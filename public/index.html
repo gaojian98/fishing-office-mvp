@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>摸鱼</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #1f2933;
+      background: linear-gradient(180deg, #e4f6f1, #f8fbfa);
+    }
+    main { width: min(1180px, calc(100vw - 24px)); margin: 0 auto; padding: 18px 0 32px; }
+    .top { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start; margin-bottom: 12px; }
+    h1 { margin: 0 0 6px; font-size: clamp(36px, 6vw, 64px); line-height: 1; }
+    .desc, .note { margin: 6px 0 0; color: #557087; line-height: 1.5; font-weight: 700; }
+    .note { color: #31515a; font-size: 13px; }
+    button, input, select, textarea { font: inherit; }
+    button { border: 0; border-radius: 8px; padding: 10px 12px; color: #fff; background: #123f45; font-weight: 900; cursor: pointer; }
+    button.secondary { background: #4b6f73; }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    .auth, .panel, .paytable, .draw-panel {
+      border: 1px solid #a9cdc6;
+      border-radius: 8px;
+      background: rgba(255,255,255,.78);
+      box-shadow: 0 14px 34px rgba(45,86,82,.12);
+    }
+    .auth { padding: 12px; min-width: min(360px, 100%); }
+    .auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .auth input { width: 100%; border: 1px solid #b7d6d0; border-radius: 8px; padding: 9px; background: #fff; }
+    .userbar { display: none; gap: 8px; align-items: center; justify-content: end; flex-wrap: wrap; font-weight: 900; }
+    .userbar a { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 8px 12px; border-radius: 8px; color: #fff; background: #123f45; text-decoration: none; }
+    .userbar a.secondary-link { background: #4b6f73; }
+    .layout { display: grid; grid-template-columns: 150px 180px 560px; gap: 10px; align-items: start; }
+    .paytable { overflow: hidden; }
+    .paytable h2 { margin: 0; padding: 6px 8px; font-size: 13px; border-bottom: 1px solid #c9e2dd; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 4px 7px; border-bottom: 1px solid #d7e9e5; text-align: left; white-space: nowrap; }
+    th:last-child, td:last-child { text-align: right; font-weight: 900; }
+    .paytable table { font-size: 10px; color: #334155; }
+    .win { color: #0f766e; }
+    .lose { color: #b91c1c; }
+    .draw-stack { display: grid; gap: 10px; }
+    .draw-panel { padding: 8px; }
+    .round { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; font-weight: 900; }
+    .hint { margin: 4px 0 8px; color: #64748b; font-size: 11px; line-height: 1.35; min-height: 30px; }
+    .draw-table { table-layout: fixed; border-radius: 8px; overflow: hidden; box-shadow: 0 0 0 1px #bddbd5; }
+    .draw-table th, .draw-table td { text-align: center; border: 1px solid #bddbd5; background: rgba(255,255,255,.72); }
+    .draw-table th { height: 44px; }
+    .draw-table td { font-size: 20px; color: #0b4850; font-weight: 900; }
+    .draw-fish { display: grid; place-items: center; height: 34px; }
+    .result { min-height: 88px; margin-top: 8px; padding: 8px; border: 1px solid #bddbd5; border-radius: 8px; background: #f8fafc; }
+    .result-title { margin: 0 0 4px; font-size: 17px; font-weight: 900; }
+    .score { margin: 0 0 4px; font-size: 12px; font-weight: 900; }
+    .board-wrap {
+      position: relative;
+      width: 560px;
+      aspect-ratio: 3 / 2;
+      background: url("ricefield-bg.png") center / cover no-repeat;
+      border: 6px solid #7d4f28;
+      border-radius: 12px;
+      box-shadow: inset 0 0 0 4px rgba(197,145,76,.7), 0 18px 44px rgba(45,86,82,.18);
+      overflow: hidden;
+    }
+    .board { position: absolute; inset: 0; display: block; }
+    .tank {
+      position: absolute;
+      width: 11.6%;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      transform: translate(-50%, -50%);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 8px;
+      background: transparent;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .13s ease, box-shadow .13s ease, border-color .13s ease, background .13s ease;
+    }
+    .tank:not(.opened):hover { transform: translate(-50%, -50%) translateY(-2px); border-color: rgba(255,255,255,.8); background: rgba(255,255,255,.08); }
+    .tank::before {
+      content: "";
+      position: absolute;
+      left: 12%; right: 12%; top: 23%; height: 56%;
+      border-radius: 8px 8px 12px 12px;
+      background: radial-gradient(ellipse at 28% 16%, rgba(255,255,255,.72), transparent 24%), linear-gradient(180deg, rgba(217,249,255,.84), rgba(88,194,211,.72));
+      border: 1px solid rgba(74,133,144,.45);
+      box-shadow: inset 0 -8px 14px rgba(55,140,158,.2);
+      animation: waterBreath 3.6s ease-in-out infinite;
+    }
+    .tank::after {
+      content: "";
+      position: absolute;
+      left: 14%; right: 14%; top: 9%; height: 17%;
+      border-radius: 999px 999px 5px 5px;
+      background: repeating-linear-gradient(90deg, rgba(91,51,24,.18) 0 5px, transparent 5px 10px), linear-gradient(180deg, #d2a65e, #8a5a2d);
+      z-index: 4;
+    }
+    .tank.opened::after { transform: translateY(-30px) rotate(-11deg); opacity: 0; }
+    .tank.opened::before { opacity: .36; transform: scale(.9); }
+    @keyframes waterBreath { 0%,100% { opacity:.82; transform:scale(.985); } 50% { opacity:1; transform:scale(1.025); } }
+    .cover-mark { z-index: 5; display: grid; place-items: center; width: 42%; aspect-ratio: 1; border-radius: 50%; background: rgba(255,250,214,.82); color: #5c3a1c; font-weight: 900; }
+    .tank.opened .cover-mark { opacity: 0; transform: scale(.7); pointer-events: none; }
+    .fish { position: absolute; left: 50%; top: 52%; z-index: 6; opacity: 0; transform: translate(-50%, -50%) scale(.75); width: min(86%, 52px); display: grid; place-items: center; }
+    .tank.opened .fish { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    .fish svg { width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 3px 4px rgba(20,76,84,.18)); }
+    .eel { width: min(94%, 58px); }
+    .draw-fish .fish { position: static; opacity: 1; transform: none; width: 48px; }
+    .draw-fish .eel { width: 56px; }
+    @media (max-width: 860px) {
+      .top { grid-template-columns: 1fr; }
+      .layout { grid-template-columns: minmax(0,1fr) minmax(0,1fr); grid-template-areas: "pay draw" "board board"; }
+      .paytable { grid-area: pay; }
+      .draw-stack { grid-area: draw; }
+      .board-wrap { grid-area: board; width: 100%; border-width: 4px; }
+      .fish { width: min(86%, 40px); }
+      .eel { width: min(94%, 44px); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="top">
+      <div>
+        <h1>摸鱼</h1>
+        <p class="desc">棋盘里共有 24 个密封鱼缸：黄鱼、石斑鱼、鳗鱼各 8 条。每局打开 12 个鱼缸，系统按三种鱼数量组合结算积分。</p>
+        <p class="note">开奖只看数量组合：摸到 5、4、3 时输 10 分，其他组合按照赔率表赢分。</p>
+      </div>
+      <section class="auth" id="authBox">
+        <div class="auth-grid">
+          <input id="username" placeholder="用户名">
+          <input id="password" type="password" placeholder="密码">
+          <input id="referralCode" placeholder="推荐码，可不填">
+          <button id="loginBtn">登录</button>
+          <button id="registerBtn" class="secondary">注册</button>
+        </div>
+      </section>
+      <div class="userbar" id="userbar">
+        <span id="userInfo"></span>
+        <a href="/wallet.html">钱包</a>
+        <button id="logoutBtn" class="secondary">退出</button>
+        <a href="/admin.html" id="adminLink" class="secondary-link" style="display:none">后台</a>
+      </div>
+    </div>
+
+    <section class="layout">
+      <div class="paytable">
+        <h2>赔率表</h2>
+        <table>
+          <thead><tr><th>数量组合</th><th>积分结果</th></tr></thead>
+          <tbody>
+            <tr><td>8、4、0</td><td class="win">赢 100</td></tr>
+            <tr><td>7、5、0</td><td class="win">赢 20</td></tr>
+            <tr><td>6、6、0</td><td class="win">赢 20</td></tr>
+            <tr><td>8、3、1</td><td class="win">赢 20</td></tr>
+            <tr><td>8、2、2</td><td class="win">赢 20</td></tr>
+            <tr><td>7、4、1</td><td class="win">赢 20</td></tr>
+            <tr><td>7、3、2</td><td class="win">赢 20</td></tr>
+            <tr><td>6、5、1</td><td class="win">赢 20</td></tr>
+            <tr><td>6、4、2</td><td class="win">赢 1</td></tr>
+            <tr><td>6、3、3</td><td class="win">赢 1</td></tr>
+            <tr><td>5、5、2</td><td class="win">赢 1</td></tr>
+            <tr><td>4、4、4</td><td class="win">赢 1</td></tr>
+            <tr><td>5、4、3</td><td class="lose">输 10</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="draw-stack">
+        <section class="draw-panel">
+          <div class="round"><span>已摸次数</span><span><b id="openedCount">0</b>/12</span></div>
+          <p class="hint" id="statusText">请先登录，然后点击开局。</p>
+          <table class="draw-table">
+            <thead><tr><th><span class="draw-fish draw-yellow"></span></th><th><span class="draw-fish draw-grouper"></span></th><th><span class="draw-fish draw-eel"></span></th></tr></thead>
+            <tbody><tr><td id="yellowCount">0</td><td id="grouperCount">0</td><td id="eelCount">0</td></tr></tbody>
+          </table>
+          <div class="result" id="resultBox"><p class="result-title">等待开局</p><p class="score">本局积分：0</p><p class="score">账号积分：0</p></div>
+        </section>
+        <button id="startBtn">开始新局</button>
+      </div>
+      <div class="board-wrap"><div class="board" id="board"></div></div>
+    </section>
+
+  </main>
+
+  <script>
+    const tokenKey = "moyu_token";
+    const fishLabels = { yellow: "黄鱼", grouper: "石斑鱼", eel: "鳗鱼" };
+    const tankPositions = [
+      [15.2, 19.7], [28.9, 19.7], [42.8, 19.7], [56.7, 19.7], [70.6, 19.7], [84.5, 19.7],
+      [15.2, 37.0], [28.9, 37.0], [42.8, 37.0], [56.7, 37.0], [70.6, 37.0], [84.5, 37.0],
+      [15.2, 54.3], [28.9, 54.3], [42.8, 54.3], [56.7, 54.3], [70.6, 54.3], [84.5, 54.3],
+      [15.2, 71.6], [28.9, 71.6], [42.8, 71.6], [56.7, 71.6], [70.6, 71.6], [84.5, 71.6]
+    ];
+    let me = null;
+    let roundId = null;
+    let finished = false;
+    let counts = { yellow: 0, grouper: 0, eel: 0 };
+
+    const qs = (s) => document.querySelector(s);
+    const board = qs("#board");
+
+    function fishSvg(type) {
+      if (type === "yellow") return `<span class="fish yellow"><svg viewBox="0 0 170 86"><path d="M135 38 L166 18 Q172 43 165 67 L135 51 Z" fill="#e99524"/><path d="M55 25 C74 5 104 1 136 16 C118 18 95 23 70 35 Z" fill="#d89024"/><path d="M21 29 C43 8 96 8 139 30 C154 38 154 49 139 58 C93 83 39 75 17 54 C4 42 8 35 21 29 Z" fill="#f0b33b"/><path d="M17 30 C35 15 53 19 61 43 C50 69 31 68 15 53 C5 42 8 35 17 30 Z" fill="#9b7145"/><path d="M62 31 C75 27 91 28 111 36 M60 43 C79 39 102 42 126 50 M55 55 C73 57 93 58 118 56" fill="none" stroke="#9a743e" stroke-width="3" stroke-linecap="round"/><circle cx="31" cy="35" r="6" fill="#101820"/><circle cx="33" cy="33" r="2" fill="#fff"/></svg></span>`;
+      if (type === "grouper") return `<span class="fish grouper"><svg viewBox="0 0 178 88"><path d="M132 36 L172 14 Q179 43 169 71 L132 56 Z" fill="#3c4143"/><path d="M55 22 L67 3 L74 23 L84 5 L91 23 L102 7 L108 24 L122 10 L124 29 C102 24 80 22 55 22 Z" fill="#202528"/><path d="M20 28 C43 7 105 10 141 30 C158 39 159 51 142 61 C102 83 45 78 18 58 C3 47 5 36 20 28 Z" fill="#59636a"/><g fill="#111820"><circle cx="64" cy="38" r="3"/><circle cx="76" cy="47" r="3"/><circle cx="91" cy="36" r="3"/><circle cx="102" cy="49" r="3"/><circle cx="117" cy="39" r="3"/><circle cx="130" cy="52" r="3"/></g><circle cx="36" cy="35" r="7" fill="#d7d27a"/><circle cx="38" cy="34" r="4" fill="#111820"/></svg></span>`;
+      return `<span class="fish eel"><svg viewBox="0 0 180 82"><path d="M15 48 C43 16 86 17 109 40 C130 61 151 61 166 43" fill="none" stroke="#eef2ef" stroke-width="20" stroke-linecap="round" opacity=".82"/><path d="M15 48 C43 16 86 17 109 40 C130 61 151 61 166 43" fill="none" stroke="#2b2925" stroke-width="13" stroke-linecap="round"/><path d="M29 51 C57 38 83 34 106 45 C125 54 143 56 157 45" fill="none" stroke="#d6c3ad" stroke-width="4" stroke-linecap="round"/><path d="M154 42 C162 34 173 36 177 44 C171 51 160 51 154 45 Z" fill="#253036"/><circle cx="168" cy="42" r="3.4" fill="#eef7f8"/><circle cx="169" cy="42" r="1.8" fill="#101820"/></svg></span>`;
+    }
+
+    qs(".draw-yellow").innerHTML = fishSvg("yellow");
+    qs(".draw-grouper").innerHTML = fishSvg("grouper");
+    qs(".draw-eel").innerHTML = fishSvg("eel");
+
+    async function api(path, options = {}) {
+      const headers = { "content-type": "application/json", ...(options.headers || {}) };
+      const token = localStorage.getItem(tokenKey);
+      if (token) headers.authorization = `Bearer ${token}`;
+      const res = await fetch(path, { ...options, headers });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "请求失败");
+      return data;
+    }
+
+    function updateAuth() {
+      qs("#authBox").style.display = me ? "none" : "block";
+      qs("#userbar").style.display = me ? "flex" : "none";
+      if (me) {
+        qs("#userInfo").textContent = `${me.username} | 积分 ${me.balance}`;
+        qs("#adminLink").style.display = me.role === "admin" ? "inline" : "none";
+      }
+    }
+
+    function renderIdleResult() {
+      qs("#resultBox").className = "result";
+      qs("#statusText").textContent = me ? "点击开始新局，然后打开 12 个鱼缸。" : "请先登录，然后点击开局。";
+      qs("#resultBox").innerHTML = `<p class="result-title">等待开局</p><p class="score">本局积分：0</p><p class="score">账号积分：${me?.balance ?? 0}</p>`;
+    }
+
+    function resetBoard() {
+      board.innerHTML = "";
+      for (let i = 0; i < 24; i++) {
+        const btn = document.createElement("button");
+        btn.className = "tank";
+        btn.type = "button";
+        btn.dataset.index = i;
+        const [left, top] = tankPositions[i];
+        btn.style.left = `${left}%`;
+        btn.style.top = `${top}%`;
+        btn.innerHTML = `<span class="cover-mark">?</span>`;
+        btn.addEventListener("click", () => openTank(i, btn));
+        board.appendChild(btn);
+      }
+      counts = { yellow: 0, grouper: 0, eel: 0 };
+      renderCounts();
+      qs("#openedCount").textContent = "0";
+    }
+
+    function renderCounts() {
+      qs("#yellowCount").textContent = counts.yellow;
+      qs("#grouperCount").textContent = counts.grouper;
+      qs("#eelCount").textContent = counts.eel;
+    }
+
+    async function loadMe() {
+      const token = localStorage.getItem(tokenKey);
+      if (!token) { updateAuth(); resetBoard(); renderIdleResult(); return; }
+      try {
+        const data = await api("/api/me");
+        me = data.user;
+      } catch {
+        localStorage.removeItem(tokenKey);
+        me = null;
+      }
+      updateAuth();
+      resetBoard();
+      renderIdleResult();
+    }
+
+    async function auth(mode) {
+      try {
+        const username = qs("#username").value.trim();
+        const password = qs("#password").value;
+        const referralCode = qs("#referralCode").value.trim();
+        const data = await api(mode === "login" ? "/api/auth/login" : "/api/auth/register", { method: "POST", body: JSON.stringify({ username, password, referralCode }) });
+        localStorage.setItem(tokenKey, data.token);
+        me = data.user;
+        updateAuth();
+        resetBoard();
+        renderIdleResult();
+      } catch (error) { alert(error.message); }
+    }
+
+    async function startRound() {
+      if (!me) return alert("请先登录");
+      const data = await api("/api/game/start", { method: "POST", body: "{}" });
+      roundId = data.roundId;
+      finished = false;
+      resetBoard();
+      qs("#statusText").textContent = "点击鱼缸开始摸鱼。";
+      qs("#resultBox").className = "result";
+      qs("#resultBox").innerHTML = `<p class="result-title">摸鱼中</p><p class="score">本局积分：0</p><p class="score">账号积分：${me.balance}</p>`;
+    }
+
+    async function openTank(index, btn) {
+      if (!roundId || finished || btn.classList.contains("opened")) return;
+      try {
+        const data = await api("/api/game/open", { method: "POST", body: JSON.stringify({ roundId, index }) });
+        btn.classList.add("opened");
+        btn.innerHTML += fishSvg(data.fish);
+        counts = data.counts;
+        renderCounts();
+        qs("#openedCount").textContent = data.opened.length;
+        if (data.finished) {
+          finished = true;
+          data.result.allFish.forEach((fish, i) => {
+            const tank = board.querySelector(`[data-index="${i}"]`);
+            if (!tank.classList.contains("opened")) {
+              tank.classList.add("opened");
+              tank.innerHTML += fishSvg(fish);
+            }
+          });
+          me.balance = data.result.balance;
+          const score = data.result.score;
+          const combo = data.result.combo.split("").join("、");
+          qs("#resultBox").className = `result ${score > 0 ? "win" : "lose"}`;
+          qs("#resultBox").innerHTML = `<p class="result-title">${score > 0 ? "赢了" : "输了"}</p><p class="score">本期数量组合：${combo}</p><p class="score">本局${score > 0 ? "赢" : "输"} ${Math.abs(score)} 积分</p><p class="score">账号积分：${me.balance}</p>`;
+          qs("#statusText").textContent = `本局结束，数量组合为 ${combo}。`;
+          updateAuth();
+        } else {
+          qs("#statusText").textContent = `摸到了${data.label}，还剩 ${12 - data.opened.length} 次。`;
+        }
+      } catch (error) { alert(error.message); }
+    }
+
+    qs("#loginBtn").onclick = () => auth("login");
+    qs("#registerBtn").onclick = () => auth("register");
+    qs("#logoutBtn").onclick = () => { localStorage.removeItem(tokenKey); me = null; roundId = null; updateAuth(); resetBoard(); renderIdleResult(); };
+    qs("#startBtn").onclick = startRound;
+    loadMe();
+  </script>
+</body>
+</html>

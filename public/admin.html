@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>摸鱼后台</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #eef7f5; color: #1f2933; }
+    main { width: min(1180px, calc(100vw - 24px)); margin: 0 auto; padding: 20px 0; }
+    h1 { margin: 0 0 12px; }
+    .card { border: 1px solid #b7d6d0; background: rgba(255,255,255,.84); border-radius: 8px; padding: 12px; margin-bottom: 12px; }
+    input, button, select { font: inherit; }
+    input, select { border: 1px solid #b7d6d0; border-radius: 8px; padding: 8px; }
+    button { border: 0; border-radius: 8px; padding: 8px 10px; background: #123f45; color: #fff; font-weight: 800; cursor: pointer; }
+    nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    th, td { border-bottom: 1px solid #d7e9e5; padding: 6px; text-align: left; vertical-align: top; }
+    pre { white-space: pre-wrap; margin: 0; max-width: 360px; }
+    .login { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>摸鱼后台</h1>
+    <section class="card" id="loginBox">
+      <div class="login">
+        <input id="username" placeholder="管理员用户名">
+        <input id="password" type="password" placeholder="密码">
+        <button id="loginBtn">登录</button>
+      </div>
+    </section>
+    <section id="adminBox" style="display:none">
+      <div class="card">
+        <strong id="summary">加载中...</strong>
+      </div>
+      <nav>
+        <button data-table="users">用户</button>
+        <button data-table="recharges">充值</button>
+        <button data-table="withdrawals">提现</button>
+        <button data-table="transactions">流水</button>
+        <button data-table="rounds">游戏记录</button>
+        <button id="logoutBtn">退出</button>
+      </nav>
+      <section class="card">
+        <h2 id="tableTitle">数据</h2>
+        <div id="tableBox"></div>
+      </section>
+    </section>
+  </main>
+  <script>
+    const tokenKey = "moyu_token";
+    const qs = (s) => document.querySelector(s);
+    async function api(path, options = {}) {
+      const headers = { "content-type": "application/json", ...(options.headers || {}) };
+      const token = localStorage.getItem(tokenKey);
+      if (token) headers.authorization = `Bearer ${token}`;
+      const res = await fetch(path, { ...options, headers });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "请求失败");
+      return data;
+    }
+    async function login() {
+      try {
+        const data = await api("/api/auth/login", { method: "POST", body: JSON.stringify({ username: qs("#username").value, password: qs("#password").value }) });
+        localStorage.setItem(tokenKey, data.token);
+        await init();
+      } catch (e) { alert(e.message); }
+    }
+    async function init() {
+      try {
+        const me = await api("/api/me");
+        if (me.user.role !== "admin") throw new Error("不是管理员账号");
+        qs("#loginBox").style.display = "none";
+        qs("#adminBox").style.display = "block";
+        const s = await api("/api/admin/summary");
+        qs("#summary").textContent = `玩家 ${s.players} | 总用户 ${s.users} | 游戏局数 ${s.rounds} | 待审充值 ${s.pendingRecharges} | 待审提现 ${s.pendingWithdrawals}`;
+        await loadTable("users");
+      } catch (e) {
+        qs("#loginBox").style.display = "block";
+        qs("#adminBox").style.display = "none";
+      }
+    }
+    function renderCell(value) {
+      if (value && typeof value === "object") return `<pre>${escapeHtml(JSON.stringify(value, null, 2))}</pre>`;
+      return escapeHtml(String(value ?? ""));
+    }
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m]));
+    }
+    async function loadTable(table) {
+      qs("#tableTitle").textContent = table;
+      const data = await api(`/api/admin/list/${table}`);
+      const rows = data.rows;
+      if (!rows.length) { qs("#tableBox").innerHTML = "暂无数据"; return; }
+      const keys = Object.keys(rows[0]);
+      let html = `<table><thead><tr>${keys.map(k => `<th>${k}</th>`).join("")}<th>操作</th></tr></thead><tbody>`;
+      for (const row of rows) {
+        html += `<tr>${keys.map(k => `<td>${renderCell(row[k])}</td>`).join("")}<td>${actions(table, row)}</td></tr>`;
+      }
+      html += "</tbody></table>";
+      qs("#tableBox").innerHTML = html;
+    }
+    function actions(table, row) {
+      if ((table === "recharges" || table === "withdrawals") && row.status === "pending") {
+        const kind = table === "recharges" ? "recharge" : "withdraw";
+        return `<button onclick="review('${kind}','${row.id}','approved')">通过</button> <button onclick="review('${kind}','${row.id}','rejected')">拒绝</button>`;
+      }
+      return "";
+    }
+    window.review = async (kind, orderId, status) => {
+      try {
+        await api("/api/admin/review", { method: "POST", body: JSON.stringify({ kind, orderId, status }) });
+        await loadTable(kind === "recharge" ? "recharges" : "withdrawals");
+      } catch (e) { alert(e.message); }
+    };
+    qs("#loginBtn").onclick = login;
+    qs("#logoutBtn").onclick = () => { localStorage.removeItem(tokenKey); location.reload(); };
+    document.querySelectorAll("nav button[data-table]").forEach((btn) => btn.onclick = () => loadTable(btn.dataset.table));
+    init();
+  </script>
+</body>
+</html>

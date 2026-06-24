@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Telegram 登录</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #1f2933;
+      background: linear-gradient(180deg, #e4f6f1, #f8fbfa);
+    }
+    .box {
+      width: min(420px, calc(100vw - 24px));
+      border: 1px solid #a9cdc6;
+      border-radius: 8px;
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 14px 34px rgba(45,86,82,.12);
+      padding: 20px;
+      text-align: center;
+      font-weight: 900;
+    }
+  </style>
+</head>
+<body>
+  <div class="box" id="box">正在通过 Telegram 登录...</div>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const token = params.get("token");
+    const next = params.get("next") || "/";
+    if (token) {
+      localStorage.setItem("moyu_token", token);
+      location.replace(next.startsWith("/") ? next : "/");
+    } else {
+      document.querySelector("#box").textContent = "登录链接无效，请回到 Telegram 机器人重新进入。";
+    }
+  </script>
+</body>
+</html>
