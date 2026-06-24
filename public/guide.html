@@ -13,18 +13,35 @@
       color: #1f2933;
       background: linear-gradient(180deg, #e4f6f1, #f8fbfa);
     }
-    main { width: min(760px, calc(100vw - 24px)); margin: 0 auto; padding: 18px 0 30px; }
-    header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-    h1 { margin: 0; font-size: clamp(30px, 7vw, 48px); line-height: 1; }
-    a { display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 8px 12px; border-radius: 999px; color: #123f45; background: rgba(255,255,255,.84); border: 1px solid #a9cdc6; text-decoration: none; font-weight: 950; white-space: nowrap; }
-    .card { border: 1px solid #a9cdc6; border-radius: 8px; background: rgba(255,255,255,.82); box-shadow: 0 14px 34px rgba(45,86,82,.12); padding: 14px; margin-bottom: 12px; }
-    h2 { margin: 0 0 8px; font-size: 18px; }
-    p { margin: 0 0 8px; color: #40566b; line-height: 1.55; font-weight: 750; }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    th, td { padding: 7px; border-bottom: 1px solid #d7e9e5; text-align: left; }
+    main { width: min(760px, calc(100vw - 20px)); margin: 0 auto; padding: 12px 0 10px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+    h1 { margin: 0; font-size: clamp(28px, 7vw, 42px); line-height: 1; }
+    a { display: inline-flex; align-items: center; justify-content: center; min-height: 32px; padding: 7px 11px; border-radius: 999px; color: #123f45; background: rgba(255,255,255,.84); border: 1px solid #a9cdc6; text-decoration: none; font-weight: 950; white-space: nowrap; }
+    .card { border: 1px solid #a9cdc6; border-radius: 8px; background: rgba(255,255,255,.82); box-shadow: 0 14px 34px rgba(45,86,82,.12); padding: 10px; margin-bottom: 8px; }
+    h2 { margin: 0 0 6px; font-size: 16px; }
+    p { margin: 0 0 5px; color: #40566b; line-height: 1.36; font-weight: 750; }
+    .rules { display: grid; gap: 5px; color: #40566b; font-weight: 750; line-height: 1.36; }
+    .rule { margin: 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th, td { padding: 3px 6px; border-bottom: 1px solid #d7e9e5; text-align: left; line-height: 1.2; }
     th:last-child, td:last-child { text-align: right; font-weight: 900; }
     .win { color: #0f766e; }
     .lose { color: #b91c1c; }
+    @media (max-width: 480px) {
+      main { width: min(100vw - 16px, 430px); padding-top: 10px; }
+      h1 { font-size: 30px; }
+      a { min-height: 30px; padding: 6px 10px; font-size: 13px; }
+      .card { padding: 7px; margin-bottom: 6px; }
+      h2 { font-size: 14px; margin-bottom: 4px; }
+      .rules { gap: 2px; }
+      .rules, p { font-size: 10px; line-height: 1.18; }
+      table, thead, tbody { display: block; }
+      thead { display: none; }
+      tbody { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7px; }
+      tr { display: grid; grid-template-columns: 1fr auto; align-items: center; border-bottom: 1px solid #d7e9e5; }
+      td { display: block; border-bottom: 0; padding: 2px 0; font-size: 10px; line-height: 1.1; }
+      td:last-child { padding-left: 5px; }
+    }
   </style>
 </head>
 <body>
@@ -35,9 +52,14 @@
     </header>
     <section class="card">
       <h2>玩法</h2>
-      <p>棋盘里共有 24 个密封鱼缸：黄鱼、石斑鱼、鳗鱼各 8 条。</p>
-      <p>每局可以打开 12 个鱼缸，系统按三种鱼最终数量组合结算积分。</p>
-      <p>数量组合不指定鱼种顺序，例如 8、4、0 表示一种鱼摸到 8 条，另一种摸到 4 条，第三种摸到 0 条。</p>
+      <div class="rules">
+        <p class="rule">棋盘里共有 24 个密封鱼缸：黄鱼、石斑鱼、鳗鱼各 8 条。</p>
+        <p class="rule">每局打开 12 个鱼缸，系统统计三种鱼数量并自动结算积分；第 12 次摸完后会揭开全部鱼缸。</p>
+        <p class="rule">数量组合不指定鱼种顺序。例如 8、4、0 表示一种鱼摸到 8 条，另一种摸到 4 条，第三种摸到 0 条。</p>
+        <p class="rule">5、4、3 固定输 10 分；赔率表内其他组合按表赢分；不在表内的组合按 0 分处理。</p>
+        <p class="rule">通过钱包可查看账号积分、冻结积分、推荐码，并提交充值、提现、修改密码。</p>
+        <p class="rule">Telegram 老会员可分享自己的邀请链接，新会员通过链接进入并注册后会绑定推荐关系。</p>
+      </div>
     </section>
     <section class="card">
       <h2>赔率表</h2>
