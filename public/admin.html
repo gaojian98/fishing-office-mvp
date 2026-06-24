@@ -3,54 +3,102 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>摸鱼后台</title>
+  <title>摸鱼运营后台</title>
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #eef7f5; color: #1f2933; }
-    main { width: min(1180px, calc(100vw - 24px)); margin: 0 auto; padding: 20px 0; }
-    h1 { margin: 0 0 12px; }
-    .card { border: 1px solid #b7d6d0; background: rgba(255,255,255,.84); border-radius: 8px; padding: 12px; margin-bottom: 12px; }
-    input, button, select { font: inherit; }
-    input, select { border: 1px solid #b7d6d0; border-radius: 8px; padding: 8px; }
-    button { border: 0; border-radius: 8px; padding: 8px 10px; background: #123f45; color: #fff; font-weight: 800; cursor: pointer; }
-    nav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-    table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    th, td { border-bottom: 1px solid #d7e9e5; padding: 6px; text-align: left; vertical-align: top; }
-    pre { white-space: pre-wrap; margin: 0; max-width: 360px; }
+    body { margin: 0; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #1f2933; background: #eef7f5; }
+    button, input, select { font: inherit; }
+    button { border: 0; border-radius: 8px; padding: 8px 10px; background: #123f45; color: #fff; font-weight: 900; cursor: pointer; }
+    button.ghost { color: #123f45; background: #f7fffd; border: 1px solid #a9cdc6; }
+    input, select { border: 1px solid #b7d6d0; border-radius: 8px; padding: 8px; background: #fff; }
+    .login-wrap { width: min(520px, calc(100vw - 24px)); margin: 12vh auto 0; }
     .login { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; }
+    .app { display: none; min-height: 100vh; grid-template-columns: 220px 1fr; }
+    aside { background: #123f45; color: #ecfeff; padding: 16px 12px; }
+    .brand { margin: 0 0 16px; font-size: 24px; font-weight: 950; }
+    .menu { display: grid; gap: 6px; }
+    .menu button { width: 100%; text-align: left; background: transparent; color: #d7f7f2; border: 1px solid transparent; }
+    .menu button.active { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.22); color: #fff; }
+    .content { padding: 14px; min-width: 0; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+    .topbar h1 { margin: 0; font-size: 28px; }
+    .admin-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-weight: 850; }
+    .badge { display: inline-flex; align-items: center; min-height: 30px; padding: 5px 9px; border-radius: 999px; background: #fff; border: 1px solid #a9cdc6; color: #31515a; }
+    .card { border: 1px solid #b7d6d0; background: rgba(255,255,255,.86); border-radius: 8px; padding: 12px; margin-bottom: 12px; box-shadow: 0 14px 34px rgba(45,86,82,.1); }
+    .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .metric { padding: 12px; border: 1px solid #d1e7e2; border-radius: 8px; background: #fbfffe; }
+    .metric span { display: block; color: #64748b; font-size: 12px; font-weight: 850; }
+    .metric strong { display: block; margin-top: 5px; color: #0b4850; font-size: 24px; }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    .tabs button.active { background: #0f766e; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    .table-wrap { overflow: auto; border: 1px solid #d7e9e5; border-radius: 8px; background: #fff; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 760px; }
+    th, td { border-bottom: 1px solid #e3efec; padding: 7px; text-align: left; vertical-align: top; white-space: nowrap; }
+    th { background: #f1faf8; color: #31515a; font-weight: 950; }
+    td.muted { color: #64748b; }
+    .status-pending { color: #b45309; font-weight: 950; }
+    .status-approved { color: #0f766e; font-weight: 950; }
+    .status-rejected { color: #b91c1c; font-weight: 950; }
+    .actions { display: flex; gap: 6px; }
+    .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .empty { padding: 18px; color: #64748b; font-weight: 850; }
+    @media (max-width: 860px) {
+      .app { grid-template-columns: 1fr; }
+      aside { position: sticky; top: 0; z-index: 2; }
+      .menu { grid-template-columns: repeat(4, 1fr); }
+      .menu button { text-align: center; padding: 7px 5px; font-size: 12px; }
+      .metrics { grid-template-columns: 1fr 1fr; }
+      .panel-grid { grid-template-columns: 1fr; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .login { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <h1>摸鱼后台</h1>
-    <section class="card" id="loginBox">
-      <div class="login">
-        <input id="username" placeholder="管理员用户名">
-        <input id="password" type="password" placeholder="密码">
-        <button id="loginBtn">登录</button>
-      </div>
-    </section>
-    <section id="adminBox" style="display:none">
-      <div class="card">
-        <strong id="summary">加载中...</strong>
-      </div>
-      <nav>
-        <button data-table="users">用户</button>
-        <button data-table="recharges">充值</button>
-        <button data-table="withdrawals">提现</button>
-        <button data-table="transactions">流水</button>
-        <button data-table="rounds">游戏记录</button>
-        <button id="logoutBtn">退出</button>
-      </nav>
-      <section class="card">
-        <h2 id="tableTitle">数据</h2>
-        <div id="tableBox"></div>
-      </section>
+  <main class="login-wrap" id="loginBox">
+    <h1>摸鱼运营后台</h1>
+    <section class="card login">
+      <input id="username" placeholder="管理员用户名">
+      <input id="password" type="password" placeholder="密码">
+      <button id="loginBtn">登录</button>
     </section>
   </main>
+
+  <section class="app" id="adminBox">
+    <aside>
+      <p class="brand">摸鱼后台</p>
+      <nav class="menu" id="menu"></nav>
+    </aside>
+    <div class="content">
+      <header class="topbar">
+        <h1 id="pageTitle">数据总览</h1>
+        <div class="admin-meta">
+          <span class="badge" id="adminName">管理员</span>
+          <span class="badge" id="todoBadge">待办 0</span>
+          <button class="ghost" id="refreshBtn">刷新</button>
+          <button id="logoutBtn">退出</button>
+        </div>
+      </header>
+      <section id="view"></section>
+    </div>
+  </section>
+
   <script>
     const tokenKey = "moyu_token";
     const qs = (s) => document.querySelector(s);
+    const modules = [
+      { id: "dashboard", name: "数据总览" },
+      { id: "members", name: "会员管理" },
+      { id: "funds", name: "资金管理" },
+      { id: "games", name: "游戏管理" },
+      { id: "referrals", name: "推荐系统" },
+      { id: "bot", name: "机器人管理" },
+      { id: "risk", name: "风控管理" },
+      { id: "settings", name: "系统设置" }
+    ];
+    let state = { me: null, module: "dashboard", tab: "users", cache: {} };
+
     async function api(path, options = {}) {
       const headers = { "content-type": "application/json", ...(options.headers || {}) };
       const token = localStorage.getItem(tokenKey);
@@ -60,6 +108,17 @@
       if (!res.ok) throw new Error(data.error || "请求失败");
       return data;
     }
+
+    function escapeHtml(text) {
+      return String(text ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m]));
+    }
+    function money(value) { return Number(value || 0).toLocaleString("zh-CN"); }
+    function time(value) { return value ? new Date(value).toLocaleString("zh-CN", { hour12: false }) : "-"; }
+    function statusText(value) {
+      const map = { pending: "待审核", approved: "已通过", rejected: "已拒绝", open: "进行中", finished: "已结算", active: "正常" };
+      return `<span class="status-${escapeHtml(value)}">${map[value] || escapeHtml(value || "-")}</span>`;
+    }
+
     async function login() {
       try {
         const data = await api("/api/auth/login", { method: "POST", body: JSON.stringify({ username: qs("#username").value, password: qs("#password").value }) });
@@ -67,56 +126,228 @@
         await init();
       } catch (e) { alert(e.message); }
     }
+
     async function init() {
       try {
-        const me = await api("/api/me");
-        if (me.user.role !== "admin") throw new Error("不是管理员账号");
+        const data = await api("/api/me");
+        if (data.user.role !== "admin") throw new Error("不是管理员账号");
+        state.me = data.user;
         qs("#loginBox").style.display = "none";
-        qs("#adminBox").style.display = "block";
-        const s = await api("/api/admin/summary");
-        qs("#summary").textContent = `玩家 ${s.players} | 总用户 ${s.users} | 游戏局数 ${s.rounds} | 待审充值 ${s.pendingRecharges} | 待审提现 ${s.pendingWithdrawals}`;
-        await loadTable("users");
-      } catch (e) {
+        qs("#adminBox").style.display = "grid";
+        qs("#adminName").textContent = `管理员：${data.user.username}`;
+        renderMenu();
+        await loadAll();
+        render();
+      } catch {
         qs("#loginBox").style.display = "block";
         qs("#adminBox").style.display = "none";
       }
     }
-    function renderCell(value) {
-      if (value && typeof value === "object") return `<pre>${escapeHtml(JSON.stringify(value, null, 2))}</pre>`;
-      return escapeHtml(String(value ?? ""));
+
+    function renderMenu() {
+      qs("#menu").innerHTML = modules.map((item) => `<button class="${state.module === item.id ? "active" : ""}" data-module="${item.id}">${item.name}</button>`).join("");
+      qs("#menu").querySelectorAll("button").forEach((btn) => btn.onclick = () => {
+        state.module = btn.dataset.module;
+        state.tab = defaultTab(state.module);
+        renderMenu();
+        render();
+      });
     }
-    function escapeHtml(text) {
-      return text.replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m]));
+
+    function defaultTab(module) {
+      return ({ members: "users", funds: "recharges", games: "rounds", referrals: "tree", bot: "status", risk: "risk-users", settings: "admins" })[module] || "dashboard";
     }
-    async function loadTable(table) {
-      qs("#tableTitle").textContent = table;
-      const data = await api(`/api/admin/list/${table}`);
-      const rows = data.rows;
-      if (!rows.length) { qs("#tableBox").innerHTML = "暂无数据"; return; }
-      const keys = Object.keys(rows[0]);
-      let html = `<table><thead><tr>${keys.map(k => `<th>${k}</th>`).join("")}<th>操作</th></tr></thead><tbody>`;
-      for (const row of rows) {
-        html += `<tr>${keys.map(k => `<td>${renderCell(row[k])}</td>`).join("")}<td>${actions(table, row)}</td></tr>`;
+
+    async function loadAll() {
+      const [summary, users, recharges, withdrawals, transactions, rounds] = await Promise.all([
+        api("/api/admin/summary"),
+        api("/api/admin/list/users"),
+        api("/api/admin/list/recharges"),
+        api("/api/admin/list/withdrawals"),
+        api("/api/admin/list/transactions"),
+        api("/api/admin/list/rounds")
+      ]);
+      state.cache = { summary, users: users.rows, recharges: recharges.rows, withdrawals: withdrawals.rows, transactions: transactions.rows, rounds: rounds.rows };
+      qs("#todoBadge").textContent = `待办 ${summary.pendingRecharges + summary.pendingWithdrawals}`;
+    }
+
+    function render() {
+      const mod = modules.find((m) => m.id === state.module);
+      qs("#pageTitle").textContent = mod?.name || "运营后台";
+      if (state.module === "dashboard") return renderDashboard();
+      if (state.module === "members") return renderMembers();
+      if (state.module === "funds") return renderFunds();
+      if (state.module === "games") return renderGames();
+      if (state.module === "referrals") return renderReferrals();
+      if (state.module === "bot") return renderBot();
+      if (state.module === "risk") return renderRisk();
+      return renderSettings();
+    }
+
+    function metrics(items) {
+      return `<section class="metrics">${items.map((item) => `<div class="metric"><span>${item.label}</span><strong>${item.value}</strong></div>`).join("")}</section>`;
+    }
+    function card(title, body) { return `<section class="card"><h2>${title}</h2>${body}</section>`; }
+    function tabs(items) {
+      return `<div class="tabs">${items.map((item) => `<button class="${state.tab === item.id ? "active" : "ghost"}" data-tab="${item.id}">${item.name}</button>`).join("")}</div>`;
+    }
+    function bindTabs() {
+      qs("#view").querySelectorAll("[data-tab]").forEach((btn) => btn.onclick = () => { state.tab = btn.dataset.tab; render(); });
+    }
+
+    function table(headers, rows) {
+      if (!rows.length) return `<div class="empty">暂无数据</div>`;
+      return `<div class="table-wrap"><table><thead><tr>${headers.map((h) => `<th>${h.label}</th>`).join("")}<th>操作</th></tr></thead><tbody>${rows.map((row) => `<tr>${headers.map((h) => `<td>${h.render ? h.render(row) : escapeHtml(row[h.key])}</td>`).join("")}<td>${rowActions(row)}</td></tr>`).join("")}</tbody></table></div>`;
+    }
+    function rowActions(row) {
+      if (row.__kind && row.status === "pending") {
+        return `<div class="actions"><button onclick="review('${row.__kind}','${row.id}','approved')">通过</button><button class="ghost" onclick="review('${row.__kind}','${row.id}','rejected')">拒绝</button></div>`;
       }
-      html += "</tbody></table>";
-      qs("#tableBox").innerHTML = html;
+      return `<span class="muted">-</span>`;
     }
-    function actions(table, row) {
-      if ((table === "recharges" || table === "withdrawals") && row.status === "pending") {
-        const kind = table === "recharges" ? "recharge" : "withdraw";
-        return `<button onclick="review('${kind}','${row.id}','approved')">通过</button> <button onclick="review('${kind}','${row.id}','rejected')">拒绝</button>`;
-      }
-      return "";
+
+    function renderDashboard() {
+      const s = state.cache.summary;
+      const pending = [...state.cache.recharges.filter((o) => o.status === "pending").map((o) => ({ ...o, __kind: "recharge" })), ...state.cache.withdrawals.filter((o) => o.status === "pending").map((o) => ({ ...o, __kind: "withdraw" }))];
+      qs("#view").innerHTML = [
+        metrics([
+          { label: "总会员", value: money(s.players) },
+          { label: "今日新增", value: money(s.todayPlayers) },
+          { label: "今日局数", value: money(s.todayRounds) },
+          { label: "平台盈亏", value: money(s.platformProfit) },
+          { label: "待审充值", value: money(s.pendingRecharges) },
+          { label: "待审提现", value: money(s.pendingWithdrawals) },
+          { label: "总积分余额", value: money(s.totalBalance) },
+          { label: "冻结积分", value: money(s.totalFrozen) }
+        ]),
+        card("待办审核", orderTable(pending))
+      ].join("");
     }
+
+    function renderMembers() {
+      qs("#view").innerHTML = tabs([{ id: "users", name: "会员列表" }, { id: "profiles", name: "会员详情" }, { id: "adjust", name: "积分调整" }]) +
+        (state.tab === "users" ? card("会员列表", userTable(state.cache.users)) :
+        state.tab === "profiles" ? card("会员详情", userTable(state.cache.users.slice(0, 20))) :
+        card("积分调整", `<div class="empty">基础版先展示入口；下一步可接入后台加分、扣分、冻结、解冻。</div>`));
+      bindTabs();
+    }
+
+    function renderFunds() {
+      const tabsHtml = tabs([{ id: "recharges", name: "充值订单" }, { id: "withdrawals", name: "提现订单" }, { id: "transactions", name: "钱包流水" }, { id: "exchange", name: "兑换订单" }]);
+      const body = state.tab === "recharges" ? orderTable(state.cache.recharges.map((o) => ({ ...o, __kind: "recharge" }))) :
+        state.tab === "withdrawals" ? orderTable(state.cache.withdrawals.map((o) => ({ ...o, __kind: "withdraw" }))) :
+        state.tab === "transactions" ? txTable(state.cache.transactions) :
+        `<div class="empty">积分兑换现金入口已在钱包页预留；订单表下一步接入。</div>`;
+      qs("#view").innerHTML = tabsHtml + card("资金管理", body);
+      bindTabs();
+    }
+
+    function renderGames() {
+      qs("#view").innerHTML = tabs([{ id: "rounds", name: "游戏记录" }, { id: "odds", name: "赔率配置" }, { id: "abnormal", name: "异常局查询" }]) +
+        (state.tab === "rounds" ? card("游戏记录", roundTable(state.cache.rounds)) :
+        state.tab === "odds" ? card("赔率配置", oddsTable()) :
+        card("异常局查询", `<div class="empty">基础版显示入口；后续按连续大赢、短时间高频、异常胜率筛查。</div>`));
+      bindTabs();
+    }
+
+    function renderReferrals() {
+      const users = state.cache.users;
+      const rows = users.filter((u) => u.referred_by).map((u) => ({ user: u, parent: users.find((p) => p.id === u.referred_by) }));
+      qs("#view").innerHTML = card("推荐关系", table([
+        { label: "会员", render: (r) => escapeHtml(r.user.username) },
+        { label: "系统ID", render: (r) => escapeHtml(r.user.user_no || r.user.id) },
+        { label: "推荐人", render: (r) => escapeHtml(r.parent?.username || "-") },
+        { label: "注册时间", render: (r) => time(r.user.created_at) }
+      ], rows));
+    }
+
+    function renderBot() {
+      qs("#view").innerHTML = metrics([
+        { label: "Bot 用户名", value: "p31000Bot" },
+        { label: "Webhook", value: "已配置" },
+        { label: "入口域名", value: "p3.up.railway.app" },
+        { label: "菜单按钮", value: "7" }
+      ]) + card("机器人菜单", `<div class="panel-grid"><div class="empty">进入游戏 / 钱包 / 邀请好友 / 我的邀请链接</div><div class="empty">玩法说明 / 排行榜 / 开奖结果</div></div>`);
+    }
+
+    function renderRisk() {
+      const negative = state.cache.users.filter((u) => Number(u.balance) < 0);
+      const pendingWithdrawals = state.cache.withdrawals.filter((o) => o.status === "pending");
+      qs("#view").innerHTML = metrics([
+        { label: "负积分账号", value: negative.length },
+        { label: "待审提现", value: pendingWithdrawals.length },
+        { label: "黑名单", value: 0 },
+        { label: "异常提示", value: negative.length + pendingWithdrawals.length }
+      ]) + card("风险列表", userTable(negative));
+    }
+
+    function renderSettings() {
+      qs("#view").innerHTML = card("系统设置", `<div class="panel-grid"><div class="empty">管理员账号、角色权限、操作日志</div><div class="empty">支付渠道、兑换比例、域名配置</div></div>`);
+    }
+
+    function userTable(rows) {
+      return table([
+        { label: "系统ID", render: (r) => escapeHtml(r.user_no || r.id) },
+        { label: "账号", key: "username" },
+        { label: "积分", render: (r) => money(r.balance) },
+        { label: "冻结", render: (r) => money(r.frozen) },
+        { label: "手机号", render: (r) => escapeHtml(r.phone || "-") },
+        { label: "Telegram", render: (r) => escapeHtml(r.telegram_username || r.telegram_id || "-") },
+        { label: "推荐码", key: "referral_code" },
+        { label: "状态", render: (r) => statusText(r.status) },
+        { label: "注册时间", render: (r) => time(r.created_at) }
+      ], rows);
+    }
+    function orderTable(rows) {
+      return table([
+        { label: "订单号", key: "id" },
+        { label: "会员ID", key: "user_id" },
+        { label: "金额", render: (r) => money(r.amount) },
+        { label: "渠道/方式", render: (r) => escapeHtml(r.channel || r.method || "-") },
+        { label: "账号/凭证", render: (r) => escapeHtml(r.account || r.proof || r.note || "-") },
+        { label: "状态", render: (r) => statusText(r.status) },
+        { label: "时间", render: (r) => time(r.created_at) }
+      ], rows);
+    }
+    function txTable(rows) {
+      return table([
+        { label: "流水号", key: "id" },
+        { label: "会员ID", key: "user_id" },
+        { label: "类型", key: "type" },
+        { label: "金额", render: (r) => money(r.amount) },
+        { label: "前余额", render: (r) => money(r.balance_before) },
+        { label: "后余额", render: (r) => money(r.balance_after) },
+        { label: "备注", key: "note" },
+        { label: "时间", render: (r) => time(r.created_at) }
+      ], rows);
+    }
+    function roundTable(rows) {
+      return table([
+        { label: "局号", key: "id" },
+        { label: "会员ID", key: "user_id" },
+        { label: "状态", render: (r) => statusText(r.status) },
+        { label: "组合", render: (r) => escapeHtml(String(r.combo || "-").split("").join("、")) },
+        { label: "输赢", render: (r) => money(r.score) },
+        { label: "结算后", render: (r) => money(r.balance_after) },
+        { label: "时间", render: (r) => time(r.created_at) }
+      ], rows);
+    }
+    function oddsTable() {
+      const rows = [["8、4、0", "赢 100"], ["7、5、0", "赢 20"], ["6、6、0", "赢 20"], ["8、3、1", "赢 20"], ["8、2、2", "赢 20"], ["7、4、1", "赢 20"], ["7、3、2", "赢 20"], ["6、5、1", "赢 20"], ["6、4、2", "赢 1"], ["6、3、3", "赢 1"], ["5、5、2", "赢 1"], ["4、4、4", "赢 1"], ["5、4、3", "输 10"]];
+      return table([{ label: "数量组合", render: (r) => r.combo }, { label: "积分结果", render: (r) => r.score }], rows.map(([combo, score]) => ({ combo, score })));
+    }
+
     window.review = async (kind, orderId, status) => {
       try {
         await api("/api/admin/review", { method: "POST", body: JSON.stringify({ kind, orderId, status }) });
-        await loadTable(kind === "recharge" ? "recharges" : "withdrawals");
+        await loadAll();
+        render();
       } catch (e) { alert(e.message); }
     };
+
     qs("#loginBtn").onclick = login;
     qs("#logoutBtn").onclick = () => { localStorage.removeItem(tokenKey); location.reload(); };
-    document.querySelectorAll("nav button[data-table]").forEach((btn) => btn.onclick = () => loadTable(btn.dataset.table));
+    qs("#refreshBtn").onclick = async () => { await loadAll(); render(); };
     init();
   </script>
 </body>

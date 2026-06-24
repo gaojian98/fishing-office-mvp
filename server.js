@@ -907,10 +907,25 @@ async function api(req, res, path) {
     const rounds = await listRows("rounds", 10000);
     const recharges = await listRows("recharge_orders", 10000);
     const withdrawals = await listRows("withdraw_orders", 10000);
+    const transactions = await listRows("wallet_transactions", 10000);
+    const today = new Date().toISOString().slice(0, 10);
+    const todayRows = (rows) => rows.filter((row) => String(row.created_at || "").slice(0, 10) === today);
+    const sum = (rows, key = "amount") => rows.reduce((total, row) => total + Number(row[key] || 0), 0);
+    const approvedRecharges = recharges.filter((o) => o.status === "approved");
+    const approvedWithdrawals = withdrawals.filter((o) => o.status === "approved");
+    const gameTx = transactions.filter((tx) => tx.type === "game");
     return sendJson(res, 200, {
       users: users.length,
       players: users.filter((u) => u.role === "player").length,
       rounds: rounds.length,
+      todayPlayers: todayRows(users).filter((u) => u.role === "player").length,
+      todayRounds: todayRows(rounds).length,
+      todayRechargeAmount: sum(todayRows(approvedRecharges)),
+      todayWithdrawAmount: sum(todayRows(approvedWithdrawals)),
+      platformProfit: -sum(gameTx),
+      todayPlatformProfit: -sum(todayRows(gameTx)),
+      totalBalance: sum(users, "balance"),
+      totalFrozen: sum(users, "frozen"),
       pendingRecharges: recharges.filter((o) => o.status === "pending").length,
       pendingWithdrawals: withdrawals.filter((o) => o.status === "pending").length
     });
