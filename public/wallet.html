@@ -13,33 +13,45 @@
       color: #1f2933;
       background: linear-gradient(180deg, #e4f6f1, #f8fbfa);
     }
-    main { width: min(900px, calc(100vw - 24px)); margin: 0 auto; padding: 18px 0 32px; }
-    header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
-    h1 { margin: 0; font-size: clamp(34px, 6vw, 54px); line-height: 1; }
-    h2 { margin: 0 0 10px; font-size: 20px; }
-    a, button { border: 0; border-radius: 8px; padding: 10px 12px; color: #fff; background: #123f45; font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; }
-    button.secondary, a.secondary { background: #4b6f73; }
-    input, textarea { width: 100%; border: 1px solid #b7d6d0; border-radius: 8px; padding: 10px; background: #fff; font: inherit; }
-    textarea { resize: vertical; min-height: 72px; }
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 12px; }
+    main { width: min(860px, calc(100vw - 18px)); margin: 0 auto; padding: 12px 0 18px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; }
+    h1 { margin: 0; font-size: clamp(30px, 7vw, 46px); line-height: 1; }
+    h2 { margin: 0 0 8px; font-size: 18px; }
+    a, button { border: 0; border-radius: 8px; padding: 9px 11px; color: #fff; background: #123f45; font: inherit; font-weight: 900; text-decoration: none; cursor: pointer; }
+    a.secondary, button.secondary { background: #4b6f73; }
+    input, textarea, select { width: 100%; border: 1px solid #b7d6d0; border-radius: 8px; padding: 9px; background: #fff; font: inherit; }
+    textarea { resize: vertical; min-height: 64px; }
+    .message { margin: 0 0 8px; color: #0f766e; font-weight: 900; min-height: 18px; }
     .card {
       border: 1px solid #a9cdc6;
       border-radius: 8px;
-      background: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.84);
       box-shadow: 0 14px 34px rgba(45,86,82,.12);
-      padding: 14px;
+      padding: 12px;
+      margin-bottom: 10px;
     }
-    .metric { min-height: 96px; display: grid; align-content: center; }
-    .label { color: #64748b; font-size: 13px; font-weight: 800; }
-    .value { margin-top: 4px; color: #0b4850; font-size: 26px; font-weight: 950; overflow-wrap: anywhere; }
-    .forms { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .item { min-width: 0; padding: 9px; border: 1px solid #d1e7e2; border-radius: 8px; background: rgba(248,252,251,.9); }
+    .label { color: #64748b; font-size: 12px; font-weight: 850; }
+    .value { margin-top: 3px; color: #0b4850; font-size: 18px; font-weight: 950; overflow-wrap: anywhere; }
+    .money-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .form-grid { display: grid; gap: 8px; }
-    .full { grid-column: 1 / -1; }
-    .message { margin: 0 0 12px; color: #0f766e; font-weight: 900; min-height: 20px; }
-    @media (max-width: 760px) {
-      header { align-items: flex-start; flex-direction: column; }
-      .grid, .forms { grid-template-columns: 1fr; }
-      a, button { width: 100%; text-align: center; }
+    .quick-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
+    .quick { min-height: 42px; color: #123f45; background: #f7fffd; border: 1px solid #a9cdc6; }
+    .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    @media (max-width: 700px) {
+      main { width: min(100vw - 14px, 430px); padding-top: 10px; }
+      header { margin-bottom: 8px; }
+      h1 { font-size: 32px; }
+      h2 { font-size: 16px; margin-bottom: 7px; }
+      a, button { padding: 8px 10px; }
+      .card { padding: 9px; margin-bottom: 8px; }
+      .info-grid { grid-template-columns: 1fr 1fr; gap: 7px; }
+      .item { padding: 8px; }
+      .value { font-size: 17px; }
+      .money-grid, .security-grid { grid-template-columns: 1fr; gap: 8px; }
+      .quick-grid { grid-template-columns: 1fr; gap: 7px; }
+      input, textarea, select { padding: 8px; }
     }
   </style>
 </head>
@@ -52,47 +64,58 @@
 
     <p class="message" id="message"></p>
 
-    <section class="grid">
-      <div class="card metric">
-        <div class="label">账号</div>
-        <div class="value" id="username">-</div>
-      </div>
-      <div class="card metric">
-        <div class="label">账号积分</div>
-        <div class="value" id="balance">0</div>
-      </div>
-      <div class="card metric">
-        <div class="label">冻结积分</div>
-        <div class="value" id="frozen">0</div>
-      </div>
-      <div class="card metric full">
-        <div class="label">推荐码</div>
-        <div class="value" id="referralCode">-</div>
+    <section class="card">
+      <h2>账号信息</h2>
+      <div class="info-grid">
+        <div class="item"><div class="label">账号</div><div class="value" id="username">-</div></div>
+        <div class="item"><div class="label">系统ID</div><div class="value" id="systemId">-</div></div>
+        <div class="item"><div class="label">积分</div><div class="value" id="balance">0</div></div>
+        <div class="item"><div class="label">邀请码</div><div class="value" id="referralCode">-</div></div>
       </div>
     </section>
 
-    <section class="forms">
-      <div class="card">
-        <h2>充值申请</h2>
+    <section class="card">
+      <h2>资金功能</h2>
+      <div class="money-grid">
         <div class="form-grid">
+          <strong>充值申请</strong>
+          <select id="rechargeChannel">
+            <option value="bank">银行卡</option>
+            <option value="usdt">USDT</option>
+          </select>
           <input id="rechargeAmount" type="number" min="1" placeholder="充值积分">
           <textarea id="rechargeNote" placeholder="转账说明或凭证"></textarea>
           <button id="rechargeBtn">提交充值</button>
         </div>
-      </div>
 
-      <div class="card">
-        <h2>提现申请</h2>
         <div class="form-grid">
+          <strong>提现申请</strong>
+          <select id="withdrawMethod">
+            <option value="bank">银行卡</option>
+            <option value="usdt">USDT</option>
+          </select>
           <input id="withdrawAmount" type="number" min="1" placeholder="提现积分">
-          <input id="withdrawAccount" placeholder="提现账号 / 钱包地址">
+          <input id="withdrawAccount" placeholder="银行卡号 / USDT 地址">
           <button id="withdrawBtn">提交提现</button>
         </div>
       </div>
+      <div class="quick-grid">
+        <button class="quick" id="autoRechargeBtn">自动充值</button>
+        <button class="quick" id="autoWithdrawBtn">自动提现</button>
+        <button class="quick" id="exchangeBtn">积分兑换现金</button>
+      </div>
+    </section>
 
-      <div class="card full">
-        <h2>修改密码</h2>
+    <section class="card">
+      <h2>账号安全</h2>
+      <div class="security-grid">
         <div class="form-grid">
+          <strong>手机号码</strong>
+          <input id="phone" inputmode="tel" placeholder="手机号码">
+          <button id="profileBtn">保存手机号码</button>
+        </div>
+        <div class="form-grid">
+          <strong>修改密码</strong>
           <input id="oldPassword" type="password" placeholder="原密码">
           <input id="newPassword" type="password" placeholder="新密码，至少 6 位">
           <button id="passwordBtn">确认修改</button>
@@ -125,9 +148,10 @@
         const data = await api("/api/me");
         me = data.user;
         qs("#username").textContent = me.username;
+        qs("#systemId").textContent = me.systemId;
         qs("#balance").textContent = me.balance;
-        qs("#frozen").textContent = me.frozen;
         qs("#referralCode").textContent = me.referralCode;
+        qs("#phone").value = me.phone || "";
       } catch {
         location.href = "/";
       }
@@ -138,11 +162,21 @@
       try {
         const path = kind === "recharge" ? "/api/recharge" : "/api/withdraw";
         const body = kind === "recharge"
-          ? { amount: Number(qs("#rechargeAmount").value), note: qs("#rechargeNote").value }
-          : { amount: Number(qs("#withdrawAmount").value), account: qs("#withdrawAccount").value };
+          ? { amount: Number(qs("#rechargeAmount").value), channel: qs("#rechargeChannel").value, note: qs("#rechargeNote").value }
+          : { amount: Number(qs("#withdrawAmount").value), method: qs("#withdrawMethod").value, account: qs("#withdrawAccount").value };
         await api(path, { method: "POST", body: JSON.stringify(body) });
         show("已提交，等待后台审核。");
         await loadMe();
+      } catch (error) {
+        show(error.message);
+      }
+    }
+
+    async function saveProfile() {
+      try {
+        const data = await api("/api/me/profile", { method: "POST", body: JSON.stringify({ phone: qs("#phone").value }) });
+        me = data.user;
+        show("手机号码已保存。");
       } catch (error) {
         show(error.message);
       }
@@ -162,9 +196,17 @@
       }
     }
 
+    function comingSoon(label) {
+      show(`${label}入口已预留，后续可接入支付通道。`);
+    }
+
     qs("#rechargeBtn").onclick = () => submitOrder("recharge");
     qs("#withdrawBtn").onclick = () => submitOrder("withdraw");
+    qs("#profileBtn").onclick = saveProfile;
     qs("#passwordBtn").onclick = changePassword;
+    qs("#autoRechargeBtn").onclick = () => comingSoon("自动充值");
+    qs("#autoWithdrawBtn").onclick = () => comingSoon("自动提现");
+    qs("#exchangeBtn").onclick = () => comingSoon("积分兑换现金");
     loadMe();
   </script>
 </body>

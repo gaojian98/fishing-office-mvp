@@ -86,12 +86,14 @@ function verifyPassword(password, stored) {
 function publicUser(user) {
   return {
     id: user.id,
+    systemId: user.user_no || String(user.id || "").slice(-6).toUpperCase(),
     username: user.username,
     role: user.role,
     referralCode: user.referral_code,
     referredBy: user.referred_by,
     balance: user.balance,
     frozen: user.frozen,
+    phone: user.phone || "",
     telegramId: user.telegram_id,
     createdAt: user.created_at
   };
@@ -122,8 +124,10 @@ async function initDb() {
         role text not null default 'player',
         referral_code text unique not null,
         referred_by text,
+        user_no integer unique,
         balance integer not null default 0,
         frozen integer not null default 0,
+        phone text,
         telegram_id text unique,
         telegram_username text,
         status text not null default 'active',
@@ -165,6 +169,7 @@ async function initDb() {
         id text primary key,
         user_id text not null references users(id),
         amount integer not null,
+        channel text,
         status text not null,
         proof text,
         note text,
@@ -177,6 +182,7 @@ async function initDb() {
         user_id text not null references users(id),
         amount integer not null,
         account text not null,
+        method text,
         status text not null,
         note text,
         created_at timestamptz not null,
@@ -192,6 +198,10 @@ async function initDb() {
       );
       alter table users add column if not exists telegram_id text unique;
       alter table users add column if not exists telegram_username text;
+      alter table users add column if not exists user_no integer unique;
+      alter table users add column if not exists phone text;
+      alter table recharge_orders add column if not exists channel text;
+      alter table withdraw_orders add column if not exists method text;
     `);
     const exists = await pool.query("select id from users where username=$1", [ADMIN_USERNAME]);
     if (!exists.rowCount) {
@@ -210,8 +220,10 @@ async function initDb() {
         role: "admin",
         referral_code: makeReferralCode(),
         referred_by: null,
+        user_no: await nextUserNo(),
         balance: 0,
         frozen: 0,
+        phone: "",
         telegram_id: null,
         telegram_username: null,
         status: "active",
@@ -265,6 +277,30 @@ async function findUserByTelegramId(telegramId) {
   return db.users.find((u) => String(u.telegram_id || "") === String(telegramId)) || null;
 }
 
+async function nextUserNo() {
+  if (pool) {
+    const res = await pool.query("select coalesce(max(user_no), 100000) + 1 as next_no from users");
+    return Number(res.rows[0].next_no);
+  }
+  const db = await loadMemory();
+  return Math.max(100000, ...db.users.map((u) => Number(u.user_no || 0))) + 1;
+}
+
+async function updateUserProfile(userId, { phone }) {
+  const cleanPhone = String(phone || "").trim();
+  if (cleanPhone && !/^[0-9+\-\s()]{6,24}$/.test(cleanPhone)) throw httpError(400, "手机号码格式不正确");
+  if (pool) {
+    await pool.query("update users set phone=$1 where id=$2", [cleanPhone, userId]);
+    return await findUserById(userId);
+  }
+  const db = await loadMemory();
+  const user = db.users.find((u) => u.id === userId);
+  if (!user) throw httpError(404, "用户不存在");
+  user.phone = cleanPhone;
+  await saveMemory();
+  return user;
+}
+
 async function createUser({ username, password, referralCode, telegramId = null, telegramUsername = null }) {
   const existing = await findUserByUsername(username);
   if (existing) throw httpError(409, "用户名已存在");
@@ -276,8 +312,10 @@ async function createUser({ username, password, referralCode, telegramId = null,
     role: "player",
     referral_code: makeReferralCode(),
     referred_by: referrer?.id || null,
+    user_no: await nextUserNo(),
     balance: 0,
     frozen: 0,
+    phone: "",
     telegram_id: telegramId ? String(telegramId) : null,
     telegram_username: telegramUsername || null,
     status: "active",
@@ -286,8 +324,8 @@ async function createUser({ username, password, referralCode, telegramId = null,
   };
   if (pool) {
     await pool.query(
-      "insert into users (id, username, password_hash, role, referral_code, referred_by, balance, frozen, telegram_id, telegram_username, status, created_at) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)",
-      [user.id, user.username, user.password_hash, user.role, user.referral_code, user.referred_by, user.balance, user.frozen, user.telegram_id, user.telegram_username, user.status, user.created_at]
+      "insert into users (id, username, password_hash, role, referral_code, referred_by, user_no, balance, frozen, phone, telegram_id, telegram_username, status, created_at) values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)",
+      [user.id, user.username, user.password_hash, user.role, user.referral_code, user.referred_by, user.user_no, user.balance, user.frozen, user.phone, user.telegram_id, user.telegram_username, user.status, user.created_at]
     );
   } else {
     const db = await loadMemory();
@@ -593,9 +631,9 @@ async function createOrder(kind, row) {
   if (pool) {
     const table = kind === "recharge" ? "recharge_orders" : "withdraw_orders";
     if (kind === "recharge") {
-      await pool.query("insert into recharge_orders (id,user_id,amount,status,proof,note,created_at) values ($1,$2,$3,$4,$5,$6,$7)", [row.id, row.user_id, row.amount, row.status, row.proof, row.note, row.created_at]);
+      await pool.query("insert into recharge_orders (id,user_id,amount,channel,status,proof,note,created_at) values ($1,$2,$3,$4,$5,$6,$7,$8)", [row.id, row.user_id, row.amount, row.channel, row.status, row.proof, row.note, row.created_at]);
     } else {
-      await pool.query("insert into withdraw_orders (id,user_id,amount,account,status,note,created_at) values ($1,$2,$3,$4,$5,$6,$7)", [row.id, row.user_id, row.amount, row.account, row.status, row.note, row.created_at]);
+      await pool.query("insert into withdraw_orders (id,user_id,amount,account,method,status,note,created_at) values ($1,$2,$3,$4,$5,$6,$7,$8)", [row.id, row.user_id, row.amount, row.account, row.method, row.status, row.note, row.created_at]);
     }
   } else {
     const db = await loadMemory();
@@ -810,6 +848,12 @@ async function api(req, res, path) {
     await updatePassword(user.id, hashPassword(body.newPassword));
     return sendJson(res, 200, { ok: true });
   }
+  if (req.method === "POST" && path === "/api/me/profile") {
+    requireRole(user);
+    const body = await readJson(req);
+    const updated = await updateUserProfile(user.id, { phone: body.phone });
+    return sendJson(res, 200, { user: publicUser(updated) });
+  }
   if (req.method === "GET" && path === "/api/me") {
     requireRole(user);
     return sendJson(res, 200, { user: publicUser(user) });
@@ -841,7 +885,8 @@ async function api(req, res, path) {
     const body = await readJson(req);
     const amount = Number(body.amount);
     if (!Number.isInteger(amount) || amount <= 0) throw httpError(400, "充值金额错误");
-    const order = await createOrder("recharge", { id: id("rec"), user_id: user.id, amount, status: "pending", proof: body.proof || "", note: body.note || "", created_at: now() });
+    const channel = ["bank", "usdt"].includes(body.channel) ? body.channel : "bank";
+    const order = await createOrder("recharge", { id: id("rec"), user_id: user.id, amount, channel, status: "pending", proof: body.proof || "", note: body.note || "", created_at: now() });
     return sendJson(res, 200, { order });
   }
   if (req.method === "POST" && path === "/api/withdraw") {
@@ -851,7 +896,8 @@ async function api(req, res, path) {
     if (!Number.isInteger(amount) || amount <= 0) throw httpError(400, "提现金额错误");
     if (!body.account) throw httpError(400, "请输入提现账号");
     if (Number(user.balance) < amount) throw httpError(400, "积分不足");
-    const order = await createOrder("withdraw", { id: id("wd"), user_id: user.id, amount, account: body.account, status: "pending", note: body.note || "", created_at: now() });
+    const method = ["bank", "usdt"].includes(body.method) ? body.method : "bank";
+    const order = await createOrder("withdraw", { id: id("wd"), user_id: user.id, amount, account: body.account, method, status: "pending", note: body.note || "", created_at: now() });
     await reserveWithdrawal(user.id, amount, order.id);
     return sendJson(res, 200, { order });
   }
