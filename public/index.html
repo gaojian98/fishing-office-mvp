@@ -6,18 +6,35 @@
   <title>摸鱼</title>
   <style>
     * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
     body {
       margin: 0;
-      min-height: 100vh;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: #1f2933;
       background: linear-gradient(180deg, #e4f6f1, #f8fbfa);
     }
-    main { width: min(1180px, calc(100vw - 24px)); margin: 0 auto; padding: 18px 0 32px; }
-    .top { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: start; margin-bottom: 12px; }
-    h1 { margin: 0 0 6px; font-size: clamp(36px, 6vw, 64px); line-height: 1; }
-    .desc, .note { margin: 6px 0 0; color: #557087; line-height: 1.5; font-weight: 700; }
-    .note { color: #31515a; font-size: 13px; }
+    main { width: min(1180px, calc(100vw - 16px)); margin: 0 auto; padding: 8px 0 0; }
+    .top { display: grid; gap: 7px; margin-bottom: 8px; }
+    .brand { display: flex; align-items: center; gap: 8px; }
+    .logo { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: #fff7cc; box-shadow: inset 0 0 0 2px #d4b04c; font-size: 24px; }
+    h1 { margin: 0; font-size: clamp(30px, 7vw, 46px); line-height: 1; }
+    .nav-row { display: flex; align-items: center; gap: 7px; flex-wrap: nowrap; }
+    .bubble {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      color: #123f45;
+      background: rgba(255,255,255,.82);
+      border: 1px solid #a9cdc6;
+      text-decoration: none;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+    .spacer { flex: 1; min-width: 0; }
+    .account { color: #31515a; font-size: 12px; font-weight: 900; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     button, input, select, textarea { font: inherit; }
     button { border: 0; border-radius: 8px; padding: 10px 12px; color: #fff; background: #123f45; font-weight: 900; cursor: pointer; }
     button.secondary { background: #4b6f73; }
@@ -28,33 +45,31 @@
       background: rgba(255,255,255,.78);
       box-shadow: 0 14px 34px rgba(45,86,82,.12);
     }
-    .auth { padding: 12px; min-width: min(360px, 100%); }
+    .auth { display: none; padding: 8px; width: 100%; }
+    .auth.open { display: block; }
     .auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .auth input { width: 100%; border: 1px solid #b7d6d0; border-radius: 8px; padding: 9px; background: #fff; }
-    .userbar { display: none; gap: 8px; align-items: center; justify-content: end; flex-wrap: wrap; font-weight: 900; }
-    .userbar a { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 8px 12px; border-radius: 8px; color: #fff; background: #123f45; text-decoration: none; }
-    .userbar a.secondary-link { background: #4b6f73; }
+    .auth input { width: 100%; border: 1px solid #b7d6d0; border-radius: 8px; padding: 7px; background: #fff; min-width: 0; }
     .layout { display: grid; grid-template-columns: 150px 180px 560px; gap: 10px; align-items: start; }
     .paytable { overflow: hidden; }
-    .paytable h2 { margin: 0; padding: 6px 8px; font-size: 13px; border-bottom: 1px solid #c9e2dd; }
+    .paytable h2 { margin: 0; padding: 5px 7px; font-size: 13px; border-bottom: 1px solid #c9e2dd; }
     table { width: 100%; border-collapse: collapse; }
-    th, td { padding: 4px 7px; border-bottom: 1px solid #d7e9e5; text-align: left; white-space: nowrap; }
+    th, td { padding: 3px 7px; border-bottom: 1px solid #d7e9e5; text-align: left; white-space: nowrap; }
     th:last-child, td:last-child { text-align: right; font-weight: 900; }
     .paytable table { font-size: 10px; color: #334155; }
     .win { color: #0f766e; }
     .lose { color: #b91c1c; }
-    .draw-stack { display: grid; gap: 10px; }
-    .draw-panel { padding: 8px; }
+    .draw-stack { display: grid; gap: 7px; }
+    .draw-panel { padding: 7px; }
     .round { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; font-weight: 900; }
-    .hint { margin: 4px 0 8px; color: #64748b; font-size: 11px; line-height: 1.35; min-height: 30px; }
+    .hint { margin: 3px 0 6px; color: #64748b; font-size: 10px; line-height: 1.25; min-height: 13px; }
     .draw-table { table-layout: fixed; border-radius: 8px; overflow: hidden; box-shadow: 0 0 0 1px #bddbd5; }
     .draw-table th, .draw-table td { text-align: center; border: 1px solid #bddbd5; background: rgba(255,255,255,.72); }
-    .draw-table th { height: 44px; }
-    .draw-table td { font-size: 20px; color: #0b4850; font-weight: 900; }
-    .draw-fish { display: grid; place-items: center; height: 34px; }
-    .result { min-height: 88px; margin-top: 8px; padding: 8px; border: 1px solid #bddbd5; border-radius: 8px; background: #f8fafc; }
-    .result-title { margin: 0 0 4px; font-size: 17px; font-weight: 900; }
-    .score { margin: 0 0 4px; font-size: 12px; font-weight: 900; }
+    .draw-table th { height: 32px; }
+    .draw-table td { font-size: 18px; color: #0b4850; font-weight: 900; }
+    .draw-fish { display: grid; place-items: center; height: 26px; }
+    .result { min-height: 64px; margin-top: 6px; padding: 7px; border: 1px solid #bddbd5; border-radius: 8px; background: #f8fafc; }
+    .result-title { margin: 0 0 3px; font-size: 15px; font-weight: 900; }
+    .score { margin: 0 0 2px; font-size: 11px; font-weight: 900; }
     .board-wrap {
       position: relative;
       width: 560px;
@@ -108,10 +123,9 @@
     .tank.opened .fish { opacity: 1; transform: translate(-50%, -50%) scale(1); }
     .fish svg { width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 3px 4px rgba(20,76,84,.18)); }
     .eel { width: min(94%, 58px); }
-    .draw-fish .fish { position: static; opacity: 1; transform: none; width: 48px; }
-    .draw-fish .eel { width: 56px; }
+    .draw-fish .fish { position: static; opacity: 1; transform: none; width: 36px; }
+    .draw-fish .eel { width: 42px; }
     @media (max-width: 860px) {
-      .top { grid-template-columns: 1fr; }
       .layout { grid-template-columns: minmax(0,1fr) minmax(0,1fr); grid-template-areas: "pay draw" "board board"; }
       .paytable { grid-area: pay; }
       .draw-stack { grid-area: draw; }
@@ -119,15 +133,43 @@
       .fish { width: min(86%, 40px); }
       .eel { width: min(94%, 44px); }
     }
+    @media (max-width: 480px) {
+      main { width: min(100vw - 12px, 430px); padding-top: 6px; }
+      .logo { width: 32px; height: 32px; font-size: 20px; }
+      h1 { font-size: 32px; }
+      .bubble { min-height: 30px; padding: 6px 9px; font-size: 13px; }
+      .account { max-width: 86px; font-size: 11px; }
+      .auth-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+      .auth input, .auth button { font-size: 12px; padding: 6px; }
+      .layout { gap: 7px; }
+      .paytable table { font-size: 9px; }
+      .paytable h2 { font-size: 12px; padding: 4px 6px; }
+      th, td { padding: 2px 5px; }
+      .draw-panel { padding: 6px; }
+      .round { font-size: 12px; }
+      .draw-table th { height: 28px; }
+      .draw-table td { font-size: 17px; }
+      .result { min-height: 58px; }
+      #startBtn { padding: 9px 10px; }
+      .board-wrap { border-width: 4px; border-radius: 10px; }
+      .tank { width: 11.2%; }
+      .cover-mark { font-size: 12px; }
+    }
   </style>
 </head>
 <body>
   <main>
     <div class="top">
-      <div>
+      <div class="brand">
+        <span class="logo" aria-hidden="true">🐟</span>
         <h1>摸鱼</h1>
-        <p class="desc">棋盘里共有 24 个密封鱼缸：黄鱼、石斑鱼、鳗鱼各 8 条。每局打开 12 个鱼缸，系统按三种鱼数量组合结算积分。</p>
-        <p class="note">开奖只看数量组合：摸到 5、4、3 时输 10 分，其他组合按照赔率表赢分。</p>
+      </div>
+      <div class="nav-row">
+        <a class="bubble" href="/guide.html">游戏说明</a>
+        <a class="bubble" href="/wallet.html">钱包</a>
+        <button class="bubble" id="authToggle" type="button">登录</button>
+        <span class="spacer"></span>
+        <span class="account" id="userInfo"></span>
       </div>
       <section class="auth" id="authBox">
         <div class="auth-grid">
@@ -138,12 +180,6 @@
           <button id="registerBtn" class="secondary">注册</button>
         </div>
       </section>
-      <div class="userbar" id="userbar">
-        <span id="userInfo"></span>
-        <a href="/wallet.html">钱包</a>
-        <button id="logoutBtn" class="secondary">退出</button>
-        <a href="/admin.html" id="adminLink" class="secondary-link" style="display:none">后台</a>
-      </div>
     </div>
 
     <section class="layout">
@@ -223,11 +259,12 @@
     }
 
     function updateAuth() {
-      qs("#authBox").style.display = me ? "none" : "block";
-      qs("#userbar").style.display = me ? "flex" : "none";
+      qs("#authBox").classList.toggle("open", false);
+      qs("#authToggle").textContent = me ? "退出" : "登录";
       if (me) {
         qs("#userInfo").textContent = `${me.username} | 积分 ${me.balance}`;
-        qs("#adminLink").style.display = me.role === "admin" ? "inline" : "none";
+      } else {
+        qs("#userInfo").textContent = "";
       }
     }
 
@@ -335,7 +372,18 @@
 
     qs("#loginBtn").onclick = () => auth("login");
     qs("#registerBtn").onclick = () => auth("register");
-    qs("#logoutBtn").onclick = () => { localStorage.removeItem(tokenKey); me = null; roundId = null; updateAuth(); resetBoard(); renderIdleResult(); };
+    qs("#authToggle").onclick = () => {
+      if (me) {
+        localStorage.removeItem(tokenKey);
+        me = null;
+        roundId = null;
+        updateAuth();
+        resetBoard();
+        renderIdleResult();
+        return;
+      }
+      qs("#authBox").classList.toggle("open");
+    };
     qs("#startBtn").onclick = startRound;
     loadMe();
   </script>

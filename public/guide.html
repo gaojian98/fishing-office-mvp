@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>游戏说明</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #1f2933;
+      background: linear-gradient(180deg, #e4f6f1, #f8fbfa);
+    }
+    main { width: min(760px, calc(100vw - 24px)); margin: 0 auto; padding: 18px 0 30px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    h1 { margin: 0; font-size: clamp(30px, 7vw, 48px); line-height: 1; }
+    a { display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 8px 12px; border-radius: 999px; color: #123f45; background: rgba(255,255,255,.84); border: 1px solid #a9cdc6; text-decoration: none; font-weight: 950; white-space: nowrap; }
+    .card { border: 1px solid #a9cdc6; border-radius: 8px; background: rgba(255,255,255,.82); box-shadow: 0 14px 34px rgba(45,86,82,.12); padding: 14px; margin-bottom: 12px; }
+    h2 { margin: 0 0 8px; font-size: 18px; }
+    p { margin: 0 0 8px; color: #40566b; line-height: 1.55; font-weight: 750; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 7px; border-bottom: 1px solid #d7e9e5; text-align: left; }
+    th:last-child, td:last-child { text-align: right; font-weight: 900; }
+    .win { color: #0f766e; }
+    .lose { color: #b91c1c; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>游戏说明</h1>
+      <a href="/">返回摸鱼</a>
+    </header>
+    <section class="card">
+      <h2>玩法</h2>
+      <p>棋盘里共有 24 个密封鱼缸：黄鱼、石斑鱼、鳗鱼各 8 条。</p>
+      <p>每局可以打开 12 个鱼缸，系统按三种鱼最终数量组合结算积分。</p>
+      <p>数量组合不指定鱼种顺序，例如 8、4、0 表示一种鱼摸到 8 条，另一种摸到 4 条，第三种摸到 0 条。</p>
+    </section>
+    <section class="card">
+      <h2>赔率表</h2>
+      <table>
+        <thead><tr><th>数量组合</th><th>积分结果</th></tr></thead>
+        <tbody>
+          <tr><td>8、4、0</td><td class="win">赢 100</td></tr>
+          <tr><td>7、5、0</td><td class="win">赢 20</td></tr>
+          <tr><td>6、6、0</td><td class="win">赢 20</td></tr>
+          <tr><td>8、3、1</td><td class="win">赢 20</td></tr>
+          <tr><td>8、2、2</td><td class="win">赢 20</td></tr>
+          <tr><td>7、4、1</td><td class="win">赢 20</td></tr>
+          <tr><td>7、3、2</td><td class="win">赢 20</td></tr>
+          <tr><td>6、5、1</td><td class="win">赢 20</td></tr>
+          <tr><td>6、4、2</td><td class="win">赢 1</td></tr>
+          <tr><td>6、3、3</td><td class="win">赢 1</td></tr>
+          <tr><td>5、5、2</td><td class="win">赢 1</td></tr>
+          <tr><td>4、4、4</td><td class="win">赢 1</td></tr>
+          <tr><td>5、4、3</td><td class="lose">输 10</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</body>
+</html>
