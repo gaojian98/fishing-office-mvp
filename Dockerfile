@@ -2,14 +2,9 @@ FROM ghcr.io/cirruslabs/flutter:stable AS flutter-builder
 
 WORKDIR /app
 
-COPY fishing_office_flutter/pubspec.yaml fishing_office_flutter/pubspec.lock ./fishing_office_flutter/
+COPY . .
 WORKDIR /app/fishing_office_flutter
-RUN flutter pub get
-
-WORKDIR /app
-COPY fishing_office_flutter ./fishing_office_flutter
-WORKDIR /app/fishing_office_flutter
-RUN flutter build web --release
+RUN flutter pub get && flutter build web --release
 
 FROM node:20-alpine AS runtime
 
