@@ -1,0 +1,356 @@
+{
+  "meta": {
+    "project": "上班摸鱼 / Fishing Office",
+    "version": "V1.0",
+    "currency": {
+      "cash": [
+        "USDT",
+        "VND"
+      ],
+      "platformCoin": "摸鱼币",
+      "points": "积分"
+    }
+  },
+  "StoreDialog": {
+    "title": "渔具商店",
+    "description": "木质立式贴墙货柜，横三格竖四格。每个商品点一次购买一个。",
+    "items": [
+      {
+        "id": "rod_basic",
+        "name": "新手鱼竿",
+        "category": "鱼竿",
+        "price": 188,
+        "currency": "摸鱼币",
+        "owned": 1
+      },
+      {
+        "id": "rod_carbon",
+        "name": "碳素鱼竿",
+        "category": "鱼竿",
+        "price": 888,
+        "currency": "摸鱼币",
+        "owned": 0
+      },
+      {
+        "id": "reel_deep",
+        "name": "深海轮",
+        "category": "鱼轮",
+        "price": 988,
+        "currency": "摸鱼币",
+        "owned": 0
+      },
+      {
+        "id": "line_strong",
+        "name": "高强鱼线",
+        "category": "鱼线",
+        "price": 588,
+        "currency": "摸鱼币",
+        "owned": 3
+      },
+      {
+        "id": "float_lucky",
+        "name": "幸运鱼漂",
+        "category": "鱼漂",
+        "price": 288,
+        "currency": "摸鱼币",
+        "owned": 2
+      },
+      {
+        "id": "bait_shrimp",
+        "name": "鲜虾鱼饵",
+        "category": "鱼饵",
+        "price": 99,
+        "currency": "摸鱼币",
+        "owned": 20
+      },
+      {
+        "id": "bait_premium",
+        "name": "高级鱼饵",
+        "category": "鱼饵",
+        "price": 188,
+        "currency": "摸鱼币",
+        "owned": 8
+      },
+      {
+        "id": "net_small",
+        "name": "小抄网",
+        "category": "工具",
+        "price": 388,
+        "currency": "摸鱼币",
+        "owned": 1
+      },
+      {
+        "id": "bucket_wood",
+        "name": "木鱼桶",
+        "category": "工具",
+        "price": 688,
+        "currency": "摸鱼币",
+        "owned": 1
+      },
+      {
+        "id": "detector",
+        "name": "鱼群探测器",
+        "category": "工具",
+        "price": 1288,
+        "currency": "摸鱼币",
+        "owned": 0
+      },
+      {
+        "id": "boat_toy",
+        "name": "远投小船",
+        "category": "工具",
+        "price": 1888,
+        "currency": "摸鱼币",
+        "owned": 0
+      },
+      {
+        "id": "rod_legend",
+        "name": "传说鱼竿",
+        "category": "鱼竿",
+        "price": 2888,
+        "currency": "摸鱼币",
+        "owned": 0
+      }
+    ],
+    "purchaseRule": {
+      "tapOnceBuyOne": true,
+      "confirmBeforePurchase": true,
+      "insufficientCoinAction": "openWallet"
+    }
+  },
+  "HonorDialog": {
+    "title": "荣耀墙",
+    "leftStats": [
+      {
+        "label": "鱼库村",
+        "value": "132/386 种"
+      },
+      {
+        "label": "累计钓鱼",
+        "value": "12,568 条"
+      },
+      {
+        "label": "累计养鱼",
+        "value": "3,286 条"
+      },
+      {
+        "label": "累计出售",
+        "value": "8,560 条"
+      },
+      {
+        "label": "增鱼记录",
+        "value": "78 次"
+      },
+      {
+        "label": "最大单鱼",
+        "value": "28.6 kg"
+      },
+      {
+        "label": "最稀有鱼",
+        "value": "深海魔鬼鱼"
+      }
+    ],
+    "chart": {
+      "title": "成长曲线",
+      "xAxis": "时间/天",
+      "series": [
+        {
+          "id": "points",
+          "name": "积分",
+          "values": [
+            0,
+            1200,
+            3200,
+            6400,
+            9600,
+            13800,
+            17800,
+            23560
+          ]
+        },
+        {
+          "id": "level",
+          "name": "等级",
+          "values": [
+            1,
+            4,
+            8,
+            12,
+            16,
+            21,
+            25,
+            28
+          ]
+        },
+        {
+          "id": "playTime",
+          "name": "时间",
+          "values": [
+            0,
+            4,
+            9,
+            15,
+            22,
+            31,
+            38,
+            46
+          ]
+        }
+      ]
+    },
+    "summary": [
+      {
+        "label": "当前积分",
+        "value": "23560"
+      },
+      {
+        "label": "当前等级",
+        "value": "Lv.28"
+      },
+      {
+        "label": "累计时间",
+        "value": "46 天"
+      }
+    ]
+  },
+  "BagDialog": {
+    "title": "我的背包",
+    "capacity": {
+      "used": 59,
+      "total": 100
+    },
+    "tabs": [
+      "全部",
+      "鱼竿",
+      "鱼轮",
+      "鱼线",
+      "鱼饵",
+      "鱼漂",
+      "工具"
+    ],
+    "items": [
+      {
+        "id": "rod_basic",
+        "name": "新手鱼竿",
+        "category": "鱼竿",
+        "count": 1,
+        "rarity": "普通"
+      },
+      {
+        "id": "rod_carbon",
+        "name": "碳素鱼竿",
+        "category": "鱼竿",
+        "count": 1,
+        "rarity": "稀有"
+      },
+      {
+        "id": "reel_deep",
+        "name": "深海轮",
+        "category": "鱼轮",
+        "count": 1,
+        "rarity": "稀有"
+      },
+      {
+        "id": "line_strong",
+        "name": "高强鱼线",
+        "category": "鱼线",
+        "count": 3,
+        "rarity": "普通"
+      },
+      {
+        "id": "bait_shrimp",
+        "name": "鲜虾鱼饵",
+        "category": "鱼饵",
+        "count": 20,
+        "rarity": "普通"
+      },
+      {
+        "id": "bait_premium",
+        "name": "高级鱼饵",
+        "category": "鱼饵",
+        "count": 8,
+        "rarity": "稀有"
+      },
+      {
+        "id": "float_lucky",
+        "name": "幸运鱼漂",
+        "category": "鱼漂",
+        "count": 5,
+        "rarity": "稀有"
+      },
+      {
+        "id": "net_small",
+        "name": "小抄网",
+        "category": "工具",
+        "count": 2,
+        "rarity": "普通"
+      },
+      {
+        "id": "detector",
+        "name": "鱼群探测器",
+        "category": "工具",
+        "count": 1,
+        "rarity": "史诗"
+      },
+      {
+        "id": "bucket_wood",
+        "name": "木鱼桶",
+        "category": "工具",
+        "count": 1,
+        "rarity": "普通"
+      },
+      {
+        "id": "boat_toy",
+        "name": "远投小船",
+        "category": "工具",
+        "count": 1,
+        "rarity": "稀有"
+      },
+      {
+        "id": "rod_legend",
+        "name": "传说鱼竿",
+        "category": "鱼竿",
+        "count": 1,
+        "rarity": "传说"
+      }
+    ],
+    "actions": [
+      "使用",
+      "出售",
+      "整理"
+    ]
+  },
+  "TaskDialog": {
+    "title": "今日任务",
+    "tasks": [
+      {
+        "id": "catch_10",
+        "name": "钓到10条鱼",
+        "progress": 0,
+        "target": 10,
+        "reward": {
+          "摸鱼币": 188
+        }
+      },
+      {
+        "id": "level_10",
+        "name": "升级鱼竿到10级",
+        "progress": 6,
+        "target": 10,
+        "reward": {
+          "积分": 50
+        }
+      },
+      {
+        "id": "invite_3",
+        "name": "邀请3位好友",
+        "progress": 1,
+        "target": 3,
+        "reward": {
+          "摸鱼币": 1888
+        }
+      }
+    ],
+    "claimButton": "领取奖励"
+  }
+}

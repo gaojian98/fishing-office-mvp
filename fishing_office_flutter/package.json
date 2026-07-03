@@ -1,0 +1,8 @@
+{
+  "name": "fishing-office-mvp",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  }
+}

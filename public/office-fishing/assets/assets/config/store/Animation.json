@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "page": "Store",
+    "version": "1.0"
+  },
+  "animationPresets": {
+    "dialogOpen": {
+      "type": "fadeScale",
+      "opacityFrom": 0,
+      "opacityTo": 1,
+      "scaleFrom": 0.96,
+      "scaleTo": 1.0,
+      "durationMs": 180,
+      "curve": "easeOut"
+    },
+    "dialogClose": {
+      "type": "fade",
+      "opacityFrom": 1,
+      "opacityTo": 0,
+      "durationMs": 150,
+      "curve": "easeIn"
+    },
+    "tabSwitch": {
+      "type": "fade",
+      "opacityFrom": 0.65,
+      "opacityTo": 1.0,
+      "durationMs": 120,
+      "curve": "easeOut"
+    },
+    "productCardEnter": {
+      "type": "fadeMoveUp",
+      "opacityFrom": 0,
+      "opacityTo": 1,
+      "moveY": -8,
+      "durationMs": 160,
+      "curve": "easeOut"
+    },
+    "productCardPress": {
+      "type": "scale",
+      "from": 1.0,
+      "to": 0.98,
+      "durationMs": 120,
+      "curve": "easeOut",
+      "reverse": true
+    },
+    "purchaseSuccess": {
+      "type": "fadeMoveUp",
+      "opacityFrom": 0,
+      "opacityTo": 1,
+      "moveY": -16,
+      "durationMs": 420,
+      "curve": "easeOut"
+    }
+  },
+  "bindings": [
+    {
+      "target": "StoreDialog",
+      "event": "open",
+      "preset": "dialogOpen"
+    },
+    {
+      "target": "StoreDialog",
+      "event": "close",
+      "preset": "dialogClose"
+    },
+    {
+      "target": "storeTabs",
+      "event": "switch",
+      "preset": "tabSwitch"
+    },
+    {
+      "target": "productCard",
+      "event": "enter",
+      "preset": "productCardEnter"
+    },
+    {
+      "target": "productCard",
+      "event": "tap",
+      "preset": "productCardPress"
+    },
+    {
+      "target": "PurchaseSuccessDialog",
+      "event": "open",
+      "preset": "purchaseSuccess"
+    }
+  ],
+  "rules": {
+    "reduceMotion": {
+      "disableProductEnterAnimation": true,
+      "keepButtonFeedback": true,
+      "keepDialogAnimation": true
+    },
+    "performance": {
+      "targetFps": 60,
+      "maxAnimatedCardsAtOnce": 12
+    }
+  }
+}

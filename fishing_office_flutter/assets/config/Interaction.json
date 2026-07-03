@@ -1,0 +1,143 @@
+{
+  "meta": {
+    "project": "FishingOffice",
+    "page": "Home",
+    "version": "V3.0"
+  },
+  "actions": [
+    {
+      "target": "profile_card",
+      "event": "tap",
+      "action": "openAccountCenter"
+    },
+    {
+      "target": "btn_help",
+      "event": "tap",
+      "action": "openDialog",
+      "params": {
+        "dialog": "GameHelpDialog"
+      }
+    },
+    {
+      "target": "btn_lobby",
+      "event": "tap",
+      "action": "navigate",
+      "params": {
+        "route": "/lobby"
+      }
+    },
+    {
+      "target": "btn_fishing_mode",
+      "event": "tap",
+      "action": "setFishingMode",
+      "params": {
+        "mode": "office_fishing"
+      }
+    },
+    {
+      "target": "btn_lakeside",
+      "event": "tap",
+      "action": "switchMap",
+      "params": {
+        "map": "lakeside"
+      }
+    },
+    {
+      "target": "btn_wallet",
+      "event": "tap",
+      "action": "navigate",
+      "params": {
+        "route": "/wallet"
+      }
+    },
+    {
+      "target": "btn_exit",
+      "event": "tap",
+      "action": "confirmExit"
+    },
+    {
+      "target": "work_badge",
+      "event": "tap",
+      "action": "openAccountCenter"
+    },
+    {
+      "target": "task_board",
+      "event": "tap",
+      "action": "openDialog",
+      "params": {
+        "dialog": "TaskDialog"
+      }
+    },
+    {
+      "target": "fish_book",
+      "event": "tap",
+      "action": "navigate",
+      "params": {
+        "route": "/fish-book"
+      }
+    },
+    {
+      "target": "computer",
+      "event": "tap",
+      "action": "openDialog",
+      "params": {
+        "dialog": "ComputerWorkDialog"
+      }
+    },
+    {
+      "target": "pen_holder",
+      "event": "tap",
+      "action": "openDialog",
+      "params": {
+        "dialog": "FishBucketDialog"
+      }
+    },
+    {
+      "target": "tool_box",
+      "event": "tap",
+      "action": "openDialog",
+      "params": {
+        "dialog": "ToolBoxDialog"
+      }
+    },
+    {
+      "target": "mouse_top",
+      "event": "tap",
+      "action": "throwLine"
+    },
+    {
+      "target": "mouse_bottom",
+      "event": "tap",
+      "action": "pullLine"
+    },
+    {
+      "target": "btn_store",
+      "event": "tap",
+      "action": "openDialog",
+      "params": {
+        "dialog": "StoreDialog"
+      }
+    },
+    {
+      "target": "btn_honor",
+      "event": "tap",
+      "action": "openDialog",
+      "params": {
+        "dialog": "HonorDialog"
+      }
+    },
+    {
+      "target": "btn_bag",
+      "event": "tap",
+      "action": "openDialog",
+      "params": {
+        "dialog": "BagDialog"
+      }
+    },
+    {
+      "target": "btn_start_fishing",
+      "event": "tap",
+      "action": "startFishingFlow"
+    }
+  ]
+}

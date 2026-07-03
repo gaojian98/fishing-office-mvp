@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>湖畔钓鱼</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { min-height: 100%; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #1f2933;
+      background: #0b342f;
+      overflow: hidden;
+    }
+    button, input { font: inherit; }
+    button {
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 12px;
+      color: #fff;
+      background: #123f45;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    button:disabled { opacity: .55; cursor: not-allowed; }
+    button.secondary { background: #4b6f73; }
+    main {
+      width: min(430px, 100vw, 46.25svh);
+      height: 100svh;
+      margin: 0 auto;
+      padding: 0;
+      overflow: hidden;
+    }
+    .top {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      top: max(8px, env(safe-area-inset-top));
+      z-index: 24;
+      display: grid;
+      gap: 6px;
+    }
+    .brand { display: flex; align-items: center; gap: 7px; }
+    .logo {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,247,204,.7);
+      border: 1px solid rgba(255,255,255,.62);
+      box-shadow: inset 0 0 0 2px rgba(212,176,76,.76), 0 8px 18px rgba(7,42,38,.18);
+      color: #123f45;
+      font-size: 18px;
+      font-weight: 950;
+      backdrop-filter: blur(8px);
+    }
+    h1 {
+      margin: 0;
+      color: #17252c;
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: 0;
+      text-shadow: 0 1px 0 rgba(255,255,255,.55), 0 8px 18px rgba(255,255,255,.28);
+    }
+    .nav-row { display: flex; align-items: center; gap: 5px; flex-wrap: nowrap; }
+    .bubble {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 30px;
+      padding: 6px 8px;
+      border: 1px solid rgba(235,255,250,.6);
+      border-radius: 999px;
+      color: #123f45;
+      background: rgba(255,255,255,.26);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 950;
+      white-space: nowrap;
+      text-shadow: 0 1px 0 rgba(255,255,255,.35);
+      backdrop-filter: blur(10px) saturate(1.12);
+      box-shadow: 0 8px 20px rgba(7,42,38,.13);
+    }
+    .spacer { flex: 1; min-width: 0; }
+    .account {
+      max-width: 92px;
+      overflow: hidden;
+      color: #12262b;
+      font-size: 10px;
+      font-weight: 900;
+      text-overflow: ellipsis;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .account.active {
+      padding: 6px 8px;
+      border: 1px solid rgba(235,255,250,.58);
+      border-radius: 999px;
+      background: rgba(255,255,255,.24);
+      text-shadow: 0 1px 0 rgba(255,255,255,.42);
+      backdrop-filter: blur(10px) saturate(1.12);
+    }
+    .auth {
+      display: none;
+      padding: 8px;
+      border: 1px solid rgba(235,255,250,.54);
+      border-radius: 10px;
+      background: rgba(255,255,255,.22);
+      box-shadow: 0 14px 34px rgba(7,42,38,.16);
+      backdrop-filter: blur(12px) saturate(1.12);
+    }
+    .auth.open { display: block; }
+    .auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .auth input {
+      width: 100%;
+      min-width: 0;
+      padding: 7px;
+      border: 1px solid #b7d6d0;
+      border-radius: 8px;
+      background: #fff;
+      font-size: 12px;
+    }
+    .auth button { padding: 7px; font-size: 12px; }
+
+    .status-dock {
+      position: absolute;
+      left: auto;
+      right: 8px;
+      top: calc(max(8px, env(safe-area-inset-top)) + 78px);
+      z-index: 23;
+      width: min(248px, calc(100% - 16px));
+      display: block;
+    }
+    .panel {
+      position: relative;
+      min-width: 0;
+      padding: 6px;
+      color: #f7fffd;
+      border: 1px solid rgba(235,255,250,.32);
+      border-radius: 10px;
+      background: rgba(6, 28, 34, .12);
+      box-shadow: 0 8px 18px rgba(4, 24, 28, .1);
+      backdrop-filter: blur(6px) saturate(1.06);
+    }
+    .round {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      color: #f9fffd;
+      font-size: 11px;
+      font-weight: 950;
+      text-shadow: 0 2px 4px rgba(0,0,0,.62);
+    }
+    .round span:last-child { font-size: 10px; white-space: nowrap; }
+    .hint {
+      margin: 2px 0 4px;
+      color: #e9fffb;
+      font-size: 9px;
+      line-height: 1.35;
+      font-weight: 850;
+      text-shadow: 0 2px 4px rgba(0,0,0,.58);
+    }
+    .bucket-row {
+      display: flex;
+      align-items: center;
+      min-height: 28px;
+      gap: 3px;
+      overflow: hidden;
+      padding-right: 38px;
+    }
+    .bucket-fish {
+      display: grid;
+      place-items: center;
+      flex: 0 0 32px;
+      height: 23px;
+      border-radius: 999px;
+      background: rgba(235,255,250,.12);
+      box-shadow: inset 0 0 0 1px rgba(235,255,250,.18), 0 3px 8px rgba(0,0,0,.16);
+    }
+    .bucket-row .fish-svg { width: 30px; }
+    .bucket-empty {
+      color: #f6fffd;
+      font-size: 11px;
+      font-weight: 900;
+      opacity: .88;
+      text-shadow: 0 2px 4px rgba(0,0,0,.64);
+    }
+    .share-bucket {
+      position: absolute;
+      right: 6px;
+      bottom: 6px;
+      min-height: 22px;
+      padding: 3px 7px;
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: 999px;
+      color: #f8fffd;
+      background: rgba(11, 72, 70, .52);
+      box-shadow: 0 6px 14px rgba(0,0,0,.2);
+      font-size: 10px;
+      line-height: 1;
+      text-shadow: 0 1px 3px rgba(0,0,0,.62);
+      backdrop-filter: blur(6px);
+    }
+    .share-bucket[hidden] { display: none; }
+    .round-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 4px;
+      margin: 5px 0 3px;
+    }
+    .metric {
+      min-width: 0;
+      padding: 4px 3px;
+      border: 1px solid rgba(235,255,250,.26);
+      border-radius: 7px;
+      background: rgba(5, 43, 43, .2);
+      text-align: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .metric b {
+      display: block;
+      color: #fff8bf;
+      font-size: 10px;
+      line-height: 1.1;
+      font-weight: 950;
+      text-shadow: 0 2px 4px rgba(0,0,0,.58);
+    }
+    .metric span {
+      display: block;
+      margin-top: 1px;
+      color: #edfffb;
+      font-size: 8px;
+      line-height: 1.1;
+      font-weight: 850;
+      text-shadow: 0 2px 4px rgba(0,0,0,.56);
+    }
+    .pond {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      aspect-ratio: 853 / 1844;
+      min-height: 0;
+      overflow: hidden;
+      border: 0;
+      border-radius: 0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0) 0 62%, rgba(0,22,21,.1) 100%) 0 0 / 100% 100% no-repeat,
+        url("fishing-resort-bg-rightshore.png") right top / 111.12% auto no-repeat;
+      box-shadow: none;
+      isolation: isolate;
+    }
+    .scene-layer { position: absolute; pointer-events: none; }
+    .water-gloss {
+      left: 0;
+      right: 0;
+      top: 22%;
+      bottom: 0;
+      z-index: 4;
+      border-radius: 0;
+      background:
+        radial-gradient(ellipse at 64% 18%, rgba(255,255,255,.12), transparent 15%),
+        repeating-linear-gradient(2deg, rgba(255,255,255,.035) 0 1px, transparent 1px 74px),
+        repeating-linear-gradient(-4deg, rgba(255,255,255,.025) 0 1px, transparent 1px 96px);
+      mix-blend-mode: screen;
+      opacity: .2;
+      animation: waterBreath 7.2s ease-in-out infinite;
+    }
+    @keyframes waterBreath {
+      0%, 100% { transform: translate3d(0,0,0); opacity: .16; }
+      50% { transform: translate3d(6px,2px,0); opacity: .28; }
+    }
+
+    .bubbles { inset: 0; z-index: 7; }
+    .bubbles i {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border: 1px solid rgba(235,255,255,.82);
+      border-radius: 50%;
+      opacity: 0;
+      animation: bubble 4.8s ease-in-out infinite;
+    }
+    .bubbles i:nth-child(1) { left: 24%; top: 58%; animation-delay: .2s; }
+    .bubbles i:nth-child(2) { left: 48%; top: 47%; animation-delay: 1.4s; }
+    .bubbles i:nth-child(3) { left: 37%; top: 70%; animation-delay: 2.7s; }
+    .bubbles i:nth-child(4) { left: 62%; top: 42%; animation-delay: 3.6s; }
+    @keyframes bubble {
+      0%,72% { transform: translateY(8px) scale(.5); opacity:0; }
+      78% { opacity:.86; }
+      100% { transform: translateY(-18px) scale(1.45); opacity:0; }
+    }
+    .surface-fish {
+      z-index: 7;
+      width: 32px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(6,42,37,.78);
+      left: var(--x, 58%);
+      top: var(--y, 50%);
+      opacity: 0;
+      transform: rotate(var(--r, -8deg)) scaleX(var(--dir, 1));
+      animation: surfaceFish var(--dur, 7.4s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+      will-change: transform, opacity;
+    }
+    .surface-fish::after {
+      content: "";
+      position: absolute;
+      right: -9px;
+      top: 1px;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+      border-left: 10px solid currentColor;
+    }
+    .surface-fish::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: -12px;
+      width: 6px;
+      height: 6px;
+      border: 1px solid rgba(235,255,255,.9);
+      border-radius: 50%;
+      box-shadow: 11px -7px 0 -2px rgba(235,255,255,.72);
+    }
+    .surface-fish.yellow { color: rgba(214,154,38,.86); background: rgba(214,154,38,.86); }
+    .surface-fish.grouper { color: rgba(38,48,50,.86); background: rgba(38,48,50,.86); }
+    @keyframes surfaceFish {
+      0%, 58%, 100% { opacity:0; transform: translateY(8px) rotate(var(--r, -8deg)) scale(.8) scaleX(var(--dir, 1)); }
+      66% { opacity:.76; transform: translateY(0) rotate(var(--r, -8deg)) scale(1) scaleX(var(--dir, 1)); }
+      74% { opacity:.18; transform: translateY(3px) rotate(var(--r, -8deg)) scale(.9) scaleX(var(--dir, 1)); }
+    }
+    .ripple {
+      position: absolute;
+      z-index: 6;
+      left: var(--x);
+      top: var(--y);
+      width: 8px;
+      height: 8px;
+      border: 1px solid rgba(237,255,255,.58);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: rippleSpread 1.8s ease-out forwards;
+    }
+    @keyframes rippleSpread {
+      0% { transform: translate(-50%, -50%) scale(.4); opacity: .8; }
+      100% { transform: translate(-50%, -50%) scale(7.5); opacity: 0; }
+    }
+
+    .rod {
+      right: 13%;
+      bottom: 7.5%;
+      z-index: 10;
+      width: 88%;
+      height: 4px;
+      border-radius: 999px;
+      background:
+        linear-gradient(90deg, #12100d 0 3%, #6b3b1d 3% 15%, #2b2219 15% 22%, #875022 22% 28%, #332313 28% 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255,236,180,.4),
+        0 2px 4px rgba(0,0,0,.35);
+      filter: drop-shadow(0 2px 2px rgba(0,0,0,.32));
+      transform: rotate(88deg);
+      transform-origin: right bottom;
+      transition: transform .28s ease;
+    }
+    .rod::before {
+      content: "";
+      position: absolute;
+      right: -18px;
+      top: -6px;
+      width: 30px;
+      height: 14px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #2b2117, #8a5627 58%, #2b2117);
+      box-shadow: inset 0 2px 0 rgba(255,224,160,.3), 0 2px 4px rgba(0,0,0,.26);
+    }
+    .rod::after {
+      content: "";
+      position: absolute;
+      left: 18%;
+      top: -3px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(230,244,238,.95);
+      background: transparent;
+      box-shadow:
+        54px 0 0 -1px transparent,
+        54px 0 0 0 rgba(230,244,238,.92),
+        108px 0 0 -1px transparent,
+        108px 0 0 0 rgba(230,244,238,.84),
+        162px 0 0 -1px transparent,
+        162px 0 0 0 rgba(230,244,238,.78);
+    }
+    .line {
+      right: 13%;
+      bottom: 7.8%;
+      z-index: 10;
+      width: 88%;
+      height: 1.3px;
+      background: rgba(238,255,255,.78);
+      opacity: 0;
+      transform: rotate(15deg) scaleX(0);
+      transform-origin: right center;
+      transition: opacity .18s ease, transform .18s ease, height .18s ease;
+    }
+    .hook {
+      left: 4.5%;
+      bottom: 18.8%;
+      z-index: 11;
+      width: 7px;
+      height: 10px;
+      border: 1.5px solid #e7f9f8;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      border-radius: 50%;
+      opacity: 0;
+      transform: rotate(24deg);
+      transition: opacity .18s ease, transform .18s ease;
+    }
+    .float {
+      left: 3.6%;
+      bottom: 18.4%;
+      z-index: 11;
+      width: 8px;
+      height: 13px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #e84d39 0 46%, #fff 46%);
+      box-shadow: 0 0 0 2px rgba(255,255,255,.14), 0 2px 7px rgba(0,0,0,.22);
+      opacity: 0;
+      animation: bob 2.4s ease-in-out infinite;
+      transition: opacity .18s ease;
+    }
+    .float::after {
+      content: "";
+      position: absolute;
+      left: -10px;
+      right: -10px;
+      bottom: -4px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.2);
+    }
+    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(3px); } }
+    .pond.casting .rod { animation: rodCast .78s ease-out forwards; }
+    .pond.casting .line { animation: lineCast .78s ease-out forwards; }
+    .pond.casting .hook, .pond.casting .float { animation: hookCast .78s ease-out forwards; }
+    .pond.waiting-bite .rod { transform: rotate(15deg); }
+    .pond.waiting-bite .line,
+    .pond.waiting-bite .hook,
+    .pond.waiting-bite .float {
+      opacity: 1;
+    }
+    .pond.waiting-bite .line { transform: rotate(15deg) scaleX(1); }
+    .pond.waiting-bite .float { animation: bob 1.3s ease-in-out infinite; }
+    .pond.lifting .rod { animation: rodLift .62s ease-out forwards; }
+    .pond.lifting .line,
+    .pond.lifting .hook,
+    .pond.lifting .float { animation: tackleLift .62s ease-out forwards; }
+    .pond.bite .float { animation: floatBite .72s ease-in-out; }
+    .pond.empty-cast .float { animation: missTug .8s ease-in-out; }
+    @keyframes rodCast { 0% { transform: rotate(88deg); } 46% { transform: rotate(2deg); } 100% { transform: rotate(15deg); } }
+    @keyframes rodLift { 0% { transform: rotate(15deg); } 42% { transform: rotate(34deg); } 100% { transform: rotate(88deg); } }
+    @keyframes lineCast {
+      0% { opacity: 0; transform: rotate(88deg) scaleX(.04); }
+      48% { opacity: .95; transform: rotate(2deg) scaleX(.82); }
+      100% { opacity: 1; transform: rotate(15deg) scaleX(1); }
+    }
+    @keyframes hookCast {
+      0% { opacity: 0; transform: translate(342px, 98px) rotate(82deg) scale(.65); }
+      48% { opacity: .95; transform: translate(72px, 18px) rotate(8deg) scale(.92); }
+      100% { opacity: 1; transform: translate(0, 0) rotate(24deg) scale(1); }
+    }
+    @keyframes tackleLift {
+      0% { opacity: 1; }
+      100% { opacity: 0; transform: translate(342px, 98px) rotate(72deg) scale(.65); }
+    }
+    @keyframes floatBite { 0%,100% { transform: translateY(0); } 35% { transform: translateY(12px); } 68% { transform: translateY(-4px); } }
+    @keyframes missTug { 0%,100% { transform: translateY(0); } 28% { transform: translateY(5px); } 56% { transform: translateY(-2px); } }
+    .bite-splash {
+      left: 2%;
+      bottom: 18%;
+      z-index: 12;
+      width: 38px;
+      height: 18px;
+      border-radius: 50%;
+      opacity: 0;
+      background: radial-gradient(ellipse, rgba(235,255,255,.72), rgba(235,255,255,.15) 54%, transparent 70%);
+    }
+    .pond.bite .bite-splash { animation: splashPop .72s ease-out; }
+    @keyframes splashPop {
+      0% { opacity: 0; transform: scale(.35); }
+      30% { opacity: .9; transform: scale(1); }
+      100% { opacity: 0; transform: scale(1.7); }
+    }
+
+    .ui-hud {
+      right: 12px;
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      z-index: 15;
+      display: grid;
+      gap: 8px;
+      justify-items: end;
+      width: 120px;
+      pointer-events: auto;
+    }
+    .cast-button {
+      position: relative;
+      pointer-events: auto;
+      width: 100%;
+      min-height: 62px;
+      border: 2px solid rgba(255,242,190,.92);
+      border-radius: 16px;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.18), transparent 24%, rgba(104,62,25,.16) 50%, transparent 76%),
+        linear-gradient(180deg, #ffbf33, #ff7a18 58%, #c2410c);
+      color: #fffdf5;
+      text-shadow: 0 2px 3px rgba(80,30,6,.45);
+      box-shadow: 0 0 0 0 rgba(255,186,36,.48), 0 0 22px rgba(255,122,24,.45), 0 15px 30px rgba(57,35,12,.38);
+      font-size: 17px;
+      animation: castPulse 2.2s ease-in-out infinite;
+    }
+    .cast-button[data-phase="waiting"] {
+      background:
+        linear-gradient(90deg, rgba(255,255,255,.18), transparent 24%, rgba(20,83,45,.18) 50%, transparent 76%),
+        linear-gradient(180deg, #34d399, #059669 58%, #047857);
+      box-shadow: 0 0 0 0 rgba(52,211,153,.5), 0 0 24px rgba(52,211,153,.45), 0 15px 30px rgba(12,74,55,.36);
+    }
+    .cast-button:disabled { animation: none; background: rgba(112,138,139,.78); box-shadow: none; border-color: rgba(255,255,255,.35); }
+    .cast-button:active { transform: scale(.96); }
+    @keyframes castPulse {
+      0%,100% { transform: scale(1); filter: saturate(1); }
+      50% { transform: scale(1.035); filter: saturate(1.22) brightness(1.06); }
+    }
+    .caught-fish {
+      left: 3.6%;
+      bottom: 19%;
+      z-index: 14;
+      width: 34px;
+      height: 12px;
+      border-radius: 50%;
+      opacity: 0;
+    }
+    .caught-fish::after {
+      content: "";
+      position: absolute;
+      right: -9px;
+      top: 2px;
+      border-left: 10px solid currentColor;
+      border-top: 4px solid transparent;
+      border-bottom: 4px solid transparent;
+    }
+    .caught-fish.yellow { color: #d69a26; background: #d69a26; }
+    .caught-fish.grouper { color: #263032; background: #263032; }
+    .caught-fish.eel { color: #4c4034; height: 9px; border-radius: 999px; background: #4c4034; }
+    .caught-fish.empty { display: none; }
+    .pond.landing .caught-fish:not(.empty) { animation: landFish .98s ease-in forwards; }
+    @keyframes landFish {
+      0% { opacity:0; transform: translate(0,0) scale(.72) rotate(-22deg); }
+      18% { opacity:1; }
+      58% { opacity:1; transform: translate(142px, 46px) scale(1) rotate(8deg); }
+      100% { opacity:0; transform: translate(342px, 98px) scale(.38) rotate(36deg); }
+    }
+    .catch-toast {
+      left: 50%;
+      bottom: 22%;
+      z-index: 16;
+      min-width: 96px;
+      padding: 8px 10px;
+      border: 1px solid rgba(231,255,250,.6);
+      border-radius: 999px;
+      background: rgba(10,54,49,.66);
+      color: #fff7c2;
+      font-size: 13px;
+      font-weight: 950;
+      text-align: center;
+      opacity: 0;
+      transform: translateX(-50%) translateY(10px);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 24px rgba(0,0,0,.22);
+    }
+    .catch-toast.show { animation: toastUp 1.2s ease-out; }
+    @keyframes toastUp {
+      0% { opacity: 0; transform: translateX(-50%) translateY(14px) scale(.94); }
+      18% { opacity: 1; transform: translateX(-50%) translateY(0) scale(1); }
+      78% { opacity: 1; }
+      100% { opacity: 0; transform: translateX(-50%) translateY(-16px) scale(.98); }
+    }
+    .result-sheet {
+      left: 50%;
+      bottom: calc(92px + env(safe-area-inset-bottom));
+      z-index: 22;
+      width: min(286px, calc(100% - 24px));
+      padding: 12px;
+      border: 1px solid rgba(255,248,190,.72);
+      border-radius: 12px;
+      background: rgba(8, 43, 43, .72);
+      color: #f8fffd;
+      box-shadow: 0 18px 42px rgba(3,20,24,.28), inset 0 1px 0 rgba(255,255,255,.14);
+      backdrop-filter: blur(12px) saturate(1.12);
+      pointer-events: auto;
+      transform: translateX(-50%);
+    }
+    .result-sheet[hidden] { display: none; }
+    .result-title {
+      margin: 0 0 8px;
+      color: #fff4a8;
+      font-size: 17px;
+      font-weight: 950;
+      text-shadow: 0 2px 6px rgba(0,0,0,.42);
+    }
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+    .result-grid div {
+      min-width: 0;
+      padding: 7px 5px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.12);
+      text-align: center;
+    }
+    .result-grid b {
+      display: block;
+      color: #ffffff;
+      font-size: 15px;
+      line-height: 1.1;
+      font-weight: 950;
+    }
+    .result-grid span {
+      display: block;
+      margin-top: 3px;
+      color: #d7fffa;
+      font-size: 10px;
+      line-height: 1.1;
+      font-weight: 850;
+    }
+    .result-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .result-actions.shared { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .result-actions button {
+      min-height: 34px;
+      padding: 8px;
+      border-radius: 9px;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .cast-lane { display: none; }
+    .fish-svg { display: grid; place-items: center; width: 54px; }
+    .fish-svg svg { width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 3px 5px rgba(20,76,84,.18)); }
+    .empty-hook { display: grid; place-items: center; width: 44px; height: 34px; border: 2px dashed rgba(17,94,89,.48); border-radius: 50%; color: #0f766e; font-size: 10px; }
+
+    @media (min-width: 721px) {
+      main { width: min(430px, 46.25svh); }
+    }
+    @media (max-width: 370px) {
+      main { width: min(100vw, 46.25svh); }
+      .bubble { padding: 6px 6px; }
+      .account { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+      .surface-fish, .bubbles i, .water-gloss { opacity: .18; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="pond" aria-label="湖畔钓鱼">
+      <header class="top">
+        <div class="brand">
+          <span class="logo" aria-hidden="true">钓</span>
+          <h1>湖畔钓鱼</h1>
+        </div>
+        <div class="nav-row">
+          <a class="bubble" href="/fishing-guide.html">游戏说明</a>
+          <a class="bubble" href="/games.html">游戏大厅</a>
+          <a class="bubble" href="/">稻田摸鱼</a>
+          <a class="bubble" href="/wallet.html">钱包</a>
+          <button class="bubble" id="authToggle" type="button">登录</button>
+          <span class="spacer"></span>
+          <a class="account" id="userInfo" href="/wallet.html" title="进入钱包修改账号名称"></a>
+        </div>
+        <section class="auth" id="authBox">
+          <div class="auth-grid">
+            <input id="username" placeholder="用户名">
+            <input id="password" type="password" placeholder="密码">
+            <input id="referralCode" placeholder="推荐码，可不填">
+            <button id="loginBtn">登录</button>
+            <button id="registerBtn" class="secondary">注册</button>
+          </div>
+        </section>
+      </header>
+
+      <section class="status-dock">
+        <section class="panel">
+          <div class="round"><span>活鱼桶</span><span id="recoverySummary">本局回收0积分</span></div>
+          <p class="hint" id="statusText">请先登录，然后开始钓鱼。</p>
+          <div class="round-metrics" id="roundMetrics"></div>
+          <div class="bucket-row" id="bucketBox"><span class="bucket-empty">暂无鱼获</span></div>
+          <button class="share-bucket" id="shareBucketBtn" type="button" hidden>分享</button>
+        </section>
+      </section>
+
+      <div class="scene-layer water-gloss"></div>
+      <div class="scene-layer bubbles"><i></i><i></i><i></i><i></i></div>
+      <div class="scene-layer surface-fish yellow f1"></div>
+      <div class="scene-layer surface-fish grouper f2"></div>
+      <div class="scene-layer surface-fish yellow f3"></div>
+      <div class="scene-layer surface-fish grouper f4"></div>
+      <div class="scene-layer surface-fish yellow f5"></div>
+
+      <div class="scene-layer rod"></div>
+      <div class="scene-layer line"></div>
+      <div class="scene-layer hook"></div>
+      <div class="scene-layer float"></div>
+      <div class="scene-layer bite-splash"></div>
+      <div class="scene-layer caught-fish" id="caughtFish"></div>
+      <div class="scene-layer catch-toast" id="catchToast"></div>
+      <section class="scene-layer result-sheet" id="resultSheet" hidden aria-live="polite">
+        <h2 class="result-title" id="resultTitle">本局结算</h2>
+        <div class="result-grid">
+          <div><b id="resultRecovery">0</b><span>回收积分</span></div>
+          <div><b id="resultScore">0</b><span>本局盈亏</span></div>
+          <div><b id="resultBalance">0</b><span>账户摸鱼币</span></div>
+        </div>
+        <div class="result-actions">
+          <button id="newRoundBtn" type="button">再钓一局</button>
+          <button id="resultShareBtn" class="secondary" type="button" hidden>分享鱼获</button>
+          <button id="closeResultBtn" class="secondary" type="button">收起</button>
+        </div>
+      </section>
+      <div class="cast-lane" id="castLane"></div>
+      <div class="scene-layer ui-hud">
+        <button id="castBtn" class="cast-button" disabled>抛竿</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const tokenKey = "moyu_token";
+    const defaultSettings = {
+      enabled: true,
+      entry_cost: 20,
+      attempts: 5,
+      outcomes: [
+        { id: "grouper", name: "石斑鱼", probability: 10, price: 20 },
+        { id: "yellow", name: "黄鱼", probability: 40, price: 3 },
+        { id: "eel", name: "鳗鱼", probability: 30, price: 1 },
+        { id: "empty", name: "空竿", probability: 20, price: 0 }
+      ]
+    };
+    const sceneConfig = {
+      visualBiteProbability: 0.35,
+      waitMinMs: 2000,
+      waitMaxMs: 6000,
+      fishMinX: 14,
+      fishMaxX: 70,
+      fishMinY: 28,
+      fishMaxY: 76
+    };
+    window.fishingSceneConfig = sceneConfig;
+    let me = null;
+    let settings = defaultSettings;
+    let round = null;
+    let castingBusy = false;
+    let castPhase = "idle";
+    let biteTimer = null;
+
+    const qs = (s) => document.querySelector(s);
+    const pond = qs(".pond");
+    const caughtFish = qs("#caughtFish");
+    const catchToast = qs("#catchToast");
+    const resultSheet = qs("#resultSheet");
+    const urlReferralCode = new URLSearchParams(location.search).get("ref") || "";
+    if (urlReferralCode) qs("#referralCode").value = urlReferralCode;
+
+    const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+    const rand = (min, max) => Math.random() * (max - min) + min;
+    const randInt = (min, max) => Math.floor(rand(min, max + 1));
+
+    async function api(path, options = {}) {
+      const headers = { "content-type": "application/json", ...(options.headers || {}) };
+      const token = localStorage.getItem(tokenKey);
+      if (token) headers.authorization = `Bearer ${token}`;
+      const res = await fetch(path, { ...options, headers });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "请求失败");
+      return data;
+    }
+
+    function fishSvg(type) {
+      if (type === "yellow") return `<span class="fish-svg"><svg viewBox="0 0 170 86"><path d="M135 38 L166 18 Q172 43 165 67 L135 51 Z" fill="#e99524"/><path d="M55 25 C74 5 104 1 136 16 C118 18 95 23 70 35 Z" fill="#d89024"/><path d="M21 29 C43 8 96 8 139 30 C154 38 154 49 139 58 C93 83 39 75 17 54 C4 42 8 35 21 29 Z" fill="#f0b33b"/><path d="M17 30 C35 15 53 19 61 43 C50 69 31 68 15 53 C5 42 8 35 17 30 Z" fill="#9b7145"/><path d="M62 31 C75 27 91 28 111 36 M60 43 C79 39 102 42 126 50 M55 55 C73 57 93 58 118 56" fill="none" stroke="#9a743e" stroke-width="3" stroke-linecap="round"/><circle cx="31" cy="35" r="6" fill="#101820"/><circle cx="33" cy="33" r="2" fill="#fff"/></svg></span>`;
+      if (type === "grouper") return `<span class="fish-svg"><svg viewBox="0 0 178 88"><path d="M132 36 L172 14 Q179 43 169 71 L132 56 Z" fill="#3c4143"/><path d="M55 22 L67 3 L74 23 L84 5 L91 23 L102 7 L108 24 L122 10 L124 29 C102 24 80 22 55 22 Z" fill="#202528"/><path d="M20 28 C43 7 105 10 141 30 C158 39 159 51 142 61 C102 83 45 78 18 58 C3 47 5 36 20 28 Z" fill="#59636a"/><g fill="#111820"><circle cx="64" cy="38" r="3"/><circle cx="76" cy="47" r="3"/><circle cx="91" cy="36" r="3"/><circle cx="102" cy="49" r="3"/><circle cx="117" cy="39" r="3"/><circle cx="130" cy="52" r="3"/></g><circle cx="36" cy="35" r="7" fill="#d7d27a"/><circle cx="38" cy="34" r="4" fill="#111820"/></svg></span>`;
+      if (type === "eel") return `<span class="fish-svg"><svg viewBox="0 0 180 82"><path d="M15 48 C43 16 86 17 109 40 C130 61 151 61 166 43" fill="none" stroke="#eef2ef" stroke-width="20" stroke-linecap="round" opacity=".82"/><path d="M15 48 C43 16 86 17 109 40 C130 61 151 61 166 43" fill="none" stroke="#2b2925" stroke-width="13" stroke-linecap="round"/><path d="M29 51 C57 38 83 34 106 45 C125 54 143 56 157 45" fill="none" stroke="#d6c3ad" stroke-width="4" stroke-linecap="round"/><path d="M154 42 C162 34 173 36 177 44 C171 51 160 51 154 45 Z" fill="#253036"/><circle cx="168" cy="42" r="3.4" fill="#eef7f8"/><circle cx="169" cy="42" r="1.8" fill="#101820"/></svg></span>`;
+      return `<span class="empty-hook">空竿</span>`;
+    }
+
+    function updateAuth() {
+      qs("#authBox").classList.toggle("open", false);
+      qs("#authToggle").textContent = me ? "退出" : "登录";
+      if (me) {
+        qs("#userInfo").textContent = `${me.displayName || me.username} | 积分 ${me.balance}`;
+        qs("#userInfo").classList.add("active");
+      } else {
+        qs("#userInfo").textContent = "";
+        qs("#userInfo").classList.remove("active");
+      }
+    }
+
+    function renderSettings() {
+      const casts = round?.casts || [];
+      const attempts = Number(round?.attempts || settings.attempts || defaultSettings.attempts);
+      const entryCost = Number(round?.entryCost || settings.entry_cost || defaultSettings.entry_cost);
+      const recovery = Number(round?.recovery || 0);
+      const remaining = round?.status === "open" ? Math.max(0, attempts - casts.length) : attempts;
+      const score = !round ? 0 : (round.status === "finished" && round.score != null ? Number(round.score) : recovery - entryCost);
+      qs("#roundMetrics").innerHTML = [
+        { label: "入场", value: `${entryCost}` },
+        { label: "剩余", value: `${remaining}/${attempts}` },
+        { label: "回收", value: `${recovery}` },
+        { label: !round ? "准备" : (round.status === "finished" ? "盈亏" : "浮动"), value: `${score > 0 ? "+" : ""}${score}` }
+      ].map((item) => `<div class="metric"><b>${item.value}</b><span>${item.label}</span></div>`).join("");
+    }
+
+    function renderCastButton() {
+      const button = qs("#castBtn");
+      const entryCost = Number(settings.entry_cost || defaultSettings.entry_cost);
+      if (!me) {
+        button.textContent = "登录";
+      } else if (settings.enabled === false) {
+        button.textContent = "未开放";
+      } else if ((!round || round.status !== "open") && Number(me.balance || 0) < entryCost) {
+        button.textContent = "摸鱼币不足";
+      } else if (castPhase === "waiting") {
+        button.textContent = "起竿";
+      } else if (!round || round.status === "finished") {
+        button.textContent = "开局";
+      } else {
+        button.textContent = "抛竿";
+      }
+      button.dataset.phase = castPhase === "waiting" ? "waiting" : "idle";
+      button.disabled = castingBusy || settings.enabled === false || (me && (!round || round.status !== "open") && Number(me.balance || 0) < entryCost);
+    }
+
+    function renderRound() {
+      const casts = round?.casts || [];
+      const recovery = round?.recovery || 0;
+      const caught = casts.filter((cast) => cast.outcome_id && cast.outcome_id !== "empty");
+      const caughtGrouper = caught.some((cast) => cast.outcome_id === "grouper");
+      if (!round || round.status !== "open") castPhase = "idle";
+      qs("#recoverySummary").textContent = `本局回收${recovery}积分`;
+      qs("#shareBucketBtn").hidden = !caughtGrouper;
+      qs("#bucketBox").innerHTML = caught.length
+        ? caught.map((cast) => `<span class="bucket-fish" title="${cast.name}">${fishSvg(cast.outcome_id)}</span>`).join("")
+        : `<span class="bucket-empty">暂无鱼获</span>`;
+      qs("#castLane").innerHTML = Array.from({ length: settings.attempts }, (_, index) => {
+        const cast = casts[index];
+        if (!cast) return `<div class="cast-card"><span>第 ${index + 1} 竿</span>待抛</div>`;
+        return `<div class="cast-card done">${fishSvg(cast.outcome_id)}<span>${cast.name} +${cast.price}</span></div>`;
+      }).join("");
+      if (!round) {
+        renderSettings();
+        renderCastButton();
+        qs("#statusText").textContent = me ? `点击右下角开局，系统会先扣除 ${settings.entry_cost} 积分。` : "请先登录，然后开始钓鱼。";
+        return;
+      }
+      renderSettings();
+      renderCastButton();
+      if (round.status === "finished") {
+        const score = Number(round.score || 0);
+        qs("#statusText").textContent = `本局已结算，${score >= 0 ? "盈利" : "亏损"}${Math.abs(score)}积分。`;
+      } else {
+        qs("#statusText").textContent = castPhase === "waiting" ? "鱼漂已落在深水区，点击起竿收线。" : `还剩 ${settings.attempts - casts.length} 次抛竿机会。`;
+      }
+    }
+
+    function showResult() {
+      if (!round || round.status !== "finished") return;
+      const score = Number(round.score || 0);
+      const canShare = (round.casts || []).some((cast) => cast.outcome_id === "grouper");
+      qs("#resultTitle").textContent = score >= 0 ? "本局结算 | 有鱼上岸" : "本局结算 | 手气一般";
+      qs("#resultRecovery").textContent = Number(round.recovery || 0);
+      qs("#resultScore").textContent = `${score > 0 ? "+" : ""}${score}`;
+      qs("#resultBalance").textContent = round.balance ?? me?.balance ?? 0;
+      qs("#resultShareBtn").hidden = !canShare;
+      qs(".result-actions").classList.toggle("shared", canShare);
+      resultSheet.hidden = false;
+    }
+
+    function hideResult() {
+      resultSheet.hidden = true;
+    }
+
+    function clearBiteCue() {
+      if (biteTimer) clearTimeout(biteTimer);
+      biteTimer = null;
+      pond.classList.remove("bite");
+    }
+
+    function scheduleBiteCue() {
+      clearBiteCue();
+      if (Math.random() > sceneConfig.visualBiteProbability) return;
+      biteTimer = setTimeout(() => {
+        if (!round || round.status !== "open" || castPhase !== "waiting" || castingBusy) return;
+        pond.classList.add("bite");
+        qs("#statusText").textContent = "鱼漂有动静，现在起竿试试。";
+        setTimeout(() => pond.classList.remove("bite"), 820);
+      }, randInt(sceneConfig.waitMinMs, sceneConfig.waitMaxMs));
+    }
+
+    function shareBucket() {
+      const casts = round?.casts || [];
+      const caught = casts.filter((cast) => cast.outcome_id && cast.outcome_id !== "empty");
+      if (!caught.some((cast) => cast.outcome_id === "grouper")) return;
+      const recovery = round?.recovery || 0;
+      const fishList = caught.map((cast) => cast.name).join("、") || "暂无鱼获";
+      const gameUrl = new URL("/fishing.html", location.origin);
+      if (me?.referralCode) gameUrl.searchParams.set("ref", me.referralCode);
+      const text = `我在湖畔钓鱼钓到石斑鱼，本局回收${recovery}积分！\n活鱼桶：${fishList}\n来试试你的手气：`;
+      const shareUrl = `https://t.me/share/url?url=${encodeURIComponent(gameUrl.toString())}&text=${encodeURIComponent(text)}`;
+      window.open(shareUrl, "_blank", "noopener");
+    }
+
+    function playLanding(outcomeId) {
+      pond.classList.remove("landing", "empty-cast", "bite", "waiting-bite", "lifting");
+      caughtFish.className = "scene-layer caught-fish";
+      void pond.offsetWidth;
+      caughtFish.classList.add(outcomeId || "empty");
+      if (outcomeId && outcomeId !== "empty") {
+        pond.classList.add("bite", "landing");
+        setTimeout(() => {
+          pond.classList.remove("landing", "bite");
+          caughtFish.className = "scene-layer caught-fish";
+        }, 1020);
+      } else {
+        pond.classList.add("empty-cast");
+        setTimeout(() => pond.classList.remove("empty-cast"), 820);
+      }
+    }
+
+    function showCatchToast(cast) {
+      catchToast.classList.remove("show");
+      if (!cast || cast.outcome_id === "empty") {
+        catchToast.textContent = "空竿";
+      } else {
+        catchToast.textContent = `获得 ${cast.name} +${cast.price}`;
+      }
+      void catchToast.offsetWidth;
+      catchToast.classList.add("show");
+    }
+
+    function spawnRipple(x, y) {
+      const ripple = document.createElement("i");
+      ripple.className = "ripple";
+      ripple.style.setProperty("--x", `${x}%`);
+      ripple.style.setProperty("--y", `${y}%`);
+      pond.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 1900);
+    }
+
+    function randomizeFish(fish) {
+      const x = rand(sceneConfig.fishMinX, sceneConfig.fishMaxX);
+      const y = rand(sceneConfig.fishMinY, sceneConfig.fishMaxY);
+      const yellow = Math.random() > 0.45;
+      fish.classList.toggle("yellow", yellow);
+      fish.classList.toggle("grouper", !yellow);
+      fish.style.setProperty("--x", `${x.toFixed(1)}%`);
+      fish.style.setProperty("--y", `${y.toFixed(1)}%`);
+      fish.style.setProperty("--r", `${rand(-16, 14).toFixed(1)}deg`);
+      fish.style.setProperty("--dir", Math.random() > 0.5 ? "1" : "-1");
+      fish.style.setProperty("--dur", `${rand(6.2, 9.4).toFixed(2)}s`);
+      fish.style.setProperty("--delay", `${rand(0, 2.6).toFixed(2)}s`);
+      spawnRipple(x + rand(-1.5, 1.5), y + rand(-.8, .8));
+    }
+
+    function initScene() {
+      document.querySelectorAll(".surface-fish").forEach((fish, index) => {
+        randomizeFish(fish);
+        setInterval(() => randomizeFish(fish), randInt(5200 + index * 220, 11000 + index * 420));
+      });
+      setInterval(() => spawnRipple(rand(16, 72), rand(34, 75)), 3600);
+    }
+
+    async function loadMe() {
+      const token = localStorage.getItem(tokenKey);
+      if (!token) {
+        me = null;
+        settings = defaultSettings;
+        updateAuth();
+        renderSettings();
+        renderRound();
+        return;
+      }
+      try {
+        const data = await api("/api/me");
+        me = data.user;
+        const config = await api("/api/fishing/settings");
+        settings = config.settings || defaultSettings;
+      } catch {
+        localStorage.removeItem(tokenKey);
+        me = null;
+        settings = defaultSettings;
+      }
+      updateAuth();
+      renderSettings();
+      renderRound();
+    }
+
+    async function auth(mode) {
+      try {
+        const data = await api(mode === "login" ? "/api/auth/login" : "/api/auth/register", {
+          method: "POST",
+          body: JSON.stringify({ username: qs("#username").value.trim(), password: qs("#password").value, referralCode: qs("#referralCode").value.trim() })
+        });
+        localStorage.setItem(tokenKey, data.token);
+        me = data.user;
+        const config = await api("/api/fishing/settings");
+        settings = config.settings || defaultSettings;
+        round = null;
+        updateAuth();
+        renderSettings();
+        renderRound();
+      } catch (error) { alert(error.message); }
+    }
+
+    async function startFishing() {
+      if (!me) {
+        qs("#authBox").classList.add("open");
+        qs("#statusText").textContent = "登录后即可开局钓鱼。";
+        return false;
+      }
+      try {
+        hideResult();
+        clearBiteCue();
+        const data = await api("/api/fishing/start", { method: "POST", body: "{}" });
+        settings = data.settings || settings;
+        round = data.round;
+        castPhase = "idle";
+        pond.classList.remove("casting", "waiting-bite", "lifting", "landing", "empty-cast", "bite");
+        me.balance = round.balance;
+        renderSettings();
+        renderRound();
+        updateAuth();
+        return true;
+      } catch (error) {
+        alert(error.message);
+        return false;
+      }
+    }
+
+    async function castRod() {
+      if (castingBusy) return;
+      if (!me) {
+        qs("#authBox").classList.add("open");
+        qs("#statusText").textContent = "请先登录或注册账号。";
+        return;
+      }
+      if (castPhase === "waiting") return liftRod();
+      if (!round || round.status !== "open") {
+        const started = await startFishing();
+        if (!started || !round || round.status !== "open") return;
+      }
+      castingBusy = true;
+      castPhase = "waiting";
+      renderRound();
+      pond.classList.remove("casting", "waiting-bite");
+      void pond.offsetWidth;
+      pond.classList.add("casting");
+      try {
+        qs("#statusText").textContent = "鱼线飞出，鱼漂落向深水区。";
+        await sleep(820);
+        pond.classList.add("waiting-bite");
+        pond.classList.remove("casting");
+        qs("#statusText").textContent = "鱼漂已落在深水区，点击起竿收线。";
+        scheduleBiteCue();
+      } catch (error) {
+        clearBiteCue();
+        pond.classList.remove("waiting-bite", "casting");
+        castPhase = "idle";
+        alert(error.message);
+      } finally {
+        castingBusy = false;
+        renderRound();
+      }
+    }
+
+    async function liftRod() {
+      if (!round || round.status !== "open" || castingBusy || castPhase !== "waiting") return;
+      castingBusy = true;
+      renderRound();
+      try {
+        clearBiteCue();
+        qs("#statusText").textContent = "起竿收线中。";
+        pond.classList.remove("waiting-bite", "casting");
+        pond.classList.add("lifting");
+        await sleep(520);
+        const data = await api("/api/fishing/cast", { method: "POST", body: JSON.stringify({ roundId: round.roundId }) });
+        castPhase = "idle";
+        round = data.round;
+        playLanding(data.cast?.outcome_id);
+        showCatchToast(data.cast);
+        if (data.finished && data.result) {
+          me.balance = data.result.balance;
+          setTimeout(showResult, 720);
+        }
+        renderRound();
+        updateAuth();
+      } catch (error) {
+        pond.classList.remove("waiting-bite", "casting", "lifting");
+        castPhase = "idle";
+        alert(error.message);
+      } finally {
+        castingBusy = false;
+        renderRound();
+      }
+    }
+
+    qs("#loginBtn").onclick = () => auth("login");
+    qs("#registerBtn").onclick = () => auth("register");
+    qs("#authToggle").onclick = () => {
+      if (me) {
+        localStorage.removeItem(tokenKey);
+        me = null;
+        round = null;
+        castPhase = "idle";
+        clearBiteCue();
+        updateAuth();
+        renderRound();
+        return;
+      }
+      qs("#authBox").classList.toggle("open");
+    };
+    qs("#castBtn").onclick = castRod;
+    qs("#shareBucketBtn").onclick = shareBucket;
+    qs("#resultShareBtn").onclick = shareBucket;
+    qs("#newRoundBtn").onclick = startFishing;
+    qs("#closeResultBtn").onclick = hideResult;
+    renderSettings();
+    renderRound();
+    initScene();
+    loadMe();
+  </script>
+</body>
+</html>

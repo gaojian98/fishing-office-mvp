@@ -11,8 +11,10 @@
     button { border: 0; border-radius: 8px; padding: 8px 10px; background: #123f45; color: #fff; font-weight: 900; cursor: pointer; }
     button.ghost { color: #123f45; background: #f7fffd; border: 1px solid #a9cdc6; }
     input, select { border: 1px solid #b7d6d0; border-radius: 8px; padding: 8px; background: #fff; }
+    textarea { border: 1px solid #b7d6d0; border-radius: 8px; padding: 8px; background: #fff; font: inherit; resize: vertical; min-height: 58px; }
     .login-wrap { width: min(520px, calc(100vw - 24px)); margin: 12vh auto 0; }
     .login { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; }
+    .staff-apply { display: none; margin-top: 10px; }
     .app { display: none; min-height: 100vh; grid-template-columns: 220px 1fr; }
     aside { background: #123f45; color: #ecfeff; padding: 16px 12px; }
     .brand { margin: 0 0 16px; font-size: 24px; font-weight: 950; }
@@ -32,6 +34,11 @@
     .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
     .tabs button.active { background: #0f766e; }
     .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .form-grid label { display: grid; gap: 5px; color: #31515a; font-size: 12px; font-weight: 850; }
+    .form-grid .wide { grid-column: 1 / -1; }
+    .form-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-top: 10px; }
+    .danger-text { color: #b91c1c; font-weight: 900; }
     .table-wrap { overflow: auto; border: 1px solid #d7e9e5; border-radius: 8px; background: #fff; }
     table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 760px; }
     th, td { border-bottom: 1px solid #e3efec; padding: 7px; text-align: left; vertical-align: top; white-space: nowrap; }
@@ -40,8 +47,28 @@
     .status-pending { color: #b45309; font-weight: 950; }
     .status-approved { color: #0f766e; font-weight: 950; }
     .status-rejected { color: #b91c1c; font-weight: 950; }
+    .status-online { color: #0f766e; font-weight: 950; }
+    .status-prototype { color: #2c7be5; font-weight: 950; }
+    .status-maintenance { color: #b45309; font-weight: 950; }
+    .status-offline { color: #64748b; font-weight: 950; }
+    .status-disabled { color: #64748b; font-weight: 950; }
+    .status-blacklisted { color: #7f1d1d; font-weight: 950; }
     .actions { display: flex; gap: 6px; }
     .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .channel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .channel-card { border: 1px solid #d1e7e2; border-radius: 8px; background: #fbfffe; padding: 12px; display: grid; gap: 8px; }
+    .channel-card strong { color: #0b4850; font-size: 18px; }
+    .checks { display: grid; gap: 6px; color: #31515a; font-weight: 850; }
+    .checks label { display: flex; align-items: center; gap: 7px; }
+    .checks input { width: auto; }
+    .rule-grid { display: grid; gap: 10px; }
+    .rule-row { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; align-items: end; padding: 10px; border: 1px solid #d1e7e2; border-radius: 8px; background: #fbfffe; }
+    .rule-row label { display: grid; gap: 5px; color: #31515a; font-size: 12px; font-weight: 850; }
+    .rule-row .checks { align-self: center; }
+    .list-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .list-item { border: 1px solid #d1e7e2; border-radius: 8px; background: #fbfffe; padding: 12px; }
+    .list-item strong { display: block; color: #0b4850; margin-bottom: 6px; }
+    .list-item p { margin: 0; color: #64748b; font-weight: 850; line-height: 1.5; }
     .empty { padding: 18px; color: #64748b; font-weight: 850; }
     @media (max-width: 860px) {
       .app { grid-template-columns: 1fr; }
@@ -50,6 +77,10 @@
       .menu button { text-align: center; padding: 7px 5px; font-size: 12px; }
       .metrics { grid-template-columns: 1fr 1fr; }
       .panel-grid { grid-template-columns: 1fr; }
+      .channel-grid { grid-template-columns: 1fr; }
+      .list-grid { grid-template-columns: 1fr; }
+      .rule-row { grid-template-columns: 1fr; }
+      .form-grid { grid-template-columns: 1fr; }
       .topbar { align-items: flex-start; flex-direction: column; }
       .login { grid-template-columns: 1fr; }
     }
@@ -62,6 +93,26 @@
       <input id="username" placeholder="管理员用户名">
       <input id="password" type="password" placeholder="密码">
       <button id="loginBtn">登录</button>
+      <button class="ghost" id="showApplyBtn" type="button">申请客服账号</button>
+    </section>
+    <section class="card staff-apply" id="staffApplyBox">
+      <h2>申请后台账号</h2>
+      <div class="panel-grid">
+        <input id="applyUsername" placeholder="登录账号">
+        <input id="applyPassword" type="password" placeholder="登录密码，至少6位">
+        <input id="applyName" placeholder="姓名 / 昵称">
+        <input id="applyPhone" placeholder="手机号码">
+        <select id="applyRole">
+          <option value="customer_service">客服</option>
+          <option value="finance">财务</option>
+          <option value="risk">风控</option>
+          <option value="operations">运营</option>
+        </select>
+        <input id="applyReason" placeholder="申请说明">
+      </div>
+      <div style="height:10px"></div>
+      <button id="submitApplyBtn" type="button">提交申请</button>
+      <div class="empty">提交后由超级管理员在系统设置里审批，通过前不能登录后台。</div>
     </section>
   </main>
 
@@ -92,12 +143,15 @@
       { id: "members", name: "会员管理" },
       { id: "funds", name: "资金管理" },
       { id: "games", name: "游戏管理" },
+      { id: "marketing", name: "营销活动" },
       { id: "referrals", name: "推荐系统" },
       { id: "bot", name: "机器人管理" },
       { id: "risk", name: "风控管理" },
       { id: "settings", name: "系统设置" }
     ];
-    let state = { me: null, module: "dashboard", tab: "users", cache: {} };
+    let state = { me: null, module: "dashboard", tab: "users", selectedUserId: "", memberFilters: {}, cache: {} };
+    const staffRoles = { admin: "超级管理员", customer_service: "客服", finance: "财务", risk: "风控", operations: "运营" };
+    const moduleNames = { dashboard: "数据总览", members: "会员管理", funds: "资金管理", games: "游戏管理", marketing: "营销活动", referrals: "推荐系统", bot: "机器人管理", risk: "风控管理", settings: "系统设置" };
 
     async function api(path, options = {}) {
       const headers = { "content-type": "application/json", ...(options.headers || {}) };
@@ -108,6 +162,9 @@
       if (!res.ok) throw new Error(data.error || "请求失败");
       return data;
     }
+    async function safeApi(path, fallback) {
+      try { return await api(path); } catch { return fallback; }
+    }
 
     function escapeHtml(text) {
       return String(text ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m]));
@@ -115,7 +172,7 @@
     function money(value) { return Number(value || 0).toLocaleString("zh-CN"); }
     function time(value) { return value ? new Date(value).toLocaleString("zh-CN", { hour12: false }) : "-"; }
     function statusText(value) {
-      const map = { pending: "待审核", approved: "已通过", rejected: "已拒绝", open: "进行中", finished: "已结算", active: "正常" };
+      const map = { pending: "待审核", approved: "已通过", rejected: "已拒绝", online: "在线", prototype: "原型", maintenance: "维护中", offline: "已下线", open: "进行中", finished: "已结算", active: "正常", disabled: "已停用", blacklisted: "黑名单" };
       return `<span class="status-${escapeHtml(value)}">${map[value] || escapeHtml(value || "-")}</span>`;
     }
 
@@ -130,7 +187,7 @@
     async function init() {
       try {
         const data = await api("/api/me");
-        if (data.user.role !== "admin") throw new Error("不是管理员账号");
+        if (data.user.role === "player") throw new Error("不是管理员账号");
         state.me = data.user;
         qs("#loginBox").style.display = "none";
         qs("#adminBox").style.display = "grid";
@@ -145,7 +202,9 @@
     }
 
     function renderMenu() {
-      qs("#menu").innerHTML = modules.map((item) => `<button class="${state.module === item.id ? "active" : ""}" data-module="${item.id}">${item.name}</button>`).join("");
+      const allowed = allowedModules();
+      if (!allowed.some((item) => item.id === state.module)) state.module = allowed[0]?.id || "dashboard";
+      qs("#menu").innerHTML = allowed.map((item) => `<button class="${state.module === item.id ? "active" : ""}" data-module="${item.id}">${item.name}</button>`).join("");
       qs("#menu").querySelectorAll("button").forEach((btn) => btn.onclick = () => {
         state.module = btn.dataset.module;
         state.tab = defaultTab(state.module);
@@ -155,20 +214,36 @@
     }
 
     function defaultTab(module) {
-      return ({ members: "users", funds: "recharges", games: "rounds", referrals: "tree", bot: "status", risk: "risk-users", settings: "admins" })[module] || "dashboard";
+      return ({ dashboard: "overview", members: "users", funds: "recharges", games: "platform", marketing: "referral-bonus", referrals: "tree", bot: "status", risk: "risk-users", settings: "admins" })[module] || "overview";
+    }
+    function allowedModules() {
+      if (!state.me || state.me.role === "admin") return modules;
+      const permissions = Array.isArray(state.me.adminPermissions) ? state.me.adminPermissions : [];
+      return modules.filter((item) => permissions.includes(item.id));
     }
 
     async function loadAll() {
-      const [summary, users, recharges, withdrawals, transactions, rounds] = await Promise.all([
-        api("/api/admin/summary"),
-        api("/api/admin/list/users"),
-        api("/api/admin/list/recharges"),
-        api("/api/admin/list/withdrawals"),
-        api("/api/admin/list/transactions"),
-        api("/api/admin/list/rounds")
+      const [summary, users, recharges, withdrawals, transactions, valueLedger, rounds, fishingRounds, paymentChannels, operationLogs, financeSettings, fishingSettings, marketingSettings, botCenter, systemStatus, gamePlatform, platformConfig] = await Promise.all([
+        safeApi("/api/admin/summary", {}),
+        safeApi("/api/admin/list/users", { rows: [] }),
+        safeApi("/api/admin/list/recharges", { rows: [] }),
+        safeApi("/api/admin/list/withdrawals", { rows: [] }),
+        safeApi("/api/admin/list/transactions", { rows: [] }),
+        safeApi("/api/admin/list/valueLedger", { rows: [] }),
+        safeApi("/api/admin/list/rounds", { rows: [] }),
+        safeApi("/api/admin/list/fishingRounds", { rows: [] }),
+        safeApi("/api/admin/list/paymentChannels", { rows: [] }),
+        safeApi("/api/admin/list/operationLogs", { rows: [] }),
+        safeApi("/api/finance-settings", { settings: {} }),
+        safeApi("/api/fishing/settings", { settings: {} }),
+        safeApi("/api/marketing-settings", { settings: {} }),
+        safeApi("/api/admin/bot-center", { groups: [], templates: [], logs: [] }),
+        safeApi("/api/admin/system-status", { status: null }),
+        safeApi("/api/admin/game-platform", { platform: { games: [], recentRounds: [], shared: {}, valueUnits: [] } }),
+        safeApi("/api/platform/config", { config: { platform: {}, valueUnits: [], games: [] } })
       ]);
-      state.cache = { summary, users: users.rows, recharges: recharges.rows, withdrawals: withdrawals.rows, transactions: transactions.rows, rounds: rounds.rows };
-      qs("#todoBadge").textContent = `待办 ${summary.pendingRecharges + summary.pendingWithdrawals}`;
+      state.cache = { summary, users: users.rows, recharges: recharges.rows, withdrawals: withdrawals.rows, transactions: transactions.rows, valueLedger: valueLedger.rows, rounds: rounds.rows, fishingRounds: fishingRounds.rows, paymentChannels: paymentChannels.rows, operationLogs: operationLogs.rows, financeSettings: financeSettings.settings, fishingSettings: fishingSettings.settings, marketingSettings: marketingSettings.settings, botCenter, systemStatus: systemStatus.status, gamePlatform: gamePlatform.platform, platformConfig: platformConfig.config };
+      qs("#todoBadge").textContent = `待办 ${Number(summary.pendingRecharges || 0) + Number(summary.pendingWithdrawals || 0)}`;
     }
 
     function render() {
@@ -178,6 +253,7 @@
       if (state.module === "members") return renderMembers();
       if (state.module === "funds") return renderFunds();
       if (state.module === "games") return renderGames();
+      if (state.module === "marketing") return renderMarketing();
       if (state.module === "referrals") return renderReferrals();
       if (state.module === "bot") return renderBot();
       if (state.module === "risk") return renderRisk();
@@ -191,6 +267,9 @@
     function tabs(items) {
       return `<div class="tabs">${items.map((item) => `<button class="${state.tab === item.id ? "active" : "ghost"}" data-tab="${item.id}">${item.name}</button>`).join("")}</div>`;
     }
+    function featureGrid(items) {
+      return `<div class="list-grid">${items.map(([title, text]) => `<div class="list-item"><strong>${escapeHtml(title)}</strong><p>${escapeHtml(text)}</p></div>`).join("")}</div>`;
+    }
     function bindTabs() {
       qs("#view").querySelectorAll("[data-tab]").forEach((btn) => btn.onclick = () => { state.tab = btn.dataset.tab; render(); });
     }
@@ -203,109 +282,888 @@
       if (row.__kind && row.status === "pending") {
         return `<div class="actions"><button onclick="review('${row.__kind}','${row.id}','approved')">通过</button><button class="ghost" onclick="review('${row.__kind}','${row.id}','rejected')">拒绝</button></div>`;
       }
+      if (row.__user) {
+        const restore = row.status === "active" ? `<button class="ghost" onclick="setMemberStatus('${escapeHtml(row.id)}','disabled')">停用</button>` : `<button onclick="setMemberStatus('${escapeHtml(row.id)}','active')">恢复</button>`;
+        const blacklist = row.status === "blacklisted" ? "" : `<button class="ghost" onclick="setMemberStatus('${escapeHtml(row.id)}','blacklisted')">拉黑</button>`;
+        return `<div class="actions"><button class="ghost" onclick="viewUserDetail('${escapeHtml(row.id)}')">详情</button>${restore}${blacklist}</div>`;
+      }
+      if (row.__staffReview) {
+        return `<div class="actions"><button onclick="reviewStaff('${escapeHtml(row.id)}','approved')">通过</button><button class="ghost" onclick="reviewStaff('${escapeHtml(row.id)}','rejected')">拒绝</button></div>`;
+      }
+      if (row.__staff) {
+        return `<button class="ghost" onclick="state.tab='roles'; render()">分配权限</button>`;
+      }
       return `<span class="muted">-</span>`;
     }
 
     function renderDashboard() {
       const s = state.cache.summary;
       const pending = [...state.cache.recharges.filter((o) => o.status === "pending").map((o) => ({ ...o, __kind: "recharge" })), ...state.cache.withdrawals.filter((o) => o.status === "pending").map((o) => ({ ...o, __kind: "withdraw" }))];
-      qs("#view").innerHTML = [
-        metrics([
-          { label: "总会员", value: money(s.players) },
-          { label: "今日新增", value: money(s.todayPlayers) },
-          { label: "今日局数", value: money(s.todayRounds) },
-          { label: "平台盈亏", value: money(s.platformProfit) },
+      const tabsHtml = tabs([{ id: "overview", name: "运营概览" }, { id: "today", name: "今日数据" }, { id: "todo", name: "待办事项" }, { id: "finance-summary", name: "资金概览" }]);
+      const overview = metrics([
+        { label: "总会员", value: money(s.players) },
+        { label: "总局数", value: money(s.rounds) },
+        { label: "平台盈亏", value: money(s.platformProfit) },
+        { label: "总摸鱼币余额", value: money(s.totalBalance) },
+        { label: "冻结摸鱼币", value: money(s.totalFrozen) },
+        { label: "待审充值", value: money(s.pendingRecharges) },
+        { label: "待审提现", value: money(s.pendingWithdrawals) },
+        { label: "机器人菜单", value: "7" }
+      ]);
+      const today = metrics([
+        { label: "今日新增会员", value: money(s.todayPlayers) },
+        { label: "今日游戏局数", value: money(s.todayRounds) },
+        { label: "今日充值", value: money(s.todayRechargeAmount) },
+        { label: "今日提现", value: money(s.todayWithdrawAmount) },
+        { label: "今日平台盈亏", value: money(s.todayPlatformProfit) },
+        { label: "今日待办", value: money(s.pendingRecharges + s.pendingWithdrawals) },
+        { label: "今日风险提示", value: money(state.cache.users.filter((u) => Number(u.balance) < 0).length) },
+        { label: "今日活动配置", value: "已启用" }
+      ]);
+      const body = state.tab === "today" ? today :
+        state.tab === "todo" ? orderTable(pending) :
+        state.tab === "finance-summary" ? metrics([
+          { label: "总摸鱼币余额", value: money(s.totalBalance) },
+          { label: "冻结摸鱼币", value: money(s.totalFrozen) },
           { label: "待审充值", value: money(s.pendingRecharges) },
           { label: "待审提现", value: money(s.pendingWithdrawals) },
-          { label: "总积分余额", value: money(s.totalBalance) },
-          { label: "冻结积分", value: money(s.totalFrozen) }
-        ]),
-        card("待办审核", orderTable(pending))
-      ].join("");
+          { label: "今日充值", value: money(s.todayRechargeAmount) },
+          { label: "今日提现", value: money(s.todayWithdrawAmount) },
+          { label: "平台盈亏", value: money(s.platformProfit) },
+          { label: "USDT汇率", value: money(state.cache.financeSettings?.usdt_vnd_rate) }
+        ]) :
+        overview;
+      qs("#view").innerHTML = tabsHtml + card("数据总览", body);
+      bindTabs();
     }
 
     function renderMembers() {
-      qs("#view").innerHTML = tabs([{ id: "users", name: "会员列表" }, { id: "profiles", name: "会员详情" }, { id: "adjust", name: "积分调整" }]) +
+      qs("#view").innerHTML = tabs([{ id: "users", name: "会员列表" }, { id: "search", name: "会员查询" }, { id: "profiles", name: "会员详情" }, { id: "adjust", name: "摸鱼币调整" }, { id: "status", name: "账号状态" }, { id: "telegram-users", name: "TG会员" }]) +
         (state.tab === "users" ? card("会员列表", userTable(state.cache.users)) :
-        state.tab === "profiles" ? card("会员详情", userTable(state.cache.users.slice(0, 20))) :
-        card("积分调整", `<div class="empty">基础版先展示入口；下一步可接入后台加分、扣分、冻结、解冻。</div>`));
+        state.tab === "search" ? memberSearchPanel() :
+        state.tab === "profiles" ? memberDetailPanel() :
+        state.tab === "status" ? memberStatusPanel() :
+        state.tab === "telegram-users" ? card("TG会员", userTable(state.cache.users.filter((u) => u.telegram_id || u.telegram_username))) :
+        memberAdjustPanel());
       bindTabs();
     }
 
     function renderFunds() {
-      const tabsHtml = tabs([{ id: "recharges", name: "充值订单" }, { id: "withdrawals", name: "提现订单" }, { id: "transactions", name: "钱包流水" }, { id: "exchange", name: "兑换订单" }]);
+      const tabsHtml = tabs([{ id: "recharges", name: "充值订单" }, { id: "withdrawals", name: "提现订单" }, { id: "channels", name: "支付通道" }, { id: "rates", name: "汇率设置" }, { id: "value-units", name: "价值单位" }, { id: "transactions", name: "钱包流水" }, { id: "value-ledger", name: "价值流水" }, { id: "exchange", name: "兑换订单" }]);
+      const exchangeOrders = state.cache.withdrawals.filter((order) => String(order.note || "").includes("兑换现金") || String(order.note || "").includes("摸鱼币"));
       const body = state.tab === "recharges" ? orderTable(state.cache.recharges.map((o) => ({ ...o, __kind: "recharge" }))) :
         state.tab === "withdrawals" ? orderTable(state.cache.withdrawals.map((o) => ({ ...o, __kind: "withdraw" }))) :
+        state.tab === "channels" ? paymentChannelPanel(state.cache.paymentChannels) :
+        state.tab === "rates" ? financeSettingsPanel(state.cache.financeSettings) :
+        state.tab === "value-units" ? valueUnitPanel() :
         state.tab === "transactions" ? txTable(state.cache.transactions) :
-        `<div class="empty">积分兑换现金入口已在钱包页预留；订单表下一步接入。</div>`;
+        state.tab === "value-ledger" ? valueLedgerTable(state.cache.valueLedger || []) :
+        orderTable(exchangeOrders.map((o) => ({ ...o, __kind: "withdraw" })));
       qs("#view").innerHTML = tabsHtml + card("资金管理", body);
       bindTabs();
     }
 
     function renderGames() {
-      qs("#view").innerHTML = tabs([{ id: "rounds", name: "游戏记录" }, { id: "odds", name: "赔率配置" }, { id: "abnormal", name: "异常局查询" }]) +
-        (state.tab === "rounds" ? card("游戏记录", roundTable(state.cache.rounds)) :
+      qs("#view").innerHTML = tabs([{ id: "platform", name: "平台概览" }, { id: "catalog", name: "游戏目录" }, { id: "all-rounds", name: "统一记录" }, { id: "rounds", name: "摸鱼记录" }, { id: "odds", name: "摸鱼赔率" }, { id: "fish-config", name: "鱼缸配置" }, { id: "fishing-config", name: "钓鱼配置" }, { id: "fishing-rounds", name: "钓鱼记录" }, { id: "abnormal", name: "异常局查询" }, { id: "result-stats", name: "开奖结果" }, { id: "integration", name: "接入规范" }]) +
+        (state.tab === "platform" ? gamePlatformPanel() :
+        state.tab === "catalog" ? gameCatalogPanel() :
+        state.tab === "all-rounds" ? card("统一游戏记录", platformRoundTable(state.cache.gamePlatform?.recentRounds || [])) :
+        state.tab === "rounds" ? card("游戏记录", roundTable(state.cache.rounds)) :
         state.tab === "odds" ? card("赔率配置", oddsTable()) :
-        card("异常局查询", `<div class="empty">基础版显示入口；后续按连续大赢、短时间高频、异常胜率筛查。</div>`));
+        state.tab === "fish-config" ? card("鱼缸配置", featureGrid([
+          ["鱼种数量", "黄鱼、石斑鱼、鳗鱼各 8 条。"],
+          ["开局规则", "24 个鱼缸随机分布，每局打开 12 个。"],
+          ["结算方式", "按三种鱼最终数量组合结算。"]
+        ])) :
+        state.tab === "fishing-config" ? card("钓鱼配置", fishingSettingsPanel(state.cache.fishingSettings)) :
+        state.tab === "fishing-rounds" ? card("钓鱼记录", fishingRoundTable(state.cache.fishingRounds || [])) :
+        state.tab === "result-stats" ? card("开奖结果", roundTable(state.cache.rounds.filter((r) => r.status === "finished"))) :
+        state.tab === "integration" ? gameIntegrationPanel() :
+        abnormalGamePanel());
+      bindTabs();
+    }
+
+    function gamePlatformPanel() {
+      const platform = state.cache.gamePlatform || { games: [], shared: {}, recentRounds: [] };
+      const shared = platform.shared || {};
+      const platformMeta = platform.platform || state.cache.platformConfig?.platform || {};
+      const units = platform.valueUnits || platformValueUnits();
+      return `
+        ${metrics([
+          { label: "游戏平台", value: escapeHtml(platformMeta.name || "摸鱼") },
+          { label: "已接入游戏", value: money(shared.gameCount) },
+          { label: "共用会员", value: money(shared.players) },
+          { label: "总游戏局数", value: money(shared.totalRounds) },
+          { label: "平台总盈亏", value: money(shared.totalPlatformProfit) },
+          { label: "今日总局数", value: money((platform.games || []).reduce((sum, game) => sum + Number(game.todayRounds || 0), 0)) },
+          { label: "今日平台盈亏", value: money((platform.games || []).reduce((sum, game) => sum + Number(game.todayPlatformProfit || 0), 0)) },
+          { label: "钱包模式", value: shared.walletLabel || "摸鱼币" },
+          { label: "价值单位", value: money(units.length) }
+        ])}
+        <div style="height:12px"></div>
+        ${card("游戏运营概览", gameCatalogTable(platform.games || []))}
+        ${card("平台价值单位", table([
+          { label: "单位ID", key: "id" },
+          { label: "名称", key: "name" },
+          { label: "编码", render: (r) => escapeHtml((r.codes || []).join(" / ")) },
+          { label: "说明", key: "description" }
+        ], units))}
+        ${card("最近游戏记录", platformRoundTable((platform.recentRounds || []).slice(0, 20)))}
+      `;
+    }
+
+    function gameCatalogPanel() {
+      const games = state.cache.gamePlatform?.games || [];
+      return `
+        ${card("游戏目录", gameCatalogTable(games))}
+        ${card("平台共用能力", featureGrid([
+          ["会员账号", "所有小游戏共用同一套会员、Telegram 登录和推荐关系。"],
+          ["现金", "USDT、VND 作为外部结算币种，用于充值、提现和财务对账。"],
+          ["摸鱼币", "所有小游戏共用余额、冻结、充值提现和钱包流水，当前兼容 users.balance。"],
+          ["游戏资源", "鱼饵、渔具、鱼获、道具等资源统一纳入跨游戏资产模型。"],
+          ["游戏积分", "等级、榜单、荣誉和成就分数统一归入游戏积分，不直接等同现金。"],
+          ["风控审计", "游戏记录统一进入后台风控、操作日志和异常局查询。"],
+          ["营销触达", "活动配置、机器人群发、推荐奖励可服务全部游戏。"]
+        ]))}
+      `;
+    }
+
+    function gameCatalogTable(rows) {
+      return table([
+        { label: "游戏ID", key: "id" },
+        { label: "游戏名称", key: "name" },
+        { label: "类型", key: "category" },
+        { label: "状态", render: (r) => statusText(r.status) },
+        { label: "入口", render: (r) => `<a href="${escapeHtml(r.entry)}" target="_blank" rel="noopener">${escapeHtml(r.entry)}</a>` },
+        { label: "今日局数", render: (r) => money(r.todayRounds) },
+        { label: "总局数", render: (r) => money(r.rounds) },
+        { label: "平台盈亏", render: (r) => money(r.platformProfit) }
+      ], rows);
+    }
+
+    function platformRoundTable(rows) {
+      return table([
+        { label: "游戏", key: "game_name" },
+        { label: "局号", key: "round_id" },
+        { label: "会员", render: (r) => escapeHtml(r.username || userLabel(r.user_id)) },
+        { label: "状态", render: (r) => statusText(r.status) },
+        { label: "入场", render: (r) => money(r.stake) },
+        { label: "回收", render: (r) => money(r.recovery) },
+        { label: "玩家结果", render: (r) => money(r.score) },
+        { label: "平台盈亏", render: (r) => money(r.platform_profit) },
+        { label: "时间", render: (r) => time(r.created_at) }
+      ], rows);
+    }
+
+    function gameIntegrationPanel() {
+      return card("小游戏接入规范", featureGrid([
+        ["注册游戏目录", "在服务端 gameCatalog 增加 id、名称、入口、说明和后台配置标签。"],
+        ["复用账号钱包", "新游戏开局前读取摸鱼币余额，扣费和结算统一写 wallet_transactions。"],
+        ["写入价值流水", "现金、摸鱼币、游戏资源、游戏积分的变化统一写 value_ledger。"],
+        ["资源和积分分离", "道具、鱼获等属于 game_resource；等级、排名、成就属于 game_point。"],
+        ["记录游戏局", "每个游戏保存 round_id、user_id、status、score、created_at、ended_at。"],
+        ["适配统一后台", "在 getGamePlatformOverview 中把新游戏记录转换为统一记录字段。"],
+        ["配置单独隔离", "每个小游戏的概率、价格、开关独立保存，后台只展示对应配置面板。"],
+        ["权限共用 games", "小游戏管理统一走 games 模块权限，资金和会员仍走各自模块。"]
+      ]));
+    }
+
+    function abnormalGamePanel() {
+      const finishedMoyu = state.cache.rounds.filter((round) => round.status === "finished");
+      const finishedFishing = (state.cache.fishingRounds || []).filter((round) => round.status === "finished");
+      const highWinMoyu = finishedMoyu.filter((round) => Number(round.score || 0) >= 20);
+      const highWinFishing = finishedFishing.filter((round) => Number(round.score || 0) >= 20);
+      const highLoss = finishedFishing.filter((round) => Number(round.score || 0) <= -20);
+      const recentLimit = Date.now() - 10 * 60 * 1000;
+      const recentRounds = [...state.cache.rounds, ...(state.cache.fishingRounds || [])].filter((round) => new Date(round.created_at).getTime() >= recentLimit);
+      const byUser = recentRounds.reduce((map, round) => {
+        map[round.user_id] = (map[round.user_id] || 0) + 1;
+        return map;
+      }, {});
+      const highFrequency = Object.entries(byUser)
+        .filter(([, count]) => count >= 5)
+        .map(([userId, count]) => ({ user_id: userId, count, username: state.cache.users.find((user) => user.id === userId)?.username || "-" }));
+      return `
+        ${metrics([
+          { label: "摸鱼高奖局", value: money(highWinMoyu.length) },
+          { label: "钓鱼高奖局", value: money(highWinFishing.length) },
+          { label: "钓鱼高亏局", value: money(highLoss.length) },
+          { label: "10分钟高频账号", value: money(highFrequency.length) }
+        ])}
+        <div style="height:12px"></div>
+        ${card("摸鱼高额中奖", roundTable(highWinMoyu))}
+        ${card("钓鱼高额中奖", fishingRoundTable(highWinFishing))}
+        ${card("钓鱼高亏损局", fishingRoundTable(highLoss))}
+        ${card("短时高频账号", table([
+          { label: "会员ID", key: "user_id" },
+          { label: "账号", key: "username" },
+          { label: "10分钟局数", render: (r) => money(r.count) }
+        ], highFrequency))}
+      `;
+    }
+
+    function renderMarketing() {
+      const tabsHtml = tabs([{ id: "referral-bonus", name: "推荐奖励" }, { id: "checkin-bonus", name: "签到奖励" }, { id: "recharge-bonus", name: "充值奖励" }]);
+      const settings = state.cache.marketingSettings || {};
+      const body = state.tab === "referral-bonus" ? referralBonusPanel(settings.referral) :
+        state.tab === "checkin-bonus" ? checkinBonusPanel(settings.checkin) :
+        rechargeBonusPanel(settings.recharge);
+      qs("#view").innerHTML = tabsHtml + card("营销活动管理", body);
       bindTabs();
     }
 
     function renderReferrals() {
       const users = state.cache.users;
       const rows = users.filter((u) => u.referred_by).map((u) => ({ user: u, parent: users.find((p) => p.id === u.referred_by) }));
-      qs("#view").innerHTML = card("推荐关系", table([
+      const referralTable = table([
         { label: "会员", render: (r) => escapeHtml(r.user.username) },
         { label: "系统ID", render: (r) => escapeHtml(r.user.user_no || r.user.id) },
         { label: "推荐人", render: (r) => escapeHtml(r.parent?.username || "-") },
         { label: "注册时间", render: (r) => time(r.user.created_at) }
-      ], rows));
+      ], rows);
+      const ranking = users.map((u) => ({ ...u, children: users.filter((child) => child.referred_by === u.id).length })).filter((u) => u.children > 0).sort((a, b) => b.children - a.children);
+      const rewardRows = state.cache.transactions.filter((tx) => /referral|bonus|reward|checkin|activity|recharge_bonus/.test(String(tx.type || "")));
+      qs("#view").innerHTML = tabs([{ id: "tree", name: "推荐关系" }, { id: "invite-codes", name: "邀请码" }, { id: "ranking", name: "推荐排行" }, { id: "rewards", name: "奖励记录" }]) +
+        (state.tab === "invite-codes" ? card("邀请码", userTable(users)) :
+        state.tab === "ranking" ? card("推荐排行", table([
+          { label: "会员", key: "username" },
+          { label: "系统ID", render: (r) => escapeHtml(r.user_no || r.id) },
+          { label: "直接推荐人数", render: (r) => money(r.children) },
+          { label: "推荐码", key: "referral_code" }
+        ], ranking)) :
+        state.tab === "rewards" ? card("奖励记录", txTable(rewardRows)) :
+        card("推荐关系", referralTable));
+      bindTabs();
     }
 
     function renderBot() {
-      qs("#view").innerHTML = metrics([
-        { label: "Bot 用户名", value: "p31000Bot" },
-        { label: "Webhook", value: "已配置" },
-        { label: "入口域名", value: "p3.up.railway.app" },
-        { label: "菜单按钮", value: "7" }
-      ]) + card("机器人菜单", `<div class="panel-grid"><div class="empty">进入游戏 / 钱包 / 邀请好友 / 我的邀请链接</div><div class="empty">玩法说明 / 排行榜 / 开奖结果</div></div>`);
+      const status = state.cache.systemStatus || {};
+      const bot = status.bot || {};
+      const username = bot.username ? `@${String(bot.username).replace(/^@/, "")}` : "未配置";
+      const botMetrics = metrics([
+        { label: "Bot 用户名", value: escapeHtml(username) },
+        { label: "Token", value: bot.tokenConfigured ? "已配置" : "未配置" },
+        { label: "启用群组", value: money(bot.enabledGroups) },
+        { label: "消息模板", value: money(bot.templates) }
+      ]);
+      qs("#view").innerHTML = tabs([{ id: "status", name: "机器人状态" }, { id: "bot-groups", name: "Telegram群管理" }, { id: "message-templates", name: "消息模板" }, { id: "broadcast", name: "一键群发" }, { id: "send-logs", name: "发送日志" }, { id: "menu", name: "菜单配置" }, { id: "bot-users", name: "机器人会员" }]) +
+        (state.tab === "bot-groups" ? card("消息中心 · Telegram 群管理", botGroupsPanel()) :
+        state.tab === "message-templates" ? card("消息中心 · 消息模板", messageTemplatesPanel()) :
+        state.tab === "broadcast" ? card("消息中心 · 一键群发", broadcastPanel()) :
+        state.tab === "send-logs" ? card("消息中心 · 发送日志", sendLogsPanel()) :
+        state.tab === "menu" ? card("菜单配置", featureGrid([
+          ["进入游戏", "打开 Telegram 登录后的游戏首页。"],
+          ["我的邀请链接", "返回会员专属推荐链接。"],
+          ["邀请好友", "调用 Telegram 分享链接。"],
+          ["玩法说明", "发送游戏规则说明。"],
+          ["优惠活动", "按后台营销活动配置生成文案。"],
+          ["钱包", "打开会员钱包页。"],
+          ["开奖结果", "查询会员最近一局结果。"]
+        ])) :
+        state.tab === "copywriting" ? card("消息文案", featureGrid([
+          ["欢迎语", "会员 /start 后看到的游戏介绍。"],
+          ["优惠活动", "读取营销活动的推荐、签到、充值奖励。"],
+          ["玩法说明", "展示鱼缸数量、开奖规则、结算规则。"]
+        ])) :
+        state.tab === "bot-users" ? card("机器人会员", userTable(state.cache.users.filter((u) => u.telegram_id || u.telegram_username))) :
+        state.tab === "webhook-log" ? card("Webhook日志", featureGrid([
+          ["最近消息", "后续接入 Telegram 更新日志。"],
+          ["失败记录", "记录发送失败、回调失败原因。"],
+          ["重试处理", "支持客服手动重试机器人消息。"]
+        ])) :
+        botMetrics + card("机器人菜单", featureGrid([
+          ["主入口", "进入游戏、钱包、邀请好友。"],
+          ["信息查询", "玩法说明、优惠活动、开奖结果。"],
+          ["Webhook", bot.webhookUrl || "-"]
+        ])));
+      bindTabs();
     }
 
     function renderRisk() {
       const negative = state.cache.users.filter((u) => Number(u.balance) < 0);
       const pendingWithdrawals = state.cache.withdrawals.filter((o) => o.status === "pending");
-      qs("#view").innerHTML = metrics([
+      const riskMetrics = metrics([
         { label: "负积分账号", value: negative.length },
         { label: "待审提现", value: pendingWithdrawals.length },
         { label: "黑名单", value: 0 },
         { label: "异常提示", value: negative.length + pendingWithdrawals.length }
-      ]) + card("风险列表", userTable(negative));
+      ]);
+      qs("#view").innerHTML = tabs([{ id: "risk-users", name: "异常会员" }, { id: "negative", name: "负积分" }, { id: "withdraw-risk", name: "提现风险" }, { id: "blacklist", name: "黑名单" }, { id: "audit-log", name: "审核日志" }]) +
+        (state.tab === "negative" ? card("负积分账号", userTable(negative)) :
+        state.tab === "withdraw-risk" ? card("提现风险", orderTable(pendingWithdrawals.map((o) => ({ ...o, __kind: "withdraw" })))) :
+        state.tab === "blacklist" ? riskBlacklistPanel() :
+        state.tab === "audit-log" ? card("审核日志", operationLogTable(state.cache.operationLogs)) :
+        riskMetrics + card("风险列表", userTable(negative)));
+      bindTabs();
+    }
+
+    function riskBlacklistPanel() {
+      const blacklisted = state.cache.users.filter((user) => user.status === "blacklisted");
+      return `
+        <section class="channel-card">
+          <strong>加入黑名单</strong>
+          <div class="form-grid">
+            <label>会员账号 / 系统ID / 手机号<input id="blacklistLookup" placeholder="例如 tg_123 / 100001 / 手机号"></label>
+            <label>处理原因<input id="blacklistReason" placeholder="例如 异常提现、风控复核"></label>
+          </div>
+          <div class="form-actions">
+            <button onclick="setMemberStatusFromInput('blacklisted')">加入黑名单</button>
+          </div>
+          <div class="empty">黑名单账号不能登录、游戏、提现；可在表格操作里恢复。</div>
+        </section>
+        ${card("黑名单账号", userTable(blacklisted))}
+      `;
     }
 
     function renderSettings() {
-      qs("#view").innerHTML = card("系统设置", `<div class="panel-grid"><div class="empty">管理员账号、角色权限、操作日志</div><div class="empty">支付渠道、兑换比例、域名配置</div></div>`);
+      const status = state.cache.systemStatus || {};
+      qs("#view").innerHTML = tabs([{ id: "admins", name: "管理员" }, { id: "applications", name: "账号审批" }, { id: "roles", name: "角色权限" }, { id: "domain", name: "域名配置" }, { id: "security", name: "安全设置" }, { id: "launch-check", name: "上线自检" }, { id: "logs", name: "操作日志" }]) +
+        (state.tab === "applications" ? staffApplicationsPanel() :
+        state.tab === "roles" ? staffRolesPanel() :
+        state.tab === "domain" ? card("域名配置", featureGrid([
+          ["游戏域名", status.runtime?.appUrl || "-"],
+          ["Telegram入口", "机器人按钮使用 APP_URL 生成。"],
+          ["Webhook", status.bot?.webhookUrl || "-"]
+        ])) :
+        state.tab === "security" ? securitySettingsPanel() :
+        state.tab === "launch-check" ? launchCheckPanel(status) :
+        state.tab === "logs" ? card("操作日志", operationLogTable(state.cache.operationLogs)) :
+        staffAdminsPanel());
+      bindTabs();
+    }
+
+    function staffUsers() {
+      return (state.cache.users || []).filter((user) => user.role && user.role !== "player");
+    }
+    function securitySettingsPanel() {
+      const status = state.cache.systemStatus || {};
+      return card("安全设置", `
+        ${featureGrid([
+          ["会话有效期", "会员和后台登录默认 7 天有效。"],
+          ["密码策略", status.security?.defaultAdminPassword ? "当前仍是默认后台密码，测试上线前必须修改。" : "已使用自定义后台密码。"],
+          ["敏感配置", "机器人 Token 和数据库连接只放在环境变量。"]
+        ])}
+        <div style="height:12px"></div>
+        <section class="channel-card">
+          <strong>修改当前后台密码</strong>
+          <input id="adminOldPassword" type="password" placeholder="当前密码">
+          <input id="adminNewPassword" type="password" placeholder="新密码，至少 6 位">
+          <input id="adminConfirmPassword" type="password" placeholder="再次输入新密码">
+          <button onclick="changeAdminPassword()">保存新密码</button>
+          <div class="empty" id="adminPasswordMessage">只修改当前登录账号的后台密码。</div>
+        </section>
+      `);
+    }
+    function launchCheckPanel(status = {}) {
+      const checks = status.checks || [];
+      const rows = checks.map((item) => ({ ...item, status: item.ok ? "approved" : "rejected" }));
+      return card("上线自检", `
+        ${metrics([
+          { label: "通过项", value: money(checks.filter((item) => item.ok).length) },
+          { label: "需处理", value: money(checks.filter((item) => !item.ok).length) },
+          { label: "待审充值", value: money(status.operations?.pendingRecharges) },
+          { label: "待审提现", value: money(status.operations?.pendingWithdrawals) },
+          { label: "数据存储", value: escapeHtml(status.runtime?.storage || "-") },
+          { label: "支付通道", value: money(status.operations?.enabledPaymentChannels) },
+          { label: "后台账号", value: money(status.security?.staffCount) },
+          { label: "待批账号", value: money(status.security?.pendingStaffApplications) }
+        ])}
+        <div style="height:12px"></div>
+        ${table([
+          { label: "检查项", render: (r) => escapeHtml(r.label) },
+          { label: "结果", render: (r) => statusText(r.status) },
+          { label: "说明", render: (r) => escapeHtml(r.detail) }
+        ], rows)}
+        <div class="empty">上线测试前至少处理默认后台密码、正式 APP_URL、支付通道和 Telegram 配置。</div>
+      `);
+    }
+    function staffStatusText(value) {
+      return ({ pending: "待审批", approved: "已通过", rejected: "已拒绝" }[value] || value || "已通过");
+    }
+    function staffRoleSelect(user) {
+      return `<select id="staff-role-${escapeHtml(user.id)}">
+        ${Object.entries(staffRoles).filter(([role]) => role !== "admin" || user.role === "admin").map(([role, label]) => `<option value="${role}" ${user.role === role ? "selected" : ""}>${label}</option>`).join("")}
+      </select>`;
+    }
+    function permissionChecks(user) {
+      const permissions = new Set(normalizedUserPermissions(user));
+      return `<div class="checks">${Object.entries(moduleNames).map(([id, name]) => `
+        <label><input id="perm-${escapeHtml(user.id)}-${id}" type="checkbox" ${permissions.has(id) ? "checked" : ""} ${user.role === "admin" ? "disabled" : ""}>${name}</label>
+      `).join("")}</div>`;
+    }
+    function normalizedUserPermissions(user) {
+      if (Array.isArray(user.admin_permissions)) return user.admin_permissions;
+      if (Array.isArray(user.adminPermissions)) return user.adminPermissions;
+      if (typeof user.admin_permissions === "string") {
+        try { return JSON.parse(user.admin_permissions); } catch { return user.admin_permissions.split(","); }
+      }
+      const defaults = {
+        admin: Object.keys(moduleNames),
+        customer_service: ["dashboard", "members", "funds", "bot"],
+        finance: ["dashboard", "funds", "members"],
+        risk: ["dashboard", "members", "games", "risk"],
+        operations: ["dashboard", "games", "marketing", "referrals", "bot"]
+      };
+      return defaults[user.role] || [];
+    }
+    function staffAdminsPanel() {
+      const rows = staffUsers();
+      const body = table([
+        { label: "账号", key: "username" },
+        { label: "姓名", render: (r) => escapeHtml(r.staff_name || "-") },
+        { label: "角色", render: (r) => escapeHtml(staffRoles[r.role] || r.role) },
+        { label: "审批", render: (r) => staffStatusText(r.admin_status) },
+        { label: "状态", render: (r) => statusText(r.status) },
+        { label: "手机", render: (r) => escapeHtml(r.phone || "-") },
+        { label: "权限", render: (r) => normalizedUserPermissions(r).map((id) => moduleNames[id]).filter(Boolean).join("、") || "-" },
+        { label: "注册时间", render: (r) => time(r.created_at) }
+      ], rows.map((row) => ({ ...row, __staff: true })));
+      return card("管理员", `
+        ${featureGrid([
+          ["当前管理员", `${state.me?.username || "admin"} / ${staffRoles[state.me?.role] || state.me?.role || "管理员"}`],
+          ["申请流程", "客服、财务、风控、运营从登录页提交申请，超级管理员在账号审批中处理。"],
+          ["分权规则", "审批通过后按模块授权，未授权模块不会在后台菜单显示。"]
+        ])}
+        <div style="height:12px"></div>
+        ${body}
+      `);
+    }
+    function staffApplicationsPanel() {
+      const pending = staffUsers().filter((user) => (user.admin_status || "approved") === "pending");
+      const reviewed = staffUsers().filter((user) => (user.admin_status || "approved") !== "pending");
+      const pendingTable = table([
+        { label: "账号", key: "username" },
+        { label: "姓名", render: (r) => escapeHtml(r.staff_name || "-") },
+        { label: "申请角色", render: (r) => escapeHtml(staffRoles[r.role] || r.role) },
+        { label: "手机", render: (r) => escapeHtml(r.phone || "-") },
+        { label: "说明", render: (r) => escapeHtml(r.staff_reason || "-") },
+        { label: "申请时间", render: (r) => time(r.created_at) }
+      ], pending.map((row) => ({ ...row, __staffReview: true })));
+      const reviewedTable = table([
+        { label: "账号", key: "username" },
+        { label: "角色", render: (r) => escapeHtml(staffRoles[r.role] || r.role) },
+        { label: "审批", render: (r) => staffStatusText(r.admin_status) },
+        { label: "状态", render: (r) => statusText(r.status) },
+        { label: "时间", render: (r) => time(r.created_at) }
+      ], reviewed.map((row) => ({ ...row, __staff: true })));
+      return card("账号审批", `
+        ${metrics([
+          { label: "待审批", value: money(pending.length) },
+          { label: "已通过", value: money(staffUsers().filter((u) => (u.admin_status || "approved") === "approved").length) },
+          { label: "已拒绝", value: money(staffUsers().filter((u) => u.admin_status === "rejected").length) },
+          { label: "后台账号", value: money(staffUsers().length) }
+        ])}
+        <div style="height:12px"></div>
+        ${card("待审批申请", pendingTable)}
+        ${card("已处理账号", reviewedTable)}
+      `);
+    }
+    function staffRolesPanel() {
+      const rows = staffUsers();
+      return card("角色权限", `
+        ${featureGrid([
+          ["超级管理员", "拥有所有后台功能，可以审批账号和调整权限。"],
+          ["客服", "默认处理会员查询、充值提现沟通、机器人咨询。"],
+          ["财务", "默认处理资金管理、支付通道、充值提现审核。"],
+          ["风控", "默认查看会员、游戏记录、提现风险和黑名单。"],
+          ["运营", "默认管理游戏、营销活动、推荐系统和机器人内容。"]
+        ])}
+        <div style="height:12px"></div>
+        <div class="rule-grid">
+          ${rows.map((user) => `
+            <div class="channel-card">
+              <strong>${escapeHtml(user.username)} · ${escapeHtml(staffRoles[user.role] || user.role)}</strong>
+              <input id="staff-name-${escapeHtml(user.id)}" value="${escapeHtml(user.staff_name || "")}" placeholder="姓名 / 昵称" ${user.role === "admin" ? "disabled" : ""}>
+              <input id="staff-phone-${escapeHtml(user.id)}" value="${escapeHtml(user.phone || "")}" placeholder="手机号码" ${user.role === "admin" ? "disabled" : ""}>
+              ${staffRoleSelect(user)}
+              <select id="staff-admin-status-${escapeHtml(user.id)}" ${user.role === "admin" ? "disabled" : ""}>
+                <option value="approved" ${(user.admin_status || "approved") === "approved" ? "selected" : ""}>已通过</option>
+                <option value="pending" ${user.admin_status === "pending" ? "selected" : ""}>待审批</option>
+                <option value="rejected" ${user.admin_status === "rejected" ? "selected" : ""}>已拒绝</option>
+              </select>
+              <select id="staff-status-${escapeHtml(user.id)}" ${user.role === "admin" ? "disabled" : ""}>
+                <option value="active" ${user.status === "active" ? "selected" : ""}>启用</option>
+                <option value="disabled" ${user.status === "disabled" ? "selected" : ""}>停用</option>
+              </select>
+              ${permissionChecks(user)}
+              <button onclick="saveStaffAccount('${escapeHtml(user.id)}')" ${user.role === "admin" ? "disabled" : ""}>保存权限</button>
+            </div>
+          `).join("")}
+        </div>
+      `);
     }
 
     function userTable(rows) {
       return table([
         { label: "系统ID", render: (r) => escapeHtml(r.user_no || r.id) },
         { label: "账号", key: "username" },
-        { label: "积分", render: (r) => money(r.balance) },
+        { label: "摸鱼币", render: (r) => money(r.balance) },
         { label: "冻结", render: (r) => money(r.frozen) },
         { label: "手机号", render: (r) => escapeHtml(r.phone || "-") },
         { label: "Telegram", render: (r) => escapeHtml(r.telegram_username || r.telegram_id || "-") },
         { label: "推荐码", key: "referral_code" },
         { label: "状态", render: (r) => statusText(r.status) },
         { label: "注册时间", render: (r) => time(r.created_at) }
-      ], rows);
+      ], rows.map((row) => ({ ...row, __user: true })));
+    }
+    function filterMembers() {
+      const filters = state.memberFilters || {};
+      const keyword = String(filters.keyword || "").trim().toLowerCase();
+      const start = filters.start ? new Date(`${filters.start}T00:00:00`).getTime() : 0;
+      const end = filters.end ? new Date(`${filters.end}T23:59:59`).getTime() : Infinity;
+      const minBalance = filters.minBalance === "" || filters.minBalance == null ? -Infinity : Number(filters.minBalance);
+      const maxBalance = filters.maxBalance === "" || filters.maxBalance == null ? Infinity : Number(filters.maxBalance);
+      return state.cache.users.filter((user) => {
+        const haystack = [user.username, user.id, user.user_no, user.phone, user.telegram_id, user.telegram_username, user.referral_code].join(" ").toLowerCase();
+        const created = user.created_at ? new Date(user.created_at).getTime() : 0;
+        const balance = Number(user.balance || 0);
+        if (keyword && !haystack.includes(keyword)) return false;
+        if (created < start || created > end) return false;
+        if (balance < minBalance || balance > maxBalance) return false;
+        if (filters.status === "active" && user.status !== "active") return false;
+        if (filters.status === "frozen" && user.status === "active") return false;
+        if (filters.status === "negative" && balance >= 0) return false;
+        if (filters.status === "telegram" && !user.telegram_id && !user.telegram_username) return false;
+        return true;
+      });
+    }
+    function memberSearchPanel() {
+      const filters = state.memberFilters || {};
+      const rows = filterMembers();
+      return card("会员查询", `
+        <div class="filters">
+          <input id="memberSearchKeyword" value="${escapeHtml(filters.keyword || "")}" placeholder="账号 / 系统ID / 手机 / Telegram / 推荐码">
+          <select id="memberSearchStatus">
+            <option value="" ${!filters.status ? "selected" : ""}>全部状态</option>
+            <option value="active" ${filters.status === "active" ? "selected" : ""}>正常账号</option>
+            <option value="frozen" ${filters.status === "frozen" ? "selected" : ""}>非正常账号</option>
+            <option value="negative" ${filters.status === "negative" ? "selected" : ""}>负积分账号</option>
+            <option value="telegram" ${filters.status === "telegram" ? "selected" : ""}>Telegram会员</option>
+          </select>
+          <input id="memberSearchStart" type="date" value="${escapeHtml(filters.start || "")}">
+          <input id="memberSearchEnd" type="date" value="${escapeHtml(filters.end || "")}">
+          <input id="memberSearchMinBalance" type="number" value="${escapeHtml(filters.minBalance ?? "")}" placeholder="最低摸鱼币">
+          <input id="memberSearchMaxBalance" type="number" value="${escapeHtml(filters.maxBalance ?? "")}" placeholder="最高摸鱼币">
+          <button onclick="applyMemberSearch()">查询</button>
+          <button class="ghost" onclick="resetMemberSearch()">重置</button>
+        </div>
+        ${metrics([
+          { label: "查询结果", value: money(rows.length) },
+          { label: "Telegram会员", value: money(rows.filter((u) => u.telegram_id || u.telegram_username).length) },
+          { label: "负积分", value: money(rows.filter((u) => Number(u.balance) < 0).length) },
+          { label: "摸鱼币合计", value: money(rows.reduce((sum, u) => sum + Number(u.balance || 0), 0)) }
+        ])}
+        <div style="height:10px"></div>
+        ${userTable(rows)}
+      `);
+    }
+    function memberDetailPanel() {
+      const users = state.cache.users || [];
+      const selected = users.find((user) => user.id === state.selectedUserId) || users[0];
+      if (!selected) return card("会员详情", `<div class="empty">暂无会员数据</div>`);
+      state.selectedUserId = selected.id;
+      const recharges = state.cache.recharges.filter((item) => item.user_id === selected.id);
+      const withdrawals = state.cache.withdrawals.filter((item) => item.user_id === selected.id);
+      const transactions = state.cache.transactions.filter((item) => item.user_id === selected.id);
+      const rounds = state.cache.rounds.filter((item) => item.user_id === selected.id);
+      const referrals = users.filter((user) => user.referred_by === selected.id);
+      const approvedRecharges = recharges.filter((item) => item.status === "approved");
+      const approvedWithdrawals = withdrawals.filter((item) => item.status === "approved");
+      const finishedRounds = rounds.filter((item) => item.status === "finished");
+      const gameScore = finishedRounds.reduce((sum, item) => sum + Number(item.score || 0), 0);
+      const detailOptions = users.slice(0, 200).map((user) => `<option value="${escapeHtml(user.id)}" ${user.id === selected.id ? "selected" : ""}>${escapeHtml(user.username)} / ${escapeHtml(user.user_no || user.id)}</option>`).join("");
+      return card("会员详情", `
+        <div class="filters">
+          <select id="memberDetailSelect">${detailOptions}</select>
+          <button onclick="selectMemberDetail()">查看会员</button>
+          <button class="ghost" onclick="backToMemberSearch()">返回查询</button>
+        </div>
+        ${metrics([
+          { label: "当前摸鱼币", value: money(selected.balance) },
+          { label: "冻结摸鱼币", value: money(selected.frozen) },
+          { label: "累计充值", value: money(approvedRecharges.reduce((sum, item) => sum + Number(item.amount || 0), 0)) },
+          { label: "累计提现", value: money(approvedWithdrawals.reduce((sum, item) => sum + Number(item.amount || 0), 0)) },
+          { label: "游戏输赢", value: money(gameScore) },
+          { label: "游戏局数", value: money(finishedRounds.length) },
+          { label: "直接推荐", value: money(referrals.length) },
+          { label: "待办订单", value: money(recharges.filter((item) => item.status === "pending").length + withdrawals.filter((item) => item.status === "pending").length) }
+        ])}
+        <div style="height:12px"></div>
+        ${card("账号信息", featureGrid([
+          ["账号", selected.username],
+          ["系统ID", selected.user_no || selected.id],
+          ["用户ID", selected.id],
+          ["手机号", selected.phone || "-"],
+          ["Telegram", selected.telegram_username || selected.telegram_id || "-"],
+          ["推荐码", selected.referral_code || "-"],
+          ["推荐人", users.find((user) => user.id === selected.referred_by)?.username || "-"],
+          ["账号状态", selected.status || "-"],
+          ["注册时间", time(selected.created_at)],
+          ["最近登录", time(selected.last_login_at)]
+        ]))}
+        <div class="panel-grid">
+          ${card("最近充值", orderTable(recharges.slice(0, 8).map((item) => ({ ...item, __kind: "recharge" }))))}
+          ${card("最近提现", orderTable(withdrawals.slice(0, 8).map((item) => ({ ...item, __kind: "withdraw" }))))}
+        </div>
+        ${card("钱包流水", txTable(transactions.slice(0, 12)))}
+        ${card("游戏记录", roundTable(rounds.slice(0, 12)))}
+        ${card("推荐会员", userTable(referrals))}
+      `);
+    }
+    function memberStatusPanel() {
+      const abnormal = state.cache.users.filter((u) => u.status !== "active" || Number(u.balance) < 0);
+      return card("账号状态", `
+        <section class="channel-card">
+          <strong>修改会员状态</strong>
+          <div class="form-grid">
+            <label>会员账号 / 系统ID / 用户ID / 手机号<input id="statusLookup" placeholder="输入会员标识"></label>
+            <label>目标状态
+              <select id="statusValue">
+                <option value="active">恢复正常</option>
+                <option value="disabled">停用账号</option>
+                <option value="blacklisted">加入黑名单</option>
+              </select>
+            </label>
+            <label class="wide">处理原因<textarea id="statusReason" placeholder="例如 用户申请冻结、风控复核、误封恢复"></textarea></label>
+          </div>
+          <div class="form-actions">
+            <button onclick="setMemberStatusFromInput()">保存状态</button>
+          </div>
+        </section>
+        <div style="height:12px"></div>
+        ${metrics([
+          { label: "异常账号", value: money(abnormal.length) },
+          { label: "停用账号", value: money(state.cache.users.filter((u) => u.status === "disabled").length) },
+          { label: "黑名单", value: money(state.cache.users.filter((u) => u.status === "blacklisted").length) },
+          { label: "负摸鱼币", value: money(state.cache.users.filter((u) => Number(u.balance) < 0).length) }
+        ])}
+        <div style="height:12px"></div>
+        ${userTable(abnormal)}
+      `);
+    }
+    function memberAdjustPanel() {
+      const users = (state.cache.users || []).filter((user) => user.role === "player");
+      const selected = users.find((user) => user.id === state.selectedUserId) || users[0];
+      if (selected && !state.selectedUserId) state.selectedUserId = selected.id;
+      const options = users.slice(0, 300).map((user) => `<option value="${escapeHtml(user.id)}" ${selected?.id === user.id ? "selected" : ""}>${escapeHtml(user.username)} / ${escapeHtml(user.user_no || user.id)} / ${money(user.balance)}币</option>`).join("");
+      const recent = (state.cache.transactions || []).filter((tx) => ["admin_add", "admin_deduct", "admin_set_balance"].includes(tx.type)).slice(0, 30);
+      const selectedInfo = selected ? metrics([
+        { label: "账号", value: escapeHtml(selected.username) },
+        { label: "系统ID", value: escapeHtml(selected.user_no || selected.id) },
+        { label: "当前摸鱼币", value: money(selected.balance) },
+        { label: "冻结摸鱼币", value: money(selected.frozen) }
+      ]) : `<div class="empty">暂无会员数据</div>`;
+      return card("摸鱼币调整", `
+        ${selectedInfo}
+        <div style="height:12px"></div>
+        <div class="form-grid">
+          <label>选择会员
+            <select id="adjustUserSelect" onchange="state.selectedUserId=this.value; render()">
+              ${options}
+            </select>
+          </label>
+          <label>或手动输入会员
+            <input id="adjustUserLookup" value="${escapeHtml(selected?.username || "")}" placeholder="账号 / 系统ID / 用户ID / 手机号">
+          </label>
+          <label>调整方式
+            <select id="adjustMode">
+              <option value="add">增加：当前摸鱼币增加指定数量</option>
+              <option value="deduct">扣除：当前摸鱼币扣除指定数量</option>
+              <option value="set">直接设定：把当前摸鱼币改为指定数值</option>
+            </select>
+          </label>
+          <label>摸鱼币数量
+            <input id="adjustAmount" type="number" step="1" placeholder="例如 100">
+          </label>
+          <label class="wide">调整原因
+            <textarea id="adjustReason" placeholder="必须填写，例如：充值补单、活动奖励、误操作修正、风控扣分"></textarea>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button onclick="submitMemberBalanceAdjust()">确认修改摸鱼币</button>
+          <span class="danger-text">提交后会立即修改会员余额，并写入钱包流水。</span>
+        </div>
+      `) + card("最近后台调整流水", txTable(recent));
+    }
+    function channelName(id) {
+      return state.cache.paymentChannels?.find((channel) => channel.id === id)?.name || id || "-";
+    }
+    function userLabel(userId) {
+      const user = state.cache.users?.find((item) => item.id === userId);
+      return user ? `${user.username} / ${user.user_no || user.id}` : userId || "-";
+    }
+    function paymentChannelPanel(rows) {
+      return `<div class="channel-grid">${rows.map((channel) => `
+        <div class="channel-card">
+          <strong>${escapeHtml(channel.name)}</strong>
+          <input id="channel-name-${escapeHtml(channel.id)}" value="${escapeHtml(channel.name)}" placeholder="通道名称">
+          <input id="channel-sort-${escapeHtml(channel.id)}" type="number" value="${Number(channel.sort_order || 100)}" placeholder="排序">
+          <input id="channel-account-name-${escapeHtml(channel.id)}" value="${escapeHtml(channel.account_name || "")}" placeholder="户名 / 钱包类型 / 收款人">
+          <input id="channel-account-no-${escapeHtml(channel.id)}" value="${escapeHtml(channel.account_no || "")}" placeholder="银行卡号 / 钱包地址 / ZaloPay 账号">
+          <input id="channel-network-${escapeHtml(channel.id)}" value="${escapeHtml(channel.network || "")}" placeholder="银行名称 / 网络类型，例如 TRC20">
+          <textarea id="channel-instructions-${escapeHtml(channel.id)}" placeholder="会员转账说明">${escapeHtml(channel.instructions || "")}</textarea>
+          <div class="checks">
+            <label><input id="channel-enabled-${escapeHtml(channel.id)}" type="checkbox" ${channel.enabled ? "checked" : ""}>启用通道</label>
+            <label><input id="channel-recharge-${escapeHtml(channel.id)}" type="checkbox" ${channel.supports_recharge ? "checked" : ""}>用于入款充值</label>
+            <label><input id="channel-withdraw-${escapeHtml(channel.id)}" type="checkbox" ${channel.supports_withdraw ? "checked" : ""}>用于出款提现</label>
+          </div>
+          <button onclick="savePaymentChannel('${escapeHtml(channel.id)}')">保存通道</button>
+        </div>`).join("")}</div>`;
+    }
+    function financeSettingsPanel(settings = {}) {
+      const pointRate = Number(settings.point_vnd_rate || 1000);
+      const usdtRate = Number(settings.usdt_vnd_rate || 25000);
+      return `<div class="panel-grid">
+        <div class="metric">
+          <span>摸鱼币与越南盾</span>
+          <strong>1 摸鱼币 = ${money(pointRate)} VND</strong>
+          <p class="muted">固定比例，会员入款、出款和平台钱包余额都按这个比例折算。</p>
+        </div>
+        <div class="channel-card">
+          <strong>USDT / 越南盾汇率</strong>
+          <input id="usdtVndRate" type="number" min="1" step="1" value="${usdtRate}" placeholder="例如 25000">
+          <div class="empty">客服人员根据市场情况手工设置；充值和提现共用同一个汇率。</div>
+          <button onclick="saveFinanceSettings()">保存汇率</button>
+        </div>
+      </div>`;
+    }
+    function botStats() {
+      const groups = state.cache.botCenter?.groups || [];
+      const templates = state.cache.botCenter?.templates || [];
+      const bot = state.cache.systemStatus?.bot || {};
+      return metrics([
+        { label: "启用群组", value: money(groups.filter((g) => g.enabled).length) },
+        { label: "消息模板", value: money(templates.length) },
+        { label: "最近发送", value: money(bot.recentSends) },
+        { label: "Bot 状态", value: bot.tokenConfigured ? "已配置" : "未配置" }
+      ]);
+    }
+    function botGroupsPanel() {
+      const groups = state.cache.botCenter?.groups || [];
+      return botStats() + `<section class="channel-card">
+        <strong>新增群组</strong>
+        <div class="empty">群 ID 填 Telegram chat_id，私有群通常是 -100 开头。Bot 必须先加入该群并有发消息权限。</div>
+        <input id="botGroupName" placeholder="群名称">
+        <input id="botGroupChatId" placeholder="群 ID（chat_id）">
+        <select id="botGroupEnabled"><option value="true">启用</option><option value="false">停用</option></select>
+        <button onclick="saveBotGroup()">添加</button>
+      </section>` + card("群组列表", table([
+        { label: "ID", key: "id" },
+        { label: "名称", key: "name" },
+        { label: "群 ID", key: "chat_id" },
+        { label: "状态", render: (r) => r.enabled ? "启用" : "停用" },
+        { label: "创建时间", render: (r) => time(r.created_at) }
+      ], groups));
+    }
+    function messageTemplatesPanel() {
+      const templates = state.cache.botCenter?.templates || [];
+      return botStats() + `<section class="channel-card">
+        <strong>新建模板</strong>
+        <input id="templateTitle" placeholder="标题（后台标识）">
+        <textarea id="templateBody" placeholder="正文（支持 HTML）"></textarea>
+        <input id="templateImage" placeholder="图片 URL（可选，sendPhoto）">
+        <input id="templateVideo" placeholder="视频 URL（可选，优先 sendVideo）">
+        <div class="panel-grid">
+          <input id="templateButtonText" placeholder="按钮文字">
+          <input id="templateButtonUrl" placeholder="按钮链接（https://t.me/xx）">
+        </div>
+        <div class="empty">勿填 @用户名；可填 https://t.me/lele1006bot，系统会自动规范化。</div>
+        <button onclick="saveMessageTemplate()">创建</button>
+      </section>` + card("模板列表", table([
+        { label: "标题", key: "title" },
+        { label: "正文", render: (r) => escapeHtml(String(r.body || "").slice(0, 80)) },
+        { label: "图片", render: (r) => r.image_url ? "有" : "-" },
+        { label: "视频", render: (r) => r.video_url ? "有" : "-" },
+        { label: "按钮", render: (r) => r.button_text ? escapeHtml(r.button_text) : "-" },
+        { label: "时间", render: (r) => time(r.created_at) }
+      ], templates));
+    }
+    function broadcastPanel() {
+      const tgUsers = state.cache.users.filter((u) => u.telegram_id || u.telegram_username);
+      const templates = state.cache.botCenter?.templates || [];
+      return botStats() + `<section class="channel-card">
+          <strong>一键群发</strong>
+          <select id="broadcastTemplate">
+            <option value="">选择消息模板（可选）</option>
+            ${templates.filter((item) => item.enabled).map((item) => `<option value="${escapeHtml(item.id)}">${escapeHtml(item.title)}</option>`).join("")}
+          </select>
+          <select id="broadcastAudience">
+            <option value="all_tg">全部 Telegram 会员（${tgUsers.length}人）</option>
+            <option value="active_tg">正常 Telegram 会员</option>
+            <option value="enabled_groups">全部启用群组</option>
+          </select>
+          <textarea id="broadcastText" placeholder="未选择模板时，可在这里输入临时文本消息"></textarea>
+          <label class="checks"><input id="broadcastAllGroups" type="checkbox" checked> 发送到全部启用群组</label>
+          <button onclick="sendTelegramBroadcast()">发送消息</button>
+          <div class="empty" id="broadcastResult">发送前请确认内容无误。</div>
+        </section>
+        <div class="empty">扩展预留：meta_json 字段可存 AI 文案来源、A/B 轮播策略；定时任务每分钟检查一次。</div>`;
+    }
+    function sendLogsPanel() {
+      const logs = state.cache.botCenter?.logs || [];
+      return botStats() + table([
+        { label: "时间", render: (r) => time(r.created_at) },
+        { label: "对象", key: "target_type" },
+        { label: "目标", render: (r) => money(r.target_count) },
+        { label: "成功", render: (r) => money(r.sent) },
+        { label: "失败", render: (r) => money(r.failed) },
+        { label: "内容", render: (r) => escapeHtml(String(r.text || "").slice(0, 80)) }
+      ], logs);
+    }
+    function ruleEnabled(id, checked) {
+      return `<label><input id="${id}" type="checkbox" ${checked ? "checked" : ""}>启用</label>`;
+    }
+    function referralBonusPanel(referral = {}) {
+      const tiers = referral.tiers || [];
+      return `<div class="rule-grid">
+        <div class="checks">${ruleEnabled("marketing-referral-enabled", referral.enabled !== false)}</div>
+        ${Array.from({ length: 3 }, (_, index) => {
+          const tier = tiers[index] || {};
+          return `<div class="rule-row">
+            <label>有效会员数量<input id="referral-effective-${index}" type="number" min="0" step="1" value="${Number(tier.effective_members || 0)}"></label>
+            <label>奖励积分<input id="referral-reward-${index}" type="number" min="0" step="1" value="${Number(tier.reward_points || 0)}"></label>
+            <div class="checks">${ruleEnabled(`referral-tier-enabled-${index}`, tier.enabled !== false)}</div>
+          </div>`;
+        }).join("")}
+        <button onclick="saveMarketingSettings()">保存推荐奖励</button>
+      </div>`;
+    }
+    function checkinBonusPanel(checkin = {}) {
+      return `<div class="rule-grid">
+        <div class="checks">${ruleEnabled("marketing-checkin-enabled", checkin.enabled !== false)}</div>
+        <div class="rule-row">
+          <label>连续签到天数<input id="checkin-days" type="number" min="1" step="1" value="${Number(checkin.consecutive_days || 7)}"></label>
+          <label>奖励积分<input id="checkin-reward" type="number" min="0" step="1" value="${Number(checkin.reward_points || 0)}"></label>
+          <div class="empty">默认按连续 7 天计算，可手动改天数和奖励。</div>
+        </div>
+        <button onclick="saveMarketingSettings()">保存签到奖励</button>
+      </div>`;
+    }
+    function rechargeBonusPanel(recharge = {}) {
+      const tiers = recharge.tiers || [];
+      return `<div class="rule-grid">
+        <div class="checks">${ruleEnabled("marketing-recharge-enabled", recharge.enabled !== false)}</div>
+        ${Array.from({ length: 5 }, (_, index) => {
+          const tier = tiers[index] || {};
+          return `<div class="rule-row">
+            <label>单笔充值积分<input id="recharge-condition-${index}" type="number" min="0" step="1" value="${Number(tier.recharge_points || 0)}"></label>
+            <label>奖励积分<input id="recharge-reward-${index}" type="number" min="0" step="1" value="${Number(tier.reward_points || 0)}"></label>
+            <div class="checks">${ruleEnabled(`recharge-tier-enabled-${index}`, tier.enabled !== false)}</div>
+          </div>`;
+        }).join("")}
+        <button onclick="saveMarketingSettings()">保存充值奖励</button>
+      </div>`;
     }
     function orderTable(rows) {
       return table([
         { label: "订单号", key: "id" },
-        { label: "会员ID", key: "user_id" },
+        { label: "会员", render: (r) => escapeHtml(userLabel(r.user_id)) },
         { label: "金额", render: (r) => money(r.amount) },
-        { label: "渠道/方式", render: (r) => escapeHtml(r.channel || r.method || "-") },
+        { label: "渠道/方式", render: (r) => escapeHtml(channelName(r.channel || r.method)) },
         { label: "账号/凭证", render: (r) => escapeHtml(r.account || r.proof || r.note || "-") },
         { label: "状态", render: (r) => statusText(r.status) },
+        { label: "审核备注", render: (r) => escapeHtml(r.review_note || "-") },
+        { label: "审核时间", render: (r) => time(r.reviewed_at) },
         { label: "时间", render: (r) => time(r.created_at) }
       ], rows);
     }
@@ -314,10 +1172,57 @@
         { label: "流水号", key: "id" },
         { label: "会员ID", key: "user_id" },
         { label: "类型", key: "type" },
+        { label: "单位", render: (r) => escapeHtml(r.unit_type || "moyu_coin") },
+        { label: "币种", render: (r) => escapeHtml(r.currency || "MYB") },
         { label: "金额", render: (r) => money(r.amount) },
         { label: "前余额", render: (r) => money(r.balance_before) },
         { label: "后余额", render: (r) => money(r.balance_after) },
         { label: "备注", key: "note" },
+        { label: "时间", render: (r) => time(r.created_at) }
+      ], rows);
+    }
+    function platformValueUnits() {
+      return state.cache.platformConfig?.valueUnits || state.cache.gamePlatform?.valueUnits || [];
+    }
+    function valueUnitPanel() {
+      const units = platformValueUnits();
+      return `
+        ${metrics([
+          { label: "平台名称", value: escapeHtml(state.cache.platformConfig?.platform?.name || state.cache.gamePlatform?.platform?.name || "摸鱼") },
+          { label: "价值单位", value: money(units.length) },
+          { label: "钱包单位", value: "摸鱼币 / MYB" },
+          { label: "现金币种", value: "USDT / VND" }
+        ])}
+        <div style="height:12px"></div>
+        ${table([
+          { label: "单位ID", key: "id" },
+          { label: "名称", key: "name" },
+          { label: "编码", render: (r) => escapeHtml((r.codes || []).join(" / ")) },
+          { label: "作用域", key: "scope" },
+          { label: "说明", key: "description" }
+        ], units)}
+      `;
+    }
+    function valueLedgerTable(rows = []) {
+      return table([
+        { label: "流水号", key: "id" },
+        { label: "会员", render: (r) => escapeHtml(userLabel(r.user_id)) },
+        { label: "单位", key: "unit_type" },
+        { label: "币种/编码", render: (r) => escapeHtml(r.currency || r.resource_id || "-") },
+        { label: "游戏", render: (r) => escapeHtml(r.game_id || "-") },
+        { label: "数量", render: (r) => money(r.amount) },
+        { label: "前值", render: (r) => money(r.balance_before) },
+        { label: "后值", render: (r) => money(r.balance_after) },
+        { label: "来源", key: "ref_type" },
+        { label: "时间", render: (r) => time(r.created_at) }
+      ], rows);
+    }
+    function operationLogTable(rows = []) {
+      return table([
+        { label: "日志ID", key: "id" },
+        { label: "管理员", render: (r) => escapeHtml(state.cache.users.find((user) => user.id === r.admin_id)?.username || r.admin_id || "-") },
+        { label: "操作", key: "action" },
+        { label: "内容", render: (r) => escapeHtml(typeof r.detail === "string" ? r.detail : JSON.stringify(r.detail || {})) },
         { label: "时间", render: (r) => time(r.created_at) }
       ], rows);
     }
@@ -336,16 +1241,405 @@
       const rows = [["8、4、0", "赢 100"], ["7、5、0", "赢 20"], ["6、6、0", "赢 20"], ["8、3、1", "赢 20"], ["8、2、2", "赢 20"], ["7、4、1", "赢 20"], ["7、3、2", "赢 20"], ["6、5、1", "赢 20"], ["6、4、2", "赢 1"], ["6、3、3", "赢 1"], ["5、5、2", "赢 1"], ["4、4、4", "赢 1"], ["5、4、3", "输 10"]];
       return table([{ label: "数量组合", render: (r) => r.combo }, { label: "积分结果", render: (r) => r.score }], rows.map(([combo, score]) => ({ combo, score })));
     }
+    const fishingIds = ["grouper", "yellow", "eel", "empty"];
+    const fishingNames = { grouper: "石斑鱼", yellow: "黄鱼", eel: "鳗鱼", empty: "空竿" };
+    function jsonCell(value, fallback) {
+      if (value == null) return fallback;
+      if (typeof value === "string") {
+        try { return JSON.parse(value); } catch { return fallback; }
+      }
+      return value;
+    }
+    function normalizedFishingSettings(settings = {}) {
+      const fallback = {
+        enabled: true,
+        entry_cost: 20,
+        attempts: 5,
+        outcomes: [
+          { id: "grouper", name: "石斑鱼", probability: 10, price: 20 },
+          { id: "yellow", name: "黄鱼", probability: 40, price: 3 },
+          { id: "eel", name: "鳗鱼", probability: 30, price: 1 },
+          { id: "empty", name: "空竿", probability: 20, price: 0 }
+        ]
+      };
+      const source = { ...fallback, ...(settings || {}) };
+      const outcomes = fishingIds.map((id) => {
+        const base = fallback.outcomes.find((item) => item.id === id);
+        const current = (source.outcomes || []).find((item) => item.id === id) || {};
+        return { id, name: fishingNames[id], probability: Number(current.probability ?? base.probability), price: Number(current.price ?? base.price) };
+      });
+      return { enabled: source.enabled !== false, entry_cost: Number(source.entry_cost || 20), attempts: Number(source.attempts || 5), outcomes };
+    }
+    function fishingStats(settings) {
+      const perCast = settings.outcomes.reduce((total, item) => total + (Number(item.probability) / 100) * Number(item.price), 0);
+      const recovery = perCast * Number(settings.attempts);
+      const playerEv = recovery - Number(settings.entry_cost);
+      return {
+        totalProbability: settings.outcomes.reduce((total, item) => total + Number(item.probability), 0),
+        expectedRecovery: recovery,
+        playerEv,
+        ownerEv: -playerEv,
+        rtp: Number(settings.entry_cost) ? (recovery / Number(settings.entry_cost)) * 100 : 0
+      };
+    }
+    function fishingSettingsPanel(settings = {}) {
+      const s = normalizedFishingSettings(settings);
+      const stats = fishingStats(s);
+      const rows = s.outcomes.map((item) => `
+        <tr>
+          <td>${escapeHtml(item.name)}</td>
+          <td><input id="fishing-prob-${item.id}" type="number" min="0" max="100" step="0.1" value="${item.probability}"></td>
+          <td><input id="fishing-price-${item.id}" type="number" min="0" step="1" value="${item.price}"></td>
+        </tr>`).join("");
+      return `
+        <div class="panel-grid">
+          <div class="list-item">
+            <strong>基础规则</strong>
+            <div class="rule-grid">
+              <label class="checks"><input id="fishing-enabled" type="checkbox" ${s.enabled ? "checked" : ""}> 启用钓鱼游戏</label>
+              <label>每局费用<input id="fishing-entry-cost" type="number" min="1" step="1" value="${s.entry_cost}"></label>
+              <label>每局钓鱼次数<input id="fishing-attempts" type="number" min="1" max="20" step="1" value="${s.attempts}"></label>
+            </div>
+          </div>
+          <div class="list-item">
+            <strong>理论测算</strong>
+            <p>概率合计：${stats.totalProbability.toFixed(1)}%</p>
+            <p>单局平均回收：${stats.expectedRecovery.toFixed(2)} 积分</p>
+            <p>玩家单局期望：${stats.playerEv.toFixed(2)} 积分</p>
+            <p>庄家单局期望：${stats.ownerEv.toFixed(2)} 积分，RTP ${stats.rtp.toFixed(2)}%</p>
+          </div>
+        </div>
+        <div class="table-wrap" style="margin-top:10px">
+          <table>
+            <thead><tr><th>结果</th><th>出现概率 %</th><th>回收价格（积分）</th></tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+        <div style="height:10px"></div>
+        <button onclick="saveFishingSettings()">保存钓鱼配置</button>`;
+    }
+    function fishingRoundTable(rows) {
+      return table([
+        { label: "局号", key: "id" },
+        { label: "会员ID", key: "user_id" },
+        { label: "状态", render: (r) => statusText(r.status) },
+        { label: "费用", render: (r) => money(r.entry_cost) },
+        { label: "回收", render: (r) => money(r.recovery) },
+        { label: "净结果", render: (r) => money(r.score) },
+        { label: "结果明细", render: (r) => {
+          const counts = jsonCell(r.counts, {});
+          return `${fishingNames.grouper}${counts.grouper || 0} / ${fishingNames.yellow}${counts.yellow || 0} / ${fishingNames.eel}${counts.eel || 0} / 空竿${counts.empty || 0}`;
+        } },
+        { label: "结算后", render: (r) => money(r.balance_after) },
+        { label: "时间", render: (r) => time(r.created_at) }
+      ], rows || []);
+    }
 
     window.review = async (kind, orderId, status) => {
+      const statusLabel = status === "approved" ? "通过" : "拒绝";
+      const note = prompt(`请输入${kind === "recharge" ? "充值" : "提现"}订单“${statusLabel}”审核备注：`, statusLabel);
+      if (note === null) return;
+      if (!confirm(`确认${statusLabel}订单 ${orderId}？`)) return;
       try {
-        await api("/api/admin/review", { method: "POST", body: JSON.stringify({ kind, orderId, status }) });
+        await api("/api/admin/review", { method: "POST", body: JSON.stringify({ kind, orderId, status, note }) });
+        await loadAll();
+        render();
+      } catch (e) { alert(e.message); }
+    };
+    window.viewUserDetail = (userId) => {
+      state.selectedUserId = userId;
+      state.module = "members";
+      state.tab = "profiles";
+      renderMenu();
+      render();
+    };
+    window.selectMemberDetail = () => {
+      state.selectedUserId = document.getElementById("memberDetailSelect")?.value || "";
+      render();
+    };
+    window.applyMemberSearch = () => {
+      state.memberFilters = {
+        keyword: document.getElementById("memberSearchKeyword")?.value || "",
+        status: document.getElementById("memberSearchStatus")?.value || "",
+        start: document.getElementById("memberSearchStart")?.value || "",
+        end: document.getElementById("memberSearchEnd")?.value || "",
+        minBalance: document.getElementById("memberSearchMinBalance")?.value || "",
+        maxBalance: document.getElementById("memberSearchMaxBalance")?.value || ""
+      };
+      render();
+    };
+    window.resetMemberSearch = () => {
+      state.memberFilters = {};
+      render();
+    };
+    window.backToMemberSearch = () => {
+      state.tab = "search";
+      render();
+    };
+    window.submitMemberBalanceAdjust = async () => {
+      const selected = state.cache.users?.find((user) => user.id === state.selectedUserId);
+      const lookup = document.getElementById("adjustUserLookup")?.value.trim() || selected?.username || selected?.id || "";
+      const mode = document.getElementById("adjustMode")?.value || "add";
+      const amount = Number(document.getElementById("adjustAmount")?.value || 0);
+      const reason = document.getElementById("adjustReason")?.value.trim() || "";
+      const modeText = ({ add: "加分", deduct: "扣分", set: "直接设定积分为" })[mode] || "调整";
+      if (!lookup) return alert("请选择或输入会员。");
+      if (!Number.isFinite(amount)) return alert("请输入有效摸鱼币数量。");
+      if (!reason) return alert("请填写调整原因。");
+      if (!confirm(`确认对会员 ${lookup} 执行“${modeText} ${amount}”？\n提交后会立即修改余额并写入流水。`)) return;
+      try {
+        const data = await api("/api/admin/member-adjust-balance", {
+          method: "POST",
+          body: JSON.stringify({ user_lookup: lookup, mode, amount, reason })
+        });
+        await loadAll();
+        state.selectedUserId = data.adjustment?.userId || state.selectedUserId;
+        render();
+        alert(`摸鱼币已修改：${data.adjustment.before} -> ${data.adjustment.after}`);
+      } catch (e) { alert(e.message); }
+    };
+    window.setMemberStatus = async (userId, status) => {
+      const statusLabel = ({ active: "恢复正常", disabled: "停用账号", blacklisted: "加入黑名单" })[status] || status;
+      const reason = prompt(`请输入“${statusLabel}”的处理原因：`, statusLabel);
+      if (reason === null) return;
+      if (!confirm(`确认将该会员状态修改为：${statusLabel}？`)) return;
+      try {
+        await api("/api/admin/member-status", {
+          method: "POST",
+          body: JSON.stringify({ userId, status, reason })
+        });
+        await loadAll();
+        render();
+      } catch (e) { alert(e.message); }
+    };
+    window.setMemberStatusFromInput = async (forcedStatus = "") => {
+      const lookup = document.getElementById("statusLookup")?.value.trim() || document.getElementById("blacklistLookup")?.value.trim() || "";
+      const status = forcedStatus || document.getElementById("statusValue")?.value || "active";
+      const reason = document.getElementById("statusReason")?.value.trim() || document.getElementById("blacklistReason")?.value.trim() || "";
+      if (!lookup) return alert("请输入会员账号、系统ID、用户ID或手机号。");
+      if (!reason) return alert("请填写处理原因。");
+      try {
+        await api("/api/admin/member-status", {
+          method: "POST",
+          body: JSON.stringify({ user_lookup: lookup, status, reason })
+        });
+        await loadAll();
+        render();
+      } catch (e) { alert(e.message); }
+    };
+    window.reviewStaff = async (staffId, status) => {
+      try {
+        await api("/api/admin/staff/review", { method: "POST", body: JSON.stringify({ staff_id: staffId, status }) });
+        await loadAll();
+        render();
+      } catch (e) { alert(e.message); }
+    };
+    window.saveStaffAccount = async (staffId) => {
+      try {
+        const permissions = Object.keys(moduleNames).filter((id) => document.getElementById(`perm-${staffId}-${id}`)?.checked);
+        await api("/api/admin/staff/update", {
+          method: "POST",
+          body: JSON.stringify({
+            staff_id: staffId,
+            staff_name: document.getElementById(`staff-name-${staffId}`)?.value || "",
+            phone: document.getElementById(`staff-phone-${staffId}`)?.value || "",
+            role: document.getElementById(`staff-role-${staffId}`)?.value || "",
+            admin_status: document.getElementById(`staff-admin-status-${staffId}`)?.value || "",
+            status: document.getElementById(`staff-status-${staffId}`)?.value || "",
+            admin_permissions: permissions
+          })
+        });
+        await loadAll();
+        render();
+      } catch (e) { alert(e.message); }
+    };
+    window.changeAdminPassword = async () => {
+      const oldPassword = document.getElementById("adminOldPassword")?.value || "";
+      const newPassword = document.getElementById("adminNewPassword")?.value || "";
+      const confirmPassword = document.getElementById("adminConfirmPassword")?.value || "";
+      const message = document.getElementById("adminPasswordMessage");
+      if (newPassword.length < 6) {
+        message.textContent = "新密码至少 6 位。";
+        return;
+      }
+      if (newPassword !== confirmPassword) {
+        message.textContent = "两次输入的新密码不一致。";
+        return;
+      }
+      try {
+        await api("/api/auth/change-password", { method: "POST", body: JSON.stringify({ oldPassword, newPassword }) });
+        document.getElementById("adminOldPassword").value = "";
+        document.getElementById("adminNewPassword").value = "";
+        document.getElementById("adminConfirmPassword").value = "";
+        message.textContent = "密码已修改，请妥善保存新密码。";
+      } catch (e) {
+        message.textContent = e.message;
+      }
+    };
+    async function submitStaffApplication() {
+      try {
+        await api("/api/admin/staff/apply", {
+          method: "POST",
+          body: JSON.stringify({
+            username: qs("#applyUsername").value,
+            password: qs("#applyPassword").value,
+            staff_name: qs("#applyName").value,
+            phone: qs("#applyPhone").value,
+            role: qs("#applyRole").value,
+            reason: qs("#applyReason").value
+          })
+        });
+        alert("申请已提交，请等待超级管理员审批。");
+        qs("#staffApplyBox").style.display = "none";
+      } catch (e) { alert(e.message); }
+    }
+
+    window.savePaymentChannel = async (channelId) => {
+      try {
+        await api("/api/admin/payment-channel", {
+          method: "POST",
+          body: JSON.stringify({
+            id: channelId,
+            name: document.getElementById(`channel-name-${channelId}`).value,
+            sort_order: Number(document.getElementById(`channel-sort-${channelId}`).value),
+            account_name: document.getElementById(`channel-account-name-${channelId}`).value,
+            account_no: document.getElementById(`channel-account-no-${channelId}`).value,
+            network: document.getElementById(`channel-network-${channelId}`).value,
+            instructions: document.getElementById(`channel-instructions-${channelId}`).value,
+            enabled: document.getElementById(`channel-enabled-${channelId}`).checked,
+            supports_recharge: document.getElementById(`channel-recharge-${channelId}`).checked,
+            supports_withdraw: document.getElementById(`channel-withdraw-${channelId}`).checked
+          })
+        });
+        await loadAll();
+        render();
+      } catch (e) { alert(e.message); }
+    };
+
+    window.saveFinanceSettings = async () => {
+      try {
+        await api("/api/admin/finance-settings", {
+          method: "POST",
+          body: JSON.stringify({ usdt_vnd_rate: Number(document.getElementById("usdtVndRate").value) })
+        });
+        await loadAll();
+        render();
+      } catch (e) { alert(e.message); }
+    };
+    window.saveFishingSettings = async () => {
+      try {
+        await api("/api/admin/fishing-settings", {
+          method: "POST",
+          body: JSON.stringify({
+            enabled: document.getElementById("fishing-enabled").checked,
+            entry_cost: Number(document.getElementById("fishing-entry-cost").value),
+            attempts: Number(document.getElementById("fishing-attempts").value),
+            outcomes: fishingIds.map((id) => ({
+              id,
+              probability: Number(document.getElementById(`fishing-prob-${id}`).value),
+              price: Number(document.getElementById(`fishing-price-${id}`).value)
+            }))
+          })
+        });
+        await loadAll();
+        render();
+      } catch (e) { alert(e.message); }
+    };
+
+    function checkedValue(id, fallback) {
+      return document.getElementById(id)?.checked ?? fallback;
+    }
+    function numberValue(id, fallback) {
+      const element = document.getElementById(id);
+      return element ? Number(element.value) : fallback;
+    }
+    function currentMarketingDraft() {
+      const current = state.cache.marketingSettings || {};
+      const referral = current.referral || { tiers: [] };
+      const checkin = current.checkin || {};
+      const recharge = current.recharge || { tiers: [] };
+      return {
+        referral: {
+          enabled: checkedValue("marketing-referral-enabled", referral.enabled !== false),
+          tiers: Array.from({ length: 3 }, (_, index) => ({
+            effective_members: numberValue(`referral-effective-${index}`, referral.tiers?.[index]?.effective_members || 0),
+            reward_points: numberValue(`referral-reward-${index}`, referral.tiers?.[index]?.reward_points || 0),
+            enabled: checkedValue(`referral-tier-enabled-${index}`, referral.tiers?.[index]?.enabled !== false)
+          }))
+        },
+        checkin: {
+          enabled: checkedValue("marketing-checkin-enabled", checkin.enabled !== false),
+          consecutive_days: numberValue("checkin-days", checkin.consecutive_days || 7),
+          reward_points: numberValue("checkin-reward", checkin.reward_points || 0)
+        },
+        recharge: {
+          enabled: checkedValue("marketing-recharge-enabled", recharge.enabled !== false),
+          tiers: Array.from({ length: 5 }, (_, index) => ({
+            recharge_points: numberValue(`recharge-condition-${index}`, recharge.tiers?.[index]?.recharge_points || 0),
+            reward_points: numberValue(`recharge-reward-${index}`, recharge.tiers?.[index]?.reward_points || 0),
+            enabled: checkedValue(`recharge-tier-enabled-${index}`, recharge.tiers?.[index]?.enabled !== false)
+          }))
+        }
+      };
+    }
+    window.saveMarketingSettings = async () => {
+      try {
+        await api("/api/admin/marketing-settings", { method: "POST", body: JSON.stringify(currentMarketingDraft()) });
+        await loadAll();
+        render();
+      } catch (e) { alert(e.message); }
+    };
+    window.sendTelegramBroadcast = async () => {
+      const text = document.getElementById("broadcastText").value.trim();
+      const templateId = document.getElementById("broadcastTemplate")?.value || "";
+      const audience = document.getElementById("broadcastAllGroups")?.checked ? "enabled_groups" : document.getElementById("broadcastAudience").value;
+      if (!templateId && !text) return alert("请选择模板或输入消息内容");
+      if (!confirm("确认发送这条 Telegram 消息？")) return;
+      try {
+        const data = await api("/api/admin/telegram/broadcast", {
+          method: "POST",
+          body: JSON.stringify({ audience, text, template_id: templateId })
+        });
+        document.getElementById("broadcastResult").textContent = `发送完成：目标 ${data.result.total} 人，成功 ${data.result.sent} 人，失败 ${data.result.failed} 人。`;
+        await loadAll();
+      } catch (e) { alert(e.message); }
+    };
+    window.saveBotGroup = async () => {
+      try {
+        await api("/api/admin/bot-group", {
+          method: "POST",
+          body: JSON.stringify({
+            name: document.getElementById("botGroupName").value,
+            chat_id: document.getElementById("botGroupChatId").value,
+            enabled: document.getElementById("botGroupEnabled").value === "true"
+          })
+        });
+        await loadAll();
+        render();
+      } catch (e) { alert(e.message); }
+    };
+    window.saveMessageTemplate = async () => {
+      try {
+        await api("/api/admin/message-template", {
+          method: "POST",
+          body: JSON.stringify({
+            title: document.getElementById("templateTitle").value,
+            body: document.getElementById("templateBody").value,
+            image_url: document.getElementById("templateImage").value,
+            video_url: document.getElementById("templateVideo").value,
+            button_text: document.getElementById("templateButtonText").value,
+            button_url: document.getElementById("templateButtonUrl").value,
+            enabled: true
+          })
+        });
         await loadAll();
         render();
       } catch (e) { alert(e.message); }
     };
 
     qs("#loginBtn").onclick = login;
+    qs("#showApplyBtn").onclick = () => { qs("#staffApplyBox").style.display = qs("#staffApplyBox").style.display === "block" ? "none" : "block"; };
+    qs("#submitApplyBtn").onclick = submitStaffApplication;
     qs("#logoutBtn").onclick = () => { localStorage.removeItem(tokenKey); location.reload(); };
     qs("#refreshBtn").onclick = async () => { await loadAll(); render(); };
     init();

@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "page": "Home",
+    "version": "1.0"
+  },
+  "dialogs": {
+    "ProfileDialog": {
+      "type": "medium",
+      "title": "我的资料",
+      "description": "显示玩家头像、昵称、ID、等级、摸鱼币、积分。",
+      "contentSource": "profile",
+      "closeable": true
+    },
+    "GameHelpDialog": {
+      "type": "medium",
+      "title": "游戏说明",
+      "description": "说明上班摸鱼的基础玩法：抛线、等待、收线、获得鱼。",
+      "contentSource": "help",
+      "closeable": true
+    },
+    "TaskDialog": {
+      "type": "medium",
+      "title": "今日快乐",
+      "description": "展示今日任务，但不得制造 KPI 压迫感。",
+      "contentSource": "tasks",
+      "closeable": true
+    },
+    "StoreDialog": {
+      "type": "full",
+      "title": "渔具商店",
+      "description": "木质货柜风格，展示鱼竿、鱼线、鱼漂、鱼饵、工具等商品。",
+      "contentSource": "store",
+      "closeable": true
+    },
+    "HonorDialog": {
+      "type": "full",
+      "title": "荣耀墙",
+      "description": "展示玩家鱼获、成长记录、积分、等级和时间曲线。",
+      "contentSource": "honor",
+      "closeable": true
+    },
+    "BagDialog": {
+      "type": "full",
+      "title": "我的背包",
+      "description": "展示玩家拥有的渔具、鱼饵、鱼漂、工具和鱼获。",
+      "contentSource": "bag",
+      "closeable": true
+    },
+    "ComputerDialog": {
+      "type": "medium",
+      "title": "工作电脑",
+      "description": "展示正常办公内容，不应过度游戏化。",
+      "contentSource": "computer",
+      "closeable": true
+    },
+    "FishBucketDialog": {
+      "type": "medium",
+      "title": "鱼桶",
+      "description": "展示当前暂存鱼获。",
+      "contentSource": "fishBucket",
+      "closeable": true
+    },
+    "ToolBoxDialog": {
+      "type": "medium",
+      "title": "工具盒",
+      "description": "展示当前可用工具。",
+      "contentSource": "toolBox",
+      "closeable": true
+    },
+    "ExitDialog": {
+      "type": "small",
+      "title": "带着快乐回去吗？",
+      "description": "退出确认弹窗，文案必须温和，不制造留存焦虑。",
+      "contentSource": "exit",
+      "closeable": true,
+      "actions": [
+        {
+          "label": "再摸一会儿",
+          "action": "closeDialog"
+        },
+        {
+          "label": "带着快乐回去",
+          "action": "exitGame"
+        }
+      ]
+    }
+  }
+}

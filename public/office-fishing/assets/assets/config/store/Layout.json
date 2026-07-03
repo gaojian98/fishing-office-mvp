@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "page": "Store",
+    "version": "1.0",
+    "designWidth": 390,
+    "designHeight": 844,
+    "displayMode": "dialog",
+    "dialogType": "full"
+  },
+  "dialog": {
+    "x": 24,
+    "y": 104,
+    "width": 342,
+    "height": 640,
+    "radius": 22,
+    "overlay": "rgba(0,0,0,0.48)"
+  },
+  "header": {
+    "title": {
+      "x": 48,
+      "y": 128,
+      "width": 220,
+      "height": 36
+    },
+    "closeButton": {
+      "x": 316,
+      "y": 120,
+      "width": 42,
+      "height": 42
+    }
+  },
+  "tabs": {
+    "x": 42,
+    "y": 176,
+    "width": 306,
+    "height": 40,
+    "itemWidth": 72,
+    "itemHeight": 36,
+    "gap": 8
+  },
+  "shelf": {
+    "x": 42,
+    "y": 228,
+    "width": 306,
+    "height": 420,
+    "columns": 3,
+    "rows": 4,
+    "cellWidth": 94,
+    "cellHeight": 98,
+    "gapX": 12,
+    "gapY": 10
+  },
+  "productCard": {
+    "image": {
+      "x": 8,
+      "y": 8,
+      "width": 78,
+      "height": 48
+    },
+    "name": {
+      "x": 6,
+      "y": 58,
+      "width": 82,
+      "height": 18
+    },
+    "priceTag": {
+      "x": 8,
+      "y": 78,
+      "width": 78,
+      "height": 18
+    }
+  },
+  "footer": {
+    "coinInfo": {
+      "x": 42,
+      "y": 660,
+      "width": 150,
+      "height": 40
+    },
+    "walletButton": {
+      "x": 206,
+      "y": 660,
+      "width": 66,
+      "height": 40
+    },
+    "refreshButton": {
+      "x": 282,
+      "y": 660,
+      "width": 66,
+      "height": 40
+    }
+  },
+  "responsive": {
+    "scaleMode": "auto",
+    "safeArea": true,
+    "lockPortrait": true
+  }
+}

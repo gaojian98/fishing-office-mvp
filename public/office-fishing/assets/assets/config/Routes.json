@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "project": "FishingOffice",
+    "version": "V3.0",
+    "defaultRoute": "/home"
+  },
+  "routes": [
+    {
+      "path": "/home",
+      "page": "HomePage",
+      "type": "page",
+      "transition": "fade"
+    },
+    {
+      "path": "/lobby",
+      "page": "LobbyPage",
+      "type": "page",
+      "transition": "slideLeft"
+    },
+    {
+      "path": "/wallet",
+      "page": "WalletPage",
+      "type": "page",
+      "transition": "slideLeft"
+    },
+    {
+      "path": "/fish-book",
+      "page": "FishBookPage",
+      "type": "page",
+      "transition": "slideLeft"
+    },
+    {
+      "path": "/store",
+      "page": "StoreDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/honor",
+      "page": "HonorDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/bag",
+      "page": "BagDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/task",
+      "page": "TaskDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    }
+  ]
+}

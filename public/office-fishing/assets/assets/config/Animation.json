@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "project": "FishingOffice",
+    "page": "Home",
+    "version": "V3.0"
+  },
+  "presets": {
+    "button_tap": {
+      "type": "scale",
+      "from": 1,
+      "to": 0.95,
+      "durationMs": 150,
+      "reverse": true
+    },
+    "dialog_open": {
+      "type": "fadeScale",
+      "durationMs": 180
+    },
+    "float_idle": {
+      "type": "translateY",
+      "from": -4,
+      "to": 5,
+      "durationMs": 1200,
+      "loop": true,
+      "yoyo": true
+    },
+    "fish_jump": {
+      "type": "jump",
+      "randomDelayMs": [
+        1200,
+        6000
+      ],
+      "loop": true
+    }
+  },
+  "bindings": [
+    {
+      "target": "all_buttons",
+      "on": "tap",
+      "preset": "button_tap"
+    },
+    {
+      "target": "fish_float",
+      "on": "load",
+      "preset": "float_idle"
+    },
+    {
+      "target": "StoreDialog",
+      "on": "open",
+      "preset": "dialog_open"
+    },
+    {
+      "target": "HonorDialog",
+      "on": "open",
+      "preset": "dialog_open"
+    },
+    {
+      "target": "BagDialog",
+      "on": "open",
+      "preset": "dialog_open"
+    }
+  ]
+}

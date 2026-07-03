@@ -1,0 +1,39 @@
+[Script Info]
+Title: FishingOffice Database ER Diagram
+ScriptType: v4.00+
+PlayResX: 1800
+PlayResY: 1200
+WrapStyle: 2
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Title,Helvetica Neue,48,&H00FFFFFF,&H000000FF,&H00000000,&H64000000,-1,0,0,0,100,100,0,0,1,0,0,7,60,60,40,1
+Style: BoxTitle,Helvetica Neue,40,&H00FFFFFF,&H000000FF,&H00000000,&H64000000,-1,0,0,0,100,100,0,0,1,0,0,7,20,20,20,1
+Style: BoxText,Helvetica Neue,30,&H00FFFFFF,&H000000FF,&H00000000,&H64000000,0,0,0,0,100,100,0,0,1,0,0,7,20,20,20,1
+Style: MidText,Helvetica Neue,34,&H00FFFFFF,&H000000FF,&H00000000,&H64000000,-1,0,0,0,100,100,0,0,1,0,0,7,20,20,20,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:10.00,Title,,0,0,0,,{\pos(900,95)}FishingOffice Database ER Diagram
+
+Dialogue: 0,0:00:00.00,0:00:10.00,BoxTitle,,0,0,0,,{\pos(330,240)}PLAYER
+Dialogue: 0,0:00:00.00,0:00:10.00,BoxText,,0,0,0,,{\pos(330,300)}user account\NWallet\NInventory\NCompanion\NRelationship\NMeaning\NStory\NMemory
+
+Dialogue: 0,0:00:00.00,0:00:10.00,BoxTitle,,0,0,0,,{\pos(900,240)}WORLD
+Dialogue: 0,0:00:00.00,0:00:10.00,BoxText,,0,0,0,,{\pos(900,300)}Weather\NToday\NFishing Session
+
+Dialogue: 0,0:00:00.00,0:00:10.00,BoxTitle,,0,0,0,,{\pos(1470,240)}FISH
+Dialogue: 0,0:00:00.00,0:00:10.00,BoxText,,0,0,0,,{\pos(1470,300)}Fishing Session\NInventory\NWallet Transaction\NCompanion
+
+Dialogue: 0,0:00:00.00,0:00:10.00,MidText,,0,0,0,,{\pos(900,610)}FISHING SESSION\Nlinks Player, Fish, World, Weather\Nsettles Wallet Transaction / Memory / Meaning
+
+Dialogue: 0,0:00:00.00,0:00:10.00,BoxTitle,,0,0,0,,{\pos(330,860)}INVENTORY
+Dialogue: 0,0:00:00.00,0:00:10.00,BoxText,,0,0,0,,{\pos(330,930)}Player items and resources
+
+Dialogue: 0,0:00:00.00,0:00:10.00,BoxTitle,,0,0,0,,{\pos(900,860)}RELATIONSHIP / MEANING
+Dialogue: 0,0:00:00.00,0:00:10.00,BoxText,,0,0,0,,{\pos(900,930)}Independent narrative state\Nlinked by Player
+
+Dialogue: 0,0:00:00.00,0:00:10.00,BoxTitle,,0,0,0,,{\pos(1470,860)}STORY / MEMORY / TRANSACTION
+Dialogue: 0,0:00:00.00,0:00:10.00,BoxText,,0,0,0,,{\pos(1470,930)}Long-term records and ledger
+

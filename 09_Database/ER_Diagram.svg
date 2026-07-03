@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200">
+  <rect width="1800" height="1200" fill="#0f172a"/>
+  <rect x="40" y="50" width="1720" height="90" rx="18" fill="#1e293b"/>
+  <text x="70" y="108" fill="#ffffff" font-family="Helvetica, Arial, sans-serif" font-size="48" font-weight="700">FishingOffice Database ER Diagram</text>
+
+  <g fill="#ffffff" font-family="Helvetica, Arial, sans-serif">
+    <rect x="70" y="190" width="520" height="220" rx="18" fill="#1d4ed8" fill-opacity="0.75"/>
+    <text x="110" y="250" font-size="40" font-weight="700">PLAYER</text>
+    <text x="110" y="300" font-size="30">user account</text>
+    <text x="110" y="344" font-size="30">Wallet</text>
+    <text x="110" y="384" font-size="30">Inventory</text>
+
+    <rect x="640" y="190" width="520" height="220" rx="18" fill="#0f766e" fill-opacity="0.75"/>
+    <text x="680" y="250" font-size="40" font-weight="700">WORLD</text>
+    <text x="680" y="300" font-size="30">Weather</text>
+    <text x="680" y="344" font-size="30">Today</text>
+    <text x="680" y="384" font-size="30">Fishing Session</text>
+
+    <rect x="1210" y="190" width="520" height="220" rx="18" fill="#7c3aed" fill-opacity="0.75"/>
+    <text x="1250" y="250" font-size="40" font-weight="700">FISH</text>
+    <text x="1250" y="300" font-size="30">Fishing Session</text>
+    <text x="1250" y="344" font-size="30">Inventory</text>
+    <text x="1250" y="384" font-size="30">Wallet Transaction</text>
+
+    <rect x="355" y="500" width="1090" height="250" rx="20" fill="#334155" fill-opacity="0.85"/>
+    <text x="395" y="560" font-size="44" font-weight="700">FISHING SESSION</text>
+    <text x="395" y="620" font-size="30">links Player, Fish, World, Weather</text>
+    <text x="395" y="665" font-size="30">settles Wallet Transaction / Memory / Meaning</text>
+
+    <rect x="70" y="790" width="520" height="250" rx="18" fill="#166534" fill-opacity="0.75"/>
+    <text x="110" y="850" font-size="38" font-weight="700">INVENTORY</text>
+    <text x="110" y="902" font-size="30">Player items and resources</text>
+
+    <rect x="640" y="790" width="520" height="250" rx="18" fill="#92400e" fill-opacity="0.75"/>
+    <text x="680" y="850" font-size="38" font-weight="700">RELATIONSHIP / MEANING</text>
+    <text x="680" y="902" font-size="30">Independent narrative state</text>
+    <text x="680" y="946" font-size="30">linked by Player</text>
+
+    <rect x="1210" y="790" width="520" height="250" rx="18" fill="#be123c" fill-opacity="0.75"/>
+    <text x="1250" y="850" font-size="38" font-weight="700">STORY / MEMORY / TRANSACTION</text>
+    <text x="1250" y="902" font-size="30">Long-term records and ledger</text>
+  </g>
+
+  <g stroke="#e2e8f0" stroke-width="5" fill="none" stroke-linecap="round">
+    <path d="M590 300 C610 300, 620 300, 640 300"/>
+    <path d="M1160 300 C1180 300, 1190 300, 1210 300"/>
+    <path d="M900 410 L900 500"/>
+    <path d="M900 750 L900 790"/>
+    <path d="M330 410 L330 500"/>
+    <path d="M1470 410 L1470 500"/>
+  </g>
+</svg>

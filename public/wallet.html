@@ -39,6 +39,11 @@
     .quick-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 10px; }
     .quick { min-height: 42px; color: #123f45; background: #f7fffd; border: 1px solid #a9cdc6; }
     .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .rate-line { color: #31515a; font-size: 13px; font-weight: 850; line-height: 1.45; }
+    .estimate { min-height: 20px; color: #0f766e; font-weight: 950; }
+    .pay-info { display: none; border: 1px solid #d1e7e2; border-radius: 8px; background: #fbfffe; padding: 9px; color: #31515a; font-size: 13px; font-weight: 850; line-height: 1.55; }
+    .pay-info strong { display: block; color: #0b4850; font-size: 15px; margin-bottom: 4px; }
+    .pay-info div { overflow-wrap: anywhere; }
     @media (max-width: 700px) {
       main { width: min(100vw - 14px, 430px); padding-top: 10px; }
       header { margin-bottom: 8px; }
@@ -67,7 +72,8 @@
     <section class="card">
       <h2>账号信息</h2>
       <div class="info-grid">
-        <div class="item"><div class="label">账号</div><div class="value" id="username">-</div></div>
+        <div class="item"><div class="label">账号名称</div><div class="value" id="displayNameText">-</div></div>
+        <div class="item"><div class="label">登录账号</div><div class="value" id="username">-</div></div>
         <div class="item"><div class="label">系统ID</div><div class="value" id="systemId">-</div></div>
         <div class="item"><div class="label">积分</div><div class="value" id="balance">0</div></div>
         <div class="item"><div class="label">邀请码</div><div class="value" id="referralCode">-</div></div>
@@ -79,40 +85,40 @@
       <div class="money-grid">
         <div class="form-grid">
           <strong>充值申请</strong>
-          <select id="rechargeChannel">
-            <option value="bank">银行卡</option>
-            <option value="usdt">USDT</option>
-          </select>
+          <select id="rechargeChannel"></select>
+          <div class="pay-info" id="rechargePayInfo"></div>
           <input id="rechargeAmount" type="number" min="1" placeholder="充值积分">
+          <div class="estimate" id="rechargeEstimate"></div>
           <textarea id="rechargeNote" placeholder="转账说明或凭证"></textarea>
           <button id="rechargeBtn">提交充值</button>
         </div>
 
         <div class="form-grid">
           <strong>提现申请</strong>
-          <select id="withdrawMethod">
-            <option value="bank">银行卡</option>
-            <option value="usdt">USDT</option>
-          </select>
+          <select id="withdrawMethod"></select>
           <input id="withdrawAmount" type="number" min="1" placeholder="提现积分">
-          <input id="withdrawAccount" placeholder="银行卡号 / USDT 地址">
+          <div class="estimate" id="withdrawEstimate"></div>
+          <input id="withdrawAccount" placeholder="收款账号 / 钱包地址 / ZaloPay 账号">
           <button id="withdrawBtn">提交提现</button>
         </div>
       </div>
       <div class="quick-grid">
         <button class="quick" id="autoRechargeBtn">自动充值</button>
         <button class="quick" id="autoWithdrawBtn">自动提现</button>
-        <button class="quick" id="exchangeBtn">积分兑换现金</button>
+        <button class="quick" id="exchangeBtn">摸鱼币兑换现金</button>
       </div>
+      <p class="rate-line" id="rateLine">汇率加载中...</p>
     </section>
 
     <section class="card">
       <h2>账号安全</h2>
       <div class="security-grid">
         <div class="form-grid">
+          <strong>账号名称</strong>
+          <input id="displayName" maxlength="18" placeholder="首页右上角显示的名称">
           <strong>手机号码</strong>
           <input id="phone" inputmode="tel" placeholder="手机号码">
-          <button id="profileBtn">保存手机号码</button>
+          <button id="profileBtn">保存资料</button>
         </div>
         <div class="form-grid">
           <strong>修改密码</strong>
@@ -128,6 +134,8 @@
     const tokenKey = "moyu_token";
     const qs = (s) => document.querySelector(s);
     let me = null;
+    let paymentChannels = [];
+    let financeSettings = { point_vnd_rate: 1000, usdt_vnd_rate: 25000 };
 
     async function api(path, options = {}) {
       const headers = { "content-type": "application/json", ...(options.headers || {}) };
@@ -142,19 +150,81 @@
     function show(message) {
       qs("#message").textContent = message;
     }
+    function escapeHtml(text) {
+      return String(text ?? "").replace(/[&<>"']/g, (m) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[m]));
+    }
 
     async function loadMe() {
       try {
         const data = await api("/api/me");
         me = data.user;
+        qs("#displayNameText").textContent = me.displayName || me.username;
         qs("#username").textContent = me.username;
         qs("#systemId").textContent = me.systemId;
         qs("#balance").textContent = me.balance;
         qs("#referralCode").textContent = me.referralCode;
+        qs("#displayName").value = me.displayName || me.username;
         qs("#phone").value = me.phone || "";
       } catch {
         location.href = "/";
       }
+    }
+
+    async function loadPaymentChannels() {
+      const [channelData, settingsData] = await Promise.all([api("/api/payment-channels"), api("/api/finance-settings")]);
+      paymentChannels = channelData.channels || [];
+      financeSettings = settingsData.settings || financeSettings;
+      const rechargeOptions = paymentChannels.filter((channel) => channel.enabled && channel.supports_recharge);
+      const withdrawOptions = paymentChannels.filter((channel) => channel.enabled && channel.supports_withdraw);
+      qs("#rechargeChannel").innerHTML = rechargeOptions.map((channel) => `<option value="${escapeHtml(channel.id)}">${escapeHtml(channel.name)}</option>`).join("");
+      qs("#withdrawMethod").innerHTML = withdrawOptions.map((channel) => `<option value="${escapeHtml(channel.id)}">${escapeHtml(channel.name)}</option>`).join("");
+      qs("#rechargeBtn").disabled = rechargeOptions.length === 0;
+      qs("#withdrawBtn").disabled = withdrawOptions.length === 0;
+      qs("#rateLine").textContent = `当前汇率：1 积分 = ${money(financeSettings.point_vnd_rate)} 越南盾；1 USDT = ${money(financeSettings.usdt_vnd_rate)} 越南盾。充值和提现使用同一汇率。`;
+      updateEstimates();
+    }
+
+    function money(value) {
+      return Number(value || 0).toLocaleString("zh-CN");
+    }
+
+    function estimateText(points, channelId) {
+      const amount = Number(points || 0);
+      if (!amount) return "";
+      const vnd = amount * Number(financeSettings.point_vnd_rate || 1000);
+      if (channelId === "cold_wallet") {
+        const usdt = vnd / Number(financeSettings.usdt_vnd_rate || 25000);
+        return `约 ${usdt.toFixed(4)} USDT（${money(vnd)} 越南盾）`;
+      }
+      return `${money(vnd)} 越南盾`;
+    }
+
+    function selectedChannel(id) {
+      return paymentChannels.find((channel) => channel.id === id) || null;
+    }
+
+    function renderRechargePayInfo() {
+      const channel = selectedChannel(qs("#rechargeChannel").value);
+      const box = qs("#rechargePayInfo");
+      if (!channel) {
+        box.style.display = "none";
+        box.innerHTML = "";
+        return;
+      }
+      const rows = [
+        channel.account_name ? `<div>户名/类型：${escapeHtml(channel.account_name)}</div>` : "",
+        channel.account_no ? `<div>账号/地址：${escapeHtml(channel.account_no)}</div>` : "",
+        channel.network ? `<div>银行/网络：${escapeHtml(channel.network)}</div>` : "",
+        channel.instructions ? `<div>说明：${escapeHtml(channel.instructions)}</div>` : ""
+      ].filter(Boolean);
+      box.innerHTML = `<strong>${escapeHtml(channel.name)}收款信息</strong>${rows.length ? rows.join("") : "<div>后台暂未填写收款信息，请联系客服确认。</div>"}`;
+      box.style.display = "block";
+    }
+
+    function updateEstimates() {
+      renderRechargePayInfo();
+      qs("#rechargeEstimate").textContent = estimateText(qs("#rechargeAmount").value, qs("#rechargeChannel").value);
+      qs("#withdrawEstimate").textContent = estimateText(qs("#withdrawAmount").value, qs("#withdrawMethod").value);
     }
 
     async function submitOrder(kind) {
@@ -172,11 +242,42 @@
       }
     }
 
+    async function submitExchange() {
+      if (!me) return;
+      const amount = Number(qs("#withdrawAmount").value);
+      const account = qs("#withdrawAccount").value.trim();
+      if (!amount || amount <= 0) {
+        qs("#withdrawAmount").focus();
+        return show("请先在提现申请里填写要兑换的积分。");
+      }
+      if (!account) {
+        qs("#withdrawAccount").focus();
+        return show("请先填写收款账号 / 钱包地址 / ZaloPay 账号。");
+      }
+      if (!confirm(`确认提交 ${amount} 摸鱼币兑换现金申请？`)) return;
+      try {
+        await api("/api/withdraw", {
+          method: "POST",
+          body: JSON.stringify({
+            amount,
+            method: qs("#withdrawMethod").value,
+            account,
+            note: "摸鱼币兑换现金"
+          })
+        });
+        show("兑换申请已提交，等待后台审核。");
+        await loadMe();
+      } catch (error) {
+        show(error.message);
+      }
+    }
+
     async function saveProfile() {
       try {
-        const data = await api("/api/me/profile", { method: "POST", body: JSON.stringify({ phone: qs("#phone").value }) });
+        const data = await api("/api/me/profile", { method: "POST", body: JSON.stringify({ phone: qs("#phone").value, displayName: qs("#displayName").value }) });
         me = data.user;
-        show("手机号码已保存。");
+        qs("#displayNameText").textContent = me.displayName || me.username;
+        show("账号资料已保存。");
       } catch (error) {
         show(error.message);
       }
@@ -202,12 +303,16 @@
 
     qs("#rechargeBtn").onclick = () => submitOrder("recharge");
     qs("#withdrawBtn").onclick = () => submitOrder("withdraw");
+    qs("#rechargeAmount").oninput = updateEstimates;
+    qs("#withdrawAmount").oninput = updateEstimates;
+    qs("#rechargeChannel").onchange = updateEstimates;
+    qs("#withdrawMethod").onchange = updateEstimates;
     qs("#profileBtn").onclick = saveProfile;
     qs("#passwordBtn").onclick = changePassword;
     qs("#autoRechargeBtn").onclick = () => comingSoon("自动充值");
     qs("#autoWithdrawBtn").onclick = () => comingSoon("自动提现");
-    qs("#exchangeBtn").onclick = () => comingSoon("积分兑换现金");
-    loadMe();
+    qs("#exchangeBtn").onclick = submitExchange;
+    Promise.all([loadMe(), loadPaymentChannels()]);
   </script>
 </body>
 </html>

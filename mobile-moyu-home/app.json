@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "上班摸鱼",
+    "slug": "shangban-moyu",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "assetBundlePatterns": [
+      "assets/**/*"
+    ],
+    "ios": {
+      "supportsTablet": false
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}

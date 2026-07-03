@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>湖畔钓鱼游戏说明</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #1f2933;
+      background: linear-gradient(180deg, #e4f6f1, #f8fbfa);
+    }
+    main { width: min(720px, calc(100vw - 24px)); margin: 0 auto; padding: 18px 0; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+    h1 { margin: 0; font-size: clamp(30px, 8vw, 44px); line-height: 1; }
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      color: #123f45;
+      background: rgba(255,255,255,.82);
+      border: 1px solid #a9cdc6;
+      text-decoration: none;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+    section {
+      border: 1px solid #a9cdc6;
+      border-radius: 8px;
+      background: rgba(255,255,255,.82);
+      box-shadow: 0 14px 34px rgba(45,86,82,.12);
+      padding: 18px;
+    }
+    p {
+      margin: 0;
+      color: #31515a;
+      font-size: 20px;
+      line-height: 1.8;
+      font-weight: 850;
+    }
+    @media (max-width: 480px) {
+      main { width: min(100vw - 12px, 430px); padding-top: 10px; }
+      header { align-items: flex-start; }
+      h1 { font-size: 32px; }
+      a { min-height: 32px; padding: 6px 10px; font-size: 13px; }
+      section { padding: 14px; }
+      p { font-size: 17px; line-height: 1.75; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>游戏说明</h1>
+      <a href="/fishing.html">返回钓鱼</a>
+    </header>
+    <section>
+      <p>上班钓鱼，忙里偷闲、取悦自己。欢迎来到大富翁垂钓园，鱼塘有三种鱼，分别是石斑鱼、黄鱼、鳗鱼；每局入场费20积分，玩家有5次抛竿的机会；三种鱼的回收价格分别为：20、3、1个积分；游戏公平、纯属娱乐、盈亏靠运气。</p>
+    </section>
+  </main>
+</body>
+</html>

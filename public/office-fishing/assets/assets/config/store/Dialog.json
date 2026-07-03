@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "page": "Store",
+    "version": "1.0"
+  },
+  "dialogs": {
+    "ProductDetailDialog": {
+      "type": "medium",
+      "title": "商品详情",
+      "description": "展示商品名称、类型、等级、价格、效果说明和拥有数量。",
+      "contentSource": "selectedProduct",
+      "closeable": true,
+      "actions": [
+        {
+          "label": "取消",
+          "action": "closeDialog"
+        },
+        {
+          "label": "购买",
+          "action": "openDialog",
+          "target": "ConfirmPurchaseDialog"
+        }
+      ]
+    },
+    "ConfirmPurchaseDialog": {
+      "type": "small",
+      "title": "确认购买",
+      "description": "确认是否使用摸鱼币购买该商品。",
+      "contentSource": "selectedProductPurchase",
+      "closeable": true,
+      "actions": [
+        {
+          "label": "再看看",
+          "action": "closeDialog"
+        },
+        {
+          "label": "买一个",
+          "action": "purchaseItem"
+        }
+      ]
+    },
+    "PurchaseSuccessDialog": {
+      "type": "small",
+      "title": "购买成功",
+      "description": "商品已放入背包。",
+      "contentSource": "purchaseResult",
+      "closeable": true,
+      "actions": [
+        {
+          "label": "知道了",
+          "action": "closeDialog"
+        }
+      ]
+    },
+    "InsufficientCoinDialog": {
+      "type": "small",
+      "title": "摸鱼币不足",
+      "description": "摸鱼币暂时不够，可以去钱包兑换，也可以继续钓鱼赚取。",
+      "contentSource": "walletGuide",
+      "closeable": true,
+      "actions": [
+        {
+          "label": "继续看看",
+          "action": "closeDialog"
+        },
+        {
+          "label": "去钱包",
+          "action": "navigate",
+          "target": "/wallet"
+        }
+      ]
+    }
+  }
+}

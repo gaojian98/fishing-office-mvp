@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "project": "上班摸鱼 / Fishing Office",
+    "version": "V1.0"
+  },
+  "fishingStates": [
+    {
+      "id": "idle",
+      "name": "空闲",
+      "next": [
+        "casting"
+      ]
+    },
+    {
+      "id": "casting",
+      "name": "抛线",
+      "durationMs": 600,
+      "next": [
+        "waiting"
+      ]
+    },
+    {
+      "id": "waiting",
+      "name": "等待",
+      "durationMs": [
+        3000,
+        9000
+      ],
+      "next": [
+        "bite",
+        "idle"
+      ]
+    },
+    {
+      "id": "bite",
+      "name": "鱼咬钩",
+      "durationMs": 1200,
+      "next": [
+        "reeling",
+        "escape"
+      ]
+    },
+    {
+      "id": "reeling",
+      "name": "收线",
+      "durationMs": 1600,
+      "next": [
+        "reward",
+        "escape"
+      ]
+    },
+    {
+      "id": "reward",
+      "name": "获得鱼",
+      "durationMs": 1600,
+      "next": [
+        "idle"
+      ]
+    },
+    {
+      "id": "escape",
+      "name": "脱钩",
+      "durationMs": 1000,
+      "next": [
+        "idle"
+      ]
+    }
+  ],
+  "rules": {
+    "baseBiteChance": 0.32,
+    "baitBonus": 0.12,
+    "rodBonus": 0.08,
+    "escapeRiskBase": 0.18,
+    "perfectReelWindowMs": 900
+  }
+}

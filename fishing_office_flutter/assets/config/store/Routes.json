@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "page": "Store",
+    "version": "1.0",
+    "defaultRoute": "/store"
+  },
+  "routes": [
+    {
+      "path": "/store",
+      "page": "StoreDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/store/product-detail",
+      "page": "ProductDetailDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/store/confirm-purchase",
+      "page": "ConfirmPurchaseDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/store/purchase-success",
+      "page": "PurchaseSuccessDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/store/insufficient-coin",
+      "page": "InsufficientCoinDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/wallet",
+      "page": "WalletPage",
+      "type": "page",
+      "transition": "slideLeft"
+    },
+    {
+      "path": "/bag",
+      "page": "BagDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    }
+  ],
+  "unknownRoute": {
+    "action": "showDialog",
+    "dialog": "ComingSoonDialog",
+    "title": "Coming Soon",
+    "message": "This page is under development."
+  }
+}

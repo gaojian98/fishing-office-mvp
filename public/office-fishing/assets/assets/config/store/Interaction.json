@@ -1,0 +1,72 @@
+{
+  "meta": {
+    "page": "Store",
+    "version": "1.0"
+  },
+  "interactions": [
+    {
+      "id": "closeButton",
+      "event": "tap",
+      "action": "closeDialog",
+      "target": "StoreDialog"
+    },
+    {
+      "id": "tab_recommend",
+      "event": "tap",
+      "action": "switchStoreCategory",
+      "parameter": "recommend"
+    },
+    {
+      "id": "tab_rod",
+      "event": "tap",
+      "action": "switchStoreCategory",
+      "parameter": "rod"
+    },
+    {
+      "id": "tab_line",
+      "event": "tap",
+      "action": "switchStoreCategory",
+      "parameter": "line"
+    },
+    {
+      "id": "tab_bait",
+      "event": "tap",
+      "action": "switchStoreCategory",
+      "parameter": "bait"
+    },
+    {
+      "id": "tab_tool",
+      "event": "tap",
+      "action": "switchStoreCategory",
+      "parameter": "tool"
+    },
+    {
+      "id": "productCard",
+      "event": "tap",
+      "action": "openDialog",
+      "target": "ProductDetailDialog"
+    },
+    {
+      "id": "productBuyButton",
+      "event": "tap",
+      "action": "openDialog",
+      "target": "ConfirmPurchaseDialog"
+    },
+    {
+      "id": "confirmPurchase",
+      "event": "tap",
+      "action": "purchaseItem"
+    },
+    {
+      "id": "walletButton",
+      "event": "tap",
+      "action": "navigate",
+      "target": "/wallet"
+    },
+    {
+      "id": "refreshButton",
+      "event": "tap",
+      "action": "refreshStoreItems"
+    }
+  ]
+}

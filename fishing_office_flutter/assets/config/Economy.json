@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "project": "上班摸鱼 / Fishing Office",
+    "version": "V1.0"
+  },
+  "units": [
+    {
+      "id": "USDT",
+      "name": "USDT",
+      "type": "cash",
+      "canRecharge": true,
+      "canWithdraw": true,
+      "precision": 2
+    },
+    {
+      "id": "VND",
+      "name": "越南盾",
+      "type": "cash",
+      "canRecharge": true,
+      "canWithdraw": true,
+      "precision": 0
+    },
+    {
+      "id": "fish_coin",
+      "name": "摸鱼币",
+      "type": "platform_coin",
+      "canRecharge": true,
+      "canWithdraw": false,
+      "precision": 0
+    },
+    {
+      "id": "points",
+      "name": "积分",
+      "type": "game_points",
+      "canRecharge": false,
+      "canWithdraw": false,
+      "precision": 0
+    }
+  ],
+  "exchange": [
+    {
+      "from": "USDT",
+      "to": "fish_coin",
+      "rate": 1000,
+      "enabled": true
+    },
+    {
+      "from": "VND",
+      "to": "fish_coin",
+      "rate": 0.04,
+      "enabled": true
+    }
+  ],
+  "rules": {
+    "pointsPurpose": [
+      "等级",
+      "排行榜",
+      "荣耀",
+      "活动奖励"
+    ],
+    "fishCoinPurpose": [
+      "购买渔具",
+      "购买鱼饵",
+      "升级装备",
+      "参与活动"
+    ],
+    "cashPurpose": [
+      "充值",
+      "提现",
+      "兑换摸鱼币"
+    ]
+  }
+}

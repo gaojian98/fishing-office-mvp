@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "project": "上班摸鱼 / Fishing Office",
+    "version": "V1.0",
+    "description": "Global Route Mapping",
+    "defaultRoute": "/home"
+  },
+  "routes": [
+    {
+      "path": "/home",
+      "page": "HomePage",
+      "type": "page",
+      "transition": "fade",
+      "webHref": "/fishing-office.html"
+    },
+    {
+      "path": "/lobby",
+      "page": "LobbyPage",
+      "type": "page",
+      "transition": "slideLeft",
+      "webHref": "/games.html"
+    },
+    {
+      "path": "/wallet",
+      "page": "WalletPage",
+      "type": "page",
+      "transition": "slideLeft",
+      "webHref": "/wallet.html"
+    },
+    {
+      "path": "/fish-book",
+      "page": "FishBookPage",
+      "type": "page",
+      "transition": "slideLeft",
+      "webHref": "/fishing-office.html"
+    },
+    {
+      "path": "/task",
+      "page": "TaskDialog",
+      "type": "dialog",
+      "transition": "fadeScale",
+      "contentSource": "fishing-office-dialog-content.json#TaskDialog",
+      "layoutSource": "fishing-office-dialog-layout.json#TaskDialog"
+    },
+    {
+      "path": "/account",
+      "page": "AccountDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/computer",
+      "page": "ComputerWorkDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/fish-bucket",
+      "page": "FishBucketDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/tool-box",
+      "page": "ToolBoxDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/store",
+      "page": "StoreDialog",
+      "type": "dialog",
+      "transition": "fadeScale",
+      "contentSource": "fishing-office-dialog-content.json#StoreDialog",
+      "layoutSource": "fishing-office-dialog-layout.json#StoreDialog"
+    },
+    {
+      "path": "/honor",
+      "page": "HonorDialog",
+      "type": "dialog",
+      "transition": "fadeScale",
+      "contentSource": "fishing-office-dialog-content.json#HonorDialog",
+      "layoutSource": "fishing-office-dialog-layout.json#HonorDialog"
+    },
+    {
+      "path": "/bag",
+      "page": "BagDialog",
+      "type": "dialog",
+      "transition": "fadeScale",
+      "contentSource": "fishing-office-dialog-content.json#BagDialog",
+      "layoutSource": "fishing-office-dialog-layout.json#BagDialog"
+    },
+    {
+      "path": "/game-help",
+      "page": "GameHelpDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/fishing",
+      "page": "FishingScene",
+      "type": "state",
+      "transition": "none"
+    }
+  ],
+  "transitions": {
+    "fade": {
+      "type": "fade",
+      "duration": 200
+    },
+    "slideLeft": {
+      "type": "slideLeft",
+      "duration": 250
+    },
+    "slideRight": {
+      "type": "slideRight",
+      "duration": 250
+    },
+    "fadeScale": {
+      "type": "fadeScale",
+      "duration": 180
+    }
+  },
+  "unknownRoute": {
+    "action": "showDialog",
+    "title": "Coming Soon",
+    "message": "This page is under development."
+  }
+}

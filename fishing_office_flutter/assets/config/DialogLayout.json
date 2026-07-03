@@ -1,0 +1,192 @@
+{
+  "meta": {
+    "project": "上班摸鱼 / Fishing Office",
+    "version": "V1.0",
+    "designSize": {
+      "width": 390,
+      "height": 844
+    },
+    "description": "Home secondary popup layouts."
+  },
+  "common": {
+    "overlay": {
+      "color": "#000000",
+      "opacity": 0.48
+    },
+    "closeButton": {
+      "width": 44,
+      "height": 44
+    },
+    "title": {
+      "fontSize": 24,
+      "fontWeight": "bold",
+      "color": "#FFFFFF"
+    }
+  },
+  "dialogs": {
+    "StoreDialog": {
+      "route": "/store",
+      "title": "渔具商店",
+      "style": "wooden_shelf",
+      "panel": {
+        "x": 24,
+        "y": 120,
+        "width": 342,
+        "height": 610,
+        "radius": 22
+      },
+      "closeButton": {
+        "x": 314,
+        "y": 132,
+        "width": 42,
+        "height": 42
+      },
+      "titleRect": {
+        "x": 48,
+        "y": 140,
+        "width": 250,
+        "height": 36
+      },
+      "grid": {
+        "x": 42,
+        "y": 188,
+        "columns": 3,
+        "rows": 4,
+        "cellWidth": 96,
+        "cellHeight": 105,
+        "gapX": 8,
+        "gapY": 10
+      },
+      "footer": {
+        "x": 42,
+        "y": 646,
+        "width": 306,
+        "height": 52
+      }
+    },
+    "HonorDialog": {
+      "route": "/honor",
+      "title": "荣耀墙",
+      "style": "honor_wall",
+      "panel": {
+        "x": 18,
+        "y": 132,
+        "width": 354,
+        "height": 580,
+        "radius": 22
+      },
+      "closeButton": {
+        "x": 318,
+        "y": 144,
+        "width": 42,
+        "height": 42
+      },
+      "titleRect": {
+        "x": 42,
+        "y": 152,
+        "width": 250,
+        "height": 36
+      },
+      "leftStats": {
+        "x": 36,
+        "y": 194,
+        "width": 145,
+        "height": 410
+      },
+      "rightChart": {
+        "x": 190,
+        "y": 194,
+        "width": 160,
+        "height": 260
+      },
+      "summaryCards": {
+        "x": 190,
+        "y": 470,
+        "width": 160,
+        "height": 112
+      }
+    },
+    "BagDialog": {
+      "route": "/bag",
+      "title": "我的背包",
+      "style": "inventory",
+      "panel": {
+        "x": 24,
+        "y": 122,
+        "width": 342,
+        "height": 610,
+        "radius": 22
+      },
+      "closeButton": {
+        "x": 314,
+        "y": 134,
+        "width": 42,
+        "height": 42
+      },
+      "titleRect": {
+        "x": 48,
+        "y": 142,
+        "width": 250,
+        "height": 36
+      },
+      "tabs": {
+        "x": 42,
+        "y": 190,
+        "width": 70,
+        "height": 400
+      },
+      "grid": {
+        "x": 122,
+        "y": 190,
+        "columns": 3,
+        "rows": 4,
+        "cellWidth": 70,
+        "cellHeight": 88,
+        "gapX": 8,
+        "gapY": 10
+      },
+      "footer": {
+        "x": 42,
+        "y": 650,
+        "width": 306,
+        "height": 48
+      }
+    },
+    "TaskDialog": {
+      "route": "/task",
+      "title": "今日任务",
+      "style": "task_board",
+      "panel": {
+        "x": 32,
+        "y": 168,
+        "width": 326,
+        "height": 470,
+        "radius": 22
+      },
+      "closeButton": {
+        "x": 304,
+        "y": 180,
+        "width": 42,
+        "height": 42
+      },
+      "titleRect": {
+        "x": 54,
+        "y": 190,
+        "width": 230,
+        "height": 36
+      },
+      "list": {
+        "x": 54,
+        "y": 235,
+        "width": 282,
+        "height": 300
+      },
+      "claimButton": {
+        "x": 105,
+        "y": 555,
+        "width": 180,
+        "height": 52
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+# ER Diagram
+
+```mermaid
+erDiagram
+  PLAYER ||--o{ FISHING_SESSION : starts
+  PLAYER ||--o{ WALLET : owns
+  PLAYER ||--o{ WALLET_TRANSACTION : records
+  PLAYER ||--o{ INVENTORY : holds
+  PLAYER ||--o{ COMPANION : owns
+  PLAYER ||--o{ RELATIONSHIP : tracks
+  PLAYER ||--o{ MEANING : creates
+  PLAYER ||--o{ STORY : writes
+  PLAYER ||--o{ MEMORY : keeps
+  PLAYER ||--o{ TODAY : experiences
+
+  WORLD ||--o{ WEATHER : affects
+  WORLD ||--o{ TODAY : generates
+  WORLD ||--o{ FISHING_SESSION : influences
+
+  WEATHER ||--o{ FISHING_SESSION : modifies
+  WEATHER ||--o{ TODAY : describes
+
+  FISH ||--o{ FISHING_SESSION : appears_in
+  FISH ||--o{ INVENTORY : stored_as
+  FISH ||--o{ WALLET_TRANSACTION : priced_by
+  FISH ||--o{ COMPANION : may_become
+
+  FISHING_SESSION ||--o{ WALLET_TRANSACTION : settles
+  FISHING_SESSION ||--o{ MEMORY : leaves
+  FISHING_SESSION ||--o{ MEANING : prompts
+
+  COMPANION ||--o{ RELATIONSHIP : deepens
+  COMPANION ||--o{ MEMORY : shares
+
+  RELATIONSHIP ||--o{ MEMORY : accumulates
+  MEANING ||--o{ STORY : inspires
+  MEMORY ||--o{ STORY : informs
+```
+
