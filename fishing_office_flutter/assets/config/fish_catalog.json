@@ -1,0 +1,2885 @@
+{
+  "version": "1.0",
+  "fish": [
+    {
+      "id": "fish_001",
+      "name": "小黄鱼",
+      "rarity": "common",
+      "value": 37,
+      "weightRange": {
+        "min": 2,
+        "max": 9,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_011",
+      "story": "小黄鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "普通小伙伴",
+      "habitat": "河流",
+      "favoriteTime": "morning",
+      "favoriteWeather": "sunny",
+      "favoriteBait": "basic_bait",
+      "fear": "突然的键盘声",
+      "personality": "胆小",
+      "description": "小黄鱼住在河流，性格胆小，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "小黄鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "小黄鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "小黄鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "小黄鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_002",
+      "name": "办公鲫",
+      "rarity": "common",
+      "value": 44,
+      "weightRange": {
+        "min": 2,
+        "max": 10,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_012",
+      "story": "办公鲫出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "普通小伙伴",
+      "habitat": "湖泊",
+      "favoriteTime": "afternoon",
+      "favoriteWeather": "cloudy",
+      "favoriteBait": "basic_bait",
+      "fear": "会议提醒",
+      "personality": "贪吃",
+      "description": "办公鲫住在湖泊，性格贪吃，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "办公鲫说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "办公鲫被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "办公鲫在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "办公鲫在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_003",
+      "name": "便签鱼",
+      "rarity": "common",
+      "value": 51,
+      "weightRange": {
+        "min": 2,
+        "max": 11,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_013",
+      "story": "便签鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "普通小伙伴",
+      "habitat": "池塘",
+      "favoriteTime": "evening",
+      "favoriteWeather": "rainy",
+      "favoriteBait": "basic_bait",
+      "fear": "太亮的屏幕",
+      "personality": "暴躁",
+      "description": "便签鱼住在池塘，性格暴躁，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "便签鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "便签鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "便签鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "便签鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_004",
+      "name": "咖啡豆鱼",
+      "rarity": "common",
+      "value": 58,
+      "weightRange": {
+        "min": 2,
+        "max": 12,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_014",
+      "story": "咖啡豆鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "普通小伙伴",
+      "habitat": "海边",
+      "favoriteTime": "night",
+      "favoriteWeather": "windy",
+      "favoriteBait": "basic_bait",
+      "fear": "老板路过",
+      "personality": "好奇",
+      "description": "咖啡豆鱼住在海边，性格好奇，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "咖啡豆鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "咖啡豆鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "咖啡豆鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "咖啡豆鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_005",
+      "name": "键盘泥鳅",
+      "rarity": "common",
+      "value": 65,
+      "weightRange": {
+        "min": 2,
+        "max": 13,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_015",
+      "story": "键盘泥鳅出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "普通小伙伴",
+      "habitat": "码头",
+      "favoriteTime": "late_night",
+      "favoriteWeather": "foggy",
+      "favoriteBait": "basic_bait",
+      "fear": "急促的脚步声",
+      "personality": "爱炫耀",
+      "description": "键盘泥鳅住在码头，性格爱炫耀，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "键盘泥鳅说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "键盘泥鳅被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "键盘泥鳅在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "键盘泥鳅在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_006",
+      "name": "午休鲈",
+      "rarity": "common",
+      "value": 72,
+      "weightRange": {
+        "min": 2,
+        "max": 14,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_016",
+      "story": "午休鲈出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "普通小伙伴",
+      "habitat": "深海",
+      "favoriteTime": "noon",
+      "favoriteWeather": "night",
+      "favoriteBait": "basic_bait",
+      "fear": "没有风的午后",
+      "personality": "善良",
+      "description": "午休鲈住在深海，性格善良，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "午休鲈说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "午休鲈被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "午休鲈在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "午休鲈在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_007",
+      "name": "窗光小鱼",
+      "rarity": "common",
+      "value": 79,
+      "weightRange": {
+        "min": 2,
+        "max": 15,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_017",
+      "story": "窗光小鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "普通小伙伴",
+      "habitat": "河流",
+      "favoriteTime": "morning",
+      "favoriteWeather": "sunny",
+      "favoriteBait": "basic_bait",
+      "fear": "突然的键盘声",
+      "personality": "狡猾",
+      "description": "窗光小鱼住在河流，性格狡猾，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "窗光小鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "窗光小鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "窗光小鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "窗光小鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_008",
+      "name": "纸杯鱼",
+      "rarity": "common",
+      "value": 86,
+      "weightRange": {
+        "min": 2,
+        "max": 16,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_018",
+      "story": "纸杯鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "普通小伙伴",
+      "habitat": "湖泊",
+      "favoriteTime": "afternoon",
+      "favoriteWeather": "cloudy",
+      "favoriteBait": "basic_bait",
+      "fear": "会议提醒",
+      "personality": "胆大",
+      "description": "纸杯鱼住在湖泊，性格胆大，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "纸杯鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "纸杯鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "纸杯鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "纸杯鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_009",
+      "name": "工位沙丁",
+      "rarity": "common",
+      "value": 93,
+      "weightRange": {
+        "min": 2,
+        "max": 17,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_river_clear_trout",
+      "story": "工位沙丁出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "普通小伙伴",
+      "habitat": "池塘",
+      "favoriteTime": "evening",
+      "favoriteWeather": "rainy",
+      "favoriteBait": "basic_bait",
+      "fear": "太亮的屏幕",
+      "personality": "懒惰",
+      "description": "工位沙丁住在池塘，性格懒惰，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "工位沙丁说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "工位沙丁被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "工位沙丁在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "工位沙丁在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_010",
+      "name": "薯片鳊",
+      "rarity": "common",
+      "value": 100,
+      "weightRange": {
+        "min": 2,
+        "max": 18,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_river_snack_eel",
+      "story": "薯片鳊出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "普通小伙伴",
+      "habitat": "海边",
+      "favoriteTime": "night",
+      "favoriteWeather": "windy",
+      "favoriteBait": "basic_bait",
+      "fear": "老板路过",
+      "personality": "神秘",
+      "description": "薯片鳊住在海边，性格神秘，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "薯片鳊说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "薯片鳊被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "薯片鳊在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "薯片鳊在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_011",
+      "name": "巴沙鱼",
+      "rarity": "rare",
+      "value": 197,
+      "weightRange": {
+        "min": 5,
+        "max": 29,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_001",
+      "nextBaitTarget": "fish_019",
+      "story": "巴沙鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "稀有小伙伴",
+      "habitat": "码头",
+      "favoriteTime": "late_night",
+      "favoriteWeather": "foggy",
+      "favoriteBait": "fish_010",
+      "fear": "急促的脚步声",
+      "personality": "胆小",
+      "description": "巴沙鱼住在码头，性格胆小，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "巴沙鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "巴沙鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "巴沙鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "巴沙鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_012",
+      "name": "罗非鱼",
+      "rarity": "rare",
+      "value": 204,
+      "weightRange": {
+        "min": 5,
+        "max": 30,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_002",
+      "nextBaitTarget": "fish_020",
+      "story": "罗非鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "稀有小伙伴",
+      "habitat": "深海",
+      "favoriteTime": "noon",
+      "favoriteWeather": "night",
+      "favoriteBait": "fish_011",
+      "fear": "没有风的午后",
+      "personality": "贪吃",
+      "description": "罗非鱼住在深海，性格贪吃，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "罗非鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "罗非鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "罗非鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "罗非鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_013",
+      "name": "海风青鱼",
+      "rarity": "rare",
+      "value": 211,
+      "weightRange": {
+        "min": 5,
+        "max": 31,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_003",
+      "nextBaitTarget": "fish_021",
+      "story": "海风青鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "稀有小伙伴",
+      "habitat": "河流",
+      "favoriteTime": "morning",
+      "favoriteWeather": "sunny",
+      "favoriteBait": "fish_012",
+      "fear": "突然的键盘声",
+      "personality": "暴躁",
+      "description": "海风青鱼住在河流，性格暴躁，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "海风青鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "海风青鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "海风青鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "海风青鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_014",
+      "name": "会议逃生鱼",
+      "rarity": "rare",
+      "value": 218,
+      "weightRange": {
+        "min": 5,
+        "max": 32,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_004",
+      "nextBaitTarget": "fish_022",
+      "story": "会议逃生鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "稀有小伙伴",
+      "habitat": "湖泊",
+      "favoriteTime": "afternoon",
+      "favoriteWeather": "cloudy",
+      "favoriteBait": "fish_013",
+      "fear": "会议提醒",
+      "personality": "好奇",
+      "description": "会议逃生鱼住在湖泊，性格好奇，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "会议逃生鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "会议逃生鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "会议逃生鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "会议逃生鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_015",
+      "name": "奶茶鳜",
+      "rarity": "rare",
+      "value": 225,
+      "weightRange": {
+        "min": 5,
+        "max": 33,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_005",
+      "nextBaitTarget": "fish_023",
+      "story": "奶茶鳜出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "稀有小伙伴",
+      "habitat": "池塘",
+      "favoriteTime": "evening",
+      "favoriteWeather": "rainy",
+      "favoriteBait": "fish_014",
+      "fear": "太亮的屏幕",
+      "personality": "爱炫耀",
+      "description": "奶茶鳜住在池塘，性格爱炫耀，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "奶茶鳜说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "奶茶鳜被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "奶茶鳜在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "奶茶鳜在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_016",
+      "name": "工牌鲤",
+      "rarity": "rare",
+      "value": 232,
+      "weightRange": {
+        "min": 5,
+        "max": 34,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_006",
+      "nextBaitTarget": "fish_024",
+      "story": "工牌鲤出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "稀有小伙伴",
+      "habitat": "海边",
+      "favoriteTime": "night",
+      "favoriteWeather": "windy",
+      "favoriteBait": "fish_015",
+      "fear": "老板路过",
+      "personality": "善良",
+      "description": "工牌鲤住在海边，性格善良，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "工牌鲤说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "工牌鲤被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "工牌鲤在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "工牌鲤在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_017",
+      "name": "云影鲷",
+      "rarity": "rare",
+      "value": 239,
+      "weightRange": {
+        "min": 5,
+        "max": 35,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_007",
+      "nextBaitTarget": "fish_river_old_silver",
+      "story": "云影鲷出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "稀有小伙伴",
+      "habitat": "码头",
+      "favoriteTime": "late_night",
+      "favoriteWeather": "foggy",
+      "favoriteBait": "fish_016",
+      "fear": "急促的脚步声",
+      "personality": "狡猾",
+      "description": "云影鲷住在码头，性格狡猾，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "云影鲷说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "云影鲷被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "云影鲷在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "云影鲷在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_018",
+      "name": "午后三文",
+      "rarity": "rare",
+      "value": 246,
+      "weightRange": {
+        "min": 5,
+        "max": 36,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_008",
+      "nextBaitTarget": "fish_lake_story_pike",
+      "story": "午后三文出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "稀有小伙伴",
+      "habitat": "深海",
+      "favoriteTime": "noon",
+      "favoriteWeather": "night",
+      "favoriteBait": "fish_017",
+      "fear": "没有风的午后",
+      "personality": "胆大",
+      "description": "午后三文住在深海，性格胆大，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "午后三文说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "午后三文被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "午后三文在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "午后三文在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_019",
+      "name": "鲭鱼",
+      "rarity": "epic",
+      "value": 553,
+      "weightRange": {
+        "min": 12,
+        "max": 54,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_011",
+      "nextBaitTarget": "fish_025",
+      "story": "鲭鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "史诗小伙伴",
+      "habitat": "河流",
+      "favoriteTime": "morning",
+      "favoriteWeather": "sunny",
+      "favoriteBait": "fish_018",
+      "fear": "突然的键盘声",
+      "personality": "懒惰",
+      "description": "鲭鱼住在河流，性格懒惰，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "鲭鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "鲭鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "鲭鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "鲭鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_020",
+      "name": "石斑鱼",
+      "rarity": "epic",
+      "value": 560,
+      "weightRange": {
+        "min": 12,
+        "max": 55,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_012",
+      "nextBaitTarget": "fish_026",
+      "story": "石斑鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "史诗小伙伴",
+      "habitat": "湖泊",
+      "favoriteTime": "afternoon",
+      "favoriteWeather": "cloudy",
+      "favoriteBait": "fish_019",
+      "fear": "会议提醒",
+      "personality": "神秘",
+      "description": "石斑鱼住在湖泊，性格神秘，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "石斑鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "石斑鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "石斑鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "石斑鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_021",
+      "name": "周五锦鲤",
+      "rarity": "epic",
+      "value": 567,
+      "weightRange": {
+        "min": 12,
+        "max": 56,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_013",
+      "nextBaitTarget": "fish_027",
+      "story": "周五锦鲤出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "史诗小伙伴",
+      "habitat": "池塘",
+      "favoriteTime": "evening",
+      "favoriteWeather": "rainy",
+      "favoriteBait": "fish_020",
+      "fear": "太亮的屏幕",
+      "personality": "胆小",
+      "description": "周五锦鲤住在池塘，性格胆小，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "周五锦鲤说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "周五锦鲤被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "周五锦鲤在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "周五锦鲤在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_022",
+      "name": "漂流瓶鱼",
+      "rarity": "epic",
+      "value": 574,
+      "weightRange": {
+        "min": 12,
+        "max": 57,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_014",
+      "nextBaitTarget": "fish_028",
+      "story": "漂流瓶鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "史诗小伙伴",
+      "habitat": "海边",
+      "favoriteTime": "night",
+      "favoriteWeather": "windy",
+      "favoriteBait": "fish_021",
+      "fear": "老板路过",
+      "personality": "贪吃",
+      "description": "漂流瓶鱼住在海边，性格贪吃，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "漂流瓶鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "漂流瓶鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "漂流瓶鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "漂流瓶鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_023",
+      "name": "加班银鲳",
+      "rarity": "epic",
+      "value": 581,
+      "weightRange": {
+        "min": 12,
+        "max": 58,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_015",
+      "nextBaitTarget": "fish_river_legend_dragonlet",
+      "story": "加班银鲳出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "史诗小伙伴",
+      "habitat": "码头",
+      "favoriteTime": "late_night",
+      "favoriteWeather": "foggy",
+      "favoriteBait": "fish_022",
+      "fear": "急促的脚步声",
+      "personality": "暴躁",
+      "description": "加班银鲳住在码头，性格暴躁，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "加班银鲳说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "加班银鲳被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "加班银鲳在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "加班银鲳在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_024",
+      "name": "海鸟信使鱼",
+      "rarity": "epic",
+      "value": 588,
+      "weightRange": {
+        "min": 12,
+        "max": 59,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_016",
+      "nextBaitTarget": "fish_lake_moon_koi",
+      "story": "海鸟信使鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "史诗小伙伴",
+      "habitat": "深海",
+      "favoriteTime": "noon",
+      "favoriteWeather": "night",
+      "favoriteBait": "fish_023",
+      "fear": "没有风的午后",
+      "personality": "好奇",
+      "description": "海鸟信使鱼住在深海，性格好奇，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "海鸟信使鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "海鸟信使鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "海鸟信使鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "海鸟信使鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_025",
+      "name": "金枪鱼",
+      "rarity": "legend",
+      "value": 1375,
+      "weightRange": {
+        "min": 30,
+        "max": 105,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_019",
+      "nextBaitTarget": "fish_029",
+      "story": "金枪鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "传说小伙伴",
+      "habitat": "河流",
+      "favoriteTime": "morning",
+      "favoriteWeather": "sunny",
+      "favoriteBait": "fish_024",
+      "fear": "突然的键盘声",
+      "personality": "爱炫耀",
+      "description": "金枪鱼住在河流，性格爱炫耀，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "金枪鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "金枪鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "金枪鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "金枪鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_026",
+      "name": "老渔夫的蓝鱼",
+      "rarity": "legend",
+      "value": 1382,
+      "weightRange": {
+        "min": 30,
+        "max": 106,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_020",
+      "nextBaitTarget": "fish_030",
+      "story": "老渔夫的蓝鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "传说小伙伴",
+      "habitat": "湖泊",
+      "favoriteTime": "afternoon",
+      "favoriteWeather": "cloudy",
+      "favoriteBait": "fish_025",
+      "fear": "会议提醒",
+      "personality": "善良",
+      "description": "老渔夫的蓝鱼住在湖泊，性格善良，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "老渔夫的蓝鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "老渔夫的蓝鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "老渔夫的蓝鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "老渔夫的蓝鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_027",
+      "name": "月光办公室鱼",
+      "rarity": "legend",
+      "value": 1389,
+      "weightRange": {
+        "min": 30,
+        "max": 107,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_021",
+      "nextBaitTarget": "fish_seaside_sun_myth",
+      "story": "月光办公室鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "传说小伙伴",
+      "habitat": "池塘",
+      "favoriteTime": "evening",
+      "favoriteWeather": "rainy",
+      "favoriteBait": "fish_026",
+      "fear": "太亮的屏幕",
+      "personality": "狡猾",
+      "description": "月光办公室鱼住在池塘，性格狡猾，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "月光办公室鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "月光办公室鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "月光办公室鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "月光办公室鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_028",
+      "name": "老板路过鲨",
+      "rarity": "legend",
+      "value": 1396,
+      "weightRange": {
+        "min": 30,
+        "max": 108,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_022",
+      "nextBaitTarget": "fish_deep_second_world",
+      "story": "老板路过鲨出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "传说小伙伴",
+      "habitat": "海边",
+      "favoriteTime": "night",
+      "favoriteWeather": "windy",
+      "favoriteBait": "fish_027",
+      "fear": "老板路过",
+      "personality": "胆大",
+      "description": "老板路过鲨住在海边，性格胆大，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "老板路过鲨说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "老板路过鲨被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "老板路过鲨在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "老板路过鲨在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_029",
+      "name": "第二世界鲸",
+      "rarity": "myth",
+      "value": 3803,
+      "weightRange": {
+        "min": 80,
+        "max": 189,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_025",
+      "nextBaitTarget": "",
+      "story": "第二世界鲸出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "神话小伙伴",
+      "habitat": "码头",
+      "favoriteTime": "late_night",
+      "favoriteWeather": "foggy",
+      "favoriteBait": "fish_028",
+      "fear": "急促的脚步声",
+      "personality": "懒惰",
+      "description": "第二世界鲸住在码头，性格懒惰，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "第二世界鲸说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "第二世界鲸被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "第二世界鲸在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "第二世界鲸在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_030",
+      "name": "会发光的梦鱼",
+      "rarity": "myth",
+      "value": 3810,
+      "weightRange": {
+        "min": 80,
+        "max": 190,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_026",
+      "nextBaitTarget": "",
+      "story": "会发光的梦鱼出现在办公室窗外的海面上，像一段只属于今天的小小回忆。",
+      "nickname": "神话小伙伴",
+      "habitat": "深海",
+      "favoriteTime": "noon",
+      "favoriteWeather": "night",
+      "favoriteBait": "fish_029",
+      "fear": "没有风的午后",
+      "personality": "神秘",
+      "description": "会发光的梦鱼住在深海，性格神秘，常在玩家愿意慢下来时靠近鱼漂。",
+      "firstDialogue": "会发光的梦鱼说：第一次见面，别急着收线，先看看今天的海。",
+      "catchReaction": "会发光的梦鱼被钓上来时轻轻摆了摆尾巴，像是在确认这次相遇是否值得记住。",
+      "waitDialogues": [
+        "会发光的梦鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。",
+        "会发光的梦鱼在水下绕着鱼饵转了一圈，像是在考虑要不要靠近。"
+      ]
+    },
+    {
+      "id": "fish_river_shy_carp",
+      "name": "青石小鲤",
+      "nickname": "石缝小胆",
+      "rarity": "common",
+      "sizeRange": {
+        "min": 12,
+        "max": 24,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 0.4,
+        "max": 1.2,
+        "unit": "kg"
+      },
+      "value": 68,
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_lake_blue_gill",
+      "favoriteWeather": "sunny",
+      "favoriteTime": "morning",
+      "favoriteLocation": "河流",
+      "personality": "胆小",
+      "description": "青石小鲤常出现在河流，性格胆小，喜欢在sunny的morning靠近鱼漂。",
+      "story": "青石小鲤第一次出现时，窗外的河流像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "我只是路过，如果水面太吵，我会躲到影子里。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次青石小鲤把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它被钓上来时还在小声说：别突然开会。",
+      "habitat": "河流",
+      "favoriteBait": "basic_bait",
+      "fear": "突然的键盘声",
+      "firstDialogue": "我只是路过，如果水面太吵，我会躲到影子里。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_river_greedy_catfish",
+      "name": "饭团鲶",
+      "nickname": "加餐大嘴",
+      "rarity": "common",
+      "sizeRange": {
+        "min": 18,
+        "max": 32,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 0.8,
+        "max": 2.0,
+        "unit": "kg"
+      },
+      "value": 72,
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_lake_proud_koi",
+      "favoriteWeather": "cloudy",
+      "favoriteTime": "afternoon",
+      "favoriteLocation": "河流",
+      "personality": "贪吃",
+      "description": "饭团鲶常出现在河流，性格贪吃，喜欢在cloudy的afternoon靠近鱼漂。",
+      "story": "饭团鲶第一次出现时，窗外的河流像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "如果鱼饵闻起来像下午茶，我可能会多看两眼。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次饭团鲶把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它第一反应不是害怕，而是问还有没有下一口。",
+      "habitat": "河流",
+      "favoriteBait": "basic_bait",
+      "fear": "会议提醒",
+      "firstDialogue": "如果鱼饵闻起来像下午茶，我可能会多看两眼。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_river_angry_perch",
+      "name": "拍水鲈",
+      "nickname": "小暴脾气",
+      "rarity": "common",
+      "sizeRange": {
+        "min": 15,
+        "max": 28,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 0.6,
+        "max": 1.8,
+        "unit": "kg"
+      },
+      "value": 76,
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_pond_soft_betta",
+      "favoriteWeather": "rainy",
+      "favoriteTime": "night",
+      "favoriteLocation": "河流",
+      "personality": "暴躁",
+      "description": "拍水鲈常出现在河流，性格暴躁，喜欢在rainy的night靠近鱼漂。",
+      "story": "拍水鲈第一次出现时，窗外的河流像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "别晃鱼漂，我今天已经被三阵海风吵醒了。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次拍水鲈把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它甩了甩尾巴，像在抗议今天的风向。",
+      "habitat": "河流",
+      "favoriteBait": "basic_bait",
+      "fear": "太亮的屏幕",
+      "firstDialogue": "别晃鱼漂，我今天已经被三阵海风吵醒了。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_lake_curious_minnow",
+      "name": "湖光小白鱼",
+      "nickname": "问号尾巴",
+      "rarity": "common",
+      "sizeRange": {
+        "min": 8,
+        "max": 18,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 0.2,
+        "max": 0.8,
+        "unit": "kg"
+      },
+      "value": 60,
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_seaside_milk_tea_grouper",
+      "favoriteWeather": "sunny",
+      "favoriteTime": "morning",
+      "favoriteLocation": "湖泊",
+      "personality": "好奇",
+      "description": "湖光小白鱼常出现在湖泊，性格好奇，喜欢在sunny的morning靠近鱼漂。",
+      "story": "湖光小白鱼第一次出现时，窗外的湖泊像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "你们办公室的人，为什么总盯着一块发光的屏幕？",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次湖光小白鱼把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它睁大眼睛，好像终于看清了办公室是什么样子。",
+      "habitat": "湖泊",
+      "favoriteBait": "basic_bait",
+      "fear": "老板路过",
+      "firstDialogue": "你们办公室的人，为什么总盯着一块发光的屏幕？",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_lake_showoff_bream",
+      "name": "镜面鳊",
+      "nickname": "闪亮先生",
+      "rarity": "common",
+      "sizeRange": {
+        "min": 16,
+        "max": 30,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 0.7,
+        "max": 1.9,
+        "unit": "kg"
+      },
+      "value": 82,
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_dock_kind_snapper",
+      "favoriteWeather": "sunny",
+      "favoriteTime": "afternoon",
+      "favoriteLocation": "湖泊",
+      "personality": "爱炫耀",
+      "description": "镜面鳊常出现在湖泊，性格爱炫耀，喜欢在sunny的afternoon靠近鱼漂。",
+      "story": "镜面鳊第一次出现时，窗外的湖泊像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "看见我的鳞片了吗？这可不是普通阳光。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次镜面鳊把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它故意让鳞片多闪了两下。",
+      "habitat": "湖泊",
+      "favoriteBait": "basic_bait",
+      "fear": "急促的脚步声",
+      "firstDialogue": "看见我的鳞片了吗？这可不是普通阳光。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_pond_kind_goldfish",
+      "name": "便当金鱼",
+      "nickname": "温柔饭盒",
+      "rarity": "common",
+      "sizeRange": {
+        "min": 10,
+        "max": 20,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 0.3,
+        "max": 0.9,
+        "unit": "kg"
+      },
+      "value": 64,
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_deep_lazy_ray",
+      "favoriteWeather": "cloudy",
+      "favoriteTime": "afternoon",
+      "favoriteLocation": "池塘",
+      "personality": "善良",
+      "description": "便当金鱼常出现在池塘，性格善良，喜欢在cloudy的afternoon靠近鱼漂。",
+      "story": "便当金鱼第一次出现时，窗外的池塘像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "如果你累了，我可以陪你安静一会儿。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次便当金鱼把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它安静地看着你，像是在确认你今天过得还好。",
+      "habitat": "池塘",
+      "favoriteBait": "basic_bait",
+      "fear": "没有风的午后",
+      "firstDialogue": "如果你累了，我可以陪你安静一会儿。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_pond_lazy_loach",
+      "name": "午睡泥鳅",
+      "nickname": "躺平条",
+      "rarity": "common",
+      "sizeRange": {
+        "min": 9,
+        "max": 22,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 0.2,
+        "max": 1.0,
+        "unit": "kg"
+      },
+      "value": 58,
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_pack01_river_memo_catfish",
+      "favoriteWeather": "sunny",
+      "favoriteTime": "noon",
+      "favoriteLocation": "池塘",
+      "personality": "懒惰",
+      "description": "午睡泥鳅常出现在池塘，性格懒惰，喜欢在sunny的noon靠近鱼漂。",
+      "story": "午睡泥鳅第一次出现时，窗外的池塘像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "能不能等我睡醒再决定谁钓谁？",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次午睡泥鳅把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它被钓上来时像刚从午睡里醒来。",
+      "habitat": "池塘",
+      "favoriteBait": "basic_bait",
+      "fear": "突然的键盘声",
+      "firstDialogue": "能不能等我睡醒再决定谁钓谁？",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_seaside_bold_mackerel",
+      "name": "海风鲭",
+      "nickname": "冲浪仔",
+      "rarity": "common",
+      "sizeRange": {
+        "min": 22,
+        "max": 40,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 1.0,
+        "max": 3.2,
+        "unit": "kg"
+      },
+      "value": 95,
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_pack01_lake_overtime_trout",
+      "favoriteWeather": "windy",
+      "favoriteTime": "morning",
+      "favoriteLocation": "海边",
+      "personality": "胆大",
+      "description": "海风鲭常出现在海边，性格胆大，喜欢在windy的morning靠近鱼漂。",
+      "story": "海风鲭第一次出现时，窗外的海边像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "风越大，我越想跳出水面看看你。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次海风鲭把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它跳得很高，像是主动完成了一次登场。",
+      "habitat": "海边",
+      "favoriteBait": "basic_bait",
+      "fear": "会议提醒",
+      "firstDialogue": "风越大，我越想跳出水面看看你。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_dock_sly_sardine",
+      "name": "码头沙丁",
+      "nickname": "绕钩高手",
+      "rarity": "common",
+      "sizeRange": {
+        "min": 12,
+        "max": 24,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 0.3,
+        "max": 1.1,
+        "unit": "kg"
+      },
+      "value": 88,
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_pack01_pond_raincoat_koi",
+      "favoriteWeather": "foggy",
+      "favoriteTime": "evening",
+      "favoriteLocation": "码头",
+      "personality": "狡猾",
+      "description": "码头沙丁常出现在码头，性格狡猾，喜欢在foggy的evening靠近鱼漂。",
+      "story": "码头沙丁第一次出现时，窗外的码头像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "我会靠近，但不保证会上钩。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次码头沙丁把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它上钩后还假装自己只是来参观的。",
+      "habitat": "码头",
+      "favoriteBait": "basic_bait",
+      "fear": "太亮的屏幕",
+      "firstDialogue": "我会靠近，但不保证会上钩。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_deep_mystery_lantern",
+      "name": "微光灯笼鱼",
+      "nickname": "小灯泡",
+      "rarity": "common",
+      "sizeRange": {
+        "min": 14,
+        "max": 26,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 0.4,
+        "max": 1.4,
+        "unit": "kg"
+      },
+      "value": 110,
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_pack01_seaside_meeting_mackerel",
+      "favoriteWeather": "night",
+      "favoriteTime": "night",
+      "favoriteLocation": "深海",
+      "personality": "神秘",
+      "description": "微光灯笼鱼常出现在深海，性格神秘，喜欢在night的night靠近鱼漂。",
+      "story": "微光灯笼鱼第一次出现时，窗外的深海像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "有些鱼不是被钓到的，是自己选择出现的。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次微光灯笼鱼把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它身上的微光让窗边安静了几秒。",
+      "habitat": "深海",
+      "favoriteBait": "basic_bait",
+      "fear": "老板路过",
+      "firstDialogue": "有些鱼不是被钓到的，是自己选择出现的。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_river_clear_trout",
+      "name": "清流鳟",
+      "nickname": "玻璃背",
+      "rarity": "rare",
+      "sizeRange": {
+        "min": 24,
+        "max": 42,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 1.2,
+        "max": 3.8,
+        "unit": "kg"
+      },
+      "value": 180,
+      "baitRequired": "fish_009",
+      "nextBaitTarget": "fish_pond_dream_carp",
+      "favoriteWeather": "sunny",
+      "favoriteTime": "morning",
+      "favoriteLocation": "河流",
+      "personality": "胆小",
+      "description": "清流鳟常出现在河流，性格胆小，喜欢在sunny的morning靠近鱼漂。",
+      "story": "清流鳟第一次出现时，窗外的河流像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "我只是路过，如果水面太吵，我会躲到影子里。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次清流鳟把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它被钓上来时还在小声说：别突然开会。",
+      "habitat": "河流",
+      "favoriteBait": "fish_deep_mystery_lantern",
+      "fear": "急促的脚步声",
+      "firstDialogue": "我只是路过，如果水面太吵，我会躲到影子里。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_river_snack_eel",
+      "name": "薯片鳗",
+      "nickname": "咔嚓尾",
+      "rarity": "rare",
+      "sizeRange": {
+        "min": 30,
+        "max": 55,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 1.5,
+        "max": 4.4,
+        "unit": "kg"
+      },
+      "value": 190,
+      "baitRequired": "fish_010",
+      "nextBaitTarget": "fish_seaside_golden_bass",
+      "favoriteWeather": "cloudy",
+      "favoriteTime": "afternoon",
+      "favoriteLocation": "河流",
+      "personality": "贪吃",
+      "description": "薯片鳗常出现在河流，性格贪吃，喜欢在cloudy的afternoon靠近鱼漂。",
+      "story": "薯片鳗第一次出现时，窗外的河流像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "如果鱼饵闻起来像下午茶，我可能会多看两眼。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次薯片鳗把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它第一反应不是害怕，而是问还有没有下一口。",
+      "habitat": "河流",
+      "favoriteBait": "fish_river_clear_trout",
+      "fear": "没有风的午后",
+      "firstDialogue": "如果鱼饵闻起来像下午茶，我可能会多看两眼。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_lake_blue_gill",
+      "name": "蓝鳃湖客",
+      "nickname": "蓝领带",
+      "rarity": "rare",
+      "sizeRange": {
+        "min": 20,
+        "max": 38,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 1.0,
+        "max": 3.0,
+        "unit": "kg"
+      },
+      "value": 210,
+      "baitRequired": "fish_river_shy_carp",
+      "nextBaitTarget": "fish_dock_hook_foxfish",
+      "favoriteWeather": "sunny",
+      "favoriteTime": "evening",
+      "favoriteLocation": "湖泊",
+      "personality": "好奇",
+      "description": "蓝鳃湖客常出现在湖泊，性格好奇，喜欢在sunny的evening靠近鱼漂。",
+      "story": "蓝鳃湖客第一次出现时，窗外的湖泊像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "你们办公室的人，为什么总盯着一块发光的屏幕？",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次蓝鳃湖客把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它睁大眼睛，好像终于看清了办公室是什么样子。",
+      "habitat": "湖泊",
+      "favoriteBait": "fish_river_snack_eel",
+      "fear": "突然的键盘声",
+      "firstDialogue": "你们办公室的人，为什么总盯着一块发光的屏幕？",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_lake_proud_koi",
+      "name": "工牌锦鲤",
+      "nickname": "胸牌王",
+      "rarity": "rare",
+      "sizeRange": {
+        "min": 26,
+        "max": 48,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 1.6,
+        "max": 5.0,
+        "unit": "kg"
+      },
+      "value": 240,
+      "baitRequired": "fish_river_greedy_catfish",
+      "nextBaitTarget": "fish_deep_blue_hermit",
+      "favoriteWeather": "sunny",
+      "favoriteTime": "noon",
+      "favoriteLocation": "湖泊",
+      "personality": "爱炫耀",
+      "description": "工牌锦鲤常出现在湖泊，性格爱炫耀，喜欢在sunny的noon靠近鱼漂。",
+      "story": "工牌锦鲤第一次出现时，窗外的湖泊像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "看见我的鳞片了吗？这可不是普通阳光。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次工牌锦鲤把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它故意让鳞片多闪了两下。",
+      "habitat": "湖泊",
+      "favoriteBait": "fish_lake_blue_gill",
+      "fear": "会议提醒",
+      "firstDialogue": "看见我的鳞片了吗？这可不是普通阳光。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_pond_soft_betta",
+      "name": "纸杯斗鱼",
+      "nickname": "杯中侠",
+      "rarity": "rare",
+      "sizeRange": {
+        "min": 10,
+        "max": 18,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 0.2,
+        "max": 0.7,
+        "unit": "kg"
+      },
+      "value": 175,
+      "baitRequired": "fish_river_angry_perch",
+      "nextBaitTarget": "fish_pack01_seaside_moonlit_bass",
+      "favoriteWeather": "rainy",
+      "favoriteTime": "afternoon",
+      "favoriteLocation": "池塘",
+      "personality": "暴躁",
+      "description": "纸杯斗鱼常出现在池塘，性格暴躁，喜欢在rainy的afternoon靠近鱼漂。",
+      "story": "纸杯斗鱼第一次出现时，窗外的池塘像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "别晃鱼漂，我今天已经被三阵海风吵醒了。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次纸杯斗鱼把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它甩了甩尾巴，像在抗议今天的风向。",
+      "habitat": "池塘",
+      "favoriteBait": "fish_lake_proud_koi",
+      "fear": "太亮的屏幕",
+      "firstDialogue": "别晃鱼漂，我今天已经被三阵海风吵醒了。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_seaside_milk_tea_grouper",
+      "name": "奶茶石斑",
+      "nickname": "珍珠口袋",
+      "rarity": "rare",
+      "sizeRange": {
+        "min": 35,
+        "max": 60,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 2.4,
+        "max": 7.5,
+        "unit": "kg"
+      },
+      "value": 260,
+      "baitRequired": "fish_lake_curious_minnow",
+      "nextBaitTarget": "fish_pack01_pier_clockwork_tuna",
+      "favoriteWeather": "cloudy",
+      "favoriteTime": "afternoon",
+      "favoriteLocation": "海边",
+      "personality": "贪吃",
+      "description": "奶茶石斑常出现在海边，性格贪吃，喜欢在cloudy的afternoon靠近鱼漂。",
+      "story": "奶茶石斑第一次出现时，窗外的海边像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "如果鱼饵闻起来像下午茶，我可能会多看两眼。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次奶茶石斑把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它第一反应不是害怕，而是问还有没有下一口。",
+      "habitat": "海边",
+      "favoriteBait": "fish_pond_soft_betta",
+      "fear": "老板路过",
+      "firstDialogue": "如果鱼饵闻起来像下午茶，我可能会多看两眼。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_dock_kind_snapper",
+      "name": "码头红鲷",
+      "nickname": "红围巾",
+      "rarity": "rare",
+      "sizeRange": {
+        "min": 28,
+        "max": 52,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 1.8,
+        "max": 5.8,
+        "unit": "kg"
+      },
+      "value": 230,
+      "baitRequired": "fish_lake_showoff_bream",
+      "nextBaitTarget": "fish_pack01_deep_lantern_ray",
+      "favoriteWeather": "windy",
+      "favoriteTime": "morning",
+      "favoriteLocation": "码头",
+      "personality": "善良",
+      "description": "码头红鲷常出现在码头，性格善良，喜欢在windy的morning靠近鱼漂。",
+      "story": "码头红鲷第一次出现时，窗外的码头像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "如果你累了，我可以陪你安静一会儿。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次码头红鲷把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它安静地看着你，像是在确认你今天过得还好。",
+      "habitat": "码头",
+      "favoriteBait": "fish_seaside_milk_tea_grouper",
+      "fear": "急促的脚步声",
+      "firstDialogue": "如果你累了，我可以陪你安静一会儿。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_deep_lazy_ray",
+      "name": "慢云鳐",
+      "nickname": "海底沙发",
+      "rarity": "rare",
+      "sizeRange": {
+        "min": 60,
+        "max": 100,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 6.0,
+        "max": 18.0,
+        "unit": "kg"
+      },
+      "value": 280,
+      "baitRequired": "fish_pond_kind_goldfish",
+      "nextBaitTarget": "fish_pack01_lake_glass_oracle_carp",
+      "favoriteWeather": "night",
+      "favoriteTime": "night",
+      "favoriteLocation": "深海",
+      "personality": "懒惰",
+      "description": "慢云鳐常出现在深海，性格懒惰，喜欢在night的night靠近鱼漂。",
+      "story": "慢云鳐第一次出现时，窗外的深海像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "能不能等我睡醒再决定谁钓谁？",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次慢云鳐把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它被钓上来时像刚从午睡里醒来。",
+      "habitat": "深海",
+      "favoriteBait": "fish_dock_kind_snapper",
+      "fear": "没有风的午后",
+      "firstDialogue": "能不能等我睡醒再决定谁钓谁？",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_river_old_silver",
+      "name": "老银鲴",
+      "nickname": "银胡子",
+      "rarity": "epic",
+      "sizeRange": {
+        "min": 32,
+        "max": 58,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 2.0,
+        "max": 6.0,
+        "unit": "kg"
+      },
+      "value": 520,
+      "baitRequired": "fish_017",
+      "nextBaitTarget": "fish_dock_storm_tuna",
+      "favoriteWeather": "foggy",
+      "favoriteTime": "morning",
+      "favoriteLocation": "河流",
+      "personality": "神秘",
+      "description": "老银鲴常出现在河流，性格神秘，喜欢在foggy的morning靠近鱼漂。",
+      "story": "老银鲴第一次出现时，窗外的河流像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "有些鱼不是被钓到的，是自己选择出现的。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次老银鲴把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它身上的微光让窗边安静了几秒。",
+      "habitat": "河流",
+      "favoriteBait": "fish_deep_lazy_ray",
+      "fear": "突然的键盘声",
+      "firstDialogue": "有些鱼不是被钓到的，是自己选择出现的。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_lake_story_pike",
+      "name": "故事狗鱼",
+      "nickname": "长句子",
+      "rarity": "epic",
+      "sizeRange": {
+        "min": 45,
+        "max": 80,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 4.0,
+        "max": 12.0,
+        "unit": "kg"
+      },
+      "value": 560,
+      "baitRequired": "fish_018",
+      "nextBaitTarget": "fish_deep_clock_whale",
+      "favoriteWeather": "cloudy",
+      "favoriteTime": "evening",
+      "favoriteLocation": "湖泊",
+      "personality": "好奇",
+      "description": "故事狗鱼常出现在湖泊，性格好奇，喜欢在cloudy的evening靠近鱼漂。",
+      "story": "故事狗鱼第一次出现时，窗外的湖泊像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "你们办公室的人，为什么总盯着一块发光的屏幕？",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次故事狗鱼把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它睁大眼睛，好像终于看清了办公室是什么样子。",
+      "habitat": "湖泊",
+      "favoriteBait": "fish_river_old_silver",
+      "fear": "会议提醒",
+      "firstDialogue": "你们办公室的人，为什么总盯着一块发光的屏幕？",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_pond_dream_carp",
+      "name": "午梦鲤",
+      "nickname": "枕头鳞",
+      "rarity": "epic",
+      "sizeRange": {
+        "min": 35,
+        "max": 70,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 3.0,
+        "max": 10.0,
+        "unit": "kg"
+      },
+      "value": 500,
+      "baitRequired": "fish_river_clear_trout",
+      "nextBaitTarget": "fish_pack01_deep_cloud_whale",
+      "favoriteWeather": "sunny",
+      "favoriteTime": "noon",
+      "favoriteLocation": "池塘",
+      "personality": "懒惰",
+      "description": "午梦鲤常出现在池塘，性格懒惰，喜欢在sunny的noon靠近鱼漂。",
+      "story": "午梦鲤第一次出现时，窗外的池塘像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "能不能等我睡醒再决定谁钓谁？",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次午梦鲤把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它被钓上来时像刚从午睡里醒来。",
+      "habitat": "池塘",
+      "favoriteBait": "fish_lake_story_pike",
+      "fear": "太亮的屏幕",
+      "firstDialogue": "能不能等我睡醒再决定谁钓谁？",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_seaside_golden_bass",
+      "name": "金边海鲈",
+      "nickname": "阳光领主",
+      "rarity": "epic",
+      "sizeRange": {
+        "min": 50,
+        "max": 92,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 5.0,
+        "max": 16.0,
+        "unit": "kg"
+      },
+      "value": 680,
+      "baitRequired": "fish_river_snack_eel",
+      "nextBaitTarget": "fish_pack01_seaside_sunclock_marlin",
+      "favoriteWeather": "sunny",
+      "favoriteTime": "morning",
+      "favoriteLocation": "海边",
+      "personality": "爱炫耀",
+      "description": "金边海鲈常出现在海边，性格爱炫耀，喜欢在sunny的morning靠近鱼漂。",
+      "story": "金边海鲈第一次出现时，窗外的海边像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "看见我的鳞片了吗？这可不是普通阳光。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次金边海鲈把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它故意让鳞片多闪了两下。",
+      "habitat": "海边",
+      "favoriteBait": "fish_pond_dream_carp",
+      "fear": "老板路过",
+      "firstDialogue": "看见我的鳞片了吗？这可不是普通阳光。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_dock_hook_foxfish",
+      "name": "钩影狐鱼",
+      "nickname": "绕线师",
+      "rarity": "epic",
+      "sizeRange": {
+        "min": 42,
+        "max": 78,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 4.0,
+        "max": 13.0,
+        "unit": "kg"
+      },
+      "value": 640,
+      "baitRequired": "fish_lake_blue_gill",
+      "nextBaitTarget": "fish_pack01_pier_brass_anchor_king",
+      "favoriteWeather": "foggy",
+      "favoriteTime": "night",
+      "favoriteLocation": "码头",
+      "personality": "狡猾",
+      "description": "钩影狐鱼常出现在码头，性格狡猾，喜欢在foggy的night靠近鱼漂。",
+      "story": "钩影狐鱼第一次出现时，窗外的码头像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "我会靠近，但不保证会上钩。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次钩影狐鱼把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它上钩后还假装自己只是来参观的。",
+      "habitat": "码头",
+      "favoriteBait": "fish_seaside_golden_bass",
+      "fear": "急促的脚步声",
+      "firstDialogue": "我会靠近，但不保证会上钩。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_deep_blue_hermit",
+      "name": "深蓝隐士鱼",
+      "nickname": "蓝斗篷",
+      "rarity": "epic",
+      "sizeRange": {
+        "min": 55,
+        "max": 110,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 8.0,
+        "max": 24.0,
+        "unit": "kg"
+      },
+      "value": 760,
+      "baitRequired": "fish_lake_proud_koi",
+      "nextBaitTarget": "fish_pack01_lake_aurora_lotusfish",
+      "favoriteWeather": "night",
+      "favoriteTime": "night",
+      "favoriteLocation": "深海",
+      "personality": "神秘",
+      "description": "深蓝隐士鱼常出现在深海，性格神秘，喜欢在night的night靠近鱼漂。",
+      "story": "深蓝隐士鱼第一次出现时，窗外的深海像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "有些鱼不是被钓到的，是自己选择出现的。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次深蓝隐士鱼把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它身上的微光让窗边安静了几秒。",
+      "habitat": "深海",
+      "favoriteBait": "fish_dock_hook_foxfish",
+      "fear": "没有风的午后",
+      "firstDialogue": "有些鱼不是被钓到的，是自己选择出现的。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_river_legend_dragonlet",
+      "name": "小河龙影",
+      "nickname": "水纹小龙",
+      "rarity": "legend",
+      "sizeRange": {
+        "min": 70,
+        "max": 130,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 12.0,
+        "max": 35.0,
+        "unit": "kg"
+      },
+      "value": 1500,
+      "baitRequired": "fish_023",
+      "nextBaitTarget": "fish_pack01_myth_office_sea_seraph",
+      "favoriteWeather": "rainy",
+      "favoriteTime": "evening",
+      "favoriteLocation": "河流",
+      "personality": "胆大",
+      "description": "小河龙影常出现在河流，性格胆大，喜欢在rainy的evening靠近鱼漂。",
+      "story": "小河龙影第一次出现时，窗外的河流像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "风越大，我越想跳出水面看看你。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次小河龙影把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它跳得很高，像是主动完成了一次登场。",
+      "habitat": "河流",
+      "favoriteBait": "fish_deep_blue_hermit",
+      "fear": "突然的键盘声",
+      "firstDialogue": "风越大，我越想跳出水面看看你。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_lake_moon_koi",
+      "name": "月湖锦鲤",
+      "nickname": "月票守护者",
+      "rarity": "legend",
+      "sizeRange": {
+        "min": 65,
+        "max": 125,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 10.0,
+        "max": 32.0,
+        "unit": "kg"
+      },
+      "value": 1680,
+      "baitRequired": "fish_024",
+      "nextBaitTarget": "fish_pack01_myth_second_world_keeper",
+      "favoriteWeather": "night",
+      "favoriteTime": "night",
+      "favoriteLocation": "湖泊",
+      "personality": "善良",
+      "description": "月湖锦鲤常出现在湖泊，性格善良，喜欢在night的night靠近鱼漂。",
+      "story": "月湖锦鲤第一次出现时，窗外的湖泊像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "如果你累了，我可以陪你安静一会儿。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次月湖锦鲤把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它安静地看着你，像是在确认你今天过得还好。",
+      "habitat": "湖泊",
+      "favoriteBait": "fish_river_legend_dragonlet",
+      "fear": "会议提醒",
+      "firstDialogue": "如果你累了，我可以陪你安静一会儿。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_dock_storm_tuna",
+      "name": "风暴金枪",
+      "nickname": "码头闪电",
+      "rarity": "legend",
+      "sizeRange": {
+        "min": 100,
+        "max": 180,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 30.0,
+        "max": 80.0,
+        "unit": "kg"
+      },
+      "value": 1900,
+      "baitRequired": "fish_river_old_silver",
+      "nextBaitTarget": "fish_029",
+      "favoriteWeather": "storm",
+      "favoriteTime": "night",
+      "favoriteLocation": "码头",
+      "personality": "暴躁",
+      "description": "风暴金枪常出现在码头，性格暴躁，喜欢在storm的night靠近鱼漂。",
+      "story": "风暴金枪第一次出现时，窗外的码头像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "别晃鱼漂，我今天已经被三阵海风吵醒了。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次风暴金枪把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它甩了甩尾巴，像在抗议今天的风向。",
+      "habitat": "码头",
+      "favoriteBait": "fish_lake_moon_koi",
+      "fear": "太亮的屏幕",
+      "firstDialogue": "别晃鱼漂，我今天已经被三阵海风吵醒了。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_deep_clock_whale",
+      "name": "时钟鲸",
+      "nickname": "慢一分钟",
+      "rarity": "legend",
+      "sizeRange": {
+        "min": 180,
+        "max": 320,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 120.0,
+        "max": 360.0,
+        "unit": "kg"
+      },
+      "value": 2200,
+      "baitRequired": "fish_lake_story_pike",
+      "nextBaitTarget": "fish_030",
+      "favoriteWeather": "night",
+      "favoriteTime": "late_night",
+      "favoriteLocation": "深海",
+      "personality": "神秘",
+      "description": "时钟鲸常出现在深海，性格神秘，喜欢在night的late_night靠近鱼漂。",
+      "story": "时钟鲸第一次出现时，窗外的深海像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "有些鱼不是被钓到的，是自己选择出现的。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次时钟鲸把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它身上的微光让窗边安静了几秒。",
+      "habitat": "深海",
+      "favoriteBait": "fish_dock_storm_tuna",
+      "fear": "老板路过",
+      "firstDialogue": "有些鱼不是被钓到的，是自己选择出现的。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_seaside_sun_myth",
+      "name": "日光神鱼",
+      "nickname": "早安太阳",
+      "rarity": "myth",
+      "sizeRange": {
+        "min": 120,
+        "max": 220,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 40.0,
+        "max": 140.0,
+        "unit": "kg"
+      },
+      "value": 4200,
+      "baitRequired": "fish_027",
+      "nextBaitTarget": "",
+      "favoriteWeather": "sunny",
+      "favoriteTime": "morning",
+      "favoriteLocation": "海边",
+      "personality": "善良",
+      "description": "日光神鱼常出现在海边，性格善良，喜欢在sunny的morning靠近鱼漂。",
+      "story": "日光神鱼第一次出现时，窗外的海边像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "如果你累了，我可以陪你安静一会儿。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次日光神鱼把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它安静地看着你，像是在确认你今天过得还好。",
+      "habitat": "海边",
+      "favoriteBait": "fish_deep_clock_whale",
+      "fear": "急促的脚步声",
+      "firstDialogue": "如果你累了，我可以陪你安静一会儿。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_deep_second_world",
+      "name": "第二世界梦鱼",
+      "nickname": "明天再见",
+      "rarity": "myth",
+      "sizeRange": {
+        "min": 150,
+        "max": 300,
+        "unit": "cm"
+      },
+      "weightRange": {
+        "min": 60.0,
+        "max": 220.0,
+        "unit": "kg"
+      },
+      "value": 5200,
+      "baitRequired": "fish_028",
+      "nextBaitTarget": "",
+      "favoriteWeather": "starry",
+      "favoriteTime": "late_night",
+      "favoriteLocation": "深海",
+      "personality": "神秘",
+      "description": "第二世界梦鱼常出现在深海，性格神秘，喜欢在starry的late_night靠近鱼漂。",
+      "story": "第二世界梦鱼第一次出现时，窗外的深海像被轻轻翻开了一页。玩家不一定会记住它的价值，但会记住它让等待变得不一样。",
+      "selfIntro": "有些鱼不是被钓到的，是自己选择出现的。",
+      "waitingDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ],
+      "funStory": "有一次第二世界梦鱼把一片便利店小票当成船票，认真研究了半个下午。",
+      "catchReaction": "它身上的微光让窗边安静了几秒。",
+      "habitat": "深海",
+      "favoriteBait": "fish_seaside_sun_myth",
+      "fear": "没有风的午后",
+      "firstDialogue": "有些鱼不是被钓到的，是自己选择出现的。",
+      "waitDialogues": [
+        "鱼漂轻轻晃了一下，像有人在水下打了个招呼。",
+        "水面安静下来，仿佛这条鱼正在考虑要不要相信你。"
+      ]
+    },
+    {
+      "id": "fish_pack01_river_button_minnow",
+      "name": "纽扣小鳑鲏",
+      "nickname": "袖口小银点",
+      "rarity": "common",
+      "habitat": "河流",
+      "favoriteTime": "清晨",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "基础鱼饵",
+      "fear": "突然响起的键盘声",
+      "personality": "胆小",
+      "value": 18,
+      "weightRange": {
+        "min": 0.08,
+        "max": 0.18,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_pack01_pier_blueprint_eel",
+      "description": "像衬衫纽扣一样亮的小鱼，常在办公室窗外的浅河边闪一下就躲开。",
+      "story": "传说它会收集掉进河里的回形针，把它们排成小小的银色栅栏。",
+      "firstDialogue": "别盯着我看，我只是路过一下。",
+      "catchReaction": "它缩成一小团，像被点名发言的新同事。",
+      "waitDialogues": [
+        "水草边有一粒银点轻轻闪过。",
+        "鱼漂旁边冒出一个很小的泡泡，很快又安静了。"
+      ]
+    },
+    {
+      "id": "fish_pack01_river_tea_dace",
+      "name": "茶香溪鲴",
+      "nickname": "茶水间小客人",
+      "rarity": "common",
+      "habitat": "河流",
+      "favoriteTime": "上午",
+      "favoriteWeather": "多云",
+      "favoriteBait": "茶点碎屑",
+      "fear": "被误认为咖啡渣",
+      "personality": "好奇",
+      "value": 22,
+      "weightRange": {
+        "min": 0.12,
+        "max": 0.3,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_pack01_deep_password_grouper",
+      "description": "总在水里闻来闻去，仿佛能分辨出今天茶水间谁泡了乌龙茶。",
+      "story": "它曾跟着一片茶叶漂了三条街，最后决定住在味道最温柔的河湾。",
+      "firstDialogue": "你身上有奶茶味，是路过茶水间了吗？",
+      "catchReaction": "它甩甩尾巴，像在评价这次见面不够优雅。",
+      "waitDialogues": [
+        "鱼饵旁有一阵像茶香一样轻的水纹。",
+        "水面浮起一点点碎屑，像被谁试探着尝了一口。"
+      ]
+    },
+    {
+      "id": "fish_pack01_pond_snack_goby",
+      "name": "薯片塘鳅",
+      "nickname": "脆脆小偷",
+      "rarity": "common",
+      "habitat": "池塘",
+      "favoriteTime": "下午",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "薯片屑",
+      "fear": "健康饮食提醒",
+      "personality": "贪吃",
+      "value": 26,
+      "weightRange": {
+        "min": 0.15,
+        "max": 0.36,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_pack01_river_peppermint_chub",
+      "description": "一听到零食袋响就会靠近，尾巴摆得像偷偷摸摸的午后三点。",
+      "story": "它坚信每个池塘都应该有一张下午茶菜单。",
+      "firstDialogue": "你有黄瓜味的吗？原味也行。",
+      "catchReaction": "它嘴边还挂着一点碎屑，显然没想到摸鱼也有代价。",
+      "waitDialogues": [
+        "鱼饵周围出现了急促的小漩涡。",
+        "有什么东西把薯片屑叼走了一半，又假装没发生。"
+      ]
+    },
+    {
+      "id": "fish_pack01_pond_clip_carp",
+      "name": "回形针鲤",
+      "nickname": "文件夹巡逻员",
+      "rarity": "common",
+      "habitat": "池塘",
+      "favoriteTime": "午后",
+      "favoriteWeather": "阴天",
+      "favoriteBait": "基础鱼饵",
+      "fear": "散乱的文件",
+      "personality": "爱炫耀",
+      "value": 31,
+      "weightRange": {
+        "min": 0.25,
+        "max": 0.55,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_pack01_lake_postcard_pike",
+      "description": "鳞片像一枚枚回形针，游过时总想把水草整理得整整齐齐。",
+      "story": "它曾把一整片荷叶按日期排序，因此被池塘里的鱼称为行政主管。",
+      "firstDialogue": "请把鱼线排队，不要插队。",
+      "catchReaction": "它昂着头，似乎觉得自己只是被临时调岗。",
+      "waitDialogues": [
+        "鱼线被轻轻拉直，像有人整理了它。",
+        "水面出现三道整齐的小波纹。"
+      ]
+    },
+    {
+      "id": "fish_pack01_lake_calendar_bream",
+      "name": "日历湖鳊",
+      "nickname": "周一提醒者",
+      "rarity": "common",
+      "habitat": "湖泊",
+      "favoriteTime": "上午",
+      "favoriteWeather": "小雨",
+      "favoriteBait": "饭团米粒",
+      "fear": "周一早会",
+      "personality": "懒惰",
+      "value": 34,
+      "weightRange": {
+        "min": 0.3,
+        "max": 0.72,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_011",
+      "description": "背鳍上有淡淡的格纹，看起来像一本泡湿的办公日历。",
+      "story": "它总把周五圈起来，却永远记不清今天是星期几。",
+      "firstDialogue": "今天不是周五吗？那我再睡一会儿。",
+      "catchReaction": "它打了个很慢的哈欠，似乎被钓上来也不着急。",
+      "waitDialogues": [
+        "鱼漂慢慢偏了一点，像有人翻了页。",
+        "湖面安静得像午休前的办公室。"
+      ]
+    },
+    {
+      "id": "fish_pack01_lake_lunch_perch",
+      "name": "便当湖鲈",
+      "nickname": "午饭守护者",
+      "rarity": "common",
+      "habitat": "湖泊",
+      "favoriteTime": "中午",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "饭团米粒",
+      "fear": "午饭被会议占用",
+      "personality": "善良",
+      "value": 39,
+      "weightRange": {
+        "min": 0.45,
+        "max": 0.9,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_012",
+      "description": "它总在午饭时间出现，像提醒你再忙也要好好吃饭。",
+      "story": "有一次它把一粒米推回岸边，像是在说别浪费粮食。",
+      "firstDialogue": "你吃饭了吗？没吃就别急着收线。",
+      "catchReaction": "它安静地看着你，好像更担心你有没有按时休息。",
+      "waitDialogues": [
+        "水面传来很轻的咕噜声，像肚子饿了。",
+        "鱼漂旁的水纹温和地扩散开。"
+      ]
+    },
+    {
+      "id": "fish_pack01_seaside_bubble_mullet",
+      "name": "气泡海鲻",
+      "nickname": "海边打字员",
+      "rarity": "common",
+      "habitat": "海边",
+      "favoriteTime": "下午",
+      "favoriteWeather": "海风",
+      "favoriteBait": "奶茶珍珠",
+      "fear": "气泡被戳破",
+      "personality": "好奇",
+      "value": 42,
+      "weightRange": {
+        "min": 0.35,
+        "max": 0.85,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_013",
+      "description": "吐出的泡泡一串串排列，像一封还没写完的海风邮件。",
+      "story": "它喜欢把泡泡吹到窗边，让加班的人误以为海在回复消息。",
+      "firstDialogue": "我刚刚发出的泡泡，你收到了吗？",
+      "catchReaction": "它吐出最后一个圆圆的泡泡，里面映着窗外的蓝天。",
+      "waitDialogues": [
+        "鱼漂附近冒出一串整齐的泡泡。",
+        "水里像有人敲了几个很轻的句号。"
+      ]
+    },
+    {
+      "id": "fish_pack01_seaside_sunbeam_sardine",
+      "name": "阳光沙丁",
+      "nickname": "窗外小金线",
+      "rarity": "common",
+      "habitat": "海边",
+      "favoriteTime": "傍晚",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "基础鱼饵",
+      "fear": "阴影突然落下",
+      "personality": "胆小",
+      "value": 45,
+      "weightRange": {
+        "min": 0.12,
+        "max": 0.28,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_014",
+      "description": "身体像被夕阳描了一道金边，靠近窗户时会让桌面亮一下。",
+      "story": "它相信每一道夕阳都可以把今天的疲惫照轻一点。",
+      "firstDialogue": "别太用力，我只是来晒一会儿太阳。",
+      "catchReaction": "它轻轻颤了一下，像一束被捧在手里的光。",
+      "waitDialogues": [
+        "海面有一条细细的金线游过。",
+        "鱼漂旁闪了一下，又很快消失。"
+      ]
+    },
+    {
+      "id": "fish_pack01_pier_receipt_snapper",
+      "name": "小票码头鲷",
+      "nickname": "报销单守门鱼",
+      "rarity": "common",
+      "habitat": "码头",
+      "favoriteTime": "上午",
+      "favoriteWeather": "多云",
+      "favoriteBait": "饭团米粒",
+      "fear": "报销被退回",
+      "personality": "狡猾",
+      "value": 49,
+      "weightRange": {
+        "min": 0.5,
+        "max": 1.05,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_015",
+      "description": "它喜欢躲在码头绳索旁，身上的斑纹像皱巴巴的小票。",
+      "story": "它曾试图用一片贝壳报销三颗鱼卵，被老海龟当场驳回。",
+      "firstDialogue": "先别收线，你这张凭证还差一个章。",
+      "catchReaction": "它一脸镇定，像早就准备好了申诉材料。",
+      "waitDialogues": [
+        "鱼线被绕了一小圈，像有人在盖章。",
+        "码头边传来轻轻的咔哒声。"
+      ]
+    },
+    {
+      "id": "fish_pack01_pier_rope_flounder",
+      "name": "绳结码头鲽",
+      "nickname": "慢吞吞水手",
+      "rarity": "common",
+      "habitat": "码头",
+      "favoriteTime": "夜晚",
+      "favoriteWeather": "微风",
+      "favoriteBait": "基础鱼饵",
+      "fear": "绳结被解开",
+      "personality": "懒惰",
+      "value": 52,
+      "weightRange": {
+        "min": 0.6,
+        "max": 1.25,
+        "unit": "kg"
+      },
+      "baitRequired": "basic_bait",
+      "nextBaitTarget": "fish_016",
+      "description": "扁扁地趴在码头阴影里，像一枚不想下班的绳结。",
+      "story": "它知道每根缆绳的故事，只是通常懒得讲完。",
+      "firstDialogue": "嘘，我正在假装自己是一块木板。",
+      "catchReaction": "它慢慢翻了个身，像终于承认今天被发现了。",
+      "waitDialogues": [
+        "鱼线忽然变沉，像挂住了一段旧绳。",
+        "码头水下有影子懒懒地挪了一下。"
+      ]
+    },
+    {
+      "id": "fish_pack01_river_memo_catfish",
+      "name": "备忘录鲶",
+      "nickname": "便利贴胡子",
+      "rarity": "rare",
+      "habitat": "河流",
+      "favoriteTime": "傍晚",
+      "favoriteWeather": "小雨",
+      "favoriteBait": "小鱼",
+      "fear": "忘记重要事项",
+      "personality": "好奇",
+      "value": 96,
+      "weightRange": {
+        "min": 1.1,
+        "max": 2.4,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_pond_lazy_loach",
+      "nextBaitTarget": "fish_pack01_pond_paper_crane_koi",
+      "description": "胡须像贴满备忘录的线条，总在河底翻找被人遗忘的小事。",
+      "story": "它记得每个路过的人皱眉的原因，也记得谁在雨里偷偷笑过。",
+      "firstDialogue": "你今天最想忘掉的事情是什么？我可以帮你藏一会儿。",
+      "catchReaction": "它的胡须轻轻抖动，像翻出了一条关于你的记录。",
+      "waitDialogues": [
+        "河底有柔软的影子在鱼饵旁写字。",
+        "鱼漂停了一瞬，像有人想起了什么。"
+      ]
+    },
+    {
+      "id": "fish_pack01_lake_overtime_trout",
+      "name": "加班湖鳟",
+      "nickname": "夜灯追随者",
+      "rarity": "rare",
+      "habitat": "湖泊",
+      "favoriteTime": "夜晚",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "咖啡豆",
+      "fear": "突然断电",
+      "personality": "胆大",
+      "value": 118,
+      "weightRange": {
+        "min": 1.4,
+        "max": 3.2,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_seaside_bold_mackerel",
+      "nextBaitTarget": "fish_pack01_river_keyboard_dragonfish",
+      "description": "夜晚湖面亮起办公室灯光时，它会沿着倒影游来。",
+      "story": "它曾陪一个加班的人熬到凌晨，直到那人终于把文档保存。",
+      "firstDialogue": "还没下班吗？那我陪你等一等。",
+      "catchReaction": "它看起来并不慌，像早就习惯了临时需求。",
+      "waitDialogues": [
+        "湖面倒映出一盏像办公室夜灯的光。",
+        "鱼饵旁有一股咖啡香般的水纹。"
+      ]
+    },
+    {
+      "id": "fish_pack01_pond_raincoat_koi",
+      "name": "雨衣锦鲤",
+      "nickname": "小伞幸运星",
+      "rarity": "rare",
+      "habitat": "池塘",
+      "favoriteTime": "下午",
+      "favoriteWeather": "小雨",
+      "favoriteBait": "饭团米粒",
+      "fear": "太阳突然太大",
+      "personality": "善良",
+      "value": 132,
+      "weightRange": {
+        "min": 0.9,
+        "max": 1.8,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_dock_sly_sardine",
+      "nextBaitTarget": "fish_019",
+      "description": "鳞片像穿着一件透明雨衣，下雨时会把好运推到岸边。",
+      "story": "有个新人第一天上班迷路，它在水里游成箭头，帮他找到了电梯。",
+      "firstDialogue": "下雨天别急，慢一点也会到。",
+      "catchReaction": "它轻轻甩出几滴水，像送你一小把好运。",
+      "waitDialogues": [
+        "池塘里有一圈像小伞一样的涟漪。",
+        "雨点落下时，鱼漂旁亮了一点金色。"
+      ]
+    },
+    {
+      "id": "fish_pack01_seaside_meeting_mackerel",
+      "name": "会议海鲭",
+      "nickname": "简单同步鱼",
+      "rarity": "rare",
+      "habitat": "海边",
+      "favoriteTime": "上午",
+      "favoriteWeather": "多云",
+      "favoriteBait": "小鱼",
+      "fear": "会议延长十分钟",
+      "personality": "暴躁",
+      "value": 146,
+      "weightRange": {
+        "min": 1.2,
+        "max": 2.8,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_deep_mystery_lantern",
+      "nextBaitTarget": "fish_020",
+      "description": "游速很快，听到“简单同步一下”会立刻转身逃跑。",
+      "story": "它最讨厌没有议程的海流，因为每次都会把所有鱼卷进同一个漩涡。",
+      "firstDialogue": "如果你要开会，请先放我走。",
+      "catchReaction": "它拍了拍尾巴，像在抗议这次收线没有提前预约。",
+      "waitDialogues": [
+        "海面突然乱了一下，像有人插入了临时议题。",
+        "鱼漂急促晃了两下，又强行恢复平静。"
+      ]
+    },
+    {
+      "id": "fish_pack01_pier_blueprint_eel",
+      "name": "蓝图码头鳗",
+      "nickname": "施工线条",
+      "rarity": "rare",
+      "habitat": "码头",
+      "favoriteTime": "清晨",
+      "favoriteWeather": "阴天",
+      "favoriteBait": "小鱼",
+      "fear": "图纸版本错误",
+      "personality": "狡猾",
+      "value": 158,
+      "weightRange": {
+        "min": 1.5,
+        "max": 3.5,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_pack01_river_button_minnow",
+      "nextBaitTarget": "fish_021",
+      "description": "身体细长像一条蓝色施工线，能从码头缝隙里悄悄穿过。",
+      "story": "它知道海底每一条暗道，却总说“这个版本还不能公开”。",
+      "firstDialogue": "你有权限查看这条水路吗？",
+      "catchReaction": "它绕着鱼线打了半个结，像还想留一条退路。",
+      "waitDialogues": [
+        "码头阴影里有蓝色细线一闪而过。",
+        "鱼线像被什么东西轻轻测量了一下。"
+      ]
+    },
+    {
+      "id": "fish_pack01_deep_password_grouper",
+      "name": "密码石斑",
+      "nickname": "深海锁屏",
+      "rarity": "rare",
+      "habitat": "深海",
+      "favoriteTime": "夜晚",
+      "favoriteWeather": "阴天",
+      "favoriteBait": "巴沙鱼",
+      "fear": "密码提示问题",
+      "personality": "神秘",
+      "value": 176,
+      "weightRange": {
+        "min": 2.5,
+        "max": 5.8,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_pack01_river_tea_dace",
+      "nextBaitTarget": "fish_022",
+      "description": "身上布满像密码点阵的斑纹，靠近时海水会暗下一点。",
+      "story": "它守着一扇不存在的门，只有心情放松的人才能看见门缝里的光。",
+      "firstDialogue": "答案不是数字，是你今天有没有好好休息。",
+      "catchReaction": "它沉默了几秒，像在确认你是不是正确的人。",
+      "waitDialogues": [
+        "深处传来规律的暗光，像锁屏在呼吸。",
+        "鱼漂周围的海水忽然安静下来。"
+      ]
+    },
+    {
+      "id": "fish_pack01_river_peppermint_chub",
+      "name": "薄荷溪鲦",
+      "nickname": "清醒小风",
+      "rarity": "rare",
+      "habitat": "河流",
+      "favoriteTime": "午后",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "奶茶珍珠",
+      "fear": "过甜的饮料",
+      "personality": "胆小",
+      "value": 121,
+      "weightRange": {
+        "min": 0.6,
+        "max": 1.4,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_pack01_pond_snack_goby",
+      "nextBaitTarget": "fish_023",
+      "description": "游过时带来一点清凉，像下午犯困时突然吹来的风。",
+      "story": "它会把过甜的梦稀释成刚刚好的心情。",
+      "firstDialogue": "别皱眉，喝口水，世界会清楚一点。",
+      "catchReaction": "它身上散出淡淡薄荷味，让收线这件事也慢了下来。",
+      "waitDialogues": [
+        "鱼漂边的水变得很清，像被薄荷擦亮。",
+        "一阵清凉的小水纹贴着鱼线游过。"
+      ]
+    },
+    {
+      "id": "fish_pack01_lake_postcard_pike",
+      "name": "明信片湖梭",
+      "nickname": "寄给周末的鱼",
+      "rarity": "rare",
+      "habitat": "湖泊",
+      "favoriteTime": "傍晚",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "小鱼",
+      "fear": "地址写错",
+      "personality": "爱炫耀",
+      "value": 165,
+      "weightRange": {
+        "min": 1.8,
+        "max": 4.2,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_pack01_pond_clip_carp",
+      "nextBaitTarget": "fish_024",
+      "description": "鳞片像一张张湖边明信片，喜欢把夕阳贴在背上。",
+      "story": "它每年都会给未来的自己寄一张“别忘了慢下来”的明信片。",
+      "firstDialogue": "你想把今天寄给谁？",
+      "catchReaction": "它展开背鳍，像展示一整本旅行相册。",
+      "waitDialogues": [
+        "湖面有一片像邮戳的圆形水纹。",
+        "鱼漂旁掠过一道修长的夕光。"
+      ]
+    },
+    {
+      "id": "fish_pack01_seaside_moonlit_bass",
+      "name": "月窗海鲈",
+      "nickname": "夜班窗影",
+      "rarity": "epic",
+      "habitat": "海边",
+      "favoriteTime": "夜晚",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "罗非鱼",
+      "fear": "刺眼白灯",
+      "personality": "神秘",
+      "value": 320,
+      "weightRange": {
+        "min": 3.0,
+        "max": 7.2,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_pond_soft_betta",
+      "nextBaitTarget": "fish_025",
+      "description": "只在月光照进办公室窗户时出现，身影像被夜色裁出来。",
+      "story": "它见过无数加班的人，也记得那些终于关掉电脑后松一口气的脸。",
+      "firstDialogue": "今天辛苦了，夜里的海会替你保密。",
+      "catchReaction": "它安静地靠近，像一段月光被轻轻收进掌心。",
+      "waitDialogues": [
+        "海面出现一块像窗户一样的月光。",
+        "鱼漂下方有银色影子缓慢盘旋。"
+      ]
+    },
+    {
+      "id": "fish_pack01_pier_clockwork_tuna",
+      "name": "钟表码头鲔",
+      "nickname": "准点大哥",
+      "rarity": "epic",
+      "habitat": "码头",
+      "favoriteTime": "清晨",
+      "favoriteWeather": "海风",
+      "favoriteBait": "石斑鱼",
+      "fear": "闹钟没响",
+      "personality": "暴躁",
+      "value": 385,
+      "weightRange": {
+        "min": 5.0,
+        "max": 11.5,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_seaside_milk_tea_grouper",
+      "nextBaitTarget": "fish_026",
+      "description": "游动节奏像钟摆，准时到让码头的海鸥都不好意思迟到。",
+      "story": "它曾把潮汐表改得更适合午睡，因此被老渔夫称为最懂生活的钟。",
+      "firstDialogue": "你迟到了三秒，不过我今天心情还行。",
+      "catchReaction": "它猛烈一摆尾，像在提醒这次会面已经超时。",
+      "waitDialogues": [
+        "码头水下传来像钟摆一样的规律水声。",
+        "鱼漂每隔几秒就整齐地轻点一下。"
+      ]
+    },
+    {
+      "id": "fish_pack01_deep_lantern_ray",
+      "name": "灯笼深海鳐",
+      "nickname": "海底小夜灯",
+      "rarity": "epic",
+      "habitat": "深海",
+      "favoriteTime": "夜晚",
+      "favoriteWeather": "阴天",
+      "favoriteBait": "金枪鱼",
+      "fear": "孤独的黑暗",
+      "personality": "善良",
+      "value": 430,
+      "weightRange": {
+        "min": 6.5,
+        "max": 14.0,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_dock_kind_snapper",
+      "nextBaitTarget": "fish_027",
+      "description": "腹部发出柔和的光，像深海里专门留给迷路者的一盏灯。",
+      "story": "它不喜欢照亮宝藏，只喜欢照亮回家的路。",
+      "firstDialogue": "别怕，深一点的地方也可以很温柔。",
+      "catchReaction": "它的光慢慢变亮，像担心你看不清它的眼睛。",
+      "waitDialogues": [
+        "深水里有一盏小灯慢慢靠近。",
+        "鱼线下方亮起一圈温柔的蓝光。"
+      ]
+    },
+    {
+      "id": "fish_pack01_lake_glass_oracle_carp",
+      "name": "玻璃预言鲤",
+      "nickname": "透明小先知",
+      "rarity": "epic",
+      "habitat": "湖泊",
+      "favoriteTime": "清晨",
+      "favoriteWeather": "薄雾",
+      "favoriteBait": "石斑鱼",
+      "fear": "被问明天股价",
+      "personality": "神秘",
+      "value": 455,
+      "weightRange": {
+        "min": 2.8,
+        "max": 6.8,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_deep_lazy_ray",
+      "nextBaitTarget": "fish_028",
+      "description": "身体近乎透明，能把湖面的云影折成还没发生的小预感。",
+      "story": "它从不预言成功，只偶尔提醒人们今天适合早点下班。",
+      "firstDialogue": "我看见你明天会笑一下，原因还不能说。",
+      "catchReaction": "它透明的鳞片里晃过几幅尚未抵达的画面。",
+      "waitDialogues": [
+        "湖雾里似乎有透明鱼影一闪。",
+        "鱼漂的倒影比鱼漂本身先动了一下。"
+      ]
+    },
+    {
+      "id": "fish_pack01_pond_paper_crane_koi",
+      "name": "纸鹤池锦",
+      "nickname": "折给晴天的鱼",
+      "rarity": "epic",
+      "habitat": "池塘",
+      "favoriteTime": "傍晚",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "罗非鱼",
+      "fear": "纸张被雨淋湿",
+      "personality": "善良",
+      "value": 410,
+      "weightRange": {
+        "min": 1.6,
+        "max": 4.0,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_pack01_river_memo_catfish",
+      "nextBaitTarget": "fish_river_legend_dragonlet",
+      "description": "尾鳍像折好的纸鹤，游动时像把祝福一只只放进水里。",
+      "story": "它会把没说出口的辛苦折成纸鹤，藏在荷叶背面。",
+      "firstDialogue": "今天也辛苦了，我帮你把心事折小一点。",
+      "catchReaction": "它的尾鳍轻轻展开，像一封终于寄出的安慰。",
+      "waitDialogues": [
+        "池塘边飘过一片像纸鹤的白影。",
+        "鱼漂旁的水纹折出细细的角。"
+      ]
+    },
+    {
+      "id": "fish_pack01_river_keyboard_dragonfish",
+      "name": "键盘河龙鱼",
+      "nickname": "回车键守护者",
+      "rarity": "epic",
+      "habitat": "河流",
+      "favoriteTime": "下午",
+      "favoriteWeather": "多云",
+      "favoriteBait": "鲭鱼",
+      "fear": "连按退格键",
+      "personality": "爱炫耀",
+      "value": 480,
+      "weightRange": {
+        "min": 3.5,
+        "max": 8.5,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_pack01_lake_overtime_trout",
+      "nextBaitTarget": "fish_lake_moon_koi",
+      "description": "鳞片排列像键帽，游过时会发出很轻的敲击声。",
+      "story": "它相信每个人都需要一个能按下回车的瞬间，然后把今天提交给自己。",
+      "firstDialogue": "准备好了吗？我可以帮你把今天发送出去。",
+      "catchReaction": "它啪地甩了一下尾，像按下了一个响亮的确认键。",
+      "waitDialogues": [
+        "河面下传来轻轻的键盘声。",
+        "鱼漂像被敲击一样规律地跳了两下。"
+      ]
+    },
+    {
+      "id": "fish_pack01_deep_cloud_whale",
+      "name": "云影鲸鱼",
+      "nickname": "深海白云",
+      "rarity": "legend",
+      "habitat": "深海",
+      "favoriteTime": "清晨",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "金枪鱼",
+      "fear": "永远不散的阴天",
+      "personality": "懒惰",
+      "value": 920,
+      "weightRange": {
+        "min": 80.0,
+        "max": 160.0,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_pond_dream_carp",
+      "nextBaitTarget": "fish_seaside_sun_myth",
+      "description": "巨大的身影像落进深海的一朵云，只有心很安静时才会靠近。",
+      "story": "它每年只醒几次，醒来时会替海面擦亮一整天的蓝。",
+      "firstDialogue": "别急，我游得慢，是因为世界本来就不该太快。",
+      "catchReaction": "它没有挣扎，只是像云一样停在你的梦边。",
+      "waitDialogues": [
+        "深海升起一片很大的白影。",
+        "鱼线忽然变轻，像挂住了一朵云。"
+      ]
+    },
+    {
+      "id": "fish_pack01_seaside_sunclock_marlin",
+      "name": "日晷海枪鱼",
+      "nickname": "追光的长针",
+      "rarity": "legend",
+      "habitat": "海边",
+      "favoriteTime": "正午",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "金枪鱼",
+      "fear": "没有影子的日子",
+      "personality": "胆大",
+      "value": 1080,
+      "weightRange": {
+        "min": 45.0,
+        "max": 95.0,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_seaside_golden_bass",
+      "nextBaitTarget": "fish_deep_second_world",
+      "description": "长吻像日晷上的指针，划过海面时能把午后的时间拨慢一点。",
+      "story": "它曾帮一位困在午休前的上班族偷回了十二分钟阳光。",
+      "firstDialogue": "你想让今天慢在哪一分钟？",
+      "catchReaction": "它跃出海面，阳光在它身上停了一拍。",
+      "waitDialogues": [
+        "海面上有一道像指针的亮线。",
+        "鱼漂的影子忽然向旁边偏了一点。"
+      ]
+    },
+    {
+      "id": "fish_pack01_pier_brass_anchor_king",
+      "name": "黄铜锚王",
+      "nickname": "码头老国王",
+      "rarity": "legend",
+      "habitat": "码头",
+      "favoriteTime": "傍晚",
+      "favoriteWeather": "海风",
+      "favoriteBait": "石斑鱼",
+      "fear": "被遗忘的旧船",
+      "personality": "神秘",
+      "value": 1160,
+      "weightRange": {
+        "min": 30.0,
+        "max": 72.0,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_dock_hook_foxfish",
+      "nextBaitTarget": "fish_pack01_myth_office_sea_seraph",
+      "description": "鳞片泛着黄铜光泽，常守在旧码头下，像一个沉默的港口国王。",
+      "story": "它记得所有离开的船，也记得每个回来的人。",
+      "firstDialogue": "你不是第一个在这里等待的人，也不会是最后一个。",
+      "catchReaction": "它沉重地点了点头，像允许你听见码头的一段旧事。",
+      "waitDialogues": [
+        "码头下传来低沉的金属回响。",
+        "鱼线像被一枚旧锚轻轻压住。"
+      ]
+    },
+    {
+      "id": "fish_pack01_lake_aurora_lotusfish",
+      "name": "极光莲鱼",
+      "nickname": "湖心彩梦",
+      "rarity": "legend",
+      "habitat": "湖泊",
+      "favoriteTime": "夜晚",
+      "favoriteWeather": "薄雾",
+      "favoriteBait": "传奇鱼饵",
+      "fear": "太吵的心事",
+      "personality": "善良",
+      "value": 1280,
+      "weightRange": {
+        "min": 8.0,
+        "max": 18.0,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_deep_blue_hermit",
+      "nextBaitTarget": "fish_pack01_myth_second_world_keeper",
+      "description": "在湖心开出一圈极光般的鳞光，像把梦轻轻放在水上。",
+      "story": "只有在玩家真正放慢呼吸时，它才会把一小片彩色夜晚送到窗边。",
+      "firstDialogue": "你听见了吗？安静也会发光。",
+      "catchReaction": "它身上的光慢慢合拢，像一本温柔的夜间图鉴。",
+      "waitDialogues": [
+        "湖心泛起极淡的彩色光带。",
+        "鱼漂旁的夜色像莲花一样慢慢展开。"
+      ]
+    },
+    {
+      "id": "fish_pack01_myth_office_sea_seraph",
+      "name": "办公室海天使",
+      "nickname": "窗边小奇迹",
+      "rarity": "myth",
+      "habitat": "海边",
+      "favoriteTime": "清晨",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "神话鱼饵",
+      "fear": "人们忘记快乐",
+      "personality": "善良",
+      "value": 2600,
+      "weightRange": {
+        "min": 0.8,
+        "max": 2.2,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_river_legend_dragonlet",
+      "nextBaitTarget": "",
+      "description": "透明的小鱼像海风捏成的翅膀，偶尔会停在办公室窗外看人们工作。",
+      "story": "它不属于任何海域，只在有人累了却还愿意温柔对待世界时出现。",
+      "firstDialogue": "你已经很努力了，今天可以把心放轻一点。",
+      "catchReaction": "它没有害怕，只是把一小片清晨留在你的掌心。",
+      "waitDialogues": [
+        "窗外的海风忽然变得很轻，像有人经过。",
+        "鱼漂旁亮起一对几乎透明的小翅膀。"
+      ]
+    },
+    {
+      "id": "fish_pack01_myth_second_world_keeper",
+      "name": "第二世界守望鱼",
+      "nickname": "明天还会来的鱼",
+      "rarity": "myth",
+      "habitat": "深海",
+      "favoriteTime": "黎明",
+      "favoriteWeather": "晴天",
+      "favoriteBait": "神话鱼饵",
+      "fear": "世界停止变化",
+      "personality": "神秘",
+      "value": 3200,
+      "weightRange": {
+        "min": 12.0,
+        "max": 28.0,
+        "unit": "kg"
+      },
+      "baitRequired": "fish_lake_moon_koi",
+      "nextBaitTarget": "",
+      "description": "它守在第二世界的最深处，身上有海、办公室灯光和明天的颜色。",
+      "story": "据说它每天都会巡视一次海面，确认这里仍然有人愿意回来坐一会儿。",
+      "firstDialogue": "明天也来看看吧，这里会有一点点不一样。",
+      "catchReaction": "它轻轻看了你一眼，像把明天的故事托付给了你。",
+      "waitDialogues": [
+        "深海里传来很远的回声，像有人在等明天。",
+        "鱼漂静静停住，周围的海像整个世界屏住了呼吸。"
+      ]
+    }
+  ]
+}

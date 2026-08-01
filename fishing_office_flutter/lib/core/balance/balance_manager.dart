@@ -14,10 +14,13 @@ class BalanceManager {
 
   Future<BalanceBundle> load() async {
     final fishChain = await _reader.readAsset('$assetBasePath/FishChain.xlsx');
-    final economy = await _reader.readAsset('$assetBasePath/EconomyBalance.xlsx');
-    final probability = await _reader.readAsset('$assetBasePath/Probability.xlsx');
+    final economy =
+        await _reader.readAsset('$assetBasePath/EconomyBalance.xlsx');
+    final probability =
+        await _reader.readAsset('$assetBasePath/Probability.xlsx');
     final time = await _reader.readAsset('$assetBasePath/TimeBalance.xlsx');
-    final companion = await _reader.readAsset('$assetBasePath/CompanionBalance.xlsx');
+    final companion =
+        await _reader.readAsset('$assetBasePath/CompanionBalance.xlsx');
     final reward = await _reader.readAsset('$assetBasePath/RewardBalance.xlsx');
 
     return BalanceBundle(
@@ -57,12 +60,17 @@ class BalanceManager {
 
   Future<BalanceMappingReport> loadReport() async {
     final sections = <BalanceMappingSection>[
-      _fishChainSection(await _reader.readAsset('$assetBasePath/FishChain.xlsx')),
-      _economySection(await _reader.readAsset('$assetBasePath/EconomyBalance.xlsx')),
-      _probabilitySection(await _reader.readAsset('$assetBasePath/Probability.xlsx')),
+      _fishChainSection(
+          await _reader.readAsset('$assetBasePath/FishChain.xlsx')),
+      _economySection(
+          await _reader.readAsset('$assetBasePath/EconomyBalance.xlsx')),
+      _probabilitySection(
+          await _reader.readAsset('$assetBasePath/Probability.xlsx')),
       _timeSection(await _reader.readAsset('$assetBasePath/TimeBalance.xlsx')),
-      _companionSection(await _reader.readAsset('$assetBasePath/CompanionBalance.xlsx')),
-      _rewardSection(await _reader.readAsset('$assetBasePath/RewardBalance.xlsx')),
+      _companionSection(
+          await _reader.readAsset('$assetBasePath/CompanionBalance.xlsx')),
+      _rewardSection(
+          await _reader.readAsset('$assetBasePath/RewardBalance.xlsx')),
     ];
     return BalanceMappingReport(sections: sections);
   }

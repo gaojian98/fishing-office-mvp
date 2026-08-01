@@ -1,0 +1,1355 @@
+{
+  "version": "1.0",
+  "events": [
+    {
+      "id": "waiting_event_001",
+      "type": "fish_talk",
+      "category": "waiting",
+      "title": "鱼说话",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一条鱼探出水面说：今天你看起来比昨天轻松一点。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_talk"
+        ],
+        "reward": null
+      },
+      "probability": 1,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_talk"
+      ]
+    },
+    {
+      "id": "waiting_event_002",
+      "type": "fish_complain",
+      "category": "waiting",
+      "title": "鱼吐槽",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "鱼甩了甩尾巴：你这鱼饵，是不是从会议室带出来的？"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_complain"
+        ],
+        "reward": null
+      },
+      "probability": 2,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_complain"
+      ]
+    },
+    {
+      "id": "waiting_event_003",
+      "type": "fish_help",
+      "category": "waiting",
+      "title": "鱼求救",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "小鱼小声说：我迷路了，可以先别收线吗？"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_help"
+        ],
+        "reward": null
+      },
+      "probability": 3,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_help"
+      ]
+    },
+    {
+      "id": "waiting_event_004",
+      "type": "escape_laugh",
+      "category": "waiting",
+      "title": "脱钩嘲笑",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "鱼影一闪而过，水面留下几个像笑声一样的泡泡。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "escape_laugh"
+        ],
+        "reward": null
+      },
+      "probability": 4,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "escape_laugh"
+      ]
+    },
+    {
+      "id": "waiting_event_005",
+      "type": "mother_fish",
+      "category": "waiting",
+      "title": "怀孕母鱼求救",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一条母鱼轻轻碰了碰鱼漂，好像在请求你放她回家。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "mother_fish"
+        ],
+        "reward": null
+      },
+      "probability": 5,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "mother_fish"
+      ]
+    },
+    {
+      "id": "waiting_event_006",
+      "type": "bottle",
+      "category": "waiting",
+      "title": "漂流瓶",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一个漂流瓶从窗外海面飘过，里面像是写着某个上班族的愿望。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "bottle"
+        ],
+        "reward": null
+      },
+      "probability": 1,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "bottle"
+      ]
+    },
+    {
+      "id": "waiting_event_007",
+      "type": "bird_pass",
+      "category": "waiting",
+      "title": "海鸟经过",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "海鸟掠过窗边，投下一小片安静的影子。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "bird_pass"
+        ],
+        "reward": null
+      },
+      "probability": 2,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "bird_pass"
+      ]
+    },
+    {
+      "id": "waiting_event_008",
+      "type": "boss_pass",
+      "category": "waiting",
+      "title": "老板路过",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "老板从身后经过，你的鼠标线安静得像一根数据线。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "boss_pass"
+        ],
+        "reward": null
+      },
+      "probability": 3,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "boss_pass"
+      ]
+    },
+    {
+      "id": "waiting_event_009",
+      "type": "old_hint",
+      "category": "waiting",
+      "title": "老渔夫提醒",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "老渔夫说：别急，真正的大鱼不会被催出来。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "old_hint"
+        ],
+        "reward": null
+      },
+      "probability": 4,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "old_hint"
+      ]
+    },
+    {
+      "id": "waiting_event_010",
+      "type": "coffee_wind",
+      "category": "waiting",
+      "title": "咖啡香气",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "咖啡香从茶水间飘过，鱼漂也像打了个小哈欠。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "coffee_wind"
+        ],
+        "reward": null
+      },
+      "probability": 5,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "coffee_wind"
+      ]
+    },
+    {
+      "id": "waiting_event_011",
+      "type": "fish_talk",
+      "category": "waiting",
+      "title": "鱼说话",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一条鱼探出水面说：今天你看起来比昨天轻松一点。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_talk"
+        ],
+        "reward": null
+      },
+      "probability": 1,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_talk"
+      ]
+    },
+    {
+      "id": "waiting_event_012",
+      "type": "fish_complain",
+      "category": "waiting",
+      "title": "鱼吐槽",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "鱼甩了甩尾巴：你这鱼饵，是不是从会议室带出来的？"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_complain"
+        ],
+        "reward": null
+      },
+      "probability": 2,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_complain"
+      ]
+    },
+    {
+      "id": "waiting_event_013",
+      "type": "fish_help",
+      "category": "waiting",
+      "title": "鱼求救",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "小鱼小声说：我迷路了，可以先别收线吗？"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_help"
+        ],
+        "reward": null
+      },
+      "probability": 3,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_help"
+      ]
+    },
+    {
+      "id": "waiting_event_014",
+      "type": "escape_laugh",
+      "category": "waiting",
+      "title": "脱钩嘲笑",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "鱼影一闪而过，水面留下几个像笑声一样的泡泡。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "escape_laugh"
+        ],
+        "reward": null
+      },
+      "probability": 4,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "escape_laugh"
+      ]
+    },
+    {
+      "id": "waiting_event_015",
+      "type": "mother_fish",
+      "category": "waiting",
+      "title": "怀孕母鱼求救",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一条母鱼轻轻碰了碰鱼漂，好像在请求你放她回家。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "mother_fish"
+        ],
+        "reward": null
+      },
+      "probability": 5,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "mother_fish"
+      ]
+    },
+    {
+      "id": "waiting_event_016",
+      "type": "bottle",
+      "category": "waiting",
+      "title": "漂流瓶",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一个漂流瓶从窗外海面飘过，里面像是写着某个上班族的愿望。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "bottle"
+        ],
+        "reward": null
+      },
+      "probability": 1,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "bottle"
+      ]
+    },
+    {
+      "id": "waiting_event_017",
+      "type": "bird_pass",
+      "category": "waiting",
+      "title": "海鸟经过",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "海鸟掠过窗边，投下一小片安静的影子。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "bird_pass"
+        ],
+        "reward": null
+      },
+      "probability": 2,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "bird_pass"
+      ]
+    },
+    {
+      "id": "waiting_event_018",
+      "type": "boss_pass",
+      "category": "waiting",
+      "title": "老板路过",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "老板从身后经过，你的鼠标线安静得像一根数据线。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "boss_pass"
+        ],
+        "reward": null
+      },
+      "probability": 3,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "boss_pass"
+      ]
+    },
+    {
+      "id": "waiting_event_019",
+      "type": "old_hint",
+      "category": "waiting",
+      "title": "老渔夫提醒",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "老渔夫说：别急，真正的大鱼不会被催出来。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "old_hint"
+        ],
+        "reward": null
+      },
+      "probability": 4,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "old_hint"
+      ]
+    },
+    {
+      "id": "waiting_event_020",
+      "type": "coffee_wind",
+      "category": "waiting",
+      "title": "咖啡香气",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "咖啡香从茶水间飘过，鱼漂也像打了个小哈欠。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "coffee_wind"
+        ],
+        "reward": null
+      },
+      "probability": 5,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "coffee_wind"
+      ]
+    },
+    {
+      "id": "waiting_event_021",
+      "type": "fish_talk",
+      "category": "waiting",
+      "title": "鱼说话",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一条鱼探出水面说：今天你看起来比昨天轻松一点。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_talk"
+        ],
+        "reward": null
+      },
+      "probability": 1,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_talk"
+      ]
+    },
+    {
+      "id": "waiting_event_022",
+      "type": "fish_complain",
+      "category": "waiting",
+      "title": "鱼吐槽",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "鱼甩了甩尾巴：你这鱼饵，是不是从会议室带出来的？"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_complain"
+        ],
+        "reward": null
+      },
+      "probability": 2,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_complain"
+      ]
+    },
+    {
+      "id": "waiting_event_023",
+      "type": "fish_help",
+      "category": "waiting",
+      "title": "鱼求救",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "小鱼小声说：我迷路了，可以先别收线吗？"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_help"
+        ],
+        "reward": null
+      },
+      "probability": 3,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_help"
+      ]
+    },
+    {
+      "id": "waiting_event_024",
+      "type": "escape_laugh",
+      "category": "waiting",
+      "title": "脱钩嘲笑",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "鱼影一闪而过，水面留下几个像笑声一样的泡泡。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "escape_laugh"
+        ],
+        "reward": null
+      },
+      "probability": 4,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "escape_laugh"
+      ]
+    },
+    {
+      "id": "waiting_event_025",
+      "type": "mother_fish",
+      "category": "waiting",
+      "title": "怀孕母鱼求救",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一条母鱼轻轻碰了碰鱼漂，好像在请求你放她回家。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "mother_fish"
+        ],
+        "reward": null
+      },
+      "probability": 5,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "mother_fish"
+      ]
+    },
+    {
+      "id": "waiting_event_026",
+      "type": "bottle",
+      "category": "waiting",
+      "title": "漂流瓶",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一个漂流瓶从窗外海面飘过，里面像是写着某个上班族的愿望。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "bottle"
+        ],
+        "reward": null
+      },
+      "probability": 1,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "bottle"
+      ]
+    },
+    {
+      "id": "waiting_event_027",
+      "type": "bird_pass",
+      "category": "waiting",
+      "title": "海鸟经过",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "海鸟掠过窗边，投下一小片安静的影子。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "bird_pass"
+        ],
+        "reward": null
+      },
+      "probability": 2,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "bird_pass"
+      ]
+    },
+    {
+      "id": "waiting_event_028",
+      "type": "boss_pass",
+      "category": "waiting",
+      "title": "老板路过",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "老板从身后经过，你的鼠标线安静得像一根数据线。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "boss_pass"
+        ],
+        "reward": null
+      },
+      "probability": 3,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "boss_pass"
+      ]
+    },
+    {
+      "id": "waiting_event_029",
+      "type": "old_hint",
+      "category": "waiting",
+      "title": "老渔夫提醒",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "老渔夫说：别急，真正的大鱼不会被催出来。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "old_hint"
+        ],
+        "reward": null
+      },
+      "probability": 4,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "old_hint"
+      ]
+    },
+    {
+      "id": "waiting_event_030",
+      "type": "coffee_wind",
+      "category": "waiting",
+      "title": "咖啡香气",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "咖啡香从茶水间飘过，鱼漂也像打了个小哈欠。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "coffee_wind"
+        ],
+        "reward": null
+      },
+      "probability": 5,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "coffee_wind"
+      ]
+    },
+    {
+      "id": "waiting_event_031",
+      "type": "fish_talk",
+      "category": "waiting",
+      "title": "鱼说话",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一条鱼探出水面说：今天你看起来比昨天轻松一点。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_talk"
+        ],
+        "reward": null
+      },
+      "probability": 1,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_talk"
+      ]
+    },
+    {
+      "id": "waiting_event_032",
+      "type": "fish_complain",
+      "category": "waiting",
+      "title": "鱼吐槽",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "鱼甩了甩尾巴：你这鱼饵，是不是从会议室带出来的？"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_complain"
+        ],
+        "reward": null
+      },
+      "probability": 2,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_complain"
+      ]
+    },
+    {
+      "id": "waiting_event_033",
+      "type": "fish_help",
+      "category": "waiting",
+      "title": "鱼求救",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "小鱼小声说：我迷路了，可以先别收线吗？"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_help"
+        ],
+        "reward": null
+      },
+      "probability": 3,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_help"
+      ]
+    },
+    {
+      "id": "waiting_event_034",
+      "type": "escape_laugh",
+      "category": "waiting",
+      "title": "脱钩嘲笑",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "鱼影一闪而过，水面留下几个像笑声一样的泡泡。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "escape_laugh"
+        ],
+        "reward": null
+      },
+      "probability": 4,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "escape_laugh"
+      ]
+    },
+    {
+      "id": "waiting_event_035",
+      "type": "mother_fish",
+      "category": "waiting",
+      "title": "怀孕母鱼求救",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一条母鱼轻轻碰了碰鱼漂，好像在请求你放她回家。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "mother_fish"
+        ],
+        "reward": null
+      },
+      "probability": 5,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "mother_fish"
+      ]
+    },
+    {
+      "id": "waiting_event_036",
+      "type": "bottle",
+      "category": "waiting",
+      "title": "漂流瓶",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一个漂流瓶从窗外海面飘过，里面像是写着某个上班族的愿望。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "bottle"
+        ],
+        "reward": null
+      },
+      "probability": 1,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "bottle"
+      ]
+    },
+    {
+      "id": "waiting_event_037",
+      "type": "bird_pass",
+      "category": "waiting",
+      "title": "海鸟经过",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "海鸟掠过窗边，投下一小片安静的影子。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "bird_pass"
+        ],
+        "reward": null
+      },
+      "probability": 2,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "bird_pass"
+      ]
+    },
+    {
+      "id": "waiting_event_038",
+      "type": "boss_pass",
+      "category": "waiting",
+      "title": "老板路过",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "老板从身后经过，你的鼠标线安静得像一根数据线。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "boss_pass"
+        ],
+        "reward": null
+      },
+      "probability": 3,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "boss_pass"
+      ]
+    },
+    {
+      "id": "waiting_event_039",
+      "type": "old_hint",
+      "category": "waiting",
+      "title": "老渔夫提醒",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "老渔夫说：别急，真正的大鱼不会被催出来。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "old_hint"
+        ],
+        "reward": null
+      },
+      "probability": 4,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "old_hint"
+      ]
+    },
+    {
+      "id": "waiting_event_040",
+      "type": "coffee_wind",
+      "category": "waiting",
+      "title": "咖啡香气",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "咖啡香从茶水间飘过，鱼漂也像打了个小哈欠。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "coffee_wind"
+        ],
+        "reward": null
+      },
+      "probability": 5,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "coffee_wind"
+      ]
+    },
+    {
+      "id": "waiting_event_041",
+      "type": "fish_talk",
+      "category": "waiting",
+      "title": "鱼说话",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一条鱼探出水面说：今天你看起来比昨天轻松一点。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_talk"
+        ],
+        "reward": null
+      },
+      "probability": 1,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_talk"
+      ]
+    },
+    {
+      "id": "waiting_event_042",
+      "type": "fish_complain",
+      "category": "waiting",
+      "title": "鱼吐槽",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "鱼甩了甩尾巴：你这鱼饵，是不是从会议室带出来的？"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_complain"
+        ],
+        "reward": null
+      },
+      "probability": 2,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_complain"
+      ]
+    },
+    {
+      "id": "waiting_event_043",
+      "type": "fish_help",
+      "category": "waiting",
+      "title": "鱼求救",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "小鱼小声说：我迷路了，可以先别收线吗？"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "fish_help"
+        ],
+        "reward": null
+      },
+      "probability": 3,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "fish_help"
+      ]
+    },
+    {
+      "id": "waiting_event_044",
+      "type": "escape_laugh",
+      "category": "waiting",
+      "title": "脱钩嘲笑",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "鱼影一闪而过，水面留下几个像笑声一样的泡泡。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "escape_laugh"
+        ],
+        "reward": null
+      },
+      "probability": 4,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "escape_laugh"
+      ]
+    },
+    {
+      "id": "waiting_event_045",
+      "type": "mother_fish",
+      "category": "waiting",
+      "title": "怀孕母鱼求救",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一条母鱼轻轻碰了碰鱼漂，好像在请求你放她回家。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "mother_fish"
+        ],
+        "reward": null
+      },
+      "probability": 5,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "mother_fish"
+      ]
+    },
+    {
+      "id": "waiting_event_046",
+      "type": "bottle",
+      "category": "waiting",
+      "title": "漂流瓶",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "一个漂流瓶从窗外海面飘过，里面像是写着某个上班族的愿望。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "bottle"
+        ],
+        "reward": null
+      },
+      "probability": 1,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "bottle"
+      ]
+    },
+    {
+      "id": "waiting_event_047",
+      "type": "bird_pass",
+      "category": "waiting",
+      "title": "海鸟经过",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "海鸟掠过窗边，投下一小片安静的影子。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "bird_pass"
+        ],
+        "reward": null
+      },
+      "probability": 2,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "bird_pass"
+      ]
+    },
+    {
+      "id": "waiting_event_048",
+      "type": "boss_pass",
+      "category": "waiting",
+      "title": "老板路过",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "老板从身后经过，你的鼠标线安静得像一根数据线。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "boss_pass"
+        ],
+        "reward": null
+      },
+      "probability": 3,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "boss_pass"
+      ]
+    },
+    {
+      "id": "waiting_event_049",
+      "type": "old_hint",
+      "category": "waiting",
+      "title": "老渔夫提醒",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "老渔夫说：别急，真正的大鱼不会被催出来。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "old_hint"
+        ],
+        "reward": null
+      },
+      "probability": 4,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "old_hint"
+      ]
+    },
+    {
+      "id": "waiting_event_050",
+      "type": "coffee_wind",
+      "category": "waiting",
+      "title": "咖啡香气",
+      "dialog": [
+        {
+          "speaker": "second_world",
+          "text": "咖啡香从茶水间飘过，鱼漂也像打了个小哈欠。"
+        }
+      ],
+      "choices": [],
+      "result": {
+        "memoryTags": [
+          "coffee_wind"
+        ],
+        "reward": null
+      },
+      "probability": 5,
+      "unlockLevel": 1,
+      "repeatable": true,
+      "nextEvent": "",
+      "tags": [
+        "waiting",
+        "coffee_wind"
+      ]
+    }
+  ]
+}

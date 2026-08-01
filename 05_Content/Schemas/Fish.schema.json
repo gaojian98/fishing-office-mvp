@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Fish",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "rarity": { "type": "string" },
+    "story": { "type": "string" },
+    "habitat": { "type": "string" },
+    "value": { "type": "integer" },
+    "points": { "type": "integer" },
+    "canSell": { "type": "boolean" },
+    "canKeep": { "type": "boolean" },
+    "canUseAsBait": { "type": "boolean" },
+    "enabled": { "type": "boolean" },
+    "metadata": { "type": "object" }
+  },
+  "required": ["id", "name", "rarity", "enabled"]
+}

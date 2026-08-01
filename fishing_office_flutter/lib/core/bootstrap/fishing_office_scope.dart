@@ -18,7 +18,8 @@ class FishingOfficeScope extends InheritedWidget {
   final InteractionManager interactionManager;
 
   static FishingOfficeScope of(BuildContext context) {
-    final scope = context.dependOnInheritedWidgetOfExactType<FishingOfficeScope>();
+    final scope =
+        context.dependOnInheritedWidgetOfExactType<FishingOfficeScope>();
     assert(scope != null, 'FishingOfficeScope not found in context');
     return scope!;
   }

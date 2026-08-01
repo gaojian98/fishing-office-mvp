@@ -5,6 +5,7 @@ import 'today_mood.dart';
 import 'today_news.dart';
 import 'today_recommendation.dart';
 import 'today_story.dart';
+import '../managers/world_clock_manager.dart';
 
 typedef TodayEngineListener = void Function(TodayStory story);
 
@@ -53,7 +54,7 @@ class TodayEngine {
       fishSignals: fishSignals,
     );
     final story = TodayStory(
-      todayId: DateTime.now().microsecondsSinceEpoch.toString(),
+      todayId: WorldClockManager.timestampId(),
       worldId: worldId,
       timeLabel: timeManager.clock.timeLabel,
       mood: mood,
@@ -62,7 +63,7 @@ class TodayEngine {
       worldEvents: worldEvents,
       companionStates: companionStates,
       fishSignals: fishSignals,
-      generatedAt: DateTime.now(),
+      generatedAt: WorldClockManager.systemNow(),
       context: worldData,
     );
     _emit(story);

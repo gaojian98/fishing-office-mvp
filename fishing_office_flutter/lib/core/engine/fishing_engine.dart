@@ -4,6 +4,7 @@ import 'fishing_event.dart';
 import 'fishing_result.dart';
 import 'fishing_session.dart';
 import 'ocean_engine.dart';
+import '../managers/world_clock_manager.dart';
 
 typedef FishingEngineListener = void Function(FishingEvent event);
 
@@ -25,7 +26,7 @@ class FishingEngine {
     Map<String, dynamic> initialData = const {},
   }) {
     return FishingSession(
-      id: id ?? DateTime.now().microsecondsSinceEpoch.toString(),
+      id: id ?? WorldClockManager.timestampId(),
       initialData: initialData,
     );
   }

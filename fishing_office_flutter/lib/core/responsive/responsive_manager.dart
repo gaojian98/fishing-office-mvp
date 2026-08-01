@@ -15,7 +15,8 @@ class ResponsiveManager {
   final Orientation orientation;
   final EdgeInsets safeArea;
 
-  factory ResponsiveManager.fromContext(BuildContext context, {Size? designSize}) {
+  factory ResponsiveManager.fromContext(BuildContext context,
+      {Size? designSize}) {
     final media = MediaQuery.of(context);
     return ResponsiveManager(
       designSize: designSize ?? const Size(390, 844),

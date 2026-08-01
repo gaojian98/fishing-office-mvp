@@ -1,5 +1,5 @@
-name: fishing_office
-description: "上班摸鱼 Fishing Office mobile game home prototype."
+name: fishing_office_mvp
+description: "Standalone 上班摸鱼 Fishing Office MVP."
 publish_to: "none"
 version: 1.0.0+1
 
@@ -22,16 +22,44 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/Home.png
-    - assets/config/Layout.json
-    - assets/config/Interaction.json
-    - assets/config/Animation.json
-    - assets/config/Routes.json
-    - assets/config/Dialog.json
-    - assets/config/Economy.json
-    - assets/config/GameState.json
-    - assets/config/store/Layout.json
-    - assets/config/store/Interaction.json
-    - assets/config/store/Dialog.json
-    - assets/config/store/Animation.json
-    - assets/config/store/Routes.json
-    - assets/config/store/Data.json
+    - assets/images/store/product_placeholder.png
+    - assets/config/office_layout.json
+    - assets/config/office_interaction.json
+    - assets/config/office_dialog.json
+    - assets/config/office_animation.json
+    - assets/config/office_routes.json
+    - assets/config/store/store_products.json
+    - assets/config/guide.json
+    - assets/config/honor.json
+    - assets/config/inventory.json
+    - assets/config/fish_collection.json
+    - assets/config/fish_catalog.json
+    - assets/config/profile.json
+    - assets/config/settings.json
+    - assets/config/assets.json
+    - assets/config/transaction.json
+    - assets/config/task.json
+    - assets/config/world.json
+    - assets/config/resident.json
+    - assets/config/residents.json
+    - assets/config/dialog.json
+    - assets/config/story.json
+    - assets/config/event.json
+    - assets/config/events.json
+    - assets/config/memory.json
+    - assets/config/identity.json
+    - assets/config/collection.json
+    - assets/config/resident_schedule.json
+    - assets/config/resident_activity.json
+    - assets/config/resident_memory.json
+    - assets/config/resident_relationship.json
+    - assets/config/resident_dialogue.json
+    - assets/config/resident_story.json
+    - assets/config/relationship.json
+    - assets/config/world_timeline.json
+    - assets/config/dialogue_context.json
+    - assets/config/event_trigger.json
+    - assets/config/festival.json
+    - assets/config/weather.json
+    - assets/config/rumor.json
+    - assets/config/legend.json

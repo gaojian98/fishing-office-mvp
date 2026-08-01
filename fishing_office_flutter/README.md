@@ -1,116 +1,71 @@
-# 上班摸鱼（Fishing Office）
+# 上班摸鱼（Fishing Office）Flutter
 
-Flutter project scaffold for the Designer + Developer workflow.
+This is the active Flutter project for the standalone `上班摸鱼` MVP.
 
-Current stage: foundation only. No business logic, no guessed hotspots, no inferred layout.
+## Highest Product Specification
 
-## Design Stage
+All Flutter development must follow the single Product Bible:
 
-The home page uses a fixed design canvas:
+- [../00_Project/SecondWorld_Product_Bible.md](../00_Project/SecondWorld_Product_Bible.md)
 
-```text
-390 x 844
-```
+Do not copy or maintain another Product Bible.
 
-The stage is centered on screen. Wider previews keep black side margins.
+## Development Rule
 
-## Layer Order
+Flutter implements confirmed specs only:
 
-```text
-HomePage
- ├── Background
- ├── SeaLayer
- ├── OfficeLayer
- ├── DeskLayer
- ├── InteractiveLayer
- ├── TopBar
- ├── BottomBar
- └── DialogLayer
-```
+1. Product decision
+2. UI design
+3. JSON specification
+4. Flutter implementation
+5. Local test
 
-Each layer is an independent Flutter widget. Most layers are placeholders until design JSON files are supplied.
+Flutter must not change product direction, economy principles, world view, or unconfirmed gameplay.
 
-## Background
-
-Background image:
+## Design Coordinate System
 
 ```text
-assets/images/Home.png
+1080 x 1920
 ```
 
 Rules:
 
-- `BoxFit.contain`
-- no crop
-- no stretch
-- replace `Home.png` directly without code changes
+- Background image uses contain-style scaling.
+- Hotspots use JSON coordinates.
+- Pages and dialogs follow confirmed JSON and DesignSystem rules.
 
-## Run
+## Config Source
 
-Flutter is not installed in this Codex environment, so compile/run was not executed here.
+Active JSON files:
 
-On a machine with Flutter installed:
+- [assets/config](assets/config)
+
+The app should load configuration through Repository / Provider / Manager layers, not direct page reads.
+
+## Local Test
 
 ```bash
-cd fishing_office_flutter
-flutter create .
 flutter pub get
-flutter run -d chrome
+flutter analyze
+flutter build web --release
+PORT=3100 node server.js
 ```
 
-## Next Inputs Needed
-
-The Developer should not guess layout. Please provide these files next:
+Open:
 
 ```text
-Layout.json
-Interaction.json
-Animation.json
-Route.json
-AssetManifest.json
+http://127.0.0.1:3100/#/home
 ```
 
-Suggested order:
+If browser cache shows an old build, use a fresh port from `build/web`:
 
-1. `Layout.json` - element ids, layer names, x/y/width/height based on 390 x 844.
-2. `Interaction.json` - tap targets, click behavior, dialog/page/action bindings.
-3. `Animation.json` - water, fish, bobber, cloud, button press and dialog transition specs.
-4. `Route.json` - page ids and navigation mapping.
-5. `AssetManifest.json` - replaceable image/audio asset ids and paths.
+```bash
+cd build/web
+python3 -m http.server 8084 --bind 127.0.0.1
+```
 
-## Current JSON Hook
-
-The scaffold now loads these files:
+Open:
 
 ```text
-assets/config/Layout.json
-assets/config/Interaction.json
+http://127.0.0.1:8084/#/home
 ```
-
-Web preview mirrors the same contract:
-
-```text
-public/fishing-office-layout.json
-public/fishing-office-interaction.json
-```
-
-Minimal `Layout.json` shape:
-
-```json
-{
-  "version": "1.0",
-  "designSize": { "width": 390, "height": 844 },
-  "elements": [
-    {
-      "id": "example_button",
-      "label": "示例按钮",
-      "layer": "InteractiveLayer",
-      "action": "example.action",
-      "enabled": true,
-      "rect": { "x": 0, "y": 0, "width": 100, "height": 48 }
-    }
-  ]
-}
-```
-
-Until Designer supplies real `elements`, no clickable regions are rendered.

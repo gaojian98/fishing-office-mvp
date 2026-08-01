@@ -1,5 +1,6 @@
 import 'identity_manager.dart';
 import 'meaning_choice_record.dart';
+import '../managers/world_clock_manager.dart';
 
 class StoryGenerator {
   const StoryGenerator();
@@ -11,14 +12,14 @@ class StoryGenerator {
     Map<String, dynamic> context = const {},
   }) {
     return MeaningStory(
-      storyId: DateTime.now().microsecondsSinceEpoch.toString(),
+      storyId: WorldClockManager.timestampId(),
       playerId: playerId,
       title: _buildTitle(choices),
       summary: _buildSummary(choices, identity),
       identityTags: identity.tags,
       choices: choices,
       context: context,
-      createdAt: DateTime.now(),
+      createdAt: WorldClockManager.systemNow(),
     );
   }
 

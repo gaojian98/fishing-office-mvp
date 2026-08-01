@@ -13,17 +13,32 @@ class AudioManager {
   bool muted = false;
 
   void play(String assetId, {String category = 'sfx', double? volume}) {
+    if (muted || assetId.isEmpty) return;
     if (kDebugMode) {
-      debugPrint('AudioManager.play($assetId, category=$category, volume=$volume)');
+      debugPrint(
+          'AudioManager.play($assetId, category=$category, volume=$volume)');
     }
   }
 
   void stop(String assetId) {
+    if (assetId.isEmpty) return;
     if (kDebugMode) debugPrint('AudioManager.stop($assetId)');
   }
 
-  void fade(String assetId, {Duration duration = const Duration(milliseconds: 800)}) {
-    if (kDebugMode) debugPrint('AudioManager.fade($assetId, duration=$duration)');
+  void fade(String assetId,
+      {Duration duration = const Duration(milliseconds: 800)}) {
+    if (assetId.isEmpty) return;
+    if (kDebugMode) {
+      debugPrint('AudioManager.fade($assetId, duration=$duration)');
+    }
+  }
+
+  void playAmbient(String assetId, {double? volume}) {
+    play(assetId, category: 'ambient', volume: volume ?? ambientVolume);
+  }
+
+  void stopAmbient(String assetId) {
+    stop(assetId);
   }
 
   void setMuted(bool value) {

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Resident",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "type": { "type": "string" },
+    "personality": { "type": "string" },
+    "mood": { "type": "string" },
+    "location": { "type": "string" },
+    "dialogGroup": { "type": "string" },
+    "unlockLevel": { "type": "integer" },
+    "enabled": { "type": "boolean" },
+    "metadata": { "type": "object" }
+  },
+  "required": ["id", "name", "type", "enabled"]
+}

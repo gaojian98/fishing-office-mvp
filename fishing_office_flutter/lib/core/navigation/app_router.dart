@@ -23,7 +23,8 @@ class AppRouter {
       return PageRouteBuilder<void>(
         settings: settings,
         opaque: false,
-        pageBuilder: (context, animation, secondaryAnimation) => const SizedBox.shrink(),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            const SizedBox.shrink(),
       );
     }
     if (route.path == routes.startPath) {

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Event",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string" },
+    "type": { "type": "string" },
+    "title": { "type": "string" },
+    "dialogueIds": { "type": "array", "items": { "type": "string" } },
+    "choices": { "type": "array", "items": { "type": "object" } },
+    "results": { "type": "array", "items": { "type": "object" } },
+    "conditions": { "type": "object" },
+    "weight": { "type": "number" },
+    "repeatable": { "type": "boolean" },
+    "enabled": { "type": "boolean" },
+    "metadata": { "type": "object" }
+  },
+  "required": ["id", "type", "title", "enabled"]
+}

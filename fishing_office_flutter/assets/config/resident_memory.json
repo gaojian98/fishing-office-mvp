@@ -1,0 +1,29 @@
+{
+  "version": "1.0",
+  "memories": [
+    {
+      "residentId": "old_fisher",
+      "firstMeetTime": "",
+      "lastMeetTime": "",
+      "meetCount": 0,
+      "lastInteraction": "",
+      "memoryTags": []
+    },
+    {
+      "residentId": "office_bird",
+      "firstMeetTime": "",
+      "lastMeetTime": "",
+      "meetCount": 0,
+      "lastInteraction": "",
+      "memoryTags": []
+    },
+    {
+      "residentId": "little_fish",
+      "firstMeetTime": "",
+      "lastMeetTime": "",
+      "meetCount": 0,
+      "lastInteraction": "",
+      "memoryTags": []
+    }
+  ]
+}

@@ -10,4 +10,3 @@ class AssetJsonSource implements JsonSource {
   @override
   Future<String> loadString(String path) => rootBundle.loadString(path);
 }
-

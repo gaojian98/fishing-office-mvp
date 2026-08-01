@@ -13,26 +13,26 @@ class StoreConfigLoader {
 
   Future<StoreConfigBundle> load() async {
     final raw = await Future.wait([
-      rootBundle.loadString('assets/config/store/Layout.json'),
-      rootBundle.loadString('assets/config/store/Interaction.json'),
-      rootBundle.loadString('assets/config/store/Dialog.json'),
-      rootBundle.loadString('assets/config/store/Animation.json'),
-      rootBundle.loadString('assets/config/store/Routes.json'),
-      rootBundle.loadString('assets/config/store/Data.json'),
+      rootBundle.loadString('assets/config/office_layout.json'),
+      rootBundle.loadString('assets/config/office_interaction.json'),
+      rootBundle.loadString('assets/config/office_dialog.json'),
+      rootBundle.loadString('assets/config/office_animation.json'),
+      rootBundle.loadString('assets/config/office_routes.json'),
+      rootBundle.loadString('assets/config/store/store_products.json'),
     ]);
 
     return StoreConfigBundle(
       layout: StoreLayoutConfig.fromJson(
-        jsonDecode(raw[0]) as Map<String, dynamic>,
+        _decodeSection(raw[0], 'store'),
       ),
       interaction: InteractionConfig.fromJson(
-        jsonDecode(raw[1]) as Map<String, dynamic>,
+        _decodeSection(raw[1], 'store'),
       ),
       dialog: DialogConfig.fromJson(
-        jsonDecode(raw[2]) as Map<String, dynamic>,
+        _decodeSection(raw[2], 'store'),
       ),
       animation: AnimationConfig.fromJson(
-        jsonDecode(raw[3]) as Map<String, dynamic>,
+        _decodeSection(raw[3], 'store'),
       ),
       routes: RoutesConfig.fromJson(
         jsonDecode(raw[4]) as Map<String, dynamic>,
@@ -42,4 +42,11 @@ class StoreConfigLoader {
       ),
     );
   }
+}
+
+Map<String, dynamic> _decodeSection(Object raw, String section) {
+  final json = jsonDecode(raw.toString()) as Map<String, dynamic>;
+  final value = json[section];
+  if (value is Map<String, dynamic>) return value;
+  return json;
 }

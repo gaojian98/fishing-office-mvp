@@ -1,3 +1,5 @@
+import '../managers/world_clock_manager.dart';
+
 class LegacyManager {
   const LegacyManager();
 
@@ -8,12 +10,12 @@ class LegacyManager {
     Map<String, dynamic> context = const {},
   }) {
     return MeaningLegacy(
-      legacyId: DateTime.now().microsecondsSinceEpoch.toString(),
+      legacyId: WorldClockManager.timestampId(),
       playerId: playerId,
       storyIds: storyIds,
       identityTags: identityTags,
       context: context,
-      createdAt: DateTime.now(),
+      createdAt: WorldClockManager.systemNow(),
     );
   }
 }

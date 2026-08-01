@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dialogue",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "id": { "type": "string" },
+    "speakerId": { "type": "string" },
+    "group": { "type": "string" },
+    "text": { "type": "string" },
+    "conditions": { "type": "object" },
+    "nextId": { "type": "string" },
+    "enabled": { "type": "boolean" },
+    "metadata": { "type": "object" }
+  },
+  "required": ["id", "speakerId", "text", "enabled"]
+}

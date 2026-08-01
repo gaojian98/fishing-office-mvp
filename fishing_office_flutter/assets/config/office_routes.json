@@ -1,0 +1,86 @@
+{
+  "meta": {
+    "project": "FishingOffice",
+    "version": "V1.0",
+    "defaultRoute": "/home"
+  },
+  "routes": [
+    {
+      "path": "/home",
+      "page": "HomePage",
+      "type": "page",
+      "transition": "fade"
+    },
+    {
+      "path": "/store",
+      "page": "StoreDialog",
+      "type": "page",
+      "transition": "slideLeft"
+    },
+    {
+      "path": "/profile",
+      "page": "ProfileCenterDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/settings",
+      "page": "SettingsDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/bag",
+      "page": "BagDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/collection",
+      "page": "FishCollectionDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/honor",
+      "page": "HonorDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/wallet",
+      "page": "WalletPage",
+      "type": "page",
+      "transition": "slideLeft"
+    },
+    {
+      "path": "/help",
+      "page": "GameHelpDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    },
+    {
+      "path": "/fishing",
+      "page": "FishingPage",
+      "type": "page",
+      "transition": "fade"
+    },
+    {
+      "path": "/result",
+      "page": "ResultPage",
+      "type": "page",
+      "transition": "fade"
+    },
+    {
+      "path": "/exit",
+      "page": "ExitDialog",
+      "type": "dialog",
+      "transition": "fadeScale"
+    }
+  ],
+  "unknownRoute": {
+    "action": "showDialog",
+    "title": "Coming Soon",
+    "message": "This page is under development."
+  }
+}

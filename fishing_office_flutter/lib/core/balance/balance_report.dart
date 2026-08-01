@@ -31,4 +31,3 @@ class BalanceSheetReport {
   final String sheetName;
   final List<String> fields;
 }
-

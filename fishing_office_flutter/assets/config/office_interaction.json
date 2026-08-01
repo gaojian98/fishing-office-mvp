@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "project": "FishingOffice",
+    "version": "V1.0"
+  },
+  "home": {
+    "meta": {
+      "project": "FishingOffice",
+      "page": "Home",
+      "version": "V3.0"
+    },
+    "actions": [
+      {
+        "target": "profile_card",
+        "event": "tap",
+        "action": "navigate",
+        "params": {
+          "route": "/profile"
+        }
+      },
+      {
+        "target": "btn_help",
+        "event": "tap",
+        "action": "openDialog",
+        "params": {
+          "dialog": "GameHelpDialog"
+        }
+      },
+      {
+        "target": "btn_exit",
+        "event": "tap",
+        "action": "confirmExit"
+      },
+      {
+        "target": "mouse_top",
+        "event": "tap",
+        "action": "throwLine"
+      },
+      {
+        "target": "mouse_bottom",
+        "event": "tap",
+        "action": "pullLine"
+      },
+      {
+        "target": "btn_store",
+        "event": "tap",
+        "action": "openDialog",
+        "params": {
+          "dialog": "StoreDialog"
+        }
+      },
+      {
+        "target": "btn_honor",
+        "event": "tap",
+        "action": "openDialog",
+        "params": {
+          "dialog": "HonorDialog"
+        }
+      },
+      {
+        "target": "btn_bag",
+        "event": "tap",
+        "action": "openDialog",
+        "params": {
+          "dialog": "BagDialog"
+        }
+      },
+      {
+        "target": "btn_start_fishing",
+        "event": "tap",
+        "action": "startFishingFlow"
+      },
+      {
+        "target": "btn_tasks",
+        "event": "tap",
+        "action": "openDialog",
+        "params": {
+          "dialog": "TaskDialog"
+        }
+      }
+    ]
+  },
+  "store": {
+    "meta": {
+      "page": "Store",
+      "version": "1.0"
+    },
+    "interactions": [
+      {
+        "id": "closeButton",
+        "event": "tap",
+        "action": "closeDialog",
+        "target": "StoreDialog"
+      },
+      {
+        "id": "tab_recommend",
+        "event": "tap",
+        "action": "switchStoreCategory",
+        "parameter": "recommend"
+      },
+      {
+        "id": "tab_rod",
+        "event": "tap",
+        "action": "switchStoreCategory",
+        "parameter": "rod"
+      },
+      {
+        "id": "tab_line",
+        "event": "tap",
+        "action": "switchStoreCategory",
+        "parameter": "line"
+      },
+      {
+        "id": "tab_bait",
+        "event": "tap",
+        "action": "switchStoreCategory",
+        "parameter": "bait"
+      },
+      {
+        "id": "tab_tool",
+        "event": "tap",
+        "action": "switchStoreCategory",
+        "parameter": "tool"
+      },
+      {
+        "id": "productCard",
+        "event": "tap",
+        "action": "openDialog",
+        "target": "ProductDetailDialog"
+      },
+      {
+        "id": "productBuyButton",
+        "event": "tap",
+        "action": "openDialog",
+        "target": "ConfirmPurchaseDialog"
+      },
+      {
+        "id": "confirmPurchase",
+        "event": "tap",
+        "action": "purchaseItem"
+      },
+      {
+        "id": "walletButton",
+        "event": "tap",
+        "action": "navigate",
+        "target": "/wallet"
+      },
+      {
+        "id": "refreshButton",
+        "event": "tap",
+        "action": "refreshStoreItems"
+      }
+    ]
+  }
+}

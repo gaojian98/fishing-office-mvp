@@ -4,6 +4,7 @@ import 'ocean_ecology.dart';
 import 'ocean_memory.dart';
 import 'ocean_mood.dart';
 import 'ocean_state.dart';
+import '../managers/world_clock_manager.dart';
 
 typedef OceanEngineListener = void Function(OceanState state);
 
@@ -64,11 +65,11 @@ class OceanEngine {
     Map<String, dynamic> payload = const {},
   }) {
     final memory = OceanMemory(
-      memoryId: DateTime.now().microsecondsSinceEpoch.toString(),
+      memoryId: WorldClockManager.timestampId(),
       memoryType: memoryType,
       description: description,
       payload: payload,
-      createdAt: DateTime.now(),
+      createdAt: WorldClockManager.systemNow(),
     );
     _state = _state.copyWith(
       memoryTags: [..._state.memoryTags, memory.memoryType],

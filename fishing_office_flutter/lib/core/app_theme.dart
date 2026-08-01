@@ -31,7 +31,8 @@ class AppTheme {
         labelLarge: AppTypography.button,
         labelMedium: AppTypography.buttonSmall,
       ),
-      dividerTheme: const DividerThemeData(color: AppColor.divider, thickness: 1),
+      dividerTheme:
+          const DividerThemeData(color: AppColor.divider, thickness: 1),
       dialogTheme: DialogThemeData(
         backgroundColor: AppColor.white,
         surfaceTintColor: AppColor.white,

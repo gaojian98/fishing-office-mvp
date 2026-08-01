@@ -23,4 +23,3 @@ class XlsxRecord {
 
   String operator [](String key) => values[key] ?? '';
 }
-

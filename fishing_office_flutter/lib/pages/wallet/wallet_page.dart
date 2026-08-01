@@ -34,11 +34,20 @@ class WalletPage extends ConsumerWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              _WalletCard(label: 'fish_coin', value: '${wallet.fishCoin}', iconId: FishingIcon.fishingCoin),
+              _WalletCard(
+                  label: 'fish_coin',
+                  value: '${wallet.fishCoin}',
+                  iconId: FishingIcon.fishingCoin),
               const SizedBox(height: 12),
-              _WalletCard(label: 'points', value: '${wallet.points}', iconId: FishingIcon.point),
+              _WalletCard(
+                  label: 'points',
+                  value: '${wallet.points}',
+                  iconId: FishingIcon.point),
               const SizedBox(height: 12),
-              _WalletCard(label: 'cash', value: '${wallet.cashPlaceholder}', iconId: FishingIcon.coin),
+              _WalletCard(
+                  label: 'cash',
+                  value: '${wallet.cashPlaceholder}',
+                  iconId: FishingIcon.coin),
               const SizedBox(height: 24),
               Text('当前仅展示资产，不做充值/提现。', style: AppTypography.caption),
             ],

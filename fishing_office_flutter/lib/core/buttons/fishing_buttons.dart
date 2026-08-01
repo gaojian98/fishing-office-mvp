@@ -34,9 +34,15 @@ class _FishingButtonPressedState extends State<FishingButtonPressed> {
       label: widget.semanticLabel,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTapDown: widget.onPressed == null ? null : (_) => setState(() => _pressed = true),
-        onTapCancel: widget.onPressed == null ? null : () => setState(() => _pressed = false),
-        onTapUp: widget.onPressed == null ? null : (_) => setState(() => _pressed = false),
+        onTapDown: widget.onPressed == null
+            ? null
+            : (_) => setState(() => _pressed = true),
+        onTapCancel: widget.onPressed == null
+            ? null
+            : () => setState(() => _pressed = false),
+        onTapUp: widget.onPressed == null
+            ? null
+            : (_) => setState(() => _pressed = false),
         onTap: widget.onPressed,
         child: AnimatedScale(
           duration: widget.duration,
@@ -85,10 +91,13 @@ class FishingPrimaryButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (iconId != null) ...[
-              FishingIconWidget(iconId: iconId!, size: 24, color: AppColor.textPrimary),
+              FishingIconWidget(
+                  iconId: iconId!, size: 24, color: AppColor.textPrimary),
               const SizedBox(width: 8),
             ],
-            Text(label, style: AppTypography.buttonLarge.copyWith(color: AppColor.textPrimary)),
+            Text(label,
+                style: AppTypography.buttonLarge
+                    .copyWith(color: AppColor.textPrimary)),
           ],
         ),
       ),
@@ -132,10 +141,12 @@ class FishingSecondaryButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (iconId != null) ...[
-              FishingIconWidget(iconId: iconId!, size: 20, color: AppColor.white),
+              FishingIconWidget(
+                  iconId: iconId!, size: 20, color: AppColor.white),
               const SizedBox(width: 8),
             ],
-            Text(label, style: AppTypography.button.copyWith(color: AppColor.white)),
+            Text(label,
+                style: AppTypography.button.copyWith(color: AppColor.white)),
           ],
         ),
       ),
@@ -242,10 +253,13 @@ class FishingFloatingButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             if (iconId != null) ...[
-              FishingIconWidget(iconId: iconId!, size: 24, color: AppColor.textPrimary),
+              FishingIconWidget(
+                  iconId: iconId!, size: 24, color: AppColor.textPrimary),
               const SizedBox(width: 8),
             ],
-            Text(label, style: AppTypography.buttonLarge.copyWith(color: AppColor.textPrimary)),
+            Text(label,
+                style: AppTypography.buttonLarge
+                    .copyWith(color: AppColor.textPrimary)),
           ],
         ),
       ),

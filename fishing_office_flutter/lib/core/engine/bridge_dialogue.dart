@@ -1,6 +1,7 @@
 import 'bridge_calendar.dart';
 import 'bridge_festival.dart';
 import 'bridge_weather.dart';
+import '../managers/world_clock_manager.dart';
 
 class BridgeDialogue {
   const BridgeDialogue({
@@ -22,14 +23,14 @@ class BridgeDialogue {
     required Map<String, dynamic> publicContext,
   }) {
     return BridgeDialogue(
-      dialogueId: DateTime.now().microsecondsSinceEpoch.toString(),
+      dialogueId: WorldClockManager.timestampId(),
       playerId: playerId,
       message: _buildMessage(calendar, festival, weather),
       calendar: calendar,
       festival: festival,
       weather: weather,
       publicContext: publicContext,
-      createdAt: DateTime.now(),
+      createdAt: WorldClockManager.systemNow(),
     );
   }
 

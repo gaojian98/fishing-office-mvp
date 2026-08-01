@@ -6,6 +6,7 @@ import 'relationship_engine.dart';
 import 'today_engine.dart';
 import 'world_engine.dart';
 import 'welcome_message.dart';
+import '../managers/world_clock_manager.dart';
 
 class WelcomeBackSystem {
   WelcomeBackSystem({
@@ -50,7 +51,7 @@ class WelcomeBackSystem {
     );
     final recommendation = ReturnRecommendation.fromSummary(summary);
     final welcome = WelcomeMessage(
-      recordId: DateTime.now().microsecondsSinceEpoch.toString(),
+      recordId: WorldClockManager.timestampId(),
       playerId: playerId,
       lastLoginAt: lastLoginAt,
       currentLoginAt: currentLoginAt,

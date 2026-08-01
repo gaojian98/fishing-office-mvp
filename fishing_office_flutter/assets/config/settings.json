@@ -1,0 +1,129 @@
+{
+  "settings": {
+    "meta": {
+      "project": "FishingOffice",
+      "page": "SettingsCenter",
+      "version": "1.0",
+      "designSize": {
+        "width": 1080,
+        "height": 1920
+      }
+    },
+    "title": "设置中心",
+    "closeLabel": "关闭",
+    "savedMessage": "设置已保存。",
+    "restoredMessage": "已恢复默认设置。",
+    "cacheClearedMessage": "缓存已清除。",
+    "confirmReset": {
+      "title": "恢复默认",
+      "body": "是否恢复为默认设置？",
+      "confirmLabel": "恢复默认",
+      "cancelLabel": "取消"
+    },
+    "confirmClearCache": {
+      "title": "清除缓存",
+      "body": "确认清除本地缓存？",
+      "confirmLabel": "清除缓存",
+      "cancelLabel": "取消"
+    },
+    "footer": {
+      "saveLabel": "保存设置",
+      "restoreLabel": "恢复默认",
+      "closeLabel": "关闭"
+    },
+    "items": [
+      {
+        "id": "music",
+        "label": "音乐开关",
+        "type": "toggle",
+        "help": "控制背景音乐。",
+        "defaultValue": "on",
+        "onLabel": "开",
+        "offLabel": "关"
+      },
+      {
+        "id": "sound",
+        "label": "音效开关",
+        "type": "toggle",
+        "help": "控制按键和弹窗音效。",
+        "defaultValue": "on",
+        "onLabel": "开",
+        "offLabel": "关"
+      },
+      {
+        "id": "vibration",
+        "label": "震动开关",
+        "type": "toggle",
+        "help": "控制触感反馈。",
+        "defaultValue": "off",
+        "onLabel": "开",
+        "offLabel": "关"
+      },
+      {
+        "id": "notification",
+        "label": "通知开关",
+        "type": "toggle",
+        "help": "控制游戏内提醒。",
+        "defaultValue": "on",
+        "onLabel": "开",
+        "offLabel": "关"
+      },
+      {
+        "id": "quality",
+        "label": "画质选择",
+        "type": "segment",
+        "help": "根据设备性能调整画面。",
+        "defaultValue": "medium",
+        "options": [
+          {
+            "id": "low",
+            "label": "低"
+          },
+          {
+            "id": "medium",
+            "label": "中"
+          },
+          {
+            "id": "high",
+            "label": "高"
+          }
+        ]
+      },
+      {
+        "id": "language",
+        "label": "语言选择",
+        "type": "segment",
+        "help": "切换界面语言。",
+        "defaultValue": "zh",
+        "options": [
+          {
+            "id": "zh",
+            "label": "中文"
+          },
+          {
+            "id": "en",
+            "label": "English"
+          },
+          {
+            "id": "vi",
+            "label": "Tiếng Việt"
+          }
+        ]
+      },
+      {
+        "id": "clear_cache",
+        "label": "清除缓存",
+        "type": "action",
+        "help": "清理本地缓存数据。",
+        "buttonLabel": "清除缓存"
+      },
+      {
+        "id": "back_profile",
+        "label": "返回个人中心",
+        "type": "action",
+        "help": "回到个人中心。",
+        "buttonLabel": "返回个人中心"
+      }
+    ]
+  }
+}

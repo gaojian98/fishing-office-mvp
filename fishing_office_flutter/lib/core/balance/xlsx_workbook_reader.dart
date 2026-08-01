@@ -76,7 +76,8 @@ class XlsxWorkbookReader {
     final document = XmlDocument.parse(xml);
     final rows = <_RawRow>[];
     for (final row in document.findAllElements('row')) {
-      final rowIndex = int.tryParse(row.getAttribute('r') ?? '') ?? rows.length + 1;
+      final rowIndex =
+          int.tryParse(row.getAttribute('r') ?? '') ?? rows.length + 1;
       final cells = <int, String>{};
       for (final cell in row.findElements('c')) {
         final ref = cell.getAttribute('r') ?? '';
@@ -90,7 +91,8 @@ class XlsxWorkbookReader {
 
     final headerRowIndex = _detectHeaderRowIndex(rows);
     if (headerRowIndex == -1) {
-      return XlsxTable(sheetName: sheetName, headers: const [], records: const []);
+      return XlsxTable(
+          sheetName: sheetName, headers: const [], records: const []);
     }
 
     final headerRow = rows[headerRowIndex];
@@ -119,9 +121,11 @@ class XlsxWorkbookReader {
     for (var i = 0; i < rows.length; i++) {
       final row = rows[i];
       final values = _orderedValues(row.cells);
-      final nonEmpty = values.where((value) => value.trim().isNotEmpty).toList();
+      final nonEmpty =
+          values.where((value) => value.trim().isNotEmpty).toList();
       if (nonEmpty.length < 2) continue;
-      final textCells = nonEmpty.where((value) => !_looksLikeNumber(value)).length;
+      final textCells =
+          nonEmpty.where((value) => !_looksLikeNumber(value)).length;
       if (textCells >= 2) return i;
     }
     return -1;
@@ -144,9 +148,8 @@ class XlsxWorkbookReader {
     if (type == 'inlineStr') {
       return cell.findAllElements('t').map((t) => t.innerText).join();
     }
-    final valueElement = cell.findElements('v').isNotEmpty
-        ? cell.findElements('v').first
-        : null;
+    final valueElement =
+        cell.findElements('v').isNotEmpty ? cell.findElements('v').first : null;
     final raw = valueElement?.innerText ?? '';
     if (type == 's') {
       final index = int.tryParse(raw) ?? -1;
@@ -188,7 +191,8 @@ class XlsxWorkbookReader {
   }
 
   bool _looksLikeNumber(String value) {
-    return double.tryParse(value.replaceAll('%', '').replaceAll(',', '')) != null;
+    return double.tryParse(value.replaceAll('%', '').replaceAll(',', '')) !=
+        null;
   }
 }
 

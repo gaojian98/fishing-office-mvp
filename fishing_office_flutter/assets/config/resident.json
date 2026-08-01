@@ -1,0 +1,5406 @@
+{
+  "version": "1.0",
+  "residents": [
+    {
+      "id": "old_fisher",
+      "name": "老渔夫",
+      "age": 62,
+      "role": "窗边钓鱼顾问",
+      "type": "resident",
+      "personality": "warm",
+      "dialogGroup": "old_fisher",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "location": "office_sea_window",
+      "description": "总说大鱼不赶时间的人，像海风一样慢。",
+      "enabled": true,
+      "nickname": "钓鱼伯",
+      "gender": "male",
+      "job": "钓鱼顾问",
+      "favoriteFood": "热茶",
+      "favoriteFish": "小鱼",
+      "home": "窗边小屋",
+      "workplace": "办公室海窗",
+      "dailyRoute": [
+        "窗边小屋",
+        "办公室海窗",
+        "码头长椅"
+      ]
+    },
+    {
+      "id": "front_desk_lily",
+      "name": "前台小妹",
+      "age": 24,
+      "role": "前台",
+      "type": "resident",
+      "personality": "bright",
+      "dialogGroup": "front_desk_lily",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "location": "front_desk",
+      "description": "知道每个人几点来，也知道谁今天最需要一杯热茶。",
+      "enabled": true,
+      "nickname": "小莉",
+      "gender": "female",
+      "job": "前台",
+      "favoriteFood": "柠檬茶",
+      "favoriteFish": "纸杯鱼",
+      "home": "办公楼旁公寓",
+      "workplace": "前台",
+      "dailyRoute": [
+        "办公楼旁公寓",
+        "前台",
+        "咖啡角"
+      ]
+    },
+    {
+      "id": "nap_guard",
+      "name": "午睡保安",
+      "age": 48,
+      "role": "保安",
+      "type": "resident",
+      "personality": "sleepy",
+      "dialogGroup": "nap_guard",
+      "mood": "sleepy",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "location": "security_corner",
+      "description": "看似总在打盹，其实什么风吹草动都逃不过他。",
+      "enabled": true,
+      "nickname": "午睡叔",
+      "gender": "male",
+      "job": "保安",
+      "favoriteFood": "卤蛋饭团",
+      "favoriteFish": "慢吞吞鱼",
+      "home": "保安宿舍",
+      "workplace": "保安角",
+      "dailyRoute": [
+        "保安宿舍",
+        "保安角",
+        "窗边走廊"
+      ]
+    },
+    {
+      "id": "it_repair_wu",
+      "name": "电脑维修员",
+      "age": 31,
+      "role": "电脑维修员",
+      "type": "resident",
+      "personality": "practical",
+      "dialogGroup": "it_repair_wu",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "location": "repair_desk",
+      "description": "能修电脑，也能修好一点点坏心情。",
+      "enabled": true,
+      "nickname": "维修吴",
+      "gender": "male",
+      "job": "电脑维修员",
+      "favoriteFood": "泡面加蛋",
+      "favoriteFish": "电路鱼",
+      "home": "维修间阁楼",
+      "workplace": "维修桌",
+      "dailyRoute": [
+        "维修间阁楼",
+        "维修桌",
+        "服务器角落"
+      ]
+    },
+    {
+      "id": "sea_cleaner",
+      "name": "海边清洁工",
+      "age": 55,
+      "role": "海边清洁工",
+      "type": "resident",
+      "personality": "gentle",
+      "dialogGroup": "sea_cleaner",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "location": "window_boardwalk",
+      "description": "每天清理窗外海岸，捡到过很多没寄出的心事。",
+      "enabled": true,
+      "nickname": "海岸叔",
+      "gender": "male",
+      "job": "海边清洁工",
+      "favoriteFood": "白粥小菜",
+      "favoriteFish": "海风鱼",
+      "home": "海边工具屋",
+      "workplace": "窗外木栈道",
+      "dailyRoute": [
+        "海边工具屋",
+        "窗外木栈道",
+        "码头垃圾桶旁"
+      ]
+    },
+    {
+      "id": "coffee_boss",
+      "name": "咖啡店老板",
+      "age": 39,
+      "role": "咖啡店老板",
+      "type": "resident",
+      "personality": "calm",
+      "dialogGroup": "coffee_boss",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "location": "coffee_counter",
+      "description": "懂咖啡，也懂上班族不想说出口的累。",
+      "enabled": true,
+      "nickname": "咖啡老板",
+      "gender": "male",
+      "job": "咖啡店老板",
+      "favoriteFood": "可颂",
+      "favoriteFish": "拿铁鱼",
+      "home": "咖啡店二楼",
+      "workplace": "咖啡柜台",
+      "dailyRoute": [
+        "咖啡店二楼",
+        "咖啡柜台",
+        "办公室茶水间"
+      ]
+    },
+    {
+      "id": "coworker_qiang",
+      "name": "摸鱼同事阿强",
+      "age": 27,
+      "role": "同事",
+      "type": "resident",
+      "personality": "funny",
+      "dialogGroup": "coworker_qiang",
+      "mood": "funny",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "location": "neighbor_desk",
+      "description": "摸鱼技术很一般，但心理素质非常稳定。",
+      "enabled": true,
+      "nickname": "阿强",
+      "gender": "male",
+      "job": "摸鱼同事",
+      "favoriteFood": "辣条",
+      "favoriteFish": "摸鱼小鲫",
+      "home": "员工公寓",
+      "workplace": "邻桌",
+      "dailyRoute": [
+        "员工公寓",
+        "邻桌",
+        "茶水间"
+      ]
+    },
+    {
+      "id": "late_supervisor",
+      "name": "爱迟到的主管",
+      "age": 36,
+      "role": "主管",
+      "type": "resident",
+      "personality": "awkward",
+      "dialogGroup": "late_supervisor",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "location": "manager_room",
+      "description": "总是迟到，却总能准确路过你的屏幕。",
+      "enabled": true,
+      "nickname": "迟到主管",
+      "gender": "male",
+      "job": "主管",
+      "favoriteFood": "冷掉的三明治",
+      "favoriteFish": "闹钟鱼",
+      "home": "主管公寓",
+      "workplace": "主管室",
+      "dailyRoute": [
+        "主管公寓",
+        "电梯口",
+        "主管室"
+      ]
+    },
+    {
+      "id": "runner_li",
+      "name": "送文件的小李",
+      "age": 22,
+      "role": "行政助理",
+      "type": "resident",
+      "personality": "energetic",
+      "dialogGroup": "runner_li",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "location": "office_aisle",
+      "description": "一路小跑送文件，也顺便送来办公室最新传闻。",
+      "enabled": true,
+      "nickname": "小李",
+      "gender": "male",
+      "job": "行政助理",
+      "favoriteFood": "饭团",
+      "favoriteFish": "文件鱼",
+      "home": "青年公寓",
+      "workplace": "办公室走廊",
+      "dailyRoute": [
+        "青年公寓",
+        "办公室走廊",
+        "打印机旁"
+      ]
+    },
+    {
+      "id": "mystery_guest",
+      "name": "神秘钓鱼客",
+      "age": 40,
+      "role": "神秘钓鱼客",
+      "type": "resident",
+      "personality": "mysterious",
+      "dialogGroup": "mystery_guest",
+      "mood": "mysterious",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "location": "far_window",
+      "description": "偶尔出现在窗边，只留下湿润的脚印和一句谜语。",
+      "enabled": true,
+      "nickname": "谜客",
+      "gender": "unknown",
+      "job": "神秘钓鱼客",
+      "favoriteFood": "海盐糖",
+      "favoriteFish": "发光鱼",
+      "home": "未知",
+      "workplace": "远窗",
+      "dailyRoute": [
+        "远窗",
+        "码头尽头",
+        "未知"
+      ]
+    },
+    {
+      "id": "old_city_mailman",
+      "name": "老城邮差老周",
+      "nickname": "老周",
+      "gender": "male",
+      "age": 58,
+      "job": "邮差",
+      "role": "邮差",
+      "type": "resident",
+      "personality": "steady",
+      "favoriteFood": "热豆浆",
+      "favoriteFish": "窗光小鱼",
+      "home": "老城区石板巷",
+      "workplace": "老城区邮局",
+      "dailyRoute": [
+        "老城区石板巷",
+        "便利店门口",
+        "办公楼前台"
+      ],
+      "location": "老城区邮局",
+      "dialogGroup": "old_city_mailman",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "每天推着旧自行车送信，也把许多没说出口的问候送到第二世界。",
+      "memoryTags": [
+        "old_city_mailman_first_meet",
+        "old_city_mailman_repeat_meet",
+        "old_city_mailman_favorite_food",
+        "old_city_mailman_favorite_fish",
+        "old_city_mailman_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "老城邮差老周说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "老城邮差老周说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "老城邮差老周说：朋友来了，连鱼漂都安静了一点。",
+        "special": "老城邮差老周说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "old_city_mailman_story_warm",
+          "type": "温情",
+          "title": "老城邮差老周的温柔午后"
+        },
+        {
+          "id": "old_city_mailman_story_office",
+          "type": "办公室",
+          "title": "老城邮差老周的办公室小插曲"
+        },
+        {
+          "id": "old_city_mailman_story_fairy",
+          "type": "童话",
+          "title": "老城邮差老周遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "old_city_tailor_aunt",
+      "name": "老城裁缝阿姨",
+      "nickname": "针线阿姨",
+      "gender": "female",
+      "age": 53,
+      "job": "裁缝",
+      "role": "裁缝",
+      "type": "resident",
+      "personality": "kind",
+      "favoriteFood": "红豆面包",
+      "favoriteFish": "纸杯鱼",
+      "home": "老城区二楼小屋",
+      "workplace": "老城裁缝铺",
+      "dailyRoute": [
+        "老城区二楼小屋",
+        "裁缝铺",
+        "海边长椅"
+      ],
+      "location": "老城裁缝铺",
+      "dialogGroup": "old_city_tailor_aunt",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她能补好衬衫袖口，也能把一个人的坏心情缝得平整一点。",
+      "memoryTags": [
+        "old_city_tailor_aunt_first_meet",
+        "old_city_tailor_aunt_repeat_meet",
+        "old_city_tailor_aunt_favorite_food",
+        "old_city_tailor_aunt_favorite_fish",
+        "old_city_tailor_aunt_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "老城裁缝阿姨说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "老城裁缝阿姨说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "老城裁缝阿姨说：朋友来了，连鱼漂都安静了一点。",
+        "special": "老城裁缝阿姨说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "old_city_tailor_aunt_story_warm",
+          "type": "温情",
+          "title": "老城裁缝阿姨的温柔午后"
+        },
+        {
+          "id": "old_city_tailor_aunt_story_office",
+          "type": "办公室",
+          "title": "老城裁缝阿姨的办公室小插曲"
+        },
+        {
+          "id": "old_city_tailor_aunt_story_fairy",
+          "type": "童话",
+          "title": "老城裁缝阿姨遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "office_finance_lin",
+      "name": "办公楼财务林姐",
+      "nickname": "林姐",
+      "gender": "female",
+      "age": 34,
+      "job": "财务",
+      "role": "财务",
+      "type": "resident",
+      "personality": "careful",
+      "favoriteFood": "低糖拿铁",
+      "favoriteFish": "工牌鲤",
+      "home": "居民区三号楼",
+      "workplace": "办公楼财务室",
+      "dailyRoute": [
+        "居民区三号楼",
+        "办公楼电梯",
+        "财务室"
+      ],
+      "location": "办公楼财务室",
+      "dialogGroup": "office_finance_lin",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "总能算清账目，却从不催你把快乐也算成效率。",
+      "memoryTags": [
+        "office_finance_lin_first_meet",
+        "office_finance_lin_repeat_meet",
+        "office_finance_lin_favorite_food",
+        "office_finance_lin_favorite_fish",
+        "office_finance_lin_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "办公楼财务林姐说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "办公楼财务林姐说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "办公楼财务林姐说：朋友来了，连鱼漂都安静了一点。",
+        "special": "办公楼财务林姐说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "office_finance_lin_story_warm",
+          "type": "温情",
+          "title": "办公楼财务林姐的温柔午后"
+        },
+        {
+          "id": "office_finance_lin_story_office",
+          "type": "办公室",
+          "title": "办公楼财务林姐的办公室小插曲"
+        },
+        {
+          "id": "office_finance_lin_story_fairy",
+          "type": "童话",
+          "title": "办公楼财务林姐遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "office_intern_xiaochen",
+      "name": "实习生小陈",
+      "nickname": "小陈",
+      "gender": "male",
+      "age": 21,
+      "job": "实习生",
+      "role": "实习生",
+      "type": "resident",
+      "personality": "curious",
+      "favoriteFood": "饭团",
+      "favoriteFish": "便签鱼",
+      "home": "合租小屋",
+      "workplace": "开放办公区",
+      "dailyRoute": [
+        "合租小屋",
+        "便利店",
+        "开放办公区"
+      ],
+      "location": "开放办公区",
+      "dialogGroup": "office_intern_xiaochen",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "刚来办公室不久，连摸鱼都摸得很认真。",
+      "memoryTags": [
+        "office_intern_xiaochen_first_meet",
+        "office_intern_xiaochen_repeat_meet",
+        "office_intern_xiaochen_favorite_food",
+        "office_intern_xiaochen_favorite_fish",
+        "office_intern_xiaochen_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "实习生小陈说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "实习生小陈说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "实习生小陈说：朋友来了，连鱼漂都安静了一点。",
+        "special": "实习生小陈说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "office_intern_xiaochen_story_warm",
+          "type": "温情",
+          "title": "实习生小陈的温柔午后"
+        },
+        {
+          "id": "office_intern_xiaochen_story_office",
+          "type": "办公室",
+          "title": "实习生小陈的办公室小插曲"
+        },
+        {
+          "id": "office_intern_xiaochen_story_fairy",
+          "type": "童话",
+          "title": "实习生小陈遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "seaside_shell_girl",
+      "name": "海边捡贝壳女孩",
+      "nickname": "贝壳妹",
+      "gender": "female",
+      "age": 19,
+      "job": "贝壳收藏者",
+      "role": "贝壳收藏者",
+      "type": "resident",
+      "personality": "dreamy",
+      "favoriteFood": "草莓汽水",
+      "favoriteFish": "漂流瓶鱼",
+      "home": "海边白色小屋",
+      "workplace": "海边沙滩",
+      "dailyRoute": [
+        "海边白色小屋",
+        "沙滩",
+        "码头"
+      ],
+      "location": "海边沙滩",
+      "dialogGroup": "seaside_shell_girl",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她说每个贝壳里都有一小段被海保存下来的午后。",
+      "memoryTags": [
+        "seaside_shell_girl_first_meet",
+        "seaside_shell_girl_repeat_meet",
+        "seaside_shell_girl_favorite_food",
+        "seaside_shell_girl_favorite_fish",
+        "seaside_shell_girl_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "海边捡贝壳女孩说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "海边捡贝壳女孩说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "海边捡贝壳女孩说：朋友来了，连鱼漂都安静了一点。",
+        "special": "海边捡贝壳女孩说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "seaside_shell_girl_story_warm",
+          "type": "温情",
+          "title": "海边捡贝壳女孩的温柔午后"
+        },
+        {
+          "id": "seaside_shell_girl_story_office",
+          "type": "办公室",
+          "title": "海边捡贝壳女孩的办公室小插曲"
+        },
+        {
+          "id": "seaside_shell_girl_story_fairy",
+          "type": "童话",
+          "title": "海边捡贝壳女孩遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "seaside_lifeguard_han",
+      "name": "海边救生员韩哥",
+      "nickname": "韩哥",
+      "gender": "male",
+      "age": 29,
+      "job": "救生员",
+      "role": "救生员",
+      "type": "resident",
+      "personality": "brave",
+      "favoriteFood": "冰柠茶",
+      "favoriteFish": "海风青鱼",
+      "home": "海边宿舍",
+      "workplace": "救生塔",
+      "dailyRoute": [
+        "海边宿舍",
+        "救生塔",
+        "码头"
+      ],
+      "location": "救生塔",
+      "dialogGroup": "seaside_lifeguard_han",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "看起来很强壮，说话却轻得怕吵醒海浪。",
+      "memoryTags": [
+        "seaside_lifeguard_han_first_meet",
+        "seaside_lifeguard_han_repeat_meet",
+        "seaside_lifeguard_han_favorite_food",
+        "seaside_lifeguard_han_favorite_fish",
+        "seaside_lifeguard_han_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "海边救生员韩哥说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "海边救生员韩哥说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "海边救生员韩哥说：朋友来了，连鱼漂都安静了一点。",
+        "special": "海边救生员韩哥说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "seaside_lifeguard_han_story_warm",
+          "type": "温情",
+          "title": "海边救生员韩哥的温柔午后"
+        },
+        {
+          "id": "seaside_lifeguard_han_story_office",
+          "type": "办公室",
+          "title": "海边救生员韩哥的办公室小插曲"
+        },
+        {
+          "id": "seaside_lifeguard_han_story_fairy",
+          "type": "童话",
+          "title": "海边救生员韩哥遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "dock_captain_ma",
+      "name": "码头马船长",
+      "nickname": "马船长",
+      "gender": "male",
+      "age": 47,
+      "job": "船长",
+      "role": "船长",
+      "type": "resident",
+      "personality": "bold",
+      "favoriteFood": "咸鱼粥",
+      "favoriteFish": "金枪鱼",
+      "home": "码头船屋",
+      "workplace": "旧码头",
+      "dailyRoute": [
+        "码头船屋",
+        "旧码头",
+        "灯塔"
+      ],
+      "location": "旧码头",
+      "dialogGroup": "dock_captain_ma",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他说自己见过最大的浪，也见过最安静的一条鱼。",
+      "memoryTags": [
+        "dock_captain_ma_first_meet",
+        "dock_captain_ma_repeat_meet",
+        "dock_captain_ma_favorite_food",
+        "dock_captain_ma_favorite_fish",
+        "dock_captain_ma_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "码头马船长说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "码头马船长说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "码头马船长说：朋友来了，连鱼漂都安静了一点。",
+        "special": "码头马船长说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "dock_captain_ma_story_warm",
+          "type": "温情",
+          "title": "码头马船长的温柔午后"
+        },
+        {
+          "id": "dock_captain_ma_story_office",
+          "type": "办公室",
+          "title": "码头马船长的办公室小插曲"
+        },
+        {
+          "id": "dock_captain_ma_story_fairy",
+          "type": "童话",
+          "title": "码头马船长遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "dock_rope_worker_niu",
+      "name": "码头缆绳工老牛",
+      "nickname": "老牛",
+      "gender": "male",
+      "age": 44,
+      "job": "缆绳工",
+      "role": "缆绳工",
+      "type": "resident",
+      "personality": "patient",
+      "favoriteFood": "卤蛋",
+      "favoriteFish": "石斑鱼",
+      "home": "码头宿舍",
+      "workplace": "缆绳仓库",
+      "dailyRoute": [
+        "码头宿舍",
+        "缆绳仓库",
+        "海边清洁站"
+      ],
+      "location": "缆绳仓库",
+      "dialogGroup": "dock_rope_worker_niu",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他打的结很牢，但从不把生活绑得太紧。",
+      "memoryTags": [
+        "dock_rope_worker_niu_first_meet",
+        "dock_rope_worker_niu_repeat_meet",
+        "dock_rope_worker_niu_favorite_food",
+        "dock_rope_worker_niu_favorite_fish",
+        "dock_rope_worker_niu_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "码头缆绳工老牛说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "码头缆绳工老牛说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "码头缆绳工老牛说：朋友来了，连鱼漂都安静了一点。",
+        "special": "码头缆绳工老牛说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "dock_rope_worker_niu_story_warm",
+          "type": "温情",
+          "title": "码头缆绳工老牛的温柔午后"
+        },
+        {
+          "id": "dock_rope_worker_niu_story_office",
+          "type": "办公室",
+          "title": "码头缆绳工老牛的办公室小插曲"
+        },
+        {
+          "id": "dock_rope_worker_niu_story_fairy",
+          "type": "童话",
+          "title": "码头缆绳工老牛遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "coffee_poet_nan",
+      "name": "咖啡店写诗的南南",
+      "nickname": "南南",
+      "gender": "female",
+      "age": 26,
+      "job": "自由写作者",
+      "role": "自由写作者",
+      "type": "resident",
+      "personality": "poetic",
+      "favoriteFood": "肉桂卷",
+      "favoriteFish": "月光办公室鱼",
+      "home": "咖啡店楼上",
+      "workplace": "窗边咖啡座",
+      "dailyRoute": [
+        "咖啡店楼上",
+        "窗边咖啡座",
+        "公园长椅"
+      ],
+      "location": "窗边咖啡座",
+      "dialogGroup": "coffee_poet_nan",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她在咖啡杯边写诗，有时把逗号写成鱼钩。",
+      "memoryTags": [
+        "coffee_poet_nan_first_meet",
+        "coffee_poet_nan_repeat_meet",
+        "coffee_poet_nan_favorite_food",
+        "coffee_poet_nan_favorite_fish",
+        "coffee_poet_nan_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "咖啡店写诗的南南说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "咖啡店写诗的南南说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "咖啡店写诗的南南说：朋友来了，连鱼漂都安静了一点。",
+        "special": "咖啡店写诗的南南说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "coffee_poet_nan_story_warm",
+          "type": "温情",
+          "title": "咖啡店写诗的南南的温柔午后"
+        },
+        {
+          "id": "coffee_poet_nan_story_office",
+          "type": "办公室",
+          "title": "咖啡店写诗的南南的办公室小插曲"
+        },
+        {
+          "id": "coffee_poet_nan_story_fairy",
+          "type": "童话",
+          "title": "咖啡店写诗的南南遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "coffee_roaster_gu",
+      "name": "咖啡烘焙师顾叔",
+      "nickname": "顾叔",
+      "gender": "male",
+      "age": 42,
+      "job": "咖啡烘焙师",
+      "role": "咖啡烘焙师",
+      "type": "resident",
+      "personality": "warm",
+      "favoriteFood": "黑巧克力",
+      "favoriteFish": "咖啡豆鱼",
+      "home": "咖啡店后巷",
+      "workplace": "烘焙间",
+      "dailyRoute": [
+        "咖啡店后巷",
+        "烘焙间",
+        "便利店"
+      ],
+      "location": "烘焙间",
+      "dialogGroup": "coffee_roaster_gu",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他能闻出咖啡豆的火候，也能闻出今天适不适合慢慢等鱼。",
+      "memoryTags": [
+        "coffee_roaster_gu_first_meet",
+        "coffee_roaster_gu_repeat_meet",
+        "coffee_roaster_gu_favorite_food",
+        "coffee_roaster_gu_favorite_fish",
+        "coffee_roaster_gu_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "咖啡烘焙师顾叔说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "咖啡烘焙师顾叔说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "咖啡烘焙师顾叔说：朋友来了，连鱼漂都安静了一点。",
+        "special": "咖啡烘焙师顾叔说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "coffee_roaster_gu_story_warm",
+          "type": "温情",
+          "title": "咖啡烘焙师顾叔的温柔午后"
+        },
+        {
+          "id": "coffee_roaster_gu_story_office",
+          "type": "办公室",
+          "title": "咖啡烘焙师顾叔的办公室小插曲"
+        },
+        {
+          "id": "coffee_roaster_gu_story_fairy",
+          "type": "童话",
+          "title": "咖啡烘焙师顾叔遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "store_night_cashier",
+      "name": "便利店夜班收银员",
+      "nickname": "夜班小何",
+      "gender": "female",
+      "age": 28,
+      "job": "收银员",
+      "role": "收银员",
+      "type": "resident",
+      "personality": "quiet",
+      "favoriteFood": "关东煮",
+      "favoriteFish": "午休鲈",
+      "home": "居民区便利店楼上",
+      "workplace": "24小时便利店",
+      "dailyRoute": [
+        "便利店楼上",
+        "24小时便利店",
+        "公园入口"
+      ],
+      "location": "24小时便利店",
+      "dialogGroup": "store_night_cashier",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她见过很多深夜加班的人，也悄悄给他们多留一串鱼丸。",
+      "memoryTags": [
+        "store_night_cashier_first_meet",
+        "store_night_cashier_repeat_meet",
+        "store_night_cashier_favorite_food",
+        "store_night_cashier_favorite_fish",
+        "store_night_cashier_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "便利店夜班收银员说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "便利店夜班收银员说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "便利店夜班收银员说：朋友来了，连鱼漂都安静了一点。",
+        "special": "便利店夜班收银员说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "store_night_cashier_story_warm",
+          "type": "温情",
+          "title": "便利店夜班收银员的温柔午后"
+        },
+        {
+          "id": "store_night_cashier_story_office",
+          "type": "办公室",
+          "title": "便利店夜班收银员的办公室小插曲"
+        },
+        {
+          "id": "store_night_cashier_story_fairy",
+          "type": "童话",
+          "title": "便利店夜班收银员遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "store_delivery_bro",
+      "name": "便利店送货阿飞",
+      "nickname": "阿飞",
+      "gender": "male",
+      "age": 25,
+      "job": "送货员",
+      "role": "送货员",
+      "type": "resident",
+      "personality": "energetic",
+      "favoriteFood": "冰饭团",
+      "favoriteFish": "薯片鳊",
+      "home": "码头合租房",
+      "workplace": "便利店仓库",
+      "dailyRoute": [
+        "码头合租房",
+        "便利店仓库",
+        "办公楼后门"
+      ],
+      "location": "便利店仓库",
+      "dialogGroup": "store_delivery_bro",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "跑得很快，笑得更快，总说生活像送货，慢了也能到。",
+      "memoryTags": [
+        "store_delivery_bro_first_meet",
+        "store_delivery_bro_repeat_meet",
+        "store_delivery_bro_favorite_food",
+        "store_delivery_bro_favorite_fish",
+        "store_delivery_bro_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "便利店送货阿飞说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "便利店送货阿飞说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "便利店送货阿飞说：朋友来了，连鱼漂都安静了一点。",
+        "special": "便利店送货阿飞说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "store_delivery_bro_story_warm",
+          "type": "温情",
+          "title": "便利店送货阿飞的温柔午后"
+        },
+        {
+          "id": "store_delivery_bro_story_office",
+          "type": "办公室",
+          "title": "便利店送货阿飞的办公室小插曲"
+        },
+        {
+          "id": "store_delivery_bro_story_fairy",
+          "type": "童话",
+          "title": "便利店送货阿飞遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "park_chess_grandpa",
+      "name": "公园下棋爷爷",
+      "nickname": "棋爷",
+      "gender": "male",
+      "age": 70,
+      "job": "退休棋手",
+      "role": "退休棋手",
+      "type": "resident",
+      "personality": "wise",
+      "favoriteFood": "热茶",
+      "favoriteFish": "老渔夫的蓝鱼",
+      "home": "公园旁老楼",
+      "workplace": "公园棋桌",
+      "dailyRoute": [
+        "公园旁老楼",
+        "公园棋桌",
+        "海边长椅"
+      ],
+      "location": "公园棋桌",
+      "dialogGroup": "park_chess_grandpa",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他下棋很慢，像在等一条还没游到棋盘边的鱼。",
+      "memoryTags": [
+        "park_chess_grandpa_first_meet",
+        "park_chess_grandpa_repeat_meet",
+        "park_chess_grandpa_favorite_food",
+        "park_chess_grandpa_favorite_fish",
+        "park_chess_grandpa_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "公园下棋爷爷说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "公园下棋爷爷说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "公园下棋爷爷说：朋友来了，连鱼漂都安静了一点。",
+        "special": "公园下棋爷爷说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "park_chess_grandpa_story_warm",
+          "type": "温情",
+          "title": "公园下棋爷爷的温柔午后"
+        },
+        {
+          "id": "park_chess_grandpa_story_office",
+          "type": "办公室",
+          "title": "公园下棋爷爷的办公室小插曲"
+        },
+        {
+          "id": "park_chess_grandpa_story_fairy",
+          "type": "童话",
+          "title": "公园下棋爷爷遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "park_kite_boy",
+      "name": "公园放风筝男孩",
+      "nickname": "风筝仔",
+      "gender": "male",
+      "age": 12,
+      "job": "学生",
+      "role": "学生",
+      "type": "resident",
+      "personality": "playful",
+      "favoriteFood": "奶油面包",
+      "favoriteFish": "海鸟信使鱼",
+      "home": "居民区五号楼",
+      "workplace": "公园草地",
+      "dailyRoute": [
+        "居民区五号楼",
+        "公园草地",
+        "便利店门口"
+      ],
+      "location": "公园草地",
+      "dialogGroup": "park_kite_boy",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他的风筝常常飞到办公室窗外，好像替大人们放一天假。",
+      "memoryTags": [
+        "park_kite_boy_first_meet",
+        "park_kite_boy_repeat_meet",
+        "park_kite_boy_favorite_food",
+        "park_kite_boy_favorite_fish",
+        "park_kite_boy_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "公园放风筝男孩说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "公园放风筝男孩说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "公园放风筝男孩说：朋友来了，连鱼漂都安静了一点。",
+        "special": "公园放风筝男孩说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "park_kite_boy_story_warm",
+          "type": "温情",
+          "title": "公园放风筝男孩的温柔午后"
+        },
+        {
+          "id": "park_kite_boy_story_office",
+          "type": "办公室",
+          "title": "公园放风筝男孩的办公室小插曲"
+        },
+        {
+          "id": "park_kite_boy_story_fairy",
+          "type": "童话",
+          "title": "公园放风筝男孩遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "residence_granny_sun",
+      "name": "居民区晒太阳奶奶",
+      "nickname": "孙奶奶",
+      "gender": "female",
+      "age": 76,
+      "job": "退休教师",
+      "role": "退休教师",
+      "type": "resident",
+      "personality": "gentle",
+      "favoriteFood": "桂花糕",
+      "favoriteFish": "会发光的梦鱼",
+      "home": "居民区一号楼",
+      "workplace": "居民区花坛",
+      "dailyRoute": [
+        "居民区一号楼",
+        "居民区花坛",
+        "公园入口"
+      ],
+      "location": "居民区花坛",
+      "dialogGroup": "residence_granny_sun",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她总坐在花坛边，说阳光也需要有人陪它待一会儿。",
+      "memoryTags": [
+        "residence_granny_sun_first_meet",
+        "residence_granny_sun_repeat_meet",
+        "residence_granny_sun_favorite_food",
+        "residence_granny_sun_favorite_fish",
+        "residence_granny_sun_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "居民区晒太阳奶奶说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "居民区晒太阳奶奶说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "居民区晒太阳奶奶说：朋友来了，连鱼漂都安静了一点。",
+        "special": "居民区晒太阳奶奶说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "residence_granny_sun_story_warm",
+          "type": "温情",
+          "title": "居民区晒太阳奶奶的温柔午后"
+        },
+        {
+          "id": "residence_granny_sun_story_office",
+          "type": "办公室",
+          "title": "居民区晒太阳奶奶的办公室小插曲"
+        },
+        {
+          "id": "residence_granny_sun_story_fairy",
+          "type": "童话",
+          "title": "居民区晒太阳奶奶遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "residence_cat_owner",
+      "name": "居民区养猫青年",
+      "nickname": "猫哥",
+      "gender": "male",
+      "age": 30,
+      "job": "插画师",
+      "role": "插画师",
+      "type": "resident",
+      "personality": "soft",
+      "favoriteFood": "三明治",
+      "favoriteFish": "奶茶鳜",
+      "home": "居民区顶楼",
+      "workplace": "家中画室",
+      "dailyRoute": [
+        "居民区顶楼",
+        "家中画室",
+        "咖啡店"
+      ],
+      "location": "家中画室",
+      "dialogGroup": "residence_cat_owner",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他画鱼，也画猫，偶尔分不清是谁在观察谁。",
+      "memoryTags": [
+        "residence_cat_owner_first_meet",
+        "residence_cat_owner_repeat_meet",
+        "residence_cat_owner_favorite_food",
+        "residence_cat_owner_favorite_fish",
+        "residence_cat_owner_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "居民区养猫青年说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "居民区养猫青年说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "居民区养猫青年说：朋友来了，连鱼漂都安静了一点。",
+        "special": "居民区养猫青年说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "residence_cat_owner_story_warm",
+          "type": "温情",
+          "title": "居民区养猫青年的温柔午后"
+        },
+        {
+          "id": "residence_cat_owner_story_office",
+          "type": "办公室",
+          "title": "居民区养猫青年的办公室小插曲"
+        },
+        {
+          "id": "residence_cat_owner_story_fairy",
+          "type": "童话",
+          "title": "居民区养猫青年遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "office_cleaner_yu",
+      "name": "办公楼夜间保洁余姐",
+      "nickname": "余姐",
+      "gender": "female",
+      "age": 45,
+      "job": "夜间保洁",
+      "role": "夜间保洁",
+      "type": "resident",
+      "personality": "reliable",
+      "favoriteFood": "热汤面",
+      "favoriteFish": "键盘泥鳅",
+      "home": "老城区小院",
+      "workplace": "办公楼夜间走廊",
+      "dailyRoute": [
+        "老城区小院",
+        "办公楼夜间走廊",
+        "前台"
+      ],
+      "location": "办公楼夜间走廊",
+      "dialogGroup": "office_cleaner_yu",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她总在大家离开后擦亮窗户，让第二天的海更清楚一点。",
+      "memoryTags": [
+        "office_cleaner_yu_first_meet",
+        "office_cleaner_yu_repeat_meet",
+        "office_cleaner_yu_favorite_food",
+        "office_cleaner_yu_favorite_fish",
+        "office_cleaner_yu_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "办公楼夜间保洁余姐说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "办公楼夜间保洁余姐说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "办公楼夜间保洁余姐说：朋友来了，连鱼漂都安静了一点。",
+        "special": "办公楼夜间保洁余姐说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "office_cleaner_yu_story_warm",
+          "type": "温情",
+          "title": "办公楼夜间保洁余姐的温柔午后"
+        },
+        {
+          "id": "office_cleaner_yu_story_office",
+          "type": "办公室",
+          "title": "办公楼夜间保洁余姐的办公室小插曲"
+        },
+        {
+          "id": "office_cleaner_yu_story_fairy",
+          "type": "童话",
+          "title": "办公楼夜间保洁余姐遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "harbor_lightkeeper",
+      "name": "灯塔看守人",
+      "nickname": "灯塔叔",
+      "gender": "male",
+      "age": 61,
+      "job": "灯塔看守人",
+      "role": "灯塔看守人",
+      "type": "resident",
+      "personality": "solitary",
+      "favoriteFood": "海盐饼干",
+      "favoriteFish": "第二世界鲸",
+      "home": "灯塔小屋",
+      "workplace": "海边灯塔",
+      "dailyRoute": [
+        "灯塔小屋",
+        "海边灯塔",
+        "旧码头"
+      ],
+      "location": "海边灯塔",
+      "dialogGroup": "harbor_lightkeeper",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他守着灯塔，也守着那些还没找到方向的人。",
+      "memoryTags": [
+        "harbor_lightkeeper_first_meet",
+        "harbor_lightkeeper_repeat_meet",
+        "harbor_lightkeeper_favorite_food",
+        "harbor_lightkeeper_favorite_fish",
+        "harbor_lightkeeper_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "灯塔看守人说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "灯塔看守人说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "灯塔看守人说：朋友来了，连鱼漂都安静了一点。",
+        "special": "灯塔看守人说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "harbor_lightkeeper_story_warm",
+          "type": "温情",
+          "title": "灯塔看守人的温柔午后"
+        },
+        {
+          "id": "harbor_lightkeeper_story_office",
+          "type": "办公室",
+          "title": "灯塔看守人的办公室小插曲"
+        },
+        {
+          "id": "harbor_lightkeeper_story_fairy",
+          "type": "童话",
+          "title": "灯塔看守人遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "old_city_bookshop_owner",
+      "name": "老城书店老板",
+      "nickname": "书店老板",
+      "gender": "male",
+      "age": 49,
+      "job": "书店老板",
+      "role": "书店老板",
+      "type": "resident",
+      "personality": "scholarly",
+      "favoriteFood": "柠檬茶",
+      "favoriteFish": "云影鲷",
+      "home": "老城书店阁楼",
+      "workplace": "旧书店",
+      "dailyRoute": [
+        "老城书店阁楼",
+        "旧书店",
+        "公园长椅"
+      ],
+      "location": "旧书店",
+      "dialogGroup": "old_city_bookshop_owner",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他的书架最底层，放着一本没人借走的《钓鱼与等待》。",
+      "memoryTags": [
+        "old_city_bookshop_owner_first_meet",
+        "old_city_bookshop_owner_repeat_meet",
+        "old_city_bookshop_owner_favorite_food",
+        "old_city_bookshop_owner_favorite_fish",
+        "old_city_bookshop_owner_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "老城书店老板说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "老城书店老板说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "老城书店老板说：朋友来了，连鱼漂都安静了一点。",
+        "special": "老城书店老板说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "old_city_bookshop_owner_story_warm",
+          "type": "温情",
+          "title": "老城书店老板的温柔午后"
+        },
+        {
+          "id": "old_city_bookshop_owner_story_office",
+          "type": "办公室",
+          "title": "老城书店老板的办公室小插曲"
+        },
+        {
+          "id": "old_city_bookshop_owner_story_fairy",
+          "type": "童话",
+          "title": "老城书店老板遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "seaside_flower_vendor",
+      "name": "海边卖花阿婆",
+      "nickname": "花婆婆",
+      "gender": "female",
+      "age": 68,
+      "job": "卖花人",
+      "role": "卖花人",
+      "type": "resident",
+      "personality": "tender",
+      "favoriteFood": "花生糖",
+      "favoriteFish": "周五锦鲤",
+      "home": "海边花棚",
+      "workplace": "海边花摊",
+      "dailyRoute": [
+        "海边花棚",
+        "海边花摊",
+        "居民区花坛"
+      ],
+      "location": "海边花摊",
+      "dialogGroup": "seaside_flower_vendor",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她卖花，也把一些没来得及说出口的祝福别在花枝上。",
+      "memoryTags": [
+        "seaside_flower_vendor_first_meet",
+        "seaside_flower_vendor_repeat_meet",
+        "seaside_flower_vendor_favorite_food",
+        "seaside_flower_vendor_favorite_fish",
+        "seaside_flower_vendor_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "海边卖花阿婆说：第一次见面，就先别急着介绍自己，听听风吧。",
+        "repeatMeet": "海边卖花阿婆说：又见面了，今天的第二世界也给你留了位置。",
+        "friend": "海边卖花阿婆说：朋友来了，连鱼漂都安静了一点。",
+        "special": "海边卖花阿婆说：如果今天很累，就把累交给海风保管一会儿。"
+      },
+      "storyEntrances": [
+        {
+          "id": "seaside_flower_vendor_story_warm",
+          "type": "温情",
+          "title": "海边卖花阿婆的温柔午后"
+        },
+        {
+          "id": "seaside_flower_vendor_story_office",
+          "type": "办公室",
+          "title": "海边卖花阿婆的办公室小插曲"
+        },
+        {
+          "id": "seaside_flower_vendor_story_fairy",
+          "type": "童话",
+          "title": "海边卖花阿婆遇见会发光的海风"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "restaurant_soup_chef",
+      "name": "汤面师傅老秦",
+      "nickname": "秦师傅",
+      "gender": "male",
+      "age": 45,
+      "job": "餐厅汤面师傅",
+      "role": "餐厅汤面师傅",
+      "type": "resident",
+      "personality": "steady",
+      "favoriteFood": "葱油拌面",
+      "favoriteFish": "便当湖鲈",
+      "home": "餐厅后巷小屋",
+      "workplace": "海风餐厅",
+      "dailyRoute": [
+        "餐厅后巷小屋",
+        "海风餐厅",
+        "市场菜摊"
+      ],
+      "location": "海风餐厅",
+      "dialogGroup": "restaurant_soup_chef",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他总说一碗热汤能把一整天的疲惫慢慢泡开。",
+      "memoryTags": [
+        "restaurant_soup_chef_first_meet",
+        "restaurant_soup_chef_repeat_meet",
+        "restaurant_soup_chef_favorite_food",
+        "restaurant_soup_chef_favorite_fish",
+        "restaurant_soup_chef_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "汤面师傅老秦说：第一次见面，我刚从餐厅那边过来，今天的风还不错。",
+        "repeatMeet": "汤面师傅老秦说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "汤面师傅老秦说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "汤面师傅老秦说：如果今天现实世界太吵，就先把心放在海风餐厅门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "restaurant_soup_chef_story_warm",
+          "type": "温馨",
+          "title": "汤面师傅老秦的温馨片段"
+        },
+        {
+          "id": "restaurant_soup_chef_story_humor",
+          "type": "幽默",
+          "title": "汤面师傅老秦的轻松插曲"
+        },
+        {
+          "id": "restaurant_soup_chef_story_twist",
+          "type": "反转",
+          "title": "汤面师傅老秦的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "restaurant_dessert_apprentice",
+      "name": "甜品学徒小茉",
+      "nickname": "小茉",
+      "gender": "female",
+      "age": 22,
+      "job": "甜品学徒",
+      "role": "甜品学徒",
+      "type": "resident",
+      "personality": "bright",
+      "favoriteFood": "芒果布丁",
+      "favoriteFish": "阳光沙丁",
+      "home": "员工宿舍",
+      "workplace": "海风餐厅甜品台",
+      "dailyRoute": [
+        "员工宿舍",
+        "海风餐厅甜品台",
+        "咖啡店窗边"
+      ],
+      "location": "海风餐厅甜品台",
+      "dialogGroup": "restaurant_dessert_apprentice",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她练习挤奶油花的时候，总会把失败品留给路过的海鸟。",
+      "memoryTags": [
+        "restaurant_dessert_apprentice_first_meet",
+        "restaurant_dessert_apprentice_repeat_meet",
+        "restaurant_dessert_apprentice_favorite_food",
+        "restaurant_dessert_apprentice_favorite_fish",
+        "restaurant_dessert_apprentice_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "甜品学徒小茉说：第一次见面，我刚从餐厅那边过来，今天的风还不错。",
+        "repeatMeet": "甜品学徒小茉说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "甜品学徒小茉说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "甜品学徒小茉说：如果今天现实世界太吵，就先把心放在海风餐厅甜品台门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "restaurant_dessert_apprentice_story_warm",
+          "type": "温馨",
+          "title": "甜品学徒小茉的温馨片段"
+        },
+        {
+          "id": "restaurant_dessert_apprentice_story_humor",
+          "type": "幽默",
+          "title": "甜品学徒小茉的轻松插曲"
+        },
+        {
+          "id": "restaurant_dessert_apprentice_story_twist",
+          "type": "反转",
+          "title": "甜品学徒小茉的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "school_art_teacher",
+      "name": "美术老师许青",
+      "nickname": "许老师",
+      "gender": "female",
+      "age": 34,
+      "job": "学校美术老师",
+      "role": "学校美术老师",
+      "type": "resident",
+      "personality": "gentle",
+      "favoriteFood": "紫菜饭团",
+      "favoriteFish": "纸鹤池锦",
+      "home": "教师公寓",
+      "workplace": "第二世界学校",
+      "dailyRoute": [
+        "教师公寓",
+        "第二世界学校",
+        "公园写生角"
+      ],
+      "location": "第二世界学校",
+      "dialogGroup": "school_art_teacher",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她教孩子画海，也教大人把心事画得轻一点。",
+      "memoryTags": [
+        "school_art_teacher_first_meet",
+        "school_art_teacher_repeat_meet",
+        "school_art_teacher_favorite_food",
+        "school_art_teacher_favorite_fish",
+        "school_art_teacher_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "美术老师许青说：第一次见面，我刚从学校那边过来，今天的风还不错。",
+        "repeatMeet": "美术老师许青说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "美术老师许青说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "美术老师许青说：如果今天现实世界太吵，就先把心放在第二世界学校门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "school_art_teacher_story_warm",
+          "type": "温馨",
+          "title": "美术老师许青的温馨片段"
+        },
+        {
+          "id": "school_art_teacher_story_humor",
+          "type": "幽默",
+          "title": "美术老师许青的轻松插曲"
+        },
+        {
+          "id": "school_art_teacher_story_twist",
+          "type": "反转",
+          "title": "美术老师许青的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "school_gate_keeper",
+      "name": "校门口老梁",
+      "nickname": "梁伯",
+      "gender": "male",
+      "age": 59,
+      "job": "学校门卫",
+      "role": "学校门卫",
+      "type": "resident",
+      "personality": "watchful",
+      "favoriteFood": "热豆浆",
+      "favoriteFish": "纽扣小鳑鲏",
+      "home": "学校门房",
+      "workplace": "第二世界学校门口",
+      "dailyRoute": [
+        "学校门房",
+        "第二世界学校门口",
+        "便利店"
+      ],
+      "location": "第二世界学校门口",
+      "dialogGroup": "school_gate_keeper",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他记得每个孩子放学时的笑声，也记得每个上班族急匆匆的背影。",
+      "memoryTags": [
+        "school_gate_keeper_first_meet",
+        "school_gate_keeper_repeat_meet",
+        "school_gate_keeper_favorite_food",
+        "school_gate_keeper_favorite_fish",
+        "school_gate_keeper_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "校门口老梁说：第一次见面，我刚从学校那边过来，今天的风还不错。",
+        "repeatMeet": "校门口老梁说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "校门口老梁说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "校门口老梁说：如果今天现实世界太吵，就先把心放在第二世界学校门口门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "school_gate_keeper_story_warm",
+          "type": "温馨",
+          "title": "校门口老梁的温馨片段"
+        },
+        {
+          "id": "school_gate_keeper_story_humor",
+          "type": "幽默",
+          "title": "校门口老梁的轻松插曲"
+        },
+        {
+          "id": "school_gate_keeper_story_twist",
+          "type": "反转",
+          "title": "校门口老梁的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hospital_night_nurse",
+      "name": "夜班护士林夏",
+      "nickname": "林护士",
+      "gender": "female",
+      "age": 29,
+      "job": "医院夜班护士",
+      "role": "医院夜班护士",
+      "type": "resident",
+      "personality": "warm",
+      "favoriteFood": "红枣粥",
+      "favoriteFish": "灯笼深海鳐",
+      "home": "医院值班宿舍",
+      "workplace": "海边医院",
+      "dailyRoute": [
+        "医院值班宿舍",
+        "海边医院",
+        "海边长椅"
+      ],
+      "location": "海边医院",
+      "dialogGroup": "hospital_night_nurse",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她说夜里最需要灯的人，往往假装自己不累。",
+      "memoryTags": [
+        "hospital_night_nurse_first_meet",
+        "hospital_night_nurse_repeat_meet",
+        "hospital_night_nurse_favorite_food",
+        "hospital_night_nurse_favorite_fish",
+        "hospital_night_nurse_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "夜班护士林夏说：第一次见面，我刚从医院那边过来，今天的风还不错。",
+        "repeatMeet": "夜班护士林夏说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "夜班护士林夏说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "夜班护士林夏说：如果今天现实世界太吵，就先把心放在海边医院门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "hospital_night_nurse_story_warm",
+          "type": "温馨",
+          "title": "夜班护士林夏的温馨片段"
+        },
+        {
+          "id": "hospital_night_nurse_story_humor",
+          "type": "幽默",
+          "title": "夜班护士林夏的轻松插曲"
+        },
+        {
+          "id": "hospital_night_nurse_story_twist",
+          "type": "反转",
+          "title": "夜班护士林夏的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hospital_pharmacist_uncle",
+      "name": "药房叔叔阿庆",
+      "nickname": "阿庆叔",
+      "gender": "male",
+      "age": 47,
+      "job": "医院药剂师",
+      "role": "医院药剂师",
+      "type": "resident",
+      "personality": "careful",
+      "favoriteFood": "薄荷糖",
+      "favoriteFish": "薄荷溪鲦",
+      "home": "医院家属楼",
+      "workplace": "海边医院药房",
+      "dailyRoute": [
+        "医院家属楼",
+        "海边医院药房",
+        "书店"
+      ],
+      "location": "海边医院药房",
+      "dialogGroup": "hospital_pharmacist_uncle",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他配药很慢，因为总想确认每个人都能安心回家。",
+      "memoryTags": [
+        "hospital_pharmacist_uncle_first_meet",
+        "hospital_pharmacist_uncle_repeat_meet",
+        "hospital_pharmacist_uncle_favorite_food",
+        "hospital_pharmacist_uncle_favorite_fish",
+        "hospital_pharmacist_uncle_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "药房叔叔阿庆说：第一次见面，我刚从医院那边过来，今天的风还不错。",
+        "repeatMeet": "药房叔叔阿庆说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "药房叔叔阿庆说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "药房叔叔阿庆说：如果今天现实世界太吵，就先把心放在海边医院药房门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "hospital_pharmacist_uncle_story_warm",
+          "type": "温馨",
+          "title": "药房叔叔阿庆的温馨片段"
+        },
+        {
+          "id": "hospital_pharmacist_uncle_story_humor",
+          "type": "幽默",
+          "title": "药房叔叔阿庆的轻松插曲"
+        },
+        {
+          "id": "hospital_pharmacist_uncle_story_twist",
+          "type": "反转",
+          "title": "药房叔叔阿庆的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "cafe_latte_artist",
+      "name": "拉花师安妮",
+      "nickname": "安妮",
+      "gender": "female",
+      "age": 27,
+      "job": "咖啡店拉花师",
+      "role": "咖啡店拉花师",
+      "type": "resident",
+      "personality": "creative",
+      "favoriteFood": "焦糖拿铁",
+      "favoriteFish": "气泡海鲻",
+      "home": "咖啡店阁楼",
+      "workplace": "窗海咖啡店",
+      "dailyRoute": [
+        "咖啡店阁楼",
+        "窗海咖啡店",
+        "码头栈道"
+      ],
+      "location": "窗海咖啡店",
+      "dialogGroup": "cafe_latte_artist",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她能把一朵海浪画进咖啡，也能把坏心情搅成奶泡。",
+      "memoryTags": [
+        "cafe_latte_artist_first_meet",
+        "cafe_latte_artist_repeat_meet",
+        "cafe_latte_artist_favorite_food",
+        "cafe_latte_artist_favorite_fish",
+        "cafe_latte_artist_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "拉花师安妮说：第一次见面，我刚从咖啡店那边过来，今天的风还不错。",
+        "repeatMeet": "拉花师安妮说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "拉花师安妮说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "拉花师安妮说：如果今天现实世界太吵，就先把心放在窗海咖啡店门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "cafe_latte_artist_story_warm",
+          "type": "温馨",
+          "title": "拉花师安妮的温馨片段"
+        },
+        {
+          "id": "cafe_latte_artist_story_humor",
+          "type": "幽默",
+          "title": "拉花师安妮的轻松插曲"
+        },
+        {
+          "id": "cafe_latte_artist_story_twist",
+          "type": "反转",
+          "title": "拉花师安妮的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "cafe_sleepy_roaster",
+      "name": "瞌睡烘豆师阿森",
+      "nickname": "阿森",
+      "gender": "male",
+      "age": 36,
+      "job": "咖啡烘豆师",
+      "role": "咖啡烘豆师",
+      "type": "resident",
+      "personality": "sleepy",
+      "favoriteFood": "黑咖啡",
+      "favoriteFish": "加班湖鳟",
+      "home": "咖啡店后屋",
+      "workplace": "窗海咖啡店烘焙间",
+      "dailyRoute": [
+        "咖啡店后屋",
+        "窗海咖啡店烘焙间",
+        "公交站"
+      ],
+      "location": "窗海咖啡店烘焙间",
+      "dialogGroup": "cafe_sleepy_roaster",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他总在烘豆时打盹，却从没让一颗豆子孤单地焦掉。",
+      "memoryTags": [
+        "cafe_sleepy_roaster_first_meet",
+        "cafe_sleepy_roaster_repeat_meet",
+        "cafe_sleepy_roaster_favorite_food",
+        "cafe_sleepy_roaster_favorite_fish",
+        "cafe_sleepy_roaster_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "瞌睡烘豆师阿森说：第一次见面，我刚从咖啡店那边过来，今天的风还不错。",
+        "repeatMeet": "瞌睡烘豆师阿森说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "瞌睡烘豆师阿森说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "瞌睡烘豆师阿森说：如果今天现实世界太吵，就先把心放在窗海咖啡店烘焙间门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "cafe_sleepy_roaster_story_warm",
+          "type": "温馨",
+          "title": "瞌睡烘豆师阿森的温馨片段"
+        },
+        {
+          "id": "cafe_sleepy_roaster_story_humor",
+          "type": "幽默",
+          "title": "瞌睡烘豆师阿森的轻松插曲"
+        },
+        {
+          "id": "cafe_sleepy_roaster_story_twist",
+          "type": "反转",
+          "title": "瞌睡烘豆师阿森的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "pier_net_mender_aunt",
+      "name": "补网阿姨春梅",
+      "nickname": "春梅姨",
+      "gender": "female",
+      "age": 52,
+      "job": "码头补网匠",
+      "role": "码头补网匠",
+      "type": "resident",
+      "personality": "practical",
+      "favoriteFood": "海带汤",
+      "favoriteFish": "绳结码头鲽",
+      "home": "码头木屋",
+      "workplace": "旧码头补网棚",
+      "dailyRoute": [
+        "码头木屋",
+        "旧码头补网棚",
+        "市场"
+      ],
+      "location": "旧码头补网棚",
+      "dialogGroup": "pier_net_mender_aunt",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她把破掉的渔网补好，也顺手补好一些人的坏心情。",
+      "memoryTags": [
+        "pier_net_mender_aunt_first_meet",
+        "pier_net_mender_aunt_repeat_meet",
+        "pier_net_mender_aunt_favorite_food",
+        "pier_net_mender_aunt_favorite_fish",
+        "pier_net_mender_aunt_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "补网阿姨春梅说：第一次见面，我刚从码头那边过来，今天的风还不错。",
+        "repeatMeet": "补网阿姨春梅说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "补网阿姨春梅说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "补网阿姨春梅说：如果今天现实世界太吵，就先把心放在旧码头补网棚门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "pier_net_mender_aunt_story_warm",
+          "type": "温馨",
+          "title": "补网阿姨春梅的温馨片段"
+        },
+        {
+          "id": "pier_net_mender_aunt_story_humor",
+          "type": "幽默",
+          "title": "补网阿姨春梅的轻松插曲"
+        },
+        {
+          "id": "pier_net_mender_aunt_story_twist",
+          "type": "反转",
+          "title": "补网阿姨春梅的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "pier_whistle_boy",
+      "name": "吹哨少年阿洛",
+      "nickname": "阿洛",
+      "gender": "male",
+      "age": 18,
+      "job": "码头引船员",
+      "role": "码头引船员",
+      "type": "resident",
+      "personality": "curious",
+      "favoriteFood": "烤玉米",
+      "favoriteFish": "小票码头鲷",
+      "home": "码头宿舍",
+      "workplace": "旧码头",
+      "dailyRoute": [
+        "码头宿舍",
+        "旧码头",
+        "灯塔"
+      ],
+      "location": "旧码头",
+      "dialogGroup": "pier_whistle_boy",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他用口哨给回港的小船指路，也给迷路的人提神。",
+      "memoryTags": [
+        "pier_whistle_boy_first_meet",
+        "pier_whistle_boy_repeat_meet",
+        "pier_whistle_boy_favorite_food",
+        "pier_whistle_boy_favorite_fish",
+        "pier_whistle_boy_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "吹哨少年阿洛说：第一次见面，我刚从码头那边过来，今天的风还不错。",
+        "repeatMeet": "吹哨少年阿洛说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "吹哨少年阿洛说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "吹哨少年阿洛说：如果今天现实世界太吵，就先把心放在旧码头门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "pier_whistle_boy_story_warm",
+          "type": "温馨",
+          "title": "吹哨少年阿洛的温馨片段"
+        },
+        {
+          "id": "pier_whistle_boy_story_humor",
+          "type": "幽默",
+          "title": "吹哨少年阿洛的轻松插曲"
+        },
+        {
+          "id": "pier_whistle_boy_story_twist",
+          "type": "反转",
+          "title": "吹哨少年阿洛的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "police_bicycle_officer",
+      "name": "单车巡警周然",
+      "nickname": "周巡警",
+      "gender": "male",
+      "age": 31,
+      "job": "社区巡警",
+      "role": "社区巡警",
+      "type": "resident",
+      "personality": "upright",
+      "favoriteFood": "牛肉饭",
+      "favoriteFish": "黄铜锚王",
+      "home": "警察局宿舍",
+      "workplace": "海边警察局",
+      "dailyRoute": [
+        "警察局宿舍",
+        "海边警察局",
+        "公园",
+        "公交站"
+      ],
+      "location": "海边警察局",
+      "dialogGroup": "police_bicycle_officer",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他骑车巡逻时会放慢速度，因为怕惊动晒太阳的猫。",
+      "memoryTags": [
+        "police_bicycle_officer_first_meet",
+        "police_bicycle_officer_repeat_meet",
+        "police_bicycle_officer_favorite_food",
+        "police_bicycle_officer_favorite_fish",
+        "police_bicycle_officer_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "单车巡警周然说：第一次见面，我刚从警察局那边过来，今天的风还不错。",
+        "repeatMeet": "单车巡警周然说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "单车巡警周然说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "单车巡警周然说：如果今天现实世界太吵，就先把心放在海边警察局门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "police_bicycle_officer_story_warm",
+          "type": "温馨",
+          "title": "单车巡警周然的温馨片段"
+        },
+        {
+          "id": "police_bicycle_officer_story_humor",
+          "type": "幽默",
+          "title": "单车巡警周然的轻松插曲"
+        },
+        {
+          "id": "police_bicycle_officer_story_twist",
+          "type": "反转",
+          "title": "单车巡警周然的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "police_lost_found_clerk",
+      "name": "失物招领员小唐",
+      "nickname": "小唐",
+      "gender": "female",
+      "age": 26,
+      "job": "失物招领员",
+      "role": "失物招领员",
+      "type": "resident",
+      "personality": "patient",
+      "favoriteFood": "柠檬蛋糕",
+      "favoriteFish": "备忘录鲶",
+      "home": "警察局楼上",
+      "workplace": "警察局失物招领窗口",
+      "dailyRoute": [
+        "警察局楼上",
+        "警察局失物招领窗口",
+        "邮局"
+      ],
+      "location": "警察局失物招领窗口",
+      "dialogGroup": "police_lost_found_clerk",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她保管伞、钥匙和没来得及说出口的道歉。",
+      "memoryTags": [
+        "police_lost_found_clerk_first_meet",
+        "police_lost_found_clerk_repeat_meet",
+        "police_lost_found_clerk_favorite_food",
+        "police_lost_found_clerk_favorite_fish",
+        "police_lost_found_clerk_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "失物招领员小唐说：第一次见面，我刚从警察局那边过来，今天的风还不错。",
+        "repeatMeet": "失物招领员小唐说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "失物招领员小唐说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "失物招领员小唐说：如果今天现实世界太吵，就先把心放在警察局失物招领窗口门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "police_lost_found_clerk_story_warm",
+          "type": "温馨",
+          "title": "失物招领员小唐的温馨片段"
+        },
+        {
+          "id": "police_lost_found_clerk_story_humor",
+          "type": "幽默",
+          "title": "失物招领员小唐的轻松插曲"
+        },
+        {
+          "id": "police_lost_found_clerk_story_twist",
+          "type": "反转",
+          "title": "失物招领员小唐的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "fire_station_cook",
+      "name": "消防站饭叔老马",
+      "nickname": "马叔",
+      "gender": "male",
+      "age": 54,
+      "job": "消防站炊事员",
+      "role": "消防站炊事员",
+      "type": "resident",
+      "personality": "hearty",
+      "favoriteFood": "番茄炒蛋",
+      "favoriteFish": "雨衣锦鲤",
+      "home": "消防站宿舍",
+      "workplace": "海风消防站",
+      "dailyRoute": [
+        "消防站宿舍",
+        "海风消防站厨房",
+        "市场"
+      ],
+      "location": "海风消防站",
+      "dialogGroup": "fire_station_cook",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他相信热饭能让刚从风里回来的人重新站稳。",
+      "memoryTags": [
+        "fire_station_cook_first_meet",
+        "fire_station_cook_repeat_meet",
+        "fire_station_cook_favorite_food",
+        "fire_station_cook_favorite_fish",
+        "fire_station_cook_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "消防站饭叔老马说：第一次见面，我刚从消防站那边过来，今天的风还不错。",
+        "repeatMeet": "消防站饭叔老马说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "消防站饭叔老马说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "消防站饭叔老马说：如果今天现实世界太吵，就先把心放在海风消防站门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "fire_station_cook_story_warm",
+          "type": "温馨",
+          "title": "消防站饭叔老马的温馨片段"
+        },
+        {
+          "id": "fire_station_cook_story_humor",
+          "type": "幽默",
+          "title": "消防站饭叔老马的轻松插曲"
+        },
+        {
+          "id": "fire_station_cook_story_twist",
+          "type": "反转",
+          "title": "消防站饭叔老马的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "fire_rookie_mina",
+      "name": "新消防员米娜",
+      "nickname": "米娜",
+      "gender": "female",
+      "age": 24,
+      "job": "消防员新人",
+      "role": "消防员新人",
+      "type": "resident",
+      "personality": "brave",
+      "favoriteFood": "草莓酸奶",
+      "favoriteFish": "日晷海枪鱼",
+      "home": "消防站宿舍",
+      "workplace": "海风消防站训练场",
+      "dailyRoute": [
+        "消防站宿舍",
+        "海风消防站训练场",
+        "便利店"
+      ],
+      "location": "海风消防站训练场",
+      "dialogGroup": "fire_rookie_mina",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她练习出警速度，也练习在紧张时对自己笑一下。",
+      "memoryTags": [
+        "fire_rookie_mina_first_meet",
+        "fire_rookie_mina_repeat_meet",
+        "fire_rookie_mina_favorite_food",
+        "fire_rookie_mina_favorite_fish",
+        "fire_rookie_mina_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "新消防员米娜说：第一次见面，我刚从消防站那边过来，今天的风还不错。",
+        "repeatMeet": "新消防员米娜说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "新消防员米娜说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "新消防员米娜说：如果今天现实世界太吵，就先把心放在海风消防站训练场门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "fire_rookie_mina_story_warm",
+          "type": "温馨",
+          "title": "新消防员米娜的温馨片段"
+        },
+        {
+          "id": "fire_rookie_mina_story_humor",
+          "type": "幽默",
+          "title": "新消防员米娜的轻松插曲"
+        },
+        {
+          "id": "fire_rookie_mina_story_twist",
+          "type": "反转",
+          "title": "新消防员米娜的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "flower_shop_owner_lu",
+      "name": "花店老板陆晴",
+      "nickname": "陆晴",
+      "gender": "female",
+      "age": 40,
+      "job": "花店老板",
+      "role": "花店老板",
+      "type": "resident",
+      "personality": "tender",
+      "favoriteFood": "桂花糕",
+      "favoriteFish": "极光莲鱼",
+      "home": "花店二楼",
+      "workplace": "晴日花店",
+      "dailyRoute": [
+        "花店二楼",
+        "晴日花店",
+        "医院"
+      ],
+      "location": "晴日花店",
+      "dialogGroup": "flower_shop_owner_lu",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她说每束花都有一个等着被安慰的人。",
+      "memoryTags": [
+        "flower_shop_owner_lu_first_meet",
+        "flower_shop_owner_lu_repeat_meet",
+        "flower_shop_owner_lu_favorite_food",
+        "flower_shop_owner_lu_favorite_fish",
+        "flower_shop_owner_lu_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "花店老板陆晴说：第一次见面，我刚从花店那边过来，今天的风还不错。",
+        "repeatMeet": "花店老板陆晴说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "花店老板陆晴说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "花店老板陆晴说：如果今天现实世界太吵，就先把心放在晴日花店门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "flower_shop_owner_lu_story_warm",
+          "type": "温馨",
+          "title": "花店老板陆晴的温馨片段"
+        },
+        {
+          "id": "flower_shop_owner_lu_story_humor",
+          "type": "幽默",
+          "title": "花店老板陆晴的轻松插曲"
+        },
+        {
+          "id": "flower_shop_owner_lu_story_twist",
+          "type": "反转",
+          "title": "花店老板陆晴的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "flower_delivery_kid",
+      "name": "送花少年豆豆",
+      "nickname": "豆豆",
+      "gender": "male",
+      "age": 16,
+      "job": "送花员",
+      "role": "送花员",
+      "type": "resident",
+      "personality": "lively",
+      "favoriteFood": "蜜桃汽水",
+      "favoriteFish": "阳光沙丁",
+      "home": "居民区小阁楼",
+      "workplace": "晴日花店配送台",
+      "dailyRoute": [
+        "居民区小阁楼",
+        "晴日花店配送台",
+        "办公楼前台"
+      ],
+      "location": "晴日花店配送台",
+      "dialogGroup": "flower_delivery_kid",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他送花总会跑错一层楼，却常常刚好送到需要的人手里。",
+      "memoryTags": [
+        "flower_delivery_kid_first_meet",
+        "flower_delivery_kid_repeat_meet",
+        "flower_delivery_kid_favorite_food",
+        "flower_delivery_kid_favorite_fish",
+        "flower_delivery_kid_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "送花少年豆豆说：第一次见面，我刚从花店那边过来，今天的风还不错。",
+        "repeatMeet": "送花少年豆豆说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "送花少年豆豆说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "送花少年豆豆说：如果今天现实世界太吵，就先把心放在晴日花店配送台门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "flower_delivery_kid_story_warm",
+          "type": "温馨",
+          "title": "送花少年豆豆的温馨片段"
+        },
+        {
+          "id": "flower_delivery_kid_story_humor",
+          "type": "幽默",
+          "title": "送花少年豆豆的轻松插曲"
+        },
+        {
+          "id": "flower_delivery_kid_story_twist",
+          "type": "反转",
+          "title": "送花少年豆豆的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "bookstore_cat_librarian",
+      "name": "猫咪书店管理员阿岚",
+      "nickname": "阿岚",
+      "gender": "female",
+      "age": 33,
+      "job": "书店管理员",
+      "role": "书店管理员",
+      "type": "resident",
+      "personality": "quiet",
+      "favoriteFood": "热可可",
+      "favoriteFish": "明信片湖梭",
+      "home": "书店阁楼",
+      "workplace": "潮声书店",
+      "dailyRoute": [
+        "书店阁楼",
+        "潮声书店",
+        "公园"
+      ],
+      "location": "潮声书店",
+      "dialogGroup": "bookstore_cat_librarian",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她负责把书归位，也负责提醒读者别把自己弄丢。",
+      "memoryTags": [
+        "bookstore_cat_librarian_first_meet",
+        "bookstore_cat_librarian_repeat_meet",
+        "bookstore_cat_librarian_favorite_food",
+        "bookstore_cat_librarian_favorite_fish",
+        "bookstore_cat_librarian_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "猫咪书店管理员阿岚说：第一次见面，我刚从书店那边过来，今天的风还不错。",
+        "repeatMeet": "猫咪书店管理员阿岚说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "猫咪书店管理员阿岚说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "猫咪书店管理员阿岚说：如果今天现实世界太吵，就先把心放在潮声书店门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "bookstore_cat_librarian_story_warm",
+          "type": "温馨",
+          "title": "猫咪书店管理员阿岚的温馨片段"
+        },
+        {
+          "id": "bookstore_cat_librarian_story_humor",
+          "type": "幽默",
+          "title": "猫咪书店管理员阿岚的轻松插曲"
+        },
+        {
+          "id": "bookstore_cat_librarian_story_twist",
+          "type": "反转",
+          "title": "猫咪书店管理员阿岚的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "supermarket_cashier_fei",
+      "name": "超市收银员菲菲",
+      "nickname": "菲菲",
+      "gender": "female",
+      "age": 25,
+      "job": "超市收银员",
+      "role": "超市收银员",
+      "type": "resident",
+      "personality": "cheerful",
+      "favoriteFood": "关东煮",
+      "favoriteFish": "薯片塘鳅",
+      "home": "超市员工宿舍",
+      "workplace": "海角超市",
+      "dailyRoute": [
+        "超市员工宿舍",
+        "海角超市",
+        "公交站"
+      ],
+      "location": "海角超市",
+      "dialogGroup": "supermarket_cashier_fei",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她能一眼看出谁买零食是为了开心，谁买零食是为了撑住今天。",
+      "memoryTags": [
+        "supermarket_cashier_fei_first_meet",
+        "supermarket_cashier_fei_repeat_meet",
+        "supermarket_cashier_fei_favorite_food",
+        "supermarket_cashier_fei_favorite_fish",
+        "supermarket_cashier_fei_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "超市收银员菲菲说：第一次见面，我刚从超市那边过来，今天的风还不错。",
+        "repeatMeet": "超市收银员菲菲说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "超市收银员菲菲说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "超市收银员菲菲说：如果今天现实世界太吵，就先把心放在海角超市门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "supermarket_cashier_fei_story_warm",
+          "type": "温馨",
+          "title": "超市收银员菲菲的温馨片段"
+        },
+        {
+          "id": "supermarket_cashier_fei_story_humor",
+          "type": "幽默",
+          "title": "超市收银员菲菲的轻松插曲"
+        },
+        {
+          "id": "supermarket_cashier_fei_story_twist",
+          "type": "反转",
+          "title": "超市收银员菲菲的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "market_fishmonger_hu",
+      "name": "市场鱼贩胡哥",
+      "nickname": "胡哥",
+      "gender": "male",
+      "age": 43,
+      "job": "市场鱼贩",
+      "role": "市场鱼贩",
+      "type": "resident",
+      "personality": "talkative",
+      "favoriteFood": "蒜蓉粉丝",
+      "favoriteFish": "会议海鲭",
+      "home": "市场后街",
+      "workplace": "清晨市场鱼摊",
+      "dailyRoute": [
+        "市场后街",
+        "清晨市场鱼摊",
+        "码头"
+      ],
+      "location": "清晨市场鱼摊",
+      "dialogGroup": "market_fishmonger_hu",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他嗓门很大，但给熟人称鱼时总会悄悄多一点。",
+      "memoryTags": [
+        "market_fishmonger_hu_first_meet",
+        "market_fishmonger_hu_repeat_meet",
+        "market_fishmonger_hu_favorite_food",
+        "market_fishmonger_hu_favorite_fish",
+        "market_fishmonger_hu_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "市场鱼贩胡哥说：第一次见面，我刚从市场那边过来，今天的风还不错。",
+        "repeatMeet": "市场鱼贩胡哥说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "市场鱼贩胡哥说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "市场鱼贩胡哥说：如果今天现实世界太吵，就先把心放在清晨市场鱼摊门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "market_fishmonger_hu_story_warm",
+          "type": "温馨",
+          "title": "市场鱼贩胡哥的温馨片段"
+        },
+        {
+          "id": "market_fishmonger_hu_story_humor",
+          "type": "幽默",
+          "title": "市场鱼贩胡哥的轻松插曲"
+        },
+        {
+          "id": "market_fishmonger_hu_story_twist",
+          "type": "反转",
+          "title": "市场鱼贩胡哥的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "market_vegetable_granny",
+      "name": "菜市场莲奶奶",
+      "nickname": "莲奶奶",
+      "gender": "female",
+      "age": 70,
+      "job": "菜摊摊主",
+      "role": "菜摊摊主",
+      "type": "resident",
+      "personality": "kind",
+      "favoriteFood": "玉米粥",
+      "favoriteFish": "便当湖鲈",
+      "home": "老城区小院",
+      "workplace": "清晨市场菜摊",
+      "dailyRoute": [
+        "老城区小院",
+        "清晨市场菜摊",
+        "花店"
+      ],
+      "location": "清晨市场菜摊",
+      "dialogGroup": "market_vegetable_granny",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她卖青菜，也把生活里皱巴巴的部分整理得很清爽。",
+      "memoryTags": [
+        "market_vegetable_granny_first_meet",
+        "market_vegetable_granny_repeat_meet",
+        "market_vegetable_granny_favorite_food",
+        "market_vegetable_granny_favorite_fish",
+        "market_vegetable_granny_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "菜市场莲奶奶说：第一次见面，我刚从市场那边过来，今天的风还不错。",
+        "repeatMeet": "菜市场莲奶奶说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "菜市场莲奶奶说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "菜市场莲奶奶说：如果今天现实世界太吵，就先把心放在清晨市场菜摊门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "market_vegetable_granny_story_warm",
+          "type": "温馨",
+          "title": "菜市场莲奶奶的温馨片段"
+        },
+        {
+          "id": "market_vegetable_granny_story_humor",
+          "type": "幽默",
+          "title": "菜市场莲奶奶的轻松插曲"
+        },
+        {
+          "id": "market_vegetable_granny_story_twist",
+          "type": "反转",
+          "title": "菜市场莲奶奶的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "barber_scissor_bro",
+      "name": "剪刀哥阿锐",
+      "nickname": "阿锐",
+      "gender": "male",
+      "age": 32,
+      "job": "理发师",
+      "role": "理发师",
+      "type": "resident",
+      "personality": "stylish",
+      "favoriteFood": "炸鸡块",
+      "favoriteFish": "键盘河龙鱼",
+      "home": "理发店后屋",
+      "workplace": "海风理发店",
+      "dailyRoute": [
+        "理发店后屋",
+        "海风理发店",
+        "咖啡店"
+      ],
+      "location": "海风理发店",
+      "dialogGroup": "barber_scissor_bro",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他剪头发像修剪一段烦恼，总能让人轻一点走出去。",
+      "memoryTags": [
+        "barber_scissor_bro_first_meet",
+        "barber_scissor_bro_repeat_meet",
+        "barber_scissor_bro_favorite_food",
+        "barber_scissor_bro_favorite_fish",
+        "barber_scissor_bro_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "剪刀哥阿锐说：第一次见面，我刚从理发店那边过来，今天的风还不错。",
+        "repeatMeet": "剪刀哥阿锐说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "剪刀哥阿锐说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "剪刀哥阿锐说：如果今天现实世界太吵，就先把心放在海风理发店门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "barber_scissor_bro_story_warm",
+          "type": "温馨",
+          "title": "剪刀哥阿锐的温馨片段"
+        },
+        {
+          "id": "barber_scissor_bro_story_humor",
+          "type": "幽默",
+          "title": "剪刀哥阿锐的轻松插曲"
+        },
+        {
+          "id": "barber_scissor_bro_story_twist",
+          "type": "反转",
+          "title": "剪刀哥阿锐的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "bar_singer_yue",
+      "name": "小酒吧歌手月月",
+      "nickname": "月月",
+      "gender": "female",
+      "age": 28,
+      "job": "驻唱歌手",
+      "role": "驻唱歌手",
+      "type": "resident",
+      "personality": "dreamy",
+      "favoriteFood": "蜂蜜柚子茶",
+      "favoriteFish": "月窗海鲈",
+      "home": "酒吧阁楼",
+      "workplace": "晚风酒吧",
+      "dailyRoute": [
+        "酒吧阁楼",
+        "晚风酒吧",
+        "海边长椅"
+      ],
+      "location": "晚风酒吧",
+      "dialogGroup": "bar_singer_yue",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她唱歌时声音很轻，像不想吵醒已经很累的世界。",
+      "memoryTags": [
+        "bar_singer_yue_first_meet",
+        "bar_singer_yue_repeat_meet",
+        "bar_singer_yue_favorite_food",
+        "bar_singer_yue_favorite_fish",
+        "bar_singer_yue_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "小酒吧歌手月月说：第一次见面，我刚从酒吧那边过来，今天的风还不错。",
+        "repeatMeet": "小酒吧歌手月月说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "小酒吧歌手月月说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "小酒吧歌手月月说：如果今天现实世界太吵，就先把心放在晚风酒吧门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "bar_singer_yue_story_warm",
+          "type": "温馨",
+          "title": "小酒吧歌手月月的温馨片段"
+        },
+        {
+          "id": "bar_singer_yue_story_humor",
+          "type": "幽默",
+          "title": "小酒吧歌手月月的轻松插曲"
+        },
+        {
+          "id": "bar_singer_yue_story_twist",
+          "type": "反转",
+          "title": "小酒吧歌手月月的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "hotel_frontdesk_hao",
+      "name": "酒店前台郝然",
+      "nickname": "郝然",
+      "gender": "male",
+      "age": 30,
+      "job": "酒店前台",
+      "role": "酒店前台",
+      "type": "resident",
+      "personality": "polite",
+      "favoriteFood": "三明治",
+      "favoriteFish": "玻璃预言鲤",
+      "home": "酒店员工宿舍",
+      "workplace": "海景酒店前台",
+      "dailyRoute": [
+        "酒店员工宿舍",
+        "海景酒店前台",
+        "邮局"
+      ],
+      "location": "海景酒店前台",
+      "dialogGroup": "hotel_frontdesk_hao",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他每天接待远方的人，也悄悄收藏每一句“终于到了”。",
+      "memoryTags": [
+        "hotel_frontdesk_hao_first_meet",
+        "hotel_frontdesk_hao_repeat_meet",
+        "hotel_frontdesk_hao_favorite_food",
+        "hotel_frontdesk_hao_favorite_fish",
+        "hotel_frontdesk_hao_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "酒店前台郝然说：第一次见面，我刚从酒店那边过来，今天的风还不错。",
+        "repeatMeet": "酒店前台郝然说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "酒店前台郝然说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "酒店前台郝然说：如果今天现实世界太吵，就先把心放在海景酒店前台门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "hotel_frontdesk_hao_story_warm",
+          "type": "温馨",
+          "title": "酒店前台郝然的温馨片段"
+        },
+        {
+          "id": "hotel_frontdesk_hao_story_humor",
+          "type": "幽默",
+          "title": "酒店前台郝然的轻松插曲"
+        },
+        {
+          "id": "hotel_frontdesk_hao_story_twist",
+          "type": "反转",
+          "title": "酒店前台郝然的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "bus_station_dispatcher",
+      "name": "公交调度员苗姐",
+      "nickname": "苗姐",
+      "gender": "female",
+      "age": 46,
+      "job": "公交调度员",
+      "role": "公交调度员",
+      "type": "resident",
+      "personality": "organized",
+      "favoriteFood": "热包子",
+      "favoriteFish": "回形针鲤",
+      "home": "公交站宿舍",
+      "workplace": "海边公交站",
+      "dailyRoute": [
+        "公交站宿舍",
+        "海边公交站",
+        "超市"
+      ],
+      "location": "海边公交站",
+      "dialogGroup": "bus_station_dispatcher",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她安排每一班车准时出发，也允许偶尔慢下来的心情上车。",
+      "memoryTags": [
+        "bus_station_dispatcher_first_meet",
+        "bus_station_dispatcher_repeat_meet",
+        "bus_station_dispatcher_favorite_food",
+        "bus_station_dispatcher_favorite_fish",
+        "bus_station_dispatcher_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "公交调度员苗姐说：第一次见面，我刚从公交站那边过来，今天的风还不错。",
+        "repeatMeet": "公交调度员苗姐说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "公交调度员苗姐说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "公交调度员苗姐说：如果今天现实世界太吵，就先把心放在海边公交站门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "bus_station_dispatcher_story_warm",
+          "type": "温馨",
+          "title": "公交调度员苗姐的温馨片段"
+        },
+        {
+          "id": "bus_station_dispatcher_story_humor",
+          "type": "幽默",
+          "title": "公交调度员苗姐的轻松插曲"
+        },
+        {
+          "id": "bus_station_dispatcher_story_twist",
+          "type": "反转",
+          "title": "公交调度员苗姐的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "bank_counter_sister",
+      "name": "银行柜员苏姐",
+      "nickname": "苏姐",
+      "gender": "female",
+      "age": 38,
+      "job": "银行柜员",
+      "role": "银行柜员",
+      "type": "resident",
+      "personality": "precise",
+      "favoriteFood": "红豆面包",
+      "favoriteFish": "密码石斑",
+      "home": "银行公寓",
+      "workplace": "海岸银行",
+      "dailyRoute": [
+        "银行公寓",
+        "海岸银行",
+        "咖啡店"
+      ],
+      "location": "海岸银行",
+      "dialogGroup": "bank_counter_sister",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她数钱很认真，但更喜欢数窗外飞过的海鸟。",
+      "memoryTags": [
+        "bank_counter_sister_first_meet",
+        "bank_counter_sister_repeat_meet",
+        "bank_counter_sister_favorite_food",
+        "bank_counter_sister_favorite_fish",
+        "bank_counter_sister_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "银行柜员苏姐说：第一次见面，我刚从银行那边过来，今天的风还不错。",
+        "repeatMeet": "银行柜员苏姐说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "银行柜员苏姐说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "银行柜员苏姐说：如果今天现实世界太吵，就先把心放在海岸银行门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "bank_counter_sister_story_warm",
+          "type": "温馨",
+          "title": "银行柜员苏姐的温馨片段"
+        },
+        {
+          "id": "bank_counter_sister_story_humor",
+          "type": "幽默",
+          "title": "银行柜员苏姐的轻松插曲"
+        },
+        {
+          "id": "bank_counter_sister_story_twist",
+          "type": "反转",
+          "title": "银行柜员苏姐的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "post_office_stamp_uncle",
+      "name": "邮局盖章叔叔",
+      "nickname": "章叔",
+      "gender": "male",
+      "age": 57,
+      "job": "邮局职员",
+      "role": "邮局职员",
+      "type": "resident",
+      "personality": "nostalgic",
+      "favoriteFood": "绿豆糕",
+      "favoriteFish": "明信片湖梭",
+      "home": "邮局后院",
+      "workplace": "海风邮局",
+      "dailyRoute": [
+        "邮局后院",
+        "海风邮局",
+        "书店"
+      ],
+      "location": "海风邮局",
+      "dialogGroup": "post_office_stamp_uncle",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他盖过很多邮戳，也盖住过很多人想家的瞬间。",
+      "memoryTags": [
+        "post_office_stamp_uncle_first_meet",
+        "post_office_stamp_uncle_repeat_meet",
+        "post_office_stamp_uncle_favorite_food",
+        "post_office_stamp_uncle_favorite_fish",
+        "post_office_stamp_uncle_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "邮局盖章叔叔说：第一次见面，我刚从邮局那边过来，今天的风还不错。",
+        "repeatMeet": "邮局盖章叔叔说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "邮局盖章叔叔说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "邮局盖章叔叔说：如果今天现实世界太吵，就先把心放在海风邮局门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "post_office_stamp_uncle_story_warm",
+          "type": "温馨",
+          "title": "邮局盖章叔叔的温馨片段"
+        },
+        {
+          "id": "post_office_stamp_uncle_story_humor",
+          "type": "幽默",
+          "title": "邮局盖章叔叔的轻松插曲"
+        },
+        {
+          "id": "post_office_stamp_uncle_story_twist",
+          "type": "反转",
+          "title": "邮局盖章叔叔的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "tackle_shop_owner_shen",
+      "name": "渔具店沈老板",
+      "nickname": "沈老板",
+      "gender": "male",
+      "age": 48,
+      "job": "渔具店老板",
+      "role": "渔具店老板",
+      "type": "resident",
+      "personality": "seasoned",
+      "favoriteFood": "牛肉粉",
+      "favoriteFish": "钟表码头鲔",
+      "home": "渔具店阁楼",
+      "workplace": "海钩渔具店",
+      "dailyRoute": [
+        "渔具店阁楼",
+        "海钩渔具店",
+        "旧码头"
+      ],
+      "location": "海钩渔具店",
+      "dialogGroup": "tackle_shop_owner_shen",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他卖鱼线鱼钩，也卖一点点“别急”的经验。",
+      "memoryTags": [
+        "tackle_shop_owner_shen_first_meet",
+        "tackle_shop_owner_shen_repeat_meet",
+        "tackle_shop_owner_shen_favorite_food",
+        "tackle_shop_owner_shen_favorite_fish",
+        "tackle_shop_owner_shen_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "渔具店沈老板说：第一次见面，我刚从渔具店那边过来，今天的风还不错。",
+        "repeatMeet": "渔具店沈老板说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "渔具店沈老板说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "渔具店沈老板说：如果今天现实世界太吵，就先把心放在海钩渔具店门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "tackle_shop_owner_shen_story_warm",
+          "type": "温馨",
+          "title": "渔具店沈老板的温馨片段"
+        },
+        {
+          "id": "tackle_shop_owner_shen_story_humor",
+          "type": "幽默",
+          "title": "渔具店沈老板的轻松插曲"
+        },
+        {
+          "id": "tackle_shop_owner_shen_story_twist",
+          "type": "反转",
+          "title": "渔具店沈老板的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "museum_guide_qi",
+      "name": "博物馆讲解员祁安",
+      "nickname": "祁安",
+      "gender": "female",
+      "age": 35,
+      "job": "博物馆讲解员",
+      "role": "博物馆讲解员",
+      "type": "resident",
+      "personality": "scholarly",
+      "favoriteFood": "蓝莓司康",
+      "favoriteFish": "黄铜锚王",
+      "home": "博物馆宿舍",
+      "workplace": "海洋记忆博物馆",
+      "dailyRoute": [
+        "博物馆宿舍",
+        "海洋记忆博物馆",
+        "书店"
+      ],
+      "location": "海洋记忆博物馆",
+      "dialogGroup": "museum_guide_qi",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她讲海的历史时，总会留一点位置给还没发生的故事。",
+      "memoryTags": [
+        "museum_guide_qi_first_meet",
+        "museum_guide_qi_repeat_meet",
+        "museum_guide_qi_favorite_food",
+        "museum_guide_qi_favorite_fish",
+        "museum_guide_qi_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "博物馆讲解员祁安说：第一次见面，我刚从博物馆那边过来，今天的风还不错。",
+        "repeatMeet": "博物馆讲解员祁安说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "博物馆讲解员祁安说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "博物馆讲解员祁安说：如果今天现实世界太吵，就先把心放在海洋记忆博物馆门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "museum_guide_qi_story_warm",
+          "type": "温馨",
+          "title": "博物馆讲解员祁安的温馨片段"
+        },
+        {
+          "id": "museum_guide_qi_story_humor",
+          "type": "幽默",
+          "title": "博物馆讲解员祁安的轻松插曲"
+        },
+        {
+          "id": "museum_guide_qi_story_twist",
+          "type": "反转",
+          "title": "博物馆讲解员祁安的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "lighthouse_weather_observer",
+      "name": "灯塔气象员白澄",
+      "nickname": "白澄",
+      "gender": "male",
+      "age": 41,
+      "job": "灯塔气象员",
+      "role": "灯塔气象员",
+      "type": "resident",
+      "personality": "observant",
+      "favoriteFood": "海盐苏打",
+      "favoriteFish": "云影鲸鱼",
+      "home": "灯塔观测室",
+      "workplace": "旧灯塔气象间",
+      "dailyRoute": [
+        "灯塔观测室",
+        "旧灯塔气象间",
+        "码头"
+      ],
+      "location": "旧灯塔气象间",
+      "dialogGroup": "lighthouse_weather_observer",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他记录风速、云层和那些没有写进天气预报的心情。",
+      "memoryTags": [
+        "lighthouse_weather_observer_first_meet",
+        "lighthouse_weather_observer_repeat_meet",
+        "lighthouse_weather_observer_favorite_food",
+        "lighthouse_weather_observer_favorite_fish",
+        "lighthouse_weather_observer_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "灯塔气象员白澄说：第一次见面，我刚从灯塔那边过来，今天的风还不错。",
+        "repeatMeet": "灯塔气象员白澄说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "灯塔气象员白澄说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "灯塔气象员白澄说：如果今天现实世界太吵，就先把心放在旧灯塔气象间门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "lighthouse_weather_observer_story_warm",
+          "type": "温馨",
+          "title": "灯塔气象员白澄的温馨片段"
+        },
+        {
+          "id": "lighthouse_weather_observer_story_humor",
+          "type": "幽默",
+          "title": "灯塔气象员白澄的轻松插曲"
+        },
+        {
+          "id": "lighthouse_weather_observer_story_twist",
+          "type": "反转",
+          "title": "灯塔气象员白澄的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "old_town_watch_repairer",
+      "name": "老城修表师闻伯",
+      "nickname": "闻伯",
+      "gender": "male",
+      "age": 64,
+      "job": "修表师",
+      "role": "修表师",
+      "type": "resident",
+      "personality": "patient",
+      "favoriteFood": "芝麻糊",
+      "favoriteFish": "钟表码头鲔",
+      "home": "老城钟表铺",
+      "workplace": "闻伯修表铺",
+      "dailyRoute": [
+        "老城钟表铺",
+        "闻伯修表铺",
+        "银行"
+      ],
+      "location": "闻伯修表铺",
+      "dialogGroup": "old_town_watch_repairer",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他修好停住的表，也提醒人们偶尔允许自己停一停。",
+      "memoryTags": [
+        "old_town_watch_repairer_first_meet",
+        "old_town_watch_repairer_repeat_meet",
+        "old_town_watch_repairer_favorite_food",
+        "old_town_watch_repairer_favorite_fish",
+        "old_town_watch_repairer_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "老城修表师闻伯说：第一次见面，我刚从老城区那边过来，今天的风还不错。",
+        "repeatMeet": "老城修表师闻伯说：又见面了，看来你也把这里当成可以喘口气的地方。",
+        "friend": "老城修表师闻伯说：朋友来了就不用客气，坐一会儿，海不会催你。",
+        "special": "老城修表师闻伯说：如果今天现实世界太吵，就先把心放在闻伯修表铺门口。"
+      },
+      "storyEntrances": [
+        {
+          "id": "old_town_watch_repairer_story_warm",
+          "type": "温馨",
+          "title": "老城修表师闻伯的温馨片段"
+        },
+        {
+          "id": "old_town_watch_repairer_story_humor",
+          "type": "幽默",
+          "title": "老城修表师闻伯的轻松插曲"
+        },
+        {
+          "id": "old_town_watch_repairer_story_twist",
+          "type": "反转",
+          "title": "老城修表师闻伯的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "cinema_projectionist_yan",
+      "name": "电影院放映员严叔",
+      "nickname": "严叔",
+      "gender": "male",
+      "age": 56,
+      "job": "电影院放映员",
+      "role": "电影院放映员",
+      "type": "resident",
+      "personality": "nostalgic",
+      "favoriteFood": "爆米花",
+      "favoriteFish": "月窗海鲈",
+      "home": "影院放映室旁的小屋",
+      "workplace": "海风电影院放映室",
+      "dailyRoute": [
+        "影院放映室旁的小屋",
+        "海风电影院放映室",
+        "夜市灯牌下"
+      ],
+      "location": "海风电影院放映室",
+      "dialogGroup": "cinema_projectionist_yan",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他守着旧胶片机，觉得每一束光都像一条游向明天的鱼。",
+      "memoryTags": [
+        "cinema_projectionist_yan_first_meet",
+        "cinema_projectionist_yan_repeat_meet",
+        "cinema_projectionist_yan_favorite_food",
+        "cinema_projectionist_yan_favorite_fish",
+        "cinema_projectionist_yan_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "电影院放映员严叔说：第一次见面，我刚从电影院那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "电影院放映员严叔说：又见面了，你来的时候，海风电影院放映室的风刚好停了一下。",
+        "friend": "电影院放映员严叔说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "电影院放映员严叔说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "cinema_projectionist_yan_story_warm",
+          "type": "温馨",
+          "title": "电影院放映员严叔的温馨片段"
+        },
+        {
+          "id": "cinema_projectionist_yan_story_humor",
+          "type": "幽默",
+          "title": "电影院放映员严叔的轻松插曲"
+        },
+        {
+          "id": "cinema_projectionist_yan_story_twist",
+          "type": "反转",
+          "title": "电影院放映员严叔的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "cinema_ticket_girl_nana",
+      "name": "售票员娜娜",
+      "nickname": "娜娜",
+      "gender": "female",
+      "age": 23,
+      "job": "电影院售票员",
+      "role": "电影院售票员",
+      "type": "resident",
+      "personality": "bright",
+      "favoriteFood": "橙子汽水",
+      "favoriteFish": "阳光沙丁",
+      "home": "电影院员工宿舍",
+      "workplace": "海风电影院售票口",
+      "dailyRoute": [
+        "电影院员工宿舍",
+        "海风电影院售票口",
+        "公交站"
+      ],
+      "location": "海风电影院售票口",
+      "dialogGroup": "cinema_ticket_girl_nana",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她总能从排队的人脸上猜出他们今天想看喜剧还是童话。",
+      "memoryTags": [
+        "cinema_ticket_girl_nana_first_meet",
+        "cinema_ticket_girl_nana_repeat_meet",
+        "cinema_ticket_girl_nana_favorite_food",
+        "cinema_ticket_girl_nana_favorite_fish",
+        "cinema_ticket_girl_nana_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "售票员娜娜说：第一次见面，我刚从电影院那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "售票员娜娜说：又见面了，你来的时候，海风电影院售票口的风刚好停了一下。",
+        "friend": "售票员娜娜说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "售票员娜娜说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "cinema_ticket_girl_nana_story_warm",
+          "type": "温馨",
+          "title": "售票员娜娜的温馨片段"
+        },
+        {
+          "id": "cinema_ticket_girl_nana_story_humor",
+          "type": "幽默",
+          "title": "售票员娜娜的轻松插曲"
+        },
+        {
+          "id": "cinema_ticket_girl_nana_story_twist",
+          "type": "反转",
+          "title": "售票员娜娜的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "library_archivist_mo",
+      "name": "图书馆档案员墨白",
+      "nickname": "墨白",
+      "gender": "male",
+      "age": 42,
+      "job": "图书馆档案员",
+      "role": "图书馆档案员",
+      "type": "resident",
+      "personality": "quiet",
+      "favoriteFood": "黑芝麻饼",
+      "favoriteFish": "备忘录鲶",
+      "home": "图书馆后巷公寓",
+      "workplace": "海岸图书馆档案室",
+      "dailyRoute": [
+        "图书馆后巷公寓",
+        "海岸图书馆档案室",
+        "旧书店"
+      ],
+      "location": "海岸图书馆档案室",
+      "dialogGroup": "library_archivist_mo",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他把过期报纸和未完成的梦都按日期收好。",
+      "memoryTags": [
+        "library_archivist_mo_first_meet",
+        "library_archivist_mo_repeat_meet",
+        "library_archivist_mo_favorite_food",
+        "library_archivist_mo_favorite_fish",
+        "library_archivist_mo_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "图书馆档案员墨白说：第一次见面，我刚从图书馆那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "图书馆档案员墨白说：又见面了，你来的时候，海岸图书馆档案室的风刚好停了一下。",
+        "friend": "图书馆档案员墨白说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "图书馆档案员墨白说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "library_archivist_mo_story_warm",
+          "type": "温馨",
+          "title": "图书馆档案员墨白的温馨片段"
+        },
+        {
+          "id": "library_archivist_mo_story_humor",
+          "type": "幽默",
+          "title": "图书馆档案员墨白的轻松插曲"
+        },
+        {
+          "id": "library_archivist_mo_story_twist",
+          "type": "反转",
+          "title": "图书馆档案员墨白的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "library_story_aunt_wen",
+      "name": "故事会温阿姨",
+      "nickname": "温阿姨",
+      "gender": "female",
+      "age": 63,
+      "job": "图书馆故事会主持人",
+      "role": "图书馆故事会主持人",
+      "type": "resident",
+      "personality": "warm",
+      "favoriteFood": "桂圆茶",
+      "favoriteFish": "纸鹤池锦",
+      "home": "图书馆旁小院",
+      "workplace": "海岸图书馆儿童区",
+      "dailyRoute": [
+        "图书馆旁小院",
+        "海岸图书馆儿童区",
+        "公园长椅"
+      ],
+      "location": "海岸图书馆儿童区",
+      "dialogGroup": "library_story_aunt_wen",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她讲故事时，连窗外的海鸟都会停一会儿。",
+      "memoryTags": [
+        "library_story_aunt_wen_first_meet",
+        "library_story_aunt_wen_repeat_meet",
+        "library_story_aunt_wen_favorite_food",
+        "library_story_aunt_wen_favorite_fish",
+        "library_story_aunt_wen_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "故事会温阿姨说：第一次见面，我刚从图书馆那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "故事会温阿姨说：又见面了，你来的时候，海岸图书馆儿童区的风刚好停了一下。",
+        "friend": "故事会温阿姨说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "故事会温阿姨说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "library_story_aunt_wen_story_warm",
+          "type": "温馨",
+          "title": "故事会温阿姨的温馨片段"
+        },
+        {
+          "id": "library_story_aunt_wen_story_humor",
+          "type": "幽默",
+          "title": "故事会温阿姨的轻松插曲"
+        },
+        {
+          "id": "library_story_aunt_wen_story_twist",
+          "type": "反转",
+          "title": "故事会温阿姨的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "pet_shop_groomer_yoyo",
+      "name": "宠物美容师悠悠",
+      "nickname": "悠悠",
+      "gender": "female",
+      "age": 27,
+      "job": "宠物美容师",
+      "role": "宠物美容师",
+      "type": "resident",
+      "personality": "tender",
+      "favoriteFood": "鸡蛋仔",
+      "favoriteFish": "气泡海鲻",
+      "home": "宠物店二楼",
+      "workplace": "云朵宠物店",
+      "dailyRoute": [
+        "宠物店二楼",
+        "云朵宠物店",
+        "花店"
+      ],
+      "location": "云朵宠物店",
+      "dialogGroup": "pet_shop_groomer_yoyo",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她能把一只炸毛的小狗哄成云，也能把紧张的人哄笑。",
+      "memoryTags": [
+        "pet_shop_groomer_yoyo_first_meet",
+        "pet_shop_groomer_yoyo_repeat_meet",
+        "pet_shop_groomer_yoyo_favorite_food",
+        "pet_shop_groomer_yoyo_favorite_fish",
+        "pet_shop_groomer_yoyo_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "宠物美容师悠悠说：第一次见面，我刚从宠物店那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "宠物美容师悠悠说：又见面了，你来的时候，云朵宠物店的风刚好停了一下。",
+        "friend": "宠物美容师悠悠说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "宠物美容师悠悠说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "pet_shop_groomer_yoyo_story_warm",
+          "type": "温馨",
+          "title": "宠物美容师悠悠的温馨片段"
+        },
+        {
+          "id": "pet_shop_groomer_yoyo_story_humor",
+          "type": "幽默",
+          "title": "宠物美容师悠悠的轻松插曲"
+        },
+        {
+          "id": "pet_shop_groomer_yoyo_story_twist",
+          "type": "反转",
+          "title": "宠物美容师悠悠的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "pet_shop_vet_intern_lin",
+      "name": "宠物医生实习生林澈",
+      "nickname": "林澈",
+      "gender": "male",
+      "age": 25,
+      "job": "宠物医生实习生",
+      "role": "宠物医生实习生",
+      "type": "resident",
+      "personality": "careful",
+      "favoriteFood": "紫米饭团",
+      "favoriteFish": "雨衣锦鲤",
+      "home": "宠物医院宿舍",
+      "workplace": "云朵宠物店诊疗间",
+      "dailyRoute": [
+        "宠物医院宿舍",
+        "云朵宠物店诊疗间",
+        "医院"
+      ],
+      "location": "云朵宠物店诊疗间",
+      "dialogGroup": "pet_shop_vet_intern_lin",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他给小动物听诊时，总会先对它们说谢谢你信任我。",
+      "memoryTags": [
+        "pet_shop_vet_intern_lin_first_meet",
+        "pet_shop_vet_intern_lin_repeat_meet",
+        "pet_shop_vet_intern_lin_favorite_food",
+        "pet_shop_vet_intern_lin_favorite_fish",
+        "pet_shop_vet_intern_lin_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "宠物医生实习生林澈说：第一次见面，我刚从宠物店那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "宠物医生实习生林澈说：又见面了，你来的时候，云朵宠物店诊疗间的风刚好停了一下。",
+        "friend": "宠物医生实习生林澈说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "宠物医生实习生林澈说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "pet_shop_vet_intern_lin_story_warm",
+          "type": "温馨",
+          "title": "宠物医生实习生林澈的温馨片段"
+        },
+        {
+          "id": "pet_shop_vet_intern_lin_story_humor",
+          "type": "幽默",
+          "title": "宠物医生实习生林澈的轻松插曲"
+        },
+        {
+          "id": "pet_shop_vet_intern_lin_story_twist",
+          "type": "反转",
+          "title": "宠物医生实习生林澈的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "laundry_owner_du",
+      "name": "洗衣店杜老板",
+      "nickname": "杜老板",
+      "gender": "male",
+      "age": 50,
+      "job": "洗衣店老板",
+      "role": "洗衣店老板",
+      "type": "resident",
+      "personality": "practical",
+      "favoriteFood": "葱花饼",
+      "favoriteFish": "回形针鲤",
+      "home": "洗衣店阁楼",
+      "workplace": "泡泡洗衣店",
+      "dailyRoute": [
+        "洗衣店阁楼",
+        "泡泡洗衣店",
+        "超市"
+      ],
+      "location": "泡泡洗衣店",
+      "dialogGroup": "laundry_owner_du",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他洗掉衣服上的盐渍，也洗掉一些人今天的疲惫。",
+      "memoryTags": [
+        "laundry_owner_du_first_meet",
+        "laundry_owner_du_repeat_meet",
+        "laundry_owner_du_favorite_food",
+        "laundry_owner_du_favorite_fish",
+        "laundry_owner_du_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "洗衣店杜老板说：第一次见面，我刚从洗衣店那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "洗衣店杜老板说：又见面了，你来的时候，泡泡洗衣店的风刚好停了一下。",
+        "friend": "洗衣店杜老板说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "洗衣店杜老板说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "laundry_owner_du_story_warm",
+          "type": "温馨",
+          "title": "洗衣店杜老板的温馨片段"
+        },
+        {
+          "id": "laundry_owner_du_story_humor",
+          "type": "幽默",
+          "title": "洗衣店杜老板的轻松插曲"
+        },
+        {
+          "id": "laundry_owner_du_story_twist",
+          "type": "反转",
+          "title": "洗衣店杜老板的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "laundry_student_mei",
+      "name": "洗衣店兼职小梅",
+      "nickname": "小梅",
+      "gender": "female",
+      "age": 20,
+      "job": "洗衣店兼职生",
+      "role": "洗衣店兼职生",
+      "type": "resident",
+      "personality": "cheerful",
+      "favoriteFood": "草莓面包",
+      "favoriteFish": "薯片塘鳅",
+      "home": "学生公寓",
+      "workplace": "泡泡洗衣店前台",
+      "dailyRoute": [
+        "学生公寓",
+        "泡泡洗衣店前台",
+        "学校"
+      ],
+      "location": "泡泡洗衣店前台",
+      "dialogGroup": "laundry_student_mei",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她给每个洗衣袋贴上笑脸，像给生活加一点柔顺剂。",
+      "memoryTags": [
+        "laundry_student_mei_first_meet",
+        "laundry_student_mei_repeat_meet",
+        "laundry_student_mei_favorite_food",
+        "laundry_student_mei_favorite_fish",
+        "laundry_student_mei_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "洗衣店兼职小梅说：第一次见面，我刚从洗衣店那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "洗衣店兼职小梅说：又见面了，你来的时候，泡泡洗衣店前台的风刚好停了一下。",
+        "friend": "洗衣店兼职小梅说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "洗衣店兼职小梅说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "laundry_student_mei_story_warm",
+          "type": "温馨",
+          "title": "洗衣店兼职小梅的温馨片段"
+        },
+        {
+          "id": "laundry_student_mei_story_humor",
+          "type": "幽默",
+          "title": "洗衣店兼职小梅的轻松插曲"
+        },
+        {
+          "id": "laundry_student_mei_story_twist",
+          "type": "反转",
+          "title": "洗衣店兼职小梅的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "subway_announcer_kai",
+      "name": "地铁播音员凯文",
+      "nickname": "凯文",
+      "gender": "male",
+      "age": 34,
+      "job": "地铁播音员",
+      "role": "地铁播音员",
+      "type": "resident",
+      "personality": "steady",
+      "favoriteFood": "热狗面包",
+      "favoriteFish": "日历湖鳊",
+      "home": "地铁员工宿舍",
+      "workplace": "海岸地铁站广播室",
+      "dailyRoute": [
+        "地铁员工宿舍",
+        "海岸地铁站广播室",
+        "便利店"
+      ],
+      "location": "海岸地铁站广播室",
+      "dialogGroup": "subway_announcer_kai",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他的声音每天提醒人们到站，也提醒他们别忘了下班。",
+      "memoryTags": [
+        "subway_announcer_kai_first_meet",
+        "subway_announcer_kai_repeat_meet",
+        "subway_announcer_kai_favorite_food",
+        "subway_announcer_kai_favorite_fish",
+        "subway_announcer_kai_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "地铁播音员凯文说：第一次见面，我刚从地铁站那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "地铁播音员凯文说：又见面了，你来的时候，海岸地铁站广播室的风刚好停了一下。",
+        "friend": "地铁播音员凯文说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "地铁播音员凯文说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "subway_announcer_kai_story_warm",
+          "type": "温馨",
+          "title": "地铁播音员凯文的温馨片段"
+        },
+        {
+          "id": "subway_announcer_kai_story_humor",
+          "type": "幽默",
+          "title": "地铁播音员凯文的轻松插曲"
+        },
+        {
+          "id": "subway_announcer_kai_story_twist",
+          "type": "反转",
+          "title": "地铁播音员凯文的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "subway_flower_commuter_ning",
+      "name": "抱花通勤者宁宁",
+      "nickname": "宁宁",
+      "gender": "female",
+      "age": 31,
+      "job": "地铁通勤设计师",
+      "role": "地铁通勤设计师",
+      "type": "resident",
+      "personality": "gentle",
+      "favoriteFood": "抹茶蛋糕",
+      "favoriteFish": "极光莲鱼",
+      "home": "居民区公寓",
+      "workplace": "海岸地铁站",
+      "dailyRoute": [
+        "居民区公寓",
+        "海岸地铁站",
+        "设计公司楼下"
+      ],
+      "location": "海岸地铁站",
+      "dialogGroup": "subway_flower_commuter_ning",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她每天抱着一小束花上班，好像替城市带着一点温柔。",
+      "memoryTags": [
+        "subway_flower_commuter_ning_first_meet",
+        "subway_flower_commuter_ning_repeat_meet",
+        "subway_flower_commuter_ning_favorite_food",
+        "subway_flower_commuter_ning_favorite_fish",
+        "subway_flower_commuter_ning_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "抱花通勤者宁宁说：第一次见面，我刚从地铁站那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "抱花通勤者宁宁说：又见面了，你来的时候，海岸地铁站的风刚好停了一下。",
+        "friend": "抱花通勤者宁宁说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "抱花通勤者宁宁说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "subway_flower_commuter_ning_story_warm",
+          "type": "温馨",
+          "title": "抱花通勤者宁宁的温馨片段"
+        },
+        {
+          "id": "subway_flower_commuter_ning_story_humor",
+          "type": "幽默",
+          "title": "抱花通勤者宁宁的轻松插曲"
+        },
+        {
+          "id": "subway_flower_commuter_ning_story_twist",
+          "type": "反转",
+          "title": "抱花通勤者宁宁的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "rooftop_gardener_hao",
+      "name": "天台园丁郝伯",
+      "nickname": "郝伯",
+      "gender": "male",
+      "age": 67,
+      "job": "天台园丁",
+      "role": "天台园丁",
+      "type": "resident",
+      "personality": "patient",
+      "favoriteFood": "南瓜粥",
+      "favoriteFish": "玻璃预言鲤",
+      "home": "天台小屋",
+      "workplace": "办公楼天台花园",
+      "dailyRoute": [
+        "天台小屋",
+        "办公楼天台花园",
+        "花店"
+      ],
+      "location": "办公楼天台花园",
+      "dialogGroup": "rooftop_gardener_hao",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他在高楼上种番茄，也种一些不愿被会议淹没的下午。",
+      "memoryTags": [
+        "rooftop_gardener_hao_first_meet",
+        "rooftop_gardener_hao_repeat_meet",
+        "rooftop_gardener_hao_favorite_food",
+        "rooftop_gardener_hao_favorite_fish",
+        "rooftop_gardener_hao_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "天台园丁郝伯说：第一次见面，我刚从天台那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "天台园丁郝伯说：又见面了，你来的时候，办公楼天台花园的风刚好停了一下。",
+        "friend": "天台园丁郝伯说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "天台园丁郝伯说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "rooftop_gardener_hao_story_warm",
+          "type": "温馨",
+          "title": "天台园丁郝伯的温馨片段"
+        },
+        {
+          "id": "rooftop_gardener_hao_story_humor",
+          "type": "幽默",
+          "title": "天台园丁郝伯的轻松插曲"
+        },
+        {
+          "id": "rooftop_gardener_hao_story_twist",
+          "type": "反转",
+          "title": "天台园丁郝伯的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "rooftop_cloud_watcher_su",
+      "name": "看云女孩苏米",
+      "nickname": "苏米",
+      "gender": "female",
+      "age": 19,
+      "job": "天台看云记录员",
+      "role": "天台看云记录员",
+      "type": "resident",
+      "personality": "dreamy",
+      "favoriteFood": "奶油泡芙",
+      "favoriteFish": "云影鲸鱼",
+      "home": "青年公寓",
+      "workplace": "办公楼天台",
+      "dailyRoute": [
+        "青年公寓",
+        "办公楼天台",
+        "图书馆"
+      ],
+      "location": "办公楼天台",
+      "dialogGroup": "rooftop_cloud_watcher_su",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她给每朵云取名字，并认真记录哪一朵最像周五。",
+      "memoryTags": [
+        "rooftop_cloud_watcher_su_first_meet",
+        "rooftop_cloud_watcher_su_repeat_meet",
+        "rooftop_cloud_watcher_su_favorite_food",
+        "rooftop_cloud_watcher_su_favorite_fish",
+        "rooftop_cloud_watcher_su_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "看云女孩苏米说：第一次见面，我刚从天台那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "看云女孩苏米说：又见面了，你来的时候，办公楼天台的风刚好停了一下。",
+        "friend": "看云女孩苏米说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "看云女孩苏米说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "rooftop_cloud_watcher_su_story_warm",
+          "type": "温馨",
+          "title": "看云女孩苏米的温馨片段"
+        },
+        {
+          "id": "rooftop_cloud_watcher_su_story_humor",
+          "type": "幽默",
+          "title": "看云女孩苏米的轻松插曲"
+        },
+        {
+          "id": "rooftop_cloud_watcher_su_story_twist",
+          "type": "反转",
+          "title": "看云女孩苏米的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "shipyard_welder_gang",
+      "name": "修船厂焊工刚子",
+      "nickname": "刚子",
+      "gender": "male",
+      "age": 39,
+      "job": "修船厂焊工",
+      "role": "修船厂焊工",
+      "type": "resident",
+      "personality": "brave",
+      "favoriteFood": "辣牛肉面",
+      "favoriteFish": "黄铜锚王",
+      "home": "修船厂宿舍",
+      "workplace": "老码头修船厂",
+      "dailyRoute": [
+        "修船厂宿舍",
+        "老码头修船厂",
+        "夜市"
+      ],
+      "location": "老码头修船厂",
+      "dialogGroup": "shipyard_welder_gang",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他焊补船身时火星四溅，像把海里的星星借到了岸上。",
+      "memoryTags": [
+        "shipyard_welder_gang_first_meet",
+        "shipyard_welder_gang_repeat_meet",
+        "shipyard_welder_gang_favorite_food",
+        "shipyard_welder_gang_favorite_fish",
+        "shipyard_welder_gang_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "修船厂焊工刚子说：第一次见面，我刚从修船厂那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "修船厂焊工刚子说：又见面了，你来的时候，老码头修船厂的风刚好停了一下。",
+        "friend": "修船厂焊工刚子说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "修船厂焊工刚子说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "shipyard_welder_gang_story_warm",
+          "type": "温馨",
+          "title": "修船厂焊工刚子的温馨片段"
+        },
+        {
+          "id": "shipyard_welder_gang_story_humor",
+          "type": "幽默",
+          "title": "修船厂焊工刚子的轻松插曲"
+        },
+        {
+          "id": "shipyard_welder_gang_story_twist",
+          "type": "反转",
+          "title": "修船厂焊工刚子的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "shipyard_painter_lili",
+      "name": "船体彩绘师莉莉",
+      "nickname": "莉莉",
+      "gender": "female",
+      "age": 32,
+      "job": "船体彩绘师",
+      "role": "船体彩绘师",
+      "type": "resident",
+      "personality": "creative",
+      "favoriteFood": "椰子冻",
+      "favoriteFish": "日晷海枪鱼",
+      "home": "彩绘工作室",
+      "workplace": "老码头修船厂涂装间",
+      "dailyRoute": [
+        "彩绘工作室",
+        "老码头修船厂涂装间",
+        "博物馆"
+      ],
+      "location": "老码头修船厂涂装间",
+      "dialogGroup": "shipyard_painter_lili",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她给旧船画上新颜色，像给过去一个重新出发的理由。",
+      "memoryTags": [
+        "shipyard_painter_lili_first_meet",
+        "shipyard_painter_lili_repeat_meet",
+        "shipyard_painter_lili_favorite_food",
+        "shipyard_painter_lili_favorite_fish",
+        "shipyard_painter_lili_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "船体彩绘师莉莉说：第一次见面，我刚从修船厂那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "船体彩绘师莉莉说：又见面了，你来的时候，老码头修船厂涂装间的风刚好停了一下。",
+        "friend": "船体彩绘师莉莉说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "船体彩绘师莉莉说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "shipyard_painter_lili_story_warm",
+          "type": "温馨",
+          "title": "船体彩绘师莉莉的温馨片段"
+        },
+        {
+          "id": "shipyard_painter_lili_story_humor",
+          "type": "幽默",
+          "title": "船体彩绘师莉莉的轻松插曲"
+        },
+        {
+          "id": "shipyard_painter_lili_story_twist",
+          "type": "反转",
+          "title": "船体彩绘师莉莉的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "night_market_skewer_niu",
+      "name": "夜市烤串牛哥",
+      "nickname": "牛哥",
+      "gender": "male",
+      "age": 44,
+      "job": "夜市烤串摊主",
+      "role": "夜市烤串摊主",
+      "type": "resident",
+      "personality": "hearty",
+      "favoriteFood": "烤鱿鱼串",
+      "favoriteFish": "会议海鲭",
+      "home": "夜市后街",
+      "workplace": "海风夜市烤串摊",
+      "dailyRoute": [
+        "夜市后街",
+        "海风夜市烤串摊",
+        "市场"
+      ],
+      "location": "海风夜市烤串摊",
+      "dialogGroup": "night_market_skewer_niu",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他的摊位烟火气很重，却总给加班晚归的人留一串热的。",
+      "memoryTags": [
+        "night_market_skewer_niu_first_meet",
+        "night_market_skewer_niu_repeat_meet",
+        "night_market_skewer_niu_favorite_food",
+        "night_market_skewer_niu_favorite_fish",
+        "night_market_skewer_niu_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "夜市烤串牛哥说：第一次见面，我刚从夜市那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "夜市烤串牛哥说：又见面了，你来的时候，海风夜市烤串摊的风刚好停了一下。",
+        "friend": "夜市烤串牛哥说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "夜市烤串牛哥说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "night_market_skewer_niu_story_warm",
+          "type": "温馨",
+          "title": "夜市烤串牛哥的温馨片段"
+        },
+        {
+          "id": "night_market_skewer_niu_story_humor",
+          "type": "幽默",
+          "title": "夜市烤串牛哥的轻松插曲"
+        },
+        {
+          "id": "night_market_skewer_niu_story_twist",
+          "type": "反转",
+          "title": "夜市烤串牛哥的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "night_market_lantern_lan",
+      "name": "灯笼摊阿岚",
+      "nickname": "阿岚姐",
+      "gender": "female",
+      "age": 37,
+      "job": "夜市灯笼摊主",
+      "role": "夜市灯笼摊主",
+      "type": "resident",
+      "personality": "mysterious",
+      "favoriteFood": "桂花酒酿",
+      "favoriteFish": "灯笼深海鳐",
+      "home": "夜市阁楼",
+      "workplace": "海风夜市灯笼摊",
+      "dailyRoute": [
+        "夜市阁楼",
+        "海风夜市灯笼摊",
+        "灯塔"
+      ],
+      "location": "海风夜市灯笼摊",
+      "dialogGroup": "night_market_lantern_lan",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她卖的灯笼有些会自己亮，像装着一个没讲完的故事。",
+      "memoryTags": [
+        "night_market_lantern_lan_first_meet",
+        "night_market_lantern_lan_repeat_meet",
+        "night_market_lantern_lan_favorite_food",
+        "night_market_lantern_lan_favorite_fish",
+        "night_market_lantern_lan_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "灯笼摊阿岚说：第一次见面，我刚从夜市那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "灯笼摊阿岚说：又见面了，你来的时候，海风夜市灯笼摊的风刚好停了一下。",
+        "friend": "灯笼摊阿岚说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "灯笼摊阿岚说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "night_market_lantern_lan_story_warm",
+          "type": "温馨",
+          "title": "灯笼摊阿岚的温馨片段"
+        },
+        {
+          "id": "night_market_lantern_lan_story_humor",
+          "type": "幽默",
+          "title": "灯笼摊阿岚的轻松插曲"
+        },
+        {
+          "id": "night_market_lantern_lan_story_twist",
+          "type": "反转",
+          "title": "灯笼摊阿岚的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "bakery_morning_baker_qiu",
+      "name": "清晨面包师秋姐",
+      "nickname": "秋姐",
+      "gender": "female",
+      "age": 41,
+      "job": "面包师",
+      "role": "面包师",
+      "type": "resident",
+      "personality": "warm",
+      "favoriteFood": "牛角包",
+      "favoriteFish": "便当湖鲈",
+      "home": "烘焙坊二楼",
+      "workplace": "晨光烘焙坊",
+      "dailyRoute": [
+        "烘焙坊二楼",
+        "晨光烘焙坊",
+        "咖啡店"
+      ],
+      "location": "晨光烘焙坊",
+      "dialogGroup": "bakery_morning_baker_qiu",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她每天五点醒来，让整条街先闻到温暖。",
+      "memoryTags": [
+        "bakery_morning_baker_qiu_first_meet",
+        "bakery_morning_baker_qiu_repeat_meet",
+        "bakery_morning_baker_qiu_favorite_food",
+        "bakery_morning_baker_qiu_favorite_fish",
+        "bakery_morning_baker_qiu_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "清晨面包师秋姐说：第一次见面，我刚从烘焙坊那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "清晨面包师秋姐说：又见面了，你来的时候，晨光烘焙坊的风刚好停了一下。",
+        "friend": "清晨面包师秋姐说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "清晨面包师秋姐说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "bakery_morning_baker_qiu_story_warm",
+          "type": "温馨",
+          "title": "清晨面包师秋姐的温馨片段"
+        },
+        {
+          "id": "bakery_morning_baker_qiu_story_humor",
+          "type": "幽默",
+          "title": "清晨面包师秋姐的轻松插曲"
+        },
+        {
+          "id": "bakery_morning_baker_qiu_story_twist",
+          "type": "反转",
+          "title": "清晨面包师秋姐的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "bakery_delivery_uncle_pan",
+      "name": "送面包潘叔",
+      "nickname": "潘叔",
+      "gender": "male",
+      "age": 58,
+      "job": "面包配送员",
+      "role": "面包配送员",
+      "type": "resident",
+      "personality": "reliable",
+      "favoriteFood": "肉松面包",
+      "favoriteFish": "茶香溪鲴",
+      "home": "烘焙坊仓库",
+      "workplace": "晨光烘焙坊配送口",
+      "dailyRoute": [
+        "烘焙坊仓库",
+        "晨光烘焙坊配送口",
+        "学校"
+      ],
+      "location": "晨光烘焙坊配送口",
+      "dialogGroup": "bakery_delivery_uncle_pan",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他骑着旧电动车，把刚出炉的早晨送到各个角落。",
+      "memoryTags": [
+        "bakery_delivery_uncle_pan_first_meet",
+        "bakery_delivery_uncle_pan_repeat_meet",
+        "bakery_delivery_uncle_pan_favorite_food",
+        "bakery_delivery_uncle_pan_favorite_fish",
+        "bakery_delivery_uncle_pan_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "送面包潘叔说：第一次见面，我刚从烘焙坊那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "送面包潘叔说：又见面了，你来的时候，晨光烘焙坊配送口的风刚好停了一下。",
+        "friend": "送面包潘叔说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "送面包潘叔说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "bakery_delivery_uncle_pan_story_warm",
+          "type": "温馨",
+          "title": "送面包潘叔的温馨片段"
+        },
+        {
+          "id": "bakery_delivery_uncle_pan_story_humor",
+          "type": "幽默",
+          "title": "送面包潘叔的轻松插曲"
+        },
+        {
+          "id": "bakery_delivery_uncle_pan_story_twist",
+          "type": "反转",
+          "title": "送面包潘叔的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "community_social_worker_yi",
+      "name": "社区社工依依",
+      "nickname": "依依",
+      "gender": "female",
+      "age": 29,
+      "job": "社区社工",
+      "role": "社区社工",
+      "type": "resident",
+      "personality": "kind",
+      "favoriteFood": "豆花",
+      "favoriteFish": "雨衣锦鲤",
+      "home": "社区宿舍",
+      "workplace": "海岸社区中心",
+      "dailyRoute": [
+        "社区宿舍",
+        "海岸社区中心",
+        "居民区"
+      ],
+      "location": "海岸社区中心",
+      "dialogGroup": "community_social_worker_yi",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她记得谁家的灯泡坏了，也记得谁最近需要有人聊聊天。",
+      "memoryTags": [
+        "community_social_worker_yi_first_meet",
+        "community_social_worker_yi_repeat_meet",
+        "community_social_worker_yi_favorite_food",
+        "community_social_worker_yi_favorite_fish",
+        "community_social_worker_yi_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "社区社工依依说：第一次见面，我刚从社区中心那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "社区社工依依说：又见面了，你来的时候，海岸社区中心的风刚好停了一下。",
+        "friend": "社区社工依依说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "社区社工依依说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "community_social_worker_yi_story_warm",
+          "type": "温馨",
+          "title": "社区社工依依的温馨片段"
+        },
+        {
+          "id": "community_social_worker_yi_story_humor",
+          "type": "幽默",
+          "title": "社区社工依依的轻松插曲"
+        },
+        {
+          "id": "community_social_worker_yi_story_twist",
+          "type": "反转",
+          "title": "社区社工依依的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "community_chess_grandpa_he",
+      "name": "社区棋局何爷爷",
+      "nickname": "何爷爷",
+      "gender": "male",
+      "age": 73,
+      "job": "社区象棋老人",
+      "role": "社区象棋老人",
+      "type": "resident",
+      "personality": "witty",
+      "favoriteFood": "花生米",
+      "favoriteFish": "回形针鲤",
+      "home": "居民区老楼",
+      "workplace": "社区中心棋桌",
+      "dailyRoute": [
+        "居民区老楼",
+        "社区中心棋桌",
+        "公园"
+      ],
+      "location": "社区中心棋桌",
+      "dialogGroup": "community_chess_grandpa_he",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他下棋很慢，每一步都像在等一条大鱼靠近。",
+      "memoryTags": [
+        "community_chess_grandpa_he_first_meet",
+        "community_chess_grandpa_he_repeat_meet",
+        "community_chess_grandpa_he_favorite_food",
+        "community_chess_grandpa_he_favorite_fish",
+        "community_chess_grandpa_he_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "社区棋局何爷爷说：第一次见面，我刚从社区中心那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "社区棋局何爷爷说：又见面了，你来的时候，社区中心棋桌的风刚好停了一下。",
+        "friend": "社区棋局何爷爷说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "社区棋局何爷爷说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "community_chess_grandpa_he_story_warm",
+          "type": "温馨",
+          "title": "社区棋局何爷爷的温馨片段"
+        },
+        {
+          "id": "community_chess_grandpa_he_story_humor",
+          "type": "幽默",
+          "title": "社区棋局何爷爷的轻松插曲"
+        },
+        {
+          "id": "community_chess_grandpa_he_story_twist",
+          "type": "反转",
+          "title": "社区棋局何爷爷的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "newsstand_owner_shao",
+      "name": "报刊亭邵姨",
+      "nickname": "邵姨",
+      "gender": "female",
+      "age": 55,
+      "job": "报刊亭老板",
+      "role": "报刊亭老板",
+      "type": "resident",
+      "personality": "informed",
+      "favoriteFood": "茶叶蛋",
+      "favoriteFish": "明信片湖梭",
+      "home": "报刊亭后屋",
+      "workplace": "海边报刊亭",
+      "dailyRoute": [
+        "报刊亭后屋",
+        "海边报刊亭",
+        "邮局"
+      ],
+      "location": "海边报刊亭",
+      "dialogGroup": "newsstand_owner_shao",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她知道城市的小新闻，也知道谁最近看起来没睡好。",
+      "memoryTags": [
+        "newsstand_owner_shao_first_meet",
+        "newsstand_owner_shao_repeat_meet",
+        "newsstand_owner_shao_favorite_food",
+        "newsstand_owner_shao_favorite_fish",
+        "newsstand_owner_shao_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "报刊亭邵姨说：第一次见面，我刚从报刊亭那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "报刊亭邵姨说：又见面了，你来的时候，海边报刊亭的风刚好停了一下。",
+        "friend": "报刊亭邵姨说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "报刊亭邵姨说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "newsstand_owner_shao_story_warm",
+          "type": "温馨",
+          "title": "报刊亭邵姨的温馨片段"
+        },
+        {
+          "id": "newsstand_owner_shao_story_humor",
+          "type": "幽默",
+          "title": "报刊亭邵姨的轻松插曲"
+        },
+        {
+          "id": "newsstand_owner_shao_story_twist",
+          "type": "反转",
+          "title": "报刊亭邵姨的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "photo_studio_master_gu",
+      "name": "照相馆顾师傅",
+      "nickname": "顾师傅",
+      "gender": "male",
+      "age": 60,
+      "job": "照相馆摄影师",
+      "role": "照相馆摄影师",
+      "type": "resident",
+      "personality": "nostalgic",
+      "favoriteFood": "云吞面",
+      "favoriteFish": "玻璃预言鲤",
+      "home": "照相馆阁楼",
+      "workplace": "旧光照相馆",
+      "dailyRoute": [
+        "照相馆阁楼",
+        "旧光照相馆",
+        "博物馆"
+      ],
+      "location": "旧光照相馆",
+      "dialogGroup": "photo_studio_master_gu",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他拍照时总说别急，真正好的表情需要等一等。",
+      "memoryTags": [
+        "photo_studio_master_gu_first_meet",
+        "photo_studio_master_gu_repeat_meet",
+        "photo_studio_master_gu_favorite_food",
+        "photo_studio_master_gu_favorite_fish",
+        "photo_studio_master_gu_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "照相馆顾师傅说：第一次见面，我刚从照相馆那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "照相馆顾师傅说：又见面了，你来的时候，旧光照相馆的风刚好停了一下。",
+        "friend": "照相馆顾师傅说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "照相馆顾师傅说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "photo_studio_master_gu_story_warm",
+          "type": "温馨",
+          "title": "照相馆顾师傅的温馨片段"
+        },
+        {
+          "id": "photo_studio_master_gu_story_humor",
+          "type": "幽默",
+          "title": "照相馆顾师傅的轻松插曲"
+        },
+        {
+          "id": "photo_studio_master_gu_story_twist",
+          "type": "反转",
+          "title": "照相馆顾师傅的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "photo_studio_assistant_xia",
+      "name": "修图助理小夏",
+      "nickname": "小夏",
+      "gender": "female",
+      "age": 24,
+      "job": "照相馆修图助理",
+      "role": "照相馆修图助理",
+      "type": "resident",
+      "personality": "meticulous",
+      "favoriteFood": "柠檬挞",
+      "favoriteFish": "阳光沙丁",
+      "home": "青年公寓",
+      "workplace": "旧光照相馆修图间",
+      "dailyRoute": [
+        "青年公寓",
+        "旧光照相馆修图间",
+        "咖啡店"
+      ],
+      "location": "旧光照相馆修图间",
+      "dialogGroup": "photo_studio_assistant_xia",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她会把照片里的阴影调淡，却从不把真实的疲惫删掉。",
+      "memoryTags": [
+        "photo_studio_assistant_xia_first_meet",
+        "photo_studio_assistant_xia_repeat_meet",
+        "photo_studio_assistant_xia_favorite_food",
+        "photo_studio_assistant_xia_favorite_fish",
+        "photo_studio_assistant_xia_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "修图助理小夏说：第一次见面，我刚从照相馆那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "修图助理小夏说：又见面了，你来的时候，旧光照相馆修图间的风刚好停了一下。",
+        "friend": "修图助理小夏说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "修图助理小夏说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "photo_studio_assistant_xia_story_warm",
+          "type": "温馨",
+          "title": "修图助理小夏的温馨片段"
+        },
+        {
+          "id": "photo_studio_assistant_xia_story_humor",
+          "type": "幽默",
+          "title": "修图助理小夏的轻松插曲"
+        },
+        {
+          "id": "photo_studio_assistant_xia_story_twist",
+          "type": "反转",
+          "title": "修图助理小夏的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "gym_yoga_teacher_mu",
+      "name": "瑜伽老师沐沐",
+      "nickname": "沐沐",
+      "gender": "female",
+      "age": 35,
+      "job": "瑜伽老师",
+      "role": "瑜伽老师",
+      "type": "resident",
+      "personality": "calm",
+      "favoriteFood": "水果燕麦",
+      "favoriteFish": "薄荷溪鲦",
+      "home": "瑜伽馆小屋",
+      "workplace": "海风瑜伽馆",
+      "dailyRoute": [
+        "瑜伽馆小屋",
+        "海风瑜伽馆",
+        "海边长椅"
+      ],
+      "location": "海风瑜伽馆",
+      "dialogGroup": "gym_yoga_teacher_mu",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她教大家呼吸，也教忙碌的人重新听见自己的心跳。",
+      "memoryTags": [
+        "gym_yoga_teacher_mu_first_meet",
+        "gym_yoga_teacher_mu_repeat_meet",
+        "gym_yoga_teacher_mu_favorite_food",
+        "gym_yoga_teacher_mu_favorite_fish",
+        "gym_yoga_teacher_mu_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "瑜伽老师沐沐说：第一次见面，我刚从瑜伽馆那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "瑜伽老师沐沐说：又见面了，你来的时候，海风瑜伽馆的风刚好停了一下。",
+        "friend": "瑜伽老师沐沐说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "瑜伽老师沐沐说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "gym_yoga_teacher_mu_story_warm",
+          "type": "温馨",
+          "title": "瑜伽老师沐沐的温馨片段"
+        },
+        {
+          "id": "gym_yoga_teacher_mu_story_humor",
+          "type": "幽默",
+          "title": "瑜伽老师沐沐的轻松插曲"
+        },
+        {
+          "id": "gym_yoga_teacher_mu_story_twist",
+          "type": "反转",
+          "title": "瑜伽老师沐沐的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "gym_boxing_coach_lei",
+      "name": "拳击教练雷子",
+      "nickname": "雷子",
+      "gender": "male",
+      "age": 33,
+      "job": "拳击教练",
+      "role": "拳击教练",
+      "type": "resident",
+      "personality": "direct",
+      "favoriteFood": "鸡胸饭",
+      "favoriteFish": "键盘河龙鱼",
+      "home": "拳馆宿舍",
+      "workplace": "海风拳馆",
+      "dailyRoute": [
+        "拳馆宿舍",
+        "海风拳馆",
+        "消防站"
+      ],
+      "location": "海风拳馆",
+      "dialogGroup": "gym_boxing_coach_lei",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他说有些压力不必忍着，可以对沙袋说完再回到生活。",
+      "memoryTags": [
+        "gym_boxing_coach_lei_first_meet",
+        "gym_boxing_coach_lei_repeat_meet",
+        "gym_boxing_coach_lei_favorite_food",
+        "gym_boxing_coach_lei_favorite_fish",
+        "gym_boxing_coach_lei_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "拳击教练雷子说：第一次见面，我刚从拳馆那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "拳击教练雷子说：又见面了，你来的时候，海风拳馆的风刚好停了一下。",
+        "friend": "拳击教练雷子说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "拳击教练雷子说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "gym_boxing_coach_lei_story_warm",
+          "type": "温馨",
+          "title": "拳击教练雷子的温馨片段"
+        },
+        {
+          "id": "gym_boxing_coach_lei_story_humor",
+          "type": "幽默",
+          "title": "拳击教练雷子的轻松插曲"
+        },
+        {
+          "id": "gym_boxing_coach_lei_story_twist",
+          "type": "反转",
+          "title": "拳击教练雷子的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "arcade_owner_ping",
+      "name": "游戏厅老板平哥",
+      "nickname": "平哥",
+      "gender": "male",
+      "age": 46,
+      "job": "游戏厅老板",
+      "role": "游戏厅老板",
+      "type": "resident",
+      "personality": "playful",
+      "favoriteFood": "汽水冰棒",
+      "favoriteFish": "薯片塘鳅",
+      "home": "游戏厅二楼",
+      "workplace": "海浪游戏厅",
+      "dailyRoute": [
+        "游戏厅二楼",
+        "海浪游戏厅",
+        "夜市"
+      ],
+      "location": "海浪游戏厅",
+      "dialogGroup": "arcade_owner_ping",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他修旧街机时总说，快乐按钮坏了就要立刻修。",
+      "memoryTags": [
+        "arcade_owner_ping_first_meet",
+        "arcade_owner_ping_repeat_meet",
+        "arcade_owner_ping_favorite_food",
+        "arcade_owner_ping_favorite_fish",
+        "arcade_owner_ping_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "游戏厅老板平哥说：第一次见面，我刚从游戏厅那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "游戏厅老板平哥说：又见面了，你来的时候，海浪游戏厅的风刚好停了一下。",
+        "friend": "游戏厅老板平哥说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "游戏厅老板平哥说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "arcade_owner_ping_story_warm",
+          "type": "温馨",
+          "title": "游戏厅老板平哥的温馨片段"
+        },
+        {
+          "id": "arcade_owner_ping_story_humor",
+          "type": "幽默",
+          "title": "游戏厅老板平哥的轻松插曲"
+        },
+        {
+          "id": "arcade_owner_ping_story_twist",
+          "type": "反转",
+          "title": "游戏厅老板平哥的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "arcade_score_keeper_xiaojiu",
+      "name": "分数记录员小九",
+      "nickname": "小九",
+      "gender": "nonbinary",
+      "age": 21,
+      "job": "游戏厅分数记录员",
+      "role": "游戏厅分数记录员",
+      "type": "resident",
+      "personality": "competitive",
+      "favoriteFood": "薯条",
+      "favoriteFish": "会议海鲭",
+      "home": "游戏厅小阁楼",
+      "workplace": "海浪游戏厅排行榜墙",
+      "dailyRoute": [
+        "游戏厅小阁楼",
+        "海浪游戏厅排行榜墙",
+        "便利店"
+      ],
+      "location": "海浪游戏厅排行榜墙",
+      "dialogGroup": "arcade_score_keeper_xiaojiu",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "小九记得每个高分，也记得失败后笑着再来一次的人。",
+      "memoryTags": [
+        "arcade_score_keeper_xiaojiu_first_meet",
+        "arcade_score_keeper_xiaojiu_repeat_meet",
+        "arcade_score_keeper_xiaojiu_favorite_food",
+        "arcade_score_keeper_xiaojiu_favorite_fish",
+        "arcade_score_keeper_xiaojiu_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "分数记录员小九说：第一次见面，我刚从游戏厅那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "分数记录员小九说：又见面了，你来的时候，海浪游戏厅排行榜墙的风刚好停了一下。",
+        "friend": "分数记录员小九说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "分数记录员小九说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "arcade_score_keeper_xiaojiu_story_warm",
+          "type": "温馨",
+          "title": "分数记录员小九的温馨片段"
+        },
+        {
+          "id": "arcade_score_keeper_xiaojiu_story_humor",
+          "type": "幽默",
+          "title": "分数记录员小九的轻松插曲"
+        },
+        {
+          "id": "arcade_score_keeper_xiaojiu_story_twist",
+          "type": "反转",
+          "title": "分数记录员小九的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "taxi_driver_laozhao",
+      "name": "出租车赵师傅",
+      "nickname": "赵师傅",
+      "gender": "male",
+      "age": 53,
+      "job": "出租车司机",
+      "role": "出租车司机",
+      "type": "resident",
+      "personality": "talkative",
+      "favoriteFood": "牛肉烧饼",
+      "favoriteFish": "小票码头鲷",
+      "home": "司机公寓",
+      "workplace": "海岸出租车站",
+      "dailyRoute": [
+        "司机公寓",
+        "海岸出租车站",
+        "酒店"
+      ],
+      "location": "海岸出租车站",
+      "dialogGroup": "taxi_driver_laozhao",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他开车绕过很多堵车，也绕过很多人没说出口的叹气。",
+      "memoryTags": [
+        "taxi_driver_laozhao_first_meet",
+        "taxi_driver_laozhao_repeat_meet",
+        "taxi_driver_laozhao_favorite_food",
+        "taxi_driver_laozhao_favorite_fish",
+        "taxi_driver_laozhao_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "出租车赵师傅说：第一次见面，我刚从出租车站那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "出租车赵师傅说：又见面了，你来的时候，海岸出租车站的风刚好停了一下。",
+        "friend": "出租车赵师傅说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "出租车赵师傅说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "taxi_driver_laozhao_story_warm",
+          "type": "温馨",
+          "title": "出租车赵师傅的温馨片段"
+        },
+        {
+          "id": "taxi_driver_laozhao_story_humor",
+          "type": "幽默",
+          "title": "出租车赵师傅的轻松插曲"
+        },
+        {
+          "id": "taxi_driver_laozhao_story_twist",
+          "type": "反转",
+          "title": "出租车赵师傅的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "taxi_radio_host_yun",
+      "name": "出租车电台云姐",
+      "nickname": "云姐",
+      "gender": "female",
+      "age": 39,
+      "job": "车载电台主持人",
+      "role": "车载电台主持人",
+      "type": "resident",
+      "personality": "soothing",
+      "favoriteFood": "蜂蜜水",
+      "favoriteFish": "月窗海鲈",
+      "home": "电台宿舍",
+      "workplace": "出租车电台间",
+      "dailyRoute": [
+        "电台宿舍",
+        "出租车电台间",
+        "酒吧"
+      ],
+      "location": "出租车电台间",
+      "dialogGroup": "taxi_radio_host_yun",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她的声音在夜路上陪着司机，也陪着晚归的人。",
+      "memoryTags": [
+        "taxi_radio_host_yun_first_meet",
+        "taxi_radio_host_yun_repeat_meet",
+        "taxi_radio_host_yun_favorite_food",
+        "taxi_radio_host_yun_favorite_fish",
+        "taxi_radio_host_yun_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "出租车电台云姐说：第一次见面，我刚从出租车站那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "出租车电台云姐说：又见面了，你来的时候，出租车电台间的风刚好停了一下。",
+        "friend": "出租车电台云姐说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "出租车电台云姐说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "taxi_radio_host_yun_story_warm",
+          "type": "温馨",
+          "title": "出租车电台云姐的温馨片段"
+        },
+        {
+          "id": "taxi_radio_host_yun_story_humor",
+          "type": "幽默",
+          "title": "出租车电台云姐的轻松插曲"
+        },
+        {
+          "id": "taxi_radio_host_yun_story_twist",
+          "type": "反转",
+          "title": "出租车电台云姐的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "harbor_ferry_captain_min",
+      "name": "渡轮船长敏叔",
+      "nickname": "敏叔",
+      "gender": "male",
+      "age": 62,
+      "job": "渡轮船长",
+      "role": "渡轮船长",
+      "type": "resident",
+      "personality": "steady",
+      "favoriteFood": "海鲜粥",
+      "favoriteFish": "黄铜锚王",
+      "home": "渡轮船舱",
+      "workplace": "海湾渡轮码头",
+      "dailyRoute": [
+        "渡轮船舱",
+        "海湾渡轮码头",
+        "灯塔"
+      ],
+      "location": "海湾渡轮码头",
+      "dialogGroup": "harbor_ferry_captain_min",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他每天把人送到对岸，也把一些疲惫留在海面上。",
+      "memoryTags": [
+        "harbor_ferry_captain_min_first_meet",
+        "harbor_ferry_captain_min_repeat_meet",
+        "harbor_ferry_captain_min_favorite_food",
+        "harbor_ferry_captain_min_favorite_fish",
+        "harbor_ferry_captain_min_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "渡轮船长敏叔说：第一次见面，我刚从渡轮那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "渡轮船长敏叔说：又见面了，你来的时候，海湾渡轮码头的风刚好停了一下。",
+        "friend": "渡轮船长敏叔说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "渡轮船长敏叔说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "harbor_ferry_captain_min_story_warm",
+          "type": "温馨",
+          "title": "渡轮船长敏叔的温馨片段"
+        },
+        {
+          "id": "harbor_ferry_captain_min_story_humor",
+          "type": "幽默",
+          "title": "渡轮船长敏叔的轻松插曲"
+        },
+        {
+          "id": "harbor_ferry_captain_min_story_twist",
+          "type": "反转",
+          "title": "渡轮船长敏叔的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "harbor_ferry_ticket_aqi",
+      "name": "渡轮检票员阿琪",
+      "nickname": "阿琪",
+      "gender": "female",
+      "age": 28,
+      "job": "渡轮检票员",
+      "role": "渡轮检票员",
+      "type": "resident",
+      "personality": "orderly",
+      "favoriteFood": "红豆冰",
+      "favoriteFish": "气泡海鲻",
+      "home": "渡轮宿舍",
+      "workplace": "渡轮检票口",
+      "dailyRoute": [
+        "渡轮宿舍",
+        "渡轮检票口",
+        "码头"
+      ],
+      "location": "渡轮检票口",
+      "dialogGroup": "harbor_ferry_ticket_aqi",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她检票很认真，但总会让抱着花的人先上船。",
+      "memoryTags": [
+        "harbor_ferry_ticket_aqi_first_meet",
+        "harbor_ferry_ticket_aqi_repeat_meet",
+        "harbor_ferry_ticket_aqi_favorite_food",
+        "harbor_ferry_ticket_aqi_favorite_fish",
+        "harbor_ferry_ticket_aqi_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "渡轮检票员阿琪说：第一次见面，我刚从渡轮那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "渡轮检票员阿琪说：又见面了，你来的时候，渡轮检票口的风刚好停了一下。",
+        "friend": "渡轮检票员阿琪说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "渡轮检票员阿琪说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "harbor_ferry_ticket_aqi_story_warm",
+          "type": "温馨",
+          "title": "渡轮检票员阿琪的温馨片段"
+        },
+        {
+          "id": "harbor_ferry_ticket_aqi_story_humor",
+          "type": "幽默",
+          "title": "渡轮检票员阿琪的轻松插曲"
+        },
+        {
+          "id": "harbor_ferry_ticket_aqi_story_twist",
+          "type": "反转",
+          "title": "渡轮检票员阿琪的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "recycling_station_uncle_han",
+      "name": "回收站韩叔",
+      "nickname": "韩叔",
+      "gender": "male",
+      "age": 57,
+      "job": "回收站管理员",
+      "role": "回收站管理员",
+      "type": "resident",
+      "personality": "frugal",
+      "favoriteFood": "杂粮馒头",
+      "favoriteFish": "备忘录鲶",
+      "home": "回收站小院",
+      "workplace": "海岸回收站",
+      "dailyRoute": [
+        "回收站小院",
+        "海岸回收站",
+        "市场"
+      ],
+      "location": "海岸回收站",
+      "dialogGroup": "recycling_station_uncle_han",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他相信旧东西只要被认真看见，就还会有下一段故事。",
+      "memoryTags": [
+        "recycling_station_uncle_han_first_meet",
+        "recycling_station_uncle_han_repeat_meet",
+        "recycling_station_uncle_han_favorite_food",
+        "recycling_station_uncle_han_favorite_fish",
+        "recycling_station_uncle_han_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "回收站韩叔说：第一次见面，我刚从回收站那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "回收站韩叔说：又见面了，你来的时候，海岸回收站的风刚好停了一下。",
+        "friend": "回收站韩叔说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "回收站韩叔说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "recycling_station_uncle_han_story_warm",
+          "type": "温馨",
+          "title": "回收站韩叔的温馨片段"
+        },
+        {
+          "id": "recycling_station_uncle_han_story_humor",
+          "type": "幽默",
+          "title": "回收站韩叔的轻松插曲"
+        },
+        {
+          "id": "recycling_station_uncle_han_story_twist",
+          "type": "反转",
+          "title": "回收站韩叔的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "recycling_artist_duoduo",
+      "name": "废品艺术家朵朵",
+      "nickname": "朵朵",
+      "gender": "female",
+      "age": 26,
+      "job": "废品艺术家",
+      "role": "废品艺术家",
+      "type": "resident",
+      "personality": "imaginative",
+      "favoriteFood": "彩虹糖",
+      "favoriteFish": "纸鹤池锦",
+      "home": "艺术工棚",
+      "workplace": "海岸回收站创作间",
+      "dailyRoute": [
+        "艺术工棚",
+        "海岸回收站创作间",
+        "博物馆"
+      ],
+      "location": "海岸回收站创作间",
+      "dialogGroup": "recycling_artist_duoduo",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她把旧瓶盖拼成海，把废纸箱折成会发光的小船。",
+      "memoryTags": [
+        "recycling_artist_duoduo_first_meet",
+        "recycling_artist_duoduo_repeat_meet",
+        "recycling_artist_duoduo_favorite_food",
+        "recycling_artist_duoduo_favorite_fish",
+        "recycling_artist_duoduo_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "废品艺术家朵朵说：第一次见面，我刚从回收站那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "废品艺术家朵朵说：又见面了，你来的时候，海岸回收站创作间的风刚好停了一下。",
+        "friend": "废品艺术家朵朵说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "废品艺术家朵朵说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "recycling_artist_duoduo_story_warm",
+          "type": "温馨",
+          "title": "废品艺术家朵朵的温馨片段"
+        },
+        {
+          "id": "recycling_artist_duoduo_story_humor",
+          "type": "幽默",
+          "title": "废品艺术家朵朵的轻松插曲"
+        },
+        {
+          "id": "recycling_artist_duoduo_story_twist",
+          "type": "反转",
+          "title": "废品艺术家朵朵的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "kindergarten_cook_aunt_rou",
+      "name": "幼儿园饭堂柔姨",
+      "nickname": "柔姨",
+      "gender": "female",
+      "age": 49,
+      "job": "幼儿园饭堂阿姨",
+      "role": "幼儿园饭堂阿姨",
+      "type": "resident",
+      "personality": "nurturing",
+      "favoriteFood": "南瓜饼",
+      "favoriteFish": "便当湖鲈",
+      "home": "幼儿园宿舍",
+      "workplace": "海风幼儿园饭堂",
+      "dailyRoute": [
+        "幼儿园宿舍",
+        "海风幼儿园饭堂",
+        "超市"
+      ],
+      "location": "海风幼儿园饭堂",
+      "dialogGroup": "kindergarten_cook_aunt_rou",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她做的饭不花哨，却总能让孩子们把碗吃得亮亮的。",
+      "memoryTags": [
+        "kindergarten_cook_aunt_rou_first_meet",
+        "kindergarten_cook_aunt_rou_repeat_meet",
+        "kindergarten_cook_aunt_rou_favorite_food",
+        "kindergarten_cook_aunt_rou_favorite_fish",
+        "kindergarten_cook_aunt_rou_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "幼儿园饭堂柔姨说：第一次见面，我刚从幼儿园那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "幼儿园饭堂柔姨说：又见面了，你来的时候，海风幼儿园饭堂的风刚好停了一下。",
+        "friend": "幼儿园饭堂柔姨说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "幼儿园饭堂柔姨说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "kindergarten_cook_aunt_rou_story_warm",
+          "type": "温馨",
+          "title": "幼儿园饭堂柔姨的温馨片段"
+        },
+        {
+          "id": "kindergarten_cook_aunt_rou_story_humor",
+          "type": "幽默",
+          "title": "幼儿园饭堂柔姨的轻松插曲"
+        },
+        {
+          "id": "kindergarten_cook_aunt_rou_story_twist",
+          "type": "反转",
+          "title": "幼儿园饭堂柔姨的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "kindergarten_music_teacher_ding",
+      "name": "幼儿园音乐丁老师",
+      "nickname": "丁老师",
+      "gender": "male",
+      "age": 31,
+      "job": "幼儿园音乐老师",
+      "role": "幼儿园音乐老师",
+      "type": "resident",
+      "personality": "gentle",
+      "favoriteFood": "苹果派",
+      "favoriteFish": "阳光沙丁",
+      "home": "教师公寓",
+      "workplace": "海风幼儿园音乐室",
+      "dailyRoute": [
+        "教师公寓",
+        "海风幼儿园音乐室",
+        "公园"
+      ],
+      "location": "海风幼儿园音乐室",
+      "dialogGroup": "kindergarten_music_teacher_ding",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他用小木琴敲出海浪声，让孩子们相信窗外真的有童话。",
+      "memoryTags": [
+        "kindergarten_music_teacher_ding_first_meet",
+        "kindergarten_music_teacher_ding_repeat_meet",
+        "kindergarten_music_teacher_ding_favorite_food",
+        "kindergarten_music_teacher_ding_favorite_fish",
+        "kindergarten_music_teacher_ding_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "幼儿园音乐丁老师说：第一次见面，我刚从幼儿园那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "幼儿园音乐丁老师说：又见面了，你来的时候，海风幼儿园音乐室的风刚好停了一下。",
+        "friend": "幼儿园音乐丁老师说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "幼儿园音乐丁老师说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "kindergarten_music_teacher_ding_story_warm",
+          "type": "温馨",
+          "title": "幼儿园音乐丁老师的温馨片段"
+        },
+        {
+          "id": "kindergarten_music_teacher_ding_story_humor",
+          "type": "幽默",
+          "title": "幼儿园音乐丁老师的轻松插曲"
+        },
+        {
+          "id": "kindergarten_music_teacher_ding_story_twist",
+          "type": "反转",
+          "title": "幼儿园音乐丁老师的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "tech_repair_sister_ai",
+      "name": "数码维修艾姐",
+      "nickname": "艾姐",
+      "gender": "female",
+      "age": 36,
+      "job": "数码维修师",
+      "role": "数码维修师",
+      "type": "resident",
+      "personality": "sharp",
+      "favoriteFood": "凉皮",
+      "favoriteFish": "密码石斑",
+      "home": "维修店后屋",
+      "workplace": "蓝屏数码维修店",
+      "dailyRoute": [
+        "维修店后屋",
+        "蓝屏数码维修店",
+        "办公楼"
+      ],
+      "location": "蓝屏数码维修店",
+      "dialogGroup": "tech_repair_sister_ai",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她能修好黑屏电脑，也能判断谁只是需要休息五分钟。",
+      "memoryTags": [
+        "tech_repair_sister_ai_first_meet",
+        "tech_repair_sister_ai_repeat_meet",
+        "tech_repair_sister_ai_favorite_food",
+        "tech_repair_sister_ai_favorite_fish",
+        "tech_repair_sister_ai_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "数码维修艾姐说：第一次见面，我刚从数码维修店那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "数码维修艾姐说：又见面了，你来的时候，蓝屏数码维修店的风刚好停了一下。",
+        "friend": "数码维修艾姐说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "数码维修艾姐说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "tech_repair_sister_ai_story_warm",
+          "type": "温馨",
+          "title": "数码维修艾姐的温馨片段"
+        },
+        {
+          "id": "tech_repair_sister_ai_story_humor",
+          "type": "幽默",
+          "title": "数码维修艾姐的轻松插曲"
+        },
+        {
+          "id": "tech_repair_sister_ai_story_twist",
+          "type": "反转",
+          "title": "数码维修艾姐的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "tech_parts_runner_haohao",
+      "name": "配件跑腿皓皓",
+      "nickname": "皓皓",
+      "gender": "male",
+      "age": 19,
+      "job": "数码配件跑腿员",
+      "role": "数码配件跑腿员",
+      "type": "resident",
+      "personality": "energetic",
+      "favoriteFood": "炸薯饼",
+      "favoriteFish": "键盘河龙鱼",
+      "home": "合租公寓",
+      "workplace": "蓝屏数码维修店",
+      "dailyRoute": [
+        "合租公寓",
+        "蓝屏数码维修店",
+        "公交站"
+      ],
+      "location": "蓝屏数码维修店",
+      "dialogGroup": "tech_parts_runner_haohao",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他背包里全是螺丝和转接头，像一座会跑的小仓库。",
+      "memoryTags": [
+        "tech_parts_runner_haohao_first_meet",
+        "tech_parts_runner_haohao_repeat_meet",
+        "tech_parts_runner_haohao_favorite_food",
+        "tech_parts_runner_haohao_favorite_fish",
+        "tech_parts_runner_haohao_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "配件跑腿皓皓说：第一次见面，我刚从数码维修店那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "配件跑腿皓皓说：又见面了，你来的时候，蓝屏数码维修店的风刚好停了一下。",
+        "friend": "配件跑腿皓皓说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "配件跑腿皓皓说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "tech_parts_runner_haohao_story_warm",
+          "type": "温馨",
+          "title": "配件跑腿皓皓的温馨片段"
+        },
+        {
+          "id": "tech_parts_runner_haohao_story_humor",
+          "type": "幽默",
+          "title": "配件跑腿皓皓的轻松插曲"
+        },
+        {
+          "id": "tech_parts_runner_haohao_story_twist",
+          "type": "反转",
+          "title": "配件跑腿皓皓的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "tea_house_owner_ru",
+      "name": "茶馆老板如姐",
+      "nickname": "如姐",
+      "gender": "female",
+      "age": 44,
+      "job": "茶馆老板",
+      "role": "茶馆老板",
+      "type": "resident",
+      "personality": "serene",
+      "favoriteFood": "桂花乌龙",
+      "favoriteFish": "茶香溪鲴",
+      "home": "茶馆二楼",
+      "workplace": "慢风茶馆",
+      "dailyRoute": [
+        "茶馆二楼",
+        "慢风茶馆",
+        "书店"
+      ],
+      "location": "慢风茶馆",
+      "dialogGroup": "tea_house_owner_ru",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "她泡茶从不催人，仿佛时间本来就该慢慢舒展开。",
+      "memoryTags": [
+        "tea_house_owner_ru_first_meet",
+        "tea_house_owner_ru_repeat_meet",
+        "tea_house_owner_ru_favorite_food",
+        "tea_house_owner_ru_favorite_fish",
+        "tea_house_owner_ru_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "茶馆老板如姐说：第一次见面，我刚从茶馆那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "茶馆老板如姐说：又见面了，你来的时候，慢风茶馆的风刚好停了一下。",
+        "friend": "茶馆老板如姐说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "茶馆老板如姐说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "tea_house_owner_ru_story_warm",
+          "type": "温馨",
+          "title": "茶馆老板如姐的温馨片段"
+        },
+        {
+          "id": "tea_house_owner_ru_story_humor",
+          "type": "幽默",
+          "title": "茶馆老板如姐的轻松插曲"
+        },
+        {
+          "id": "tea_house_owner_ru_story_twist",
+          "type": "反转",
+          "title": "茶馆老板如姐的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "tea_house_go_player_shi",
+      "name": "茶馆棋客石先生",
+      "nickname": "石先生",
+      "gender": "male",
+      "age": 66,
+      "job": "茶馆围棋客",
+      "role": "茶馆围棋客",
+      "type": "resident",
+      "personality": "philosophical",
+      "favoriteFood": "绿豆糕",
+      "favoriteFish": "玻璃预言鲤",
+      "home": "老城小院",
+      "workplace": "慢风茶馆窗边",
+      "dailyRoute": [
+        "老城小院",
+        "慢风茶馆窗边",
+        "社区中心"
+      ],
+      "location": "慢风茶馆窗边",
+      "dialogGroup": "tea_house_go_player_shi",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他下围棋时常盯着窗外，说真正的胜负在心里。",
+      "memoryTags": [
+        "tea_house_go_player_shi_first_meet",
+        "tea_house_go_player_shi_repeat_meet",
+        "tea_house_go_player_shi_favorite_food",
+        "tea_house_go_player_shi_favorite_fish",
+        "tea_house_go_player_shi_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "茶馆棋客石先生说：第一次见面，我刚从茶馆那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "茶馆棋客石先生说：又见面了，你来的时候，慢风茶馆窗边的风刚好停了一下。",
+        "friend": "茶馆棋客石先生说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "茶馆棋客石先生说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "tea_house_go_player_shi_story_warm",
+          "type": "温馨",
+          "title": "茶馆棋客石先生的温馨片段"
+        },
+        {
+          "id": "tea_house_go_player_shi_story_humor",
+          "type": "幽默",
+          "title": "茶馆棋客石先生的轻松插曲"
+        },
+        {
+          "id": "tea_house_go_player_shi_story_twist",
+          "type": "反转",
+          "title": "茶馆棋客石先生的意外反转"
+        }
+      ],
+      "enabled": true
+    },
+    {
+      "id": "public_bath_keeper_tang",
+      "name": "澡堂看池人汤叔",
+      "nickname": "汤叔",
+      "gender": "male",
+      "age": 58,
+      "job": "公共澡堂管理员",
+      "role": "公共澡堂管理员",
+      "type": "resident",
+      "personality": "easygoing",
+      "favoriteFood": "卤蛋",
+      "favoriteFish": "雨衣锦鲤",
+      "home": "澡堂后院",
+      "workplace": "海风澡堂",
+      "dailyRoute": [
+        "澡堂后院",
+        "海风澡堂",
+        "市场"
+      ],
+      "location": "海风澡堂",
+      "dialogGroup": "public_bath_keeper_tang",
+      "mood": "calm",
+      "friendship": 0,
+      "unlockLevel": 1,
+      "description": "他把水温调得刚刚好，也把很多人的一天泡软一点。",
+      "memoryTags": [
+        "public_bath_keeper_tang_first_meet",
+        "public_bath_keeper_tang_repeat_meet",
+        "public_bath_keeper_tang_favorite_food",
+        "public_bath_keeper_tang_favorite_fish",
+        "public_bath_keeper_tang_story_seed"
+      ],
+      "dialogueSeeds": {
+        "firstMeet": "澡堂看池人汤叔说：第一次见面，我刚从公共澡堂那边过来，今天的第二世界也在慢慢醒来。",
+        "repeatMeet": "澡堂看池人汤叔说：又见面了，你来的时候，海风澡堂的风刚好停了一下。",
+        "friend": "澡堂看池人汤叔说：朋友来了就坐一会儿吧，今天不必急着变得很厉害。",
+        "special": "澡堂看池人汤叔说：如果现实世界催得太紧，就把五分钟交给这里。"
+      },
+      "storyEntrances": [
+        {
+          "id": "public_bath_keeper_tang_story_warm",
+          "type": "温馨",
+          "title": "澡堂看池人汤叔的温馨片段"
+        },
+        {
+          "id": "public_bath_keeper_tang_story_humor",
+          "type": "幽默",
+          "title": "澡堂看池人汤叔的轻松插曲"
+        },
+        {
+          "id": "public_bath_keeper_tang_story_twist",
+          "type": "反转",
+          "title": "澡堂看池人汤叔的意外反转"
+        }
+      ],
+      "enabled": true
+    }
+  ]
+}

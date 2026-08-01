@@ -1,0 +1,361 @@
+{
+  "meta": {
+    "project": "FishingOffice",
+    "page": "Inventory",
+    "version": "1.0",
+    "title": "我的背包",
+    "defaultCategoryId": "all"
+  },
+  "inventory": {
+    "title": "🎒 我的背包",
+    "capacity": {
+      "currentLabel": "容量",
+      "maxLabel": "300",
+      "organizeLabel": "整理",
+      "filterLabel": "筛选"
+    },
+    "categories": [
+      {
+        "id": "all",
+        "label": "全部"
+      },
+      {
+        "id": "fish",
+        "label": "鱼"
+      },
+      {
+        "id": "bait",
+        "label": "鱼饵"
+      },
+      {
+        "id": "gear",
+        "label": "渔具"
+      },
+      {
+        "id": "collection",
+        "label": "收藏品"
+      }
+    ],
+    "footer": {
+      "sellLabel": "出售",
+      "useLabel": "使用",
+      "closeLabel": "关闭",
+      "sellTitle": "出售物品",
+      "sellBody": "当前背包整理功能暂未接入出售逻辑。",
+      "useTitle": "使用物品",
+      "useBody": "当前背包整理功能暂未接入使用逻辑。"
+    },
+    "emptyState": {
+      "title": "📦",
+      "message": "你的背包还是空的。\n快去海边钓第一条鱼吧。",
+      "buttonLabel": "开始钓鱼"
+    },
+    "detail": {
+      "closeLabel": "关闭",
+      "rarityLabel": "品质",
+      "descriptionLabel": "介绍",
+      "usageLabel": "用途",
+      "quantityLabel": "数量",
+      "sourceLabel": "获得来源",
+      "priceLabel": "出售价格",
+      "useButtonLabel": "使用",
+      "sellButtonLabel": "出售",
+      "useDisabledLabel": "不可使用",
+      "sellDisabledLabel": "不可出售"
+    },
+    "catalog": [
+      {
+        "id": "fish_basa",
+        "name": "巴沙鱼",
+        "category": "fish",
+        "rarity": "common",
+        "icon": "🐟",
+        "description": "一条轻松入手的基础鱼获。",
+        "usage": "可以出售，也可以作为鱼链起点。",
+        "obtainSource": "海边钓鱼",
+        "sellPrice": 18,
+        "canUse": true,
+        "canSell": true,
+        "badge": "NEW",
+        "initialQuantity": 1,
+        "sortOrder": 10,
+        "attributes": {
+          "weight": "1.2kg",
+          "quality": "普通"
+        }
+      },
+      {
+        "id": "fish_tilapia",
+        "name": "罗非鱼",
+        "category": "fish",
+        "rarity": "common",
+        "icon": "🐠",
+        "description": "办公室海边常见鱼种。",
+        "usage": "可用于轻量收藏或出售。",
+        "obtainSource": "日常钓鱼",
+        "sellPrice": 22,
+        "canUse": true,
+        "canSell": true,
+        "badge": "",
+        "initialQuantity": 1,
+        "sortOrder": 20,
+        "attributes": {
+          "weight": "1.8kg",
+          "quality": "普通"
+        }
+      },
+      {
+        "id": "bait_basic",
+        "name": "基础鱼饵",
+        "category": "bait",
+        "rarity": "common",
+        "icon": "🪱",
+        "description": "最基础的鱼饵，适合开始摸鱼。",
+        "usage": "作为首次抛线的默认鱼饵。",
+        "obtainSource": "新手领取",
+        "sellPrice": 2,
+        "canUse": true,
+        "canSell": false,
+        "badge": "装备中",
+        "initialQuantity": 6,
+        "sortOrder": 110,
+        "attributes": {
+          "baitType": "basic"
+        }
+      },
+      {
+        "id": "bait_shrimp",
+        "name": "鲜虾饵",
+        "category": "bait",
+        "rarity": "uncommon",
+        "icon": "🦐",
+        "description": "更有诱惑力的高级鱼饵。",
+        "usage": "适合中级鱼种。",
+        "obtainSource": "商城购买",
+        "sellPrice": 12,
+        "canUse": true,
+        "canSell": false,
+        "badge": "",
+        "initialQuantity": 2,
+        "sortOrder": 120,
+        "attributes": {
+          "baitType": "advanced"
+        }
+      },
+      {
+        "id": "rod_silver",
+        "name": "银纹鱼竿",
+        "category": "gear",
+        "rarity": "rare",
+        "icon": "🎣",
+        "description": "更顺手的鱼竿，手感更稳。",
+        "usage": "装备后提升钓鱼体验。",
+        "obtainSource": "鱼具商店",
+        "sellPrice": 180,
+        "canUse": true,
+        "canSell": true,
+        "badge": "",
+        "initialQuantity": 1,
+        "sortOrder": 210,
+        "attributes": {
+          "stability": "稳定",
+          "type": "鱼竿"
+        }
+      },
+      {
+        "id": "line_steady",
+        "name": "稳线鱼线",
+        "category": "gear",
+        "rarity": "rare",
+        "icon": "🧵",
+        "description": "让收线过程更稳定。",
+        "usage": "装备后减少拉扯感。",
+        "obtainSource": "鱼具商店",
+        "sellPrice": 120,
+        "canUse": true,
+        "canSell": true,
+        "badge": "",
+        "initialQuantity": 1,
+        "sortOrder": 220,
+        "attributes": {
+          "stability": "顺滑",
+          "type": "鱼线"
+        }
+      },
+      {
+        "id": "float_glow",
+        "name": "微光鱼漂",
+        "category": "gear",
+        "rarity": "epic",
+        "icon": "🎈",
+        "description": "轻微发光，便于观察。",
+        "usage": "让等待更安心。",
+        "obtainSource": "活动奖励",
+        "sellPrice": 260,
+        "canUse": true,
+        "canSell": true,
+        "badge": "",
+        "initialQuantity": 0,
+        "sortOrder": 907,
+        "attributes": {}
+      },
+      {
+        "id": "hook_steel",
+        "name": "钢钩",
+        "category": "gear",
+        "rarity": "rare",
+        "icon": "🪝",
+        "description": "更牢靠的鱼钩。",
+        "usage": "适用于更高级的鱼链。",
+        "obtainSource": "鱼具商店",
+        "sellPrice": 90,
+        "canUse": true,
+        "canSell": true,
+        "badge": "",
+        "initialQuantity": 0,
+        "sortOrder": 908,
+        "attributes": {}
+      },
+      {
+        "id": "material_wood",
+        "name": "木材",
+        "category": "material",
+        "rarity": "common",
+        "icon": "🪵",
+        "description": "制作与升级常用材料。",
+        "usage": "用于工位装饰和道具升级。",
+        "obtainSource": "任务奖励",
+        "sellPrice": 8,
+        "canUse": false,
+        "canSell": true,
+        "badge": "",
+        "initialQuantity": 0,
+        "sortOrder": 909,
+        "attributes": {}
+      },
+      {
+        "id": "material_iron",
+        "name": "铁块",
+        "category": "material",
+        "rarity": "uncommon",
+        "icon": "🧱",
+        "description": "坚固的基础材料。",
+        "usage": "用于装备强化。",
+        "obtainSource": "钓鱼掉落",
+        "sellPrice": 20,
+        "canUse": false,
+        "canSell": true,
+        "badge": "",
+        "initialQuantity": 0,
+        "sortOrder": 910,
+        "attributes": {}
+      },
+      {
+        "id": "collection_badge",
+        "name": "荣耀徽章",
+        "category": "collection",
+        "rarity": "epic",
+        "icon": "🏅",
+        "description": "记录你在第二世界的快乐时刻。",
+        "usage": "仅收藏，不出售。",
+        "obtainSource": "荣耀系统",
+        "sellPrice": 0,
+        "canUse": false,
+        "canSell": false,
+        "badge": "NEW",
+        "initialQuantity": 1,
+        "sortOrder": 310,
+        "attributes": {
+          "memory": "第一次整理背包"
+        }
+      },
+      {
+        "id": "collection_memo",
+        "name": "海边纪念章",
+        "category": "collection",
+        "rarity": "legend",
+        "icon": "🎖",
+        "description": "特别时刻的纪念。",
+        "usage": "仅收藏。",
+        "obtainSource": "活动奖励",
+        "sellPrice": 0,
+        "canUse": false,
+        "canSell": false,
+        "badge": "",
+        "initialQuantity": 1,
+        "sortOrder": 320,
+        "attributes": {
+          "memory": "海边纪念"
+        }
+      },
+      {
+        "id": "task_daily",
+        "name": "每日任务券",
+        "category": "task",
+        "rarity": "common",
+        "icon": "📋",
+        "description": "轻量任务的凭证。",
+        "usage": "完成当日目标。",
+        "obtainSource": "每日登录",
+        "sellPrice": 0,
+        "canUse": true,
+        "canSell": false,
+        "badge": "",
+        "initialQuantity": 0,
+        "sortOrder": 913,
+        "attributes": {}
+      },
+      {
+        "id": "task_event",
+        "name": "活动道具",
+        "category": "task",
+        "rarity": "rare",
+        "icon": "🎁",
+        "description": "限时活动会用到的道具。",
+        "usage": "参与特殊活动。",
+        "obtainSource": "限时活动",
+        "sellPrice": 0,
+        "canUse": true,
+        "canSell": false,
+        "badge": "",
+        "initialQuantity": 0,
+        "sortOrder": 914,
+        "attributes": {}
+      },
+      {
+        "id": "bait_special",
+        "name": "特制鱼饵",
+        "category": "bait",
+        "rarity": "epic",
+        "icon": "🌶",
+        "description": "更有吸引力的特殊鱼饵。",
+        "usage": "用于更高品质鱼种。",
+        "obtainSource": "高级奖励",
+        "sellPrice": 35,
+        "canUse": true,
+        "canSell": false,
+        "badge": "",
+        "initialQuantity": 0,
+        "sortOrder": 915,
+        "attributes": {}
+      },
+      {
+        "id": "gear_special_rod",
+        "name": "金纹竿",
+        "category": "gear",
+        "rarity": "legend",
+        "icon": "✨",
+        "description": "闪着淡淡金光的鱼竿。",
+        "usage": "装备后更有仪式感。",
+        "obtainSource": "荣耀兑换",
+        "sellPrice": 500,
+        "canUse": true,
+        "canSell": true,
+        "badge": "",
+        "initialQuantity": 0,
+        "sortOrder": 916,
+        "attributes": {}
+      }
+    ]
+  }
+}

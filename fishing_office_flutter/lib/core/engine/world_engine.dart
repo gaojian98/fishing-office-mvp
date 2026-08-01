@@ -3,6 +3,7 @@ import 'dart:async';
 import 'world_clock.dart';
 import 'world_news.dart';
 import 'world_state.dart';
+import '../managers/world_clock_manager.dart';
 
 typedef WorldEngineListener = void Function(WorldState state);
 
@@ -70,12 +71,12 @@ class WorldEngine {
     Map<String, dynamic> context = const {},
   }) {
     final item = WorldNews(
-      newsId: DateTime.now().microsecondsSinceEpoch.toString(),
+      newsId: WorldClockManager.timestampId(),
       title: title,
       summary: summary,
       time: clock,
       context: context,
-      createdAt: DateTime.now(),
+      createdAt: WorldClockManager.systemNow(),
     );
     _state = _state.copyWith(
       generatedNews: [..._state.generatedNews, item],

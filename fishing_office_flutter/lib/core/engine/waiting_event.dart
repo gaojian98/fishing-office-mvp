@@ -1,4 +1,5 @@
 import 'waiting_notification.dart';
+import '../managers/world_clock_manager.dart';
 
 class WaitingEvent {
   const WaitingEvent({
@@ -23,7 +24,7 @@ class WaitingEvent {
       eventId: notification.notificationId,
       sessionId: sessionId,
       eventType: notification.type,
-      time: notification.time ?? DateTime.now(),
+      time: notification.time ?? WorldClockManager.systemNow(),
       message: notification.message,
       effect: notification.effect,
       visibleToPlayer: notification.visibleToPlayer,

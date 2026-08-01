@@ -35,12 +35,15 @@ class StoreLayoutConfig {
   factory StoreLayoutConfig.fromJson(Map<String, dynamic> json) {
     return StoreLayoutConfig(
       meta: json['meta'] as Map<String, dynamic>? ?? const {},
-      dialog: RectSpec.fromJson(json['dialog'] as Map<String, dynamic>? ?? const {}),
+      dialog: RectSpec.fromJson(
+          json['dialog'] as Map<String, dynamic>? ?? const {}),
       header: StoreHeaderLayout.fromJson(
         json['header'] as Map<String, dynamic>? ?? const {},
       ),
-      tabs: StoreTabsLayout.fromJson(json['tabs'] as Map<String, dynamic>? ?? const {}),
-      shelf: StoreShelfLayout.fromJson(json['shelf'] as Map<String, dynamic>? ?? const {}),
+      tabs: StoreTabsLayout.fromJson(
+          json['tabs'] as Map<String, dynamic>? ?? const {}),
+      shelf: StoreShelfLayout.fromJson(
+          json['shelf'] as Map<String, dynamic>? ?? const {}),
       productCard: StoreProductCardLayout.fromJson(
         json['productCard'] as Map<String, dynamic>? ?? const {},
       ),
@@ -92,7 +95,8 @@ class StoreHeaderLayout {
   const StoreHeaderLayout({required this.title, required this.closeButton});
   factory StoreHeaderLayout.fromJson(Map<String, dynamic> json) {
     return StoreHeaderLayout(
-      title: RectSpec.fromJson(json['title'] as Map<String, dynamic>? ?? const {}),
+      title:
+          RectSpec.fromJson(json['title'] as Map<String, dynamic>? ?? const {}),
       closeButton: RectSpec.fromJson(
         json['closeButton'] as Map<String, dynamic>? ?? const {},
       ),
@@ -179,9 +183,12 @@ class StoreProductCardLayout {
   });
   factory StoreProductCardLayout.fromJson(Map<String, dynamic> json) {
     return StoreProductCardLayout(
-      image: RectSpec.fromJson(json['image'] as Map<String, dynamic>? ?? const {}),
-      name: RectSpec.fromJson(json['name'] as Map<String, dynamic>? ?? const {}),
-      priceTag: RectSpec.fromJson(json['priceTag'] as Map<String, dynamic>? ?? const {}),
+      image:
+          RectSpec.fromJson(json['image'] as Map<String, dynamic>? ?? const {}),
+      name:
+          RectSpec.fromJson(json['name'] as Map<String, dynamic>? ?? const {}),
+      priceTag: RectSpec.fromJson(
+          json['priceTag'] as Map<String, dynamic>? ?? const {}),
     );
   }
   final RectSpec image;
@@ -197,7 +204,8 @@ class StoreFooterLayout {
   });
   factory StoreFooterLayout.fromJson(Map<String, dynamic> json) {
     return StoreFooterLayout(
-      coinInfo: RectSpec.fromJson(json['coinInfo'] as Map<String, dynamic>? ?? const {}),
+      coinInfo: RectSpec.fromJson(
+          json['coinInfo'] as Map<String, dynamic>? ?? const {}),
       walletButton: RectSpec.fromJson(
         json['walletButton'] as Map<String, dynamic>? ?? const {},
       ),
@@ -215,25 +223,23 @@ class StoreDataConfig {
   const StoreDataConfig({
     required this.currency,
     required this.categories,
-    required this.items,
+    required this.products,
     required this.purchaseRules,
   });
 
   factory StoreDataConfig.fromJson(Map<String, dynamic> json) {
     return StoreDataConfig(
-      currency: StoreCurrency.fromJson(
-        json['currency'] as Map<String, dynamic>? ?? const {},
-      ),
+      currency: StoreCurrency.fromJson(json['currency']),
       categories: json['categories'] is List
           ? (json['categories'] as List)
               .whereType<Map<String, dynamic>>()
               .map(StoreCategory.fromJson)
               .toList(growable: false)
           : const [],
-      items: json['items'] is List
-          ? (json['items'] as List)
+      products: json['products'] is List
+          ? (json['products'] as List)
               .whereType<Map<String, dynamic>>()
-              .map(StoreItem.fromJson)
+              .map(StoreProduct.fromJson)
               .toList(growable: false)
           : const [],
       purchaseRules: StorePurchaseRules.fromJson(
@@ -244,8 +250,10 @@ class StoreDataConfig {
 
   final StoreCurrency currency;
   final List<StoreCategory> categories;
-  final List<StoreItem> items;
+  final List<StoreItem> products;
   final StorePurchaseRules purchaseRules;
+
+  List<StoreItem> get items => products;
 }
 
 class StoreCurrency {
@@ -254,10 +262,19 @@ class StoreCurrency {
     required this.displayName,
   });
 
-  factory StoreCurrency.fromJson(Map<String, dynamic> json) {
+  factory StoreCurrency.fromJson(Object? value) {
+    if (value is String) {
+      return StoreCurrency(
+        primary: value,
+        displayName: _currencyDisplayName(value),
+      );
+    }
+    final json =
+        value is Map<String, dynamic> ? value : const <String, dynamic>{};
     return StoreCurrency(
       primary: '${json['primary'] ?? ''}',
-      displayName: '${json['displayName'] ?? ''}',
+      displayName:
+          '${json['displayName'] ?? _currencyDisplayName('${json['primary'] ?? ''}')}',
     );
   }
 
@@ -265,60 +282,97 @@ class StoreCurrency {
   final String displayName;
 }
 
+String _currencyDisplayName(String currency) {
+  switch (currency) {
+    case 'fish_coin':
+      return '摸鱼币';
+    default:
+      return currency;
+  }
+}
+
 class StoreCategory {
   const StoreCategory({
     required this.id,
     required this.name,
+    required this.icon,
+    required this.sortOrder,
+    required this.enabled,
   });
 
   factory StoreCategory.fromJson(Map<String, dynamic> json) {
     return StoreCategory(
       id: '${json['id'] ?? ''}',
       name: '${json['name'] ?? ''}',
+      icon: '${json['icon'] ?? ''}',
+      sortOrder: _readInt(json['sortOrder']),
+      enabled: json['enabled'] != false,
     );
   }
 
   final String id;
   final String name;
+  final String icon;
+  final int sortOrder;
+  final bool enabled;
 }
 
-class StoreItem {
-  const StoreItem({
+class StoreProduct {
+  const StoreProduct({
     required this.id,
-    required this.name,
     required this.category,
+    required this.name,
+    required this.image,
     required this.rarity,
     required this.price,
     required this.currency,
     required this.owned,
-    required this.icon,
     required this.description,
+    required this.effect,
+    required this.canBuy,
+    required this.maxOwned,
+    required this.sortOrder,
+    required this.enabled,
   });
 
-  factory StoreItem.fromJson(Map<String, dynamic> json) {
-    return StoreItem(
+  factory StoreProduct.fromJson(Map<String, dynamic> json) {
+    return StoreProduct(
       id: '${json['id'] ?? ''}',
-      name: '${json['name'] ?? ''}',
       category: '${json['category'] ?? ''}',
+      name: '${json['name'] ?? ''}',
+      image: '${json['image'] ?? ''}',
       rarity: '${json['rarity'] ?? ''}',
       price: _readInt(json['price']),
       currency: '${json['currency'] ?? ''}',
       owned: _readInt(json['owned']),
-      icon: '${json['icon'] ?? ''}',
       description: '${json['description'] ?? ''}',
+      effect: '${json['effect'] ?? ''}',
+      canBuy: json['canBuy'] != false,
+      maxOwned: _readInt(json['maxOwned']),
+      sortOrder: _readInt(json['sortOrder']),
+      enabled: json['enabled'] != false,
     );
   }
 
   final String id;
-  final String name;
   final String category;
+  final String name;
+  final String image;
   final String rarity;
   final int price;
   final String currency;
   final int owned;
-  final String icon;
   final String description;
+  final String effect;
+  final bool canBuy;
+  final int maxOwned;
+  final int sortOrder;
+  final bool enabled;
+
+  String get icon => image;
 }
+
+typedef StoreItem = StoreProduct;
 
 class StorePurchaseRules {
   const StorePurchaseRules({

@@ -1,3 +1,5 @@
+import '../managers/world_clock_manager.dart';
+
 class IdentityManager {
   const IdentityManager();
 
@@ -13,7 +15,7 @@ class IdentityManager {
       primaryLabel: primaryLabel,
       tags: resolvedTags,
       context: context,
-      updatedAt: DateTime.now(),
+      updatedAt: WorldClockManager.systemNow(),
     );
   }
 }

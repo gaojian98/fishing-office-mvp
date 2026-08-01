@@ -26,6 +26,13 @@ class LayoutConfig {
 
   final Size designSize;
   final List<LayoutElement> elements;
+
+  LayoutElement? byId(String id) {
+    for (final element in elements) {
+      if (element.id == id) return element;
+    }
+    return null;
+  }
 }
 
 class LayoutElement {

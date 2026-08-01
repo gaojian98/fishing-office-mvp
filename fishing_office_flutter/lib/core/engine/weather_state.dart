@@ -2,6 +2,7 @@ import 'weather_effect.dart';
 import 'weather_visual.dart';
 import 'world_calendar.dart';
 import 'world_clock.dart';
+import '../managers/world_clock_manager.dart';
 
 enum WeatherType {
   sunny,
@@ -39,7 +40,7 @@ class WeatherState {
       effect: WeatherEffect.fromType(WeatherType.calmSea),
       visual: WeatherVisual.fromType(WeatherType.calmSea),
       context: const {},
-      createdAt: DateTime.now(),
+      createdAt: WorldClockManager.systemNow(),
     );
   }
 
@@ -75,7 +76,7 @@ class WeatherState {
         'season': calendar.season,
         'isWeekend': calendar.isWeekend,
       },
-      createdAt: DateTime.now(),
+      createdAt: WorldClockManager.systemNow(),
     );
   }
 

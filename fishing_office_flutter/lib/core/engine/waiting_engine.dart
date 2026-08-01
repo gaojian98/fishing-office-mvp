@@ -4,6 +4,7 @@ import 'waiting_event.dart';
 import 'waiting_notification.dart';
 import 'waiting_session.dart';
 import 'waiting_commitment.dart';
+import '../managers/world_clock_manager.dart';
 
 typedef WaitingEngineListener = void Function(WaitingEvent event);
 
@@ -25,7 +26,7 @@ class WaitingEngine {
     Map<String, dynamic> metadata = const {},
   }) {
     return WaitingSession(
-      id: id ?? DateTime.now().microsecondsSinceEpoch.toString(),
+      id: id ?? WorldClockManager.timestampId(),
       fishingSessionId: fishingSessionId,
       commitment: commitment,
       metadata: metadata,

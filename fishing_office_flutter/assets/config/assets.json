@@ -1,0 +1,76 @@
+{
+  "assets": {
+    "meta": {
+      "project": "FishingOffice",
+      "page": "AssetsCenter",
+      "version": "1.0",
+      "designSize": {
+        "width": 1080,
+        "height": 1920
+      }
+    },
+    "title": "资产中心",
+    "summaryTitle": "资产概览",
+    "summaryCards": [
+      {
+        "id": "fish_coin",
+        "label": "摸鱼币",
+        "value": "0",
+        "icon": "fish_coin"
+      },
+      {
+        "id": "experience",
+        "label": "经验",
+        "value": "0",
+        "icon": "exp"
+      },
+      {
+        "id": "fish_count",
+        "label": "累计钓鱼次数",
+        "value": "0 次",
+        "icon": "fish"
+      },
+      {
+        "id": "sell_count",
+        "label": "累计出售次数",
+        "value": "0 次",
+        "icon": "sell"
+      },
+      {
+        "id": "release_count",
+        "label": "累计放生次数",
+        "value": "0 次",
+        "icon": "release"
+      },
+      {
+        "id": "collection_rate",
+        "label": "图鉴完成率",
+        "value": "0%",
+        "icon": "book"
+      }
+    ],
+    "statisticsTitle": "资产统计",
+    "statistics": [
+      {
+        "id": "task_completed",
+        "label": "今日任务完成数",
+        "value": "0"
+      },
+      {
+        "id": "inventory_count",
+        "label": "背包数量",
+        "value": "0"
+      },
+      {
+        "id": "collection_count",
+        "label": "图鉴发现",
+        "value": "0"
+      },
+      {
+        "id": "transaction_count",
+        "label": "交易记录",
+        "value": "0"
+      }
+    ]
+  }
+}

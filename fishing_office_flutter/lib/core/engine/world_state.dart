@@ -1,5 +1,6 @@
 import 'world_clock.dart';
 import 'world_news.dart';
+import '../managers/world_clock_manager.dart';
 
 class WorldState {
   const WorldState({
@@ -24,7 +25,7 @@ class WorldState {
       companions: const [],
       events: const [],
       generatedNews: const [],
-      updatedAt: DateTime.now(),
+      updatedAt: WorldClockManager.systemNow(),
     );
   }
 
@@ -58,7 +59,7 @@ class WorldState {
       companions: companions ?? this.companions,
       events: events ?? this.events,
       generatedNews: generatedNews ?? this.generatedNews,
-      updatedAt: updatedAt ?? DateTime.now(),
+      updatedAt: updatedAt ?? WorldClockManager.systemNow(),
     );
   }
 }

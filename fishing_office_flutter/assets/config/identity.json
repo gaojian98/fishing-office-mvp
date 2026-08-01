@@ -1,0 +1,2506 @@
+{
+  "version": "1.0",
+  "description": "第二世界身份内容配置。Identity Pack 01。",
+  "identities": [
+    {
+      "id": "identity_morning_walker",
+      "name": "清晨散步者",
+      "title": "普通身份",
+      "description": "这是给清晨散步者的身份：它记录玩家愿意在第二世界慢下来，认真看见日常里的小光。",
+      "category": "normal",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "login_days",
+        "operator": ">=",
+        "value": 1,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/morning_walker.png",
+      "color": "#6B7280",
+      "tags": [
+        "identity",
+        "normal",
+        "common",
+        "morning_walker"
+      ],
+      "enabled": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "identity_window_stayer",
+      "name": "窗边停留者",
+      "title": "普通身份",
+      "description": "这是给窗边停留者的身份：它记录玩家愿意在第二世界慢下来，认真看见日常里的小光。",
+      "category": "normal",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "login_days",
+        "operator": ">=",
+        "value": 2,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/window_stayer.png",
+      "color": "#6B7280",
+      "tags": [
+        "identity",
+        "normal",
+        "common",
+        "window_stayer"
+      ],
+      "enabled": true,
+      "sortOrder": 2
+    },
+    {
+      "id": "identity_slow_waiter",
+      "name": "慢慢等待者",
+      "title": "普通身份",
+      "description": "这是给慢慢等待者的身份：它记录玩家愿意在第二世界慢下来，认真看见日常里的小光。",
+      "category": "normal",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "login_days",
+        "operator": ">=",
+        "value": 3,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/slow_waiter.png",
+      "color": "#6B7280",
+      "tags": [
+        "identity",
+        "normal",
+        "common",
+        "slow_waiter"
+      ],
+      "enabled": true,
+      "sortOrder": 3
+    },
+    {
+      "id": "identity_lucky_resident",
+      "name": "幸运居民",
+      "title": "普通身份",
+      "description": "这是给幸运居民的身份：它记录玩家愿意在第二世界慢下来，认真看见日常里的小光。",
+      "category": "normal",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "login_days",
+        "operator": ">=",
+        "value": 4,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/lucky_resident.png",
+      "color": "#6B7280",
+      "tags": [
+        "identity",
+        "normal",
+        "common",
+        "lucky_resident"
+      ],
+      "enabled": true,
+      "sortOrder": 4
+    },
+    {
+      "id": "identity_daily_recorder",
+      "name": "日常记录员",
+      "title": "普通身份",
+      "description": "这是给日常记录员的身份：它记录玩家愿意在第二世界慢下来，认真看见日常里的小光。",
+      "category": "normal",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "login_days",
+        "operator": ">=",
+        "value": 5,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/daily_recorder.png",
+      "color": "#6B7280",
+      "tags": [
+        "identity",
+        "normal",
+        "common",
+        "daily_recorder"
+      ],
+      "enabled": true,
+      "sortOrder": 5
+    },
+    {
+      "id": "identity_quiet_observer",
+      "name": "安静观察者",
+      "title": "普通身份",
+      "description": "这是给安静观察者的身份：它记录玩家愿意在第二世界慢下来，认真看见日常里的小光。",
+      "category": "normal",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "login_days",
+        "operator": ">=",
+        "value": 6,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/quiet_observer.png",
+      "color": "#6B7280",
+      "tags": [
+        "identity",
+        "normal",
+        "common",
+        "quiet_observer"
+      ],
+      "enabled": true,
+      "sortOrder": 6
+    },
+    {
+      "id": "identity_afternoon_rester",
+      "name": "午后休息者",
+      "title": "普通身份",
+      "description": "这是给午后休息者的身份：它记录玩家愿意在第二世界慢下来，认真看见日常里的小光。",
+      "category": "normal",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "login_days",
+        "operator": ">=",
+        "value": 7,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/afternoon_rester.png",
+      "color": "#6B7280",
+      "tags": [
+        "identity",
+        "normal",
+        "common",
+        "afternoon_rester"
+      ],
+      "enabled": true,
+      "sortOrder": 7
+    },
+    {
+      "id": "identity_small_goal_finisher",
+      "name": "小目标完成者",
+      "title": "普通身份",
+      "description": "这是给小目标完成者的身份：它记录玩家愿意在第二世界慢下来，认真看见日常里的小光。",
+      "category": "normal",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "login_days",
+        "operator": ">=",
+        "value": 8,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/small_goal_finisher.png",
+      "color": "#6B7280",
+      "tags": [
+        "identity",
+        "normal",
+        "common",
+        "small_goal_finisher"
+      ],
+      "enabled": true,
+      "sortOrder": 8
+    },
+    {
+      "id": "identity_smile_collector",
+      "name": "微笑收藏者",
+      "title": "普通身份",
+      "description": "这是给微笑收藏者的身份：它记录玩家愿意在第二世界慢下来，认真看见日常里的小光。",
+      "category": "normal",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "login_days",
+        "operator": ">=",
+        "value": 9,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/smile_collector.png",
+      "color": "#6B7280",
+      "tags": [
+        "identity",
+        "normal",
+        "rare",
+        "smile_collector"
+      ],
+      "enabled": true,
+      "sortOrder": 9
+    },
+    {
+      "id": "identity_second_world_regular",
+      "name": "第二世界常客",
+      "title": "普通身份",
+      "description": "这是给第二世界常客的身份：它记录玩家愿意在第二世界慢下来，认真看见日常里的小光。",
+      "category": "normal",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "login_days",
+        "operator": ">=",
+        "value": 10,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/second_world_regular.png",
+      "color": "#6B7280",
+      "tags": [
+        "identity",
+        "normal",
+        "rare",
+        "second_world_regular"
+      ],
+      "enabled": true,
+      "sortOrder": 10
+    },
+    {
+      "id": "identity_resident_friend",
+      "name": "居民好友",
+      "title": "居民身份",
+      "description": "这是给居民好友的身份：居民开始记住玩家，世界也把这些温柔的相遇收进档案。",
+      "category": "resident",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "resident_meet_count",
+        "operator": ">=",
+        "value": 2,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/resident_friend.png",
+      "color": "#3B82F6",
+      "tags": [
+        "identity",
+        "resident",
+        "common",
+        "resident_friend"
+      ],
+      "enabled": true,
+      "sortOrder": 11
+    },
+    {
+      "id": "identity_neighbor_greeter",
+      "name": "邻里问候者",
+      "title": "居民身份",
+      "description": "这是给邻里问候者的身份：居民开始记住玩家，世界也把这些温柔的相遇收进档案。",
+      "category": "resident",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "resident_meet_count",
+        "operator": ">=",
+        "value": 4,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/neighbor_greeter.png",
+      "color": "#3B82F6",
+      "tags": [
+        "identity",
+        "resident",
+        "common",
+        "neighbor_greeter"
+      ],
+      "enabled": true,
+      "sortOrder": 12
+    },
+    {
+      "id": "identity_old_fisher_friend",
+      "name": "老渔夫的朋友",
+      "title": "居民身份",
+      "description": "这是给老渔夫的朋友的身份：居民开始记住玩家，世界也把这些温柔的相遇收进档案。",
+      "category": "resident",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "resident_meet_count",
+        "operator": ">=",
+        "value": 6,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/old_fisher_friend.png",
+      "color": "#3B82F6",
+      "tags": [
+        "identity",
+        "resident",
+        "common",
+        "old_fisher_friend"
+      ],
+      "enabled": true,
+      "sortOrder": 13
+    },
+    {
+      "id": "identity_flower_blessing_keeper",
+      "name": "花店祝福人",
+      "title": "居民身份",
+      "description": "这是给花店祝福人的身份：居民开始记住玩家，世界也把这些温柔的相遇收进档案。",
+      "category": "resident",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "resident_meet_count",
+        "operator": ">=",
+        "value": 8,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/flower_blessing_keeper.png",
+      "color": "#3B82F6",
+      "tags": [
+        "identity",
+        "resident",
+        "common",
+        "flower_blessing_keeper"
+      ],
+      "enabled": true,
+      "sortOrder": 14
+    },
+    {
+      "id": "identity_post_office_regular",
+      "name": "邮局熟面孔",
+      "title": "居民身份",
+      "description": "这是给邮局熟面孔的身份：居民开始记住玩家，世界也把这些温柔的相遇收进档案。",
+      "category": "resident",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "resident_meet_count",
+        "operator": ">=",
+        "value": 10,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/post_office_regular.png",
+      "color": "#3B82F6",
+      "tags": [
+        "identity",
+        "resident",
+        "common",
+        "post_office_regular"
+      ],
+      "enabled": true,
+      "sortOrder": 15
+    },
+    {
+      "id": "identity_cafe_regular",
+      "name": "咖啡店座上客",
+      "title": "居民身份",
+      "description": "这是给咖啡店座上客的身份：居民开始记住玩家，世界也把这些温柔的相遇收进档案。",
+      "category": "resident",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "resident_meet_count",
+        "operator": ">=",
+        "value": 12,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/cafe_regular.png",
+      "color": "#3B82F6",
+      "tags": [
+        "identity",
+        "resident",
+        "common",
+        "cafe_regular"
+      ],
+      "enabled": true,
+      "sortOrder": 16
+    },
+    {
+      "id": "identity_market_soup_guest",
+      "name": "市场热汤客",
+      "title": "居民身份",
+      "description": "这是给市场热汤客的身份：居民开始记住玩家，世界也把这些温柔的相遇收进档案。",
+      "category": "resident",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "resident_meet_count",
+        "operator": ">=",
+        "value": 14,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/market_soup_guest.png",
+      "color": "#3B82F6",
+      "tags": [
+        "identity",
+        "resident",
+        "common",
+        "market_soup_guest"
+      ],
+      "enabled": true,
+      "sortOrder": 17
+    },
+    {
+      "id": "identity_lighthouse_listener",
+      "name": "灯塔听风人",
+      "title": "居民身份",
+      "description": "这是给灯塔听风人的身份：居民开始记住玩家，世界也把这些温柔的相遇收进档案。",
+      "category": "resident",
+      "rarity": "common",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "resident_meet_count",
+        "operator": ">=",
+        "value": 16,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/lighthouse_listener.png",
+      "color": "#3B82F6",
+      "tags": [
+        "identity",
+        "resident",
+        "common",
+        "lighthouse_listener"
+      ],
+      "enabled": true,
+      "sortOrder": 18
+    },
+    {
+      "id": "identity_community_helper",
+      "name": "社区帮手",
+      "title": "居民身份",
+      "description": "这是给社区帮手的身份：居民开始记住玩家，世界也把这些温柔的相遇收进档案。",
+      "category": "resident",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "resident_meet_count",
+        "operator": ">=",
+        "value": 18,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/community_helper.png",
+      "color": "#3B82F6",
+      "tags": [
+        "identity",
+        "resident",
+        "rare",
+        "community_helper"
+      ],
+      "enabled": true,
+      "sortOrder": 19
+    },
+    {
+      "id": "identity_seaside_old_friend",
+      "name": "海边老朋友",
+      "title": "居民身份",
+      "description": "这是给海边老朋友的身份：居民开始记住玩家，世界也把这些温柔的相遇收进档案。",
+      "category": "resident",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "resident_meet_count",
+        "operator": ">=",
+        "value": 20,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/seaside_old_friend.png",
+      "color": "#3B82F6",
+      "tags": [
+        "identity",
+        "resident",
+        "rare",
+        "seaside_old_friend"
+      ],
+      "enabled": true,
+      "sortOrder": 20
+    },
+    {
+      "id": "identity_resident_reporter",
+      "name": "居民记者",
+      "title": "职业身份",
+      "description": "这是给居民记者的身份：玩家像第二世界的一名记录者，把天气、鱼群、节日和故事慢慢整理起来。",
+      "category": "profession",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "content_discovery_count",
+        "operator": ">=",
+        "value": 3,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/resident_reporter.png",
+      "color": "#0EA5E9",
+      "tags": [
+        "identity",
+        "profession",
+        "rare",
+        "resident_reporter"
+      ],
+      "enabled": true,
+      "sortOrder": 21
+    },
+    {
+      "id": "identity_weather_observer",
+      "name": "天气观察员",
+      "title": "职业身份",
+      "description": "这是给天气观察员的身份：玩家像第二世界的一名记录者，把天气、鱼群、节日和故事慢慢整理起来。",
+      "category": "profession",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "content_discovery_count",
+        "operator": ">=",
+        "value": 6,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/weather_observer.png",
+      "color": "#0EA5E9",
+      "tags": [
+        "identity",
+        "profession",
+        "rare",
+        "weather_observer"
+      ],
+      "enabled": true,
+      "sortOrder": 22
+    },
+    {
+      "id": "identity_fish_researcher",
+      "name": "鱼类研究员",
+      "title": "职业身份",
+      "description": "这是给鱼类研究员的身份：玩家像第二世界的一名记录者，把天气、鱼群、节日和故事慢慢整理起来。",
+      "category": "profession",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "content_discovery_count",
+        "operator": ">=",
+        "value": 9,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/fish_researcher.png",
+      "color": "#0EA5E9",
+      "tags": [
+        "identity",
+        "profession",
+        "rare",
+        "fish_researcher"
+      ],
+      "enabled": true,
+      "sortOrder": 23
+    },
+    {
+      "id": "identity_ocean_photographer",
+      "name": "海洋摄影师",
+      "title": "职业身份",
+      "description": "这是给海洋摄影师的身份：玩家像第二世界的一名记录者，把天气、鱼群、节日和故事慢慢整理起来。",
+      "category": "profession",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "content_discovery_count",
+        "operator": ">=",
+        "value": 12,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/ocean_photographer.png",
+      "color": "#0EA5E9",
+      "tags": [
+        "identity",
+        "profession",
+        "rare",
+        "ocean_photographer"
+      ],
+      "enabled": true,
+      "sortOrder": 24
+    },
+    {
+      "id": "identity_festival_host",
+      "name": "节日主持人",
+      "title": "职业身份",
+      "description": "这是给节日主持人的身份：玩家像第二世界的一名记录者，把天气、鱼群、节日和故事慢慢整理起来。",
+      "category": "profession",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "content_discovery_count",
+        "operator": ">=",
+        "value": 15,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/festival_host.png",
+      "color": "#0EA5E9",
+      "tags": [
+        "identity",
+        "profession",
+        "rare",
+        "festival_host"
+      ],
+      "enabled": true,
+      "sortOrder": 25
+    },
+    {
+      "id": "identity_collection_organizer",
+      "name": "图鉴整理师",
+      "title": "职业身份",
+      "description": "这是给图鉴整理师的身份：玩家像第二世界的一名记录者，把天气、鱼群、节日和故事慢慢整理起来。",
+      "category": "profession",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "content_discovery_count",
+        "operator": ">=",
+        "value": 18,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/collection_organizer.png",
+      "color": "#0EA5E9",
+      "tags": [
+        "identity",
+        "profession",
+        "rare",
+        "collection_organizer"
+      ],
+      "enabled": true,
+      "sortOrder": 26
+    },
+    {
+      "id": "identity_pier_watcher",
+      "name": "码头守望者",
+      "title": "职业身份",
+      "description": "这是给码头守望者的身份：玩家像第二世界的一名记录者，把天气、鱼群、节日和故事慢慢整理起来。",
+      "category": "profession",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "content_discovery_count",
+        "operator": ">=",
+        "value": 21,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/pier_watcher.png",
+      "color": "#0EA5E9",
+      "tags": [
+        "identity",
+        "profession",
+        "rare",
+        "pier_watcher"
+      ],
+      "enabled": true,
+      "sortOrder": 27
+    },
+    {
+      "id": "identity_rumor_archivist",
+      "name": "传闻记录员",
+      "title": "职业身份",
+      "description": "这是给传闻记录员的身份：玩家像第二世界的一名记录者，把天气、鱼群、节日和故事慢慢整理起来。",
+      "category": "profession",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "content_discovery_count",
+        "operator": ">=",
+        "value": 24,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/rumor_archivist.png",
+      "color": "#0EA5E9",
+      "tags": [
+        "identity",
+        "profession",
+        "epic",
+        "rumor_archivist"
+      ],
+      "enabled": true,
+      "sortOrder": 28
+    },
+    {
+      "id": "identity_storyteller",
+      "name": "故事讲述者",
+      "title": "职业身份",
+      "description": "这是给故事讲述者的身份：玩家像第二世界的一名记录者，把天气、鱼群、节日和故事慢慢整理起来。",
+      "category": "profession",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "content_discovery_count",
+        "operator": ">=",
+        "value": 27,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/storyteller.png",
+      "color": "#0EA5E9",
+      "tags": [
+        "identity",
+        "profession",
+        "epic",
+        "storyteller"
+      ],
+      "enabled": true,
+      "sortOrder": 29
+    },
+    {
+      "id": "identity_world_archivist",
+      "name": "世界档案员",
+      "title": "职业身份",
+      "description": "这是给世界档案员的身份：玩家像第二世界的一名记录者，把天气、鱼群、节日和故事慢慢整理起来。",
+      "category": "profession",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "content_discovery_count",
+        "operator": ">=",
+        "value": 30,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/world_archivist.png",
+      "color": "#0EA5E9",
+      "tags": [
+        "identity",
+        "profession",
+        "epic",
+        "world_archivist"
+      ],
+      "enabled": true,
+      "sortOrder": 30
+    },
+    {
+      "id": "identity_coffee_collector",
+      "name": "咖啡收藏家",
+      "title": "兴趣身份",
+      "description": "这是给咖啡收藏家的身份：玩家不是为了效率而来，而是为了把喜欢的事一点点收藏。",
+      "category": "hobby",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hobby_memory_tags",
+        "operator": ">=",
+        "value": 1,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/coffee_collector.png",
+      "color": "#22C55E",
+      "tags": [
+        "identity",
+        "hobby",
+        "rare",
+        "coffee_collector"
+      ],
+      "enabled": true,
+      "sortOrder": 31
+    },
+    {
+      "id": "identity_coffee_taster",
+      "name": "咖啡鉴赏家",
+      "title": "兴趣身份",
+      "description": "这是给咖啡鉴赏家的身份：玩家不是为了效率而来，而是为了把喜欢的事一点点收藏。",
+      "category": "hobby",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hobby_memory_tags",
+        "operator": ">=",
+        "value": 2,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/coffee_taster.png",
+      "color": "#22C55E",
+      "tags": [
+        "identity",
+        "hobby",
+        "rare",
+        "coffee_taster"
+      ],
+      "enabled": true,
+      "sortOrder": 32
+    },
+    {
+      "id": "identity_park_musician",
+      "name": "公园演奏家",
+      "title": "兴趣身份",
+      "description": "这是给公园演奏家的身份：玩家不是为了效率而来，而是为了把喜欢的事一点点收藏。",
+      "category": "hobby",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hobby_memory_tags",
+        "operator": ">=",
+        "value": 3,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/park_musician.png",
+      "color": "#22C55E",
+      "tags": [
+        "identity",
+        "hobby",
+        "rare",
+        "park_musician"
+      ],
+      "enabled": true,
+      "sortOrder": 33
+    },
+    {
+      "id": "identity_convenience_regular",
+      "name": "便利店常客",
+      "title": "兴趣身份",
+      "description": "这是给便利店常客的身份：玩家不是为了效率而来，而是为了把喜欢的事一点点收藏。",
+      "category": "hobby",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hobby_memory_tags",
+        "operator": ">=",
+        "value": 4,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/convenience_regular.png",
+      "color": "#22C55E",
+      "tags": [
+        "identity",
+        "hobby",
+        "rare",
+        "convenience_regular"
+      ],
+      "enabled": true,
+      "sortOrder": 34
+    },
+    {
+      "id": "identity_bookmark_collector",
+      "name": "书签收集者",
+      "title": "兴趣身份",
+      "description": "这是给书签收集者的身份：玩家不是为了效率而来，而是为了把喜欢的事一点点收藏。",
+      "category": "hobby",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hobby_memory_tags",
+        "operator": ">=",
+        "value": 5,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/bookmark_collector.png",
+      "color": "#22C55E",
+      "tags": [
+        "identity",
+        "hobby",
+        "rare",
+        "bookmark_collector"
+      ],
+      "enabled": true,
+      "sortOrder": 35
+    },
+    {
+      "id": "identity_bottle_reader",
+      "name": "漂流瓶读者",
+      "title": "兴趣身份",
+      "description": "这是给漂流瓶读者的身份：玩家不是为了效率而来，而是为了把喜欢的事一点点收藏。",
+      "category": "hobby",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hobby_memory_tags",
+        "operator": ">=",
+        "value": 6,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/bottle_reader.png",
+      "color": "#22C55E",
+      "tags": [
+        "identity",
+        "hobby",
+        "rare",
+        "bottle_reader"
+      ],
+      "enabled": true,
+      "sortOrder": 36
+    },
+    {
+      "id": "identity_seagull_feeder",
+      "name": "海鸥投喂者",
+      "title": "兴趣身份",
+      "description": "这是给海鸥投喂者的身份：玩家不是为了效率而来，而是为了把喜欢的事一点点收藏。",
+      "category": "hobby",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hobby_memory_tags",
+        "operator": ">=",
+        "value": 7,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/seagull_feeder.png",
+      "color": "#22C55E",
+      "tags": [
+        "identity",
+        "hobby",
+        "rare",
+        "seagull_feeder"
+      ],
+      "enabled": true,
+      "sortOrder": 37
+    },
+    {
+      "id": "identity_night_market_wanderer",
+      "name": "夜市闲逛者",
+      "title": "兴趣身份",
+      "description": "这是给夜市闲逛者的身份：玩家不是为了效率而来，而是为了把喜欢的事一点点收藏。",
+      "category": "hobby",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hobby_memory_tags",
+        "operator": ">=",
+        "value": 8,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/night_market_wanderer.png",
+      "color": "#22C55E",
+      "tags": [
+        "identity",
+        "hobby",
+        "epic",
+        "night_market_wanderer"
+      ],
+      "enabled": true,
+      "sortOrder": 38
+    },
+    {
+      "id": "identity_wind_chime_listener",
+      "name": "风铃聆听者",
+      "title": "兴趣身份",
+      "description": "这是给风铃聆听者的身份：玩家不是为了效率而来，而是为了把喜欢的事一点点收藏。",
+      "category": "hobby",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hobby_memory_tags",
+        "operator": ">=",
+        "value": 9,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/wind_chime_listener.png",
+      "color": "#22C55E",
+      "tags": [
+        "identity",
+        "hobby",
+        "epic",
+        "wind_chime_listener"
+      ],
+      "enabled": true,
+      "sortOrder": 39
+    },
+    {
+      "id": "identity_postcard_sender",
+      "name": "明信片寄送者",
+      "title": "兴趣身份",
+      "description": "这是给明信片寄送者的身份：玩家不是为了效率而来，而是为了把喜欢的事一点点收藏。",
+      "category": "hobby",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hobby_memory_tags",
+        "operator": ">=",
+        "value": 10,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/postcard_sender.png",
+      "color": "#22C55E",
+      "tags": [
+        "identity",
+        "hobby",
+        "epic",
+        "postcard_sender"
+      ],
+      "enabled": true,
+      "sortOrder": 40
+    },
+    {
+      "id": "identity_mysterious_visitor",
+      "name": "神秘访客",
+      "title": "隐藏身份",
+      "description": "这是给神秘访客的身份：只有在安静、善意和偶然相遇里，隐藏的一面才会浮现。",
+      "category": "hidden",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hidden_event_seen",
+        "operator": ">=",
+        "value": 1,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/mysterious_visitor.png",
+      "color": "#8B5CF6",
+      "tags": [
+        "identity",
+        "hidden",
+        "epic",
+        "mysterious_visitor"
+      ],
+      "enabled": true,
+      "sortOrder": 41
+    },
+    {
+      "id": "identity_night_shift_ghost",
+      "name": "夜班幽灵",
+      "title": "隐藏身份",
+      "description": "这是给夜班幽灵的身份：只有在安静、善意和偶然相遇里，隐藏的一面才会浮现。",
+      "category": "hidden",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hidden_event_seen",
+        "operator": ">=",
+        "value": 2,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/night_shift_ghost.png",
+      "color": "#8B5CF6",
+      "tags": [
+        "identity",
+        "hidden",
+        "epic",
+        "night_shift_ghost"
+      ],
+      "enabled": true,
+      "sortOrder": 42
+    },
+    {
+      "id": "identity_anonymous_kind_soul",
+      "name": "匿名好心人",
+      "title": "隐藏身份",
+      "description": "这是给匿名好心人的身份：只有在安静、善意和偶然相遇里，隐藏的一面才会浮现。",
+      "category": "hidden",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hidden_event_seen",
+        "operator": ">=",
+        "value": 3,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/anonymous_kind_soul.png",
+      "color": "#8B5CF6",
+      "tags": [
+        "identity",
+        "hidden",
+        "epic",
+        "anonymous_kind_soul"
+      ],
+      "enabled": true,
+      "sortOrder": 43
+    },
+    {
+      "id": "identity_rain_release_keeper",
+      "name": "雨中放生者",
+      "title": "隐藏身份",
+      "description": "这是给雨中放生者的身份：只有在安静、善意和偶然相遇里，隐藏的一面才会浮现。",
+      "category": "hidden",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hidden_event_seen",
+        "operator": ">=",
+        "value": 4,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/rain_release_keeper.png",
+      "color": "#8B5CF6",
+      "tags": [
+        "identity",
+        "hidden",
+        "epic",
+        "rain_release_keeper"
+      ],
+      "enabled": true,
+      "sortOrder": 44
+    },
+    {
+      "id": "identity_midnight_tide_listener",
+      "name": "深夜听潮者",
+      "title": "隐藏身份",
+      "description": "这是给深夜听潮者的身份：只有在安静、善意和偶然相遇里，隐藏的一面才会浮现。",
+      "category": "hidden",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hidden_event_seen",
+        "operator": ">=",
+        "value": 5,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/midnight_tide_listener.png",
+      "color": "#8B5CF6",
+      "tags": [
+        "identity",
+        "hidden",
+        "epic",
+        "midnight_tide_listener"
+      ],
+      "enabled": true,
+      "sortOrder": 45
+    },
+    {
+      "id": "identity_lighthouse_shadow",
+      "name": "灯塔影子",
+      "title": "隐藏身份",
+      "description": "这是给灯塔影子的身份：只有在安静、善意和偶然相遇里，隐藏的一面才会浮现。",
+      "category": "hidden",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hidden_event_seen",
+        "operator": ">=",
+        "value": 6,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/lighthouse_shadow.png",
+      "color": "#8B5CF6",
+      "tags": [
+        "identity",
+        "hidden",
+        "epic",
+        "lighthouse_shadow"
+      ],
+      "enabled": true,
+      "sortOrder": 46
+    },
+    {
+      "id": "identity_old_pier_guest",
+      "name": "旧码头来客",
+      "title": "隐藏身份",
+      "description": "这是给旧码头来客的身份：只有在安静、善意和偶然相遇里，隐藏的一面才会浮现。",
+      "category": "hidden",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hidden_event_seen",
+        "operator": ">=",
+        "value": 7,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/old_pier_guest.png",
+      "color": "#8B5CF6",
+      "tags": [
+        "identity",
+        "hidden",
+        "epic",
+        "old_pier_guest"
+      ],
+      "enabled": true,
+      "sortOrder": 47
+    },
+    {
+      "id": "identity_hidden_story_witness",
+      "name": "隐藏剧情目击者",
+      "title": "隐藏身份",
+      "description": "这是给隐藏剧情目击者的身份：只有在安静、善意和偶然相遇里，隐藏的一面才会浮现。",
+      "category": "hidden",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hidden_event_seen",
+        "operator": ">=",
+        "value": 8,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/hidden_story_witness.png",
+      "color": "#8B5CF6",
+      "tags": [
+        "identity",
+        "hidden",
+        "epic",
+        "hidden_story_witness"
+      ],
+      "enabled": true,
+      "sortOrder": 48
+    },
+    {
+      "id": "identity_fog_companion",
+      "name": "雾中同行者",
+      "title": "隐藏身份",
+      "description": "这是给雾中同行者的身份：只有在安静、善意和偶然相遇里，隐藏的一面才会浮现。",
+      "category": "hidden",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hidden_event_seen",
+        "operator": ">=",
+        "value": 9,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/fog_companion.png",
+      "color": "#8B5CF6",
+      "tags": [
+        "identity",
+        "hidden",
+        "legend",
+        "fog_companion"
+      ],
+      "enabled": true,
+      "sortOrder": 49
+    },
+    {
+      "id": "identity_second_world_secret_keeper",
+      "name": "第二世界守秘人",
+      "title": "隐藏身份",
+      "description": "这是给第二世界守秘人的身份：只有在安静、善意和偶然相遇里，隐藏的一面才会浮现。",
+      "category": "hidden",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "hidden_event_seen",
+        "operator": ">=",
+        "value": 10,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/second_world_secret_keeper.png",
+      "color": "#8B5CF6",
+      "tags": [
+        "identity",
+        "hidden",
+        "legend",
+        "second_world_secret_keeper"
+      ],
+      "enabled": true,
+      "sortOrder": 50
+    },
+    {
+      "id": "identity_office_legend",
+      "name": "办公室传说",
+      "title": "传奇身份",
+      "description": "这是给办公室传说的身份：它不代表战力，而代表玩家陪伴这个世界走过了足够多故事。",
+      "category": "legend",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "legendary_memory_count",
+        "operator": ">=",
+        "value": 1,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/office_legend.png",
+      "color": "#F59E0B",
+      "tags": [
+        "identity",
+        "legend",
+        "legend",
+        "office_legend"
+      ],
+      "enabled": true,
+      "sortOrder": 51
+    },
+    {
+      "id": "identity_moyu_champion",
+      "name": "摸鱼冠军",
+      "title": "传奇身份",
+      "description": "这是给摸鱼冠军的身份：它不代表战力，而代表玩家陪伴这个世界走过了足够多故事。",
+      "category": "legend",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "legendary_memory_count",
+        "operator": ">=",
+        "value": 2,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/moyu_champion.png",
+      "color": "#F59E0B",
+      "tags": [
+        "identity",
+        "legend",
+        "legend",
+        "moyu_champion"
+      ],
+      "enabled": true,
+      "sortOrder": 52
+    },
+    {
+      "id": "identity_collection_master",
+      "name": "收藏大师",
+      "title": "传奇身份",
+      "description": "这是给收藏大师的身份：它不代表战力，而代表玩家陪伴这个世界走过了足够多故事。",
+      "category": "legend",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "legendary_memory_count",
+        "operator": ">=",
+        "value": 3,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/collection_master.png",
+      "color": "#F59E0B",
+      "tags": [
+        "identity",
+        "legend",
+        "legend",
+        "collection_master"
+      ],
+      "enabled": true,
+      "sortOrder": 53
+    },
+    {
+      "id": "identity_world_traveler",
+      "name": "世界旅行者",
+      "title": "传奇身份",
+      "description": "这是给世界旅行者的身份：它不代表战力，而代表玩家陪伴这个世界走过了足够多故事。",
+      "category": "legend",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "legendary_memory_count",
+        "operator": ">=",
+        "value": 4,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/world_traveler.png",
+      "color": "#F59E0B",
+      "tags": [
+        "identity",
+        "legend",
+        "legend",
+        "world_traveler"
+      ],
+      "enabled": true,
+      "sortOrder": 54
+    },
+    {
+      "id": "identity_deep_sea_explorer",
+      "name": "深海探索者",
+      "title": "传奇身份",
+      "description": "这是给深海探索者的身份：它不代表战力，而代表玩家陪伴这个世界走过了足够多故事。",
+      "category": "legend",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "legendary_memory_count",
+        "operator": ">=",
+        "value": 5,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/deep_sea_explorer.png",
+      "color": "#F59E0B",
+      "tags": [
+        "identity",
+        "legend",
+        "legend",
+        "deep_sea_explorer"
+      ],
+      "enabled": true,
+      "sortOrder": 55
+    },
+    {
+      "id": "identity_legend_collector",
+      "name": "传说收藏家",
+      "title": "传奇身份",
+      "description": "这是给传说收藏家的身份：它不代表战力，而代表玩家陪伴这个世界走过了足够多故事。",
+      "category": "legend",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "legendary_memory_count",
+        "operator": ">=",
+        "value": 6,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/legend_collector.png",
+      "color": "#F59E0B",
+      "tags": [
+        "identity",
+        "legend",
+        "legend",
+        "legend_collector"
+      ],
+      "enabled": true,
+      "sortOrder": 56
+    },
+    {
+      "id": "identity_fish_king_challenger",
+      "name": "鱼王挑战者",
+      "title": "传奇身份",
+      "description": "这是给鱼王挑战者的身份：它不代表战力，而代表玩家陪伴这个世界走过了足够多故事。",
+      "category": "legend",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "legendary_memory_count",
+        "operator": ">=",
+        "value": 7,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/fish_king_challenger.png",
+      "color": "#F59E0B",
+      "tags": [
+        "identity",
+        "legend",
+        "legend",
+        "fish_king_challenger"
+      ],
+      "enabled": true,
+      "sortOrder": 57
+    },
+    {
+      "id": "identity_seaside_poet",
+      "name": "海边诗人",
+      "title": "传奇身份",
+      "description": "这是给海边诗人的身份：它不代表战力，而代表玩家陪伴这个世界走过了足够多故事。",
+      "category": "legend",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "legendary_memory_count",
+        "operator": ">=",
+        "value": 8,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/seaside_poet.png",
+      "color": "#F59E0B",
+      "tags": [
+        "identity",
+        "legend",
+        "legend",
+        "seaside_poet"
+      ],
+      "enabled": true,
+      "sortOrder": 58
+    },
+    {
+      "id": "identity_waiting_master",
+      "name": "等待大师",
+      "title": "传奇身份",
+      "description": "这是给等待大师的身份：它不代表战力，而代表玩家陪伴这个世界走过了足够多故事。",
+      "category": "legend",
+      "rarity": "myth",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "legendary_memory_count",
+        "operator": ">=",
+        "value": 9,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/waiting_master.png",
+      "color": "#F59E0B",
+      "tags": [
+        "identity",
+        "legend",
+        "myth",
+        "waiting_master"
+      ],
+      "enabled": true,
+      "sortOrder": 59
+    },
+    {
+      "id": "identity_fairy_tale_witness",
+      "name": "童话见证者",
+      "title": "传奇身份",
+      "description": "这是给童话见证者的身份：它不代表战力，而代表玩家陪伴这个世界走过了足够多故事。",
+      "category": "legend",
+      "rarity": "myth",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "legendary_memory_count",
+        "operator": ">=",
+        "value": 10,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/fairy_tale_witness.png",
+      "color": "#F59E0B",
+      "tags": [
+        "identity",
+        "legend",
+        "myth",
+        "fairy_tale_witness"
+      ],
+      "enabled": true,
+      "sortOrder": 60
+    },
+    {
+      "id": "identity_rumor_maker",
+      "name": "传闻制造者",
+      "title": "神秘身份",
+      "description": "这是给传闻制造者的身份：玩家开始接近那些没有写在公告上的传闻和秘密。",
+      "category": "mystery",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "mystery_rumor_seen",
+        "operator": ">=",
+        "value": 2,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/rumor_maker.png",
+      "color": "#6366F1",
+      "tags": [
+        "identity",
+        "mystery",
+        "epic",
+        "rumor_maker"
+      ],
+      "enabled": true,
+      "sortOrder": 61
+    },
+    {
+      "id": "identity_bottle_promise_keeper",
+      "name": "漂流瓶守信人",
+      "title": "神秘身份",
+      "description": "这是给漂流瓶守信人的身份：玩家开始接近那些没有写在公告上的传闻和秘密。",
+      "category": "mystery",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "mystery_rumor_seen",
+        "operator": ">=",
+        "value": 4,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/bottle_promise_keeper.png",
+      "color": "#6366F1",
+      "tags": [
+        "identity",
+        "mystery",
+        "epic",
+        "bottle_promise_keeper"
+      ],
+      "enabled": true,
+      "sortOrder": 62
+    },
+    {
+      "id": "identity_star_tide_follower",
+      "name": "星潮追随者",
+      "title": "神秘身份",
+      "description": "这是给星潮追随者的身份：玩家开始接近那些没有写在公告上的传闻和秘密。",
+      "category": "mystery",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "mystery_rumor_seen",
+        "operator": ">=",
+        "value": 6,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/star_tide_follower.png",
+      "color": "#6366F1",
+      "tags": [
+        "identity",
+        "mystery",
+        "epic",
+        "star_tide_follower"
+      ],
+      "enabled": true,
+      "sortOrder": 63
+    },
+    {
+      "id": "identity_aurora_guest",
+      "name": "极光访客",
+      "title": "神秘身份",
+      "description": "这是给极光访客的身份：玩家开始接近那些没有写在公告上的传闻和秘密。",
+      "category": "mystery",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "mystery_rumor_seen",
+        "operator": ">=",
+        "value": 8,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/aurora_guest.png",
+      "color": "#6366F1",
+      "tags": [
+        "identity",
+        "mystery",
+        "epic",
+        "aurora_guest"
+      ],
+      "enabled": true,
+      "sortOrder": 64
+    },
+    {
+      "id": "identity_lunar_eclipse_watcher",
+      "name": "月食旁观者",
+      "title": "神秘身份",
+      "description": "这是给月食旁观者的身份：玩家开始接近那些没有写在公告上的传闻和秘密。",
+      "category": "mystery",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "mystery_rumor_seen",
+        "operator": ">=",
+        "value": 10,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/lunar_eclipse_watcher.png",
+      "color": "#6366F1",
+      "tags": [
+        "identity",
+        "mystery",
+        "epic",
+        "lunar_eclipse_watcher"
+      ],
+      "enabled": true,
+      "sortOrder": 65
+    },
+    {
+      "id": "identity_deep_blue_riddler",
+      "name": "深蓝谜语人",
+      "title": "神秘身份",
+      "description": "这是给深蓝谜语人的身份：玩家开始接近那些没有写在公告上的传闻和秘密。",
+      "category": "mystery",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "mystery_rumor_seen",
+        "operator": ">=",
+        "value": 12,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/deep_blue_riddler.png",
+      "color": "#6366F1",
+      "tags": [
+        "identity",
+        "mystery",
+        "epic",
+        "deep_blue_riddler"
+      ],
+      "enabled": true,
+      "sortOrder": 66
+    },
+    {
+      "id": "identity_nameless_ticket_holder",
+      "name": "无名船票持有者",
+      "title": "神秘身份",
+      "description": "这是给无名船票持有者的身份：玩家开始接近那些没有写在公告上的传闻和秘密。",
+      "category": "mystery",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "mystery_rumor_seen",
+        "operator": ">=",
+        "value": 14,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/nameless_ticket_holder.png",
+      "color": "#6366F1",
+      "tags": [
+        "identity",
+        "mystery",
+        "epic",
+        "nameless_ticket_holder"
+      ],
+      "enabled": true,
+      "sortOrder": 67
+    },
+    {
+      "id": "identity_old_page_finder",
+      "name": "旧书页发现者",
+      "title": "神秘身份",
+      "description": "这是给旧书页发现者的身份：玩家开始接近那些没有写在公告上的传闻和秘密。",
+      "category": "mystery",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "mystery_rumor_seen",
+        "operator": ">=",
+        "value": 16,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/old_page_finder.png",
+      "color": "#6366F1",
+      "tags": [
+        "identity",
+        "mystery",
+        "epic",
+        "old_page_finder"
+      ],
+      "enabled": true,
+      "sortOrder": 68
+    },
+    {
+      "id": "identity_sea_mist_pathfinder",
+      "name": "海雾问路人",
+      "title": "神秘身份",
+      "description": "这是给海雾问路人的身份：玩家开始接近那些没有写在公告上的传闻和秘密。",
+      "category": "mystery",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "mystery_rumor_seen",
+        "operator": ">=",
+        "value": 18,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/sea_mist_pathfinder.png",
+      "color": "#6366F1",
+      "tags": [
+        "identity",
+        "mystery",
+        "legend",
+        "sea_mist_pathfinder"
+      ],
+      "enabled": true,
+      "sortOrder": 69
+    },
+    {
+      "id": "identity_secret_map_keeper",
+      "name": "秘密地图保管者",
+      "title": "神秘身份",
+      "description": "这是给秘密地图保管者的身份：玩家开始接近那些没有写在公告上的传闻和秘密。",
+      "category": "mystery",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "mystery_rumor_seen",
+        "operator": ">=",
+        "value": 20,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/secret_map_keeper.png",
+      "color": "#6366F1",
+      "tags": [
+        "identity",
+        "mystery",
+        "legend",
+        "secret_map_keeper"
+      ],
+      "enabled": true,
+      "sortOrder": 70
+    },
+    {
+      "id": "identity_moyu_expert",
+      "name": "摸鱼达人",
+      "title": "办公室身份",
+      "description": "这是给摸鱼达人的身份：现实还在忙碌，但玩家学会给自己留出一小片海。",
+      "category": "office",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "office_moyu_count",
+        "operator": ">=",
+        "value": 2,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/moyu_expert.png",
+      "color": "#2563EB",
+      "tags": [
+        "identity",
+        "office",
+        "rare",
+        "moyu_expert"
+      ],
+      "enabled": true,
+      "sortOrder": 71
+    },
+    {
+      "id": "identity_meeting_escape_artist",
+      "name": "会议逃生者",
+      "title": "办公室身份",
+      "description": "这是给会议逃生者的身份：现实还在忙碌，但玩家学会给自己留出一小片海。",
+      "category": "office",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "office_moyu_count",
+        "operator": ">=",
+        "value": 4,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/meeting_escape_artist.png",
+      "color": "#2563EB",
+      "tags": [
+        "identity",
+        "office",
+        "rare",
+        "meeting_escape_artist"
+      ],
+      "enabled": true,
+      "sortOrder": 72
+    },
+    {
+      "id": "identity_coffee_lifeline",
+      "name": "咖啡续命人",
+      "title": "办公室身份",
+      "description": "这是给咖啡续命人的身份：现实还在忙碌，但玩家学会给自己留出一小片海。",
+      "category": "office",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "office_moyu_count",
+        "operator": ">=",
+        "value": 6,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/coffee_lifeline.png",
+      "color": "#2563EB",
+      "tags": [
+        "identity",
+        "office",
+        "rare",
+        "coffee_lifeline"
+      ],
+      "enabled": true,
+      "sortOrder": 73
+    },
+    {
+      "id": "identity_desk_lake_observer",
+      "name": "工位湖观察员",
+      "title": "办公室身份",
+      "description": "这是给工位湖观察员的身份：现实还在忙碌，但玩家学会给自己留出一小片海。",
+      "category": "office",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "office_moyu_count",
+        "operator": ">=",
+        "value": 8,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/desk_lake_observer.png",
+      "color": "#2563EB",
+      "tags": [
+        "identity",
+        "office",
+        "rare",
+        "desk_lake_observer"
+      ],
+      "enabled": true,
+      "sortOrder": 74
+    },
+    {
+      "id": "identity_lunch_break_guardian",
+      "name": "午休守护者",
+      "title": "办公室身份",
+      "description": "这是给午休守护者的身份：现实还在忙碌，但玩家学会给自己留出一小片海。",
+      "category": "office",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "office_moyu_count",
+        "operator": ">=",
+        "value": 10,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/lunch_break_guardian.png",
+      "color": "#2563EB",
+      "tags": [
+        "identity",
+        "office",
+        "rare",
+        "lunch_break_guardian"
+      ],
+      "enabled": true,
+      "sortOrder": 75
+    },
+    {
+      "id": "identity_overtime_comforter",
+      "name": "加班安慰者",
+      "title": "办公室身份",
+      "description": "这是给加班安慰者的身份：现实还在忙碌，但玩家学会给自己留出一小片海。",
+      "category": "office",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "office_moyu_count",
+        "operator": ">=",
+        "value": 12,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/overtime_comforter.png",
+      "color": "#2563EB",
+      "tags": [
+        "identity",
+        "office",
+        "rare",
+        "overtime_comforter"
+      ],
+      "enabled": true,
+      "sortOrder": 76
+    },
+    {
+      "id": "identity_keyboard_rest_advocate",
+      "name": "键盘休息倡导者",
+      "title": "办公室身份",
+      "description": "这是给键盘休息倡导者的身份：现实还在忙碌，但玩家学会给自己留出一小片海。",
+      "category": "office",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "office_moyu_count",
+        "operator": ">=",
+        "value": 14,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/keyboard_rest_advocate.png",
+      "color": "#2563EB",
+      "tags": [
+        "identity",
+        "office",
+        "rare",
+        "keyboard_rest_advocate"
+      ],
+      "enabled": true,
+      "sortOrder": 77
+    },
+    {
+      "id": "identity_report_disguise_master",
+      "name": "报表伪装师",
+      "title": "办公室身份",
+      "description": "这是给报表伪装师的身份：现实还在忙碌，但玩家学会给自己留出一小片海。",
+      "category": "office",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "office_moyu_count",
+        "operator": ">=",
+        "value": 16,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/report_disguise_master.png",
+      "color": "#2563EB",
+      "tags": [
+        "identity",
+        "office",
+        "epic",
+        "report_disguise_master"
+      ],
+      "enabled": true,
+      "sortOrder": 78
+    },
+    {
+      "id": "identity_window_sea_keeper",
+      "name": "窗外海面管理员",
+      "title": "办公室身份",
+      "description": "这是给窗外海面管理员的身份：现实还在忙碌，但玩家学会给自己留出一小片海。",
+      "category": "office",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "office_moyu_count",
+        "operator": ">=",
+        "value": 18,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/window_sea_keeper.png",
+      "color": "#2563EB",
+      "tags": [
+        "identity",
+        "office",
+        "epic",
+        "window_sea_keeper"
+      ],
+      "enabled": true,
+      "sortOrder": 79
+    },
+    {
+      "id": "identity_office_slow_lifer",
+      "name": "办公室慢生活家",
+      "title": "办公室身份",
+      "description": "这是给办公室慢生活家的身份：现实还在忙碌，但玩家学会给自己留出一小片海。",
+      "category": "office",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "office_moyu_count",
+        "operator": ">=",
+        "value": 20,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/office_slow_lifer.png",
+      "color": "#2563EB",
+      "tags": [
+        "identity",
+        "office",
+        "epic",
+        "office_slow_lifer"
+      ],
+      "enabled": true,
+      "sortOrder": 80
+    },
+    {
+      "id": "identity_old_angler",
+      "name": "老钓手",
+      "title": "海洋身份",
+      "description": "这是给老钓手的身份：玩家与鱼漂、潮汐、码头和深海之间，已经有了自己的节奏。",
+      "category": "ocean",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "fishing_or_ocean_memory",
+        "operator": ">=",
+        "value": 2,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/old_angler.png",
+      "color": "#06B6D4",
+      "tags": [
+        "identity",
+        "ocean",
+        "rare",
+        "old_angler"
+      ],
+      "enabled": true,
+      "sortOrder": 81
+    },
+    {
+      "id": "identity_fish_listener",
+      "name": "鱼群倾听者",
+      "title": "海洋身份",
+      "description": "这是给鱼群倾听者的身份：玩家与鱼漂、潮汐、码头和深海之间，已经有了自己的节奏。",
+      "category": "ocean",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "fishing_or_ocean_memory",
+        "operator": ">=",
+        "value": 4,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/fish_listener.png",
+      "color": "#06B6D4",
+      "tags": [
+        "identity",
+        "ocean",
+        "rare",
+        "fish_listener"
+      ],
+      "enabled": true,
+      "sortOrder": 82
+    },
+    {
+      "id": "identity_sea_breeze_follower",
+      "name": "海风追随者",
+      "title": "海洋身份",
+      "description": "这是给海风追随者的身份：玩家与鱼漂、潮汐、码头和深海之间，已经有了自己的节奏。",
+      "category": "ocean",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "fishing_or_ocean_memory",
+        "operator": ">=",
+        "value": 6,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/sea_breeze_follower.png",
+      "color": "#06B6D4",
+      "tags": [
+        "identity",
+        "ocean",
+        "rare",
+        "sea_breeze_follower"
+      ],
+      "enabled": true,
+      "sortOrder": 83
+    },
+    {
+      "id": "identity_tide_recorder",
+      "name": "潮汐记录员",
+      "title": "海洋身份",
+      "description": "这是给潮汐记录员的身份：玩家与鱼漂、潮汐、码头和深海之间，已经有了自己的节奏。",
+      "category": "ocean",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "fishing_or_ocean_memory",
+        "operator": ">=",
+        "value": 8,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/tide_recorder.png",
+      "color": "#06B6D4",
+      "tags": [
+        "identity",
+        "ocean",
+        "rare",
+        "tide_recorder"
+      ],
+      "enabled": true,
+      "sortOrder": 84
+    },
+    {
+      "id": "identity_float_watcher",
+      "name": "鱼漂守望者",
+      "title": "海洋身份",
+      "description": "这是给鱼漂守望者的身份：玩家与鱼漂、潮汐、码头和深海之间，已经有了自己的节奏。",
+      "category": "ocean",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "fishing_or_ocean_memory",
+        "operator": ">=",
+        "value": 10,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/float_watcher.png",
+      "color": "#06B6D4",
+      "tags": [
+        "identity",
+        "ocean",
+        "rare",
+        "float_watcher"
+      ],
+      "enabled": true,
+      "sortOrder": 85
+    },
+    {
+      "id": "identity_seaside_poet_apprentice",
+      "name": "海边诗人学徒",
+      "title": "海洋身份",
+      "description": "这是给海边诗人学徒的身份：玩家与鱼漂、潮汐、码头和深海之间，已经有了自己的节奏。",
+      "category": "ocean",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "fishing_or_ocean_memory",
+        "operator": ">=",
+        "value": 12,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/seaside_poet_apprentice.png",
+      "color": "#06B6D4",
+      "tags": [
+        "identity",
+        "ocean",
+        "rare",
+        "seaside_poet_apprentice"
+      ],
+      "enabled": true,
+      "sortOrder": 86
+    },
+    {
+      "id": "identity_pier_walker",
+      "name": "码头散步者",
+      "title": "海洋身份",
+      "description": "这是给码头散步者的身份：玩家与鱼漂、潮汐、码头和深海之间，已经有了自己的节奏。",
+      "category": "ocean",
+      "rarity": "rare",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "fishing_or_ocean_memory",
+        "operator": ">=",
+        "value": 14,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/pier_walker.png",
+      "color": "#06B6D4",
+      "tags": [
+        "identity",
+        "ocean",
+        "rare",
+        "pier_walker"
+      ],
+      "enabled": true,
+      "sortOrder": 87
+    },
+    {
+      "id": "identity_deep_sea_whisperer",
+      "name": "深海低语者",
+      "title": "海洋身份",
+      "description": "这是给深海低语者的身份：玩家与鱼漂、潮汐、码头和深海之间，已经有了自己的节奏。",
+      "category": "ocean",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "fishing_or_ocean_memory",
+        "operator": ">=",
+        "value": 16,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/deep_sea_whisperer.png",
+      "color": "#06B6D4",
+      "tags": [
+        "identity",
+        "ocean",
+        "epic",
+        "deep_sea_whisperer"
+      ],
+      "enabled": true,
+      "sortOrder": 88
+    },
+    {
+      "id": "identity_boat_watcher",
+      "name": "小船目送者",
+      "title": "海洋身份",
+      "description": "这是给小船目送者的身份：玩家与鱼漂、潮汐、码头和深海之间，已经有了自己的节奏。",
+      "category": "ocean",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "fishing_or_ocean_memory",
+        "operator": ">=",
+        "value": 18,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/boat_watcher.png",
+      "color": "#06B6D4",
+      "tags": [
+        "identity",
+        "ocean",
+        "epic",
+        "boat_watcher"
+      ],
+      "enabled": true,
+      "sortOrder": 89
+    },
+    {
+      "id": "identity_moonlight_angler",
+      "name": "月光钓客",
+      "title": "海洋身份",
+      "description": "这是给月光钓客的身份：玩家与鱼漂、潮汐、码头和深海之间，已经有了自己的节奏。",
+      "category": "ocean",
+      "rarity": "epic",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "fishing_or_ocean_memory",
+        "operator": ">=",
+        "value": 20,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/moonlight_angler.png",
+      "color": "#06B6D4",
+      "tags": [
+        "identity",
+        "ocean",
+        "epic",
+        "moonlight_angler"
+      ],
+      "enabled": true,
+      "sortOrder": 90
+    },
+    {
+      "id": "identity_second_world_resident",
+      "name": "第二世界居民",
+      "title": "世界身份",
+      "description": "这是给第二世界居民的身份：玩家不只是经过第二世界，而是在这里留下了会被记住的脚步。",
+      "category": "world",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "world_story_progress",
+        "operator": ">=",
+        "value": 3,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/second_world_resident.png",
+      "color": "#D97706",
+      "tags": [
+        "identity",
+        "world",
+        "legend",
+        "second_world_resident"
+      ],
+      "enabled": true,
+      "sortOrder": 91
+    },
+    {
+      "id": "identity_world_memory_keeper",
+      "name": "世界记忆保管者",
+      "title": "世界身份",
+      "description": "这是给世界记忆保管者的身份：玩家不只是经过第二世界，而是在这里留下了会被记住的脚步。",
+      "category": "world",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "world_story_progress",
+        "operator": ">=",
+        "value": 6,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/world_memory_keeper.png",
+      "color": "#D97706",
+      "tags": [
+        "identity",
+        "world",
+        "legend",
+        "world_memory_keeper"
+      ],
+      "enabled": true,
+      "sortOrder": 92
+    },
+    {
+      "id": "identity_resident_relation_witness",
+      "name": "居民关系见证者",
+      "title": "世界身份",
+      "description": "这是给居民关系见证者的身份：玩家不只是经过第二世界，而是在这里留下了会被记住的脚步。",
+      "category": "world",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "world_story_progress",
+        "operator": ">=",
+        "value": 9,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/resident_relation_witness.png",
+      "color": "#D97706",
+      "tags": [
+        "identity",
+        "world",
+        "legend",
+        "resident_relation_witness"
+      ],
+      "enabled": true,
+      "sortOrder": 93
+    },
+    {
+      "id": "identity_festival_companion",
+      "name": "节日同行人",
+      "title": "世界身份",
+      "description": "这是给节日同行人的身份：玩家不只是经过第二世界，而是在这里留下了会被记住的脚步。",
+      "category": "world",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "world_story_progress",
+        "operator": ">=",
+        "value": 12,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/festival_companion.png",
+      "color": "#D97706",
+      "tags": [
+        "identity",
+        "world",
+        "legend",
+        "festival_companion"
+      ],
+      "enabled": true,
+      "sortOrder": 94
+    },
+    {
+      "id": "identity_weather_story_collector",
+      "name": "天气故事收集者",
+      "title": "世界身份",
+      "description": "这是给天气故事收集者的身份：玩家不只是经过第二世界，而是在这里留下了会被记住的脚步。",
+      "category": "world",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "world_story_progress",
+        "operator": ">=",
+        "value": 15,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/weather_story_collector.png",
+      "color": "#D97706",
+      "tags": [
+        "identity",
+        "world",
+        "legend",
+        "weather_story_collector"
+      ],
+      "enabled": true,
+      "sortOrder": 95
+    },
+    {
+      "id": "identity_gentle_choice_maker",
+      "name": "温柔选择者",
+      "title": "世界身份",
+      "description": "这是给温柔选择者的身份：玩家不只是经过第二世界，而是在这里留下了会被记住的脚步。",
+      "category": "world",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "world_story_progress",
+        "operator": ">=",
+        "value": 18,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/gentle_choice_maker.png",
+      "color": "#D97706",
+      "tags": [
+        "identity",
+        "world",
+        "legend",
+        "gentle_choice_maker"
+      ],
+      "enabled": true,
+      "sortOrder": 96
+    },
+    {
+      "id": "identity_fairy_world_traveler",
+      "name": "童话世界旅人",
+      "title": "世界身份",
+      "description": "这是给童话世界旅人的身份：玩家不只是经过第二世界，而是在这里留下了会被记住的脚步。",
+      "category": "world",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "world_story_progress",
+        "operator": ">=",
+        "value": 21,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/fairy_world_traveler.png",
+      "color": "#D97706",
+      "tags": [
+        "identity",
+        "world",
+        "legend",
+        "fairy_world_traveler"
+      ],
+      "enabled": true,
+      "sortOrder": 97
+    },
+    {
+      "id": "identity_tomorrow_returner",
+      "name": "明天还会来的人",
+      "title": "世界身份",
+      "description": "这是给明天还会来的人的身份：玩家不只是经过第二世界，而是在这里留下了会被记住的脚步。",
+      "category": "world",
+      "rarity": "legend",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "world_story_progress",
+        "operator": ">=",
+        "value": 24,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/tomorrow_returner.png",
+      "color": "#D97706",
+      "tags": [
+        "identity",
+        "world",
+        "legend",
+        "tomorrow_returner"
+      ],
+      "enabled": true,
+      "sortOrder": 98
+    },
+    {
+      "id": "identity_world_growth_companion",
+      "name": "世界成长陪伴者",
+      "title": "世界身份",
+      "description": "这是给世界成长陪伴者的身份：玩家不只是经过第二世界，而是在这里留下了会被记住的脚步。",
+      "category": "world",
+      "rarity": "myth",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "world_story_progress",
+        "operator": ">=",
+        "value": 27,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/world_growth_companion.png",
+      "color": "#D97706",
+      "tags": [
+        "identity",
+        "world",
+        "myth",
+        "world_growth_companion"
+      ],
+      "enabled": true,
+      "sortOrder": 99
+    },
+    {
+      "id": "identity_happiness_restorer",
+      "name": "快乐恢复者",
+      "title": "世界身份",
+      "description": "这是给快乐恢复者的身份：玩家不只是经过第二世界，而是在这里留下了会被记住的脚步。",
+      "category": "world",
+      "rarity": "myth",
+      "unlockCondition": {
+        "level": 1,
+        "metric": "world_story_progress",
+        "operator": ">=",
+        "value": 30,
+        "notes": "通过第二世界经历自然解锁，不依赖充值或战力。"
+      },
+      "icon": "assets/icons/identity/happiness_restorer.png",
+      "color": "#D97706",
+      "tags": [
+        "identity",
+        "world",
+        "myth",
+        "happiness_restorer"
+      ],
+      "enabled": true,
+      "sortOrder": 100
+    }
+  ]
+}

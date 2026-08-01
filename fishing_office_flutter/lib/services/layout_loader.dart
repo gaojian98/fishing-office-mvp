@@ -8,8 +8,11 @@ class LayoutLoader {
   const LayoutLoader();
 
   Future<LayoutConfig> load() async {
-    final raw = await rootBundle.loadString('assets/config/Layout.json');
+    final raw = await rootBundle.loadString('assets/config/office_layout.json');
     final json = jsonDecode(raw) as Map<String, dynamic>;
-    return LayoutConfig.fromJson(json);
+    final home = json['home'] is Map<String, dynamic>
+        ? json['home'] as Map<String, dynamic>
+        : json;
+    return LayoutConfig.fromJson(home);
   }
 }

@@ -4,6 +4,7 @@ import 'identity_manager.dart';
 import 'legacy_manager.dart';
 import 'meaning_choice_record.dart';
 import 'story_generator.dart';
+import '../managers/world_clock_manager.dart';
 
 typedef MeaningEngineListener = void Function(MeaningChoiceRecord choice);
 
@@ -35,13 +36,13 @@ class MeaningEngine {
     required Map<String, dynamic> context,
   }) {
     final record = MeaningChoiceRecord(
-      choiceId: DateTime.now().microsecondsSinceEpoch.toString(),
+      choiceId: WorldClockManager.timestampId(),
       playerId: playerId,
       eventId: eventId,
       choiceType: choiceType,
       choiceLabel: choiceLabel,
       context: context,
-      createdAt: DateTime.now(),
+      createdAt: WorldClockManager.systemNow(),
     );
     emit(record);
     return record;

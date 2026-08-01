@@ -1,3 +1,5 @@
+import '../managers/world_clock_manager.dart';
+
 class FishingEvent {
   const FishingEvent({
     required this.type,
@@ -13,7 +15,7 @@ class FishingEvent {
       sessionId: sessionId,
       stage: 'preparing',
       payload: const {},
-      timestamp: DateTime.now(),
+      timestamp: WorldClockManager.systemNow(),
     );
   }
 
@@ -27,7 +29,7 @@ class FishingEvent {
       sessionId: sessionId,
       stage: '$stage',
       payload: payload,
-      timestamp: DateTime.now(),
+      timestamp: WorldClockManager.systemNow(),
     );
   }
 

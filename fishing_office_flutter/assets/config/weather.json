@@ -1,0 +1,5174 @@
+{
+  "version": "1.0",
+  "description": "第二世界天气内容配置。Weather Pack 01。",
+  "weatherEvents": [
+    {
+      "id": "weather_sunny_morning",
+      "name": "清晨晴天",
+      "type": "sunny",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 24,
+        "max": 28,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 45,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "calm_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "sunny",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "sunny",
+        "common",
+        "morning"
+      ],
+      "eventTags": [
+        "sunny",
+        "common",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的晴天：明亮的阳光落在办公室窗边，海面像刚被擦亮。",
+      "sortOrder": 1,
+      "enabled": true
+    },
+    {
+      "id": "weather_sunny_noon",
+      "name": "午间晴天",
+      "type": "sunny",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 25,
+        "max": 29,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 45,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "calm_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "sunny",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "sunny",
+        "common",
+        "noon"
+      ],
+      "eventTags": [
+        "sunny",
+        "common",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的晴天：明亮的阳光落在办公室窗边，海面像刚被擦亮。",
+      "sortOrder": 2,
+      "enabled": true
+    },
+    {
+      "id": "weather_sunny_afternoon",
+      "name": "午后晴天",
+      "type": "sunny",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 24,
+        "max": 28,
+        "unit": "celsius"
+      },
+      "windLevel": 3,
+      "humidity": 45,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "calm_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "sunny",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "sunny",
+        "common",
+        "afternoon"
+      ],
+      "eventTags": [
+        "sunny",
+        "common",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的晴天：明亮的阳光落在办公室窗边，海面像刚被擦亮。",
+      "sortOrder": 3,
+      "enabled": true
+    },
+    {
+      "id": "weather_sunny_evening",
+      "name": "傍晚晴天",
+      "type": "sunny",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "17:00-20:00",
+      "temperature": {
+        "min": 23,
+        "max": 27,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 45,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "calm_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "sunny",
+        "evening",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "sunny",
+        "common",
+        "evening"
+      ],
+      "eventTags": [
+        "sunny",
+        "common",
+        "evening",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "傍晚的晴天：明亮的阳光落在办公室窗边，海面像刚被擦亮。",
+      "sortOrder": 4,
+      "enabled": true
+    },
+    {
+      "id": "weather_partly_cloudy_morning",
+      "name": "清晨多云",
+      "type": "partly_cloudy",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 22,
+        "max": 26,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 55,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "partly_cloudy",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "partly_cloudy",
+        "common",
+        "morning"
+      ],
+      "eventTags": [
+        "partly_cloudy",
+        "common",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的多云：云影慢慢经过，像给海面翻了一页。",
+      "sortOrder": 5,
+      "enabled": true
+    },
+    {
+      "id": "weather_partly_cloudy_noon",
+      "name": "午间多云",
+      "type": "partly_cloudy",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 23,
+        "max": 27,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 55,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "partly_cloudy",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "partly_cloudy",
+        "common",
+        "noon"
+      ],
+      "eventTags": [
+        "partly_cloudy",
+        "common",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的多云：云影慢慢经过，像给海面翻了一页。",
+      "sortOrder": 6,
+      "enabled": true
+    },
+    {
+      "id": "weather_partly_cloudy_afternoon",
+      "name": "午后多云",
+      "type": "partly_cloudy",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 22,
+        "max": 26,
+        "unit": "celsius"
+      },
+      "windLevel": 3,
+      "humidity": 55,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "partly_cloudy",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "partly_cloudy",
+        "common",
+        "afternoon"
+      ],
+      "eventTags": [
+        "partly_cloudy",
+        "common",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的多云：云影慢慢经过，像给海面翻了一页。",
+      "sortOrder": 7,
+      "enabled": true
+    },
+    {
+      "id": "weather_overcast_morning",
+      "name": "清晨阴天",
+      "type": "overcast",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 18,
+        "max": 22,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 65,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "overcast",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "overcast",
+        "common",
+        "morning"
+      ],
+      "eventTags": [
+        "overcast",
+        "common",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的阴天：天空压低了一点，但第二世界仍然安静。",
+      "sortOrder": 8,
+      "enabled": true
+    },
+    {
+      "id": "weather_overcast_noon",
+      "name": "午间阴天",
+      "type": "overcast",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 19,
+        "max": 23,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 65,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "overcast",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "overcast",
+        "common",
+        "noon"
+      ],
+      "eventTags": [
+        "overcast",
+        "common",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的阴天：天空压低了一点，但第二世界仍然安静。",
+      "sortOrder": 9,
+      "enabled": true
+    },
+    {
+      "id": "weather_overcast_afternoon",
+      "name": "午后阴天",
+      "type": "overcast",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 18,
+        "max": 22,
+        "unit": "celsius"
+      },
+      "windLevel": 3,
+      "humidity": 65,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "overcast",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "overcast",
+        "common",
+        "afternoon"
+      ],
+      "eventTags": [
+        "overcast",
+        "common",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的阴天：天空压低了一点，但第二世界仍然安静。",
+      "sortOrder": 10,
+      "enabled": true
+    },
+    {
+      "id": "weather_light_rain_morning",
+      "name": "清晨小雨",
+      "type": "light_rain",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 20,
+        "max": 24,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 75,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "light_rain",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "light_rain",
+        "common",
+        "morning"
+      ],
+      "eventTags": [
+        "light_rain",
+        "common",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的小雨：细雨落在窗上，鱼漂旁泛起很轻的圆圈。",
+      "sortOrder": 11,
+      "enabled": true
+    },
+    {
+      "id": "weather_light_rain_noon",
+      "name": "午间小雨",
+      "type": "light_rain",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 21,
+        "max": 25,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 75,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "light_rain",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "light_rain",
+        "common",
+        "noon"
+      ],
+      "eventTags": [
+        "light_rain",
+        "common",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的小雨：细雨落在窗上，鱼漂旁泛起很轻的圆圈。",
+      "sortOrder": 12,
+      "enabled": true
+    },
+    {
+      "id": "weather_light_rain_afternoon",
+      "name": "午后小雨",
+      "type": "light_rain",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 20,
+        "max": 24,
+        "unit": "celsius"
+      },
+      "windLevel": 3,
+      "humidity": 75,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "light_rain",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "light_rain",
+        "common",
+        "afternoon"
+      ],
+      "eventTags": [
+        "light_rain",
+        "common",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的小雨：细雨落在窗上，鱼漂旁泛起很轻的圆圈。",
+      "sortOrder": 13,
+      "enabled": true
+    },
+    {
+      "id": "weather_light_rain_evening",
+      "name": "傍晚小雨",
+      "type": "light_rain",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "17:00-20:00",
+      "temperature": {
+        "min": 19,
+        "max": 23,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 75,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "light_rain",
+        "evening",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "light_rain",
+        "common",
+        "evening"
+      ],
+      "eventTags": [
+        "light_rain",
+        "common",
+        "evening",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "傍晚的小雨：细雨落在窗上，鱼漂旁泛起很轻的圆圈。",
+      "sortOrder": 14,
+      "enabled": true
+    },
+    {
+      "id": "weather_moderate_rain_morning",
+      "name": "清晨中雨",
+      "type": "moderate_rain",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 19,
+        "max": 23,
+        "unit": "celsius"
+      },
+      "windLevel": 3,
+      "humidity": 82,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "moderate_rain",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "moderate_rain",
+        "common",
+        "morning"
+      ],
+      "eventTags": [
+        "moderate_rain",
+        "common",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的中雨：雨声盖住键盘声，等待变得更像休息。",
+      "sortOrder": 15,
+      "enabled": true
+    },
+    {
+      "id": "weather_moderate_rain_noon",
+      "name": "午间中雨",
+      "type": "moderate_rain",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 20,
+        "max": 24,
+        "unit": "celsius"
+      },
+      "windLevel": 3,
+      "humidity": 82,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "moderate_rain",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "moderate_rain",
+        "common",
+        "noon"
+      ],
+      "eventTags": [
+        "moderate_rain",
+        "common",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的中雨：雨声盖住键盘声，等待变得更像休息。",
+      "sortOrder": 16,
+      "enabled": true
+    },
+    {
+      "id": "weather_moderate_rain_afternoon",
+      "name": "午后中雨",
+      "type": "moderate_rain",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 19,
+        "max": 23,
+        "unit": "celsius"
+      },
+      "windLevel": 4,
+      "humidity": 82,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "moderate_rain",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "moderate_rain",
+        "common",
+        "afternoon"
+      ],
+      "eventTags": [
+        "moderate_rain",
+        "common",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的中雨：雨声盖住键盘声，等待变得更像休息。",
+      "sortOrder": 17,
+      "enabled": true
+    },
+    {
+      "id": "weather_heavy_rain_morning",
+      "name": "清晨大雨",
+      "type": "heavy_rain",
+      "rarity": "rare",
+      "season": [
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 18,
+        "max": 22,
+        "unit": "celsius"
+      },
+      "windLevel": 4,
+      "humidity": 88,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.13,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "heavy_rain",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "heavy_rain",
+        "rare",
+        "morning"
+      ],
+      "eventTags": [
+        "heavy_rain",
+        "rare",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的大雨：海面被雨点敲得热闹，居民们说今天适合讲故事。",
+      "sortOrder": 18,
+      "enabled": true
+    },
+    {
+      "id": "weather_heavy_rain_noon",
+      "name": "午间大雨",
+      "type": "heavy_rain",
+      "rarity": "rare",
+      "season": [
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 19,
+        "max": 23,
+        "unit": "celsius"
+      },
+      "windLevel": 4,
+      "humidity": 88,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "heavy_rain",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "heavy_rain",
+        "rare",
+        "noon"
+      ],
+      "eventTags": [
+        "heavy_rain",
+        "rare",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的大雨：海面被雨点敲得热闹，居民们说今天适合讲故事。",
+      "sortOrder": 19,
+      "enabled": true
+    },
+    {
+      "id": "weather_heavy_rain_afternoon",
+      "name": "午后大雨",
+      "type": "heavy_rain",
+      "rarity": "rare",
+      "season": [
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 18,
+        "max": 22,
+        "unit": "celsius"
+      },
+      "windLevel": 5,
+      "humidity": 88,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "heavy_rain",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "heavy_rain",
+        "rare",
+        "afternoon"
+      ],
+      "eventTags": [
+        "heavy_rain",
+        "rare",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的大雨：海面被雨点敲得热闹，居民们说今天适合讲故事。",
+      "sortOrder": 20,
+      "enabled": true
+    },
+    {
+      "id": "weather_rainstorm_morning",
+      "name": "清晨暴雨",
+      "type": "rainstorm",
+      "rarity": "rare",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 17,
+        "max": 21,
+        "unit": "celsius"
+      },
+      "windLevel": 5,
+      "humidity": 92,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.13,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "careful",
+      "dialogueTags": [
+        "weather_dialogue",
+        "rainstorm",
+        "morning",
+        "careful"
+      ],
+      "storyTags": [
+        "weather_story",
+        "rainstorm",
+        "rare",
+        "morning"
+      ],
+      "eventTags": [
+        "rainstorm",
+        "rare",
+        "morning",
+        "weather_event",
+        "severe_weather"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的暴雨：窗外雨幕很厚，远处的鱼影若隐若现。",
+      "sortOrder": 21,
+      "enabled": true
+    },
+    {
+      "id": "weather_rainstorm_noon",
+      "name": "午间暴雨",
+      "type": "rainstorm",
+      "rarity": "rare",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 18,
+        "max": 22,
+        "unit": "celsius"
+      },
+      "windLevel": 5,
+      "humidity": 92,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "careful",
+      "dialogueTags": [
+        "weather_dialogue",
+        "rainstorm",
+        "noon",
+        "careful"
+      ],
+      "storyTags": [
+        "weather_story",
+        "rainstorm",
+        "rare",
+        "noon"
+      ],
+      "eventTags": [
+        "rainstorm",
+        "rare",
+        "noon",
+        "weather_event",
+        "severe_weather"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的暴雨：窗外雨幕很厚，远处的鱼影若隐若现。",
+      "sortOrder": 22,
+      "enabled": true
+    },
+    {
+      "id": "weather_rainstorm_afternoon",
+      "name": "午后暴雨",
+      "type": "rainstorm",
+      "rarity": "rare",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 17,
+        "max": 21,
+        "unit": "celsius"
+      },
+      "windLevel": 6,
+      "humidity": 92,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "careful",
+      "dialogueTags": [
+        "weather_dialogue",
+        "rainstorm",
+        "afternoon",
+        "careful"
+      ],
+      "storyTags": [
+        "weather_story",
+        "rainstorm",
+        "rare",
+        "afternoon"
+      ],
+      "eventTags": [
+        "rainstorm",
+        "rare",
+        "afternoon",
+        "weather_event",
+        "severe_weather"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的暴雨：窗外雨幕很厚，远处的鱼影若隐若现。",
+      "sortOrder": 23,
+      "enabled": true
+    },
+    {
+      "id": "weather_thunder_rain_morning",
+      "name": "清晨雷雨",
+      "type": "thunder_rain",
+      "rarity": "rare",
+      "season": [
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 21,
+        "max": 25,
+        "unit": "celsius"
+      },
+      "windLevel": 4,
+      "humidity": 86,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.13,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "thunder_rain",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "thunder_rain",
+        "rare",
+        "morning"
+      ],
+      "eventTags": [
+        "thunder_rain",
+        "rare",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的雷雨：雷声滚过海面，鱼群在深处暂时安静下来。",
+      "sortOrder": 24,
+      "enabled": true
+    },
+    {
+      "id": "weather_thunder_rain_noon",
+      "name": "午间雷雨",
+      "type": "thunder_rain",
+      "rarity": "rare",
+      "season": [
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 22,
+        "max": 26,
+        "unit": "celsius"
+      },
+      "windLevel": 4,
+      "humidity": 86,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "thunder_rain",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "thunder_rain",
+        "rare",
+        "noon"
+      ],
+      "eventTags": [
+        "thunder_rain",
+        "rare",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的雷雨：雷声滚过海面，鱼群在深处暂时安静下来。",
+      "sortOrder": 25,
+      "enabled": true
+    },
+    {
+      "id": "weather_thunder_rain_afternoon",
+      "name": "午后雷雨",
+      "type": "thunder_rain",
+      "rarity": "rare",
+      "season": [
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 21,
+        "max": 25,
+        "unit": "celsius"
+      },
+      "windLevel": 5,
+      "humidity": 86,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "thunder_rain",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "thunder_rain",
+        "rare",
+        "afternoon"
+      ],
+      "eventTags": [
+        "thunder_rain",
+        "rare",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的雷雨：雷声滚过海面，鱼群在深处暂时安静下来。",
+      "sortOrder": 26,
+      "enabled": true
+    },
+    {
+      "id": "weather_thunderstorm_morning",
+      "name": "清晨雷暴",
+      "type": "thunderstorm",
+      "rarity": "epic",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 20,
+        "max": 24,
+        "unit": "celsius"
+      },
+      "windLevel": 6,
+      "humidity": 90,
+      "visibility": "very_low",
+      "fishBonus": {
+        "activityMultiplier": 1.23,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "careful",
+      "dialogueTags": [
+        "weather_dialogue",
+        "thunderstorm",
+        "morning",
+        "careful"
+      ],
+      "storyTags": [
+        "weather_story",
+        "thunderstorm",
+        "epic",
+        "morning"
+      ],
+      "eventTags": [
+        "thunderstorm",
+        "epic",
+        "morning",
+        "weather_event",
+        "severe_weather"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的雷暴：闪电照亮一瞬间的海，像世界突然眨了眼。",
+      "sortOrder": 27,
+      "enabled": true
+    },
+    {
+      "id": "weather_thunderstorm_noon",
+      "name": "午间雷暴",
+      "type": "thunderstorm",
+      "rarity": "epic",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 21,
+        "max": 25,
+        "unit": "celsius"
+      },
+      "windLevel": 6,
+      "humidity": 90,
+      "visibility": "very_low",
+      "fishBonus": {
+        "activityMultiplier": 1.18,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "careful",
+      "dialogueTags": [
+        "weather_dialogue",
+        "thunderstorm",
+        "noon",
+        "careful"
+      ],
+      "storyTags": [
+        "weather_story",
+        "thunderstorm",
+        "epic",
+        "noon"
+      ],
+      "eventTags": [
+        "thunderstorm",
+        "epic",
+        "noon",
+        "weather_event",
+        "severe_weather"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的雷暴：闪电照亮一瞬间的海，像世界突然眨了眼。",
+      "sortOrder": 28,
+      "enabled": true
+    },
+    {
+      "id": "weather_thunderstorm_afternoon",
+      "name": "午后雷暴",
+      "type": "thunderstorm",
+      "rarity": "epic",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 20,
+        "max": 24,
+        "unit": "celsius"
+      },
+      "windLevel": 7,
+      "humidity": 90,
+      "visibility": "very_low",
+      "fishBonus": {
+        "activityMultiplier": 1.18,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "careful",
+      "dialogueTags": [
+        "weather_dialogue",
+        "thunderstorm",
+        "afternoon",
+        "careful"
+      ],
+      "storyTags": [
+        "weather_story",
+        "thunderstorm",
+        "epic",
+        "afternoon"
+      ],
+      "eventTags": [
+        "thunderstorm",
+        "epic",
+        "afternoon",
+        "weather_event",
+        "severe_weather"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的雷暴：闪电照亮一瞬间的海，像世界突然眨了眼。",
+      "sortOrder": 29,
+      "enabled": true
+    },
+    {
+      "id": "weather_shower_morning",
+      "name": "清晨阵雨",
+      "type": "shower",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 23,
+        "max": 27,
+        "unit": "celsius"
+      },
+      "windLevel": 3,
+      "humidity": 76,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "shower",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "shower",
+        "common",
+        "morning"
+      ],
+      "eventTags": [
+        "shower",
+        "common",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的阵雨：雨来得快也走得快，像一段临时插入的小故事。",
+      "sortOrder": 30,
+      "enabled": true
+    },
+    {
+      "id": "weather_shower_noon",
+      "name": "午间阵雨",
+      "type": "shower",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 24,
+        "max": 28,
+        "unit": "celsius"
+      },
+      "windLevel": 3,
+      "humidity": 76,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "shower",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "shower",
+        "common",
+        "noon"
+      ],
+      "eventTags": [
+        "shower",
+        "common",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的阵雨：雨来得快也走得快，像一段临时插入的小故事。",
+      "sortOrder": 31,
+      "enabled": true
+    },
+    {
+      "id": "weather_shower_afternoon",
+      "name": "午后阵雨",
+      "type": "shower",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 23,
+        "max": 27,
+        "unit": "celsius"
+      },
+      "windLevel": 4,
+      "humidity": 76,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "shower",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "shower",
+        "common",
+        "afternoon"
+      ],
+      "eventTags": [
+        "shower",
+        "common",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的阵雨：雨来得快也走得快，像一段临时插入的小故事。",
+      "sortOrder": 32,
+      "enabled": true
+    },
+    {
+      "id": "weather_fog_morning",
+      "name": "清晨雾",
+      "type": "fog",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 15,
+        "max": 19,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 86,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.13,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "fog",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "fog",
+        "rare",
+        "morning"
+      ],
+      "eventTags": [
+        "fog",
+        "rare",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的雾：薄雾盖住远方，隐藏事件似乎靠近了一点。",
+      "sortOrder": 33,
+      "enabled": true
+    },
+    {
+      "id": "weather_fog_noon",
+      "name": "午间雾",
+      "type": "fog",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 16,
+        "max": 20,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 86,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "fog",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "fog",
+        "rare",
+        "noon"
+      ],
+      "eventTags": [
+        "fog",
+        "rare",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的雾：薄雾盖住远方，隐藏事件似乎靠近了一点。",
+      "sortOrder": 34,
+      "enabled": true
+    },
+    {
+      "id": "weather_fog_afternoon",
+      "name": "午后雾",
+      "type": "fog",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 15,
+        "max": 19,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 86,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "fog",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "fog",
+        "rare",
+        "afternoon"
+      ],
+      "eventTags": [
+        "fog",
+        "rare",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的雾：薄雾盖住远方，隐藏事件似乎靠近了一点。",
+      "sortOrder": 35,
+      "enabled": true
+    },
+    {
+      "id": "weather_dense_fog_morning",
+      "name": "清晨浓雾",
+      "type": "dense_fog",
+      "rarity": "epic",
+      "season": [
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 13,
+        "max": 17,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 95,
+      "visibility": "very_low",
+      "fishBonus": {
+        "activityMultiplier": 1.23,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "dense_fog",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "dense_fog",
+        "epic",
+        "morning"
+      ],
+      "eventTags": [
+        "dense_fog",
+        "epic",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的浓雾：连灯塔都变得柔软，居民们说今天别走太急。",
+      "sortOrder": 36,
+      "enabled": true
+    },
+    {
+      "id": "weather_dense_fog_noon",
+      "name": "午间浓雾",
+      "type": "dense_fog",
+      "rarity": "epic",
+      "season": [
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 14,
+        "max": 18,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 95,
+      "visibility": "very_low",
+      "fishBonus": {
+        "activityMultiplier": 1.18,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "dense_fog",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "dense_fog",
+        "epic",
+        "noon"
+      ],
+      "eventTags": [
+        "dense_fog",
+        "epic",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的浓雾：连灯塔都变得柔软，居民们说今天别走太急。",
+      "sortOrder": 37,
+      "enabled": true
+    },
+    {
+      "id": "weather_dense_fog_afternoon",
+      "name": "午后浓雾",
+      "type": "dense_fog",
+      "rarity": "epic",
+      "season": [
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 13,
+        "max": 17,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 95,
+      "visibility": "very_low",
+      "fishBonus": {
+        "activityMultiplier": 1.18,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "dense_fog",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "dense_fog",
+        "epic",
+        "afternoon"
+      ],
+      "eventTags": [
+        "dense_fog",
+        "epic",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的浓雾：连灯塔都变得柔软，居民们说今天别走太急。",
+      "sortOrder": 38,
+      "enabled": true
+    },
+    {
+      "id": "weather_typhoon_morning",
+      "name": "清晨台风",
+      "type": "typhoon",
+      "rarity": "legend",
+      "season": [
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 23,
+        "max": 27,
+        "unit": "celsius"
+      },
+      "windLevel": 10,
+      "humidity": 96,
+      "visibility": "very_low",
+      "fishBonus": {
+        "activityMultiplier": 1.4,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "typhoon",
+        "morning",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "typhoon",
+        "legend",
+        "morning"
+      ],
+      "eventTags": [
+        "typhoon",
+        "legend",
+        "morning",
+        "weather_event",
+        "severe_weather"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的台风：海风用力推着窗，第二世界进入守望状态。",
+      "sortOrder": 39,
+      "enabled": true
+    },
+    {
+      "id": "weather_typhoon_noon",
+      "name": "午间台风",
+      "type": "typhoon",
+      "rarity": "legend",
+      "season": [
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 24,
+        "max": 28,
+        "unit": "celsius"
+      },
+      "windLevel": 10,
+      "humidity": 96,
+      "visibility": "very_low",
+      "fishBonus": {
+        "activityMultiplier": 1.35,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "typhoon",
+        "noon",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "typhoon",
+        "legend",
+        "noon"
+      ],
+      "eventTags": [
+        "typhoon",
+        "legend",
+        "noon",
+        "weather_event",
+        "severe_weather"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的台风：海风用力推着窗，第二世界进入守望状态。",
+      "sortOrder": 40,
+      "enabled": true
+    },
+    {
+      "id": "weather_typhoon_afternoon",
+      "name": "午后台风",
+      "type": "typhoon",
+      "rarity": "legend",
+      "season": [
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 23,
+        "max": 27,
+        "unit": "celsius"
+      },
+      "windLevel": 11,
+      "humidity": 96,
+      "visibility": "very_low",
+      "fishBonus": {
+        "activityMultiplier": 1.35,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "typhoon",
+        "afternoon",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "typhoon",
+        "legend",
+        "afternoon"
+      ],
+      "eventTags": [
+        "typhoon",
+        "legend",
+        "afternoon",
+        "weather_event",
+        "severe_weather"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的台风：海风用力推着窗，第二世界进入守望状态。",
+      "sortOrder": 41,
+      "enabled": true
+    },
+    {
+      "id": "weather_hurricane_morning",
+      "name": "清晨飓风",
+      "type": "hurricane",
+      "rarity": "myth",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 25,
+        "max": 29,
+        "unit": "celsius"
+      },
+      "windLevel": 12,
+      "humidity": 98,
+      "visibility": "very_low",
+      "fishBonus": {
+        "activityMultiplier": 1.65,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "hurricane",
+        "morning",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "hurricane",
+        "myth",
+        "morning"
+      ],
+      "eventTags": [
+        "hurricane",
+        "myth",
+        "morning",
+        "weather_event",
+        "severe_weather"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的飓风：极少出现的巨大风暴，让深海传说浮到水面。",
+      "sortOrder": 42,
+      "enabled": true
+    },
+    {
+      "id": "weather_hurricane_noon",
+      "name": "午间飓风",
+      "type": "hurricane",
+      "rarity": "myth",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 26,
+        "max": 30,
+        "unit": "celsius"
+      },
+      "windLevel": 12,
+      "humidity": 98,
+      "visibility": "very_low",
+      "fishBonus": {
+        "activityMultiplier": 1.6,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "hurricane",
+        "noon",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "hurricane",
+        "myth",
+        "noon"
+      ],
+      "eventTags": [
+        "hurricane",
+        "myth",
+        "noon",
+        "weather_event",
+        "severe_weather"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的飓风：极少出现的巨大风暴，让深海传说浮到水面。",
+      "sortOrder": 43,
+      "enabled": true
+    },
+    {
+      "id": "weather_hurricane_afternoon",
+      "name": "午后飓风",
+      "type": "hurricane",
+      "rarity": "myth",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 25,
+        "max": 29,
+        "unit": "celsius"
+      },
+      "windLevel": 12,
+      "humidity": 98,
+      "visibility": "very_low",
+      "fishBonus": {
+        "activityMultiplier": 1.6,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "hurricane",
+        "afternoon",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "hurricane",
+        "myth",
+        "afternoon"
+      ],
+      "eventTags": [
+        "hurricane",
+        "myth",
+        "afternoon",
+        "weather_event",
+        "severe_weather"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的飓风：极少出现的巨大风暴，让深海传说浮到水面。",
+      "sortOrder": 44,
+      "enabled": true
+    },
+    {
+      "id": "weather_strong_wind_morning",
+      "name": "清晨大风",
+      "type": "strong_wind",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 16,
+        "max": 20,
+        "unit": "celsius"
+      },
+      "windLevel": 7,
+      "humidity": 50,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.13,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "strong_wind",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "strong_wind",
+        "rare",
+        "morning"
+      ],
+      "eventTags": [
+        "strong_wind",
+        "rare",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的大风：风把海鸟吹得歪歪斜斜，也吹乱了居民的计划。",
+      "sortOrder": 45,
+      "enabled": true
+    },
+    {
+      "id": "weather_strong_wind_noon",
+      "name": "午间大风",
+      "type": "strong_wind",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 17,
+        "max": 21,
+        "unit": "celsius"
+      },
+      "windLevel": 7,
+      "humidity": 50,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "strong_wind",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "strong_wind",
+        "rare",
+        "noon"
+      ],
+      "eventTags": [
+        "strong_wind",
+        "rare",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的大风：风把海鸟吹得歪歪斜斜，也吹乱了居民的计划。",
+      "sortOrder": 46,
+      "enabled": true
+    },
+    {
+      "id": "weather_strong_wind_afternoon",
+      "name": "午后大风",
+      "type": "strong_wind",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 16,
+        "max": 20,
+        "unit": "celsius"
+      },
+      "windLevel": 8,
+      "humidity": 50,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "strong_wind",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "strong_wind",
+        "rare",
+        "afternoon"
+      ],
+      "eventTags": [
+        "strong_wind",
+        "rare",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的大风：风把海鸟吹得歪歪斜斜，也吹乱了居民的计划。",
+      "sortOrder": 47,
+      "enabled": true
+    },
+    {
+      "id": "weather_breeze_morning",
+      "name": "清晨微风",
+      "type": "breeze",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 21,
+        "max": 25,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 48,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "calm_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "breeze",
+        "morning",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "breeze",
+        "common",
+        "morning"
+      ],
+      "eventTags": [
+        "breeze",
+        "common",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的微风：微风刚好，适合坐一会儿，什么都不急。",
+      "sortOrder": 48,
+      "enabled": true
+    },
+    {
+      "id": "weather_breeze_noon",
+      "name": "午间微风",
+      "type": "breeze",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 22,
+        "max": 26,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 48,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "calm_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "breeze",
+        "noon",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "breeze",
+        "common",
+        "noon"
+      ],
+      "eventTags": [
+        "breeze",
+        "common",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的微风：微风刚好，适合坐一会儿，什么都不急。",
+      "sortOrder": 49,
+      "enabled": true
+    },
+    {
+      "id": "weather_breeze_afternoon",
+      "name": "午后微风",
+      "type": "breeze",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 21,
+        "max": 25,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 48,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "calm_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "breeze",
+        "afternoon",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "breeze",
+        "common",
+        "afternoon"
+      ],
+      "eventTags": [
+        "breeze",
+        "common",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的微风：微风刚好，适合坐一会儿，什么都不急。",
+      "sortOrder": 50,
+      "enabled": true
+    },
+    {
+      "id": "weather_breeze_evening",
+      "name": "傍晚微风",
+      "type": "breeze",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "17:00-20:00",
+      "temperature": {
+        "min": 20,
+        "max": 24,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 48,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "calm_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "breeze",
+        "evening",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "breeze",
+        "common",
+        "evening"
+      ],
+      "eventTags": [
+        "breeze",
+        "common",
+        "evening",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "傍晚的微风：微风刚好，适合坐一会儿，什么都不急。",
+      "sortOrder": 51,
+      "enabled": true
+    },
+    {
+      "id": "weather_muggy_morning",
+      "name": "清晨闷热",
+      "type": "muggy",
+      "rarity": "rare",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 31,
+        "max": 35,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 85,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.13,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "muggy",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "muggy",
+        "rare",
+        "morning"
+      ],
+      "eventTags": [
+        "muggy",
+        "rare",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的闷热：空气像一封没发出去的邮件，居民们都想喝点冰的。",
+      "sortOrder": 52,
+      "enabled": true
+    },
+    {
+      "id": "weather_muggy_noon",
+      "name": "午间闷热",
+      "type": "muggy",
+      "rarity": "rare",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 32,
+        "max": 36,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 85,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "muggy",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "muggy",
+        "rare",
+        "noon"
+      ],
+      "eventTags": [
+        "muggy",
+        "rare",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的闷热：空气像一封没发出去的邮件，居民们都想喝点冰的。",
+      "sortOrder": 53,
+      "enabled": true
+    },
+    {
+      "id": "weather_muggy_afternoon",
+      "name": "午后闷热",
+      "type": "muggy",
+      "rarity": "rare",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 31,
+        "max": 35,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 85,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "muggy",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "muggy",
+        "rare",
+        "afternoon"
+      ],
+      "eventTags": [
+        "muggy",
+        "rare",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的闷热：空气像一封没发出去的邮件，居民们都想喝点冰的。",
+      "sortOrder": 54,
+      "enabled": true
+    },
+    {
+      "id": "weather_cold_wave_morning",
+      "name": "清晨寒潮",
+      "type": "cold_wave",
+      "rarity": "epic",
+      "season": [
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 2,
+        "max": 6,
+        "unit": "celsius"
+      },
+      "windLevel": 5,
+      "humidity": 35,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.23,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "careful",
+      "dialogueTags": [
+        "weather_dialogue",
+        "cold_wave",
+        "morning",
+        "careful"
+      ],
+      "storyTags": [
+        "weather_story",
+        "cold_wave",
+        "epic",
+        "morning"
+      ],
+      "eventTags": [
+        "cold_wave",
+        "epic",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的寒潮：寒意从海边推来，暖灯和热汤变得格外重要。",
+      "sortOrder": 55,
+      "enabled": true
+    },
+    {
+      "id": "weather_cold_wave_noon",
+      "name": "午间寒潮",
+      "type": "cold_wave",
+      "rarity": "epic",
+      "season": [
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 3,
+        "max": 7,
+        "unit": "celsius"
+      },
+      "windLevel": 5,
+      "humidity": 35,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.18,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "careful",
+      "dialogueTags": [
+        "weather_dialogue",
+        "cold_wave",
+        "noon",
+        "careful"
+      ],
+      "storyTags": [
+        "weather_story",
+        "cold_wave",
+        "epic",
+        "noon"
+      ],
+      "eventTags": [
+        "cold_wave",
+        "epic",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的寒潮：寒意从海边推来，暖灯和热汤变得格外重要。",
+      "sortOrder": 56,
+      "enabled": true
+    },
+    {
+      "id": "weather_cold_wave_afternoon",
+      "name": "午后寒潮",
+      "type": "cold_wave",
+      "rarity": "epic",
+      "season": [
+        "winter"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 2,
+        "max": 6,
+        "unit": "celsius"
+      },
+      "windLevel": 6,
+      "humidity": 35,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.18,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "careful",
+      "dialogueTags": [
+        "weather_dialogue",
+        "cold_wave",
+        "afternoon",
+        "careful"
+      ],
+      "storyTags": [
+        "weather_story",
+        "cold_wave",
+        "epic",
+        "afternoon"
+      ],
+      "eventTags": [
+        "cold_wave",
+        "epic",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的寒潮：寒意从海边推来，暖灯和热汤变得格外重要。",
+      "sortOrder": 57,
+      "enabled": true
+    },
+    {
+      "id": "weather_heatwave_morning",
+      "name": "清晨高温",
+      "type": "heatwave",
+      "rarity": "epic",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 36,
+        "max": 40,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 48,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.23,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "careful",
+      "dialogueTags": [
+        "weather_dialogue",
+        "heatwave",
+        "morning",
+        "careful"
+      ],
+      "storyTags": [
+        "weather_story",
+        "heatwave",
+        "epic",
+        "morning"
+      ],
+      "eventTags": [
+        "heatwave",
+        "epic",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的高温：阳光像加班通知一样强烈，鱼群躲到更深处。",
+      "sortOrder": 58,
+      "enabled": true
+    },
+    {
+      "id": "weather_heatwave_noon",
+      "name": "午间高温",
+      "type": "heatwave",
+      "rarity": "epic",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 37,
+        "max": 41,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 48,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.18,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "careful",
+      "dialogueTags": [
+        "weather_dialogue",
+        "heatwave",
+        "noon",
+        "careful"
+      ],
+      "storyTags": [
+        "weather_story",
+        "heatwave",
+        "epic",
+        "noon"
+      ],
+      "eventTags": [
+        "heatwave",
+        "epic",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的高温：阳光像加班通知一样强烈，鱼群躲到更深处。",
+      "sortOrder": 59,
+      "enabled": true
+    },
+    {
+      "id": "weather_heatwave_afternoon",
+      "name": "午后高温",
+      "type": "heatwave",
+      "rarity": "epic",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 36,
+        "max": 40,
+        "unit": "celsius"
+      },
+      "windLevel": 3,
+      "humidity": 48,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.18,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "careful",
+      "dialogueTags": [
+        "weather_dialogue",
+        "heatwave",
+        "afternoon",
+        "careful"
+      ],
+      "storyTags": [
+        "weather_story",
+        "heatwave",
+        "epic",
+        "afternoon"
+      ],
+      "eventTags": [
+        "heatwave",
+        "epic",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的高温：阳光像加班通知一样强烈，鱼群躲到更深处。",
+      "sortOrder": 60,
+      "enabled": true
+    },
+    {
+      "id": "weather_low_temperature_morning",
+      "name": "清晨低温",
+      "type": "low_temperature",
+      "rarity": "rare",
+      "season": [
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 5,
+        "max": 9,
+        "unit": "celsius"
+      },
+      "windLevel": 3,
+      "humidity": 42,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.13,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "low_temperature",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "low_temperature",
+        "rare",
+        "morning"
+      ],
+      "eventTags": [
+        "low_temperature",
+        "rare",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的低温：低温让海面安静下来，等待也变得更慢。",
+      "sortOrder": 61,
+      "enabled": true
+    },
+    {
+      "id": "weather_low_temperature_noon",
+      "name": "午间低温",
+      "type": "low_temperature",
+      "rarity": "rare",
+      "season": [
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 6,
+        "max": 10,
+        "unit": "celsius"
+      },
+      "windLevel": 3,
+      "humidity": 42,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "low_temperature",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "low_temperature",
+        "rare",
+        "noon"
+      ],
+      "eventTags": [
+        "low_temperature",
+        "rare",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的低温：低温让海面安静下来，等待也变得更慢。",
+      "sortOrder": 62,
+      "enabled": true
+    },
+    {
+      "id": "weather_low_temperature_afternoon",
+      "name": "午后低温",
+      "type": "low_temperature",
+      "rarity": "rare",
+      "season": [
+        "winter"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 5,
+        "max": 9,
+        "unit": "celsius"
+      },
+      "windLevel": 4,
+      "humidity": 42,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "low_temperature",
+        "afternoon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "low_temperature",
+        "rare",
+        "afternoon"
+      ],
+      "eventTags": [
+        "low_temperature",
+        "rare",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的低温：低温让海面安静下来，等待也变得更慢。",
+      "sortOrder": 63,
+      "enabled": true
+    },
+    {
+      "id": "weather_rainbow_morning",
+      "name": "清晨彩虹",
+      "type": "rainbow",
+      "rarity": "epic",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 22,
+        "max": 26,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 68,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.23,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "rainbow",
+        "morning",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "rainbow",
+        "epic",
+        "morning"
+      ],
+      "eventTags": [
+        "rainbow",
+        "epic",
+        "morning",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather",
+        "festival_rainbow_after_rain"
+      ],
+      "description": "清晨的彩虹：雨后彩虹架在海上，像第二世界写下的道歉信。",
+      "sortOrder": 64,
+      "enabled": true
+    },
+    {
+      "id": "weather_rainbow_noon",
+      "name": "午间彩虹",
+      "type": "rainbow",
+      "rarity": "epic",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 23,
+        "max": 27,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 68,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.18,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "rainbow",
+        "noon",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "rainbow",
+        "epic",
+        "noon"
+      ],
+      "eventTags": [
+        "rainbow",
+        "epic",
+        "noon",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather",
+        "festival_rainbow_after_rain"
+      ],
+      "description": "午间的彩虹：雨后彩虹架在海上，像第二世界写下的道歉信。",
+      "sortOrder": 65,
+      "enabled": true
+    },
+    {
+      "id": "weather_rainbow_afternoon",
+      "name": "午后彩虹",
+      "type": "rainbow",
+      "rarity": "epic",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 22,
+        "max": 26,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 68,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.18,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "rainbow",
+        "afternoon",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "rainbow",
+        "epic",
+        "afternoon"
+      ],
+      "eventTags": [
+        "rainbow",
+        "epic",
+        "afternoon",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather",
+        "festival_rainbow_after_rain"
+      ],
+      "description": "午后的彩虹：雨后彩虹架在海上，像第二世界写下的道歉信。",
+      "sortOrder": 66,
+      "enabled": true
+    },
+    {
+      "id": "weather_rainbow_evening",
+      "name": "傍晚彩虹",
+      "type": "rainbow",
+      "rarity": "epic",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "17:00-20:00",
+      "temperature": {
+        "min": 21,
+        "max": 25,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 68,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.23,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "rainbow",
+        "evening",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "rainbow",
+        "epic",
+        "evening"
+      ],
+      "eventTags": [
+        "rainbow",
+        "epic",
+        "evening",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather",
+        "festival_rainbow_after_rain"
+      ],
+      "description": "傍晚的彩虹：雨后彩虹架在海上，像第二世界写下的道歉信。",
+      "sortOrder": 67,
+      "enabled": true
+    },
+    {
+      "id": "weather_sunset_glow_morning",
+      "name": "清晨晚霞",
+      "type": "sunset_glow",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 23,
+        "max": 27,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 52,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.13,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "sunset_glow",
+        "morning",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "sunset_glow",
+        "rare",
+        "morning"
+      ],
+      "eventTags": [
+        "sunset_glow",
+        "rare",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的晚霞：晚霞把办公室窗外染成橘色，适合遇见温柔的鱼。",
+      "sortOrder": 68,
+      "enabled": true
+    },
+    {
+      "id": "weather_sunset_glow_noon",
+      "name": "午间晚霞",
+      "type": "sunset_glow",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 24,
+        "max": 28,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 52,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "sunset_glow",
+        "noon",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "sunset_glow",
+        "rare",
+        "noon"
+      ],
+      "eventTags": [
+        "sunset_glow",
+        "rare",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的晚霞：晚霞把办公室窗外染成橘色，适合遇见温柔的鱼。",
+      "sortOrder": 69,
+      "enabled": true
+    },
+    {
+      "id": "weather_sunset_glow_afternoon",
+      "name": "午后晚霞",
+      "type": "sunset_glow",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 23,
+        "max": 27,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 52,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "sunset_glow",
+        "afternoon",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "sunset_glow",
+        "rare",
+        "afternoon"
+      ],
+      "eventTags": [
+        "sunset_glow",
+        "rare",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的晚霞：晚霞把办公室窗外染成橘色，适合遇见温柔的鱼。",
+      "sortOrder": 70,
+      "enabled": true
+    },
+    {
+      "id": "weather_morning_glow_morning",
+      "name": "清晨朝霞",
+      "type": "morning_glow",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 16,
+        "max": 20,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 58,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.13,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "morning_glow",
+        "morning",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "morning_glow",
+        "rare",
+        "morning"
+      ],
+      "eventTags": [
+        "morning_glow",
+        "rare",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的朝霞：朝霞一点点铺开，像今天还没被现实催促。",
+      "sortOrder": 71,
+      "enabled": true
+    },
+    {
+      "id": "weather_morning_glow_noon",
+      "name": "午间朝霞",
+      "type": "morning_glow",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 17,
+        "max": 21,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 58,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "morning_glow",
+        "noon",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "morning_glow",
+        "rare",
+        "noon"
+      ],
+      "eventTags": [
+        "morning_glow",
+        "rare",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的朝霞：朝霞一点点铺开，像今天还没被现实催促。",
+      "sortOrder": 72,
+      "enabled": true
+    },
+    {
+      "id": "weather_morning_glow_afternoon",
+      "name": "午后朝霞",
+      "type": "morning_glow",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 16,
+        "max": 20,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 58,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "bright",
+      "dialogueTags": [
+        "weather_dialogue",
+        "morning_glow",
+        "afternoon",
+        "bright"
+      ],
+      "storyTags": [
+        "weather_story",
+        "morning_glow",
+        "rare",
+        "afternoon"
+      ],
+      "eventTags": [
+        "morning_glow",
+        "rare",
+        "afternoon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的朝霞：朝霞一点点铺开，像今天还没被现实催促。",
+      "sortOrder": 73,
+      "enabled": true
+    },
+    {
+      "id": "weather_meteor_shower_morning",
+      "name": "清晨流星雨",
+      "type": "meteor_shower",
+      "rarity": "legend",
+      "season": [
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 14,
+        "max": 18,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 45,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.4,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "meteor_shower",
+        "morning",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "meteor_shower",
+        "legend",
+        "morning"
+      ],
+      "eventTags": [
+        "meteor_shower",
+        "legend",
+        "morning",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather",
+        "festival_star_tide"
+      ],
+      "description": "清晨的流星雨：流星落进海面，传闻和愿望一起浮起来。",
+      "sortOrder": 74,
+      "enabled": true
+    },
+    {
+      "id": "weather_meteor_shower_noon",
+      "name": "午间流星雨",
+      "type": "meteor_shower",
+      "rarity": "legend",
+      "season": [
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 15,
+        "max": 19,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 45,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.35,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "meteor_shower",
+        "noon",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "meteor_shower",
+        "legend",
+        "noon"
+      ],
+      "eventTags": [
+        "meteor_shower",
+        "legend",
+        "noon",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather",
+        "festival_star_tide"
+      ],
+      "description": "午间的流星雨：流星落进海面，传闻和愿望一起浮起来。",
+      "sortOrder": 75,
+      "enabled": true
+    },
+    {
+      "id": "weather_meteor_shower_afternoon",
+      "name": "午后流星雨",
+      "type": "meteor_shower",
+      "rarity": "legend",
+      "season": [
+        "summer",
+        "autumn"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 14,
+        "max": 18,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 45,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.35,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "meteor_shower",
+        "afternoon",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "meteor_shower",
+        "legend",
+        "afternoon"
+      ],
+      "eventTags": [
+        "meteor_shower",
+        "legend",
+        "afternoon",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather",
+        "festival_star_tide"
+      ],
+      "description": "午后的流星雨：流星落进海面，传闻和愿望一起浮起来。",
+      "sortOrder": 76,
+      "enabled": true
+    },
+    {
+      "id": "weather_lunar_eclipse_morning",
+      "name": "清晨月食",
+      "type": "lunar_eclipse",
+      "rarity": "legend",
+      "season": [
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 10,
+        "max": 14,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 50,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.4,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "lunar_eclipse",
+        "morning",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "lunar_eclipse",
+        "legend",
+        "morning"
+      ],
+      "eventTags": [
+        "lunar_eclipse",
+        "legend",
+        "morning",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的月食：月亮暂时躲进阴影，隐藏居民也许会出现。",
+      "sortOrder": 77,
+      "enabled": true
+    },
+    {
+      "id": "weather_lunar_eclipse_noon",
+      "name": "午间月食",
+      "type": "lunar_eclipse",
+      "rarity": "legend",
+      "season": [
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 11,
+        "max": 15,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 50,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.35,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "lunar_eclipse",
+        "noon",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "lunar_eclipse",
+        "legend",
+        "noon"
+      ],
+      "eventTags": [
+        "lunar_eclipse",
+        "legend",
+        "noon",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的月食：月亮暂时躲进阴影，隐藏居民也许会出现。",
+      "sortOrder": 78,
+      "enabled": true
+    },
+    {
+      "id": "weather_lunar_eclipse_afternoon",
+      "name": "午后月食",
+      "type": "lunar_eclipse",
+      "rarity": "legend",
+      "season": [
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": 10,
+        "max": 14,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 50,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.35,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "lunar_eclipse",
+        "afternoon",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "lunar_eclipse",
+        "legend",
+        "afternoon"
+      ],
+      "eventTags": [
+        "lunar_eclipse",
+        "legend",
+        "afternoon",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的月食：月亮暂时躲进阴影，隐藏居民也许会出现。",
+      "sortOrder": 79,
+      "enabled": true
+    },
+    {
+      "id": "weather_solar_eclipse_morning",
+      "name": "清晨日食",
+      "type": "solar_eclipse",
+      "rarity": "myth",
+      "season": [
+        "spring",
+        "summer"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 18,
+        "max": 22,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 60,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.65,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "solar_eclipse",
+        "morning",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "solar_eclipse",
+        "myth",
+        "morning"
+      ],
+      "eventTags": [
+        "solar_eclipse",
+        "myth",
+        "morning",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的日食：白天短暂暗下去，第二世界像屏住了呼吸。",
+      "sortOrder": 80,
+      "enabled": true
+    },
+    {
+      "id": "weather_solar_eclipse_noon",
+      "name": "午间日食",
+      "type": "solar_eclipse",
+      "rarity": "myth",
+      "season": [
+        "spring",
+        "summer"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 19,
+        "max": 23,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 60,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.6,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "solar_eclipse",
+        "noon",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "solar_eclipse",
+        "myth",
+        "noon"
+      ],
+      "eventTags": [
+        "solar_eclipse",
+        "myth",
+        "noon",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的日食：白天短暂暗下去，第二世界像屏住了呼吸。",
+      "sortOrder": 81,
+      "enabled": true
+    },
+    {
+      "id": "weather_full_moon_morning",
+      "name": "清晨满月",
+      "type": "full_moon",
+      "rarity": "epic",
+      "season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 12,
+        "max": 16,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 55,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.23,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "calm_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "full_moon",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "full_moon",
+        "epic",
+        "morning"
+      ],
+      "eventTags": [
+        "full_moon",
+        "epic",
+        "morning",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather",
+        "festival_star_tide"
+      ],
+      "description": "清晨的满月：圆月像大鱼漂悬在天上，夜钓故事更容易发生。",
+      "sortOrder": 82,
+      "enabled": true
+    },
+    {
+      "id": "weather_full_moon_noon",
+      "name": "午间满月",
+      "type": "full_moon",
+      "rarity": "epic",
+      "season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 13,
+        "max": 17,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 55,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.18,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "calm_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "full_moon",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "full_moon",
+        "epic",
+        "noon"
+      ],
+      "eventTags": [
+        "full_moon",
+        "epic",
+        "noon",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather",
+        "festival_star_tide"
+      ],
+      "description": "午间的满月：圆月像大鱼漂悬在天上，夜钓故事更容易发生。",
+      "sortOrder": 83,
+      "enabled": true
+    },
+    {
+      "id": "weather_new_moon_morning",
+      "name": "清晨新月",
+      "type": "new_moon",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 11,
+        "max": 15,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 50,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.13,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "new_moon",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "new_moon",
+        "rare",
+        "morning"
+      ],
+      "eventTags": [
+        "new_moon",
+        "rare",
+        "morning",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather",
+        "festival_star_tide"
+      ],
+      "description": "清晨的新月：新月很细，适合听见那些平时听不见的对白。",
+      "sortOrder": 84,
+      "enabled": true
+    },
+    {
+      "id": "weather_new_moon_noon",
+      "name": "午间新月",
+      "type": "new_moon",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "summer",
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 12,
+        "max": 16,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 50,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "new_moon",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "new_moon",
+        "rare",
+        "noon"
+      ],
+      "eventTags": [
+        "new_moon",
+        "rare",
+        "noon",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather",
+        "festival_star_tide"
+      ],
+      "description": "午间的新月：新月很细，适合听见那些平时听不见的对白。",
+      "sortOrder": 85,
+      "enabled": true
+    },
+    {
+      "id": "weather_aurora_morning",
+      "name": "清晨极光",
+      "type": "aurora",
+      "rarity": "myth",
+      "season": [
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": -4,
+        "max": 0,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 40,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.65,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "aurora",
+        "morning",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "aurora",
+        "myth",
+        "morning"
+      ],
+      "eventTags": [
+        "aurora",
+        "myth",
+        "morning",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的极光：极光落在海上，像第二世界打开了很远的门。",
+      "sortOrder": 86,
+      "enabled": true
+    },
+    {
+      "id": "weather_aurora_noon",
+      "name": "午间极光",
+      "type": "aurora",
+      "rarity": "myth",
+      "season": [
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": -3,
+        "max": 1,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 40,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.6,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "aurora",
+        "noon",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "aurora",
+        "myth",
+        "noon"
+      ],
+      "eventTags": [
+        "aurora",
+        "myth",
+        "noon",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的极光：极光落在海上，像第二世界打开了很远的门。",
+      "sortOrder": 87,
+      "enabled": true
+    },
+    {
+      "id": "weather_aurora_afternoon",
+      "name": "午后极光",
+      "type": "aurora",
+      "rarity": "myth",
+      "season": [
+        "winter"
+      ],
+      "timeRange": "14:00-17:00",
+      "temperature": {
+        "min": -4,
+        "max": 0,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 40,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.6,
+        "rareFishHint": true,
+        "preferredFishTags": [
+          "deep_fish"
+        ]
+      },
+      "residentMoodModifier": "amazed",
+      "dialogueTags": [
+        "weather_dialogue",
+        "aurora",
+        "afternoon",
+        "amazed"
+      ],
+      "storyTags": [
+        "weather_story",
+        "aurora",
+        "myth",
+        "afternoon"
+      ],
+      "eventTags": [
+        "aurora",
+        "myth",
+        "afternoon",
+        "weather_event",
+        "special_sky"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午后的极光：极光落在海上，像第二世界打开了很远的门。",
+      "sortOrder": 88,
+      "enabled": true
+    },
+    {
+      "id": "weather_drizzle_morning",
+      "name": "清晨毛毛雨",
+      "type": "drizzle",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 17,
+        "max": 21,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 80,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "drizzle",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "drizzle",
+        "common",
+        "morning"
+      ],
+      "eventTags": [
+        "drizzle",
+        "common",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的毛毛雨：毛毛雨轻得像提醒，不打扰，只陪着。",
+      "sortOrder": 89,
+      "enabled": true
+    },
+    {
+      "id": "weather_drizzle_noon",
+      "name": "午间毛毛雨",
+      "type": "drizzle",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 18,
+        "max": 22,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 80,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "drizzle",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "drizzle",
+        "common",
+        "noon"
+      ],
+      "eventTags": [
+        "drizzle",
+        "common",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的毛毛雨：毛毛雨轻得像提醒，不打扰，只陪着。",
+      "sortOrder": 90,
+      "enabled": true
+    },
+    {
+      "id": "weather_sea_mist_morning",
+      "name": "清晨海雾",
+      "type": "sea_mist",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 14,
+        "max": 18,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 92,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.13,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "sea_mist",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "sea_mist",
+        "rare",
+        "morning"
+      ],
+      "eventTags": [
+        "sea_mist",
+        "rare",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的海雾：海雾从窗外靠近，码头故事被藏了一半。",
+      "sortOrder": 91,
+      "enabled": true
+    },
+    {
+      "id": "weather_sea_mist_noon",
+      "name": "午间海雾",
+      "type": "sea_mist",
+      "rarity": "rare",
+      "season": [
+        "spring",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 15,
+        "max": 19,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 92,
+      "visibility": "low",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "sea_mist",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "sea_mist",
+        "rare",
+        "noon"
+      ],
+      "eventTags": [
+        "sea_mist",
+        "rare",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的海雾：海雾从窗外靠近，码头故事被藏了一半。",
+      "sortOrder": 92,
+      "enabled": true
+    },
+    {
+      "id": "weather_dry_sunny_morning",
+      "name": "清晨干燥晴天",
+      "type": "dry_sunny",
+      "rarity": "common",
+      "season": [
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 19,
+        "max": 23,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 30,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "dry_sunny",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "dry_sunny",
+        "common",
+        "morning"
+      ],
+      "eventTags": [
+        "dry_sunny",
+        "common",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的干燥晴天：空气清爽，远处海岛的轮廓格外清楚。",
+      "sortOrder": 93,
+      "enabled": true
+    },
+    {
+      "id": "weather_dry_sunny_noon",
+      "name": "午间干燥晴天",
+      "type": "dry_sunny",
+      "rarity": "common",
+      "season": [
+        "autumn",
+        "winter"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 20,
+        "max": 24,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 30,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "dry_sunny",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "dry_sunny",
+        "common",
+        "noon"
+      ],
+      "eventTags": [
+        "dry_sunny",
+        "common",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的干燥晴天：空气清爽，远处海岛的轮廓格外清楚。",
+      "sortOrder": 94,
+      "enabled": true
+    },
+    {
+      "id": "weather_humid_cloudy_morning",
+      "name": "清晨湿润多云",
+      "type": "humid_cloudy",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 25,
+        "max": 29,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 78,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "humid_cloudy",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "humid_cloudy",
+        "common",
+        "morning"
+      ],
+      "eventTags": [
+        "humid_cloudy",
+        "common",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的湿润多云：云层低低地挂着，鱼群像在等一场雨。",
+      "sortOrder": 95,
+      "enabled": true
+    },
+    {
+      "id": "weather_humid_cloudy_noon",
+      "name": "午间湿润多云",
+      "type": "humid_cloudy",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "summer"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 26,
+        "max": 30,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 78,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "humid_cloudy",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "humid_cloudy",
+        "common",
+        "noon"
+      ],
+      "eventTags": [
+        "humid_cloudy",
+        "common",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的湿润多云：云层低低地挂着，鱼群像在等一场雨。",
+      "sortOrder": 96,
+      "enabled": true
+    },
+    {
+      "id": "weather_cool_breeze_morning",
+      "name": "清晨清凉微风",
+      "type": "cool_breeze",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "autumn"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 16,
+        "max": 20,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 50,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.05,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "cool_breeze",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "cool_breeze",
+        "common",
+        "morning"
+      ],
+      "eventTags": [
+        "cool_breeze",
+        "common",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的清凉微风：风很轻，正好把心里的褶皱吹平一点。",
+      "sortOrder": 97,
+      "enabled": true
+    },
+    {
+      "id": "weather_cool_breeze_noon",
+      "name": "午间清凉微风",
+      "type": "cool_breeze",
+      "rarity": "common",
+      "season": [
+        "spring",
+        "autumn"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 17,
+        "max": 21,
+        "unit": "celsius"
+      },
+      "windLevel": 2,
+      "humidity": 50,
+      "visibility": "high",
+      "fishBonus": {
+        "activityMultiplier": 1.0,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "cool_breeze",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "cool_breeze",
+        "common",
+        "noon"
+      ],
+      "eventTags": [
+        "cool_breeze",
+        "common",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的清凉微风：风很轻，正好把心里的褶皱吹平一点。",
+      "sortOrder": 98,
+      "enabled": true
+    },
+    {
+      "id": "weather_warm_night_morning",
+      "name": "清晨暖夜",
+      "type": "warm_night",
+      "rarity": "rare",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "06:00-09:00",
+      "temperature": {
+        "min": 27,
+        "max": 31,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 70,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.13,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "warm_night",
+        "morning",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "warm_night",
+        "rare",
+        "morning"
+      ],
+      "eventTags": [
+        "warm_night",
+        "rare",
+        "morning",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "清晨的暖夜：夜里仍然温暖，居民们不急着回屋。",
+      "sortOrder": 99,
+      "enabled": true
+    },
+    {
+      "id": "weather_warm_night_noon",
+      "name": "午间暖夜",
+      "type": "warm_night",
+      "rarity": "rare",
+      "season": [
+        "summer"
+      ],
+      "timeRange": "11:00-14:00",
+      "temperature": {
+        "min": 28,
+        "max": 32,
+        "unit": "celsius"
+      },
+      "windLevel": 1,
+      "humidity": 70,
+      "visibility": "medium",
+      "fishBonus": {
+        "activityMultiplier": 1.08,
+        "rareFishHint": false,
+        "preferredFishTags": [
+          "common_fish"
+        ]
+      },
+      "residentMoodModifier": "calm",
+      "dialogueTags": [
+        "weather_dialogue",
+        "warm_night",
+        "noon",
+        "calm"
+      ],
+      "storyTags": [
+        "weather_story",
+        "warm_night",
+        "rare",
+        "noon"
+      ],
+      "eventTags": [
+        "warm_night",
+        "rare",
+        "noon",
+        "weather_event"
+      ],
+      "festivalTags": [
+        "weather"
+      ],
+      "description": "午间的暖夜：夜里仍然温暖，居民们不急着回屋。",
+      "sortOrder": 100,
+      "enabled": true
+    }
+  ]
+}

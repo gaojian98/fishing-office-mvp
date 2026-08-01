@@ -1,0 +1,187 @@
+{
+  "meta": {
+    "project": "FishingOffice",
+    "page": "DailyTask",
+    "version": "1.0"
+  },
+  "tasks": {
+    "title": "📋 今日任务",
+    "emptyMessage": "今天没有必须完成的事，去窗边坐一会儿也很好。",
+    "claimSuccessMessage": "奖励已领取，今天也慢慢来。",
+    "statusLabels": {
+      "not_started": "未开始",
+      "in_progress": "进行中",
+      "claimable": "可领取",
+      "completed": "已完成"
+    },
+    "rewardLabels": {
+      "fishCoin": "摸鱼币",
+      "exp": "经验",
+      "collectionPoint": "图鉴积分",
+      "titleId": "称号"
+    },
+    "categories": [
+      {
+        "id": "daily",
+        "label": "每日任务",
+        "enabled": true,
+        "sortOrder": 1
+      },
+      {
+        "id": "growth",
+        "label": "成长任务",
+        "enabled": true,
+        "sortOrder": 2
+      },
+      {
+        "id": "newbie",
+        "label": "新手任务",
+        "enabled": true,
+        "sortOrder": 3
+      },
+      {
+        "id": "weekly",
+        "label": "周任务",
+        "enabled": false,
+        "sortOrder": 4
+      }
+    ],
+    "items": [
+      {
+        "id": "daily_fish_once",
+        "title": "去窗边抛一次线",
+        "description": "今天也让鱼漂在海面上轻轻晃一会儿。",
+        "category": "daily",
+        "metric": "fishing_count",
+        "target": 1,
+        "progress": 0,
+        "reward": {
+          "fishCoin": 30,
+          "exp": 5,
+          "collectionPoint": 0,
+          "titleId": ""
+        },
+        "status": "not_started",
+        "sortOrder": 1,
+        "icon": "🎣"
+      },
+      {
+        "id": "daily_get_fish",
+        "title": "遇见一条鱼",
+        "description": "不管大小，今天的相遇都会被第二世界记住。",
+        "category": "daily",
+        "metric": "fish_obtained_count",
+        "target": 1,
+        "progress": 0,
+        "reward": {
+          "fishCoin": 45,
+          "exp": 8,
+          "collectionPoint": 1,
+          "titleId": ""
+        },
+        "status": "not_started",
+        "sortOrder": 2,
+        "icon": "🐟"
+      },
+      {
+        "id": "daily_sell_once",
+        "title": "整理一次收获",
+        "description": "把一条鱼换成摸鱼币，给今天留一点小奖励。",
+        "category": "daily",
+        "metric": "sell_count",
+        "target": 1,
+        "progress": 0,
+        "reward": {
+          "fishCoin": 20,
+          "exp": 4,
+          "collectionPoint": 0,
+          "titleId": ""
+        },
+        "status": "not_started",
+        "sortOrder": 3,
+        "icon": "💰"
+      },
+      {
+        "id": "daily_release_once",
+        "title": "把鱼送回海里",
+        "description": "放生不是损失，是和第二世界温柔地打个招呼。",
+        "category": "daily",
+        "metric": "release_count",
+        "target": 1,
+        "progress": 0,
+        "reward": {
+          "fishCoin": 10,
+          "exp": 6,
+          "collectionPoint": 0,
+          "titleId": ""
+        },
+        "status": "not_started",
+        "sortOrder": 4,
+        "icon": "🌊"
+      },
+      {
+        "id": "growth_collection_three",
+        "title": "点亮三段回忆",
+        "description": "图鉴不是数据库，它记录你在海边遇见过谁。",
+        "category": "growth",
+        "metric": "collection_count",
+        "target": 3,
+        "progress": 0,
+        "reward": {
+          "fishCoin": 80,
+          "exp": 20,
+          "collectionPoint": 3,
+          "titleId": ""
+        },
+        "status": "not_started",
+        "sortOrder": 10,
+        "icon": "📖"
+      },
+      {
+        "id": "newbie_open_bag",
+        "title": "整理自己的储物柜",
+        "description": "打开背包，看一看自己已经攒下的小成果。",
+        "category": "newbie",
+        "metric": "inventory_count",
+        "target": 1,
+        "progress": 0,
+        "reward": {
+          "fishCoin": 25,
+          "exp": 5,
+          "collectionPoint": 0,
+          "titleId": ""
+        },
+        "status": "not_started",
+        "sortOrder": 20,
+        "icon": "🎒"
+      },
+      {
+        "id": "newbie_login",
+        "title": "今天也来坐一会儿",
+        "description": "不用赶进度，回来看看海就很好。",
+        "category": "newbie",
+        "metric": "login_days",
+        "target": 1,
+        "progress": 1,
+        "reward": {
+          "fishCoin": 15,
+          "exp": 3,
+          "collectionPoint": 0,
+          "titleId": ""
+        },
+        "status": "claimable",
+        "sortOrder": 21,
+        "icon": "☀️"
+      }
+    ],
+    "uiLabels": {
+      "all": "全部",
+      "progress": "进度",
+      "reward": "奖励",
+      "claim": "领取",
+      "claimed": "已领取",
+      "close": "关闭",
+      "todayHint": "今天的小目标不是 KPI，只是提醒你第二世界有些事值得去看看。"
+    }
+  }
+}

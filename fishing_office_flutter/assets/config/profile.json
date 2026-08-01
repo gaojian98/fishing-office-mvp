@@ -1,0 +1,104 @@
+{
+  "profile": {
+    "meta": {
+      "project": "FishingOffice",
+      "page": "ProfileCenter",
+      "version": "1.0",
+      "designSize": {
+        "width": 1080,
+        "height": 1920
+      }
+    },
+    "title": "个人中心",
+    "closeLabel": "关闭",
+    "player": {
+      "nickname": "FishingPro",
+      "level": "Lv.18",
+      "titleLabel": "称号：",
+      "title": "优秀摸鱼员",
+      "joinDaysLabel": "加入天数：",
+      "joinDays": "28 天",
+      "streakLabel": "连续登录：",
+      "streak": "12 天",
+      "experienceLabel": "经验："
+    },
+    "menu": [
+      {
+        "id": "assets",
+        "label": "资产中心",
+        "hint": "展示摸鱼人生的成果。"
+      },
+      {
+        "id": "profile",
+        "label": "我的资料",
+        "hint": "查看自己的第二世界身份。"
+      },
+      {
+        "id": "titles",
+        "label": "我的称号",
+        "hint": "收藏一路获得的称号。"
+      },
+      {
+        "id": "achievements",
+        "label": "成就统计",
+        "hint": "看看陪伴世界的足迹。"
+      },
+      {
+        "id": "settings",
+        "label": "游戏设置",
+        "hint": "调整显示与体验。"
+      },
+      {
+        "id": "about",
+        "label": "关于游戏",
+        "hint": "了解《上班摸鱼》的初心。"
+      }
+    ],
+    "sections": {
+      "profile": {
+        "title": "我的资料",
+        "lines": [
+          "昵称：FishingPro",
+          "身份：办公室摸鱼员",
+          "等级：Lv.18",
+          "称号：优秀摸鱼员",
+          "说明：这里记录的是你的第二世界身份。"
+        ]
+      },
+      "titles": {
+        "title": "我的称号",
+        "lines": [
+          "• 初次摸鱼：第一次开始钓鱼后获得。",
+          "• 工位常客：连续多日回到第二世界后获得。",
+          "• 快乐补给员：用轻松的方式经营自己的成长。"
+        ]
+      },
+      "achievements": {
+        "title": "成就统计",
+        "lines": [
+          "累计钓鱼、图鉴收集、荣耀徽章都会记录在这里。",
+          "这里不是竞争榜单，而是陪伴时间的证明。"
+        ]
+      },
+      "settings": {
+        "title": "游戏设置",
+        "lines": [
+          "显示风格：蓝金木质",
+          "音效：温和办公室风",
+          "提示：后续可在这里放入设置中心。"
+        ]
+      },
+      "about": {
+        "title": "关于游戏",
+        "lines": [
+          "《上班摸鱼》是一款轻松、幽默、低压力的办公室摸鱼小游戏。",
+          "它希望让玩家在忙碌之后，回到一个属于自己的第二世界。"
+        ]
+      }
+    },
+    "footer": {
+      "transactionLabel": "查看交易记录",
+      "closeLabel": "关闭"
+    }
+  }
+}

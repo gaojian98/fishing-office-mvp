@@ -1,5 +1,6 @@
 import 'relationship_memory.dart';
 import 'relationship_profile.dart';
+import '../managers/world_clock_manager.dart';
 
 class RelationshipEvent {
   const RelationshipEvent({
@@ -16,12 +17,12 @@ class RelationshipEvent {
     required RelationshipProfile profile,
   }) {
     return RelationshipEvent(
-      eventId: DateTime.now().microsecondsSinceEpoch.toString(),
+      eventId: WorldClockManager.timestampId(),
       type: 'updated',
       profile: profile,
       memory: null,
       message: 'relationship_updated',
-      timestamp: DateTime.now(),
+      timestamp: WorldClockManager.systemNow(),
       payload: const {},
     );
   }

@@ -1,14 +1,11 @@
 {
-  "name": "moyu-railway",
+  "name": "fishing-office-mvp",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js"
-  },
-  "dependencies": {
-    "pg": "^8.13.1"
   },
   "engines": {
     "node": ">=20"

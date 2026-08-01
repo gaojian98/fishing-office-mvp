@@ -4,6 +4,7 @@ import 'emotion_state.dart';
 import 'relationship_event.dart';
 import 'relationship_memory.dart';
 import 'relationship_profile.dart';
+import '../managers/world_clock_manager.dart';
 
 typedef RelationshipEngineListener = void Function(RelationshipEvent event);
 
@@ -75,13 +76,13 @@ class RelationshipEngine {
     Map<String, dynamic> payload = const {},
   }) {
     final memory = RelationshipMemory(
-      memoryId: DateTime.now().microsecondsSinceEpoch.toString(),
+      memoryId: WorldClockManager.timestampId(),
       playerId: profile.playerId,
       targetId: profile.targetId,
       memoryType: memoryType,
       description: description,
       payload: payload,
-      createdAt: DateTime.now(),
+      createdAt: WorldClockManager.systemNow(),
     );
     emit(RelationshipEvent.memoryRecorded(
       profile: profile,

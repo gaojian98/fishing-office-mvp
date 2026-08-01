@@ -16,25 +16,23 @@ class NavigationManager {
 
   AppRoute? routeByPage(String page) => routes.byPage(page);
 
-  void openRoute(BuildContext context, String routePath) {
-    if (routePath == '/inventory') {
-      Navigator.of(context).pushNamed(routePath);
-      return;
-    }
+  bool openRoute(BuildContext context, String routePath) {
     final route = routes.byPath(routePath);
     if (route == null) {
       dialogManager.showUnknownRoute(context);
-      return;
+      return false;
     }
     if (route.type == 'dialog') {
       dialogManager.openByRoute(context, route);
-      return;
+      return false;
     }
-    if (route.type == 'state') return;
+    if (route.type == 'state') return false;
     Navigator.of(context).pushNamed(route.path);
+    return true;
   }
 
-  void openPage(BuildContext context, String routePath) => openRoute(context, routePath);
+  bool openPage(BuildContext context, String routePath) =>
+      openRoute(context, routePath);
 
   void openDialog(BuildContext context, String dialogPage) {
     final route = routes.byPage(dialogPage);

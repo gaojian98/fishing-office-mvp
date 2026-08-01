@@ -12,7 +12,9 @@ class FestivalManager {
     if (calendar.month == 1 && calendar.day == 1) festivals.add('new_year');
     if (calendar.month == 2 && calendar.day <= 10) festivals.add('tet');
     if (calendar.month == 12 && calendar.day == 25) festivals.add('christmas');
-    if (calendar.month == 1 && calendar.day == 1) festivals.add('spring_festival');
+    if (calendar.month == 1 && calendar.day == 1) {
+      festivals.add('spring_festival');
+    }
     return FestivalState(
       activeFestivals: festivals,
       timeLabel: clock.timeLabel,

@@ -13,7 +13,8 @@ class AnimationManager {
     return config.specForElement(elementId, explicitId);
   }
 
-  AnimationSpec buttonPress() => preset('button_press') ??
+  AnimationSpec buttonPress() =>
+      preset('button_press') ??
       const AnimationSpec(
         type: 'scale',
         scale: 0.95,

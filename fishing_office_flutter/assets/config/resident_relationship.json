@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "levels": [
+    {
+      "id": "stranger",
+      "name": "陌生",
+      "minMeetCount": 0,
+      "enabled": true,
+      "sortOrder": 1
+    },
+    {
+      "id": "known",
+      "name": "认识",
+      "minMeetCount": 1,
+      "enabled": true,
+      "sortOrder": 2
+    },
+    {
+      "id": "friend",
+      "name": "朋友",
+      "minMeetCount": 5,
+      "enabled": true,
+      "sortOrder": 3
+    },
+    {
+      "id": "close_friend",
+      "name": "亲近的朋友",
+      "minMeetCount": 20,
+      "enabled": true,
+      "sortOrder": 4
+    },
+    {
+      "id": "family_reserved",
+      "name": "家人（预留）",
+      "minMeetCount": 999999,
+      "enabled": false,
+      "sortOrder": 5
+    }
+  ],
+  "relationships": [
+    {
+      "residentId": "old_fisher",
+      "relationshipLevel": "stranger",
+      "relationshipScore": 0,
+      "lastChangedAt": "",
+      "reason": "尚未见面",
+      "tags": []
+    },
+    {
+      "residentId": "office_bird",
+      "relationshipLevel": "stranger",
+      "relationshipScore": 0,
+      "lastChangedAt": "",
+      "reason": "尚未见面",
+      "tags": []
+    },
+    {
+      "residentId": "little_fish",
+      "relationshipLevel": "stranger",
+      "relationshipScore": 0,
+      "lastChangedAt": "",
+      "reason": "尚未见面",
+      "tags": []
+    }
+  ]
+}

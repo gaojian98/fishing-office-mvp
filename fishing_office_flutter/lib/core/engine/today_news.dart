@@ -1,5 +1,6 @@
 import 'festival_manager.dart';
 import 'today_mood.dart';
+import '../managers/world_clock_manager.dart';
 
 class TodayNews {
   const TodayNews({
@@ -31,7 +32,7 @@ class TodayNews {
             ? '今天，世界发生了一些事。'
             : '今天，世界安静而平稳。';
     return TodayNews(
-      newsId: '${worldId}_${DateTime.now().microsecondsSinceEpoch}',
+      newsId: '${worldId}_${WorldClockManager.timestampId()}',
       headline: headline,
       summary: _buildSummary(
         mood: mood,

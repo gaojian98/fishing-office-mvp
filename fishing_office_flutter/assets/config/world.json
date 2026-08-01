@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "worldName": "第二世界",
+  "clock": {
+    "hour": 8,
+    "minute": 0,
+    "weekday": 1,
+    "month": 1,
+    "season": "reserved"
+  }
+}

@@ -1,0 +1,1427 @@
+{
+  "meta": {
+    "project": "FishingOffice",
+    "version": "V1.0"
+  },
+  "home": {
+    "meta": {
+      "project": "FishingOffice",
+      "page": "Home",
+      "version": "V3.0",
+      "designSize": {
+        "width": 1080,
+        "height": 1920
+      },
+      "background": {
+        "file": "Home.png",
+        "fit": "contain",
+        "allowCrop": false,
+        "allowStretch": false
+      }
+    },
+    "elements": [
+      {
+        "id": "profile_card",
+        "type": "button",
+        "x": 33.24,
+        "y": 40.95,
+        "width": 470.76,
+        "height": 131.95,
+        "zIndex": 30
+      },
+      {
+        "id": "btn_help",
+        "type": "button",
+        "x": 636.92,
+        "y": 45.49,
+        "width": 149.54,
+        "height": 118.29,
+        "zIndex": 30
+      },
+      {
+        "id": "btn_exit",
+        "type": "button",
+        "x": 958.16,
+        "y": 186.54,
+        "width": 116.3,
+        "height": 122.84,
+        "zIndex": 30
+      },
+      {
+        "id": "mouse_top",
+        "type": "button",
+        "x": 681.24,
+        "y": 1469.57,
+        "width": 193.84,
+        "height": 95.55,
+        "zIndex": 25
+      },
+      {
+        "id": "mouse_bottom",
+        "type": "button",
+        "x": 681.24,
+        "y": 1565.12,
+        "width": 193.84,
+        "height": 100.1,
+        "zIndex": 25
+      },
+      {
+        "id": "fish_float",
+        "type": "animated_object",
+        "x": 808.62,
+        "y": 737.07,
+        "width": 49.84,
+        "height": 104.65,
+        "zIndex": 9
+      },
+      {
+        "id": "btn_store",
+        "type": "button",
+        "x": 33.24,
+        "y": 1747.11,
+        "width": 265.84,
+        "height": 154.69,
+        "zIndex": 40
+      },
+      {
+        "id": "btn_honor",
+        "type": "button",
+        "x": 312.92,
+        "y": 1747.11,
+        "width": 265.84,
+        "height": 154.69,
+        "zIndex": 40
+      },
+      {
+        "id": "btn_bag",
+        "type": "button",
+        "x": 592.62,
+        "y": 1747.11,
+        "width": 265.84,
+        "height": 154.69,
+        "zIndex": 40
+      },
+      {
+        "id": "btn_start_fishing",
+        "type": "button",
+        "x": 869.54,
+        "y": 1728.91,
+        "width": 204.92,
+        "height": 172.89,
+        "zIndex": 40
+      },
+      {
+        "id": "btn_tasks",
+        "type": "button",
+        "x": 52,
+        "y": 1438,
+        "width": 305,
+        "height": 278,
+        "zIndex": 38
+      }
+    ]
+  },
+  "store": {
+    "meta": {
+      "page": "Store",
+      "version": "1.0",
+      "designWidth": 390,
+      "designHeight": 844,
+      "displayMode": "dialog",
+      "dialogType": "full"
+    },
+    "dialog": {
+      "x": 24,
+      "y": 104,
+      "width": 342,
+      "height": 640,
+      "radius": 22,
+      "overlay": "rgba(0,0,0,0.48)"
+    },
+    "header": {
+      "title": {
+        "x": 48,
+        "y": 128,
+        "width": 220,
+        "height": 36
+      },
+      "closeButton": {
+        "x": 316,
+        "y": 120,
+        "width": 42,
+        "height": 42
+      }
+    },
+    "tabs": {
+      "x": 42,
+      "y": 176,
+      "width": 306,
+      "height": 40,
+      "itemWidth": 72,
+      "itemHeight": 36,
+      "gap": 8
+    },
+    "shelf": {
+      "x": 42,
+      "y": 228,
+      "width": 306,
+      "height": 420,
+      "columns": 3,
+      "rows": 4,
+      "cellWidth": 94,
+      "cellHeight": 98,
+      "gapX": 12,
+      "gapY": 10
+    },
+    "productCard": {
+      "image": {
+        "x": 8,
+        "y": 8,
+        "width": 78,
+        "height": 48
+      },
+      "name": {
+        "x": 6,
+        "y": 58,
+        "width": 82,
+        "height": 18
+      },
+      "priceTag": {
+        "x": 8,
+        "y": 78,
+        "width": 78,
+        "height": 18
+      }
+    },
+    "footer": {
+      "coinInfo": {
+        "x": 42,
+        "y": 660,
+        "width": 150,
+        "height": 40
+      },
+      "walletButton": {
+        "x": 206,
+        "y": 660,
+        "width": 66,
+        "height": 40
+      },
+      "refreshButton": {
+        "x": 282,
+        "y": 660,
+        "width": 66,
+        "height": 40
+      }
+    },
+    "responsive": {
+      "scaleMode": "auto",
+      "safeArea": true,
+      "lockPortrait": true
+    }
+  },
+  "guide": {
+    "meta": {
+      "project": "FishingOffice",
+      "page": "GameGuide",
+      "version": "1.0",
+      "designSize": {
+        "width": 1080,
+        "height": 1920
+      }
+    },
+    "elements": [
+      {
+        "id": "guide_dialog",
+        "type": "panel",
+        "layer": "guide",
+        "x": 48,
+        "y": 104,
+        "width": 984,
+        "height": 1712,
+        "zIndex": 10
+      },
+      {
+        "id": "guide_header",
+        "type": "panel",
+        "layer": "guide",
+        "x": 48,
+        "y": 104,
+        "width": 984,
+        "height": 110,
+        "zIndex": 20
+      },
+      {
+        "id": "guide_title",
+        "type": "panel",
+        "layer": "guide",
+        "x": 392,
+        "y": 238,
+        "width": 300,
+        "height": 66,
+        "zIndex": 22
+      },
+      {
+        "id": "guide_close",
+        "type": "button",
+        "layer": "guide",
+        "x": 912,
+        "y": 126,
+        "width": 92,
+        "height": 52,
+        "zIndex": 30
+      },
+      {
+        "id": "guide_sidebar",
+        "type": "panel",
+        "layer": "guide",
+        "x": 68,
+        "y": 228,
+        "width": 286,
+        "height": 1324,
+        "zIndex": 18
+      },
+      {
+        "id": "guide_content",
+        "type": "panel",
+        "layer": "guide",
+        "x": 376,
+        "y": 228,
+        "width": 648,
+        "height": 1324,
+        "zIndex": 18
+      },
+      {
+        "id": "guide_prev",
+        "type": "button",
+        "layer": "guide",
+        "x": 68,
+        "y": 1606,
+        "width": 286,
+        "height": 78,
+        "zIndex": 30
+      },
+      {
+        "id": "guide_next",
+        "type": "button",
+        "layer": "guide",
+        "x": 378,
+        "y": 1606,
+        "width": 286,
+        "height": 78,
+        "zIndex": 30
+      },
+      {
+        "id": "guide_done",
+        "type": "button",
+        "layer": "guide",
+        "x": 688,
+        "y": 1606,
+        "width": 334,
+        "height": 78,
+        "zIndex": 30
+      },
+      {
+        "id": "guide_nav_game_goal",
+        "type": "button",
+        "layer": "guide",
+        "x": 82,
+        "y": 246,
+        "width": 258,
+        "height": 112,
+        "zIndex": 28
+      },
+      {
+        "id": "guide_nav_how_to_fish",
+        "type": "button",
+        "layer": "guide",
+        "x": 82,
+        "y": 368,
+        "width": 258,
+        "height": 112,
+        "zIndex": 28
+      },
+      {
+        "id": "guide_nav_fish_quality",
+        "type": "button",
+        "layer": "guide",
+        "x": 82,
+        "y": 490,
+        "width": 258,
+        "height": 112,
+        "zIndex": 28
+      },
+      {
+        "id": "guide_nav_gear_intro",
+        "type": "button",
+        "layer": "guide",
+        "x": 82,
+        "y": 612,
+        "width": 258,
+        "height": 112,
+        "zIndex": 28
+      },
+      {
+        "id": "guide_nav_fish_coin",
+        "type": "button",
+        "layer": "guide",
+        "x": 82,
+        "y": 734,
+        "width": 258,
+        "height": 112,
+        "zIndex": 28
+      },
+      {
+        "id": "guide_nav_upgrade_system",
+        "type": "button",
+        "layer": "guide",
+        "x": 82,
+        "y": 856,
+        "width": 258,
+        "height": 112,
+        "zIndex": 28
+      },
+      {
+        "id": "guide_nav_daily_tasks",
+        "type": "button",
+        "layer": "guide",
+        "x": 82,
+        "y": 978,
+        "width": 258,
+        "height": 112,
+        "zIndex": 28
+      },
+      {
+        "id": "guide_nav_achievement_system",
+        "type": "button",
+        "layer": "guide",
+        "x": 82,
+        "y": 1100,
+        "width": 258,
+        "height": 112,
+        "zIndex": 28
+      },
+      {
+        "id": "guide_nav_faq",
+        "type": "button",
+        "layer": "guide",
+        "x": 82,
+        "y": 1222,
+        "width": 258,
+        "height": 112,
+        "zIndex": 28
+      }
+    ]
+  },
+  "inventory": {
+    "meta": {
+      "project": "FishingOffice",
+      "page": "Inventory",
+      "version": "1.0",
+      "designSize": {
+        "width": 1080,
+        "height": 1920
+      }
+    },
+    "elements": [
+      {
+        "id": "inventory_dialog",
+        "type": "panel",
+        "layer": "inventory",
+        "x": 42,
+        "y": 96,
+        "width": 996,
+        "height": 1728,
+        "zIndex": 10
+      },
+      {
+        "id": "inventory_header",
+        "type": "panel",
+        "layer": "inventory",
+        "x": 42,
+        "y": 96,
+        "width": 996,
+        "height": 180,
+        "zIndex": 20
+      },
+      {
+        "id": "inventory_title",
+        "type": "panel",
+        "layer": "inventory",
+        "x": 68,
+        "y": 118,
+        "width": 460,
+        "height": 78,
+        "zIndex": 22
+      },
+      {
+        "id": "inventory_close",
+        "type": "button",
+        "layer": "inventory",
+        "x": 918,
+        "y": 118,
+        "width": 92,
+        "height": 58,
+        "zIndex": 30
+      },
+      {
+        "id": "inventory_capacity",
+        "type": "panel",
+        "layer": "inventory",
+        "x": 68,
+        "y": 314,
+        "width": 944,
+        "height": 120,
+        "zIndex": 18
+      },
+      {
+        "id": "inventory_organize",
+        "type": "button",
+        "layer": "inventory",
+        "x": 68,
+        "y": 446,
+        "width": 460,
+        "height": 72,
+        "zIndex": 30
+      },
+      {
+        "id": "inventory_filter",
+        "type": "button",
+        "layer": "inventory",
+        "x": 552,
+        "y": 446,
+        "width": 460,
+        "height": 72,
+        "zIndex": 30
+      },
+      {
+        "id": "inventory_categories",
+        "type": "panel",
+        "layer": "inventory",
+        "x": 68,
+        "y": 542,
+        "width": 944,
+        "height": 120,
+        "zIndex": 18
+      },
+      {
+        "id": "inventory_grid",
+        "type": "panel",
+        "layer": "inventory",
+        "x": 68,
+        "y": 682,
+        "width": 944,
+        "height": 846,
+        "zIndex": 18
+      },
+      {
+        "id": "inventory_detail",
+        "type": "panel",
+        "layer": "inventory",
+        "x": 696,
+        "y": 714,
+        "width": 316,
+        "height": 786,
+        "zIndex": 40
+      },
+      {
+        "id": "inventory_empty",
+        "type": "panel",
+        "layer": "inventory",
+        "x": 190,
+        "y": 790,
+        "width": 700,
+        "height": 640,
+        "zIndex": 22
+      },
+      {
+        "id": "inventory_footer",
+        "type": "panel",
+        "layer": "inventory",
+        "x": 68,
+        "y": 1602,
+        "width": 944,
+        "height": 120,
+        "zIndex": 20
+      },
+      {
+        "id": "inventory_sell",
+        "type": "button",
+        "layer": "inventory",
+        "x": 68,
+        "y": 1602,
+        "width": 248,
+        "height": 120,
+        "zIndex": 30,
+        "label": "出售"
+      },
+      {
+        "id": "inventory_use",
+        "type": "button",
+        "layer": "inventory",
+        "x": 328,
+        "y": 1602,
+        "width": 248,
+        "height": 120,
+        "zIndex": 30,
+        "label": "使用"
+      },
+      {
+        "id": "inventory_close_bottom",
+        "type": "button",
+        "layer": "inventory",
+        "x": 588,
+        "y": 1602,
+        "width": 424,
+        "height": 120,
+        "zIndex": 30,
+        "label": "关闭"
+      }
+    ]
+  },
+  "honor": {
+    "meta": {
+      "project": "FishingOffice",
+      "page": "Honor",
+      "version": "1.0",
+      "designSize": {
+        "width": 1080,
+        "height": 1920
+      }
+    },
+    "elements": [
+      {
+        "id": "honor_dialog",
+        "type": "panel",
+        "layer": "honor",
+        "x": 42,
+        "y": 96,
+        "width": 996,
+        "height": 1728,
+        "zIndex": 10
+      },
+      {
+        "id": "honor_header",
+        "type": "panel",
+        "layer": "honor",
+        "x": 42,
+        "y": 96,
+        "width": 996,
+        "height": 180,
+        "zIndex": 20
+      },
+      {
+        "id": "honor_title",
+        "type": "panel",
+        "layer": "honor",
+        "x": 68,
+        "y": 118,
+        "width": 460,
+        "height": 78,
+        "zIndex": 22
+      },
+      {
+        "id": "honor_close",
+        "type": "button",
+        "layer": "honor",
+        "x": 918,
+        "y": 118,
+        "width": 92,
+        "height": 58,
+        "zIndex": 30
+      },
+      {
+        "id": "honor_player",
+        "type": "panel",
+        "layer": "honor",
+        "x": 68,
+        "y": 308,
+        "width": 944,
+        "height": 220,
+        "zIndex": 18
+      },
+      {
+        "id": "honor_statistics",
+        "type": "panel",
+        "layer": "honor",
+        "x": 68,
+        "y": 552,
+        "width": 944,
+        "height": 180,
+        "zIndex": 18
+      },
+      {
+        "id": "honor_badge_grid",
+        "type": "panel",
+        "layer": "honor",
+        "x": 68,
+        "y": 756,
+        "width": 944,
+        "height": 980,
+        "zIndex": 18
+      },
+      {
+        "id": "honor_footer",
+        "type": "panel",
+        "layer": "honor",
+        "x": 68,
+        "y": 1760,
+        "width": 944,
+        "height": 120,
+        "zIndex": 20
+      },
+      {
+        "id": "honor_tab_title",
+        "type": "button",
+        "layer": "honor",
+        "x": 68,
+        "y": 1760,
+        "width": 248,
+        "height": 120,
+        "zIndex": 30,
+        "label": "称号"
+      },
+      {
+        "id": "honor_tab_achievement",
+        "type": "button",
+        "layer": "honor",
+        "x": 328,
+        "y": 1760,
+        "width": 248,
+        "height": 120,
+        "zIndex": 30,
+        "label": "成就"
+      },
+      {
+        "id": "honor_close_button",
+        "type": "button",
+        "layer": "honor",
+        "x": 588,
+        "y": 1760,
+        "width": 424,
+        "height": 120,
+        "zIndex": 30,
+        "label": "关闭"
+      }
+    ]
+  },
+  "fish_collection": {
+    "meta": {
+      "page": "FishCollection",
+      "version": "1.0",
+      "designSize": {
+        "width": 1080,
+        "height": 1920
+      },
+      "displayMode": "dialog",
+      "dialogType": "full"
+    },
+    "dialog": {
+      "x": 24,
+      "y": 88,
+      "width": 1032,
+      "height": 1744,
+      "radius": 32,
+      "overlay": "rgba(0,0,0,0.48)"
+    },
+    "header": {
+      "title": {
+        "x": 46,
+        "y": 112,
+        "width": 420,
+        "height": 56
+      },
+      "closeButton": {
+        "x": 934,
+        "y": 106,
+        "width": 72,
+        "height": 72
+      }
+    },
+    "stats": {
+      "x": 48,
+      "y": 192,
+      "width": 984,
+      "height": 130
+    },
+    "sidebar": {
+      "x": 48,
+      "y": 346,
+      "width": 252,
+      "height": 1280
+    },
+    "detail": {
+      "x": 326,
+      "y": 346,
+      "width": 706,
+      "height": 1280
+    },
+    "preview": {
+      "x": 350,
+      "y": 370,
+      "width": 270,
+      "height": 270
+    },
+    "name": {
+      "x": 650,
+      "y": 370,
+      "width": 332,
+      "height": 56
+    },
+    "rarity": {
+      "x": 650,
+      "y": 436,
+      "width": 180,
+      "height": 40
+    },
+    "collected": {
+      "x": 650,
+      "y": 488,
+      "width": 180,
+      "height": 40
+    },
+    "price": {
+      "x": 650,
+      "y": 540,
+      "width": 180,
+      "height": 40
+    },
+    "averageWeight": {
+      "x": 650,
+      "y": 592,
+      "width": 180,
+      "height": 40
+    },
+    "maxWeight": {
+      "x": 650,
+      "y": 644,
+      "width": 180,
+      "height": 40
+    },
+    "location": {
+      "x": 350,
+      "y": 676,
+      "width": 630,
+      "height": 40
+    },
+    "rarityRate": {
+      "x": 350,
+      "y": 728,
+      "width": 630,
+      "height": 40
+    },
+    "weather": {
+      "x": 350,
+      "y": 780,
+      "width": 300,
+      "height": 40
+    },
+    "time": {
+      "x": 680,
+      "y": 780,
+      "width": 300,
+      "height": 40
+    },
+    "condition": {
+      "x": 350,
+      "y": 836,
+      "width": 630,
+      "height": 60
+    },
+    "story": {
+      "x": 350,
+      "y": 910,
+      "width": 630,
+      "height": 240
+    },
+    "reward": {
+      "x": 350,
+      "y": 1170,
+      "width": 630,
+      "height": 54
+    },
+    "footer": {
+      "x": 326,
+      "y": 1638,
+      "width": 706,
+      "height": 102
+    },
+    "prevButton": {
+      "x": 326,
+      "y": 1638,
+      "width": 330,
+      "height": 102
+    },
+    "nextButton": {
+      "x": 674,
+      "y": 1638,
+      "width": 358,
+      "height": 102
+    },
+    "empty": {
+      "x": 350,
+      "y": 430,
+      "width": 630,
+      "height": 420
+    }
+  },
+  "profile": {
+    "meta": {
+      "page": "ProfileCenter",
+      "version": "1.0",
+      "designSize": {
+        "width": 1080,
+        "height": 1920
+      },
+      "displayMode": "dialog",
+      "dialogType": "full"
+    },
+    "dialog": {
+      "x": 24,
+      "y": 88,
+      "width": 1032,
+      "height": 1744,
+      "radius": 32,
+      "overlay": "rgba(0,0,0,0.48)"
+    },
+    "elements": [
+      {
+        "id": "profile_dialog",
+        "type": "panel",
+        "layer": "profile",
+        "x": 24,
+        "y": 88,
+        "width": 1032,
+        "height": 1744,
+        "zIndex": 10
+      },
+      {
+        "id": "profile_header",
+        "type": "panel",
+        "layer": "profile",
+        "x": 24,
+        "y": 88,
+        "width": 1032,
+        "height": 112,
+        "zIndex": 20
+      },
+      {
+        "id": "profile_title",
+        "type": "panel",
+        "layer": "profile",
+        "x": 46,
+        "y": 112,
+        "width": 420,
+        "height": 56,
+        "zIndex": 22
+      },
+      {
+        "id": "profile_close",
+        "type": "button",
+        "layer": "profile",
+        "x": 934,
+        "y": 106,
+        "width": 72,
+        "height": 72,
+        "zIndex": 30
+      },
+      {
+        "id": "profile_player",
+        "type": "panel",
+        "layer": "profile",
+        "x": 48,
+        "y": 228,
+        "width": 984,
+        "height": 260,
+        "zIndex": 18
+      },
+      {
+        "id": "profile_sidebar",
+        "type": "panel",
+        "layer": "profile",
+        "x": 48,
+        "y": 516,
+        "width": 252,
+        "height": 1062,
+        "zIndex": 18
+      },
+      {
+        "id": "profile_content",
+        "type": "panel",
+        "layer": "profile",
+        "x": 326,
+        "y": 516,
+        "width": 706,
+        "height": 1062,
+        "zIndex": 18
+      },
+      {
+        "id": "profile_footer",
+        "type": "panel",
+        "layer": "profile",
+        "x": 326,
+        "y": 1600,
+        "width": 706,
+        "height": 102,
+        "zIndex": 20
+      },
+      {
+        "id": "profile_transaction_button",
+        "type": "button",
+        "layer": "profile",
+        "x": 326,
+        "y": 1600,
+        "width": 330,
+        "height": 102,
+        "zIndex": 30
+      },
+      {
+        "id": "profile_close_button",
+        "type": "button",
+        "layer": "profile",
+        "x": 674,
+        "y": 1600,
+        "width": 358,
+        "height": 102,
+        "zIndex": 30
+      },
+      {
+        "id": "profile_menu_assets",
+        "type": "button",
+        "layer": "profile",
+        "x": 60,
+        "y": 544,
+        "width": 228,
+        "height": 136,
+        "zIndex": 30
+      },
+      {
+        "id": "profile_menu_profile",
+        "type": "button",
+        "layer": "profile",
+        "x": 60,
+        "y": 692,
+        "width": 228,
+        "height": 136,
+        "zIndex": 30
+      },
+      {
+        "id": "profile_menu_titles",
+        "type": "button",
+        "layer": "profile",
+        "x": 60,
+        "y": 840,
+        "width": 228,
+        "height": 136,
+        "zIndex": 30
+      },
+      {
+        "id": "profile_menu_achievements",
+        "type": "button",
+        "layer": "profile",
+        "x": 60,
+        "y": 988,
+        "width": 228,
+        "height": 136,
+        "zIndex": 30
+      },
+      {
+        "id": "profile_menu_settings",
+        "type": "button",
+        "layer": "profile",
+        "x": 60,
+        "y": 1136,
+        "width": 228,
+        "height": 136,
+        "zIndex": 30
+      },
+      {
+        "id": "profile_menu_about",
+        "type": "button",
+        "layer": "profile",
+        "x": 60,
+        "y": 1284,
+        "width": 228,
+        "height": 136,
+        "zIndex": 30
+      }
+    ]
+  },
+  "profile_transactions": {
+    "meta": {
+      "page": "ProfileTransactions",
+      "version": "1.0",
+      "designSize": {
+        "width": 1080,
+        "height": 1920
+      },
+      "displayMode": "dialog",
+      "dialogType": "full"
+    },
+    "elements": [
+      {
+        "id": "profile_transactions_dialog",
+        "type": "panel",
+        "layer": "profile_transactions",
+        "x": 24,
+        "y": 88,
+        "width": 1032,
+        "height": 1744,
+        "zIndex": 10
+      },
+      {
+        "id": "profile_transactions_header",
+        "type": "panel",
+        "layer": "profile_transactions",
+        "x": 24,
+        "y": 88,
+        "width": 1032,
+        "height": 112,
+        "zIndex": 20
+      },
+      {
+        "id": "profile_transactions_title",
+        "type": "panel",
+        "layer": "profile_transactions",
+        "x": 46,
+        "y": 112,
+        "width": 420,
+        "height": 56,
+        "zIndex": 22
+      },
+      {
+        "id": "profile_transactions_close",
+        "type": "button",
+        "layer": "profile_transactions",
+        "x": 934,
+        "y": 106,
+        "width": 72,
+        "height": 72,
+        "zIndex": 30
+      },
+      {
+        "id": "profile_transactions_subtitle",
+        "type": "panel",
+        "layer": "profile_transactions",
+        "x": 48,
+        "y": 204,
+        "width": 400,
+        "height": 40,
+        "zIndex": 22
+      },
+      {
+        "id": "profile_transactions_filters",
+        "type": "panel",
+        "layer": "profile_transactions",
+        "x": 48,
+        "y": 260,
+        "width": 984,
+        "height": 64,
+        "zIndex": 13
+      },
+      {
+        "id": "profile_transactions_filter_all",
+        "type": "button",
+        "layer": "profile_transactions",
+        "x": 48,
+        "y": 260,
+        "width": 176,
+        "height": 64,
+        "zIndex": 14
+      },
+      {
+        "id": "profile_transactions_filter_income",
+        "type": "button",
+        "layer": "profile_transactions",
+        "x": 250,
+        "y": 260,
+        "width": 176,
+        "height": 64,
+        "zIndex": 14
+      },
+      {
+        "id": "profile_transactions_filter_expense",
+        "type": "button",
+        "layer": "profile_transactions",
+        "x": 452,
+        "y": 260,
+        "width": 176,
+        "height": 64,
+        "zIndex": 14
+      },
+      {
+        "id": "profile_transactions_filter_reward",
+        "type": "button",
+        "layer": "profile_transactions",
+        "x": 654,
+        "y": 260,
+        "width": 176,
+        "height": 64,
+        "zIndex": 14
+      },
+      {
+        "id": "profile_transactions_filter_purchase",
+        "type": "button",
+        "layer": "profile_transactions",
+        "x": 856,
+        "y": 260,
+        "width": 176,
+        "height": 64,
+        "zIndex": 14
+      },
+      {
+        "id": "profile_transactions_page_info",
+        "type": "text",
+        "layer": "profile_transactions",
+        "x": 626,
+        "y": 1600,
+        "width": 140,
+        "height": 102,
+        "zIndex": 14
+      },
+      {
+        "id": "profile_transactions_list",
+        "type": "panel",
+        "layer": "profile_transactions",
+        "x": 48,
+        "y": 344,
+        "width": 984,
+        "height": 1200,
+        "zIndex": 18
+      },
+      {
+        "id": "profile_transactions_footer",
+        "type": "panel",
+        "layer": "profile_transactions",
+        "x": 326,
+        "y": 1600,
+        "width": 706,
+        "height": 102,
+        "zIndex": 20
+      },
+      {
+        "id": "profile_transactions_prev",
+        "type": "button",
+        "layer": "profile_transactions",
+        "x": 326,
+        "y": 1600,
+        "width": 330,
+        "height": 102,
+        "zIndex": 30
+      },
+      {
+        "id": "profile_transactions_next",
+        "type": "button",
+        "layer": "profile_transactions",
+        "x": 674,
+        "y": 1600,
+        "width": 358,
+        "height": 102,
+        "zIndex": 30
+      },
+      {
+        "id": "profile_transactions_empty",
+        "type": "panel",
+        "layer": "profile_transactions",
+        "x": 48,
+        "y": 344,
+        "width": 984,
+        "height": 1200,
+        "zIndex": 18
+      }
+    ]
+  },
+  "settings": {
+    "meta": {
+      "page": "SettingsCenter",
+      "version": "1.0",
+      "designSize": {
+        "width": 1080,
+        "height": 1920
+      },
+      "displayMode": "dialog",
+      "dialogType": "full"
+    },
+    "elements": [
+      {
+        "id": "settings_dialog",
+        "type": "panel",
+        "layer": "settings",
+        "x": 24,
+        "y": 88,
+        "width": 1032,
+        "height": 1744,
+        "zIndex": 10
+      },
+      {
+        "id": "settings_header",
+        "type": "panel",
+        "layer": "settings",
+        "x": 24,
+        "y": 88,
+        "width": 1032,
+        "height": 112,
+        "zIndex": 20
+      },
+      {
+        "id": "settings_title",
+        "type": "panel",
+        "layer": "settings",
+        "x": 46,
+        "y": 112,
+        "width": 420,
+        "height": 56,
+        "zIndex": 22
+      },
+      {
+        "id": "settings_close",
+        "type": "button",
+        "layer": "settings",
+        "x": 934,
+        "y": 106,
+        "width": 72,
+        "height": 72,
+        "zIndex": 30
+      },
+      {
+        "id": "settings_panel",
+        "type": "panel",
+        "layer": "settings",
+        "x": 48,
+        "y": 228,
+        "width": 984,
+        "height": 1260,
+        "zIndex": 18
+      },
+      {
+        "id": "settings_music",
+        "type": "button",
+        "layer": "settings",
+        "x": 72,
+        "y": 332,
+        "width": 452,
+        "height": 170,
+        "zIndex": 24
+      },
+      {
+        "id": "settings_sound",
+        "type": "button",
+        "layer": "settings",
+        "x": 556,
+        "y": 332,
+        "width": 452,
+        "height": 170,
+        "zIndex": 24
+      },
+      {
+        "id": "settings_vibration",
+        "type": "button",
+        "layer": "settings",
+        "x": 72,
+        "y": 530,
+        "width": 452,
+        "height": 170,
+        "zIndex": 24
+      },
+      {
+        "id": "settings_notification",
+        "type": "button",
+        "layer": "settings",
+        "x": 556,
+        "y": 530,
+        "width": 452,
+        "height": 170,
+        "zIndex": 24
+      },
+      {
+        "id": "settings_quality",
+        "type": "button",
+        "layer": "settings",
+        "x": 72,
+        "y": 728,
+        "width": 452,
+        "height": 170,
+        "zIndex": 24
+      },
+      {
+        "id": "settings_language",
+        "type": "button",
+        "layer": "settings",
+        "x": 556,
+        "y": 728,
+        "width": 452,
+        "height": 170,
+        "zIndex": 24
+      },
+      {
+        "id": "settings_clear_cache",
+        "type": "button",
+        "layer": "settings",
+        "x": 72,
+        "y": 926,
+        "width": 452,
+        "height": 170,
+        "zIndex": 24
+      },
+      {
+        "id": "settings_back_profile",
+        "type": "button",
+        "layer": "settings",
+        "x": 556,
+        "y": 926,
+        "width": 452,
+        "height": 170,
+        "zIndex": 24
+      },
+      {
+        "id": "settings_status",
+        "type": "panel",
+        "layer": "settings",
+        "x": 72,
+        "y": 1120,
+        "width": 936,
+        "height": 74,
+        "zIndex": 20
+      },
+      {
+        "id": "settings_footer",
+        "type": "panel",
+        "layer": "settings",
+        "x": 72,
+        "y": 1244,
+        "width": 936,
+        "height": 120,
+        "zIndex": 20
+      },
+      {
+        "id": "settings_save",
+        "type": "button",
+        "layer": "settings",
+        "x": 72,
+        "y": 1244,
+        "width": 288,
+        "height": 100,
+        "zIndex": 30
+      },
+      {
+        "id": "settings_restore",
+        "type": "button",
+        "layer": "settings",
+        "x": 396,
+        "y": 1244,
+        "width": 288,
+        "height": 100,
+        "zIndex": 30
+      },
+      {
+        "id": "settings_close_button",
+        "type": "button",
+        "layer": "settings",
+        "x": 720,
+        "y": 1244,
+        "width": 288,
+        "height": 100,
+        "zIndex": 30
+      }
+    ]
+  }
+}

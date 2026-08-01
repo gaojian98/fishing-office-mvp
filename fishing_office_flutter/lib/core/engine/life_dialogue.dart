@@ -2,6 +2,7 @@ import 'life_memory.dart';
 import 'life_profile.dart';
 import 'relationship_memory.dart';
 import 'relationship_profile.dart';
+import '../managers/world_clock_manager.dart';
 
 class LifeDialogue {
   const LifeDialogue({
@@ -27,7 +28,7 @@ class LifeDialogue {
       lifeMemories: lifeMemories,
     );
     return LifeDialogue(
-      dialogueId: DateTime.now().microsecondsSinceEpoch.toString(),
+      dialogueId: WorldClockManager.timestampId(),
       lifeId: profile.lifeId,
       playerId: profile.playerId,
       targetId: profile.targetId,
@@ -38,7 +39,7 @@ class LifeDialogue {
         'emotion': profile.emotion.name,
         'memoryCount': memories.length + lifeMemories.length,
       },
-      createdAt: DateTime.now(),
+      createdAt: WorldClockManager.systemNow(),
     );
   }
 

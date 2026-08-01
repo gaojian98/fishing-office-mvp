@@ -1,0 +1,390 @@
+{
+  "transactions": {
+    "meta": {
+      "project": "FishingOffice",
+      "page": "TransactionRecords",
+      "version": "1.0",
+      "designSize": {
+        "width": 1080,
+        "height": 1920
+      }
+    },
+    "title": "交易记录",
+    "subtitle": "最近10条记录",
+    "pageSize": 10,
+    "records": [
+      {
+        "id": "tx-001",
+        "type": "出售鱼",
+        "amount": "+88",
+        "note": "出售小黄鱼，补充了摸鱼币。",
+        "time": "2026-07-03 09:12",
+        "category": "income",
+        "currency": "fish_coin",
+        "itemId": "tx-001",
+        "itemName": "出售鱼"
+      },
+      {
+        "id": "tx-002",
+        "type": "购买装备",
+        "amount": "-120",
+        "note": "购入基础鱼饵。",
+        "time": "2026-07-03 09:34",
+        "category": "expense",
+        "currency": "fish_coin",
+        "itemId": "tx-002",
+        "itemName": "购买装备"
+      },
+      {
+        "id": "tx-003",
+        "type": "领取奖励",
+        "amount": "+50",
+        "note": "完成了今日任务。",
+        "time": "2026-07-03 10:20",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-003",
+        "itemName": "领取奖励"
+      },
+      {
+        "id": "tx-004",
+        "type": "出售鱼",
+        "amount": "+180",
+        "note": "出售一条稀有鱼，收获更多摸鱼币。",
+        "time": "2026-07-03 11:08",
+        "category": "income",
+        "currency": "fish_coin",
+        "itemId": "tx-004",
+        "itemName": "出售鱼"
+      },
+      {
+        "id": "tx-005",
+        "type": "系统赠送",
+        "amount": "+30",
+        "note": "上线签到补给。",
+        "time": "2026-07-03 12:00",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-005",
+        "itemName": "系统赠送"
+      },
+      {
+        "id": "tx-006",
+        "type": "完成任务",
+        "amount": "+60",
+        "note": "连续登录奖励。",
+        "time": "2026-07-03 12:40",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-006",
+        "itemName": "完成任务"
+      },
+      {
+        "id": "tx-007",
+        "type": "出售鱼",
+        "amount": "+96",
+        "note": "整理背包时出售了普通鱼。",
+        "time": "2026-07-03 14:05",
+        "category": "income",
+        "currency": "fish_coin",
+        "itemId": "tx-007",
+        "itemName": "出售鱼"
+      },
+      {
+        "id": "tx-008",
+        "type": "购买装备",
+        "amount": "-260",
+        "note": "升级了鱼竿。",
+        "time": "2026-07-03 15:21",
+        "category": "expense",
+        "currency": "fish_coin",
+        "itemId": "tx-008",
+        "itemName": "购买装备"
+      },
+      {
+        "id": "tx-009",
+        "type": "领取奖励",
+        "amount": "+120",
+        "note": "图鉴收集奖励。",
+        "time": "2026-07-03 17:03",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-009",
+        "itemName": "领取奖励"
+      },
+      {
+        "id": "tx-010",
+        "type": "出售鱼",
+        "amount": "+132",
+        "note": "把钓到的鱼换成了摸鱼币。",
+        "time": "2026-07-03 18:40",
+        "category": "income",
+        "currency": "fish_coin",
+        "itemId": "tx-010",
+        "itemName": "出售鱼"
+      },
+      {
+        "id": "tx-011",
+        "type": "系统赠送",
+        "amount": "+20",
+        "note": "晚间补给。",
+        "time": "2026-07-03 20:10",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-011",
+        "itemName": "系统赠送"
+      },
+      {
+        "id": "tx-012",
+        "type": "完成任务",
+        "amount": "+40",
+        "note": "今日摸鱼目标达成。",
+        "time": "2026-07-03 21:15",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-012",
+        "itemName": "完成任务"
+      },
+      {
+        "id": "tx-013",
+        "type": "出售鱼",
+        "amount": "+76",
+        "note": "把普通鱼换成了摸鱼币。",
+        "time": "2026-07-03 21:42",
+        "category": "income",
+        "currency": "fish_coin",
+        "itemId": "tx-013",
+        "itemName": "出售鱼"
+      },
+      {
+        "id": "tx-014",
+        "type": "购买商品",
+        "amount": "168",
+        "note": "购入高级鱼饵。",
+        "time": "2026-07-03 22:10",
+        "category": "expense",
+        "currency": "fish_coin",
+        "itemId": "tx-014",
+        "itemName": "购买商品"
+      },
+      {
+        "id": "tx-015",
+        "type": "领取奖励",
+        "amount": "+90",
+        "note": "完成了夜间目标。",
+        "time": "2026-07-03 22:45",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-015",
+        "itemName": "领取奖励"
+      },
+      {
+        "id": "tx-016",
+        "type": "系统赠送",
+        "amount": "+25",
+        "note": "补给礼包到账。",
+        "time": "2026-07-03 23:05",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-016",
+        "itemName": "系统赠送"
+      },
+      {
+        "id": "tx-017",
+        "type": "出售鱼",
+        "amount": "+140",
+        "note": "稀有鱼带来更多摸鱼币。",
+        "time": "2026-07-04 08:18",
+        "category": "income",
+        "currency": "fish_coin",
+        "itemId": "tx-017",
+        "itemName": "出售鱼"
+      },
+      {
+        "id": "tx-018",
+        "type": "完成任务",
+        "amount": "+60",
+        "note": "连续登录奖励。",
+        "time": "2026-07-04 08:36",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-018",
+        "itemName": "完成任务"
+      },
+      {
+        "id": "tx-019",
+        "type": "购买商品",
+        "amount": "220",
+        "note": "升级了鱼漂。",
+        "time": "2026-07-04 08:58",
+        "category": "expense",
+        "currency": "fish_coin",
+        "itemId": "tx-019",
+        "itemName": "购买商品"
+      },
+      {
+        "id": "tx-020",
+        "type": "出售鱼",
+        "amount": "+108",
+        "note": "整理背包后出售鱼获。",
+        "time": "2026-07-04 09:16",
+        "category": "income",
+        "currency": "fish_coin",
+        "itemId": "tx-020",
+        "itemName": "出售鱼"
+      },
+      {
+        "id": "tx-021",
+        "type": "领取奖励",
+        "amount": "+120",
+        "note": "图鉴收集奖励。",
+        "time": "2026-07-04 09:40",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-021",
+        "itemName": "领取奖励"
+      },
+      {
+        "id": "tx-022",
+        "type": "系统赠送",
+        "amount": "+32",
+        "note": "早间签到补给。",
+        "time": "2026-07-04 10:03",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-022",
+        "itemName": "系统赠送"
+      },
+      {
+        "id": "tx-023",
+        "type": "购买商品",
+        "amount": "88",
+        "note": "补充基础鱼饵。",
+        "time": "2026-07-04 10:26",
+        "category": "expense",
+        "currency": "fish_coin",
+        "itemId": "tx-023",
+        "itemName": "购买商品"
+      },
+      {
+        "id": "tx-024",
+        "type": "出售鱼",
+        "amount": "+92",
+        "note": "普通鱼出售。",
+        "time": "2026-07-04 10:48",
+        "category": "income",
+        "currency": "fish_coin",
+        "itemId": "tx-024",
+        "itemName": "出售鱼"
+      },
+      {
+        "id": "tx-025",
+        "type": "完成任务",
+        "amount": "+45",
+        "note": "完成了晨间任务。",
+        "time": "2026-07-04 11:12",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-025",
+        "itemName": "完成任务"
+      },
+      {
+        "id": "tx-026",
+        "type": "系统赠送",
+        "amount": "+18",
+        "note": "在线补给。",
+        "time": "2026-07-04 11:35",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-026",
+        "itemName": "系统赠送"
+      },
+      {
+        "id": "tx-027",
+        "type": "购买商品",
+        "amount": "310",
+        "note": "购买新的鱼竿部件。",
+        "time": "2026-07-04 12:00",
+        "category": "expense",
+        "currency": "fish_coin",
+        "itemId": "tx-027",
+        "itemName": "购买商品"
+      },
+      {
+        "id": "tx-028",
+        "type": "领取奖励",
+        "amount": "+110",
+        "note": "完成图鉴里程碑。",
+        "time": "2026-07-04 12:24",
+        "category": "reward",
+        "currency": "fish_coin",
+        "itemId": "tx-028",
+        "itemName": "领取奖励"
+      },
+      {
+        "id": "tx-029",
+        "type": "出售鱼",
+        "amount": "+156",
+        "note": "午间摸鱼收获。",
+        "time": "2026-07-04 12:50",
+        "category": "income",
+        "currency": "fish_coin",
+        "itemId": "tx-029",
+        "itemName": "出售鱼"
+      },
+      {
+        "id": "tx-030",
+        "type": "购买商品",
+        "amount": "145",
+        "note": "补充新鱼饵。",
+        "time": "2026-07-04 13:18",
+        "category": "expense",
+        "currency": "fish_coin",
+        "itemId": "tx-030",
+        "itemName": "购买商品"
+      }
+    ],
+    "footer": {
+      "prevLabel": "上一页",
+      "nextLabel": "下一页",
+      "closeLabel": "关闭"
+    },
+    "emptyState": {
+      "title": "暂无交易记录",
+      "body": "还没有任何交易，先去钓几条鱼吧。",
+      "buttonLabel": "开始钓鱼"
+    },
+    "pageInfoTemplate": "页码 {current} / {total}",
+    "filters": {
+      "items": [
+        {
+          "id": "all",
+          "label": "全部"
+        },
+        {
+          "id": "income",
+          "label": "收入"
+        },
+        {
+          "id": "expense",
+          "label": "支出"
+        },
+        {
+          "id": "reward",
+          "label": "奖励"
+        },
+        {
+          "id": "purchase",
+          "label": "购买"
+        }
+      ]
+    },
+    "columns": {
+      "timeLabel": "时间",
+      "typeLabel": "类型",
+      "amountLabel": "金额",
+      "balanceLabel": "余额变化",
+      "noteLabel": "备注"
+    }
+  }
+}

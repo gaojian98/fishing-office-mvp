@@ -1,5 +1,6 @@
 import 'ocean_ecology.dart';
 import 'ocean_mood.dart';
+import '../managers/world_clock_manager.dart';
 
 class OceanState {
   const OceanState({
@@ -22,7 +23,7 @@ class OceanState {
       weatherTags: const [],
       memoryTags: const [],
       newsTags: const [],
-      updatedAt: DateTime.now(),
+      updatedAt: WorldClockManager.systemNow(),
     );
   }
 
@@ -53,7 +54,7 @@ class OceanState {
       weatherTags: weatherTags ?? this.weatherTags,
       memoryTags: memoryTags ?? this.memoryTags,
       newsTags: newsTags ?? this.newsTags,
-      updatedAt: updatedAt ?? DateTime.now(),
+      updatedAt: updatedAt ?? WorldClockManager.systemNow(),
     );
   }
 

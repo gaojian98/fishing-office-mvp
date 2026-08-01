@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "activities": [
+    {
+      "id": "prepare_rods",
+      "name": "整理鱼竿"
+    },
+    {
+      "id": "drink_tea",
+      "name": "喝茶"
+    },
+    {
+      "id": "wait_slow_fish",
+      "name": "等鱼"
+    },
+    {
+      "id": "fly_by_window",
+      "name": "飞过窗边"
+    },
+    {
+      "id": "circle_float",
+      "name": "观察鱼漂"
+    }
+  ]
+}

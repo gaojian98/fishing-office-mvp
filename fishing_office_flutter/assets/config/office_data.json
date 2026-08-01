@@ -1,0 +1,182 @@
+{
+  "meta": {
+    "page": "Store",
+    "version": "1.0",
+    "dataType": "storeItems"
+  },
+  "currency": {
+    "primary": "fish_coin",
+    "displayName": "摸鱼币"
+  },
+  "categories": [
+    {
+      "id": "recommend",
+      "name": "推荐"
+    },
+    {
+      "id": "rod",
+      "name": "鱼竿"
+    },
+    {
+      "id": "line",
+      "name": "鱼线"
+    },
+    {
+      "id": "float",
+      "name": "鱼漂"
+    },
+    {
+      "id": "bait",
+      "name": "鱼饵"
+    },
+    {
+      "id": "tool",
+      "name": "工具"
+    },
+    {
+      "id": "decoration",
+      "name": "装饰"
+    }
+  ],
+  "items": [
+    {
+      "id": "rod_basic",
+      "name": "新手鱼竿",
+      "category": "rod",
+      "rarity": "common",
+      "price": 188,
+      "currency": "fish_coin",
+      "owned": 1,
+      "icon": "icon_rod",
+      "description": "适合刚开始摸鱼的新手鱼竿，轻便好用。"
+    },
+    {
+      "id": "rod_carbon",
+      "name": "碳素鱼竿",
+      "category": "rod",
+      "rarity": "rare",
+      "price": 888,
+      "currency": "fish_coin",
+      "owned": 0,
+      "icon": "icon_rod",
+      "description": "更轻、更稳，适合想钓到更大鱼的玩家。"
+    },
+    {
+      "id": "line_strong",
+      "name": "高强鱼线",
+      "category": "line",
+      "rarity": "common",
+      "price": 388,
+      "currency": "fish_coin",
+      "owned": 2,
+      "icon": "icon_line",
+      "description": "结实耐用，减少大鱼逃脱的概率。"
+    },
+    {
+      "id": "float_lucky",
+      "name": "幸运鱼漂",
+      "category": "float",
+      "rarity": "rare",
+      "price": 288,
+      "currency": "fish_coin",
+      "owned": 1,
+      "icon": "icon_float",
+      "description": "轻轻浮动，给摸鱼时光一点小期待。"
+    },
+    {
+      "id": "bait_shrimp",
+      "name": "鲜虾鱼饵",
+      "category": "bait",
+      "rarity": "common",
+      "price": 99,
+      "currency": "fish_coin",
+      "owned": 20,
+      "icon": "icon_bait",
+      "description": "常见鱼饵，适合日常钓鱼。"
+    },
+    {
+      "id": "bait_premium",
+      "name": "高级鱼饵",
+      "category": "bait",
+      "rarity": "rare",
+      "price": 188,
+      "currency": "fish_coin",
+      "owned": 8,
+      "icon": "icon_bait",
+      "description": "更容易吸引稀有鱼类。"
+    },
+    {
+      "id": "net_small",
+      "name": "小抄网",
+      "category": "tool",
+      "rarity": "common",
+      "price": 388,
+      "currency": "fish_coin",
+      "owned": 1,
+      "icon": "icon_tool",
+      "description": "帮助玩家更稳地收获鱼。"
+    },
+    {
+      "id": "bucket_wood",
+      "name": "木鱼桶",
+      "category": "tool",
+      "rarity": "common",
+      "price": 688,
+      "currency": "fish_coin",
+      "owned": 1,
+      "icon": "icon_bucket",
+      "description": "暂存鱼获的小木桶，温暖又实用。"
+    },
+    {
+      "id": "detector",
+      "name": "鱼群探测器",
+      "category": "tool",
+      "rarity": "epic",
+      "price": 1288,
+      "currency": "fish_coin",
+      "owned": 0,
+      "icon": "icon_tool",
+      "description": "帮助发现更好的钓点。"
+    },
+    {
+      "id": "desk_plant",
+      "name": "小绿植",
+      "category": "decoration",
+      "rarity": "common",
+      "price": 268,
+      "currency": "fish_coin",
+      "owned": 0,
+      "icon": "icon_decoration",
+      "description": "给工位增加一点生命力。"
+    },
+    {
+      "id": "sunny_frame",
+      "name": "阳光相框",
+      "category": "decoration",
+      "rarity": "rare",
+      "price": 568,
+      "currency": "fish_coin",
+      "owned": 0,
+      "icon": "icon_decoration",
+      "description": "把快乐时刻留在桌面上。"
+    },
+    {
+      "id": "rod_legend",
+      "name": "传说鱼竿",
+      "category": "rod",
+      "rarity": "legend",
+      "price": 2888,
+      "currency": "fish_coin",
+      "owned": 0,
+      "icon": "icon_rod",
+      "description": "传说中的鱼竿，适合真正懂得快乐的人。"
+    }
+  ],
+  "purchaseRules": {
+    "tapOnceBuyOne": true,
+    "confirmBeforePurchase": true,
+    "insufficientCurrencyAction": "openDialog",
+    "insufficientCurrencyTarget": "InsufficientCoinDialog",
+    "successDialog": "PurchaseSuccessDialog"
+  }
+}

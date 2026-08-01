@@ -1,5 +1,8 @@
+import '../../managers/world_clock_manager.dart';
+
 class JsonCacheEntry {
-  JsonCacheEntry(this.value, {DateTime? updatedAt}) : updatedAt = updatedAt ?? DateTime.now();
+  JsonCacheEntry(this.value, {DateTime? updatedAt})
+      : updatedAt = updatedAt ?? WorldClockManager.systemNow();
 
   final Map<String, dynamic> value;
   final DateTime updatedAt;
@@ -16,4 +19,3 @@ class JsonMemoryCache {
 
   void clear() => _entries.clear();
 }
-

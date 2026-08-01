@@ -1,0 +1,2756 @@
+{
+  "version": "1.0",
+  "description": "第二世界节日内容配置。Festival Pack 01。",
+  "festivals": [
+    {
+      "id": "festival_new_year",
+      "name": "新年",
+      "category": "real_world",
+      "dateType": "fixed",
+      "dateValue": "01-01",
+      "season": "winter",
+      "durationDays": 1,
+      "mood": "hopeful",
+      "theme": "新年",
+      "description": "新的一年从一阵温柔海风开始。",
+      "worldEffects": {
+        "residentMood": "hopeful",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "winter",
+          "hopeful"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "hopeful",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "hopeful",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "hopeful",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "hopeful",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 1,
+      "tags": [
+        "festival",
+        "real_world",
+        "winter",
+        "hopeful",
+        "festival_new_year"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_spring_festival",
+      "name": "春节",
+      "category": "real_world",
+      "dateType": "lunar",
+      "dateValue": "lunar-01-01",
+      "season": "winter",
+      "durationDays": 1,
+      "mood": "warm",
+      "theme": "春节",
+      "description": "居民们把灯笼挂到窗边，海面也像回家一样发亮。",
+      "worldEffects": {
+        "residentMood": "warm",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "winter",
+          "warm"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "warm",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "warm",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "warm",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "warm",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 2,
+      "tags": [
+        "festival",
+        "real_world",
+        "winter",
+        "warm",
+        "festival_spring_festival"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_lantern",
+      "name": "元宵节",
+      "category": "real_world",
+      "dateType": "lunar",
+      "dateValue": "lunar-01-15",
+      "season": "winter",
+      "durationDays": 1,
+      "mood": "gentle",
+      "theme": "元宵节",
+      "description": "小灯笼倒映在海里，像一串慢慢漂远的愿望。",
+      "worldEffects": {
+        "residentMood": "gentle",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "winter",
+          "gentle"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "gentle",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "gentle",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "gentle",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "gentle",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 3,
+      "tags": [
+        "festival",
+        "real_world",
+        "winter",
+        "gentle",
+        "festival_lantern"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_valentine",
+      "name": "情人节",
+      "category": "real_world",
+      "dateType": "fixed",
+      "dateValue": "02-14",
+      "season": "winter",
+      "durationDays": 1,
+      "mood": "soft",
+      "theme": "情人节",
+      "description": "第二世界不催促告白，只让喜欢慢慢靠近。",
+      "worldEffects": {
+        "residentMood": "soft",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "winter",
+          "soft"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "soft",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "soft",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "soft",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "soft",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 4,
+      "tags": [
+        "festival",
+        "real_world",
+        "winter",
+        "soft",
+        "festival_valentine"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_spring_flower_gift",
+      "name": "春风花礼日",
+      "category": "real_world",
+      "dateType": "fixed",
+      "dateValue": "03-08",
+      "season": "spring",
+      "durationDays": 1,
+      "mood": "respectful",
+      "theme": "春风花礼日",
+      "description": "花店和海风一起给努力生活的人送上小小祝福。",
+      "worldEffects": {
+        "residentMood": "respectful",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "spring",
+          "respectful"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "respectful",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "respectful",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "respectful",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "respectful",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 5,
+      "tags": [
+        "festival",
+        "real_world",
+        "spring",
+        "respectful",
+        "festival_spring_flower_gift"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_arbor_day",
+      "name": "种树日",
+      "category": "real_world",
+      "dateType": "fixed",
+      "dateValue": "03-12",
+      "season": "spring",
+      "durationDays": 1,
+      "mood": "fresh",
+      "theme": "种树日",
+      "description": "居民在天台种下一棵会听海声的小树。",
+      "worldEffects": {
+        "residentMood": "fresh",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "spring",
+          "fresh"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "fresh",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "fresh",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "fresh",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "fresh",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 6,
+      "tags": [
+        "festival",
+        "real_world",
+        "spring",
+        "fresh",
+        "festival_arbor_day"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_april_fools",
+      "name": "玩笑鱼日",
+      "category": "real_world",
+      "dateType": "fixed",
+      "dateValue": "04-01",
+      "season": "spring",
+      "durationDays": 1,
+      "mood": "playful",
+      "theme": "玩笑鱼日",
+      "description": "鱼群学会了开玩笑，但玩笑都很温柔。",
+      "worldEffects": {
+        "residentMood": "playful",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "spring",
+          "playful"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "playful",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "playful",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "playful",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "playful",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 7,
+      "tags": [
+        "festival",
+        "real_world",
+        "spring",
+        "playful",
+        "festival_april_fools"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_qingming",
+      "name": "清明风日",
+      "category": "real_world",
+      "dateType": "solar_term",
+      "dateValue": "qingming",
+      "season": "spring",
+      "durationDays": 1,
+      "mood": "quiet",
+      "theme": "清明风日",
+      "description": "世界放轻脚步，记住那些曾经来过的人和鱼。",
+      "worldEffects": {
+        "residentMood": "quiet",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "spring",
+          "quiet"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "quiet",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "quiet",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "quiet",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "quiet",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 8,
+      "tags": [
+        "festival",
+        "real_world",
+        "spring",
+        "quiet",
+        "festival_qingming"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_labor_day",
+      "name": "劳动节",
+      "category": "real_world",
+      "dateType": "fixed",
+      "dateValue": "05-01",
+      "season": "spring",
+      "durationDays": 1,
+      "mood": "relaxed",
+      "theme": "劳动节",
+      "description": "现实努力工作，第二世界负责让人好好休息。",
+      "worldEffects": {
+        "residentMood": "relaxed",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "spring",
+          "relaxed"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "relaxed",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "relaxed",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "relaxed",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "relaxed",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 9,
+      "tags": [
+        "festival",
+        "real_world",
+        "spring",
+        "relaxed",
+        "festival_labor_day"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_children_day",
+      "name": "童心日",
+      "category": "real_world",
+      "dateType": "fixed",
+      "dateValue": "06-01",
+      "season": "summer",
+      "durationDays": 1,
+      "mood": "bright",
+      "theme": "童心日",
+      "description": "办公室窗外的海变得像一本没写完的童话书。",
+      "worldEffects": {
+        "residentMood": "bright",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "summer",
+          "bright"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "bright",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "bright",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "bright",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "bright",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 10,
+      "tags": [
+        "festival",
+        "real_world",
+        "summer",
+        "bright",
+        "festival_children_day"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_dragon_boat",
+      "name": "端午节",
+      "category": "real_world",
+      "dateType": "lunar",
+      "dateValue": "lunar-05-05",
+      "season": "summer",
+      "durationDays": 1,
+      "mood": "lively",
+      "theme": "端午节",
+      "description": "粽叶香飘到码头，鱼群围着水波练习划船。",
+      "worldEffects": {
+        "residentMood": "lively",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "summer",
+          "lively"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "lively",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "lively",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "lively",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "lively",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 11,
+      "tags": [
+        "festival",
+        "real_world",
+        "summer",
+        "lively",
+        "festival_dragon_boat"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_qixi",
+      "name": "七夕",
+      "category": "real_world",
+      "dateType": "lunar",
+      "dateValue": "lunar-07-07",
+      "season": "summer",
+      "durationDays": 1,
+      "mood": "romantic",
+      "theme": "七夕",
+      "description": "星光落进海里，居民们说今晚适合慢慢等。",
+      "worldEffects": {
+        "residentMood": "romantic",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "summer",
+          "romantic"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "romantic",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "romantic",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "romantic",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "romantic",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 12,
+      "tags": [
+        "festival",
+        "real_world",
+        "summer",
+        "romantic",
+        "festival_qixi"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_mid_autumn",
+      "name": "中秋节",
+      "category": "real_world",
+      "dateType": "lunar",
+      "dateValue": "lunar-08-15",
+      "season": "autumn",
+      "durationDays": 1,
+      "mood": "homesick",
+      "theme": "中秋节",
+      "description": "月亮像一枚圆圆的鱼漂，提醒每个人都能被想念。",
+      "worldEffects": {
+        "residentMood": "homesick",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "autumn",
+          "homesick"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "homesick",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "homesick",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "homesick",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "homesick",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 13,
+      "tags": [
+        "festival",
+        "real_world",
+        "autumn",
+        "homesick",
+        "festival_mid_autumn"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_long_holiday_breeze",
+      "name": "长假海风日",
+      "category": "real_world",
+      "dateType": "fixed",
+      "dateValue": "10-01",
+      "season": "autumn",
+      "durationDays": 1,
+      "mood": "free",
+      "theme": "长假海风日",
+      "description": "长假的第一阵海风吹来，连键盘声都变轻了。",
+      "worldEffects": {
+        "residentMood": "free",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "autumn",
+          "free"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "free",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "free",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "free",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "free",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 14,
+      "tags": [
+        "festival",
+        "real_world",
+        "autumn",
+        "free",
+        "festival_long_holiday_breeze"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_halloween",
+      "name": "南瓜灯海夜",
+      "category": "real_world",
+      "dateType": "fixed",
+      "dateValue": "10-31",
+      "season": "autumn",
+      "durationDays": 1,
+      "mood": "mysterious",
+      "theme": "南瓜灯海夜",
+      "description": "码头亮起南瓜灯，有鱼假装自己是传说。",
+      "worldEffects": {
+        "residentMood": "mysterious",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "autumn",
+          "mysterious"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "mysterious",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "mysterious",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "mysterious",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "mysterious",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 15,
+      "tags": [
+        "festival",
+        "real_world",
+        "autumn",
+        "mysterious",
+        "festival_halloween"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_christmas",
+      "name": "圣诞节",
+      "category": "real_world",
+      "dateType": "fixed",
+      "dateValue": "12-25",
+      "season": "winter",
+      "durationDays": 1,
+      "mood": "warm",
+      "theme": "圣诞节",
+      "description": "窗边落下雪白的光，居民互相交换很小的礼物。",
+      "worldEffects": {
+        "residentMood": "warm",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "winter",
+          "warm"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "warm",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "warm",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "warm",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "warm",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 16,
+      "tags": [
+        "festival",
+        "real_world",
+        "winter",
+        "warm",
+        "festival_christmas"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_new_year_eve",
+      "name": "跨年夜",
+      "category": "real_world",
+      "dateType": "fixed",
+      "dateValue": "12-31",
+      "season": "winter",
+      "durationDays": 1,
+      "mood": "reflective",
+      "theme": "跨年夜",
+      "description": "海面倒数，不催人长大，只提醒人们明天还会来。",
+      "worldEffects": {
+        "residentMood": "reflective",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "real_world",
+          "winter",
+          "reflective"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "real_world",
+          "reflective",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "real_world",
+          "reflective",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "real_world",
+          "reflective",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "real_world",
+          "reflective",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 17,
+      "tags": [
+        "festival",
+        "real_world",
+        "winter",
+        "reflective",
+        "festival_new_year_eve"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_fisherman",
+      "name": "渔民节",
+      "category": "ocean",
+      "dateType": "world_day",
+      "dateValue": "world-day-018",
+      "season": "spring",
+      "durationDays": 1,
+      "mood": "grateful",
+      "theme": "渔民节",
+      "description": "老渔夫说，今天要感谢海，也感谢愿意等待的人。",
+      "worldEffects": {
+        "residentMood": "grateful",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "ocean",
+          "spring",
+          "grateful"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "ocean",
+          "grateful",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "ocean",
+          "grateful",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "ocean",
+          "grateful",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "ocean",
+          "grateful",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 18,
+      "tags": [
+        "festival",
+        "ocean",
+        "spring",
+        "grateful",
+        "festival_fisherman"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_ocean_breeze",
+      "name": "海风节",
+      "category": "ocean",
+      "dateType": "world_day",
+      "dateValue": "world-day-026",
+      "season": "spring",
+      "durationDays": 1,
+      "mood": "soft",
+      "theme": "海风节",
+      "description": "所有窗户都打开，让海风替人们整理心情。",
+      "worldEffects": {
+        "residentMood": "soft",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "ocean",
+          "spring",
+          "soft"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "ocean",
+          "soft",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "ocean",
+          "soft",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "ocean",
+          "soft",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "ocean",
+          "soft",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 19,
+      "tags": [
+        "festival",
+        "ocean",
+        "spring",
+        "soft",
+        "festival_ocean_breeze"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_first_fish",
+      "name": "第一条鱼纪念日",
+      "category": "ocean",
+      "dateType": "world_day",
+      "dateValue": "world-day-033",
+      "season": "spring",
+      "durationDays": 1,
+      "mood": "memorable",
+      "theme": "第一条鱼纪念日",
+      "description": "第二世界会记住玩家第一次钓起鱼的那一刻。",
+      "worldEffects": {
+        "residentMood": "memorable",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "ocean",
+          "spring",
+          "memorable"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "ocean",
+          "memorable",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "ocean",
+          "memorable",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "ocean",
+          "memorable",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "ocean",
+          "memorable",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 20,
+      "tags": [
+        "festival",
+        "ocean",
+        "spring",
+        "memorable",
+        "festival_first_fish"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_float_lantern",
+      "name": "鱼漂灯会",
+      "category": "ocean",
+      "dateType": "world_day",
+      "dateValue": "world-day-045",
+      "season": "spring",
+      "durationDays": 1,
+      "mood": "glowing",
+      "theme": "鱼漂灯会",
+      "description": "夜里所有鱼漂都变成小灯，慢慢漂向远方。",
+      "worldEffects": {
+        "residentMood": "glowing",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "ocean",
+          "spring",
+          "glowing"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "ocean",
+          "glowing",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "ocean",
+          "glowing",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "ocean",
+          "glowing",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "ocean",
+          "glowing",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 21,
+      "tags": [
+        "festival",
+        "ocean",
+        "spring",
+        "glowing",
+        "festival_float_lantern"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_tide_listening",
+      "name": "听潮日",
+      "category": "ocean",
+      "dateType": "world_day",
+      "dateValue": "world-day-052",
+      "season": "summer",
+      "durationDays": 1,
+      "mood": "quiet",
+      "theme": "听潮日",
+      "description": "居民们少说话，多听一会儿潮声。",
+      "worldEffects": {
+        "residentMood": "quiet",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "ocean",
+          "summer",
+          "quiet"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "ocean",
+          "quiet",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "ocean",
+          "quiet",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "ocean",
+          "quiet",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "ocean",
+          "quiet",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 22,
+      "tags": [
+        "festival",
+        "ocean",
+        "summer",
+        "quiet",
+        "festival_tide_listening"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_seagull_post",
+      "name": "海鸥邮差日",
+      "category": "ocean",
+      "dateType": "world_day",
+      "dateValue": "world-day-064",
+      "season": "summer",
+      "durationDays": 1,
+      "mood": "playful",
+      "theme": "海鸥邮差日",
+      "description": "海鸥送来一些不知道是谁写的小纸条。",
+      "worldEffects": {
+        "residentMood": "playful",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "ocean",
+          "summer",
+          "playful"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "ocean",
+          "playful",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "ocean",
+          "playful",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "ocean",
+          "playful",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "ocean",
+          "playful",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 23,
+      "tags": [
+        "festival",
+        "ocean",
+        "summer",
+        "playful",
+        "festival_seagull_post"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_bottle_letter",
+      "name": "漂流瓶日",
+      "category": "ocean",
+      "dateType": "world_day",
+      "dateValue": "world-day-077",
+      "season": "summer",
+      "durationDays": 1,
+      "mood": "curious",
+      "theme": "漂流瓶日",
+      "description": "海面多了许多漂流瓶，每个瓶子都藏着一句没说完的话。",
+      "worldEffects": {
+        "residentMood": "curious",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "ocean",
+          "summer",
+          "curious"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "ocean",
+          "curious",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "ocean",
+          "curious",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "ocean",
+          "curious",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "ocean",
+          "curious",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 24,
+      "tags": [
+        "festival",
+        "ocean",
+        "summer",
+        "curious",
+        "festival_bottle_letter"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_lighthouse_night",
+      "name": "灯塔守夜节",
+      "category": "ocean",
+      "dateType": "world_day",
+      "dateValue": "world-day-091",
+      "season": "summer",
+      "durationDays": 1,
+      "mood": "protective",
+      "theme": "灯塔守夜节",
+      "description": "灯塔整夜亮着，为晚归的人和迷路的鱼留灯。",
+      "worldEffects": {
+        "residentMood": "protective",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "ocean",
+          "summer",
+          "protective"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "ocean",
+          "protective",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "ocean",
+          "protective",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "ocean",
+          "protective",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "ocean",
+          "protective",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 25,
+      "tags": [
+        "festival",
+        "ocean",
+        "summer",
+        "protective",
+        "festival_lighthouse_night"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_calm_sea",
+      "name": "无浪日",
+      "category": "ocean",
+      "dateType": "world_day",
+      "dateValue": "world-day-108",
+      "season": "summer",
+      "durationDays": 1,
+      "mood": "peaceful",
+      "theme": "无浪日",
+      "description": "海面安静得像一张没有催办事项的白纸。",
+      "worldEffects": {
+        "residentMood": "peaceful",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "ocean",
+          "summer",
+          "peaceful"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "ocean",
+          "peaceful",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "ocean",
+          "peaceful",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "ocean",
+          "peaceful",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "ocean",
+          "peaceful",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 26,
+      "tags": [
+        "festival",
+        "ocean",
+        "summer",
+        "peaceful",
+        "festival_calm_sea"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_deep_blue",
+      "name": "深蓝节",
+      "category": "ocean",
+      "dateType": "world_day",
+      "dateValue": "world-day-126",
+      "season": "autumn",
+      "durationDays": 1,
+      "mood": "mysterious",
+      "theme": "深蓝节",
+      "description": "深海传来很远的蓝光，传说鱼会在这天靠近。",
+      "worldEffects": {
+        "residentMood": "mysterious",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "ocean",
+          "autumn",
+          "mysterious"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "ocean",
+          "mysterious",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "ocean",
+          "mysterious",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "ocean",
+          "mysterious",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "ocean",
+          "mysterious",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 27,
+      "tags": [
+        "festival",
+        "ocean",
+        "autumn",
+        "mysterious",
+        "festival_deep_blue"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_music",
+      "name": "音乐节",
+      "category": "resident",
+      "dateType": "world_day",
+      "dateValue": "world-day-135",
+      "season": "summer",
+      "durationDays": 1,
+      "mood": "musical",
+      "theme": "音乐节",
+      "description": "酒吧、幼儿园和海鸟一起把今天唱得轻一点。",
+      "worldEffects": {
+        "residentMood": "musical",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "resident",
+          "summer",
+          "musical"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "resident",
+          "musical",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "resident",
+          "musical",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "resident",
+          "musical",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "resident",
+          "musical",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 28,
+      "tags": [
+        "festival",
+        "resident",
+        "summer",
+        "musical",
+        "festival_music"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_fireworks",
+      "name": "烟花节",
+      "category": "resident",
+      "dateType": "world_day",
+      "dateValue": "world-day-150",
+      "season": "summer",
+      "durationDays": 1,
+      "mood": "wonder",
+      "theme": "烟花节",
+      "description": "烟花在海上打开，像给所有等待的人盖了一个亮章。",
+      "worldEffects": {
+        "residentMood": "wonder",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "resident",
+          "summer",
+          "wonder"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "resident",
+          "wonder",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "resident",
+          "wonder",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "resident",
+          "wonder",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "resident",
+          "wonder",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 29,
+      "tags": [
+        "festival",
+        "resident",
+        "summer",
+        "wonder",
+        "festival_fireworks"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_coffee",
+      "name": "咖啡节",
+      "category": "office",
+      "dateType": "world_day",
+      "dateValue": "world-day-014",
+      "season": "all",
+      "durationDays": 1,
+      "mood": "awake",
+      "theme": "咖啡节",
+      "description": "咖啡店老板给所有疲惫的人多加了一点奶泡。",
+      "worldEffects": {
+        "residentMood": "awake",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "office",
+          "all",
+          "awake"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "office",
+          "awake",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "office",
+          "awake",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "office",
+          "awake",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "office",
+          "awake",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 30,
+      "tags": [
+        "festival",
+        "office",
+        "all",
+        "awake",
+        "festival_coffee"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_no_meeting",
+      "name": "无会议日",
+      "category": "office",
+      "dateType": "world_day",
+      "dateValue": "world-day-021",
+      "season": "all",
+      "durationDays": 1,
+      "mood": "free",
+      "theme": "无会议日",
+      "description": "会议室安静了一整天，鱼群都游得更大胆。",
+      "worldEffects": {
+        "residentMood": "free",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "office",
+          "all",
+          "free"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "office",
+          "free",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "office",
+          "free",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "office",
+          "free",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "office",
+          "free",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 31,
+      "tags": [
+        "festival",
+        "office",
+        "all",
+        "free",
+        "festival_no_meeting"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_keyboard_rest",
+      "name": "键盘休息日",
+      "category": "office",
+      "dateType": "world_day",
+      "dateValue": "world-day-049",
+      "season": "all",
+      "durationDays": 1,
+      "mood": "restful",
+      "theme": "键盘休息日",
+      "description": "键盘少响一点，鱼漂多晃一点。",
+      "worldEffects": {
+        "residentMood": "restful",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "office",
+          "all",
+          "restful"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "office",
+          "restful",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "office",
+          "restful",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "office",
+          "restful",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "office",
+          "restful",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 32,
+      "tags": [
+        "festival",
+        "office",
+        "all",
+        "restful",
+        "festival_keyboard_rest"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_overtime_comfort",
+      "name": "加班安慰夜",
+      "category": "office",
+      "dateType": "world_day",
+      "dateValue": "world-day-066",
+      "season": "all",
+      "durationDays": 1,
+      "mood": "tender",
+      "theme": "加班安慰夜",
+      "description": "夜班灯亮起时，第二世界会给加班的人留一片海。",
+      "worldEffects": {
+        "residentMood": "tender",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "office",
+          "all",
+          "tender"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "office",
+          "tender",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "office",
+          "tender",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "office",
+          "tender",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "office",
+          "tender",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 33,
+      "tags": [
+        "festival",
+        "office",
+        "all",
+        "tender",
+        "festival_overtime_comfort"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_friday_koi",
+      "name": "周五锦鲤日",
+      "category": "office",
+      "dateType": "weekly",
+      "dateValue": "friday",
+      "season": "all",
+      "durationDays": 1,
+      "mood": "lucky",
+      "theme": "周五锦鲤日",
+      "description": "周五的海面更亮，锦鲤说今天适合期待好事。",
+      "worldEffects": {
+        "residentMood": "lucky",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "office",
+          "all",
+          "lucky"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "office",
+          "lucky",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "office",
+          "lucky",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "office",
+          "lucky",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "office",
+          "lucky",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 34,
+      "tags": [
+        "festival",
+        "office",
+        "all",
+        "lucky",
+        "festival_friday_koi"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_lunch_break",
+      "name": "午休慢慢日",
+      "category": "office",
+      "dateType": "world_day",
+      "dateValue": "world-day-082",
+      "season": "all",
+      "durationDays": 1,
+      "mood": "slow",
+      "theme": "午休慢慢日",
+      "description": "午饭后不急着回到现实，先让心情晒一会儿太阳。",
+      "worldEffects": {
+        "residentMood": "slow",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "office",
+          "all",
+          "slow"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "office",
+          "slow",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "office",
+          "slow",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "office",
+          "slow",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "office",
+          "slow",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 35,
+      "tags": [
+        "festival",
+        "office",
+        "all",
+        "slow",
+        "festival_lunch_break"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_desk_clean",
+      "name": "工位整理日",
+      "category": "office",
+      "dateType": "world_day",
+      "dateValue": "world-day-099",
+      "season": "all",
+      "durationDays": 1,
+      "mood": "tidy",
+      "theme": "工位整理日",
+      "description": "大家整理桌面，也顺手整理一点情绪。",
+      "worldEffects": {
+        "residentMood": "tidy",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "office",
+          "all",
+          "tidy"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "office",
+          "tidy",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "office",
+          "tidy",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "office",
+          "tidy",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "office",
+          "tidy",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 36,
+      "tags": [
+        "festival",
+        "office",
+        "all",
+        "tidy",
+        "festival_desk_clean"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_resident_greeting",
+      "name": "居民问候日",
+      "category": "resident",
+      "dateType": "world_day",
+      "dateValue": "world-day-005",
+      "season": "all",
+      "durationDays": 1,
+      "mood": "friendly",
+      "theme": "居民问候日",
+      "description": "每位居民都会多说一句问候，像确认你今天也来了。",
+      "worldEffects": {
+        "residentMood": "friendly",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "resident",
+          "all",
+          "friendly"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "resident",
+          "friendly",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "resident",
+          "friendly",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "resident",
+          "friendly",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "resident",
+          "friendly",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 37,
+      "tags": [
+        "festival",
+        "resident",
+        "all",
+        "friendly",
+        "festival_resident_greeting"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_old_fisher_story",
+      "name": "老渔夫讲故事日",
+      "category": "resident",
+      "dateType": "world_day",
+      "dateValue": "world-day-041",
+      "season": "spring",
+      "durationDays": 1,
+      "mood": "storyful",
+      "theme": "老渔夫讲故事日",
+      "description": "老渔夫会把一个很久以前的海边故事讲慢一点。",
+      "worldEffects": {
+        "residentMood": "storyful",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "resident",
+          "spring",
+          "storyful"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "resident",
+          "storyful",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "resident",
+          "storyful",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "resident",
+          "storyful",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "resident",
+          "storyful",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 38,
+      "tags": [
+        "festival",
+        "resident",
+        "spring",
+        "storyful",
+        "festival_old_fisher_story"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_flower_blessing",
+      "name": "花店祝福日",
+      "category": "resident",
+      "dateType": "world_day",
+      "dateValue": "world-day-057",
+      "season": "spring",
+      "durationDays": 1,
+      "mood": "warm",
+      "theme": "花店祝福日",
+      "description": "花店把没被领取的祝福扎成小花束。",
+      "worldEffects": {
+        "residentMood": "warm",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "resident",
+          "spring",
+          "warm"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "resident",
+          "warm",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "resident",
+          "warm",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "resident",
+          "warm",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "resident",
+          "warm",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 39,
+      "tags": [
+        "festival",
+        "resident",
+        "spring",
+        "warm",
+        "festival_flower_blessing"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_bookmark",
+      "name": "书签交换日",
+      "category": "resident",
+      "dateType": "world_day",
+      "dateValue": "world-day-073",
+      "season": "autumn",
+      "durationDays": 1,
+      "mood": "quiet",
+      "theme": "书签交换日",
+      "description": "书店居民交换书签，也交换最近记住的小事。",
+      "worldEffects": {
+        "residentMood": "quiet",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "resident",
+          "autumn",
+          "quiet"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "resident",
+          "quiet",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "resident",
+          "quiet",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "resident",
+          "quiet",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "resident",
+          "quiet",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 40,
+      "tags": [
+        "festival",
+        "resident",
+        "autumn",
+        "quiet",
+        "festival_bookmark"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_market_soup",
+      "name": "市场热汤日",
+      "category": "resident",
+      "dateType": "world_day",
+      "dateValue": "world-day-089",
+      "season": "winter",
+      "durationDays": 1,
+      "mood": "cozy",
+      "theme": "市场热汤日",
+      "description": "市场每个摊位都飘出一点热气，像给城市盖了毯子。",
+      "worldEffects": {
+        "residentMood": "cozy",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "resident",
+          "winter",
+          "cozy"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "resident",
+          "cozy",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "resident",
+          "cozy",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "resident",
+          "cozy",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "resident",
+          "cozy",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 41,
+      "tags": [
+        "festival",
+        "resident",
+        "winter",
+        "cozy",
+        "festival_market_soup"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_lost_and_found",
+      "name": "失物归还日",
+      "category": "resident",
+      "dateType": "world_day",
+      "dateValue": "world-day-104",
+      "season": "all",
+      "durationDays": 1,
+      "mood": "kind",
+      "theme": "失物归还日",
+      "description": "失物招领处今天找回的不只是物品，还有一些迟到的安心。",
+      "worldEffects": {
+        "residentMood": "kind",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "resident",
+          "all",
+          "kind"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "resident",
+          "kind",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "resident",
+          "kind",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "resident",
+          "kind",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "resident",
+          "kind",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 42,
+      "tags": [
+        "festival",
+        "resident",
+        "all",
+        "kind",
+        "festival_lost_and_found"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_neighbor_window",
+      "name": "邻里开窗日",
+      "category": "resident",
+      "dateType": "world_day",
+      "dateValue": "world-day-132",
+      "season": "summer",
+      "durationDays": 1,
+      "mood": "open",
+      "theme": "邻里开窗日",
+      "description": "居民们打开窗，互相确认海风有没有路过。",
+      "worldEffects": {
+        "residentMood": "open",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "resident",
+          "summer",
+          "open"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "resident",
+          "open",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "resident",
+          "open",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "resident",
+          "open",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "resident",
+          "open",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 43,
+      "tags": [
+        "festival",
+        "resident",
+        "summer",
+        "open",
+        "festival_neighbor_window"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_memory_postcard",
+      "name": "记忆明信片日",
+      "category": "resident",
+      "dateType": "world_day",
+      "dateValue": "world-day-158",
+      "season": "autumn",
+      "durationDays": 1,
+      "mood": "nostalgic",
+      "theme": "记忆明信片日",
+      "description": "邮局收到许多寄给过去自己的明信片。",
+      "worldEffects": {
+        "residentMood": "nostalgic",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "resident",
+          "autumn",
+          "nostalgic"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "resident",
+          "nostalgic",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "resident",
+          "nostalgic",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "resident",
+          "nostalgic",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "resident",
+          "nostalgic",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 44,
+      "tags": [
+        "festival",
+        "resident",
+        "autumn",
+        "nostalgic",
+        "festival_memory_postcard"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_spring_first_breeze",
+      "name": "春日第一阵风",
+      "category": "seasonal",
+      "dateType": "season_start",
+      "dateValue": "spring-start",
+      "season": "spring",
+      "durationDays": 1,
+      "mood": "fresh",
+      "theme": "春日第一阵风",
+      "description": "春天开始时，鱼群会从更浅的水里探头。",
+      "worldEffects": {
+        "residentMood": "fresh",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "seasonal",
+          "spring",
+          "fresh"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "seasonal",
+          "fresh",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "seasonal",
+          "fresh",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "seasonal",
+          "fresh",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "seasonal",
+          "fresh",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 45,
+      "tags": [
+        "festival",
+        "seasonal",
+        "spring",
+        "fresh",
+        "festival_spring_first_breeze"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_summer_blue_window",
+      "name": "夏日蓝窗节",
+      "category": "seasonal",
+      "dateType": "season_start",
+      "dateValue": "summer-start",
+      "season": "summer",
+      "durationDays": 1,
+      "mood": "bright",
+      "theme": "夏日蓝窗节",
+      "description": "办公室窗外蓝得像一整天都被洗过。",
+      "worldEffects": {
+        "residentMood": "bright",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "seasonal",
+          "summer",
+          "bright"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "seasonal",
+          "bright",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "seasonal",
+          "bright",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "seasonal",
+          "bright",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "seasonal",
+          "bright",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 46,
+      "tags": [
+        "festival",
+        "seasonal",
+        "summer",
+        "bright",
+        "festival_summer_blue_window"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_autumn_leaf_tide",
+      "name": "秋叶潮汐日",
+      "category": "seasonal",
+      "dateType": "season_start",
+      "dateValue": "autumn-start",
+      "season": "autumn",
+      "durationDays": 1,
+      "mood": "gentle",
+      "theme": "秋叶潮汐日",
+      "description": "落叶和潮水一起慢慢走，像给世界翻页。",
+      "worldEffects": {
+        "residentMood": "gentle",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "seasonal",
+          "autumn",
+          "gentle"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "seasonal",
+          "gentle",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "seasonal",
+          "gentle",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "seasonal",
+          "gentle",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "seasonal",
+          "gentle",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 47,
+      "tags": [
+        "festival",
+        "seasonal",
+        "autumn",
+        "gentle",
+        "festival_autumn_leaf_tide"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_winter_warm_lamp",
+      "name": "冬日暖灯节",
+      "category": "seasonal",
+      "dateType": "season_start",
+      "dateValue": "winter-start",
+      "season": "winter",
+      "durationDays": 1,
+      "mood": "warm",
+      "theme": "冬日暖灯节",
+      "description": "冬天的灯更暖，居民说要给每个晚归的人留光。",
+      "worldEffects": {
+        "residentMood": "warm",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "seasonal",
+          "winter",
+          "warm"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "seasonal",
+          "warm",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "seasonal",
+          "warm",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "seasonal",
+          "warm",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "seasonal",
+          "warm",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 48,
+      "tags": [
+        "festival",
+        "seasonal",
+        "winter",
+        "warm",
+        "festival_winter_warm_lamp"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_rainbow_after_rain",
+      "name": "雨后彩虹日",
+      "category": "weather",
+      "dateType": "weather_trigger",
+      "dateValue": "rainbow",
+      "season": "all",
+      "durationDays": 1,
+      "mood": "hopeful",
+      "theme": "雨后彩虹日",
+      "description": "彩虹出现时，第二世界会把坏心情晾干。",
+      "worldEffects": {
+        "residentMood": "hopeful",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "weather",
+          "all",
+          "hopeful"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "weather",
+          "hopeful",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "weather",
+          "hopeful",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "weather",
+          "hopeful",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "weather",
+          "hopeful",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 49,
+      "tags": [
+        "festival",
+        "weather",
+        "all",
+        "hopeful",
+        "festival_rainbow_after_rain"
+      ],
+      "enabled": true
+    },
+    {
+      "id": "festival_star_tide",
+      "name": "星潮夜",
+      "category": "weather",
+      "dateType": "weather_trigger",
+      "dateValue": "clear_night",
+      "season": "all",
+      "durationDays": 1,
+      "mood": "wonder",
+      "theme": "星潮夜",
+      "description": "晴朗夜晚，星星像潮水一样涌到海面。",
+      "worldEffects": {
+        "residentMood": "wonder",
+        "weatherPreference": "any",
+        "eventTags": [
+          "festival",
+          "weather",
+          "all",
+          "wonder"
+        ]
+      },
+      "hooks": {
+        "dialogueTags": [
+          "weather",
+          "wonder",
+          "festival_dialogue"
+        ],
+        "storyTags": [
+          "weather",
+          "wonder",
+          "festival_story"
+        ],
+        "rumorTags": [
+          "weather",
+          "wonder",
+          "festival_rumor"
+        ],
+        "legendTags": [
+          "weather",
+          "wonder",
+          "festival_legend"
+        ]
+      },
+      "unlockLevel": 1,
+      "repeatable": true,
+      "sortOrder": 50,
+      "tags": [
+        "festival",
+        "weather",
+        "all",
+        "wonder",
+        "festival_star_tide"
+      ],
+      "enabled": true
+    }
+  ]
+}

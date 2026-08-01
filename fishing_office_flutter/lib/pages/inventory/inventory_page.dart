@@ -36,7 +36,8 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
             children: [
               Row(
                 children: [
-                  Expanded(child: Text('背包 / Inventory', style: AppTypography.h1)),
+                  Expanded(
+                      child: Text('背包 / Inventory', style: AppTypography.h1)),
                   FishingIconButton(
                     iconId: 'icon_back',
                     onPressed: () => Navigator.of(context).maybePop(),
@@ -72,7 +73,9 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(18),
-                              border: Border.all(color: AppColor.primary.withValues(alpha: 0.25)),
+                              border: Border.all(
+                                  color:
+                                      AppColor.primary.withValues(alpha: 0.25)),
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -80,15 +83,19 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
                                 Row(
                                   children: [
                                     Expanded(
-                                      child: Text(entry.name, style: AppTypography.body),
+                                      child: Text(entry.name,
+                                          style: AppTypography.body),
                                     ),
-                                    Text('x${entry.quantity}', style: AppTypography.h2),
+                                    Text('x${entry.quantity}',
+                                        style: AppTypography.h2),
                                   ],
                                 ),
                                 const SizedBox(height: 6),
-                                Text('${entry.category} · ${entry.rarity}', style: AppTypography.caption),
+                                Text('${entry.category} · ${entry.rarity}',
+                                    style: AppTypography.caption),
                                 const SizedBox(height: 6),
-                                Text(entry.description, style: AppTypography.caption),
+                                Text(entry.description,
+                                    style: AppTypography.caption),
                               ],
                             ),
                           );
@@ -96,7 +103,8 @@ class _InventoryPageState extends ConsumerState<InventoryPage> {
                       ),
               ),
               const SizedBox(height: 12),
-              Text('交易记录：${transactions.records.length} 条', style: AppTypography.caption),
+              Text('交易记录：${transactions.records.length} 条',
+                  style: AppTypography.caption),
             ],
           ),
         ),

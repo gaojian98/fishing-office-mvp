@@ -1,0 +1,101 @@
+{
+  "version": "1.0",
+  "schedules": [
+    {
+      "id": "old_fisher_morning",
+      "residentId": "old_fisher",
+      "schedule": "weekday_morning",
+      "location": "office_sea_window",
+      "activity": "整理鱼竿，看看今天的海风。",
+      "activityId": "prepare_rods",
+      "startTime": "06:00",
+      "endTime": "11:30",
+      "mood": "calm",
+      "weekday": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "old_fisher_afternoon",
+      "residentId": "old_fisher",
+      "schedule": "weekday_afternoon",
+      "location": "tea_room_corner",
+      "activity": "坐在茶水间慢慢喝茶。",
+      "activityId": "drink_tea",
+      "startTime": "11:30",
+      "endTime": "18:00",
+      "mood": "warm",
+      "weekday": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "old_fisher_night",
+      "residentId": "old_fisher",
+      "schedule": "weekday_night",
+      "location": "harbor_lamp",
+      "activity": "在港口灯下等一条慢鱼。",
+      "activityId": "wait_slow_fish",
+      "startTime": "18:00",
+      "endTime": "06:00",
+      "mood": "peaceful",
+      "weekday": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "id": "office_bird_day",
+      "residentId": "office_bird",
+      "schedule": "daily_day",
+      "location": "window_sky",
+      "activity": "从窗外飞过，像一封没有寄出的信。",
+      "activityId": "fly_by_window",
+      "startTime": "07:00",
+      "endTime": "17:30",
+      "mood": "light",
+      "weekday": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "id": "little_fish_day",
+      "residentId": "little_fish",
+      "schedule": "daily_water",
+      "location": "near_float",
+      "activity": "在鱼漂附近绕了一圈。",
+      "activityId": "circle_float",
+      "startTime": "08:00",
+      "endTime": "20:00",
+      "mood": "curious",
+      "weekday": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ]
+    }
+  ]
+}
