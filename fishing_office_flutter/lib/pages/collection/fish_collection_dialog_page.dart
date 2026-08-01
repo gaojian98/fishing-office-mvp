@@ -3,7 +3,6 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../core/bootstrap/fishing_office_scope.dart';
 import '../../core/buttons/fishing_buttons.dart';
 import '../../core/providers/app_providers.dart';
 import '../../models/fish_collection_config.dart';
@@ -39,9 +38,11 @@ class _FishCollectionDialogPageState
 
   @override
   Widget build(BuildContext context) {
-    final scope = FishingOfficeScope.of(context);
     final screen = MediaQuery.sizeOf(context);
-    final scale = scope.responsive.scale;
+    final scale = math.min(
+      screen.width / widget.layout.designSize.width,
+      screen.height / widget.layout.designSize.height,
+    );
     final dialog = widget.layout.byId('collection_dialog');
     final header = widget.layout.byId('collection_header');
     final title = widget.layout.byId('collection_title');

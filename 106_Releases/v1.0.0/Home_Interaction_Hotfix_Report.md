@@ -130,3 +130,33 @@ P0: 0
 P1: 0
 
 The home interaction hotfix is validated locally and in production. Recommend product owner perform final manual production acceptance and then reconfirm Gold Master status.
+
+## Gold Master Revalidation Update
+
+Date: 2026-08-02
+
+Home interaction hotfix remains valid:
+
+- 9 home entries clickable on desktop and mobile viewports: PASS
+- Console errors during home entry validation: 0
+- Critical production resources: PASS
+- `assets/config/dialog.json` is not referenced by `main.dart.js`: PASS
+
+Revalidation blocker found outside the pointer-event fix:
+
+- P1 `GM-RV-001`: Collection / 图鉴 popup opens but renders an empty panel on desktop and mobile.
+- P2 `GM-RV-002`: Game Guide close control is not reliably visible/reachable at 390 x 844 automated validation.
+
+Current result: Hotfix is confirmed. Gold Master revalidation was blocked by the Collection popup issue before the local `GM-RV-001` fix.
+
+## GM-RV-001 Local Follow-Up
+
+Date: 2026-08-02
+
+The Collection popup blank state was fixed locally without changing the home pointer-event hotfix.
+
+- Root cause: `fish_collection` uses nested layout sections, while `LayoutConfig.fromJson` only exposed flat `elements`.
+- Fix: map nested Fish Collection layout sections into `collection_*` `LayoutElement` entries and scale the Collection dialog from its own 1080 x 1920 design size.
+- Local release validation: PASS.
+- Home 9-entry click regression after fix: PASS across 1280 x 720, 360 x 800, 390 x 844, 412 x 915, and 1080 x 1920.
+- Production status: pending redeploy.

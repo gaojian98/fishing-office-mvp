@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:fishing_office_mvp/models/layout_config.dart';
 import 'package:fishing_office_mvp/pages/home/widgets/dialog_layer.dart';
 import 'package:fishing_office_mvp/pages/home/widgets/home_layout_utils.dart';
 import 'package:flutter/material.dart';
@@ -79,6 +80,32 @@ void main() {
     expect(fitted.top, closeTo(bottomButton.top, 0.01));
     expect(fitted.width, closeTo(bottomButton.width, 0.01));
     expect(fitted.height, closeTo(bottomButton.height, 0.01));
+  });
+
+  test('fish collection nested layout exposes dialog elements', () {
+    final layout = jsonDecode(
+      File('assets/config/office_layout.json').readAsStringSync(),
+    ) as Map<String, dynamic>;
+    final collectionLayout = LayoutConfig.fromJson(
+      layout['fish_collection'] as Map<String, dynamic>,
+    );
+
+    for (final id in const [
+      'collection_dialog',
+      'collection_header',
+      'collection_title',
+      'collection_close',
+      'collection_stats',
+      'collection_sidebar',
+      'collection_detail',
+      'collection_preview',
+      'collection_footer',
+      'collection_prev',
+      'collection_next',
+    ]) {
+      expect(collectionLayout.byId(id), isNotNull,
+          reason: '$id must be available to FishCollectionDialogPage');
+    }
   });
 
   testWidgets('transparent presentation layers do not block hotspot taps',

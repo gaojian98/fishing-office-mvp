@@ -110,3 +110,52 @@ Results:
 ## Result
 
 Gold Master validation passes. Waiting for product-owner acceptance before Git commit, push, or deployment.
+
+## Hotfix Revalidation Update
+
+Date: 2026-08-02
+Online commit: 70b9e9395814515a0bcc514a46c20176ca361d17
+
+After the home interaction hotfix deployment, the home entry regression was rerun online.
+
+Passed:
+
+- 9 home entries clickable: PASS
+- Tested viewports: 1280 x 720, 360 x 800, 390 x 844, 412 x 915, 1080 x 1920
+- Store repeated open/close 10 times: PASS
+- One online fishing flow through catch result and put into bag: PASS
+- Console errors: 0
+- Critical resources: PASS
+- `assets/config/dialog.json` reference removed from compiled app: PASS
+
+Blocking issue found:
+
+- P1 `GM-RV-001`: Collection / 图鉴 popup opens as an empty panel on desktop and mobile.
+
+Current release validation status: NOT PASS in production after hotfix. Gold Master revalidation should be rerun in production after `GM-RV-001` is committed and deployed.
+
+## GM-RV-001 Local Fix Validation
+
+Date: 2026-08-02
+
+Fix scope:
+
+- Normalize nested `fish_collection` layout data into the `collection_*` elements used by the Fish Collection dialog.
+- Scale the Fish Collection dialog from its own 1080 x 1920 layout design size.
+- Add a regression test for required Fish Collection layout element IDs.
+
+Local release validation:
+
+- `flutter analyze`: PASS
+- `flutter test`: PASS, 38 tests
+- `flutter build web --release`: PASS
+- Local Collection dialog content visible on desktop: PASS
+- Local Collection dialog content visible on mobile: PASS
+- Local Collection close button desktop: PASS
+- Local Collection close button mobile: PASS
+- Local 9 home entries across 5 viewports: PASS
+- Local core fishing flow to catch result: PASS
+
+Production status:
+
+- Pending commit, push, Railway redeploy, and production Pack 32 rerun.

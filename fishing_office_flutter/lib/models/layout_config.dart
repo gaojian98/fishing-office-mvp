@@ -8,19 +8,13 @@ class LayoutConfig {
 
   factory LayoutConfig.fromJson(Map<String, dynamic> json) {
     final size = _readDesignSize(json);
-    final rawElements = json['elements'];
+    final elements = _readElements(json);
     return LayoutConfig(
       designSize: Size(
         _readDouble(size['width'], 390),
         _readDouble(size['height'], 844),
       ),
-      elements: rawElements is List
-          ? rawElements
-              .whereType<Map<String, dynamic>>()
-              .map(LayoutElement.fromJson)
-              .where((element) => element.enabled)
-              .toList(growable: false)
-          : const [],
+      elements: elements,
     );
   }
 
@@ -118,4 +112,73 @@ Map<String, dynamic> _readDesignSize(Map<String, dynamic> json) {
   if (designSize is Map<String, dynamic>) return designSize;
 
   return const {'width': 390, 'height': 844};
+}
+
+List<LayoutElement> _readElements(Map<String, dynamic> json) {
+  final rawElements = json['elements'];
+  if (rawElements is List) {
+    return rawElements
+        .whereType<Map<String, dynamic>>()
+        .map(LayoutElement.fromJson)
+        .where((element) => element.enabled)
+        .toList(growable: false);
+  }
+
+  return _readFishCollectionElements(json);
+}
+
+List<LayoutElement> _readFishCollectionElements(Map<String, dynamic> json) {
+  final meta = json['meta'];
+  if (meta is! Map<String, dynamic> || meta['page'] != 'FishCollection') {
+    return const [];
+  }
+
+  final elements = <LayoutElement>[];
+  void add(String id, Object? value, String type) {
+    if (value is! Map<String, dynamic>) return;
+    elements.add(
+      LayoutElement.fromJson({
+        'id': id,
+        'type': type,
+        'layer': 'fish_collection',
+        ...value,
+      }),
+    );
+  }
+
+  add('collection_dialog', json['dialog'], 'panel');
+
+  final dialog = json['dialog'];
+  if (dialog is Map<String, dynamic>) {
+    elements.add(
+      LayoutElement.fromJson({
+        'id': 'collection_header',
+        'type': 'panel',
+        'layer': 'fish_collection',
+        'x': dialog['x'],
+        'y': dialog['y'],
+        'width': dialog['width'],
+        'height': 112,
+      }),
+    );
+  }
+
+  final header = json['header'];
+  if (header is Map<String, dynamic>) {
+    add('collection_title', header['title'], 'text');
+    add('collection_close', header['closeButton'], 'button');
+  }
+
+  add('collection_stats', json['stats'], 'panel');
+  add('collection_sidebar', json['sidebar'], 'panel');
+  add('collection_detail', json['detail'], 'panel');
+  add('collection_preview', json['preview'], 'panel');
+  add('collection_name', json['name'], 'text');
+  add('collection_condition', json['condition'], 'text');
+  add('collection_story', json['story'], 'text');
+  add('collection_footer', json['footer'], 'panel');
+  add('collection_prev', json['prevButton'], 'button');
+  add('collection_next', json['nextButton'], 'button');
+
+  return elements.where((element) => element.enabled).toList(growable: false);
 }

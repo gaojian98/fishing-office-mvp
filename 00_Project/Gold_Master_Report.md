@@ -137,3 +137,62 @@ No obvious performance regression from Pack 29.
 - Suggested release status: Gold Master candidate ready for product-owner review.
 - Suggested Git action: do not commit or push until product owner explicitly replies: Gold Master 验收通过，可以提交。
 - Suggested Railway action: do not deploy until Release Pack 31 is approved.
+
+## Hotfix Revalidation Addendum
+
+Date: 2026-08-02
+Online commit: 70b9e9395814515a0bcc514a46c20176ca361d17
+
+After Production Hotfix 02, the online home interaction fix was revalidated.
+
+Passed:
+
+- 9 home entries clickable on 1280 x 720, 360 x 800, 390 x 844, 412 x 915, and 1080 x 1920.
+- Console errors: 0.
+- Critical production resources: HTTP 200.
+- `main.dart.js` no longer references `assets/config/dialog.json`.
+- One production fishing flow reached catch result and put-into-bag confirmation.
+
+Blocking issue:
+
+- P1 `GM-RV-001`: Collection / 图鉴 popup opens as an empty panel on desktop and mobile.
+
+Additional issue:
+
+- P2 `GM-RV-002`: Game Guide close control is not reliably visible/reachable at 390 x 844 automated validation.
+
+Updated recommendation:
+
+- Hotfix after Gold Master did not satisfy Gold Master revalidation before the local `GM-RV-001` fix.
+- Do not create a new tag.
+- Do not re-freeze or tag v1.0.0 until the tightly scoped `GM-RV-001` fix is committed, deployed, and Pack 32 passes again in production.
+
+## GM-RV-001 Local Fix Addendum
+
+Date: 2026-08-02
+
+The Collection / 图鉴 blank popup issue was fixed locally.
+
+Root cause:
+
+- Fish Collection UI expected `collection_*` layout element IDs.
+- `office_layout.json` stores Fish Collection as nested layout sections rather than a flat `elements` list.
+- The layout parser did not expose these nested sections, so the dialog frame rendered without internal content.
+
+Fix:
+
+- Added Fish Collection nested-layout normalization in `LayoutConfig`.
+- Updated Fish Collection dialog scaling to use its own 1080 x 1920 layout design size.
+- Added regression coverage for required Fish Collection layout IDs.
+
+Local validation:
+
+- `flutter analyze`: PASS.
+- `flutter test`: PASS, 38 tests.
+- `flutter build web --release`: PASS.
+- Collection content visible and closeable on desktop and mobile local release build: PASS.
+- 9 home entries remain clickable across desktop and mobile viewports: PASS.
+
+Production status:
+
+- Pending commit, push, Railway deploy, and production Pack 32 rerun.
