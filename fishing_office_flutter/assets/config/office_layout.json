@@ -118,6 +118,16 @@
         "width": 305,
         "height": 278,
         "zIndex": 38
+      },
+      {
+        "id": "fish_book",
+        "type": "button",
+        "layer": "interactive_objects",
+        "x": 392,
+        "y": 1514,
+        "width": 236,
+        "height": 200,
+        "zIndex": 38
       }
     ]
   },

@@ -77,6 +77,14 @@
         "params": {
           "dialog": "TaskDialog"
         }
+      },
+      {
+        "target": "fish_book",
+        "event": "tap",
+        "action": "openDialog",
+        "params": {
+          "dialog": "FishCollectionDialog"
+        }
       }
     ]
   },

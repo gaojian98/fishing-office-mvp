@@ -6,6 +6,8 @@ class DialogLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Dialog definitions will be generated from Interaction.json later.
-    return const SizedBox.expand();
+    return const IgnorePointer(
+      child: SizedBox.expand(),
+    );
   }
 }

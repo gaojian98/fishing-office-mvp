@@ -25,8 +25,6 @@ class JsonElementLayer extends StatelessWidget {
     final scope = FishingOfficeScope.of(context);
     final showDebugHotspots =
         kDebugMode && Uri.base.queryParameters['debugHotspots'] == '1';
-    final stageSize = scope.responsive.designSize;
-    final fitRect = homeContainRect(stageSize, _homeImageSize);
     final elements = scope.bundle.layout.elements
         .where((element) =>
             _matchesLayer(element) &&
@@ -35,40 +33,48 @@ class JsonElementLayer extends StatelessWidget {
         .toList(growable: false)
       ..sort((a, b) => a.zIndex.compareTo(b.zIndex));
 
-    return SizedBox.expand(
-      child: Stack(
-        fit: StackFit.expand,
-        children: [
-          for (final element in elements)
-            _JsonElementTile(
-              element: element,
-              showDebugHotspots: showDebugHotspots,
-              fitRect: fitRect,
-              onTap: (tapPosition) async {
-                final resolved = scope.interactionManager
-                    .actionFor(element.id, element.action);
-                final action = resolved?.action ?? element.action;
-                final target = resolved?.target ?? element.feedback;
-                debugPrint(
-                  'HotspotTap | hotspotId=${element.id} button=${element.label} action=$action target=$target tapPosition=${tapPosition.dx.toStringAsFixed(1)},${tapPosition.dy.toStringAsFixed(1)} receivedByInteractionManager=true',
-                );
-                HotspotDebugState.lastTap.value =
-                    'Last tap: ${element.id} / $action / $target';
-                await scope.interactionManager.handle(
-                  context,
-                  elementId: element.id,
-                  fallbackAction: element.action,
-                  fallbackLabel: element.label,
-                  params: {
-                    'route': element.action,
-                    'dialog': element.feedback,
-                    ..._paramsFromElement(element),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final stageSize = Size(constraints.maxWidth, constraints.maxHeight);
+        return SizedBox.expand(
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              for (final element in elements)
+                _JsonElementTile(
+                  element: element,
+                  showDebugHotspots: showDebugHotspots,
+                  stageSize: stageSize,
+                  onTap: (tapPosition) async {
+                    final resolved = scope.interactionManager
+                        .actionFor(element.id, element.action);
+                    final action = resolved?.action ?? element.action;
+                    final target = resolved?.target ?? element.feedback;
+                    if (kDebugMode) {
+                      debugPrint(_homeTapLogLabel(element.id));
+                    }
+                    debugPrint(
+                      'HotspotTap | hotspotId=${element.id} button=${element.label} action=$action target=$target tapPosition=${tapPosition.dx.toStringAsFixed(1)},${tapPosition.dy.toStringAsFixed(1)} receivedByInteractionManager=true',
+                    );
+                    HotspotDebugState.lastTap.value =
+                        'Last tap: ${element.id} / $action / $target';
+                    await scope.interactionManager.handle(
+                      context,
+                      elementId: element.id,
+                      fallbackAction: element.action,
+                      fallbackLabel: element.label,
+                      params: {
+                        'route': element.action,
+                        'dialog': element.feedback,
+                        ..._paramsFromElement(element),
+                      },
+                    );
                   },
-                );
-              },
-            ),
-        ],
-      ),
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -92,6 +98,7 @@ class JsonElementLayer extends StatelessWidget {
     const interactiveObjects = {
       'mouse_top',
       'mouse_bottom',
+      'btn_tasks',
     };
     const officeObjects = {
       'work_badge',
@@ -116,19 +123,34 @@ class JsonElementLayer extends StatelessWidget {
       if (element.animation.isNotEmpty) 'animation': element.animation,
     };
   }
+
+  String _homeTapLogLabel(String elementId) {
+    return switch (elementId) {
+      'profile_card' => 'HOME_TAP_PROFILE',
+      'btn_help' => 'HOME_TAP_HELP',
+      'btn_exit' => 'HOME_TAP_EXIT',
+      'btn_store' => 'HOME_TAP_STORE',
+      'btn_honor' => 'HOME_TAP_HONOR',
+      'btn_bag' => 'HOME_TAP_INVENTORY',
+      'btn_start_fishing' => 'HOME_TAP_FISHING',
+      'btn_tasks' => 'HOME_TAP_TASK',
+      'fish_book' || 'btn_collection' => 'HOME_TAP_COLLECTION',
+      _ => 'HOME_TAP_${elementId.toUpperCase()}',
+    };
+  }
 }
 
 class _JsonElementTile extends StatefulWidget {
   const _JsonElementTile({
     required this.element,
     required this.showDebugHotspots,
-    required this.fitRect,
+    required this.stageSize,
     required this.onTap,
   });
 
   final LayoutElement element;
   final bool showDebugHotspots;
-  final Rect fitRect;
+  final Size stageSize;
   final Future<void> Function(Offset tapPosition) onTap;
 
   @override
@@ -140,20 +162,18 @@ class _JsonElementTileState extends State<_JsonElementTile> {
 
   @override
   Widget build(BuildContext context) {
-    final rect = widget.element.rect;
-    final fittedScale = widget.fitRect.width / _homeImageSize.width;
-    final left = widget.fitRect.left + rect.left * fittedScale;
-    final top = widget.fitRect.top + rect.top * fittedScale;
-    final width = rect.width * fittedScale;
-    final height = rect.height * fittedScale;
-    final scope = FishingOfficeScope.of(context);
-    final stageScale = scope.responsive.scale;
+    final fitted = homeDesignRectToStageRect(
+      designRect: widget.element.rect,
+      stageSize: widget.stageSize,
+      designSize: _homeImageSize,
+    );
+    final stageScale = fitted.width / widget.element.rect.width;
 
     return Positioned(
-      left: left,
-      top: top,
-      width: width,
-      height: height,
+      left: fitted.left,
+      top: fitted.top,
+      width: fitted.width,
+      height: fitted.height,
       child: Semantics(
         button: true,
         label: widget.element.label,

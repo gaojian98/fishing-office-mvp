@@ -78,7 +78,7 @@ class _HomeDesignStage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
+    final stage = AspectRatio(
       aspectRatio: HomePage.designSize.width / HomePage.designSize.height,
       child: Stack(
         fit: StackFit.expand,
@@ -187,6 +187,16 @@ class _HomeDesignStage extends StatelessWidget {
           ],
         ],
       ),
+    );
+    if (!kDebugMode) return stage;
+    return Listener(
+      behavior: HitTestBehavior.translucent,
+      onPointerDown: (event) {
+        debugPrint(
+          'HomePointerDown | position=${event.localPosition.dx.toStringAsFixed(1)},${event.localPosition.dy.toStringAsFixed(1)}',
+        );
+      },
+      child: stage,
     );
   }
 }
