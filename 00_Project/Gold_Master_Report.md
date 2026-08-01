@@ -195,4 +195,12 @@ Local validation:
 
 Production status:
 
-- Pending commit, push, Railway deploy, and production Pack 32 rerun.
+- Committed, pushed, redeployed, and rerun in production.
+- Production commit: b8312d5d7fb41f451b728f15247fc14a1c18290b.
+- Collection popup no longer blank: PASS.
+- 9 home entries remain clickable: PASS.
+- Critical resources: PASS.
+- Core fishing loop to put into bag and inventory probe: PASS.
+- Console errors: 0.
+- P0: 0.
+- P1: 0.

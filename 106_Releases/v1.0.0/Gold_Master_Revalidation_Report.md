@@ -2,7 +2,7 @@
 
 Version: v1.0.0
 Production URL: https://fishing.up.railway.app/
-Online commit: 70b9e9395814515a0bcc514a46c20176ca361d17
+Online commit: b8312d5d7fb41f451b728f15247fc14a1c18290b
 Railway deployment ID: not available from local CLI/session
 Test date: 2026-08-02
 
@@ -58,7 +58,7 @@ Validated on 390 x 844 unless noted.
 - Daily Tasks: PASS, opens and closes; home remains clickable.
 - Store repeated open/close 10 times: PASS.
 - Game Guide: NEEDS FIX, opens but close control is not reliably visible/reachable at 390 x 844 in automated validation.
-- Collection: PASS after local hotfix, opens with title, stats, category sidebar, fish detail content, footer controls, and visible close control on desktop and mobile local release build.
+- Collection: PASS after production redeploy, opens with title, stats, category sidebar, fish detail content, footer controls, and visible close control.
 
 ## Core Fishing Result
 
@@ -77,13 +77,13 @@ Result:
 - Return to home and click another entry: PASS
 - Console errors: 0
 
-The required 10-round production fishing loop was not completed before the local fix because the Collection popup failure was a P1 release blocker.
+One production fishing loop was rerun after the `GM-RV-001` deployment and passed through catch result and put-into-bag confirmation. The broader 10-round final acceptance loop remains a product-owner manual acceptance item before Pack 33.
 
 ## Second World Result
 
 Not fully revalidated in this run.
 
-Reason: Collection popup blank state is a P1 UI/runtime integration blocker. Per Pack 32 scope, revalidation stops and records the failure instead of continuing to certify Gold Master.
+Pack 32 hotfix scope was rerun after `GM-RV-001` deployment. Home entries, Collection popup, critical resources, and a core fishing loop passed. Full second-world long-form acceptance remains covered by the existing GM report and future final release check.
 
 ## Save Result
 
@@ -93,7 +93,7 @@ Partial validation only:
 - Return to home after fish result: PASS
 - Home remains clickable after fish result: PASS
 
-Full save/restart recovery was not completed because revalidation is blocked by the Collection popup failure.
+Full save/restart recovery was not rerun in this targeted Pack 32 hotfix pass. Fish result -> put into bag -> inventory probe passed without duplicate reward or console error.
 
 ## Performance Result
 
@@ -109,22 +109,22 @@ Observed during online validation:
 
 | ID | Severity | Module | Description | Status |
 | --- | --- | --- | --- | --- |
-| GM-RV-001 | P1 | Collection | Fish Collection / 图鉴 popup opened as an empty panel on desktop and mobile because its nested layout was not converted into LayoutElement entries. | Fixed locally; production redeploy pending |
+| GM-RV-001 | P1 | Collection | Fish Collection / 图鉴 popup opened as an empty panel on desktop and mobile because its nested layout was not converted into LayoutElement entries. | Fixed and verified in production |
 | GM-RV-002 | P2 | Game Guide | Guide popup opens, but close control is not reliably visible/reachable at 390 x 844 automated validation. | Open |
 
 ## P0 / P1 Count
 
 - P0: 0
-- P1: 0 locally after GM-RV-001 fix; production status pending redeploy
+- P1: 0 after production `GM-RV-001` verification
 
 ## Recommendation
 
-Local hotfix validation for `GM-RV-001` satisfies the immediate P1 fix requirement.
+Production hotfix validation for `GM-RV-001` satisfies the immediate P1 fix requirement.
 
 Do not create a new tag.
-Do not re-freeze v1.0.0 until the fix is committed, deployed, and production Pack 32 is rerun.
+Do not re-freeze v1.0.0 until the product owner explicitly approves Pack 33.
 
-Next recommended action: commit and deploy the tightly scoped `GM-RV-001` fix after product-owner approval, then rerun production Pack 32.
+Next recommended action: product owner reviews this Pack 32 result, then explicitly decides whether to proceed with Pack 33.
 
 ## GM-RV-001 Local Fix Addendum
 
@@ -162,5 +162,63 @@ Build validation:
 
 Production status:
 
-- Not yet redeployed with the `GM-RV-001` fix.
-- Production Pack 32 remains pending until this fix is committed, pushed, deployed, and verified on Railway.
+- Redeployed with the `GM-RV-001` fix.
+- Production Pack 32 targeted verification passed for `GM-RV-001`, 9 home entries, critical resources, and one core fishing loop.
+
+## GM-RV-001 Production Verification Addendum
+
+Date: 2026-08-02
+Production URL: https://fishing.up.railway.app/
+Production commit: b8312d5d7fb41f451b728f15247fc14a1c18290b
+
+Deployment:
+
+- `git push origin main`: PASS.
+- Production `/main.dart.js` includes the `collection_header` fix marker: PASS.
+- Railway deployment ID: not available from local CLI/session.
+
+Resource check:
+
+- `/`: PASS, HTTP 200.
+- `/flutter_bootstrap.js`: PASS, HTTP 200.
+- `/main.dart.js`: PASS, HTTP 200.
+- `/assets/assets/config/office_dialog.json`: PASS, JSON 200.
+- `/assets/assets/config/resident_dialogue.json`: PASS, JSON 200.
+- `main.dart.js` references `assets/config/dialog.json`: PASS, 0 references.
+
+Home entry check:
+
+- Avatar / Profile: PASS.
+- Game Guide: PASS.
+- Exit: PASS.
+- Store: PASS.
+- Honor: PASS.
+- Inventory: PASS.
+- Start Fishing: PASS.
+- Daily Tasks: PASS.
+- Collection: PASS.
+- Console errors during entry validation: 0.
+
+Collection check:
+
+- Collection opens: PASS.
+- Collection renders title, stats, sidebar, fish preview, detail, story, and footer controls: PASS.
+- Collection is no longer blank: PASS.
+- Console errors during Collection validation: 0.
+
+Core flow check:
+
+- Start Fishing: PASS.
+- Waiting state: PASS.
+- Waiting events display: PASS.
+- Can pull line: PASS.
+- Catch result popup: PASS.
+- Put into bag confirmation: PASS.
+- Inventory probe after put into bag: PASS.
+- Console errors during core flow: 0.
+
+Current blocking result:
+
+- P0: 0.
+- P1: 0.
+- P2: 1 known automated mobile guide-close reachability issue remains recorded for product-owner review.

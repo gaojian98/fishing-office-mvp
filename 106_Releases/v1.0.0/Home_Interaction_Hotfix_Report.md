@@ -159,4 +159,12 @@ The Collection popup blank state was fixed locally without changing the home poi
 - Fix: map nested Fish Collection layout sections into `collection_*` `LayoutElement` entries and scale the Collection dialog from its own 1080 x 1920 design size.
 - Local release validation: PASS.
 - Home 9-entry click regression after fix: PASS across 1280 x 720, 360 x 800, 390 x 844, 412 x 915, and 1080 x 1920.
-- Production status: pending redeploy.
+- Production status: redeployed and verified.
+
+Production follow-up result:
+
+- Production commit: b8312d5d7fb41f451b728f15247fc14a1c18290b.
+- 9 home entries remain clickable: PASS.
+- Collection popup renders content after redeploy: PASS.
+- Core fishing loop to put into bag and inventory probe: PASS.
+- Console errors: 0.

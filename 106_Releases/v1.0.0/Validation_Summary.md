@@ -132,7 +132,7 @@ Blocking issue found:
 
 - P1 `GM-RV-001`: Collection / 图鉴 popup opens as an empty panel on desktop and mobile.
 
-Current release validation status: NOT PASS in production after hotfix. Gold Master revalidation should be rerun in production after `GM-RV-001` is committed and deployed.
+Current release validation status: PASS for the targeted production `GM-RV-001` hotfix rerun. Product-owner review is still required before Pack 33.
 
 ## GM-RV-001 Local Fix Validation
 
@@ -158,4 +158,10 @@ Local release validation:
 
 Production status:
 
-- Pending commit, push, Railway redeploy, and production Pack 32 rerun.
+- Committed, pushed, redeployed, and rerun in production.
+- Production commit: b8312d5d7fb41f451b728f15247fc14a1c18290b.
+- 9 home entries: PASS.
+- Collection popup no longer blank: PASS.
+- Critical resources: PASS.
+- Console errors: 0.
+- Core fishing loop through put into bag and inventory probe: PASS.
