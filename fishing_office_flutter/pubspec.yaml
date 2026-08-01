@@ -42,7 +42,6 @@ flutter:
     - assets/config/world.json
     - assets/config/resident.json
     - assets/config/residents.json
-    - assets/config/dialog.json
     - assets/config/story.json
     - assets/config/event.json
     - assets/config/events.json
