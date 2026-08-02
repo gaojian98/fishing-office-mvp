@@ -309,6 +309,8 @@ class _ProfileCenterDialogPageState
                                 closeLabel: widget.profile.footer.closeLabel,
                                 transactionButtonRect: transactionButton?.rect,
                                 closeButtonRect: closeButton?.rect,
+                                onOfficeHub: () => widget.dialogManager
+                                    .openById(context, 'OfficeHubDialog'),
                                 onTransaction: () => widget.dialogManager
                                     .showProfileTransactionRecordsDialog(
                                   context,
@@ -1023,6 +1025,7 @@ class _ProfileFooter extends StatelessWidget {
     required this.closeLabel,
     required this.transactionButtonRect,
     required this.closeButtonRect,
+    required this.onOfficeHub,
     required this.onTransaction,
     required this.onClose,
   });
@@ -1033,14 +1036,13 @@ class _ProfileFooter extends StatelessWidget {
   final String closeLabel;
   final Rect? transactionButtonRect;
   final Rect? closeButtonRect;
+  final VoidCallback onOfficeHub;
   final VoidCallback onTransaction;
   final VoidCallback onClose;
 
   @override
   Widget build(BuildContext context) {
-    final transactionWidth =
-        (transactionButtonRect?.width ?? rect.width * 0.46) * scale;
-    final closeWidth = (closeButtonRect?.width ?? rect.width * 0.46) * scale;
+    final buttonWidth = (rect.width - 32) * scale / 3;
     final height = math.max(transactionButtonRect?.height ?? 78,
             closeButtonRect?.height ?? 78) *
         scale;
@@ -1049,7 +1051,17 @@ class _ProfileFooter extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            width: transactionWidth,
+            width: buttonWidth,
+            height: height,
+            child: _BlueGoldButton(
+              label: '今日办公室',
+              icon: Icons.business_center_rounded,
+              onTap: onOfficeHub,
+            ),
+          ),
+          SizedBox(width: 16 * scale),
+          SizedBox(
+            width: buttonWidth,
             height: height,
             child: _BlueGoldButton(
               label: transactionLabel,
@@ -1059,7 +1071,7 @@ class _ProfileFooter extends StatelessWidget {
           ),
           SizedBox(width: 16 * scale),
           SizedBox(
-            width: closeWidth,
+            width: buttonWidth,
             height: height,
             child: _BlueGoldButton(
               label: closeLabel,
