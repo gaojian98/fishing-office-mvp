@@ -1,12 +1,13 @@
 # Authorization Checklist
 
-Current status: no publishing action is authorized in this module.
+Current status: grouped commit execution is complete. Product owner authorized one docs-only follow-up commit, local RC branch creation, and RC branch push. Tags, merge, Railway, and production remain unauthorized.
 
 | Action | Status | Executed | Verified |
 |---|---|---|---|
-| Commit | NOT AUTHORIZED | NO | NO |
-| Push | NOT AUTHORIZED | NO | NO |
-| Create RC branch | NOT AUTHORIZED | NO | NO |
+| Initial grouped Commit | AUTHORIZED | YES | PASS |
+| Docs-only follow-up Commit | AUTHORIZED | NO | NO |
+| Push RC branch | AUTHORIZED | NO | NO |
+| Create RC branch | AUTHORIZED | NO | NO |
 | Create RC Tag | NOT AUTHORIZED | NO | NO |
 | Push RC Tag | NOT AUTHORIZED | NO | NO |
 | Create Railway Staging Service | NOT AUTHORIZED | NO | NO |
