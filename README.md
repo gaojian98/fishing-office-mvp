@@ -55,3 +55,30 @@ Open:
 - `/fishing`
 - `/result`
 - `/exit`
+
+
+## Current Release Candidate
+
+- Candidate: `v1.2.0-rc.1`
+- Development branch: `feature/v1.1-office-life-schedule`
+- Flutter project: `fishing_office_flutter/`
+- Local test URL: `http://127.0.0.1:3101/#/home`
+- Production version remains `v1.0.0` until explicit release approval.
+
+## Local RC Validation
+
+```bash
+cd fishing_office_flutter
+dart format --set-exit-if-changed lib test
+flutter analyze
+flutter test
+flutter build web --release
+cd ..
+PORT=3101 node server.js
+```
+
+Open `http://127.0.0.1:3101/#/home` for local browser acceptance.
+
+## Release Safety
+
+Do not commit, push, tag, merge, or deploy without explicit product owner authorization. Release handoff material lives in `00_Project/v1.2.0/Release_Package/`.
