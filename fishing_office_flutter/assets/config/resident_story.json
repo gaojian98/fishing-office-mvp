@@ -12,7 +12,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "timeOfDay": "morning"
+        "timeOfDay": "morning",
+        "weather": "weather_rainstorm_morning",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -25,7 +27,11 @@
       "tags": [
         "resident_story",
         "warm",
-        "温情"
+        "温情",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -39,7 +45,9 @@
       "conditions": {
         "relationshipLevel": "known",
         "meetCountMin": 1,
-        "location": "office_sea_window"
+        "location": "office_sea_window",
+        "weather": "weather_sunny_noon",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -52,7 +60,11 @@
       "tags": [
         "resident_story",
         "funny",
-        "幽默"
+        "幽默",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -68,7 +80,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "rain",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -81,7 +95,11 @@
       "tags": [
         "resident_story",
         "fairy",
-        "童话"
+        "童话",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -98,7 +116,9 @@
         "timeOfDay": "morning",
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "storm",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -111,7 +131,11 @@
       "tags": [
         "resident_story",
         "office",
-        "办公室"
+        "办公室",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -125,7 +149,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "location": "office_sea_window"
+        "location": "office_sea_window",
+        "weather": "fog",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -138,7 +164,11 @@
       "tags": [
         "resident_story",
         "philosophy",
-        "哲理"
+        "哲理",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -152,7 +182,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "timeOfDay": "morning"
+        "timeOfDay": "morning",
+        "weather": "rainbow",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -165,7 +197,11 @@
       "tags": [
         "resident_story",
         "warm",
-        "温情"
+        "温情",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -179,7 +215,9 @@
       "conditions": {
         "relationshipLevel": "known",
         "meetCountMin": 1,
-        "location": "front_desk"
+        "location": "front_desk",
+        "weather": "weather_rainstorm_morning",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -192,7 +230,11 @@
       "tags": [
         "resident_story",
         "funny",
-        "幽默"
+        "幽默",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -208,7 +250,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_sunny_noon",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -221,7 +265,11 @@
       "tags": [
         "resident_story",
         "fairy",
-        "童话"
+        "童话",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -238,7 +286,9 @@
         "timeOfDay": "morning",
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "rain",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -251,7 +301,11 @@
       "tags": [
         "resident_story",
         "office",
-        "办公室"
+        "办公室",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -265,7 +319,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "location": "front_desk"
+        "location": "front_desk",
+        "weather": "storm",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -278,7 +334,11 @@
       "tags": [
         "resident_story",
         "philosophy",
-        "哲理"
+        "哲理",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -292,7 +352,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "timeOfDay": "morning"
+        "timeOfDay": "morning",
+        "weather": "fog",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -305,7 +367,11 @@
       "tags": [
         "resident_story",
         "warm",
-        "温情"
+        "温情",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -319,7 +385,9 @@
       "conditions": {
         "relationshipLevel": "known",
         "meetCountMin": 1,
-        "location": "security_corner"
+        "location": "security_corner",
+        "weather": "rainbow",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -332,7 +400,11 @@
       "tags": [
         "resident_story",
         "funny",
-        "幽默"
+        "幽默",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -348,7 +420,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_rainstorm_morning",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -361,7 +435,11 @@
       "tags": [
         "resident_story",
         "fairy",
-        "童话"
+        "童话",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -378,7 +456,9 @@
         "timeOfDay": "morning",
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_sunny_noon",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -391,7 +471,11 @@
       "tags": [
         "resident_story",
         "office",
-        "办公室"
+        "办公室",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -405,7 +489,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "location": "security_corner"
+        "location": "security_corner",
+        "weather": "rain",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -418,7 +504,11 @@
       "tags": [
         "resident_story",
         "philosophy",
-        "哲理"
+        "哲理",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -432,7 +522,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "timeOfDay": "morning"
+        "timeOfDay": "morning",
+        "weather": "storm",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -445,7 +537,11 @@
       "tags": [
         "resident_story",
         "warm",
-        "温情"
+        "温情",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -459,7 +555,9 @@
       "conditions": {
         "relationshipLevel": "known",
         "meetCountMin": 1,
-        "location": "repair_desk"
+        "location": "repair_desk",
+        "weather": "fog",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -472,7 +570,11 @@
       "tags": [
         "resident_story",
         "funny",
-        "幽默"
+        "幽默",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -488,7 +590,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "rainbow",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -501,7 +605,11 @@
       "tags": [
         "resident_story",
         "fairy",
-        "童话"
+        "童话",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -518,7 +626,9 @@
         "timeOfDay": "morning",
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_rainstorm_morning",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -531,7 +641,11 @@
       "tags": [
         "resident_story",
         "office",
-        "办公室"
+        "办公室",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -545,7 +659,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "location": "repair_desk"
+        "location": "repair_desk",
+        "weather": "weather_sunny_noon",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -558,7 +674,11 @@
       "tags": [
         "resident_story",
         "philosophy",
-        "哲理"
+        "哲理",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -572,7 +692,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "timeOfDay": "morning"
+        "timeOfDay": "morning",
+        "weather": "rain",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -585,7 +707,11 @@
       "tags": [
         "resident_story",
         "warm",
-        "温情"
+        "温情",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -599,7 +725,9 @@
       "conditions": {
         "relationshipLevel": "known",
         "meetCountMin": 1,
-        "location": "window_boardwalk"
+        "location": "window_boardwalk",
+        "weather": "storm",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -612,7 +740,11 @@
       "tags": [
         "resident_story",
         "funny",
-        "幽默"
+        "幽默",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -628,7 +760,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "fog",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -641,7 +775,11 @@
       "tags": [
         "resident_story",
         "fairy",
-        "童话"
+        "童话",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -658,7 +796,9 @@
         "timeOfDay": "morning",
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "rainbow",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -671,7 +811,11 @@
       "tags": [
         "resident_story",
         "office",
-        "办公室"
+        "办公室",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -685,7 +829,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "location": "window_boardwalk"
+        "location": "window_boardwalk",
+        "weather": "weather_rainstorm_morning",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -698,7 +844,11 @@
       "tags": [
         "resident_story",
         "philosophy",
-        "哲理"
+        "哲理",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -712,7 +862,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "timeOfDay": "morning"
+        "timeOfDay": "morning",
+        "weather": "weather_sunny_noon",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -725,7 +877,11 @@
       "tags": [
         "resident_story",
         "warm",
-        "温情"
+        "温情",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -739,7 +895,9 @@
       "conditions": {
         "relationshipLevel": "known",
         "meetCountMin": 1,
-        "location": "coffee_counter"
+        "location": "coffee_counter",
+        "weather": "rain",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -752,7 +910,11 @@
       "tags": [
         "resident_story",
         "funny",
-        "幽默"
+        "幽默",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -768,7 +930,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "storm",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -781,7 +945,11 @@
       "tags": [
         "resident_story",
         "fairy",
-        "童话"
+        "童话",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -798,7 +966,9 @@
         "timeOfDay": "morning",
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "fog",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -811,7 +981,11 @@
       "tags": [
         "resident_story",
         "office",
-        "办公室"
+        "办公室",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -825,7 +999,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "location": "coffee_counter"
+        "location": "coffee_counter",
+        "weather": "rainbow",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -838,7 +1014,11 @@
       "tags": [
         "resident_story",
         "philosophy",
-        "哲理"
+        "哲理",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -852,7 +1032,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "timeOfDay": "morning"
+        "timeOfDay": "morning",
+        "weather": "weather_rainstorm_morning",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -865,7 +1047,11 @@
       "tags": [
         "resident_story",
         "warm",
-        "温情"
+        "温情",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -879,7 +1065,9 @@
       "conditions": {
         "relationshipLevel": "known",
         "meetCountMin": 1,
-        "location": "neighbor_desk"
+        "location": "neighbor_desk",
+        "weather": "weather_sunny_noon",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -892,7 +1080,11 @@
       "tags": [
         "resident_story",
         "funny",
-        "幽默"
+        "幽默",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -908,7 +1100,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "rain",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -921,7 +1115,11 @@
       "tags": [
         "resident_story",
         "fairy",
-        "童话"
+        "童话",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -938,7 +1136,9 @@
         "timeOfDay": "morning",
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "storm",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -951,7 +1151,11 @@
       "tags": [
         "resident_story",
         "office",
-        "办公室"
+        "办公室",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -965,7 +1169,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "location": "neighbor_desk"
+        "location": "neighbor_desk",
+        "weather": "fog",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -978,7 +1184,11 @@
       "tags": [
         "resident_story",
         "philosophy",
-        "哲理"
+        "哲理",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -992,7 +1202,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "timeOfDay": "morning"
+        "timeOfDay": "morning",
+        "weather": "rainbow",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -1005,7 +1217,11 @@
       "tags": [
         "resident_story",
         "warm",
-        "温情"
+        "温情",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1019,7 +1235,9 @@
       "conditions": {
         "relationshipLevel": "known",
         "meetCountMin": 1,
-        "location": "manager_room"
+        "location": "manager_room",
+        "weather": "weather_rainstorm_morning",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -1032,7 +1250,11 @@
       "tags": [
         "resident_story",
         "funny",
-        "幽默"
+        "幽默",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1048,7 +1270,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_sunny_noon",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -1061,7 +1285,11 @@
       "tags": [
         "resident_story",
         "fairy",
-        "童话"
+        "童话",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1078,7 +1306,9 @@
         "timeOfDay": "morning",
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "rain",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -1091,7 +1321,11 @@
       "tags": [
         "resident_story",
         "office",
-        "办公室"
+        "办公室",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1105,7 +1339,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "location": "manager_room"
+        "location": "manager_room",
+        "weather": "storm",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -1118,7 +1354,11 @@
       "tags": [
         "resident_story",
         "philosophy",
-        "哲理"
+        "哲理",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1132,7 +1372,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "timeOfDay": "morning"
+        "timeOfDay": "morning",
+        "weather": "fog",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -1145,7 +1387,11 @@
       "tags": [
         "resident_story",
         "warm",
-        "温情"
+        "温情",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1159,7 +1405,9 @@
       "conditions": {
         "relationshipLevel": "known",
         "meetCountMin": 1,
-        "location": "office_aisle"
+        "location": "office_aisle",
+        "weather": "rainbow",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -1172,7 +1420,11 @@
       "tags": [
         "resident_story",
         "funny",
-        "幽默"
+        "幽默",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1188,7 +1440,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_rainstorm_morning",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -1201,7 +1455,11 @@
       "tags": [
         "resident_story",
         "fairy",
-        "童话"
+        "童话",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1218,7 +1476,9 @@
         "timeOfDay": "morning",
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_sunny_noon",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -1231,7 +1491,11 @@
       "tags": [
         "resident_story",
         "office",
-        "办公室"
+        "办公室",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1245,7 +1509,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "location": "office_aisle"
+        "location": "office_aisle",
+        "weather": "rain",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -1258,7 +1524,11 @@
       "tags": [
         "resident_story",
         "philosophy",
-        "哲理"
+        "哲理",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1272,7 +1542,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "timeOfDay": "morning"
+        "timeOfDay": "morning",
+        "weather": "storm",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -1285,7 +1557,11 @@
       "tags": [
         "resident_story",
         "warm",
-        "温情"
+        "温情",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1299,7 +1575,9 @@
       "conditions": {
         "relationshipLevel": "known",
         "meetCountMin": 1,
-        "location": "far_window"
+        "location": "far_window",
+        "weather": "fog",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -1312,7 +1590,11 @@
       "tags": [
         "resident_story",
         "funny",
-        "幽默"
+        "幽默",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1328,7 +1610,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "rainbow",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -1341,7 +1625,11 @@
       "tags": [
         "resident_story",
         "fairy",
-        "童话"
+        "童话",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1358,7 +1646,9 @@
         "timeOfDay": "morning",
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_rainstorm_morning",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -1371,7 +1661,11 @@
       "tags": [
         "resident_story",
         "office",
-        "办公室"
+        "办公室",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1385,7 +1679,9 @@
       "conditions": {
         "relationshipLevel": "stranger",
         "meetCountMin": 0,
-        "location": "far_window"
+        "location": "far_window",
+        "weather": "weather_sunny_noon",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -1398,7 +1694,11 @@
       "tags": [
         "resident_story",
         "philosophy",
-        "哲理"
+        "哲理",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1412,7 +1712,9 @@
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "stranger",
-        "meetCountMin": 0
+        "meetCountMin": 0,
+        "weather": "rain",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -1425,7 +1727,11 @@
       "tags": [
         "resident_content_pack_01",
         "温情",
-        "warm"
+        "warm",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1439,7 +1745,9 @@
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "known",
-        "meetCountMin": 1
+        "meetCountMin": 1,
+        "weather": "storm",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -1452,7 +1760,11 @@
       "tags": [
         "resident_content_pack_01",
         "办公室",
-        "office"
+        "office",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1469,7 +1781,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "fog",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -1482,7 +1796,11 @@
       "tags": [
         "resident_content_pack_01",
         "童话",
-        "fairy"
+        "fairy",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1496,7 +1814,9 @@
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "stranger",
-        "meetCountMin": 0
+        "meetCountMin": 0,
+        "weather": "rainbow",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -1509,7 +1829,11 @@
       "tags": [
         "resident_content_pack_01",
         "温情",
-        "warm"
+        "warm",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1523,7 +1847,9 @@
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "known",
-        "meetCountMin": 1
+        "meetCountMin": 1,
+        "weather": "weather_rainstorm_morning",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -1536,7 +1862,11 @@
       "tags": [
         "resident_content_pack_01",
         "办公室",
-        "office"
+        "office",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1553,7 +1883,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_sunny_noon",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -1566,7 +1898,11 @@
       "tags": [
         "resident_content_pack_01",
         "童话",
-        "fairy"
+        "fairy",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1580,7 +1916,9 @@
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "stranger",
-        "meetCountMin": 0
+        "meetCountMin": 0,
+        "weather": "rain",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -1593,7 +1931,11 @@
       "tags": [
         "resident_content_pack_01",
         "温情",
-        "warm"
+        "warm",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1607,7 +1949,9 @@
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "known",
-        "meetCountMin": 1
+        "meetCountMin": 1,
+        "weather": "storm",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -1620,7 +1964,11 @@
       "tags": [
         "resident_content_pack_01",
         "办公室",
-        "office"
+        "office",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1637,7 +1985,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "fog",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -1650,7 +2000,11 @@
       "tags": [
         "resident_content_pack_01",
         "童话",
-        "fairy"
+        "fairy",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1664,7 +2018,9 @@
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "stranger",
-        "meetCountMin": 0
+        "meetCountMin": 0,
+        "weather": "rainbow",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -1677,7 +2033,11 @@
       "tags": [
         "resident_content_pack_01",
         "温情",
-        "warm"
+        "warm",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1691,7 +2051,9 @@
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "known",
-        "meetCountMin": 1
+        "meetCountMin": 1,
+        "weather": "weather_rainstorm_morning",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -1704,7 +2066,11 @@
       "tags": [
         "resident_content_pack_01",
         "办公室",
-        "office"
+        "office",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1721,7 +2087,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_sunny_noon",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -1734,7 +2102,11 @@
       "tags": [
         "resident_content_pack_01",
         "童话",
-        "fairy"
+        "fairy",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1748,7 +2120,9 @@
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "stranger",
-        "meetCountMin": 0
+        "meetCountMin": 0,
+        "weather": "rain",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -1761,7 +2135,11 @@
       "tags": [
         "resident_content_pack_01",
         "温情",
-        "warm"
+        "warm",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1775,7 +2153,9 @@
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "known",
-        "meetCountMin": 1
+        "meetCountMin": 1,
+        "weather": "storm",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -1788,7 +2168,11 @@
       "tags": [
         "resident_content_pack_01",
         "办公室",
-        "office"
+        "office",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1805,7 +2189,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "fog",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -1818,7 +2204,11 @@
       "tags": [
         "resident_content_pack_01",
         "童话",
-        "fairy"
+        "fairy",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1832,7 +2222,9 @@
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "stranger",
-        "meetCountMin": 0
+        "meetCountMin": 0,
+        "weather": "rainbow",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -1845,7 +2237,11 @@
       "tags": [
         "resident_content_pack_01",
         "温情",
-        "warm"
+        "warm",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1859,7 +2255,9 @@
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "known",
-        "meetCountMin": 1
+        "meetCountMin": 1,
+        "weather": "weather_rainstorm_morning",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -1872,7 +2270,11 @@
       "tags": [
         "resident_content_pack_01",
         "办公室",
-        "office"
+        "office",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1889,7 +2291,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_sunny_noon",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -1902,7 +2306,11 @@
       "tags": [
         "resident_content_pack_01",
         "童话",
-        "fairy"
+        "fairy",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1916,7 +2324,9 @@
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "stranger",
-        "meetCountMin": 0
+        "meetCountMin": 0,
+        "weather": "rain",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -1929,7 +2339,11 @@
       "tags": [
         "resident_content_pack_01",
         "温情",
-        "warm"
+        "warm",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1943,7 +2357,9 @@
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "known",
-        "meetCountMin": 1
+        "meetCountMin": 1,
+        "weather": "storm",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -1956,7 +2372,11 @@
       "tags": [
         "resident_content_pack_01",
         "办公室",
-        "office"
+        "office",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -1973,7 +2393,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "fog",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -1986,7 +2408,11 @@
       "tags": [
         "resident_content_pack_01",
         "童话",
-        "fairy"
+        "fairy",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -2000,7 +2426,9 @@
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "stranger",
-        "meetCountMin": 0
+        "meetCountMin": 0,
+        "weather": "rainbow",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -2013,7 +2441,11 @@
       "tags": [
         "resident_content_pack_01",
         "温情",
-        "warm"
+        "warm",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -2027,7 +2459,9 @@
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "known",
-        "meetCountMin": 1
+        "meetCountMin": 1,
+        "weather": "weather_rainstorm_morning",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -2040,7 +2474,11 @@
       "tags": [
         "resident_content_pack_01",
         "办公室",
-        "office"
+        "office",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -2057,7 +2495,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_sunny_noon",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -2070,7 +2510,11 @@
       "tags": [
         "resident_content_pack_01",
         "童话",
-        "fairy"
+        "fairy",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -2084,7 +2528,9 @@
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "stranger",
-        "meetCountMin": 0
+        "meetCountMin": 0,
+        "weather": "rain",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -2097,7 +2543,11 @@
       "tags": [
         "resident_content_pack_01",
         "温情",
-        "warm"
+        "warm",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -2111,7 +2561,9 @@
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "known",
-        "meetCountMin": 1
+        "meetCountMin": 1,
+        "weather": "storm",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -2124,7 +2576,11 @@
       "tags": [
         "resident_content_pack_01",
         "办公室",
-        "office"
+        "office",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -2141,7 +2597,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "fog",
+        "festival": "active"
       },
       "result": {
         "memoryTags": [
@@ -2154,7 +2612,11 @@
       "tags": [
         "resident_content_pack_01",
         "童话",
-        "fairy"
+        "fairy",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -2168,7 +2630,9 @@
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "stranger",
-        "meetCountMin": 0
+        "meetCountMin": 0,
+        "weather": "rainbow",
+        "festival": "festival_ocean_day"
       },
       "result": {
         "memoryTags": [
@@ -2181,7 +2645,11 @@
       "tags": [
         "resident_content_pack_01",
         "温情",
-        "warm"
+        "warm",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -2195,7 +2663,9 @@
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "known",
-        "meetCountMin": 1
+        "meetCountMin": 1,
+        "weather": "weather_rainstorm_morning",
+        "festival": "festival_mid_autumn"
       },
       "result": {
         "memoryTags": [
@@ -2208,7 +2678,11 @@
       "tags": [
         "resident_content_pack_01",
         "办公室",
-        "office"
+        "office",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
@@ -2225,7 +2699,9 @@
         "meetCountMin": 5,
         "memoryTags": [
           "repeat_meet"
-        ]
+        ],
+        "weather": "weather_sunny_noon",
+        "festival": "festival_christmas"
       },
       "result": {
         "memoryTags": [
@@ -2238,7 +2714,11 @@
       "tags": [
         "resident_content_pack_01",
         "童话",
-        "fairy"
+        "fairy",
+        "weather",
+        "module_04_weather_context",
+        "festival",
+        "module_04_festival_context"
       ]
     },
     {
