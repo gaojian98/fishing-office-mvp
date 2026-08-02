@@ -56,6 +56,10 @@ function resolvePath(urlPath) {
   return filePath.startsWith(webDir) ? filePath : null;
 }
 
+function isStaticAssetRequest(pathname) {
+  return pathname.startsWith('/assets/') || extname(pathname) !== '';
+}
+
 const server = http.createServer(async (req, res) => {
   try {
     const requestUrl = new URL(req.url || '/', 'http://fishing-office.invalid');
@@ -68,6 +72,12 @@ const server = http.createServer(async (req, res) => {
         await sendFile(res, filePath);
         return;
       }
+    }
+
+    if (isStaticAssetRequest(pathname)) {
+      res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' });
+      res.end('Static asset not found');
+      return;
     }
 
     if (pathname === '/' || pathname === '/home' || pathname === '/index.html' || pathname.startsWith('/#/')) {

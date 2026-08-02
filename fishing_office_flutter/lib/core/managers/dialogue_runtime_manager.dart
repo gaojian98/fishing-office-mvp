@@ -2,8 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/foundation.dart';
 
+import '../../models/friendship_state.dart';
+import '../../models/living_office_state.dart';
+import '../../models/player_influence.dart';
 import '../../models/resident_dialogue_config.dart';
+import '../../models/location_context.dart';
 import '../../models/resident_memory_config.dart';
+import '../../models/resident_personality_context.dart';
 import '../../models/resident_relationship_config.dart';
 import '../engine/festival_manager.dart';
 import '../engine/resident_memory_engine.dart';
@@ -48,6 +53,9 @@ class DialogueRuntimeManager {
   final RumorRuntimeManager? _rumorRuntimeManager;
   final Random _random;
   final Set<String> _servedNonRepeatableIds = <String>{};
+  LivingOfficeState _livingOfficeState = LivingOfficeState.empty();
+  PlayerInfluenceContext _playerInfluenceContext =
+      PlayerInfluenceContext.empty();
 
   List<String> get servedNonRepeatableIds =>
       _servedNonRepeatableIds.toList(growable: true)..sort();
@@ -58,37 +66,75 @@ class DialogueRuntimeManager {
       ..addAll(ids.where((id) => id.isNotEmpty));
   }
 
+  void applyLivingOfficeState(LivingOfficeState state) {
+    if (state.isEmpty) return;
+    _livingOfficeState = state;
+  }
+
+  void applyPlayerInfluenceContext(PlayerInfluenceContext context) {
+    _playerInfluenceContext = context;
+  }
+
   List<ResidentDialogueEntry> getAvailableDialogues(String residentId) {
-    final context = _DialogueRuntimeContext(
-      residentId: residentId,
-      timeOfDay: _timeOfDay(),
-      weather: _worldClockManager.weather(),
-      festival: _worldClockManager.festival(),
-      festivalContext:
-          _festivalRuntimeManager?.residentFestivalContext(residentId),
-      weatherContext:
-          _weatherRuntimeManager?.residentWeatherContext(residentId),
-      rumorContext: _rumorRuntimeManager?.residentRumorContext(residentId),
-      state: _residentRuntimeManager.getResidentCurrentState(residentId),
-      memory: _residentMemoryEngine.getResidentMemory(residentId),
-      relationship: _residentRelationshipEngine.getRelationship(residentId),
-    );
+    final context = _contextFor(residentId);
     final matches = _config.dialogues
         .where((dialogue) => _matchesResident(dialogue, residentId))
+        .where((dialogue) => dialogue.actionType.isEmpty)
         .where((dialogue) =>
             dialogue.repeatable ||
             !_servedNonRepeatableIds.contains(dialogue.id))
         .where((dialogue) => _matchesConditions(dialogue.conditions, context))
         .toList(growable: false);
-    final mood = context.effectiveResidentMood;
     final sorted = List<ResidentDialogueEntry>.from(matches)
       ..sort((a, b) {
-        final priority =
-            _effectivePriority(b, mood).compareTo(_effectivePriority(a, mood));
+        final priority = _effectivePriority(b, context)
+            .compareTo(_effectivePriority(a, context));
         if (priority != 0) return priority;
         return a.id.compareTo(b.id);
       });
     return sorted;
+  }
+
+  ResidentDialogueEntry? getInteractionFeedback(
+    String residentId,
+    String actionType, {
+    bool success = true,
+  }) {
+    if (residentId.isEmpty || actionType.isEmpty) return null;
+    final context = _contextFor(residentId);
+    final expectedTag = success ? 'success' : 'blocked';
+    final matches = _config.dialogues
+        .where((dialogue) => _matchesResident(dialogue, residentId))
+        .where((dialogue) => dialogue.actionType == actionType)
+        .where((dialogue) =>
+            dialogue.repeatable ||
+            !_servedNonRepeatableIds.contains(dialogue.id))
+        .where((dialogue) =>
+            dialogue.tags.isEmpty ||
+            dialogue.tags.contains(expectedTag) ||
+            !dialogue.tags.contains(success ? 'blocked' : 'success'))
+        .where((dialogue) => _matchesConditions(dialogue.conditions, context))
+        .toList(growable: false);
+    if (matches.isEmpty) return null;
+    matches.sort((a, b) {
+      final priority = _effectivePriority(b, context)
+          .compareTo(_effectivePriority(a, context));
+      if (priority != 0) return priority;
+      final weight = b.weight.compareTo(a.weight);
+      if (weight != 0) return weight;
+      return a.id.compareTo(b.id);
+    });
+    final topPriority = _effectivePriority(matches.first, context);
+    final top = matches
+        .where(
+            (dialogue) => _effectivePriority(dialogue, context) == topPriority)
+        .toList(growable: false);
+    final selected =
+        top.length == 1 ? top.first : top[_random.nextInt(top.length)];
+    if (!selected.repeatable) {
+      _servedNonRepeatableIds.add(selected.id);
+    }
+    return selected;
   }
 
   ResidentDialogueEntry getDialogue(String residentId) {
@@ -124,6 +170,31 @@ class DialogueRuntimeManager {
     return selected;
   }
 
+  _DialogueRuntimeContext _contextFor(String residentId) {
+    final state = _residentRuntimeManager.getResidentCurrentState(residentId);
+    return _DialogueRuntimeContext(
+      residentId: residentId,
+      timeOfDay: _timeOfDay(),
+      weather: _worldClockManager.weather(),
+      festival: _worldClockManager.festival(),
+      festivalContext:
+          _festivalRuntimeManager?.residentFestivalContext(residentId),
+      weatherContext:
+          _weatherRuntimeManager?.residentWeatherContext(residentId),
+      rumorContext: _rumorRuntimeManager?.residentRumorContext(residentId),
+      state: state,
+      location: _residentRuntimeManager.getResidentLocationContext(residentId),
+      locationResidentCount:
+          _residentRuntimeManager.getResidentsAtLocation(state.location).length,
+      personality:
+          _residentRuntimeManager.getResidentPersonalityContext(residentId),
+      memory: _residentMemoryEngine.getResidentMemory(residentId),
+      relationship: _residentRelationshipEngine.getRelationship(residentId),
+      livingOfficeState: _livingOfficeState,
+      playerInfluenceContext: _playerInfluenceContext,
+    );
+  }
+
   bool _matchesResident(ResidentDialogueEntry dialogue, String residentId) {
     return dialogue.residentId == residentId || dialogue.residentId == '*';
   }
@@ -151,6 +222,42 @@ class DialogueRuntimeManager {
         conditions.relationshipLevel, context.relationship.relationshipLevel)) {
       return false;
     }
+    if (!_matchesValue(conditions.friendshipStage, context.friendshipStage)) {
+      return false;
+    }
+    if (conditions.minimumFriendshipStage.isNotEmpty &&
+        friendshipStageRank(context.friendshipStage) <
+            friendshipStageRank(conditions.minimumFriendshipStage)) {
+      return false;
+    }
+    if (conditions.friendshipScoreMin > 0 &&
+        context.friendshipScore < conditions.friendshipScoreMin) {
+      return false;
+    }
+    if (conditions.minimumTrust > 0 &&
+        context.trust < conditions.minimumTrust) {
+      return false;
+    }
+    if (conditions.minimumFamiliarity > 0 &&
+        context.familiarity < conditions.minimumFamiliarity) {
+      return false;
+    }
+    if (conditions.sharedTopics.isNotEmpty &&
+        !conditions.sharedTopics.every(context.sharedTopics.contains)) {
+      return false;
+    }
+    if (!_matchesValue(
+        conditions.lastInteractionType, context.lastInteractionType)) {
+      return false;
+    }
+    if (conditions.recentConflict != null &&
+        conditions.recentConflict != context.recentConflict) {
+      return false;
+    }
+    if (conditions.recentConflictResolved != null &&
+        conditions.recentConflictResolved != context.recentConflictResolved) {
+      return false;
+    }
     if (conditions.meetCountMin > 0 &&
         context.memory.meetCount < conditions.meetCountMin) {
       return false;
@@ -159,7 +266,22 @@ class DialogueRuntimeManager {
         context.memory.meetCount != conditions.meetCount) {
       return false;
     }
-    if (!_matchesValue(conditions.residentLocation, context.state.location)) {
+    if (!_matchesLocation(conditions.residentLocation, context.location)) {
+      return false;
+    }
+    if (!_matchesLocationTags(conditions.locationTags, context.location)) {
+      return false;
+    }
+    if (!_matchesPersonalityTags(
+      conditions.personalityTags,
+      context.personality.traits,
+    )) {
+      return false;
+    }
+    if (_intersectsPersonalityTags(
+      conditions.excludedPersonalityTags,
+      context.personality.traits,
+    )) {
       return false;
     }
     if (!_matchesValue(
@@ -178,6 +300,59 @@ class DialogueRuntimeManager {
     if (!_matchesStoryState(conditions.storyState, context.memory.memoryTags)) {
       return false;
     }
+    if (conditions.groupSizeMin > 0 &&
+        context.groupSize < conditions.groupSizeMin) {
+      return false;
+    }
+    if (!_matchesValue(conditions.groupActivity, context.groupActivity)) {
+      return false;
+    }
+    if (!_matchesValue(conditions.groupTopic, context.groupTopic)) {
+      return false;
+    }
+    if (!_matchesMood(conditions.groupMood, context.groupMood)) {
+      return false;
+    }
+    if (!_matchesGroupTags(conditions.groupTags, context.groupTags)) {
+      return false;
+    }
+    if (!_matchesValue(conditions.officeMood, context.officeMood)) {
+      return false;
+    }
+    if (conditions.minimumActivityLevel > 0 &&
+        context.activityLevel < conditions.minimumActivityLevel) {
+      return false;
+    }
+    if (conditions.maximumTensionLevel > 0 &&
+        context.tensionLevel > conditions.maximumTensionLevel) {
+      return false;
+    }
+    if (conditions.requiredOfficeTags.isNotEmpty &&
+        !conditions.requiredOfficeTags.every(context.officeTags.contains)) {
+      return false;
+    }
+    if (conditions.excludedOfficeTags.isNotEmpty &&
+        conditions.excludedOfficeTags.any(context.officeTags.contains)) {
+      return false;
+    }
+    if (conditions.requiredPlayerReputation.isNotEmpty &&
+        !conditions.requiredPlayerReputation
+            .every(context.playerReputation.contains)) {
+      return false;
+    }
+    if (conditions.requiredRecentActions.isNotEmpty &&
+        !conditions.requiredRecentActions
+            .every(context.recentPlayerActions.contains)) {
+      return false;
+    }
+    if (conditions.minimumOfficeInfluence > 0 &&
+        context.officeInfluence < conditions.minimumOfficeInfluence) {
+      return false;
+    }
+    if (conditions.minimumOfficeTrust > 0 &&
+        context.officeTrust < conditions.minimumOfficeTrust) {
+      return false;
+    }
     return true;
   }
 
@@ -186,14 +361,33 @@ class DialogueRuntimeManager {
     return _tokens(expected).contains(actual);
   }
 
+  bool _matchesLocation(String expected, LocationContext actual) {
+    if (expected.isEmpty || expected == 'any') return true;
+    final values = _tokens(expected).map(LocationContext.normalizeId).toSet();
+    return values.contains(actual.locationId) ||
+        values.contains(actual.locationType) ||
+        values.any(actual.tags.contains);
+  }
+
+  bool _matchesLocationTags(List<String> expected, LocationContext actual) {
+    if (expected.isEmpty) return true;
+    return expected.every((tag) =>
+        actual.tags.contains(tag) ||
+        actual.locationId == tag ||
+        actual.locationType == tag);
+  }
+
   bool _matchesMood(String expected, String actual) {
     if (expected.isEmpty || expected == 'any') return true;
     final actualMood = normalizeResidentMood(actual);
     return _tokens(expected).map(normalizeResidentMood).contains(actualMood);
   }
 
-  int _effectivePriority(ResidentDialogueEntry dialogue, String mood) {
-    final normalizedMood = normalizeResidentMood(mood);
+  int _effectivePriority(
+    ResidentDialogueEntry dialogue,
+    _DialogueRuntimeContext context,
+  ) {
+    final normalizedMood = normalizeResidentMood(context.effectiveResidentMood);
     var priority = dialogue.priority;
     final conditionMood = dialogue.conditions.residentMood;
     if (conditionMood.isNotEmpty &&
@@ -203,7 +397,69 @@ class DialogueRuntimeManager {
     if (dialogue.tags.map(normalizeResidentMood).contains(normalizedMood)) {
       priority += 1;
     }
+    if (_matchesPersonalityTags(
+      dialogue.conditions.personalityTags,
+      context.personality.traits,
+    )) {
+      priority += dialogue.conditions.personalityTags.length * 2;
+    }
+    if (_matchesValue(
+      dialogue.conditions.friendshipStage,
+      context.friendshipStage,
+    )) {
+      priority += dialogue.conditions.friendshipStage.isEmpty ? 0 : 2;
+    }
+    if (dialogue.conditions.minimumFriendshipStage.isNotEmpty &&
+        friendshipStageRank(context.friendshipStage) >=
+            friendshipStageRank(dialogue.conditions.minimumFriendshipStage)) {
+      priority += 1;
+    }
+    final personalityTags = context.personality.dialogueTags.toSet();
+    priority += dialogue.tags.where(personalityTags.contains).length;
+    if (dialogue.conditions.groupSizeMin > 0 &&
+        context.groupSize >= dialogue.conditions.groupSizeMin) {
+      priority += 2;
+    }
+    if (dialogue.conditions.groupTopic.isNotEmpty &&
+        _matchesValue(dialogue.conditions.groupTopic, context.groupTopic)) {
+      priority += 2;
+    }
+    if (dialogue.conditions.officeMood.isNotEmpty &&
+        _matchesValue(dialogue.conditions.officeMood, context.officeMood)) {
+      priority += 2;
+    }
+    priority += dialogue.tags.where(context.officeTags.contains).length;
+    priority += dialogue.tags.where(context.playerReputation.contains).length;
+    if (dialogue.conditions.requiredPlayerReputation.isNotEmpty) {
+      priority += dialogue.conditions.requiredPlayerReputation.length * 2;
+    }
+    if (dialogue.conditions.requiredRecentActions.isNotEmpty) {
+      priority += dialogue.conditions.requiredRecentActions.length;
+    }
     return priority;
+  }
+
+  bool _matchesGroupTags(List<String> expected, List<String> actual) {
+    if (expected.isEmpty) return true;
+    return expected.every(actual.contains);
+  }
+
+  bool _matchesPersonalityTags(List<String> expected, List<String> actual) {
+    if (expected.isEmpty) return true;
+    final normalizedActual =
+        actual.map(ResidentPersonalityContext.normalizeTrait).toSet();
+    return expected
+        .map(ResidentPersonalityContext.normalizeTrait)
+        .every(normalizedActual.contains);
+  }
+
+  bool _intersectsPersonalityTags(List<String> expected, List<String> actual) {
+    if (expected.isEmpty) return false;
+    final normalizedActual =
+        actual.map(ResidentPersonalityContext.normalizeTrait).toSet();
+    return expected
+        .map(ResidentPersonalityContext.normalizeTrait)
+        .any(normalizedActual.contains);
   }
 
   bool _matchesWeather(
@@ -293,8 +549,13 @@ class _DialogueRuntimeContext {
     required this.weatherContext,
     required this.rumorContext,
     required this.state,
+    required this.location,
+    required this.locationResidentCount,
+    required this.personality,
     required this.memory,
     required this.relationship,
+    required this.livingOfficeState,
+    required this.playerInfluenceContext,
   });
 
   final String residentId;
@@ -305,8 +566,60 @@ class _DialogueRuntimeContext {
   final WeatherContext? weatherContext;
   final RumorContext? rumorContext;
   final ResidentCurrentState state;
+  final LocationContext location;
+  final int locationResidentCount;
+  final ResidentPersonalityContext personality;
   final ResidentMemoryRecord memory;
   final ResidentRelationshipRecord relationship;
+  final LivingOfficeState livingOfficeState;
+  final PlayerInfluenceContext playerInfluenceContext;
+
+  String get friendshipStage {
+    switch (relationship.relationshipLevel) {
+      case 'known':
+        return 'acquaintance';
+      case 'friend':
+        return 'familiar';
+      case 'old_friend':
+      case 'close_friend':
+        return 'close_friend';
+      case 'trust':
+        return 'trusted_friend';
+      default:
+        return stageFor(
+          relationship.relationshipScore.clamp(0, 100).toInt(),
+          trust: trust,
+          familiarity: familiarity,
+        );
+    }
+  }
+
+  int get friendshipScore =>
+      relationship.relationshipScore.clamp(0, 100).toInt();
+  int get trust =>
+      (relationship.relationshipScore / 4).floor().clamp(0, 100).toInt();
+  int get familiarity =>
+      (memory.meetCount * 5 + relationship.relationshipScore ~/ 3)
+          .clamp(0, 100)
+          .toInt();
+  List<String> get sharedTopics => memory.memoryTags
+      .where((tag) => tag.startsWith('topic:'))
+      .map((tag) => tag.substring('topic:'.length))
+      .toList(growable: false);
+  String get lastInteractionType {
+    final tag = memory.memoryTags.lastWhere(
+      (item) => item.startsWith('last_interaction:'),
+      orElse: () => '',
+    );
+    return tag.replaceFirst('last_interaction:', '');
+  }
+
+  bool get recentConflict =>
+      memory.memoryTags.contains('conflict') ||
+      memory.memoryTags.contains('minor_tension');
+  bool get recentConflictResolved =>
+      memory.memoryTags.contains('resolve_conflict') ||
+      memory.memoryTags.contains('conflict_resolved');
 
   String get effectiveResidentMood {
     final mood = festivalContext?.residentMood ?? '';
@@ -322,4 +635,66 @@ class _DialogueRuntimeContext {
     final weatherActivity = weatherContext?.residentActivity ?? '';
     return weatherActivity.isEmpty ? state.activity : weatherActivity;
   }
+
+  int get groupSize => locationResidentCount;
+
+  String get groupActivity {
+    if (groupSize < 2) return '';
+    final activity = effectiveResidentActivity;
+    if (location.locationId == 'meeting_room') return 'meeting';
+    if (location.locationId == 'pantry' ||
+        location.locationId == 'coffee_shop') {
+      return activity.contains('lunch') ? 'lunch' : 'coffee_break';
+    }
+    if (location.locationId == 'dock' ||
+        location.locationId == 'sea' ||
+        location.locationId == 'seaside') {
+      return 'weekend_fishing';
+    }
+    if (rumorContext?.tags.isNotEmpty == true) return 'rumor_discussion';
+    return activity.contains('review') ? 'project_review' : 'office_chat';
+  }
+
+  String get groupTopic {
+    switch (groupActivity) {
+      case 'meeting':
+      case 'project_review':
+        return 'project_review';
+      case 'coffee_break':
+        return 'coffee';
+      case 'lunch':
+        return 'lunch';
+      case 'weekend_fishing':
+        return 'fishing';
+      case 'rumor_discussion':
+        return 'rumor';
+      default:
+        return groupActivity.isEmpty ? '' : 'office_life';
+    }
+  }
+
+  String get groupMood => groupSize < 2 ? '' : effectiveResidentMood;
+
+  List<String> get groupTags {
+    if (groupSize < 2) return const <String>[];
+    return <String>{
+      'office_group',
+      groupActivity,
+      if (groupTopic.isNotEmpty) 'topic:$groupTopic',
+      'location:${location.locationId}',
+      'mood:$groupMood',
+      ...location.tags,
+    }.where((item) => item.isNotEmpty).toList(growable: false);
+  }
+
+  String get officeMood => livingOfficeState.officeMood;
+  int get activityLevel => livingOfficeState.activityLevel;
+  int get socialLevel => livingOfficeState.socialLevel;
+  int get tensionLevel => livingOfficeState.tensionLevel;
+  List<String> get officeTags => livingOfficeState.worldTags;
+  List<String> get playerReputation => playerInfluenceContext.reputation;
+  Set<String> get recentPlayerActions =>
+      playerInfluenceContext.recentActionTypes;
+  int get officeInfluence => playerInfluenceContext.officeInfluence.overall;
+  int get officeTrust => playerInfluenceContext.officeInfluence.officeTrust;
 }

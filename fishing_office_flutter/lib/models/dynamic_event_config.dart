@@ -110,6 +110,11 @@ class DynamicEventConditions {
     required this.location,
     required this.residentId,
     required this.relationshipLevel,
+    required this.friendshipStage,
+    required this.friendshipTags,
+    required this.minimumFriendshipStage,
+    required this.minimumTrust,
+    required this.minimumFamiliarity,
     required this.memoryTags,
     required this.rumorTags,
     required this.fishId,
@@ -117,6 +122,22 @@ class DynamicEventConditions {
     required this.achievementState,
     required this.requiredEvents,
     required this.excludedEvents,
+    required this.personalityTags,
+    required this.excludedPersonalityTags,
+    required this.groupActivity,
+    required this.groupTopic,
+    required this.groupLocation,
+    required this.groupTags,
+    required this.groupSizeMin,
+    required this.officeMood,
+    required this.minimumActivityLevel,
+    required this.maximumTensionLevel,
+    required this.requiredOfficeTags,
+    required this.excludedOfficeTags,
+    required this.requiredPlayerReputation,
+    required this.requiredRecentActions,
+    required this.minimumOfficeInfluence,
+    required this.minimumOfficeTrust,
   });
 
   static const supportedTopLevelKeys = <String>{
@@ -126,6 +147,11 @@ class DynamicEventConditions {
     'location',
     'residentId',
     'relationshipLevel',
+    'friendshipStage',
+    'friendshipTags',
+    'minimumFriendshipStage',
+    'minimumTrust',
+    'minimumFamiliarity',
     'memoryTags',
     'rumorTags',
     'fishId',
@@ -133,6 +159,22 @@ class DynamicEventConditions {
     'achievementState',
     'requiredEvents',
     'excludedEvents',
+    'personalityTags',
+    'excludedPersonalityTags',
+    'groupActivity',
+    'groupTopic',
+    'groupLocation',
+    'groupTags',
+    'groupSizeMin',
+    'officeMood',
+    'minimumActivityLevel',
+    'maximumTensionLevel',
+    'requiredOfficeTags',
+    'excludedOfficeTags',
+    'requiredPlayerReputation',
+    'requiredRecentActions',
+    'minimumOfficeInfluence',
+    'minimumOfficeTrust',
   };
 
   factory DynamicEventConditions.fromJson(Map<String, dynamic> json) {
@@ -143,6 +185,11 @@ class DynamicEventConditions {
       location: _stringList(json['location']),
       residentId: _stringList(json['residentId']),
       relationshipLevel: _stringList(json['relationshipLevel']),
+      friendshipStage: _stringList(json['friendshipStage']),
+      friendshipTags: _stringList(json['friendshipTags']),
+      minimumFriendshipStage: json['minimumFriendshipStage']?.toString() ?? '',
+      minimumTrust: _readInt(json['minimumTrust'], fallback: 0),
+      minimumFamiliarity: _readInt(json['minimumFamiliarity'], fallback: 0),
       memoryTags: _stringList(json['memoryTags']),
       rumorTags: _stringList(json['rumorTags']),
       fishId: _stringList(json['fishId']),
@@ -150,6 +197,23 @@ class DynamicEventConditions {
       achievementState: _stringList(json['achievementState']),
       requiredEvents: _stringList(json['requiredEvents']),
       excludedEvents: _stringList(json['excludedEvents']),
+      personalityTags: _stringList(json['personalityTags']),
+      excludedPersonalityTags: _stringList(json['excludedPersonalityTags']),
+      groupActivity: _stringList(json['groupActivity']),
+      groupTopic: _stringList(json['groupTopic']),
+      groupLocation: _stringList(json['groupLocation']),
+      groupTags: _stringList(json['groupTags']),
+      groupSizeMin: _readInt(json['groupSizeMin'], fallback: 0),
+      officeMood: _stringList(json['officeMood']),
+      minimumActivityLevel: _readInt(json['minimumActivityLevel'], fallback: 0),
+      maximumTensionLevel: _readInt(json['maximumTensionLevel'], fallback: 0),
+      requiredOfficeTags: _stringList(json['requiredOfficeTags']),
+      excludedOfficeTags: _stringList(json['excludedOfficeTags']),
+      requiredPlayerReputation: _stringList(json['requiredPlayerReputation']),
+      requiredRecentActions: _stringList(json['requiredRecentActions']),
+      minimumOfficeInfluence:
+          _readInt(json['minimumOfficeInfluence'], fallback: 0),
+      minimumOfficeTrust: _readInt(json['minimumOfficeTrust'], fallback: 0),
     );
   }
 
@@ -159,6 +223,11 @@ class DynamicEventConditions {
   final List<String> location;
   final List<String> residentId;
   final List<String> relationshipLevel;
+  final List<String> friendshipStage;
+  final List<String> friendshipTags;
+  final String minimumFriendshipStage;
+  final int minimumTrust;
+  final int minimumFamiliarity;
   final List<String> memoryTags;
   final List<String> rumorTags;
   final List<String> fishId;
@@ -166,6 +235,22 @@ class DynamicEventConditions {
   final List<String> achievementState;
   final List<String> requiredEvents;
   final List<String> excludedEvents;
+  final List<String> personalityTags;
+  final List<String> excludedPersonalityTags;
+  final List<String> groupActivity;
+  final List<String> groupTopic;
+  final List<String> groupLocation;
+  final List<String> groupTags;
+  final int groupSizeMin;
+  final List<String> officeMood;
+  final int minimumActivityLevel;
+  final int maximumTensionLevel;
+  final List<String> requiredOfficeTags;
+  final List<String> excludedOfficeTags;
+  final List<String> requiredPlayerReputation;
+  final List<String> requiredRecentActions;
+  final int minimumOfficeInfluence;
+  final int minimumOfficeTrust;
 }
 
 class DynamicEventDialogLine {
@@ -212,6 +297,7 @@ class DynamicEventResult {
   const DynamicEventResult({
     required this.memoryTags,
     required this.relationshipChanges,
+    required this.friendshipChanges,
     required this.rumorIds,
     required this.storyIds,
     required this.questEvents,
@@ -225,6 +311,7 @@ class DynamicEventResult {
     return DynamicEventResult(
       memoryTags: _stringList(json['memoryTags']),
       relationshipChanges: _listOfMaps(json['relationshipChanges']),
+      friendshipChanges: _listOfMaps(json['friendshipChanges']),
       rumorIds: _stringList(json['rumorIds']),
       storyIds: _stringList(json['storyIds']),
       questEvents: _listOfMaps(json['questEvents']),
@@ -241,6 +328,10 @@ class DynamicEventResult {
       relationshipChanges: <Map<String, dynamic>>[
         ...relationshipChanges,
         ...other.relationshipChanges,
+      ],
+      friendshipChanges: <Map<String, dynamic>>[
+        ...friendshipChanges,
+        ...other.friendshipChanges,
       ],
       rumorIds: <String>{...rumorIds, ...other.rumorIds}.toList(),
       storyIds: <String>{...storyIds, ...other.storyIds}.toList(),
@@ -260,6 +351,7 @@ class DynamicEventResult {
 
   final List<String> memoryTags;
   final List<Map<String, dynamic>> relationshipChanges;
+  final List<Map<String, dynamic>> friendshipChanges;
   final List<String> rumorIds;
   final List<String> storyIds;
   final List<Map<String, dynamic>> questEvents;

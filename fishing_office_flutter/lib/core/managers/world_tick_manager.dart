@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
+import '../../models/living_office_state.dart';
+import '../../models/office_group.dart';
+import '../../models/player_influence.dart';
 import '../engine/second_world_engine.dart';
 import 'achievement_runtime_manager.dart';
 import 'dialogue_runtime_manager.dart';
@@ -176,6 +179,26 @@ class WorldSimulationContext {
     required this.events,
     required this.quests,
     required this.achievements,
+    required this.worldDate,
+    required this.timeOfDay,
+    required this.weekday,
+    required this.season,
+    required this.weatherContext,
+    required this.festivalContext,
+    required this.activeRumors,
+    required this.residentSnapshot,
+    required this.locationSnapshot,
+    required this.personalitySnapshot,
+    required this.friendshipSnapshot,
+    required this.activeGroups,
+    required this.activeStories,
+    required this.activeEvents,
+    required this.careerContext,
+    required this.skillSummary,
+    required this.questSummary,
+    required this.achievementSummary,
+    required this.livingOfficeState,
+    required this.playerInfluenceContext,
     required this.errors,
   });
 
@@ -194,6 +217,26 @@ class WorldSimulationContext {
   final List<Object?> events;
   final Map<String, Object?> quests;
   final List<Object?> achievements;
+  final String worldDate;
+  final String timeOfDay;
+  final int weekday;
+  final String season;
+  final Object? weatherContext;
+  final Object? festivalContext;
+  final List<Object?> activeRumors;
+  final Map<String, Object?> residentSnapshot;
+  final Map<String, Object?> locationSnapshot;
+  final Map<String, Object?> personalitySnapshot;
+  final Map<String, Object?> friendshipSnapshot;
+  final List<OfficeGroup> activeGroups;
+  final List<Object?> activeStories;
+  final List<Object?> activeEvents;
+  final Object? careerContext;
+  final Map<String, Object?> skillSummary;
+  final Map<String, Object?> questSummary;
+  final List<Object?> achievementSummary;
+  final LivingOfficeState livingOfficeState;
+  final PlayerInfluenceContext playerInfluenceContext;
   final Map<String, String> errors;
 
   String get signature {
@@ -209,7 +252,61 @@ class WorldSimulationContext {
       events.length,
       quests.entries.map((entry) => '${entry.key}:${entry.value}').join('|'),
       achievements.length,
+      livingOfficeState.officeMood,
+      livingOfficeState.activityLevel,
+      livingOfficeState.socialLevel,
+      livingOfficeState.tensionLevel,
+      playerInfluenceContext.officeInfluence.overall,
+      playerInfluenceContext.reputation.join('|'),
     ].join('::');
+  }
+
+  WorldSimulationContext copyWith({
+    List<OfficeGroup>? activeGroups,
+    List<Object?>? activeStories,
+    List<Object?>? activeEvents,
+    LivingOfficeState? livingOfficeState,
+    PlayerInfluenceContext? playerInfluenceContext,
+  }) {
+    return WorldSimulationContext(
+      tickType: tickType,
+      clock: clock,
+      festivals: festivals,
+      festivalTags: festivalTags,
+      weather: weather,
+      weatherTags: weatherTags,
+      residentStates: residentStates,
+      rumors: rumors,
+      rumorTags: rumorTags,
+      fishPool: fishPool,
+      economy: economy,
+      relationships: relationships,
+      events: events,
+      quests: quests,
+      achievements: achievements,
+      worldDate: worldDate,
+      timeOfDay: timeOfDay,
+      weekday: weekday,
+      season: season,
+      weatherContext: weatherContext,
+      festivalContext: festivalContext,
+      activeRumors: activeRumors,
+      residentSnapshot: residentSnapshot,
+      locationSnapshot: locationSnapshot,
+      personalitySnapshot: personalitySnapshot,
+      friendshipSnapshot: friendshipSnapshot,
+      activeGroups: activeGroups ?? this.activeGroups,
+      activeStories: activeStories ?? this.activeStories,
+      activeEvents: activeEvents ?? this.activeEvents,
+      careerContext: careerContext,
+      skillSummary: skillSummary,
+      questSummary: questSummary,
+      achievementSummary: achievementSummary,
+      livingOfficeState: livingOfficeState ?? this.livingOfficeState,
+      playerInfluenceContext:
+          playerInfluenceContext ?? this.playerInfluenceContext,
+      errors: errors,
+    );
   }
 }
 
@@ -248,6 +345,8 @@ class WorldTickContext {
     required this.afterClockMinute,
     required this.events,
     required this.stages,
+    required this.livingOfficeState,
+    required this.playerInfluenceContext,
   });
 
   final TickType tickType;
@@ -259,6 +358,8 @@ class WorldTickContext {
   final int afterClockMinute;
   final List<TickEvent> events;
   final List<String> stages;
+  final LivingOfficeState livingOfficeState;
+  final PlayerInfluenceContext playerInfluenceContext;
 }
 
 class WorldTickManager extends ChangeNotifier {
@@ -401,7 +502,7 @@ class WorldTickManager extends ChangeNotifier {
       _festivalRuntimeManager.invalidateCache();
       _weatherRuntimeManager.invalidateCache();
     }
-    final worldContext = _buildWorldContext(type);
+    var worldContext = _buildWorldContext(type);
     errors.addAll(worldContext.errors);
     final baseWorldContextKey = _baseWorldContextKey(worldContext);
     stateChanged = await _runCachedStage(
@@ -482,17 +583,18 @@ class WorldTickManager extends ChangeNotifier {
           action: () => _driveEconomy(type),
         ) ||
         stateChanged;
-    stateChanged = await _runCachedStage(
-          type,
-          'Relationship',
-          cacheKey: _relationshipStageKey(type),
-          executedStages: executedStages,
-          skippedStages: skippedStages,
-          errors: errors,
-          runtimeResults: runtimeResults,
-          action: () => _driveRelationship(type),
-        ) ||
-        stateChanged;
+    final relationshipChanged = await _runCachedStage(
+      type,
+      'Relationship',
+      cacheKey: _relationshipStageKey(type),
+      executedStages: executedStages,
+      skippedStages: skippedStages,
+      errors: errors,
+      runtimeResults: runtimeResults,
+      action: () => _driveRelationship(type),
+    );
+    stateChanged = relationshipChanged || stateChanged;
+    worldContext = _refreshLivingOfficeState(type, worldContext);
     stateChanged = await _runCachedStage(
           type,
           'DynamicEvent',
@@ -575,6 +677,8 @@ class WorldTickManager extends ChangeNotifier {
       afterClockMinute: after.minute,
       events: tickEvents,
       stages: tickEvents.map((event) => event.stage).toList(growable: false),
+      livingOfficeState: worldContext.livingOfficeState,
+      playerInfluenceContext: worldContext.playerInfluenceContext,
     );
     _history.add(context);
     final finishedAt = DateTime.now();
@@ -703,8 +807,9 @@ class WorldTickManager extends ChangeNotifier {
   }
 
   bool _driveRelationship(TickType type) {
-    if (type == TickType.dayTick ||
-        _relationshipRuntimeManager?.lastUpdateDay == null) {
+    if (type == TickType.dayTick &&
+        _relationshipRuntimeManager?.lastUpdateDay !=
+            _worldClockManager.today().dayCount) {
       _relationshipRuntimeManager?.updateResidentRelationships();
       return _relationshipRuntimeManager != null;
     }
@@ -911,7 +1016,7 @@ class WorldTickManager extends ChangeNotifier {
   }
 
   String _worldContextKey(WorldSimulationContext context) {
-    return '${_baseWorldContextKey(context)}:${context.rumorTags.join('|')}:${context.fishPool.length}:${context.events.length}';
+    return '${_baseWorldContextKey(context)}:${context.rumorTags.join('|')}:${context.fishPool.length}:${context.events.length}:${context.livingOfficeState.officeMood}:${context.livingOfficeState.activityLevel}:${context.livingOfficeState.socialLevel}:${context.livingOfficeState.tensionLevel}';
   }
 
   String _economyStageKey(TickType type) {
@@ -1010,6 +1115,79 @@ class WorldTickManager extends ChangeNotifier {
       () =>
           _achievementRuntimeManager?.getAllAchievements() ?? const <Object?>[],
     );
+    final activeGroups = safe<List<OfficeGroup>>(
+      'OfficeGroups',
+      const <OfficeGroup>[],
+      () =>
+          _relationshipRuntimeManager?.getActiveOfficeGroups() ??
+          _worldSaveManager.activeGroups,
+    );
+    final locationSnapshot = safe<Map<String, Object?>>(
+      'LocationSnapshot',
+      const <String, Object?>{},
+      () => <String, Object?>{
+        for (final resident in _residentRuntimeManager.residents)
+          resident.id:
+              _residentRuntimeManager.getResidentLocationContext(resident.id),
+      },
+    );
+    final personalitySnapshot = safe<Map<String, Object?>>(
+      'PersonalitySnapshot',
+      const <String, Object?>{},
+      () => _residentRuntimeManager.getAllResidentPersonalityContexts(),
+    );
+    final friendshipSnapshot = safe<Map<String, Object?>>(
+      'FriendshipSnapshot',
+      const <String, Object?>{},
+      () => <String, Object?>{
+        for (final state
+            in _relationshipRuntimeManager?.getAllFriendshipStates() ??
+                const <Object?>[])
+          if (_objectResidentId(state).isNotEmpty)
+            _objectResidentId(state): state,
+      },
+    );
+    final activeStories = safe<List<Object?>>(
+      'StoryContext',
+      const <Object?>[],
+      () => _storyRuntimeManager.finishedStoryIds
+          .take(12)
+          .map<Object?>((id) => id)
+          .toList(growable: false),
+    );
+    final calendar = _worldClockManager.today();
+    final worldDate =
+        'Y${calendar.year}-M${calendar.month}-D${calendar.day}-#${calendar.dayCount}';
+    final timeOfDay = _timeOfDayFor(_worldClockManager.hour());
+    final livingOfficeState = _secondWorldEngine?.buildLivingOfficeState(
+          worldDate: worldDate,
+          timeOfDay: timeOfDay,
+          weekday: calendar.weekdayIndex,
+          season: calendar.season,
+          weatherContext: weather,
+          festivalContext: festivals.isEmpty ? null : festivals.first,
+          activeRumors: rumors,
+          residentSnapshot: residentStates,
+          activeGroups: activeGroups,
+          activeStories: activeStories,
+          activeEvents: events,
+          careerContext: _worldSaveManager.careerState,
+          skillSummary:
+              Map<String, Object?>.from(_worldSaveManager.playerSkillStates),
+          questSummary: quests,
+          achievementSummary: achievements,
+          previousState: _worldSaveManager.livingOfficeState,
+        ) ??
+        _worldSaveManager.livingOfficeState;
+    final playerInfluenceContext =
+        _secondWorldEngine?.buildPlayerInfluenceContext(
+              livingOfficeState: livingOfficeState,
+              questSummary: quests,
+              achievementSummary: achievements,
+              activeRumors: rumors,
+              activeEvents: events,
+            ) ??
+            _worldSaveManager.playerInfluenceContext;
     return WorldSimulationContext(
       tickType: type,
       clock: _clockSignature(),
@@ -1026,8 +1204,113 @@ class WorldTickManager extends ChangeNotifier {
       events: events,
       quests: quests,
       achievements: achievements,
+      worldDate: worldDate,
+      timeOfDay: timeOfDay,
+      weekday: calendar.weekdayIndex,
+      season: calendar.season,
+      weatherContext: weather,
+      festivalContext: festivals.isEmpty ? null : festivals.first,
+      activeRumors: rumors,
+      residentSnapshot: residentStates,
+      locationSnapshot: locationSnapshot,
+      personalitySnapshot: personalitySnapshot,
+      friendshipSnapshot: friendshipSnapshot,
+      activeGroups: activeGroups,
+      activeStories: activeStories,
+      activeEvents: events,
+      careerContext: _worldSaveManager.careerState,
+      skillSummary:
+          Map<String, Object?>.from(_worldSaveManager.playerSkillStates),
+      questSummary: quests,
+      achievementSummary: achievements,
+      livingOfficeState: livingOfficeState,
+      playerInfluenceContext: playerInfluenceContext,
       errors: contextErrors,
     );
+  }
+
+  WorldSimulationContext _refreshLivingOfficeState(
+    TickType type,
+    WorldSimulationContext context,
+  ) {
+    final engine = _secondWorldEngine;
+    if (engine == null) return context;
+    final groups = _relationshipRuntimeManager?.getActiveOfficeGroups() ??
+        _worldSaveManager.activeGroups;
+    final state = engine.buildLivingOfficeState(
+      worldDate: context.worldDate,
+      timeOfDay: context.timeOfDay,
+      weekday: context.weekday,
+      season: context.season,
+      weatherContext: context.weatherContext,
+      festivalContext: context.festivalContext,
+      activeRumors: context.activeRumors,
+      residentSnapshot: context.residentSnapshot,
+      activeGroups: groups,
+      activeStories: context.activeStories,
+      activeEvents: _dynamicEventRuntimeManager?.getActiveEvents() ??
+          context.activeEvents,
+      careerContext: context.careerContext,
+      skillSummary: context.skillSummary,
+      questSummary: context.questSummary,
+      achievementSummary: context.achievementSummary,
+      previousState: _worldSaveManager.livingOfficeState,
+    );
+    final playerInfluenceContext = engine.buildPlayerInfluenceContext(
+      livingOfficeState: state,
+      questSummary: context.questSummary,
+      achievementSummary: context.achievementSummary,
+      activeRumors: context.activeRumors,
+      activeEvents: _dynamicEventRuntimeManager?.getActiveEvents() ??
+          context.activeEvents,
+    );
+    _worldSaveManager.setLivingOfficeState(state);
+    _worldSaveManager.setPlayerInfluenceContext(playerInfluenceContext);
+    _dialogueRuntimeManager.applyLivingOfficeState(state);
+    _dialogueRuntimeManager.applyPlayerInfluenceContext(
+      playerInfluenceContext,
+    );
+    _storyRuntimeManager.applyLivingOfficeState(state);
+    _storyRuntimeManager.applyPlayerInfluenceContext(playerInfluenceContext);
+    _dynamicEventRuntimeManager?.applyLivingOfficeState(state);
+    _dynamicEventRuntimeManager?.applyPlayerInfluenceContext(
+      playerInfluenceContext,
+    );
+    _questRuntimeManager?.applyPlayerInfluenceContext(playerInfluenceContext);
+    _achievementRuntimeManager?.applyPlayerInfluenceContext(
+      playerInfluenceContext,
+    );
+    if (type == TickType.dayTick) {
+      _worldSaveManager.recordOfficeWorldHistory(
+        engine.buildOfficeWorldHistoryEntry(state),
+      );
+    }
+    return context.copyWith(
+      activeGroups: groups,
+      activeEvents: _dynamicEventRuntimeManager?.getActiveEvents() ??
+          context.activeEvents,
+      livingOfficeState: state,
+      playerInfluenceContext: playerInfluenceContext,
+    );
+  }
+
+  String _timeOfDayFor(int hour) {
+    if (hour < 6) return 'late_night';
+    if (hour < 11) return 'morning';
+    if (hour < 14) return 'noon';
+    if (hour < 18) return 'afternoon';
+    if (hour < 22) return 'evening';
+    return 'night';
+  }
+
+  String _objectResidentId(Object? value) {
+    if (value == null) return '';
+    try {
+      final dynamic item = value;
+      return item.residentId?.toString() ?? '';
+    } catch (_) {
+      return '';
+    }
   }
 
   void _event(TickEventType eventType, TickType tickType, String stage) {

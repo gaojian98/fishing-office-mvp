@@ -134,7 +134,7 @@
     {
       "id": "old_fisher_dialogue_07",
       "residentId": "old_fisher",
-      "text": "老渔夫笑了笑：今天不用太用力，鱼会自己靠近。",
+      "text": "老渔夫笑了笑：今天不用太用力，鱼会自己靠近。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "friend",
@@ -157,7 +157,7 @@
     {
       "id": "old_fisher_dialogue_08",
       "residentId": "old_fisher",
-      "text": "老渔夫小声说：你看，海风又把烦恼吹远了一点。",
+      "text": "老渔夫小声说：你看，海风又把烦恼吹远了一点。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "close_friend",
@@ -178,7 +178,7 @@
     {
       "id": "old_fisher_dialogue_09",
       "residentId": "old_fisher",
-      "text": "老渔夫提醒你：如果老板路过，就说你在观察水域资源。",
+      "text": "老渔夫提醒你：如果老板路过，就说你在观察水域资源。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "night",
         "relationshipLevel": "stranger",
@@ -197,7 +197,7 @@
     {
       "id": "old_fisher_dialogue_10",
       "residentId": "old_fisher",
-      "text": "老渔夫望向窗外：第二世界每天都会留一点位置给你。",
+      "text": "老渔夫望向窗外：第二世界每天都会留一点位置给你。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "known",
@@ -335,7 +335,7 @@
     {
       "id": "front_desk_lily_dialogue_07",
       "residentId": "front_desk_lily",
-      "text": "前台小妹笑了笑：今天不用太用力，鱼会自己靠近。",
+      "text": "前台小妹笑了笑：今天不用太用力，鱼会自己靠近。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "friend",
@@ -358,7 +358,7 @@
     {
       "id": "front_desk_lily_dialogue_08",
       "residentId": "front_desk_lily",
-      "text": "前台小妹小声说：你看，海风又把烦恼吹远了一点。",
+      "text": "前台小妹小声说：你看，海风又把烦恼吹远了一点。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "close_friend",
@@ -379,7 +379,7 @@
     {
       "id": "front_desk_lily_dialogue_09",
       "residentId": "front_desk_lily",
-      "text": "前台小妹提醒你：如果老板路过，就说你在观察水域资源。",
+      "text": "前台小妹提醒你：如果老板路过，就说你在观察水域资源。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "night",
         "relationshipLevel": "stranger",
@@ -398,7 +398,7 @@
     {
       "id": "front_desk_lily_dialogue_10",
       "residentId": "front_desk_lily",
-      "text": "前台小妹望向窗外：第二世界每天都会留一点位置给你。",
+      "text": "前台小妹望向窗外：第二世界每天都会留一点位置给你。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "known",
@@ -536,7 +536,7 @@
     {
       "id": "nap_guard_dialogue_07",
       "residentId": "nap_guard",
-      "text": "午睡保安笑了笑：今天不用太用力，鱼会自己靠近。",
+      "text": "午睡保安笑了笑：今天不用太用力，鱼会自己靠近。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "friend",
@@ -559,7 +559,7 @@
     {
       "id": "nap_guard_dialogue_08",
       "residentId": "nap_guard",
-      "text": "午睡保安小声说：你看，海风又把烦恼吹远了一点。",
+      "text": "午睡保安小声说：你看，海风又把烦恼吹远了一点。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "close_friend",
@@ -580,7 +580,7 @@
     {
       "id": "nap_guard_dialogue_09",
       "residentId": "nap_guard",
-      "text": "午睡保安提醒你：如果老板路过，就说你在观察水域资源。",
+      "text": "午睡保安提醒你：如果老板路过，就说你在观察水域资源。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "night",
         "relationshipLevel": "stranger",
@@ -599,7 +599,7 @@
     {
       "id": "nap_guard_dialogue_10",
       "residentId": "nap_guard",
-      "text": "午睡保安望向窗外：第二世界每天都会留一点位置给你。",
+      "text": "午睡保安望向窗外：第二世界每天都会留一点位置给你。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "known",
@@ -737,7 +737,7 @@
     {
       "id": "it_repair_wu_dialogue_07",
       "residentId": "it_repair_wu",
-      "text": "电脑维修员笑了笑：今天不用太用力，鱼会自己靠近。",
+      "text": "电脑维修员笑了笑：今天不用太用力，鱼会自己靠近。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "friend",
@@ -760,7 +760,7 @@
     {
       "id": "it_repair_wu_dialogue_08",
       "residentId": "it_repair_wu",
-      "text": "电脑维修员小声说：你看，海风又把烦恼吹远了一点。",
+      "text": "电脑维修员小声说：你看，海风又把烦恼吹远了一点。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "close_friend",
@@ -781,7 +781,7 @@
     {
       "id": "it_repair_wu_dialogue_09",
       "residentId": "it_repair_wu",
-      "text": "电脑维修员提醒你：如果老板路过，就说你在观察水域资源。",
+      "text": "电脑维修员提醒你：如果老板路过，就说你在观察水域资源。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "night",
         "relationshipLevel": "stranger",
@@ -800,7 +800,7 @@
     {
       "id": "it_repair_wu_dialogue_10",
       "residentId": "it_repair_wu",
-      "text": "电脑维修员望向窗外：第二世界每天都会留一点位置给你。",
+      "text": "电脑维修员望向窗外：第二世界每天都会留一点位置给你。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "known",
@@ -938,7 +938,7 @@
     {
       "id": "sea_cleaner_dialogue_07",
       "residentId": "sea_cleaner",
-      "text": "海边清洁工笑了笑：今天不用太用力，鱼会自己靠近。",
+      "text": "海边清洁工笑了笑：今天不用太用力，鱼会自己靠近。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "friend",
@@ -961,7 +961,7 @@
     {
       "id": "sea_cleaner_dialogue_08",
       "residentId": "sea_cleaner",
-      "text": "海边清洁工小声说：你看，海风又把烦恼吹远了一点。",
+      "text": "海边清洁工小声说：你看，海风又把烦恼吹远了一点。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "close_friend",
@@ -982,7 +982,7 @@
     {
       "id": "sea_cleaner_dialogue_09",
       "residentId": "sea_cleaner",
-      "text": "海边清洁工提醒你：如果老板路过，就说你在观察水域资源。",
+      "text": "海边清洁工提醒你：如果老板路过，就说你在观察水域资源。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "night",
         "relationshipLevel": "stranger",
@@ -1001,7 +1001,7 @@
     {
       "id": "sea_cleaner_dialogue_10",
       "residentId": "sea_cleaner",
-      "text": "海边清洁工望向窗外：第二世界每天都会留一点位置给你。",
+      "text": "海边清洁工望向窗外：第二世界每天都会留一点位置给你。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "known",
@@ -1139,7 +1139,7 @@
     {
       "id": "coffee_boss_dialogue_07",
       "residentId": "coffee_boss",
-      "text": "咖啡店老板笑了笑：今天不用太用力，鱼会自己靠近。",
+      "text": "咖啡店老板笑了笑：今天不用太用力，鱼会自己靠近。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "friend",
@@ -1162,7 +1162,7 @@
     {
       "id": "coffee_boss_dialogue_08",
       "residentId": "coffee_boss",
-      "text": "咖啡店老板小声说：你看，海风又把烦恼吹远了一点。",
+      "text": "咖啡店老板小声说：你看，海风又把烦恼吹远了一点。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "close_friend",
@@ -1183,7 +1183,7 @@
     {
       "id": "coffee_boss_dialogue_09",
       "residentId": "coffee_boss",
-      "text": "咖啡店老板提醒你：如果老板路过，就说你在观察水域资源。",
+      "text": "咖啡店老板提醒你：如果老板路过，就说你在观察水域资源。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "night",
         "relationshipLevel": "stranger",
@@ -1202,7 +1202,7 @@
     {
       "id": "coffee_boss_dialogue_10",
       "residentId": "coffee_boss",
-      "text": "咖啡店老板望向窗外：第二世界每天都会留一点位置给你。",
+      "text": "咖啡店老板望向窗外：第二世界每天都会留一点位置给你。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "known",
@@ -1340,7 +1340,7 @@
     {
       "id": "coworker_qiang_dialogue_07",
       "residentId": "coworker_qiang",
-      "text": "摸鱼同事阿强笑了笑：今天不用太用力，鱼会自己靠近。",
+      "text": "摸鱼同事阿强笑了笑：今天不用太用力，鱼会自己靠近。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "friend",
@@ -1363,7 +1363,7 @@
     {
       "id": "coworker_qiang_dialogue_08",
       "residentId": "coworker_qiang",
-      "text": "摸鱼同事阿强小声说：你看，海风又把烦恼吹远了一点。",
+      "text": "摸鱼同事阿强小声说：你看，海风又把烦恼吹远了一点。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "close_friend",
@@ -1384,7 +1384,7 @@
     {
       "id": "coworker_qiang_dialogue_09",
       "residentId": "coworker_qiang",
-      "text": "摸鱼同事阿强提醒你：如果老板路过，就说你在观察水域资源。",
+      "text": "摸鱼同事阿强提醒你：如果老板路过，就说你在观察水域资源。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "night",
         "relationshipLevel": "stranger",
@@ -1403,7 +1403,7 @@
     {
       "id": "coworker_qiang_dialogue_10",
       "residentId": "coworker_qiang",
-      "text": "摸鱼同事阿强望向窗外：第二世界每天都会留一点位置给你。",
+      "text": "摸鱼同事阿强望向窗外：第二世界每天都会留一点位置给你。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "known",
@@ -1541,7 +1541,7 @@
     {
       "id": "late_supervisor_dialogue_07",
       "residentId": "late_supervisor",
-      "text": "爱迟到的主管笑了笑：今天不用太用力，鱼会自己靠近。",
+      "text": "爱迟到的主管笑了笑：今天不用太用力，鱼会自己靠近。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "friend",
@@ -1564,7 +1564,7 @@
     {
       "id": "late_supervisor_dialogue_08",
       "residentId": "late_supervisor",
-      "text": "爱迟到的主管小声说：你看，海风又把烦恼吹远了一点。",
+      "text": "爱迟到的主管小声说：你看，海风又把烦恼吹远了一点。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "close_friend",
@@ -1585,7 +1585,7 @@
     {
       "id": "late_supervisor_dialogue_09",
       "residentId": "late_supervisor",
-      "text": "爱迟到的主管提醒你：如果老板路过，就说你在观察水域资源。",
+      "text": "爱迟到的主管提醒你：如果老板路过，就说你在观察水域资源。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "night",
         "relationshipLevel": "stranger",
@@ -1604,7 +1604,7 @@
     {
       "id": "late_supervisor_dialogue_10",
       "residentId": "late_supervisor",
-      "text": "爱迟到的主管望向窗外：第二世界每天都会留一点位置给你。",
+      "text": "爱迟到的主管望向窗外：第二世界每天都会留一点位置给你。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "known",
@@ -1742,7 +1742,7 @@
     {
       "id": "runner_li_dialogue_07",
       "residentId": "runner_li",
-      "text": "送文件的小李笑了笑：今天不用太用力，鱼会自己靠近。",
+      "text": "送文件的小李笑了笑：今天不用太用力，鱼会自己靠近。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "friend",
@@ -1765,7 +1765,7 @@
     {
       "id": "runner_li_dialogue_08",
       "residentId": "runner_li",
-      "text": "送文件的小李小声说：你看，海风又把烦恼吹远了一点。",
+      "text": "送文件的小李小声说：你看，海风又把烦恼吹远了一点。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "close_friend",
@@ -1786,7 +1786,7 @@
     {
       "id": "runner_li_dialogue_09",
       "residentId": "runner_li",
-      "text": "送文件的小李提醒你：如果老板路过，就说你在观察水域资源。",
+      "text": "送文件的小李提醒你：如果老板路过，就说你在观察水域资源。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "night",
         "relationshipLevel": "stranger",
@@ -1805,7 +1805,7 @@
     {
       "id": "runner_li_dialogue_10",
       "residentId": "runner_li",
-      "text": "送文件的小李望向窗外：第二世界每天都会留一点位置给你。",
+      "text": "送文件的小李望向窗外：第二世界每天都会留一点位置给你。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "known",
@@ -1943,7 +1943,7 @@
     {
       "id": "mystery_guest_dialogue_07",
       "residentId": "mystery_guest",
-      "text": "神秘钓鱼客笑了笑：今天不用太用力，鱼会自己靠近。",
+      "text": "神秘钓鱼客笑了笑：今天不用太用力，鱼会自己靠近。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "friend",
@@ -1966,7 +1966,7 @@
     {
       "id": "mystery_guest_dialogue_08",
       "residentId": "mystery_guest",
-      "text": "神秘钓鱼客小声说：你看，海风又把烦恼吹远了一点。",
+      "text": "神秘钓鱼客小声说：你看，海风又把烦恼吹远了一点。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "afternoon",
         "relationshipLevel": "close_friend",
@@ -1987,7 +1987,7 @@
     {
       "id": "mystery_guest_dialogue_09",
       "residentId": "mystery_guest",
-      "text": "神秘钓鱼客提醒你：如果老板路过，就说你在观察水域资源。",
+      "text": "神秘钓鱼客提醒你：如果老板路过，就说你在观察水域资源。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "night",
         "relationshipLevel": "stranger",
@@ -2006,7 +2006,7 @@
     {
       "id": "mystery_guest_dialogue_10",
       "residentId": "mystery_guest",
-      "text": "神秘钓鱼客望向窗外：第二世界每天都会留一点位置给你。",
+      "text": "神秘钓鱼客望向窗外：第二世界每天都会留一点位置给你。（第2次听见时，语气有一点不同。）",
       "conditions": {
         "timeOfDay": "morning",
         "relationshipLevel": "known",
@@ -54181,6 +54181,5206 @@
         "special_event",
         "fairy_tale"
       ]
+    },
+    {
+      "id": "content_interaction_talk_001",
+      "residentId": "old_fisher",
+      "actionType": "talk",
+      "text": "老渔夫回应：这个时候对方愿意坐下来聊一会儿，话题慢慢展开，气氛像窗外的海风一样慢下来。",
+      "response": "对方愿意坐下来聊一会儿，话题慢慢展开。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "outgoing"
+        ],
+        "residentLocation": "workstation",
+        "residentMood": "calm",
+        "officeMood": "calm",
+        "festival": "active"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "talk",
+        "stranger",
+        "outgoing",
+        "workstation",
+        "calm",
+        "calm",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "talk",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_short_talk_002",
+      "residentId": "*",
+      "actionType": "short_talk",
+      "text": "居民回应：这个时候一个轻轻的招呼被接住了，气氛像窗外的海风一样慢下来。",
+      "response": "一个轻轻的招呼被接住了。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "introverted"
+        ],
+        "residentLocation": "office",
+        "residentMood": "happy",
+        "officeMood": "busy",
+        "festival": "festival_new_year"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "short_talk",
+        "acquaintance",
+        "introverted",
+        "office",
+        "happy",
+        "busy",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "short_talk",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_invite_coffee_003",
+      "residentId": "*",
+      "actionType": "invite_coffee",
+      "text": "居民回应：这个时候咖啡没有催促谁，只让休息变得自然，气氛像窗外的海风一样慢下来。",
+      "response": "咖啡没有催促谁，只让休息变得自然。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "hardworking"
+        ],
+        "residentLocation": "meeting_room",
+        "residentMood": "curious",
+        "officeMood": "cheerful",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "invite_coffee",
+        "familiar",
+        "hardworking",
+        "meeting_room",
+        "curious",
+        "cheerful",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "invite_coffee",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_help_work_004",
+      "residentId": "*",
+      "actionType": "help_work",
+      "text": "居民回应：这个时候你帮忙分走了一点工作压力，气氛像窗外的海风一样慢下来。",
+      "response": "你帮忙分走了一点工作压力。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "relaxed"
+        ],
+        "residentLocation": "pantry",
+        "residentMood": "excited",
+        "officeMood": "tense",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "help_work",
+        "friend",
+        "relaxed",
+        "pantry",
+        "excited",
+        "tense",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "help_work",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_join_break_005",
+      "residentId": "sea_cleaner",
+      "actionType": "join_break",
+      "text": "海边清洁工回应：这个时候这段休息像海风一样短，但很舒服，气氛像窗外的海风一样慢下来。",
+      "response": "这段休息像海风一样短，但很舒服。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "gossipy"
+        ],
+        "residentLocation": "printing_area",
+        "residentMood": "tired",
+        "officeMood": "quiet",
+        "festival": "festival_christmas"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_break",
+        "close_friend",
+        "gossipy",
+        "printing_area",
+        "tired",
+        "quiet",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "join_break",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_comfort_006",
+      "residentId": "*",
+      "actionType": "comfort",
+      "text": "居民回应：这个时候你没有急着讲道理，只是陪了一会儿，气氛像窗外的海风一样慢下来。",
+      "response": "你没有急着讲道理，只是陪了一会儿。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "serious"
+        ],
+        "residentLocation": "manager_room",
+        "residentMood": "busy",
+        "officeMood": "social",
+        "festival": "active"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "comfort",
+        "trusted_friend",
+        "serious",
+        "manager_room",
+        "busy",
+        "social",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "comfort",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_share_rumor_007",
+      "residentId": "*",
+      "actionType": "share_rumor",
+      "text": "居民回应：这个时候传闻被轻轻放到桌上，大家没有急着下结论，气氛像窗外的海风一样慢下来。",
+      "response": "传闻被轻轻放到桌上，大家没有急着下结论。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "optimistic"
+        ],
+        "residentLocation": "balcony",
+        "residentMood": "lonely",
+        "officeMood": "festive",
+        "festival": "festival_new_year"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_rumor",
+        "stranger",
+        "optimistic",
+        "balcony",
+        "lonely",
+        "festive",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "share_rumor",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_ask_about_rumor_008",
+      "residentId": "*",
+      "actionType": "ask_about_rumor",
+      "text": "居民回应：这个时候对方把最近听到的小消息讲给你听，气氛像窗外的海风一样慢下来。",
+      "response": "对方把最近听到的小消息讲给你听。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "cautious"
+        ],
+        "residentLocation": "elevator",
+        "residentMood": "worried",
+        "officeMood": "tired",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "ask_about_rumor",
+        "acquaintance",
+        "cautious",
+        "elevator",
+        "worried",
+        "tired",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "ask_about_rumor",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_verify_rumor_009",
+      "residentId": "runner_li",
+      "actionType": "verify_rumor",
+      "text": "送文件的小李回应：这个时候你们一起确认消息来源，让传闻变得更清楚，气氛像窗外的海风一样慢下来。",
+      "response": "你们一起确认消息来源，让传闻变得更清楚。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "kind"
+        ],
+        "residentLocation": "reception",
+        "residentMood": "sad",
+        "officeMood": "celebratory",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "verify_rumor",
+        "familiar",
+        "kind",
+        "reception",
+        "sad",
+        "celebratory",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "verify_rumor",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_share_fish_010",
+      "residentId": "*",
+      "actionType": "share_fish",
+      "text": "居民回应：这个时候鱼获变成了今天的小话题，气氛像窗外的海风一样慢下来。",
+      "response": "鱼获变成了今天的小话题。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "competitive"
+        ],
+        "residentLocation": "restroom",
+        "residentMood": "angry",
+        "officeMood": "calm",
+        "festival": "festival_christmas"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_fish",
+        "friend",
+        "competitive",
+        "restroom",
+        "angry",
+        "calm",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "share_fish",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_remember_preference_011",
+      "residentId": "*",
+      "actionType": "remember_preference",
+      "text": "居民回应：这个时候你记住了一个小偏好，对方也记住了这份细心，气氛像窗外的海风一样慢下来。",
+      "response": "你记住了一个小偏好，对方也记住了这份细心。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "playful"
+        ],
+        "residentLocation": "coffee_shop",
+        "residentMood": "grateful",
+        "officeMood": "busy",
+        "festival": "active"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "remember_preference",
+        "close_friend",
+        "playful",
+        "coffee_shop",
+        "grateful",
+        "busy",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "remember_preference",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_apologize_012",
+      "residentId": "*",
+      "actionType": "apologize",
+      "text": "居民回应：这个时候道歉没有立刻解决一切，但让气氛松了一点，气氛像窗外的海风一样慢下来。",
+      "response": "道歉没有立刻解决一切，但让气氛松了一点。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "calm"
+        ],
+        "residentLocation": "park",
+        "residentMood": "playful",
+        "officeMood": "cheerful",
+        "festival": "festival_new_year"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "apologize",
+        "trusted_friend",
+        "calm",
+        "park",
+        "playful",
+        "cheerful",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "apologize",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_resolve_conflict_013",
+      "residentId": "office_finance_lin",
+      "actionType": "resolve_conflict",
+      "text": "办公楼财务林姐回应：这个时候误会被慢慢说开，办公室安静了一些，气氛像窗外的海风一样慢下来。",
+      "response": "误会被慢慢说开，办公室安静了一些。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "sensitive"
+        ],
+        "residentLocation": "seaside",
+        "residentMood": "calm",
+        "officeMood": "tense",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "resolve_conflict",
+        "stranger",
+        "sensitive",
+        "seaside",
+        "calm",
+        "tense",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "resolve_conflict",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_observe_014",
+      "residentId": "*",
+      "actionType": "observe",
+      "text": "居民回应：这个时候你先观察，没有打扰正在发生的小事，气氛像窗外的海风一样慢下来。",
+      "response": "你先观察，没有打扰正在发生的小事。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "curious"
+        ],
+        "residentLocation": "dock",
+        "residentMood": "happy",
+        "officeMood": "quiet",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "observe",
+        "acquaintance",
+        "curious",
+        "dock",
+        "happy",
+        "quiet",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "observe",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_start_story_015",
+      "residentId": "*",
+      "actionType": "start_story",
+      "text": "居民回应：这个时候对方想起一件小事，故事自然开始，气氛像窗外的海风一样慢下来。",
+      "response": "对方想起一件小事，故事自然开始。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "outgoing"
+        ],
+        "residentLocation": "home",
+        "residentMood": "curious",
+        "officeMood": "social",
+        "festival": "festival_christmas"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "start_story",
+        "familiar",
+        "outgoing",
+        "home",
+        "curious",
+        "social",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "start_story",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_join_group_016",
+      "residentId": "*",
+      "actionType": "join_group",
+      "text": "居民回应：这个时候你加入了大家的小圈子，没有打断原本的节奏，气氛像窗外的海风一样慢下来。",
+      "response": "你加入了大家的小圈子，没有打断原本的节奏。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "introverted"
+        ],
+        "residentLocation": "workstation",
+        "residentMood": "excited",
+        "officeMood": "festive",
+        "festival": "active"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_group",
+        "friend",
+        "introverted",
+        "workstation",
+        "excited",
+        "festive",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "join_group",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_talk_017",
+      "residentId": "dock_captain_ma",
+      "actionType": "talk",
+      "text": "码头马船长回应：这个时候对方愿意坐下来聊一会儿，话题慢慢展开，气氛像窗外的海风一样慢下来。",
+      "response": "对方愿意坐下来聊一会儿，话题慢慢展开。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "hardworking"
+        ],
+        "residentLocation": "office",
+        "residentMood": "tired",
+        "officeMood": "tired",
+        "festival": "festival_new_year"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "talk",
+        "close_friend",
+        "hardworking",
+        "office",
+        "tired",
+        "tired",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "talk",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_short_talk_018",
+      "residentId": "*",
+      "actionType": "short_talk",
+      "text": "居民回应：这个时候一个轻轻的招呼被接住了，气氛像窗外的海风一样慢下来。（第2次听见时，语气有一点不同。）",
+      "response": "一个轻轻的招呼被接住了。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "relaxed"
+        ],
+        "residentLocation": "meeting_room",
+        "residentMood": "busy",
+        "officeMood": "celebratory",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "short_talk",
+        "trusted_friend",
+        "relaxed",
+        "meeting_room",
+        "busy",
+        "celebratory",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "short_talk",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_invite_coffee_019",
+      "residentId": "*",
+      "actionType": "invite_coffee",
+      "text": "居民回应：这个时候咖啡没有催促谁，只让休息变得自然，气氛像窗外的海风一样慢下来。（第2次听见时，语气有一点不同。）",
+      "response": "咖啡没有催促谁，只让休息变得自然。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "gossipy"
+        ],
+        "residentLocation": "pantry",
+        "residentMood": "lonely",
+        "officeMood": "calm",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "invite_coffee",
+        "stranger",
+        "gossipy",
+        "pantry",
+        "lonely",
+        "calm",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "invite_coffee",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_help_work_020",
+      "residentId": "*",
+      "actionType": "help_work",
+      "text": "居民回应：这个时候你帮忙分走了一点工作压力，气氛像窗外的海风一样慢下来。（第2次听见时，语气有一点不同。）",
+      "response": "你帮忙分走了一点工作压力。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "serious"
+        ],
+        "residentLocation": "printing_area",
+        "residentMood": "worried",
+        "officeMood": "busy",
+        "festival": "festival_christmas"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "help_work",
+        "acquaintance",
+        "serious",
+        "printing_area",
+        "worried",
+        "busy",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "help_work",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_join_break_021",
+      "residentId": "store_night_cashier",
+      "actionType": "join_break",
+      "text": "便利店夜班收银员回应：这个时候这段休息像海风一样短，但很舒服，气氛像窗外的海风一样慢下来。",
+      "response": "这段休息像海风一样短，但很舒服。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "optimistic"
+        ],
+        "residentLocation": "manager_room",
+        "residentMood": "sad",
+        "officeMood": "cheerful",
+        "festival": "active"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_break",
+        "familiar",
+        "optimistic",
+        "manager_room",
+        "sad",
+        "cheerful",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "join_break",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_comfort_022",
+      "residentId": "*",
+      "actionType": "comfort",
+      "text": "居民回应：这个时候你没有急着讲道理，只是陪了一会儿，气氛像窗外的海风一样慢下来。（第2次听见时，语气有一点不同。）",
+      "response": "你没有急着讲道理，只是陪了一会儿。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "cautious"
+        ],
+        "residentLocation": "balcony",
+        "residentMood": "angry",
+        "officeMood": "tense",
+        "festival": "festival_new_year"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "comfort",
+        "friend",
+        "cautious",
+        "balcony",
+        "angry",
+        "tense",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "comfort",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_share_rumor_023",
+      "residentId": "*",
+      "actionType": "share_rumor",
+      "text": "居民回应：这个时候传闻被轻轻放到桌上，大家没有急着下结论，气氛像窗外的海风一样慢下来。（第2次听见时，语气有一点不同。）",
+      "response": "传闻被轻轻放到桌上，大家没有急着下结论。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "kind"
+        ],
+        "residentLocation": "elevator",
+        "residentMood": "grateful",
+        "officeMood": "quiet",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_rumor",
+        "close_friend",
+        "kind",
+        "elevator",
+        "grateful",
+        "quiet",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "share_rumor",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_ask_about_rumor_024",
+      "residentId": "*",
+      "actionType": "ask_about_rumor",
+      "text": "居民回应：这个时候对方把最近听到的小消息讲给你听，气氛像窗外的海风一样慢下来。（第2次听见时，语气有一点不同。）",
+      "response": "对方把最近听到的小消息讲给你听。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "competitive"
+        ],
+        "residentLocation": "reception",
+        "residentMood": "playful",
+        "officeMood": "social",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "ask_about_rumor",
+        "trusted_friend",
+        "competitive",
+        "reception",
+        "playful",
+        "social",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "ask_about_rumor",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_verify_rumor_025",
+      "residentId": "residence_granny_sun",
+      "actionType": "verify_rumor",
+      "text": "居民区晒太阳奶奶回应：这个时候你们一起确认消息来源，让传闻变得更清楚，气氛像窗外的海风一样慢下来。",
+      "response": "你们一起确认消息来源，让传闻变得更清楚。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "playful"
+        ],
+        "residentLocation": "restroom",
+        "residentMood": "calm",
+        "officeMood": "festive",
+        "festival": "festival_christmas"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "verify_rumor",
+        "stranger",
+        "playful",
+        "restroom",
+        "calm",
+        "festive",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "verify_rumor",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_share_fish_026",
+      "residentId": "*",
+      "actionType": "share_fish",
+      "text": "居民回应：这个时候鱼获变成了今天的小话题，气氛像窗外的海风一样慢下来。（第2次听见时，语气有一点不同。）",
+      "response": "鱼获变成了今天的小话题。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "calm"
+        ],
+        "residentLocation": "coffee_shop",
+        "residentMood": "happy",
+        "officeMood": "tired",
+        "festival": "active"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_fish",
+        "acquaintance",
+        "calm",
+        "coffee_shop",
+        "happy",
+        "tired",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "share_fish",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_remember_preference_027",
+      "residentId": "*",
+      "actionType": "remember_preference",
+      "text": "居民回应：这个时候你记住了一个小偏好，对方也记住了这份细心，气氛像窗外的海风一样慢下来。（第2次听见时，语气有一点不同。）",
+      "response": "你记住了一个小偏好，对方也记住了这份细心。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "sensitive"
+        ],
+        "residentLocation": "park",
+        "residentMood": "curious",
+        "officeMood": "celebratory",
+        "festival": "festival_new_year"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "remember_preference",
+        "familiar",
+        "sensitive",
+        "park",
+        "curious",
+        "celebratory",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "remember_preference",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_apologize_028",
+      "residentId": "*",
+      "actionType": "apologize",
+      "text": "居民回应：这个时候道歉没有立刻解决一切，但让气氛松了一点，气氛像窗外的海风一样慢下来。（第2次听见时，语气有一点不同。）",
+      "response": "道歉没有立刻解决一切，但让气氛松了一点。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "curious"
+        ],
+        "residentLocation": "seaside",
+        "residentMood": "excited",
+        "officeMood": "calm",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "apologize",
+        "friend",
+        "curious",
+        "seaside",
+        "excited",
+        "calm",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "apologize",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_resolve_conflict_029",
+      "residentId": "old_city_bookshop_owner",
+      "actionType": "resolve_conflict",
+      "text": "老城书店老板回应：这个时候误会被慢慢说开，办公室安静了一些，气氛像窗外的海风一样慢下来。",
+      "response": "误会被慢慢说开，办公室安静了一些。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "outgoing"
+        ],
+        "residentLocation": "dock",
+        "residentMood": "tired",
+        "officeMood": "busy",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "resolve_conflict",
+        "close_friend",
+        "outgoing",
+        "dock",
+        "tired",
+        "busy",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "resolve_conflict",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_observe_030",
+      "residentId": "*",
+      "actionType": "observe",
+      "text": "居民回应：这个时候你先观察，没有打扰正在发生的小事，气氛像窗外的海风一样慢下来。（第2次听见时，语气有一点不同。）",
+      "response": "你先观察，没有打扰正在发生的小事。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "introverted"
+        ],
+        "residentLocation": "home",
+        "residentMood": "busy",
+        "officeMood": "cheerful",
+        "festival": "festival_christmas"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "observe",
+        "trusted_friend",
+        "introverted",
+        "home",
+        "busy",
+        "cheerful",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "observe",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_start_story_031",
+      "residentId": "*",
+      "actionType": "start_story",
+      "text": "居民回应：这个时候对方想起一件小事，故事自然开始，气氛像窗外的海风一样慢下来。（第2次听见时，语气有一点不同。）",
+      "response": "对方想起一件小事，故事自然开始。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "hardworking"
+        ],
+        "residentLocation": "workstation",
+        "residentMood": "lonely",
+        "officeMood": "tense",
+        "festival": "active"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "start_story",
+        "stranger",
+        "hardworking",
+        "workstation",
+        "lonely",
+        "tense",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "start_story",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_join_group_032",
+      "residentId": "*",
+      "actionType": "join_group",
+      "text": "居民回应：这个时候你加入了大家的小圈子，没有打断原本的节奏，气氛像窗外的海风一样慢下来。（第2次听见时，语气有一点不同。）",
+      "response": "你加入了大家的小圈子，没有打断原本的节奏。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "relaxed"
+        ],
+        "residentLocation": "office",
+        "residentMood": "worried",
+        "officeMood": "quiet",
+        "festival": "festival_new_year"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_group",
+        "acquaintance",
+        "relaxed",
+        "office",
+        "worried",
+        "quiet",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "join_group",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_talk_033",
+      "residentId": "school_art_teacher",
+      "actionType": "talk",
+      "text": "美术老师许青回应：这个时候对方愿意坐下来聊一会儿，话题慢慢展开，气氛像窗外的海风一样慢下来。",
+      "response": "对方愿意坐下来聊一会儿，话题慢慢展开。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "gossipy"
+        ],
+        "residentLocation": "meeting_room",
+        "residentMood": "sad",
+        "officeMood": "social",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "talk",
+        "familiar",
+        "gossipy",
+        "meeting_room",
+        "sad",
+        "social",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "talk",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_short_talk_034",
+      "residentId": "*",
+      "actionType": "short_talk",
+      "text": "居民回应：这个时候一个轻轻的招呼被接住了，气氛像窗外的海风一样慢下来。（第3次听见时，语气有一点不同。）",
+      "response": "一个轻轻的招呼被接住了。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "serious"
+        ],
+        "residentLocation": "pantry",
+        "residentMood": "angry",
+        "officeMood": "festive",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "short_talk",
+        "friend",
+        "serious",
+        "pantry",
+        "angry",
+        "festive",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "short_talk",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_invite_coffee_035",
+      "residentId": "*",
+      "actionType": "invite_coffee",
+      "text": "居民回应：这个时候咖啡没有催促谁，只让休息变得自然，气氛像窗外的海风一样慢下来。（第3次听见时，语气有一点不同。）",
+      "response": "咖啡没有催促谁，只让休息变得自然。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "optimistic"
+        ],
+        "residentLocation": "printing_area",
+        "residentMood": "grateful",
+        "officeMood": "tired",
+        "festival": "festival_christmas"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "invite_coffee",
+        "close_friend",
+        "optimistic",
+        "printing_area",
+        "grateful",
+        "tired",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "invite_coffee",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_help_work_036",
+      "residentId": "*",
+      "actionType": "help_work",
+      "text": "居民回应：这个时候你帮忙分走了一点工作压力，气氛像窗外的海风一样慢下来。（第3次听见时，语气有一点不同。）",
+      "response": "你帮忙分走了一点工作压力。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "cautious"
+        ],
+        "residentLocation": "manager_room",
+        "residentMood": "playful",
+        "officeMood": "celebratory",
+        "festival": "active"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "help_work",
+        "trusted_friend",
+        "cautious",
+        "manager_room",
+        "playful",
+        "celebratory",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "help_work",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_join_break_037",
+      "residentId": "cafe_latte_artist",
+      "actionType": "join_break",
+      "text": "拉花师安妮回应：这个时候这段休息像海风一样短，但很舒服，气氛像窗外的海风一样慢下来。",
+      "response": "这段休息像海风一样短，但很舒服。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "kind"
+        ],
+        "residentLocation": "balcony",
+        "residentMood": "calm",
+        "officeMood": "calm",
+        "festival": "festival_new_year"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_break",
+        "stranger",
+        "kind",
+        "balcony",
+        "calm",
+        "calm",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "join_break",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_comfort_038",
+      "residentId": "*",
+      "actionType": "comfort",
+      "text": "居民回应：这个时候你没有急着讲道理，只是陪了一会儿，气氛像窗外的海风一样慢下来。（第3次听见时，语气有一点不同。）",
+      "response": "你没有急着讲道理，只是陪了一会儿。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "competitive"
+        ],
+        "residentLocation": "elevator",
+        "residentMood": "happy",
+        "officeMood": "busy",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "comfort",
+        "acquaintance",
+        "competitive",
+        "elevator",
+        "happy",
+        "busy",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "comfort",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_share_rumor_039",
+      "residentId": "*",
+      "actionType": "share_rumor",
+      "text": "居民回应：这个时候传闻被轻轻放到桌上，大家没有急着下结论，气氛像窗外的海风一样慢下来。（第3次听见时，语气有一点不同。）",
+      "response": "传闻被轻轻放到桌上，大家没有急着下结论。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "playful"
+        ],
+        "residentLocation": "reception",
+        "residentMood": "curious",
+        "officeMood": "cheerful",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_rumor",
+        "familiar",
+        "playful",
+        "reception",
+        "curious",
+        "cheerful",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "share_rumor",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_ask_about_rumor_040",
+      "residentId": "*",
+      "actionType": "ask_about_rumor",
+      "text": "居民回应：这个时候对方把最近听到的小消息讲给你听，气氛像窗外的海风一样慢下来。（第3次听见时，语气有一点不同。）",
+      "response": "对方把最近听到的小消息讲给你听。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "calm"
+        ],
+        "residentLocation": "restroom",
+        "residentMood": "excited",
+        "officeMood": "tense",
+        "festival": "festival_christmas"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "ask_about_rumor",
+        "friend",
+        "calm",
+        "restroom",
+        "excited",
+        "tense",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "ask_about_rumor",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_verify_rumor_041",
+      "residentId": "police_bicycle_officer",
+      "actionType": "verify_rumor",
+      "text": "单车巡警周然回应：这个时候你们一起确认消息来源，让传闻变得更清楚，气氛像窗外的海风一样慢下来。",
+      "response": "你们一起确认消息来源，让传闻变得更清楚。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "sensitive"
+        ],
+        "residentLocation": "coffee_shop",
+        "residentMood": "tired",
+        "officeMood": "quiet",
+        "festival": "active"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "verify_rumor",
+        "close_friend",
+        "sensitive",
+        "coffee_shop",
+        "tired",
+        "quiet",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "verify_rumor",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_share_fish_042",
+      "residentId": "*",
+      "actionType": "share_fish",
+      "text": "居民回应：这个时候鱼获变成了今天的小话题，气氛像窗外的海风一样慢下来。（第3次听见时，语气有一点不同。）",
+      "response": "鱼获变成了今天的小话题。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "curious"
+        ],
+        "residentLocation": "park",
+        "residentMood": "busy",
+        "officeMood": "social",
+        "festival": "festival_new_year"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_fish",
+        "trusted_friend",
+        "curious",
+        "park",
+        "busy",
+        "social",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "share_fish",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_remember_preference_043",
+      "residentId": "*",
+      "actionType": "remember_preference",
+      "text": "居民回应：这个时候你记住了一个小偏好，对方也记住了这份细心，气氛像窗外的海风一样慢下来。（第3次听见时，语气有一点不同。）",
+      "response": "你记住了一个小偏好，对方也记住了这份细心。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "outgoing"
+        ],
+        "residentLocation": "seaside",
+        "residentMood": "lonely",
+        "officeMood": "festive",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "remember_preference",
+        "stranger",
+        "outgoing",
+        "seaside",
+        "lonely",
+        "festive",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "remember_preference",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_apologize_044",
+      "residentId": "*",
+      "actionType": "apologize",
+      "text": "居民回应：这个时候道歉没有立刻解决一切，但让气氛松了一点，气氛像窗外的海风一样慢下来。（第3次听见时，语气有一点不同。）",
+      "response": "道歉没有立刻解决一切，但让气氛松了一点。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "introverted"
+        ],
+        "residentLocation": "dock",
+        "residentMood": "worried",
+        "officeMood": "tired",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "apologize",
+        "acquaintance",
+        "introverted",
+        "dock",
+        "worried",
+        "tired",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "apologize",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_resolve_conflict_045",
+      "residentId": "flower_shop_owner_lu",
+      "actionType": "resolve_conflict",
+      "text": "花店老板陆晴回应：这个时候误会被慢慢说开，办公室安静了一些，气氛像窗外的海风一样慢下来。",
+      "response": "误会被慢慢说开，办公室安静了一些。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "hardworking"
+        ],
+        "residentLocation": "home",
+        "residentMood": "sad",
+        "officeMood": "celebratory",
+        "festival": "festival_christmas"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "resolve_conflict",
+        "familiar",
+        "hardworking",
+        "home",
+        "sad",
+        "celebratory",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "resolve_conflict",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_observe_046",
+      "residentId": "*",
+      "actionType": "observe",
+      "text": "居民回应：这个时候你先观察，没有打扰正在发生的小事，气氛像窗外的海风一样慢下来。（第3次听见时，语气有一点不同。）",
+      "response": "你先观察，没有打扰正在发生的小事。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "relaxed"
+        ],
+        "residentLocation": "workstation",
+        "residentMood": "angry",
+        "officeMood": "calm",
+        "festival": "active"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "observe",
+        "friend",
+        "relaxed",
+        "workstation",
+        "angry",
+        "calm",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "observe",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_start_story_047",
+      "residentId": "*",
+      "actionType": "start_story",
+      "text": "居民回应：这个时候对方想起一件小事，故事自然开始，气氛像窗外的海风一样慢下来。（第3次听见时，语气有一点不同。）",
+      "response": "对方想起一件小事，故事自然开始。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "gossipy"
+        ],
+        "residentLocation": "office",
+        "residentMood": "grateful",
+        "officeMood": "busy",
+        "festival": "festival_new_year"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "start_story",
+        "close_friend",
+        "gossipy",
+        "office",
+        "grateful",
+        "busy",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "start_story",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_join_group_048",
+      "residentId": "*",
+      "actionType": "join_group",
+      "text": "居民回应：这个时候你加入了大家的小圈子，没有打断原本的节奏，气氛像窗外的海风一样慢下来。（第3次听见时，语气有一点不同。）",
+      "response": "你加入了大家的小圈子，没有打断原本的节奏。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "serious"
+        ],
+        "residentLocation": "meeting_room",
+        "residentMood": "playful",
+        "officeMood": "cheerful",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_group",
+        "trusted_friend",
+        "serious",
+        "meeting_room",
+        "playful",
+        "cheerful",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "join_group",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_talk_049",
+      "residentId": "market_fishmonger_hu",
+      "actionType": "talk",
+      "text": "市场鱼贩胡哥回应：这个时候对方愿意坐下来聊一会儿，话题慢慢展开，气氛像窗外的海风一样慢下来。",
+      "response": "对方愿意坐下来聊一会儿，话题慢慢展开。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "optimistic"
+        ],
+        "residentLocation": "pantry",
+        "residentMood": "calm",
+        "officeMood": "tense",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "talk",
+        "stranger",
+        "optimistic",
+        "pantry",
+        "calm",
+        "tense",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "talk",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_short_talk_050",
+      "residentId": "*",
+      "actionType": "short_talk",
+      "text": "居民回应：这个时候一个轻轻的招呼被接住了，气氛像窗外的海风一样慢下来。（第4次听见时，语气有一点不同。）",
+      "response": "一个轻轻的招呼被接住了。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "cautious"
+        ],
+        "residentLocation": "printing_area",
+        "residentMood": "happy",
+        "officeMood": "quiet",
+        "festival": "festival_christmas"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "short_talk",
+        "acquaintance",
+        "cautious",
+        "printing_area",
+        "happy",
+        "quiet",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "short_talk",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_invite_coffee_051",
+      "residentId": "*",
+      "actionType": "invite_coffee",
+      "text": "居民回应：这个时候咖啡没有催促谁，只让休息变得自然，气氛像窗外的海风一样慢下来。（第4次听见时，语气有一点不同。）",
+      "response": "咖啡没有催促谁，只让休息变得自然。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "kind"
+        ],
+        "residentLocation": "manager_room",
+        "residentMood": "curious",
+        "officeMood": "social",
+        "festival": "active"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "invite_coffee",
+        "familiar",
+        "kind",
+        "manager_room",
+        "curious",
+        "social",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "invite_coffee",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_help_work_052",
+      "residentId": "*",
+      "actionType": "help_work",
+      "text": "居民回应：这个时候你帮忙分走了一点工作压力，气氛像窗外的海风一样慢下来。（第4次听见时，语气有一点不同。）",
+      "response": "你帮忙分走了一点工作压力。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "competitive"
+        ],
+        "residentLocation": "balcony",
+        "residentMood": "excited",
+        "officeMood": "festive",
+        "festival": "festival_new_year"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "help_work",
+        "friend",
+        "competitive",
+        "balcony",
+        "excited",
+        "festive",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "help_work",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_join_break_053",
+      "residentId": "hotel_frontdesk_hao",
+      "actionType": "join_break",
+      "text": "酒店前台郝然回应：这个时候这段休息像海风一样短，但很舒服，气氛像窗外的海风一样慢下来。",
+      "response": "这段休息像海风一样短，但很舒服。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "playful"
+        ],
+        "residentLocation": "elevator",
+        "residentMood": "tired",
+        "officeMood": "tired",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_break",
+        "close_friend",
+        "playful",
+        "elevator",
+        "tired",
+        "tired",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "join_break",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_comfort_054",
+      "residentId": "*",
+      "actionType": "comfort",
+      "text": "居民回应：这个时候你没有急着讲道理，只是陪了一会儿，气氛像窗外的海风一样慢下来。（第4次听见时，语气有一点不同。）",
+      "response": "你没有急着讲道理，只是陪了一会儿。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "calm"
+        ],
+        "residentLocation": "reception",
+        "residentMood": "busy",
+        "officeMood": "celebratory",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "comfort",
+        "trusted_friend",
+        "calm",
+        "reception",
+        "busy",
+        "celebratory",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "comfort",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_share_rumor_055",
+      "residentId": "*",
+      "actionType": "share_rumor",
+      "text": "居民回应：这个时候传闻被轻轻放到桌上，大家没有急着下结论，气氛像窗外的海风一样慢下来。（第4次听见时，语气有一点不同。）",
+      "response": "传闻被轻轻放到桌上，大家没有急着下结论。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "sensitive"
+        ],
+        "residentLocation": "restroom",
+        "residentMood": "lonely",
+        "officeMood": "calm",
+        "festival": "festival_christmas"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_rumor",
+        "stranger",
+        "sensitive",
+        "restroom",
+        "lonely",
+        "calm",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "share_rumor",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_ask_about_rumor_056",
+      "residentId": "*",
+      "actionType": "ask_about_rumor",
+      "text": "居民回应：这个时候对方把最近听到的小消息讲给你听，气氛像窗外的海风一样慢下来。（第4次听见时，语气有一点不同。）",
+      "response": "对方把最近听到的小消息讲给你听。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "curious"
+        ],
+        "residentLocation": "coffee_shop",
+        "residentMood": "worried",
+        "officeMood": "busy",
+        "festival": "active"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "ask_about_rumor",
+        "acquaintance",
+        "curious",
+        "coffee_shop",
+        "worried",
+        "busy",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "ask_about_rumor",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_verify_rumor_057",
+      "residentId": "tackle_shop_owner_shen",
+      "actionType": "verify_rumor",
+      "text": "渔具店沈老板回应：这个时候你们一起确认消息来源，让传闻变得更清楚，气氛像窗外的海风一样慢下来。",
+      "response": "你们一起确认消息来源，让传闻变得更清楚。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "outgoing"
+        ],
+        "residentLocation": "park",
+        "residentMood": "sad",
+        "officeMood": "cheerful",
+        "festival": "festival_new_year"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "verify_rumor",
+        "familiar",
+        "outgoing",
+        "park",
+        "sad",
+        "cheerful",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "verify_rumor",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_share_fish_058",
+      "residentId": "*",
+      "actionType": "share_fish",
+      "text": "居民回应：这个时候鱼获变成了今天的小话题，气氛像窗外的海风一样慢下来。（第4次听见时，语气有一点不同。）",
+      "response": "鱼获变成了今天的小话题。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "introverted"
+        ],
+        "residentLocation": "seaside",
+        "residentMood": "angry",
+        "officeMood": "tense",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_fish",
+        "friend",
+        "introverted",
+        "seaside",
+        "angry",
+        "tense",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "share_fish",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_remember_preference_059",
+      "residentId": "*",
+      "actionType": "remember_preference",
+      "text": "居民回应：这个时候你记住了一个小偏好，对方也记住了这份细心，气氛像窗外的海风一样慢下来。（第4次听见时，语气有一点不同。）",
+      "response": "你记住了一个小偏好，对方也记住了这份细心。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "hardworking"
+        ],
+        "residentLocation": "dock",
+        "residentMood": "grateful",
+        "officeMood": "quiet",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "remember_preference",
+        "close_friend",
+        "hardworking",
+        "dock",
+        "grateful",
+        "quiet",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "remember_preference",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_apologize_060",
+      "residentId": "*",
+      "actionType": "apologize",
+      "text": "居民回应：这个时候道歉没有立刻解决一切，但让气氛松了一点，气氛像窗外的海风一样慢下来。（第4次听见时，语气有一点不同。）",
+      "response": "道歉没有立刻解决一切，但让气氛松了一点。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "relaxed"
+        ],
+        "residentLocation": "home",
+        "residentMood": "playful",
+        "officeMood": "social",
+        "festival": "festival_christmas"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "apologize",
+        "trusted_friend",
+        "relaxed",
+        "home",
+        "playful",
+        "social",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "apologize",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_resolve_conflict_061",
+      "residentId": "cinema_projectionist_yan",
+      "actionType": "resolve_conflict",
+      "text": "电影院放映员严叔回应：这个时候误会被慢慢说开，办公室安静了一些，气氛像窗外的海风一样慢下来。",
+      "response": "误会被慢慢说开，办公室安静了一些。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "gossipy"
+        ],
+        "residentLocation": "workstation",
+        "residentMood": "calm",
+        "officeMood": "festive",
+        "festival": "active"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "resolve_conflict",
+        "stranger",
+        "gossipy",
+        "workstation",
+        "calm",
+        "festive",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "resolve_conflict",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_observe_062",
+      "residentId": "*",
+      "actionType": "observe",
+      "text": "居民回应：这个时候你先观察，没有打扰正在发生的小事，气氛像窗外的海风一样慢下来。（第4次听见时，语气有一点不同。）",
+      "response": "你先观察，没有打扰正在发生的小事。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "serious"
+        ],
+        "residentLocation": "office",
+        "residentMood": "happy",
+        "officeMood": "tired",
+        "festival": "festival_new_year"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "observe",
+        "acquaintance",
+        "serious",
+        "office",
+        "happy",
+        "tired",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "observe",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_start_story_063",
+      "residentId": "*",
+      "actionType": "start_story",
+      "text": "居民回应：这个时候对方想起一件小事，故事自然开始，气氛像窗外的海风一样慢下来。（第4次听见时，语气有一点不同。）",
+      "response": "对方想起一件小事，故事自然开始。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "optimistic"
+        ],
+        "residentLocation": "meeting_room",
+        "residentMood": "curious",
+        "officeMood": "celebratory",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "start_story",
+        "familiar",
+        "optimistic",
+        "meeting_room",
+        "curious",
+        "celebratory",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "start_story",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_join_group_064",
+      "residentId": "*",
+      "actionType": "join_group",
+      "text": "居民回应：这个时候你加入了大家的小圈子，没有打断原本的节奏，气氛像窗外的海风一样慢下来。（第4次听见时，语气有一点不同。）",
+      "response": "你加入了大家的小圈子，没有打断原本的节奏。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "cautious"
+        ],
+        "residentLocation": "pantry",
+        "residentMood": "excited",
+        "officeMood": "calm",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_group",
+        "friend",
+        "cautious",
+        "pantry",
+        "excited",
+        "calm",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "join_group",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_talk_065",
+      "residentId": "pet_shop_groomer_yoyo",
+      "actionType": "talk",
+      "text": "宠物美容师悠悠回应：这个时候对方愿意坐下来聊一会儿，话题慢慢展开，气氛像窗外的海风一样慢下来。",
+      "response": "对方愿意坐下来聊一会儿，话题慢慢展开。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "kind"
+        ],
+        "residentLocation": "printing_area",
+        "residentMood": "tired",
+        "officeMood": "busy",
+        "festival": "festival_christmas"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "talk",
+        "close_friend",
+        "kind",
+        "printing_area",
+        "tired",
+        "busy",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "talk",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_short_talk_066",
+      "residentId": "*",
+      "actionType": "short_talk",
+      "text": "居民回应：这个时候一个轻轻的招呼被接住了，气氛像窗外的海风一样慢下来。（第5次听见时，语气有一点不同。）",
+      "response": "一个轻轻的招呼被接住了。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "competitive"
+        ],
+        "residentLocation": "manager_room",
+        "residentMood": "busy",
+        "officeMood": "cheerful",
+        "festival": "active"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "short_talk",
+        "trusted_friend",
+        "competitive",
+        "manager_room",
+        "busy",
+        "cheerful",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "short_talk",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_invite_coffee_067",
+      "residentId": "*",
+      "actionType": "invite_coffee",
+      "text": "居民回应：这个时候咖啡没有催促谁，只让休息变得自然，气氛像窗外的海风一样慢下来。（第5次听见时，语气有一点不同。）",
+      "response": "咖啡没有催促谁，只让休息变得自然。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "playful"
+        ],
+        "residentLocation": "balcony",
+        "residentMood": "lonely",
+        "officeMood": "tense",
+        "festival": "festival_new_year"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "invite_coffee",
+        "stranger",
+        "playful",
+        "balcony",
+        "lonely",
+        "tense",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "invite_coffee",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_help_work_068",
+      "residentId": "*",
+      "actionType": "help_work",
+      "text": "居民回应：这个时候你帮忙分走了一点工作压力，气氛像窗外的海风一样慢下来。（第5次听见时，语气有一点不同。）",
+      "response": "你帮忙分走了一点工作压力。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "calm"
+        ],
+        "residentLocation": "elevator",
+        "residentMood": "worried",
+        "officeMood": "quiet",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "help_work",
+        "acquaintance",
+        "calm",
+        "elevator",
+        "worried",
+        "quiet",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "help_work",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_join_break_069",
+      "residentId": "subway_announcer_kai",
+      "actionType": "join_break",
+      "text": "地铁播音员凯文回应：这个时候这段休息像海风一样短，但很舒服，气氛像窗外的海风一样慢下来。",
+      "response": "这段休息像海风一样短，但很舒服。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "sensitive"
+        ],
+        "residentLocation": "reception",
+        "residentMood": "sad",
+        "officeMood": "social",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_break",
+        "familiar",
+        "sensitive",
+        "reception",
+        "sad",
+        "social",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "join_break",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_comfort_070",
+      "residentId": "*",
+      "actionType": "comfort",
+      "text": "居民回应：这个时候你没有急着讲道理，只是陪了一会儿，气氛像窗外的海风一样慢下来。（第5次听见时，语气有一点不同。）",
+      "response": "你没有急着讲道理，只是陪了一会儿。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "curious"
+        ],
+        "residentLocation": "restroom",
+        "residentMood": "angry",
+        "officeMood": "festive",
+        "festival": "festival_christmas"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "comfort",
+        "friend",
+        "curious",
+        "restroom",
+        "angry",
+        "festive",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "comfort",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_share_rumor_071",
+      "residentId": "*",
+      "actionType": "share_rumor",
+      "text": "居民回应：这个时候传闻被轻轻放到桌上，大家没有急着下结论，气氛像窗外的海风一样慢下来。（第5次听见时，语气有一点不同。）",
+      "response": "传闻被轻轻放到桌上，大家没有急着下结论。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "outgoing"
+        ],
+        "residentLocation": "coffee_shop",
+        "residentMood": "grateful",
+        "officeMood": "tired",
+        "festival": "active"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_rumor",
+        "close_friend",
+        "outgoing",
+        "coffee_shop",
+        "grateful",
+        "tired",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "share_rumor",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_ask_about_rumor_072",
+      "residentId": "*",
+      "actionType": "ask_about_rumor",
+      "text": "居民回应：这个时候对方把最近听到的小消息讲给你听，气氛像窗外的海风一样慢下来。（第5次听见时，语气有一点不同。）",
+      "response": "对方把最近听到的小消息讲给你听。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "introverted"
+        ],
+        "residentLocation": "park",
+        "residentMood": "playful",
+        "officeMood": "celebratory",
+        "festival": "festival_new_year"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "ask_about_rumor",
+        "trusted_friend",
+        "introverted",
+        "park",
+        "playful",
+        "celebratory",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "ask_about_rumor",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_verify_rumor_073",
+      "residentId": "shipyard_welder_gang",
+      "actionType": "verify_rumor",
+      "text": "修船厂焊工刚子回应：这个时候你们一起确认消息来源，让传闻变得更清楚，气氛像窗外的海风一样慢下来。",
+      "response": "你们一起确认消息来源，让传闻变得更清楚。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "hardworking"
+        ],
+        "residentLocation": "seaside",
+        "residentMood": "calm",
+        "officeMood": "calm",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "verify_rumor",
+        "stranger",
+        "hardworking",
+        "seaside",
+        "calm",
+        "calm",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "verify_rumor",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_share_fish_074",
+      "residentId": "*",
+      "actionType": "share_fish",
+      "text": "居民回应：这个时候鱼获变成了今天的小话题，气氛像窗外的海风一样慢下来。（第5次听见时，语气有一点不同。）",
+      "response": "鱼获变成了今天的小话题。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "relaxed"
+        ],
+        "residentLocation": "dock",
+        "residentMood": "happy",
+        "officeMood": "busy",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_fish",
+        "acquaintance",
+        "relaxed",
+        "dock",
+        "happy",
+        "busy",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "share_fish",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_remember_preference_075",
+      "residentId": "*",
+      "actionType": "remember_preference",
+      "text": "居民回应：这个时候你记住了一个小偏好，对方也记住了这份细心，气氛像窗外的海风一样慢下来。（第5次听见时，语气有一点不同。）",
+      "response": "你记住了一个小偏好，对方也记住了这份细心。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "gossipy"
+        ],
+        "residentLocation": "home",
+        "residentMood": "curious",
+        "officeMood": "cheerful",
+        "festival": "festival_christmas"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "remember_preference",
+        "familiar",
+        "gossipy",
+        "home",
+        "curious",
+        "cheerful",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "remember_preference",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_apologize_076",
+      "residentId": "*",
+      "actionType": "apologize",
+      "text": "居民回应：这个时候道歉没有立刻解决一切，但让气氛松了一点，气氛像窗外的海风一样慢下来。（第5次听见时，语气有一点不同。）",
+      "response": "道歉没有立刻解决一切，但让气氛松了一点。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "serious"
+        ],
+        "residentLocation": "workstation",
+        "residentMood": "excited",
+        "officeMood": "tense",
+        "festival": "active"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "apologize",
+        "friend",
+        "serious",
+        "workstation",
+        "excited",
+        "tense",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "apologize",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_resolve_conflict_077",
+      "residentId": "bakery_morning_baker_qiu",
+      "actionType": "resolve_conflict",
+      "text": "清晨面包师秋姐回应：这个时候误会被慢慢说开，办公室安静了一些，气氛像窗外的海风一样慢下来。",
+      "response": "误会被慢慢说开，办公室安静了一些。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "optimistic"
+        ],
+        "residentLocation": "office",
+        "residentMood": "tired",
+        "officeMood": "quiet",
+        "festival": "festival_new_year"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "resolve_conflict",
+        "close_friend",
+        "optimistic",
+        "office",
+        "tired",
+        "quiet",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "resolve_conflict",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_observe_078",
+      "residentId": "*",
+      "actionType": "observe",
+      "text": "居民回应：这个时候你先观察，没有打扰正在发生的小事，气氛像窗外的海风一样慢下来。（第5次听见时，语气有一点不同。）",
+      "response": "你先观察，没有打扰正在发生的小事。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "cautious"
+        ],
+        "residentLocation": "meeting_room",
+        "residentMood": "busy",
+        "officeMood": "social",
+        "festival": "festival_ocean_day"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "observe",
+        "trusted_friend",
+        "cautious",
+        "meeting_room",
+        "busy",
+        "social",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "observe",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_start_story_079",
+      "residentId": "*",
+      "actionType": "start_story",
+      "text": "居民回应：这个时候对方想起一件小事，故事自然开始，气氛像窗外的海风一样慢下来。（第5次听见时，语气有一点不同。）",
+      "response": "对方想起一件小事，故事自然开始。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "kind"
+        ],
+        "residentLocation": "pantry",
+        "residentMood": "lonely",
+        "officeMood": "festive",
+        "festival": "festival_mid_autumn"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "start_story",
+        "stranger",
+        "kind",
+        "pantry",
+        "lonely",
+        "festive",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "start_story",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_join_group_080",
+      "residentId": "*",
+      "actionType": "join_group",
+      "text": "居民回应：这个时候你加入了大家的小圈子，没有打断原本的节奏，气氛像窗外的海风一样慢下来。（第5次听见时，语气有一点不同。）",
+      "response": "你加入了大家的小圈子，没有打断原本的节奏。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "competitive"
+        ],
+        "residentLocation": "printing_area",
+        "residentMood": "worried",
+        "officeMood": "tired",
+        "festival": "festival_christmas"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_group",
+        "acquaintance",
+        "competitive",
+        "printing_area",
+        "worried",
+        "tired",
+        "success",
+        "festival",
+        "module_04_festival_context"
+      ],
+      "cooldownGroup": "join_group",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_talk_081",
+      "residentId": "newsstand_owner_shao",
+      "actionType": "talk",
+      "text": "报刊亭邵姨回应：这个时候对方愿意坐下来聊一会儿，话题慢慢展开，气氛像窗外的海风一样慢下来。",
+      "response": "对方愿意坐下来聊一会儿，话题慢慢展开。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "playful"
+        ],
+        "residentLocation": "manager_room",
+        "residentMood": "sad",
+        "officeMood": "celebratory"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "talk",
+        "familiar",
+        "playful",
+        "manager_room",
+        "sad",
+        "celebratory",
+        "success"
+      ],
+      "cooldownGroup": "talk",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_short_talk_082",
+      "residentId": "*",
+      "actionType": "short_talk",
+      "text": "居民回应：这个时候一个轻轻的招呼被接住了，气氛像窗外的海风一样慢下来。（第6次听见时，语气有一点不同。）",
+      "response": "一个轻轻的招呼被接住了。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "calm"
+        ],
+        "residentLocation": "balcony",
+        "residentMood": "angry",
+        "officeMood": "calm"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "short_talk",
+        "friend",
+        "calm",
+        "balcony",
+        "angry",
+        "calm",
+        "success"
+      ],
+      "cooldownGroup": "short_talk",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_invite_coffee_083",
+      "residentId": "*",
+      "actionType": "invite_coffee",
+      "text": "居民回应：这个时候咖啡没有催促谁，只让休息变得自然，气氛像窗外的海风一样慢下来。（第6次听见时，语气有一点不同。）",
+      "response": "咖啡没有催促谁，只让休息变得自然。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "sensitive"
+        ],
+        "residentLocation": "elevator",
+        "residentMood": "grateful",
+        "officeMood": "busy"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "invite_coffee",
+        "close_friend",
+        "sensitive",
+        "elevator",
+        "grateful",
+        "busy",
+        "success"
+      ],
+      "cooldownGroup": "invite_coffee",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_help_work_084",
+      "residentId": "*",
+      "actionType": "help_work",
+      "text": "居民回应：这个时候你帮忙分走了一点工作压力，气氛像窗外的海风一样慢下来。（第6次听见时，语气有一点不同。）",
+      "response": "你帮忙分走了一点工作压力。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "curious"
+        ],
+        "residentLocation": "reception",
+        "residentMood": "playful",
+        "officeMood": "cheerful"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "help_work",
+        "trusted_friend",
+        "curious",
+        "reception",
+        "playful",
+        "cheerful",
+        "success"
+      ],
+      "cooldownGroup": "help_work",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_join_break_085",
+      "residentId": "gym_boxing_coach_lei",
+      "actionType": "join_break",
+      "text": "拳击教练雷子回应：这个时候这段休息像海风一样短，但很舒服，气氛像窗外的海风一样慢下来。",
+      "response": "这段休息像海风一样短，但很舒服。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "outgoing"
+        ],
+        "residentLocation": "restroom",
+        "residentMood": "calm",
+        "officeMood": "tense"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_break",
+        "stranger",
+        "outgoing",
+        "restroom",
+        "calm",
+        "tense",
+        "success"
+      ],
+      "cooldownGroup": "join_break",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_comfort_086",
+      "residentId": "*",
+      "actionType": "comfort",
+      "text": "居民回应：这个时候你没有急着讲道理，只是陪了一会儿，气氛像窗外的海风一样慢下来。（第6次听见时，语气有一点不同。）",
+      "response": "你没有急着讲道理，只是陪了一会儿。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "introverted"
+        ],
+        "residentLocation": "coffee_shop",
+        "residentMood": "happy",
+        "officeMood": "quiet"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "comfort",
+        "acquaintance",
+        "introverted",
+        "coffee_shop",
+        "happy",
+        "quiet",
+        "success"
+      ],
+      "cooldownGroup": "comfort",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_share_rumor_087",
+      "residentId": "*",
+      "actionType": "share_rumor",
+      "text": "居民回应：这个时候传闻被轻轻放到桌上，大家没有急着下结论，气氛像窗外的海风一样慢下来。（第6次听见时，语气有一点不同。）",
+      "response": "传闻被轻轻放到桌上，大家没有急着下结论。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "hardworking"
+        ],
+        "residentLocation": "park",
+        "residentMood": "curious",
+        "officeMood": "social"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_rumor",
+        "familiar",
+        "hardworking",
+        "park",
+        "curious",
+        "social",
+        "success"
+      ],
+      "cooldownGroup": "share_rumor",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_ask_about_rumor_088",
+      "residentId": "*",
+      "actionType": "ask_about_rumor",
+      "text": "居民回应：这个时候对方把最近听到的小消息讲给你听，气氛像窗外的海风一样慢下来。（第6次听见时，语气有一点不同。）",
+      "response": "对方把最近听到的小消息讲给你听。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "relaxed"
+        ],
+        "residentLocation": "seaside",
+        "residentMood": "excited",
+        "officeMood": "festive"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "ask_about_rumor",
+        "friend",
+        "relaxed",
+        "seaside",
+        "excited",
+        "festive",
+        "success"
+      ],
+      "cooldownGroup": "ask_about_rumor",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_verify_rumor_089",
+      "residentId": "taxi_radio_host_yun",
+      "actionType": "verify_rumor",
+      "text": "出租车电台云姐回应：这个时候你们一起确认消息来源，让传闻变得更清楚，气氛像窗外的海风一样慢下来。",
+      "response": "你们一起确认消息来源，让传闻变得更清楚。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "gossipy"
+        ],
+        "residentLocation": "dock",
+        "residentMood": "tired",
+        "officeMood": "tired"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "verify_rumor",
+        "close_friend",
+        "gossipy",
+        "dock",
+        "tired",
+        "tired",
+        "success"
+      ],
+      "cooldownGroup": "verify_rumor",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_share_fish_090",
+      "residentId": "*",
+      "actionType": "share_fish",
+      "text": "居民回应：这个时候鱼获变成了今天的小话题，气氛像窗外的海风一样慢下来。（第6次听见时，语气有一点不同。）",
+      "response": "鱼获变成了今天的小话题。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "serious"
+        ],
+        "residentLocation": "home",
+        "residentMood": "busy",
+        "officeMood": "celebratory"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_fish",
+        "trusted_friend",
+        "serious",
+        "home",
+        "busy",
+        "celebratory",
+        "success"
+      ],
+      "cooldownGroup": "share_fish",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_remember_preference_091",
+      "residentId": "*",
+      "actionType": "remember_preference",
+      "text": "居民回应：这个时候你记住了一个小偏好，对方也记住了这份细心，气氛像窗外的海风一样慢下来。（第6次听见时，语气有一点不同。）",
+      "response": "你记住了一个小偏好，对方也记住了这份细心。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "optimistic"
+        ],
+        "residentLocation": "workstation",
+        "residentMood": "lonely",
+        "officeMood": "calm"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "remember_preference",
+        "stranger",
+        "optimistic",
+        "workstation",
+        "lonely",
+        "calm",
+        "success"
+      ],
+      "cooldownGroup": "remember_preference",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_apologize_092",
+      "residentId": "*",
+      "actionType": "apologize",
+      "text": "居民回应：这个时候道歉没有立刻解决一切，但让气氛松了一点，气氛像窗外的海风一样慢下来。（第6次听见时，语气有一点不同。）",
+      "response": "道歉没有立刻解决一切，但让气氛松了一点。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "cautious"
+        ],
+        "residentLocation": "office",
+        "residentMood": "worried",
+        "officeMood": "busy"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "apologize",
+        "acquaintance",
+        "cautious",
+        "office",
+        "worried",
+        "busy",
+        "success"
+      ],
+      "cooldownGroup": "apologize",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_resolve_conflict_093",
+      "residentId": "recycling_artist_duoduo",
+      "actionType": "resolve_conflict",
+      "text": "废品艺术家朵朵回应：这个时候误会被慢慢说开，办公室安静了一些，气氛像窗外的海风一样慢下来。",
+      "response": "误会被慢慢说开，办公室安静了一些。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "kind"
+        ],
+        "residentLocation": "meeting_room",
+        "residentMood": "sad",
+        "officeMood": "cheerful"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "resolve_conflict",
+        "familiar",
+        "kind",
+        "meeting_room",
+        "sad",
+        "cheerful",
+        "success"
+      ],
+      "cooldownGroup": "resolve_conflict",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_observe_094",
+      "residentId": "*",
+      "actionType": "observe",
+      "text": "居民回应：这个时候你先观察，没有打扰正在发生的小事，气氛像窗外的海风一样慢下来。（第6次听见时，语气有一点不同。）",
+      "response": "你先观察，没有打扰正在发生的小事。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "competitive"
+        ],
+        "residentLocation": "pantry",
+        "residentMood": "angry",
+        "officeMood": "tense"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "observe",
+        "friend",
+        "competitive",
+        "pantry",
+        "angry",
+        "tense",
+        "success"
+      ],
+      "cooldownGroup": "observe",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_start_story_095",
+      "residentId": "*",
+      "actionType": "start_story",
+      "text": "居民回应：这个时候对方想起一件小事，故事自然开始，气氛像窗外的海风一样慢下来。（第6次听见时，语气有一点不同。）",
+      "response": "对方想起一件小事，故事自然开始。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "playful"
+        ],
+        "residentLocation": "printing_area",
+        "residentMood": "grateful",
+        "officeMood": "quiet"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "start_story",
+        "close_friend",
+        "playful",
+        "printing_area",
+        "grateful",
+        "quiet",
+        "success"
+      ],
+      "cooldownGroup": "start_story",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_join_group_096",
+      "residentId": "*",
+      "actionType": "join_group",
+      "text": "居民回应：这个时候你加入了大家的小圈子，没有打断原本的节奏，气氛像窗外的海风一样慢下来。（第6次听见时，语气有一点不同。）",
+      "response": "你加入了大家的小圈子，没有打断原本的节奏。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "calm"
+        ],
+        "residentLocation": "manager_room",
+        "residentMood": "playful",
+        "officeMood": "social"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_group",
+        "trusted_friend",
+        "calm",
+        "manager_room",
+        "playful",
+        "social",
+        "success"
+      ],
+      "cooldownGroup": "join_group",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_talk_097",
+      "residentId": "tech_parts_runner_haohao",
+      "actionType": "talk",
+      "text": "配件跑腿皓皓回应：这个时候对方愿意坐下来聊一会儿，话题慢慢展开，气氛像窗外的海风一样慢下来。",
+      "response": "对方愿意坐下来聊一会儿，话题慢慢展开。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "sensitive"
+        ],
+        "residentLocation": "balcony",
+        "residentMood": "calm",
+        "officeMood": "festive"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "talk",
+        "stranger",
+        "sensitive",
+        "balcony",
+        "calm",
+        "festive",
+        "success"
+      ],
+      "cooldownGroup": "talk",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_short_talk_098",
+      "residentId": "*",
+      "actionType": "short_talk",
+      "text": "居民回应：这个时候一个轻轻的招呼被接住了，气氛像窗外的海风一样慢下来。（第7次听见时，语气有一点不同。）",
+      "response": "一个轻轻的招呼被接住了。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "curious"
+        ],
+        "residentLocation": "elevator",
+        "residentMood": "happy",
+        "officeMood": "tired"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "short_talk",
+        "acquaintance",
+        "curious",
+        "elevator",
+        "happy",
+        "tired",
+        "success"
+      ],
+      "cooldownGroup": "short_talk",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_invite_coffee_099",
+      "residentId": "*",
+      "actionType": "invite_coffee",
+      "text": "居民回应：这个时候咖啡没有催促谁，只让休息变得自然，气氛像窗外的海风一样慢下来。（第7次听见时，语气有一点不同。）",
+      "response": "咖啡没有催促谁，只让休息变得自然。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "outgoing"
+        ],
+        "residentLocation": "reception",
+        "residentMood": "curious",
+        "officeMood": "celebratory"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "invite_coffee",
+        "familiar",
+        "outgoing",
+        "reception",
+        "curious",
+        "celebratory",
+        "success"
+      ],
+      "cooldownGroup": "invite_coffee",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_help_work_100",
+      "residentId": "*",
+      "actionType": "help_work",
+      "text": "居民回应：这个时候你帮忙分走了一点工作压力，气氛像窗外的海风一样慢下来。（第7次听见时，语气有一点不同。）",
+      "response": "你帮忙分走了一点工作压力。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "introverted"
+        ],
+        "residentLocation": "restroom",
+        "residentMood": "excited",
+        "officeMood": "calm"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "help_work",
+        "friend",
+        "introverted",
+        "restroom",
+        "excited",
+        "calm",
+        "success"
+      ],
+      "cooldownGroup": "help_work",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_join_break_101",
+      "residentId": "old_fisher",
+      "actionType": "join_break",
+      "text": "老渔夫回应：这个时候这段休息像海风一样短，但很舒服，气氛像窗外的海风一样慢下来。",
+      "response": "这段休息像海风一样短，但很舒服。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "hardworking"
+        ],
+        "residentLocation": "coffee_shop",
+        "residentMood": "tired",
+        "officeMood": "busy"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_break",
+        "close_friend",
+        "hardworking",
+        "coffee_shop",
+        "tired",
+        "busy",
+        "success"
+      ],
+      "cooldownGroup": "join_break",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_comfort_102",
+      "residentId": "*",
+      "actionType": "comfort",
+      "text": "居民回应：这个时候你没有急着讲道理，只是陪了一会儿，气氛像窗外的海风一样慢下来。（第7次听见时，语气有一点不同。）",
+      "response": "你没有急着讲道理，只是陪了一会儿。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "relaxed"
+        ],
+        "residentLocation": "park",
+        "residentMood": "busy",
+        "officeMood": "cheerful"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "comfort",
+        "trusted_friend",
+        "relaxed",
+        "park",
+        "busy",
+        "cheerful",
+        "success"
+      ],
+      "cooldownGroup": "comfort",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_share_rumor_103",
+      "residentId": "*",
+      "actionType": "share_rumor",
+      "text": "居民回应：这个时候传闻被轻轻放到桌上，大家没有急着下结论，气氛像窗外的海风一样慢下来。（第7次听见时，语气有一点不同。）",
+      "response": "传闻被轻轻放到桌上，大家没有急着下结论。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "gossipy"
+        ],
+        "residentLocation": "seaside",
+        "residentMood": "lonely",
+        "officeMood": "tense"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_rumor",
+        "stranger",
+        "gossipy",
+        "seaside",
+        "lonely",
+        "tense",
+        "success"
+      ],
+      "cooldownGroup": "share_rumor",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_ask_about_rumor_104",
+      "residentId": "*",
+      "actionType": "ask_about_rumor",
+      "text": "居民回应：这个时候对方把最近听到的小消息讲给你听，气氛像窗外的海风一样慢下来。（第7次听见时，语气有一点不同。）",
+      "response": "对方把最近听到的小消息讲给你听。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "serious"
+        ],
+        "residentLocation": "dock",
+        "residentMood": "worried",
+        "officeMood": "quiet"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "ask_about_rumor",
+        "acquaintance",
+        "serious",
+        "dock",
+        "worried",
+        "quiet",
+        "success"
+      ],
+      "cooldownGroup": "ask_about_rumor",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_verify_rumor_105",
+      "residentId": "sea_cleaner",
+      "actionType": "verify_rumor",
+      "text": "海边清洁工回应：这个时候你们一起确认消息来源，让传闻变得更清楚，气氛像窗外的海风一样慢下来。",
+      "response": "你们一起确认消息来源，让传闻变得更清楚。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "optimistic"
+        ],
+        "residentLocation": "home",
+        "residentMood": "sad",
+        "officeMood": "social"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "verify_rumor",
+        "familiar",
+        "optimistic",
+        "home",
+        "sad",
+        "social",
+        "success"
+      ],
+      "cooldownGroup": "verify_rumor",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_share_fish_106",
+      "residentId": "*",
+      "actionType": "share_fish",
+      "text": "居民回应：这个时候鱼获变成了今天的小话题，气氛像窗外的海风一样慢下来。（第7次听见时，语气有一点不同。）",
+      "response": "鱼获变成了今天的小话题。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "cautious"
+        ],
+        "residentLocation": "workstation",
+        "residentMood": "angry",
+        "officeMood": "festive"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_fish",
+        "friend",
+        "cautious",
+        "workstation",
+        "angry",
+        "festive",
+        "success"
+      ],
+      "cooldownGroup": "share_fish",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_remember_preference_107",
+      "residentId": "*",
+      "actionType": "remember_preference",
+      "text": "居民回应：这个时候你记住了一个小偏好，对方也记住了这份细心，气氛像窗外的海风一样慢下来。（第7次听见时，语气有一点不同。）",
+      "response": "你记住了一个小偏好，对方也记住了这份细心。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "kind"
+        ],
+        "residentLocation": "office",
+        "residentMood": "grateful",
+        "officeMood": "tired"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "remember_preference",
+        "close_friend",
+        "kind",
+        "office",
+        "grateful",
+        "tired",
+        "success"
+      ],
+      "cooldownGroup": "remember_preference",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_apologize_108",
+      "residentId": "*",
+      "actionType": "apologize",
+      "text": "居民回应：这个时候道歉没有立刻解决一切，但让气氛松了一点，气氛像窗外的海风一样慢下来。（第7次听见时，语气有一点不同。）",
+      "response": "道歉没有立刻解决一切，但让气氛松了一点。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "competitive"
+        ],
+        "residentLocation": "meeting_room",
+        "residentMood": "playful",
+        "officeMood": "celebratory"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "apologize",
+        "trusted_friend",
+        "competitive",
+        "meeting_room",
+        "playful",
+        "celebratory",
+        "success"
+      ],
+      "cooldownGroup": "apologize",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_resolve_conflict_109",
+      "residentId": "runner_li",
+      "actionType": "resolve_conflict",
+      "text": "送文件的小李回应：这个时候误会被慢慢说开，办公室安静了一些，气氛像窗外的海风一样慢下来。",
+      "response": "误会被慢慢说开，办公室安静了一些。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "playful"
+        ],
+        "residentLocation": "pantry",
+        "residentMood": "calm",
+        "officeMood": "calm"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "resolve_conflict",
+        "stranger",
+        "playful",
+        "pantry",
+        "calm",
+        "calm",
+        "success"
+      ],
+      "cooldownGroup": "resolve_conflict",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_observe_110",
+      "residentId": "*",
+      "actionType": "observe",
+      "text": "居民回应：这个时候你先观察，没有打扰正在发生的小事，气氛像窗外的海风一样慢下来。（第7次听见时，语气有一点不同。）",
+      "response": "你先观察，没有打扰正在发生的小事。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "calm"
+        ],
+        "residentLocation": "printing_area",
+        "residentMood": "happy",
+        "officeMood": "busy"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "observe",
+        "acquaintance",
+        "calm",
+        "printing_area",
+        "happy",
+        "busy",
+        "success"
+      ],
+      "cooldownGroup": "observe",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_start_story_111",
+      "residentId": "*",
+      "actionType": "start_story",
+      "text": "居民回应：这个时候对方想起一件小事，故事自然开始，气氛像窗外的海风一样慢下来。（第7次听见时，语气有一点不同。）",
+      "response": "对方想起一件小事，故事自然开始。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "sensitive"
+        ],
+        "residentLocation": "manager_room",
+        "residentMood": "curious",
+        "officeMood": "cheerful"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "start_story",
+        "familiar",
+        "sensitive",
+        "manager_room",
+        "curious",
+        "cheerful",
+        "success"
+      ],
+      "cooldownGroup": "start_story",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_join_group_112",
+      "residentId": "*",
+      "actionType": "join_group",
+      "text": "居民回应：这个时候你加入了大家的小圈子，没有打断原本的节奏，气氛像窗外的海风一样慢下来。（第7次听见时，语气有一点不同。）",
+      "response": "你加入了大家的小圈子，没有打断原本的节奏。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "curious"
+        ],
+        "residentLocation": "balcony",
+        "residentMood": "excited",
+        "officeMood": "tense"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_group",
+        "friend",
+        "curious",
+        "balcony",
+        "excited",
+        "tense",
+        "success"
+      ],
+      "cooldownGroup": "join_group",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_talk_113",
+      "residentId": "office_finance_lin",
+      "actionType": "talk",
+      "text": "办公楼财务林姐回应：这个时候对方愿意坐下来聊一会儿，话题慢慢展开，气氛像窗外的海风一样慢下来。",
+      "response": "对方愿意坐下来聊一会儿，话题慢慢展开。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "outgoing"
+        ],
+        "residentLocation": "elevator",
+        "residentMood": "tired",
+        "officeMood": "quiet"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "talk",
+        "close_friend",
+        "outgoing",
+        "elevator",
+        "tired",
+        "quiet",
+        "success"
+      ],
+      "cooldownGroup": "talk",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_short_talk_114",
+      "residentId": "*",
+      "actionType": "short_talk",
+      "text": "居民回应：这个时候一个轻轻的招呼被接住了，气氛像窗外的海风一样慢下来。（第8次听见时，语气有一点不同。）",
+      "response": "一个轻轻的招呼被接住了。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "introverted"
+        ],
+        "residentLocation": "reception",
+        "residentMood": "busy",
+        "officeMood": "social"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "short_talk",
+        "trusted_friend",
+        "introverted",
+        "reception",
+        "busy",
+        "social",
+        "success"
+      ],
+      "cooldownGroup": "short_talk",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_invite_coffee_115",
+      "residentId": "*",
+      "actionType": "invite_coffee",
+      "text": "居民回应：这个时候咖啡没有催促谁，只让休息变得自然，气氛像窗外的海风一样慢下来。（第8次听见时，语气有一点不同。）",
+      "response": "咖啡没有催促谁，只让休息变得自然。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "hardworking"
+        ],
+        "residentLocation": "restroom",
+        "residentMood": "lonely",
+        "officeMood": "festive"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "invite_coffee",
+        "stranger",
+        "hardworking",
+        "restroom",
+        "lonely",
+        "festive",
+        "success"
+      ],
+      "cooldownGroup": "invite_coffee",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_help_work_116",
+      "residentId": "*",
+      "actionType": "help_work",
+      "text": "居民回应：这个时候你帮忙分走了一点工作压力，气氛像窗外的海风一样慢下来。（第8次听见时，语气有一点不同。）",
+      "response": "你帮忙分走了一点工作压力。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "relaxed"
+        ],
+        "residentLocation": "coffee_shop",
+        "residentMood": "worried",
+        "officeMood": "tired"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "help_work",
+        "acquaintance",
+        "relaxed",
+        "coffee_shop",
+        "worried",
+        "tired",
+        "success"
+      ],
+      "cooldownGroup": "help_work",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_join_break_117",
+      "residentId": "dock_captain_ma",
+      "actionType": "join_break",
+      "text": "码头马船长回应：这个时候这段休息像海风一样短，但很舒服，气氛像窗外的海风一样慢下来。",
+      "response": "这段休息像海风一样短，但很舒服。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "gossipy"
+        ],
+        "residentLocation": "park",
+        "residentMood": "sad",
+        "officeMood": "celebratory"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_break",
+        "familiar",
+        "gossipy",
+        "park",
+        "sad",
+        "celebratory",
+        "success"
+      ],
+      "cooldownGroup": "join_break",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_comfort_118",
+      "residentId": "*",
+      "actionType": "comfort",
+      "text": "居民回应：这个时候你没有急着讲道理，只是陪了一会儿，气氛像窗外的海风一样慢下来。（第8次听见时，语气有一点不同。）",
+      "response": "你没有急着讲道理，只是陪了一会儿。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "serious"
+        ],
+        "residentLocation": "seaside",
+        "residentMood": "angry",
+        "officeMood": "calm"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "comfort",
+        "friend",
+        "serious",
+        "seaside",
+        "angry",
+        "calm",
+        "success"
+      ],
+      "cooldownGroup": "comfort",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_share_rumor_119",
+      "residentId": "*",
+      "actionType": "share_rumor",
+      "text": "居民回应：这个时候传闻被轻轻放到桌上，大家没有急着下结论，气氛像窗外的海风一样慢下来。（第8次听见时，语气有一点不同。）",
+      "response": "传闻被轻轻放到桌上，大家没有急着下结论。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "optimistic"
+        ],
+        "residentLocation": "dock",
+        "residentMood": "grateful",
+        "officeMood": "busy"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_rumor",
+        "close_friend",
+        "optimistic",
+        "dock",
+        "grateful",
+        "busy",
+        "success"
+      ],
+      "cooldownGroup": "share_rumor",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_ask_about_rumor_120",
+      "residentId": "*",
+      "actionType": "ask_about_rumor",
+      "text": "居民回应：这个时候对方把最近听到的小消息讲给你听，气氛像窗外的海风一样慢下来。（第8次听见时，语气有一点不同。）",
+      "response": "对方把最近听到的小消息讲给你听。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "cautious"
+        ],
+        "residentLocation": "home",
+        "residentMood": "playful",
+        "officeMood": "cheerful"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "ask_about_rumor",
+        "trusted_friend",
+        "cautious",
+        "home",
+        "playful",
+        "cheerful",
+        "success"
+      ],
+      "cooldownGroup": "ask_about_rumor",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_verify_rumor_121",
+      "residentId": "store_night_cashier",
+      "actionType": "verify_rumor",
+      "text": "便利店夜班收银员回应：这个时候你们一起确认消息来源，让传闻变得更清楚，气氛像窗外的海风一样慢下来。",
+      "response": "你们一起确认消息来源，让传闻变得更清楚。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "kind"
+        ],
+        "residentLocation": "workstation",
+        "residentMood": "calm",
+        "officeMood": "tense"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "verify_rumor",
+        "stranger",
+        "kind",
+        "workstation",
+        "calm",
+        "tense",
+        "success"
+      ],
+      "cooldownGroup": "verify_rumor",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_share_fish_122",
+      "residentId": "*",
+      "actionType": "share_fish",
+      "text": "居民回应：这个时候鱼获变成了今天的小话题，气氛像窗外的海风一样慢下来。（第8次听见时，语气有一点不同。）",
+      "response": "鱼获变成了今天的小话题。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "competitive"
+        ],
+        "residentLocation": "office",
+        "residentMood": "happy",
+        "officeMood": "quiet"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_fish",
+        "acquaintance",
+        "competitive",
+        "office",
+        "happy",
+        "quiet",
+        "success"
+      ],
+      "cooldownGroup": "share_fish",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_remember_preference_123",
+      "residentId": "*",
+      "actionType": "remember_preference",
+      "text": "居民回应：这个时候你记住了一个小偏好，对方也记住了这份细心，气氛像窗外的海风一样慢下来。（第8次听见时，语气有一点不同。）",
+      "response": "你记住了一个小偏好，对方也记住了这份细心。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "playful"
+        ],
+        "residentLocation": "meeting_room",
+        "residentMood": "curious",
+        "officeMood": "social"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "remember_preference",
+        "familiar",
+        "playful",
+        "meeting_room",
+        "curious",
+        "social",
+        "success"
+      ],
+      "cooldownGroup": "remember_preference",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_apologize_124",
+      "residentId": "*",
+      "actionType": "apologize",
+      "text": "居民回应：这个时候道歉没有立刻解决一切，但让气氛松了一点，气氛像窗外的海风一样慢下来。（第8次听见时，语气有一点不同。）",
+      "response": "道歉没有立刻解决一切，但让气氛松了一点。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "calm"
+        ],
+        "residentLocation": "pantry",
+        "residentMood": "excited",
+        "officeMood": "festive"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "apologize",
+        "friend",
+        "calm",
+        "pantry",
+        "excited",
+        "festive",
+        "success"
+      ],
+      "cooldownGroup": "apologize",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_resolve_conflict_125",
+      "residentId": "residence_granny_sun",
+      "actionType": "resolve_conflict",
+      "text": "居民区晒太阳奶奶回应：这个时候误会被慢慢说开，办公室安静了一些，气氛像窗外的海风一样慢下来。",
+      "response": "误会被慢慢说开，办公室安静了一些。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "sensitive"
+        ],
+        "residentLocation": "printing_area",
+        "residentMood": "tired",
+        "officeMood": "tired"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "resolve_conflict",
+        "close_friend",
+        "sensitive",
+        "printing_area",
+        "tired",
+        "tired",
+        "success"
+      ],
+      "cooldownGroup": "resolve_conflict",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_observe_126",
+      "residentId": "*",
+      "actionType": "observe",
+      "text": "居民回应：这个时候你先观察，没有打扰正在发生的小事，气氛像窗外的海风一样慢下来。（第8次听见时，语气有一点不同。）",
+      "response": "你先观察，没有打扰正在发生的小事。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "curious"
+        ],
+        "residentLocation": "manager_room",
+        "residentMood": "busy",
+        "officeMood": "celebratory"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "observe",
+        "trusted_friend",
+        "curious",
+        "manager_room",
+        "busy",
+        "celebratory",
+        "success"
+      ],
+      "cooldownGroup": "observe",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_start_story_127",
+      "residentId": "*",
+      "actionType": "start_story",
+      "text": "居民回应：这个时候对方想起一件小事，故事自然开始，气氛像窗外的海风一样慢下来。（第8次听见时，语气有一点不同。）",
+      "response": "对方想起一件小事，故事自然开始。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "outgoing"
+        ],
+        "residentLocation": "balcony",
+        "residentMood": "lonely",
+        "officeMood": "calm"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "start_story",
+        "stranger",
+        "outgoing",
+        "balcony",
+        "lonely",
+        "calm",
+        "success"
+      ],
+      "cooldownGroup": "start_story",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_join_group_128",
+      "residentId": "*",
+      "actionType": "join_group",
+      "text": "居民回应：这个时候你加入了大家的小圈子，没有打断原本的节奏，气氛像窗外的海风一样慢下来。（第8次听见时，语气有一点不同。）",
+      "response": "你加入了大家的小圈子，没有打断原本的节奏。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "introverted"
+        ],
+        "residentLocation": "elevator",
+        "residentMood": "worried",
+        "officeMood": "busy"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_group",
+        "acquaintance",
+        "introverted",
+        "elevator",
+        "worried",
+        "busy",
+        "success"
+      ],
+      "cooldownGroup": "join_group",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_talk_129",
+      "residentId": "old_city_bookshop_owner",
+      "actionType": "talk",
+      "text": "老城书店老板回应：这个时候对方愿意坐下来聊一会儿，话题慢慢展开，气氛像窗外的海风一样慢下来。",
+      "response": "对方愿意坐下来聊一会儿，话题慢慢展开。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "hardworking"
+        ],
+        "residentLocation": "reception",
+        "residentMood": "sad",
+        "officeMood": "cheerful"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "talk",
+        "familiar",
+        "hardworking",
+        "reception",
+        "sad",
+        "cheerful",
+        "success"
+      ],
+      "cooldownGroup": "talk",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_short_talk_130",
+      "residentId": "*",
+      "actionType": "short_talk",
+      "text": "居民回应：这个时候一个轻轻的招呼被接住了，气氛像窗外的海风一样慢下来。（第9次听见时，语气有一点不同。）",
+      "response": "一个轻轻的招呼被接住了。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "relaxed"
+        ],
+        "residentLocation": "restroom",
+        "residentMood": "angry",
+        "officeMood": "tense"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "short_talk",
+        "friend",
+        "relaxed",
+        "restroom",
+        "angry",
+        "tense",
+        "success"
+      ],
+      "cooldownGroup": "short_talk",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_invite_coffee_131",
+      "residentId": "*",
+      "actionType": "invite_coffee",
+      "text": "居民回应：这个时候咖啡没有催促谁，只让休息变得自然，气氛像窗外的海风一样慢下来。（第9次听见时，语气有一点不同。）",
+      "response": "咖啡没有催促谁，只让休息变得自然。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "gossipy"
+        ],
+        "residentLocation": "coffee_shop",
+        "residentMood": "grateful",
+        "officeMood": "quiet"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "invite_coffee",
+        "close_friend",
+        "gossipy",
+        "coffee_shop",
+        "grateful",
+        "quiet",
+        "success"
+      ],
+      "cooldownGroup": "invite_coffee",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_help_work_132",
+      "residentId": "*",
+      "actionType": "help_work",
+      "text": "居民回应：这个时候你帮忙分走了一点工作压力，气氛像窗外的海风一样慢下来。（第9次听见时，语气有一点不同。）",
+      "response": "你帮忙分走了一点工作压力。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "serious"
+        ],
+        "residentLocation": "park",
+        "residentMood": "playful",
+        "officeMood": "social"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "help_work",
+        "trusted_friend",
+        "serious",
+        "park",
+        "playful",
+        "social",
+        "success"
+      ],
+      "cooldownGroup": "help_work",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_join_break_133",
+      "residentId": "school_art_teacher",
+      "actionType": "join_break",
+      "text": "美术老师许青回应：这个时候这段休息像海风一样短，但很舒服，气氛像窗外的海风一样慢下来。",
+      "response": "这段休息像海风一样短，但很舒服。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "optimistic"
+        ],
+        "residentLocation": "seaside",
+        "residentMood": "calm",
+        "officeMood": "festive"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_break",
+        "stranger",
+        "optimistic",
+        "seaside",
+        "calm",
+        "festive",
+        "success"
+      ],
+      "cooldownGroup": "join_break",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_comfort_134",
+      "residentId": "*",
+      "actionType": "comfort",
+      "text": "居民回应：这个时候你没有急着讲道理，只是陪了一会儿，气氛像窗外的海风一样慢下来。（第9次听见时，语气有一点不同。）",
+      "response": "你没有急着讲道理，只是陪了一会儿。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "cautious"
+        ],
+        "residentLocation": "dock",
+        "residentMood": "happy",
+        "officeMood": "tired"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "comfort",
+        "acquaintance",
+        "cautious",
+        "dock",
+        "happy",
+        "tired",
+        "success"
+      ],
+      "cooldownGroup": "comfort",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_share_rumor_135",
+      "residentId": "*",
+      "actionType": "share_rumor",
+      "text": "居民回应：这个时候传闻被轻轻放到桌上，大家没有急着下结论，气氛像窗外的海风一样慢下来。（第9次听见时，语气有一点不同。）",
+      "response": "传闻被轻轻放到桌上，大家没有急着下结论。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "kind"
+        ],
+        "residentLocation": "home",
+        "residentMood": "curious",
+        "officeMood": "celebratory"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_rumor",
+        "familiar",
+        "kind",
+        "home",
+        "curious",
+        "celebratory",
+        "success"
+      ],
+      "cooldownGroup": "share_rumor",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_ask_about_rumor_136",
+      "residentId": "*",
+      "actionType": "ask_about_rumor",
+      "text": "居民回应：这个时候对方把最近听到的小消息讲给你听，气氛像窗外的海风一样慢下来。（第9次听见时，语气有一点不同。）",
+      "response": "对方把最近听到的小消息讲给你听。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "competitive"
+        ],
+        "residentLocation": "workstation",
+        "residentMood": "excited",
+        "officeMood": "calm"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "ask_about_rumor",
+        "friend",
+        "competitive",
+        "workstation",
+        "excited",
+        "calm",
+        "success"
+      ],
+      "cooldownGroup": "ask_about_rumor",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_verify_rumor_137",
+      "residentId": "cafe_latte_artist",
+      "actionType": "verify_rumor",
+      "text": "拉花师安妮回应：这个时候你们一起确认消息来源，让传闻变得更清楚，气氛像窗外的海风一样慢下来。",
+      "response": "你们一起确认消息来源，让传闻变得更清楚。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "playful"
+        ],
+        "residentLocation": "office",
+        "residentMood": "tired",
+        "officeMood": "busy"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "verify_rumor",
+        "close_friend",
+        "playful",
+        "office",
+        "tired",
+        "busy",
+        "success"
+      ],
+      "cooldownGroup": "verify_rumor",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_share_fish_138",
+      "residentId": "*",
+      "actionType": "share_fish",
+      "text": "居民回应：这个时候鱼获变成了今天的小话题，气氛像窗外的海风一样慢下来。（第9次听见时，语气有一点不同。）",
+      "response": "鱼获变成了今天的小话题。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "calm"
+        ],
+        "residentLocation": "meeting_room",
+        "residentMood": "busy",
+        "officeMood": "cheerful"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_fish",
+        "trusted_friend",
+        "calm",
+        "meeting_room",
+        "busy",
+        "cheerful",
+        "success"
+      ],
+      "cooldownGroup": "share_fish",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_remember_preference_139",
+      "residentId": "*",
+      "actionType": "remember_preference",
+      "text": "居民回应：这个时候你记住了一个小偏好，对方也记住了这份细心，气氛像窗外的海风一样慢下来。（第9次听见时，语气有一点不同。）",
+      "response": "你记住了一个小偏好，对方也记住了这份细心。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "sensitive"
+        ],
+        "residentLocation": "pantry",
+        "residentMood": "lonely",
+        "officeMood": "tense"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "remember_preference",
+        "stranger",
+        "sensitive",
+        "pantry",
+        "lonely",
+        "tense",
+        "success"
+      ],
+      "cooldownGroup": "remember_preference",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_apologize_140",
+      "residentId": "*",
+      "actionType": "apologize",
+      "text": "居民回应：这个时候道歉没有立刻解决一切，但让气氛松了一点，气氛像窗外的海风一样慢下来。（第9次听见时，语气有一点不同。）",
+      "response": "道歉没有立刻解决一切，但让气氛松了一点。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "curious"
+        ],
+        "residentLocation": "printing_area",
+        "residentMood": "worried",
+        "officeMood": "quiet"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "apologize",
+        "acquaintance",
+        "curious",
+        "printing_area",
+        "worried",
+        "quiet",
+        "success"
+      ],
+      "cooldownGroup": "apologize",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_resolve_conflict_141",
+      "residentId": "police_bicycle_officer",
+      "actionType": "resolve_conflict",
+      "text": "单车巡警周然回应：这个时候误会被慢慢说开，办公室安静了一些，气氛像窗外的海风一样慢下来。",
+      "response": "误会被慢慢说开，办公室安静了一些。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "outgoing"
+        ],
+        "residentLocation": "manager_room",
+        "residentMood": "sad",
+        "officeMood": "social"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "resolve_conflict",
+        "familiar",
+        "outgoing",
+        "manager_room",
+        "sad",
+        "social",
+        "success"
+      ],
+      "cooldownGroup": "resolve_conflict",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_observe_142",
+      "residentId": "*",
+      "actionType": "observe",
+      "text": "居民回应：这个时候你先观察，没有打扰正在发生的小事，气氛像窗外的海风一样慢下来。（第9次听见时，语气有一点不同。）",
+      "response": "你先观察，没有打扰正在发生的小事。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "introverted"
+        ],
+        "residentLocation": "balcony",
+        "residentMood": "angry",
+        "officeMood": "festive"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "observe",
+        "friend",
+        "introverted",
+        "balcony",
+        "angry",
+        "festive",
+        "success"
+      ],
+      "cooldownGroup": "observe",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_start_story_143",
+      "residentId": "*",
+      "actionType": "start_story",
+      "text": "居民回应：这个时候对方想起一件小事，故事自然开始，气氛像窗外的海风一样慢下来。（第9次听见时，语气有一点不同。）",
+      "response": "对方想起一件小事，故事自然开始。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "hardworking"
+        ],
+        "residentLocation": "elevator",
+        "residentMood": "grateful",
+        "officeMood": "tired"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "start_story",
+        "close_friend",
+        "hardworking",
+        "elevator",
+        "grateful",
+        "tired",
+        "success"
+      ],
+      "cooldownGroup": "start_story",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_join_group_144",
+      "residentId": "*",
+      "actionType": "join_group",
+      "text": "居民回应：这个时候你加入了大家的小圈子，没有打断原本的节奏，气氛像窗外的海风一样慢下来。（第9次听见时，语气有一点不同。）",
+      "response": "你加入了大家的小圈子，没有打断原本的节奏。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "relaxed"
+        ],
+        "residentLocation": "reception",
+        "residentMood": "playful",
+        "officeMood": "celebratory"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_group",
+        "trusted_friend",
+        "relaxed",
+        "reception",
+        "playful",
+        "celebratory",
+        "success"
+      ],
+      "cooldownGroup": "join_group",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_talk_145",
+      "residentId": "flower_shop_owner_lu",
+      "actionType": "talk",
+      "text": "花店老板陆晴回应：这个时候对方愿意坐下来聊一会儿，话题慢慢展开，气氛像窗外的海风一样慢下来。",
+      "response": "对方愿意坐下来聊一会儿，话题慢慢展开。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "gossipy"
+        ],
+        "residentLocation": "restroom",
+        "residentMood": "calm",
+        "officeMood": "calm"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "talk",
+        "stranger",
+        "gossipy",
+        "restroom",
+        "calm",
+        "calm",
+        "success"
+      ],
+      "cooldownGroup": "talk",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_short_talk_146",
+      "residentId": "*",
+      "actionType": "short_talk",
+      "text": "居民回应：这个时候一个轻轻的招呼被接住了，气氛像窗外的海风一样慢下来。（第10次听见时，语气有一点不同。）",
+      "response": "一个轻轻的招呼被接住了。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "serious"
+        ],
+        "residentLocation": "coffee_shop",
+        "residentMood": "happy",
+        "officeMood": "busy"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "short_talk",
+        "acquaintance",
+        "serious",
+        "coffee_shop",
+        "happy",
+        "busy",
+        "success"
+      ],
+      "cooldownGroup": "short_talk",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_invite_coffee_147",
+      "residentId": "*",
+      "actionType": "invite_coffee",
+      "text": "居民回应：这个时候咖啡没有催促谁，只让休息变得自然，气氛像窗外的海风一样慢下来。（第10次听见时，语气有一点不同。）",
+      "response": "咖啡没有催促谁，只让休息变得自然。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "optimistic"
+        ],
+        "residentLocation": "park",
+        "residentMood": "curious",
+        "officeMood": "cheerful"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "invite_coffee",
+        "familiar",
+        "optimistic",
+        "park",
+        "curious",
+        "cheerful",
+        "success"
+      ],
+      "cooldownGroup": "invite_coffee",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_help_work_148",
+      "residentId": "*",
+      "actionType": "help_work",
+      "text": "居民回应：这个时候你帮忙分走了一点工作压力，气氛像窗外的海风一样慢下来。（第10次听见时，语气有一点不同。）",
+      "response": "你帮忙分走了一点工作压力。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "cautious"
+        ],
+        "residentLocation": "seaside",
+        "residentMood": "excited",
+        "officeMood": "tense"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "help_work",
+        "friend",
+        "cautious",
+        "seaside",
+        "excited",
+        "tense",
+        "success"
+      ],
+      "cooldownGroup": "help_work",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_join_break_149",
+      "residentId": "market_fishmonger_hu",
+      "actionType": "join_break",
+      "text": "市场鱼贩胡哥回应：这个时候这段休息像海风一样短，但很舒服，气氛像窗外的海风一样慢下来。",
+      "response": "这段休息像海风一样短，但很舒服。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "kind"
+        ],
+        "residentLocation": "dock",
+        "residentMood": "tired",
+        "officeMood": "quiet"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_break",
+        "close_friend",
+        "kind",
+        "dock",
+        "tired",
+        "quiet",
+        "success"
+      ],
+      "cooldownGroup": "join_break",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_comfort_150",
+      "residentId": "*",
+      "actionType": "comfort",
+      "text": "居民回应：这个时候你没有急着讲道理，只是陪了一会儿，气氛像窗外的海风一样慢下来。（第10次听见时，语气有一点不同。）",
+      "response": "你没有急着讲道理，只是陪了一会儿。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "competitive"
+        ],
+        "residentLocation": "home",
+        "residentMood": "busy",
+        "officeMood": "social"
+      },
+      "priority": 38,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "comfort",
+        "trusted_friend",
+        "competitive",
+        "home",
+        "busy",
+        "social",
+        "success"
+      ],
+      "cooldownGroup": "comfort",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_share_rumor_151",
+      "residentId": "*",
+      "actionType": "share_rumor",
+      "text": "居民回应：这个时候传闻被轻轻放到桌上，大家没有急着下结论，气氛像窗外的海风一样慢下来。（第10次听见时，语气有一点不同。）",
+      "response": "传闻被轻轻放到桌上，大家没有急着下结论。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "playful"
+        ],
+        "residentLocation": "workstation",
+        "residentMood": "lonely",
+        "officeMood": "festive"
+      },
+      "priority": 39,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_rumor",
+        "stranger",
+        "playful",
+        "workstation",
+        "lonely",
+        "festive",
+        "success"
+      ],
+      "cooldownGroup": "share_rumor",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_ask_about_rumor_152",
+      "residentId": "*",
+      "actionType": "ask_about_rumor",
+      "text": "居民回应：这个时候对方把最近听到的小消息讲给你听，气氛像窗外的海风一样慢下来。（第10次听见时，语气有一点不同。）",
+      "response": "对方把最近听到的小消息讲给你听。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "calm"
+        ],
+        "residentLocation": "office",
+        "residentMood": "worried",
+        "officeMood": "tired"
+      },
+      "priority": 40,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "ask_about_rumor",
+        "acquaintance",
+        "calm",
+        "office",
+        "worried",
+        "tired",
+        "success"
+      ],
+      "cooldownGroup": "ask_about_rumor",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_verify_rumor_153",
+      "residentId": "hotel_frontdesk_hao",
+      "actionType": "verify_rumor",
+      "text": "酒店前台郝然回应：这个时候你们一起确认消息来源，让传闻变得更清楚，气氛像窗外的海风一样慢下来。",
+      "response": "你们一起确认消息来源，让传闻变得更清楚。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "sensitive"
+        ],
+        "residentLocation": "meeting_room",
+        "residentMood": "sad",
+        "officeMood": "celebratory"
+      },
+      "priority": 41,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "verify_rumor",
+        "familiar",
+        "sensitive",
+        "meeting_room",
+        "sad",
+        "celebratory",
+        "success"
+      ],
+      "cooldownGroup": "verify_rumor",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_share_fish_154",
+      "residentId": "*",
+      "actionType": "share_fish",
+      "text": "居民回应：这个时候鱼获变成了今天的小话题，气氛像窗外的海风一样慢下来。（第10次听见时，语气有一点不同。）",
+      "response": "鱼获变成了今天的小话题。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "curious"
+        ],
+        "residentLocation": "pantry",
+        "residentMood": "angry",
+        "officeMood": "calm"
+      },
+      "priority": 42,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "share_fish",
+        "friend",
+        "curious",
+        "pantry",
+        "angry",
+        "calm",
+        "success"
+      ],
+      "cooldownGroup": "share_fish",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_remember_preference_155",
+      "residentId": "*",
+      "actionType": "remember_preference",
+      "text": "居民回应：这个时候你记住了一个小偏好，对方也记住了这份细心，气氛像窗外的海风一样慢下来。（第10次听见时，语气有一点不同。）",
+      "response": "你记住了一个小偏好，对方也记住了这份细心。",
+      "conditions": {
+        "friendshipStage": "close_friend",
+        "personalityTags": [
+          "outgoing"
+        ],
+        "residentLocation": "printing_area",
+        "residentMood": "grateful",
+        "officeMood": "busy"
+      },
+      "priority": 32,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "remember_preference",
+        "close_friend",
+        "outgoing",
+        "printing_area",
+        "grateful",
+        "busy",
+        "success"
+      ],
+      "cooldownGroup": "remember_preference",
+      "weight": 5
+    },
+    {
+      "id": "content_interaction_apologize_156",
+      "residentId": "*",
+      "actionType": "apologize",
+      "text": "居民回应：这个时候道歉没有立刻解决一切，但让气氛松了一点，气氛像窗外的海风一样慢下来。（第10次听见时，语气有一点不同。）",
+      "response": "道歉没有立刻解决一切，但让气氛松了一点。",
+      "conditions": {
+        "friendshipStage": "trusted_friend",
+        "personalityTags": [
+          "introverted"
+        ],
+        "residentLocation": "manager_room",
+        "residentMood": "playful",
+        "officeMood": "cheerful"
+      },
+      "priority": 33,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "apologize",
+        "trusted_friend",
+        "introverted",
+        "manager_room",
+        "playful",
+        "cheerful",
+        "success"
+      ],
+      "cooldownGroup": "apologize",
+      "weight": 1
+    },
+    {
+      "id": "content_interaction_resolve_conflict_157",
+      "residentId": "tackle_shop_owner_shen",
+      "actionType": "resolve_conflict",
+      "text": "渔具店沈老板回应：这个时候误会被慢慢说开，办公室安静了一些，气氛像窗外的海风一样慢下来。",
+      "response": "误会被慢慢说开，办公室安静了一些。",
+      "conditions": {
+        "friendshipStage": "stranger",
+        "personalityTags": [
+          "hardworking"
+        ],
+        "residentLocation": "balcony",
+        "residentMood": "calm",
+        "officeMood": "tense"
+      },
+      "priority": 34,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "resolve_conflict",
+        "stranger",
+        "hardworking",
+        "balcony",
+        "calm",
+        "tense",
+        "success"
+      ],
+      "cooldownGroup": "resolve_conflict",
+      "weight": 2
+    },
+    {
+      "id": "content_interaction_observe_158",
+      "residentId": "*",
+      "actionType": "observe",
+      "text": "居民回应：这个时候你先观察，没有打扰正在发生的小事，气氛像窗外的海风一样慢下来。（第10次听见时，语气有一点不同。）",
+      "response": "你先观察，没有打扰正在发生的小事。",
+      "conditions": {
+        "friendshipStage": "acquaintance",
+        "personalityTags": [
+          "relaxed"
+        ],
+        "residentLocation": "elevator",
+        "residentMood": "happy",
+        "officeMood": "quiet"
+      },
+      "priority": 35,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "observe",
+        "acquaintance",
+        "relaxed",
+        "elevator",
+        "happy",
+        "quiet",
+        "success"
+      ],
+      "cooldownGroup": "observe",
+      "weight": 3
+    },
+    {
+      "id": "content_interaction_start_story_159",
+      "residentId": "*",
+      "actionType": "start_story",
+      "text": "居民回应：这个时候对方想起一件小事，故事自然开始，气氛像窗外的海风一样慢下来。（第10次听见时，语气有一点不同。）",
+      "response": "对方想起一件小事，故事自然开始。",
+      "conditions": {
+        "friendshipStage": "familiar",
+        "personalityTags": [
+          "gossipy"
+        ],
+        "residentLocation": "reception",
+        "residentMood": "curious",
+        "officeMood": "social"
+      },
+      "priority": 36,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "start_story",
+        "familiar",
+        "gossipy",
+        "reception",
+        "curious",
+        "social",
+        "success"
+      ],
+      "cooldownGroup": "start_story",
+      "weight": 4
+    },
+    {
+      "id": "content_interaction_join_group_160",
+      "residentId": "*",
+      "actionType": "join_group",
+      "text": "居民回应：这个时候你加入了大家的小圈子，没有打断原本的节奏，气氛像窗外的海风一样慢下来。（第10次听见时，语气有一点不同。）",
+      "response": "你加入了大家的小圈子，没有打断原本的节奏。",
+      "conditions": {
+        "friendshipStage": "friend",
+        "personalityTags": [
+          "serious"
+        ],
+        "residentLocation": "restroom",
+        "residentMood": "excited",
+        "officeMood": "festive"
+      },
+      "priority": 37,
+      "repeatable": true,
+      "tags": [
+        "interaction_content",
+        "module_04",
+        "join_group",
+        "friend",
+        "serious",
+        "restroom",
+        "excited",
+        "festive",
+        "success"
+      ],
+      "cooldownGroup": "join_group",
+      "weight": 5
     }
   ]
 }

@@ -199,7 +199,7 @@ class FishRuntimeManager extends ChangeNotifier {
     if (_matchesBait(fish.favoriteBait, context.baitId)) score += 0.12;
     if (_matchesAny(fish.habitat, _tokens(context.locationId))) score += 0.08;
     if (_festivalRuntimeManager.getActiveFestivals().isNotEmpty) score += 0.02;
-    if (_secondWorldEngine != null) score += 0.0;
+    score += _skillScoreBonus(fish);
     final rarityCap = 0.45 + (rarityWeight * 0.9);
     return score.clamp(0.01, rarityCap.clamp(0.12, 1)).toDouble();
   }
@@ -209,7 +209,28 @@ class FishRuntimeManager extends ChangeNotifier {
     final max = fish.weightRange.max <= min ? min + 0.1 : fish.weightRange.max;
     final seed = (fish.id.hashCode + context.baitId.hashCode).abs();
     final ratio = (seed % 1000) / 1000;
-    return double.parse((min + ((max - min) * ratio)).toStringAsFixed(1));
+    final fishingLevel = _skillLevel('fishing');
+    final luckLevel = _skillLevel('luck');
+    final skillRatio =
+        (ratio + ((fishingLevel - 1) * 0.008) + ((luckLevel - 1) * 0.004))
+            .clamp(0, 0.92)
+            .toDouble();
+    return double.parse((min + ((max - min) * skillRatio)).toStringAsFixed(1));
+  }
+
+  double _skillScoreBonus(FishCatalogEntry fish) {
+    final fishing = _skillLevel('fishing') - 1;
+    final observation = _skillLevel('observation') - 1;
+    final luck = _skillLevel('luck') - 1;
+    if (fishing <= 0 && observation <= 0 && luck <= 0) return 0;
+    final rarityRank = _rarityRank(fish.rarity);
+    final base = (fishing * 0.008) + (observation * 0.004);
+    final rareSupport = rarityRank >= 3 ? luck * 0.004 : luck * 0.002;
+    return (base + rareSupport).clamp(0, 0.06).toDouble();
+  }
+
+  int _skillLevel(String skillId) {
+    return _secondWorldEngine?.getSkillState(skillId).level ?? 1;
   }
 
   FishCatalogEntry _selectWeighted(

@@ -1,7 +1,9 @@
 import 'package:flutter/foundation.dart';
 
+import '../../models/career_state.dart';
 import '../../models/fish_collection_config.dart';
 import '../../models/honor_config.dart';
+import '../../models/player_influence.dart';
 import '../../models/task_config.dart';
 import '../engine/second_world_engine.dart';
 import 'festival_runtime_manager.dart';
@@ -138,6 +140,8 @@ class AchievementRuntimeManager extends ChangeNotifier {
       <String, AchievementProgress>{};
   final Set<String> _claimedIds = <String>{};
   final Map<String, String> _unlockedAt = <String, String>{};
+  PlayerInfluenceContext _playerInfluenceContext =
+      PlayerInfluenceContext.empty();
   String _equippedTitleId = '';
 
   List<AchievementProgress> getAllAchievements() {
@@ -193,6 +197,11 @@ class AchievementRuntimeManager extends ChangeNotifier {
   AchievementProgress? getEquippedTitle() {
     if (_equippedTitleId.isEmpty) return null;
     return getAchievementProgress(_equippedTitleId);
+  }
+
+  void applyPlayerInfluenceContext(PlayerInfluenceContext context) {
+    _playerInfluenceContext = context;
+    _rebuild();
   }
 
   void _rebuild({bool notify = false}) {
@@ -340,19 +349,73 @@ class AchievementRuntimeManager extends ChangeNotifier {
     metrics['fish_coin_total'] =
         _manualCounters['fish_coin_total'] ?? metrics['fish_coin'] ?? 0;
     metrics['has_second_world_engine'] = _secondWorldEngine == null ? 0 : 1;
+    final career = _worldSaveManager.careerState;
+    metrics['career_experience'] = career.experience;
+    metrics['career_performance'] = career.performanceScore;
+    metrics['career_task_count'] = career.completedCareerTasks;
+    metrics['career_work_days'] = career.consecutiveWorkDays;
+    metrics['career_level_index'] = career.levelIndex;
+    metrics['first_salary'] =
+        _worldSaveManager.salaryTransactionIds.isEmpty ? 0 : 1;
+    metrics['first_promotion'] =
+        _worldSaveManager.promotionHistory.isEmpty ? 0 : 1;
+    metrics['career_employee'] =
+        career.levelIndex >= careerLevelOrder.indexOf('employee') ? 1 : 0;
+    metrics['career_manager'] =
+        career.levelIndex >= careerLevelOrder.indexOf('manager') ? 1 : 0;
+    metrics['high_performance'] = career.performanceScore >= 85 ? 1 : 0;
+    var allSkillsLevel3 = 1;
+    for (final skillId in playerSkillIds) {
+      final skill = _worldSaveManager.getSkillState(skillId);
+      metrics['skill_${skillId}_level'] = skill.level;
+      metrics['skill_${skillId}_experience'] = skill.experience;
+      if (skill.level < 3) allSkillsLevel3 = 0;
+    }
+    metrics['first_skill_level_up'] = _worldSaveManager.skillExperienceHistory
+            .any((record) => record.levelAfter > record.levelBefore)
+        ? 1
+        : 0;
+    metrics['skill_level_5'] = _worldSaveManager.playerSkillStates.values
+            .any((skill) => skill.level >= 5)
+        ? 1
+        : 0;
+    metrics['skill_level_10'] = _worldSaveManager.playerSkillStates.values
+            .any((skill) => skill.level >= 10)
+        ? 1
+        : 0;
+    metrics['all_skills_level_3'] = allSkillsLevel3;
+    metrics['fishing_master'] =
+        _worldSaveManager.getSkillState('fishing').level >= 10 ? 1 : 0;
+    metrics['communication_master'] =
+        _worldSaveManager.getSkillState('communication').level >= 10 ? 1 : 0;
+    metrics['management_master'] =
+        _worldSaveManager.getSkillState('management').level >= 10 ? 1 : 0;
+    metrics['office_trust'] =
+        _playerInfluenceContext.officeInfluence.officeTrust;
+    metrics['office_popularity'] =
+        _playerInfluenceContext.officeInfluence.officePopularity;
+    metrics['office_visibility'] =
+        _playerInfluenceContext.officeInfluence.officeVisibility;
+    metrics['office_influence'] =
+        _playerInfluenceContext.officeInfluence.overall;
+    metrics['friend_count'] = _playerInfluenceContext.friendCount;
+    metrics['all_residents_friend'] = _playerInfluenceContext.friendCount >=
+            _residentRuntimeManager.residents.length
+        ? 1
+        : 0;
+    for (final reputation in _playerInfluenceContext.reputation) {
+      metrics['reputation_$reputation'] = 1;
+    }
     return metrics;
   }
 
   int _maxRelationshipRank() {
     var rank = 0;
     for (final resident in _residentRuntimeManager.residents) {
-      final relationship =
-          _relationshipRuntimeManager.getPlayerRelationshipWithResident(
-        resident.id,
-      );
-      rank = rank > _relationshipRank(relationship.relationshipLevel)
+      final friendship = _worldSaveManager.getFriendshipState(resident.id);
+      rank = rank > _relationshipRank(friendship.stage)
           ? rank
-          : _relationshipRank(relationship.relationshipLevel);
+          : _relationshipRank(friendship.stage);
     }
     for (final relationship
         in _relationshipRuntimeManager.residentRelationships) {
@@ -365,13 +428,16 @@ class AchievementRuntimeManager extends ChangeNotifier {
 
   int _relationshipRank(String level) {
     switch (level) {
+      case 'acquaintance':
       case 'known':
         return 1;
+      case 'familiar':
       case 'friend':
         return 2;
       case 'old_friend':
       case 'close_friend':
         return 3;
+      case 'trusted_friend':
       case 'trust':
         return 4;
       case 'family':

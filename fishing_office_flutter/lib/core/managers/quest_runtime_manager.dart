@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../models/player_influence.dart';
 import '../../models/task_config.dart';
 import '../../models/world_save_data.dart';
 import 'app_managers.dart';
@@ -62,6 +63,8 @@ class QuestRuntimeManager extends ChangeNotifier {
   final Set<String> _seenRumorIds = <String>{};
   final Set<String> _triggeredStoryIds = <String>{};
   final Map<String, int> _worldEventCounts = <String, int>{};
+  PlayerInfluenceContext _playerInfluenceContext =
+      PlayerInfluenceContext.empty();
   int _residentInteractionCount = 0;
   int? _lastRefreshDay;
 
@@ -72,6 +75,27 @@ class QuestRuntimeManager extends ChangeNotifier {
       Map<String, int>.unmodifiable(_currentDailyMetrics());
 
   int? get lastRefreshDay => _lastRefreshDay;
+
+  List<String> get recommendedQuestTags => <String>{
+        ..._playerInfluenceContext.officeTags,
+        ..._playerInfluenceContext.reputation.map((item) => 'reputation:$item'),
+        if (_playerInfluenceContext.officeInfluence.officeTrust >= 60)
+          'help_residents',
+        if (_playerInfluenceContext.officeInfluence.officePopularity >= 60)
+          'social',
+        if (_playerInfluenceContext.officeInfluence.officeVisibility >= 60)
+          'office_events',
+      }.toList(growable: false);
+
+  void applyPlayerInfluenceContext(PlayerInfluenceContext context) {
+    _playerInfluenceContext = context;
+    _worldSaveManager.setQuestRuntimeState({
+      ..._worldSaveManager.questRuntimeState,
+      'recommendedQuestTags': recommendedQuestTags,
+      'playerReputation': context.reputation,
+      'playerOfficeInfluence': context.officeInfluence.toJson(),
+    });
+  }
 
   TaskItemConfig? taskById(String taskId) {
     for (final task in _taskConfig.tasks) {
@@ -148,6 +172,13 @@ class QuestRuntimeManager extends ChangeNotifier {
     if (residentId.isEmpty) return;
     _residentInteractionCount += 1;
     final dialogue = _dialogueRuntimeManager.getDialogue(residentId);
+    _worldSaveManager.recordSkillExperience(
+      sourceType: 'resident_interaction',
+      sourceId: residentId,
+      skillId: 'communication',
+      amount: 8,
+      reason: '与居民互动让沟通能力获得成长。',
+    );
     _worldSaveManager.recordInteraction(
       residentId: residentId,
       dialogueId: dialogue.id,
@@ -160,6 +191,15 @@ class QuestRuntimeManager extends ChangeNotifier {
   void recordStoryTriggered(String storyId) {
     if (storyId.isEmpty) return;
     _triggeredStoryIds.add(storyId);
+    _worldSaveManager.recordSkillExperienceBatch(
+      sourceType: 'story_triggered',
+      sourceId: storyId,
+      skills: const <String, int>{
+        'communication': 6,
+        'observation': 6,
+      },
+      reason: '遇见故事后，沟通和观察都多了一点经验。',
+    );
     _worldSaveManager.recordInteraction(
       residentId: '',
       dialogueId: '',
@@ -173,6 +213,13 @@ class QuestRuntimeManager extends ChangeNotifier {
   void recordRumorDiscovered(String rumorId) {
     if (rumorId.isEmpty) return;
     _seenRumorIds.add(rumorId);
+    _worldSaveManager.recordSkillExperience(
+      sourceType: 'rumor_discovered',
+      sourceId: rumorId,
+      skillId: 'observation',
+      amount: 5,
+      reason: '发现传闻让观察能力获得成长。',
+    );
     _persistState();
     notifyListeners();
   }
@@ -180,6 +227,13 @@ class QuestRuntimeManager extends ChangeNotifier {
   void recordFestivalParticipation(String festivalId) {
     if (festivalId.isEmpty) return;
     _seenFestivalIds.add(festivalId);
+    _worldSaveManager.recordSkillExperience(
+      sourceType: 'festival_participation',
+      sourceId: festivalId,
+      skillId: 'observation',
+      amount: 4,
+      reason: '留意节日变化让观察能力获得成长。',
+    );
     _persistState();
     notifyListeners();
   }
@@ -187,6 +241,13 @@ class QuestRuntimeManager extends ChangeNotifier {
   void recordWeatherExperienced(String weatherId) {
     if (weatherId.isEmpty) return;
     _seenWeatherIds.add(weatherId);
+    _worldSaveManager.recordSkillExperience(
+      sourceType: 'weather_experienced',
+      sourceId: weatherId,
+      skillId: 'observation',
+      amount: 3,
+      reason: '观察天气让观察能力获得成长。',
+    );
     _persistState();
     notifyListeners();
   }
@@ -198,8 +259,30 @@ class QuestRuntimeManager extends ChangeNotifier {
       _worldEventCounts['${type}_$id'] =
           (_worldEventCounts['${type}_$id'] ?? 0) + amount;
     }
+    _recordCareerEvent(type, id: id, amount: amount);
+    _recordSkillEvent(type, id: id, amount: amount);
     _persistState();
     notifyListeners();
+  }
+
+  void recordCareerTaskCompleted(String taskId) {
+    if (taskId.isEmpty) return;
+    recordWorldEvent('career_task_completed', id: taskId);
+  }
+
+  void recordLocationEvent(
+    String type,
+    String locationId, {
+    String residentId = '',
+    int amount = 1,
+  }) {
+    if (locationId.isEmpty) return;
+    final normalized =
+        _residentRuntimeManager.getLocationContext(locationId).locationId;
+    recordWorldEvent(type, id: normalized, amount: amount);
+    if (residentId.isNotEmpty) {
+      recordWorldEvent('${type}_resident', id: residentId, amount: amount);
+    }
   }
 
   bool claimReward({
@@ -224,6 +307,21 @@ class QuestRuntimeManager extends ChangeNotifier {
       tags: <String>['quest_reward', task.category, task.metric],
     );
     _worldSaveManager.recordTaskReward(record);
+    if (_isCareerTask(task)) {
+      _worldSaveManager.recordCareerProgress(
+        sourceId: 'task_claim_${task.id}',
+        type: 'career_task',
+        experience: (task.reward.exp <= 0 ? 4 : task.reward.exp).clamp(1, 20),
+        performanceDelta: 2,
+        completedTaskDelta: 1,
+      );
+      _worldSaveManager.recordSkillExperienceBatch(
+        sourceType: 'task_claim',
+        sourceId: task.id,
+        skills: _skillsForTask(task),
+        reason: '完成任务后，对应技能获得成长。',
+      );
+    }
     _worldSaveManager.recordInteraction(
       residentId: '',
       dialogueId: '',
@@ -331,6 +429,15 @@ class QuestRuntimeManager extends ChangeNotifier {
       }.length,
       'today_world_summary': summary == null ? 0 : 1,
       'today_world_summary_count': summary == null ? 0 : 1,
+      'office_trust': _playerInfluenceContext.officeInfluence.officeTrust,
+      'office_popularity':
+          _playerInfluenceContext.officeInfluence.officePopularity,
+      'office_visibility':
+          _playerInfluenceContext.officeInfluence.officeVisibility,
+      'office_influence': _playerInfluenceContext.officeInfluence.overall,
+      'friend_count': _playerInfluenceContext.friendCount,
+      for (final reputation in _playerInfluenceContext.reputation)
+        'reputation_$reputation': 1,
     };
   }
 
@@ -364,6 +471,106 @@ class QuestRuntimeManager extends ChangeNotifier {
     }
   }
 
+  void _recordCareerEvent(
+    String type, {
+    required String id,
+    required int amount,
+  }) {
+    if (!_isCareerMetric(type)) return;
+    final stableId = id.isEmpty
+        ? '$type:${_worldClockManager.today().dayCount}'
+        : '$type:$id';
+    _worldSaveManager.recordCareerProgress(
+      sourceId: stableId,
+      type: type,
+      experience: (amount.abs() * 3).clamp(1, 15),
+      performanceDelta: _careerPerformanceDelta(type, amount),
+      completedTaskDelta: type.contains('task') ? amount.clamp(0, 99) : 0,
+    );
+  }
+
+  void _recordSkillEvent(
+    String type, {
+    required String id,
+    required int amount,
+  }) {
+    final skillId = _skillForMetric(type);
+    if (skillId.isEmpty) return;
+    final stableId = id.isEmpty
+        ? '$type:${_worldClockManager.today().dayCount}'
+        : '$type:$id';
+    _worldSaveManager.recordSkillExperience(
+      sourceType: type,
+      sourceId: stableId,
+      skillId: skillId,
+      amount: (amount.abs() * 4).clamp(1, 20),
+      reason: '明确行为 $type 带来技能成长。',
+    );
+  }
+
+  bool _isCareerTask(TaskItemConfig task) {
+    return _isCareerMetric(task.category) || _isCareerMetric(task.metric);
+  }
+
+  bool _isCareerMetric(String value) {
+    final text = value.toLowerCase();
+    return text == 'career' ||
+        text == 'work' ||
+        text == 'resident_help' ||
+        text == 'office_event' ||
+        text == 'relationship' ||
+        text == 'story' ||
+        text.startsWith('career_') ||
+        text.startsWith('work_');
+  }
+
+  int _careerPerformanceDelta(String type, int amount) {
+    final text = type.toLowerCase();
+    if (text.contains('failed') || text.contains('ignored')) {
+      return (-amount.abs()).clamp(-3, 0);
+    }
+    if (text.contains('important') || text.contains('story')) {
+      return (amount.abs() * 2).clamp(0, 6);
+    }
+    return amount > 0 ? amount.clamp(0, 3) : amount.clamp(-3, 0);
+  }
+
+  Map<String, int> _skillsForTask(TaskItemConfig task) {
+    final skill = _skillForMetric(task.metric).isNotEmpty
+        ? _skillForMetric(task.metric)
+        : _skillForMetric(task.category);
+    if (skill.isEmpty) return const <String, int>{'efficiency': 6};
+    return <String, int>{skill: 6};
+  }
+
+  String _skillForMetric(String value) {
+    final text = value.toLowerCase();
+    if (text.contains('fish') || text.contains('fishing')) return 'fishing';
+    if (text.contains('resident') ||
+        text.contains('relationship') ||
+        text.contains('dialogue') ||
+        text.contains('help')) {
+      return 'communication';
+    }
+    if (text.contains('collection') ||
+        text.contains('rumor') ||
+        text.contains('weather') ||
+        text.contains('festival') ||
+        text.contains('discover') ||
+        text.contains('story')) {
+      return 'observation';
+    }
+    if (text.contains('task') ||
+        text.contains('daily') ||
+        text.contains('career') ||
+        text.contains('work')) {
+      return 'efficiency';
+    }
+    if (text.contains('team') || text.contains('manage')) return 'management';
+    if (text.contains('rare') || text.contains('luck')) return 'luck';
+    return '';
+  }
+
   void _persistState() {
     _worldSaveManager.setQuestRuntimeState({
       'lastRefreshDay': _lastRefreshDay,
@@ -374,6 +581,9 @@ class QuestRuntimeManager extends ChangeNotifier {
       'triggeredStoryIds': _triggeredStoryIds.toList(growable: false)..sort(),
       'residentInteractionCount': _residentInteractionCount,
       'worldEventCounts': Map<String, int>.from(_worldEventCounts),
+      'recommendedQuestTags': recommendedQuestTags,
+      'playerReputation': _playerInfluenceContext.reputation,
+      'playerOfficeInfluence': _playerInfluenceContext.officeInfluence.toJson(),
       'taskClaimedIds': _taskManager.claimedTaskIds.toList(growable: false)
         ..sort(),
     });

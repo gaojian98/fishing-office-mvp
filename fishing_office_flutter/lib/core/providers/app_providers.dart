@@ -68,6 +68,10 @@ import 'resident_life_provider.dart';
 import 'living_world_providers.dart';
 import '../managers/app_managers.dart' as app_state;
 import '../../services/home_config_loader.dart';
+import '../../models/career_state.dart';
+import '../../models/interactive_office.dart';
+import '../../models/living_office_state.dart';
+import '../../models/player_influence.dart';
 import '../../models/store_config.dart';
 
 final jsonSourceProvider =
@@ -377,6 +381,158 @@ final worldSaveManagerProvider = FutureProvider<WorldSaveManager>((ref) async {
   );
 });
 
+final careerStateProvider = FutureProvider<CareerState>((ref) async {
+  final manager = await ref.read(worldSaveManagerProvider.future);
+  return manager.careerState;
+});
+
+final playerSkillStateProvider =
+    FutureProvider<Map<String, PlayerSkillState>>((ref) async {
+  final manager = await ref.read(worldSaveManagerProvider.future);
+  return manager.playerSkillStates;
+});
+
+final careerFeedbackProvider = FutureProvider<CareerFeedback?>((ref) async {
+  final manager = await ref.read(worldSaveManagerProvider.future);
+  return manager.latestCareerFeedback;
+});
+
+final livingOfficeStateProvider =
+    FutureProvider<LivingOfficeState>((ref) async {
+  final engine = await ref.read(secondWorldEngineProvider.future);
+  return engine.getLivingOfficeState();
+});
+
+final officeWorldHistoryProvider =
+    FutureProvider<List<OfficeWorldHistoryEntry>>((ref) async {
+  final manager = await ref.read(worldSaveManagerProvider.future);
+  return manager.officeWorldHistory;
+});
+
+final interactiveOfficeSnapshotProvider =
+    FutureProvider<InteractiveOfficeSnapshot>((ref) async {
+  final inventory = ref.watch(inventoryManagerProvider);
+  final engine = await ref.read(secondWorldEngineProvider.future);
+  final home = await ref.read(homeConfigBundleProvider.future);
+  inventory.ensureCatalogLoaded(home.inventory);
+  engine.bindInteractiveRuntimes(
+    inventoryManager: inventory,
+    inventoryConfig: home.inventory,
+  );
+  return engine.getInteractiveOfficeSnapshot();
+});
+
+final residentDetailProvider =
+    FutureProvider.family<ResidentDetailViewModel, String>(
+        (ref, residentId) async {
+  final inventory = ref.watch(inventoryManagerProvider);
+  final engine = await ref.read(secondWorldEngineProvider.future);
+  final home = await ref.read(homeConfigBundleProvider.future);
+  inventory.ensureCatalogLoaded(home.inventory);
+  engine.bindInteractiveRuntimes(
+    inventoryManager: inventory,
+    inventoryConfig: home.inventory,
+  );
+  return engine.getResidentDetailViewModel(residentId);
+});
+
+final residentAvailableInteractionsProvider =
+    FutureProvider.family<List<ResidentInteractionView>, String>(
+        (ref, residentId) async {
+  final detail = await ref.read(residentDetailProvider(residentId).future);
+  return detail.availableInteractions;
+});
+
+final residentRecentMemoryProvider =
+    FutureProvider.family<List<ResidentMemoryView>, String>(
+        (ref, residentId) async {
+  final detail = await ref.read(residentDetailProvider(residentId).future);
+  return detail.recentMemories;
+});
+
+final residentStoriesProvider =
+    FutureProvider.family<List<OfficeStoryView>, String>(
+        (ref, residentId) async {
+  final detail = await ref.read(residentDetailProvider(residentId).future);
+  return detail.recentStories;
+});
+
+final residentRumorsProvider =
+    FutureProvider.family<List<OfficeRumorView>, String>(
+        (ref, residentId) async {
+  final detail = await ref.read(residentDetailProvider(residentId).future);
+  return detail.recentRumors;
+});
+
+final playerInfluenceProvider =
+    FutureProvider<PlayerInfluenceContext>((ref) async {
+  final engine = await ref.read(secondWorldEngineProvider.future);
+  return engine.getPlayerInfluenceContext();
+});
+
+final activeOfficeGroupsProvider =
+    FutureProvider<List<OfficeGroupView>>((ref) async {
+  final snapshot = await ref.read(interactiveOfficeSnapshotProvider.future);
+  return snapshot.activeGroups;
+});
+
+final officeEventsProvider = FutureProvider<List<OfficeEventView>>((ref) async {
+  final snapshot = await ref.read(interactiveOfficeSnapshotProvider.future);
+  return snapshot.currentEvents;
+});
+
+final dailyOfficeSummaryProvider =
+    FutureProvider<Map<String, Object?>>((ref) async {
+  final snapshot = await ref.read(interactiveOfficeSnapshotProvider.future);
+  return snapshot.dailySummary;
+});
+
+final residentInteractionProvider =
+    FutureProvider.family<PlayerActionResult, PlayerActionRequest>(
+        (ref, request) async {
+  final engine = await ref.read(secondWorldEngineProvider.future);
+  final home = await ref.read(homeConfigBundleProvider.future);
+  final inventory = ref.read(inventoryManagerProvider);
+  inventory.ensureCatalogLoaded(home.inventory);
+  engine.bindInteractiveRuntimes(
+    inventoryManager: inventory,
+    inventoryConfig: home.inventory,
+  );
+  final result = engine.submitPlayerAction(request);
+  ref.invalidate(interactiveOfficeSnapshotProvider);
+  if (request.targetResidentId.isNotEmpty) {
+    ref.invalidate(residentDetailProvider(request.targetResidentId));
+    ref.invalidate(
+        residentAvailableInteractionsProvider(request.targetResidentId));
+    ref.invalidate(residentRecentMemoryProvider(request.targetResidentId));
+    ref.invalidate(residentStoriesProvider(request.targetResidentId));
+    ref.invalidate(residentRumorsProvider(request.targetResidentId));
+  }
+  ref.invalidate(playerInfluenceProvider);
+  ref.invalidate(activeOfficeGroupsProvider);
+  ref.invalidate(officeEventsProvider);
+  ref.invalidate(dailyOfficeSummaryProvider);
+  return result;
+});
+
+final currentOfficeImportantEventsProvider =
+    FutureProvider<List<String>>((ref) async {
+  final state = await ref.read(livingOfficeStateProvider.future);
+  return state.importantChanges;
+});
+
+final currentOfficePopularLocationsProvider =
+    FutureProvider<List<String>>((ref) async {
+  final state = await ref.read(livingOfficeStateProvider.future);
+  return state.popularLocations;
+});
+
+final currentOfficePopularTopicsProvider =
+    FutureProvider<List<String>>((ref) async {
+  final state = await ref.read(livingOfficeStateProvider.future);
+  return state.popularTopics;
+});
+
 final secondWorldEngineProvider =
     FutureProvider<SecondWorldEngine>((ref) async {
   final residentConfig = await ref.read(residentRepositoryProvider).load();
@@ -400,6 +556,9 @@ final secondWorldEngineProvider =
   final weatherRuntime = await ref.read(weatherRuntimeManagerProvider.future);
   final rumorRuntime = await ref.read(rumorRuntimeManagerProvider.future);
   final worldSave = await ref.read(worldSaveManagerProvider.future);
+  final home = await ref.read(homeConfigBundleProvider.future);
+  final inventory = ref.read(inventoryManagerProvider);
+  inventory.ensureCatalogLoaded(home.inventory);
   return SecondWorldEngine(
     residentConfig: residentConfig,
     residentLifeEngine: lifeManager,
@@ -414,6 +573,8 @@ final secondWorldEngineProvider =
     rumorRuntimeManager: rumorRuntime,
     worldSaveManager: worldSave,
     residentRuntimeManager: ref.read(residentRuntimeManagerProvider),
+    inventoryManager: inventory,
+    inventoryConfig: home.inventory,
   );
 });
 
@@ -472,7 +633,7 @@ final worldTickManagerProvider = FutureProvider<WorldTickManager>((ref) async {
 
 final dailySimulationManagerProvider =
     FutureProvider<DailySimulationManager>((ref) async {
-  return DailySimulationManager(
+  final manager = DailySimulationManager(
     worldTickManager: await ref.read(worldTickManagerProvider.future),
     worldClockManager: ref.read(worldClockManagerProvider),
     festivalRuntimeManager:
@@ -483,6 +644,9 @@ final dailySimulationManagerProvider =
     storyRuntimeManager: await ref.read(storyRuntimeManagerProvider.future),
     worldSaveManager: await ref.read(worldSaveManagerProvider.future),
   );
+  final secondWorld = await ref.read(secondWorldEngineProvider.future);
+  secondWorld.bindInteractiveRuntimes(dailySimulationManager: manager);
+  return manager;
 });
 
 final questRuntimeManagerProvider =
@@ -527,6 +691,8 @@ final economyRuntimeManagerProvider =
     worldSaveManager: await ref.read(worldSaveManagerProvider.future),
     secondWorldEngine: await ref.read(secondWorldEngineProvider.future),
   );
+  final daily = await ref.read(dailySimulationManagerProvider.future);
+  daily.setEconomyRuntimeManager(manager);
   final tick = await ref.read(worldTickManagerProvider.future);
   tick.setEconomyRuntimeManager(manager);
   return manager;
@@ -547,6 +713,8 @@ final relationshipRuntimeManagerProvider =
         await ref.read(residentRelationshipEngineProvider.future),
     secondWorldEngine: await ref.read(secondWorldEngineProvider.future),
   );
+  final secondWorld = await ref.read(secondWorldEngineProvider.future);
+  secondWorld.bindInteractiveRuntimes(relationshipRuntimeManager: manager);
   final tick = await ref.read(worldTickManagerProvider.future);
   tick.setRelationshipRuntimeManager(manager);
   return manager;
@@ -615,6 +783,8 @@ final dynamicEventRuntimeManagerProvider =
     secondWorldEngine: await ref.read(secondWorldEngineProvider.future),
     residentMemoryEngine: ref.read(residentMemoryEngineProvider),
   );
+  final secondWorld = await ref.read(secondWorldEngineProvider.future);
+  secondWorld.bindInteractiveRuntimes(dynamicEventRuntimeManager: manager);
   final tick = await ref.read(worldTickManagerProvider.future);
   tick.setDynamicEventRuntimeManager(manager);
   return manager;
@@ -697,6 +867,7 @@ final fishingProvider = ChangeNotifierProvider<FishingProvider>((ref) {
   ref
       .read(fairyEventServiceProvider.future)
       .then(provider.setFairyEventService);
+  ref.read(worldSaveManagerProvider.future).then(provider.setWorldSaveManager);
   return provider;
 });
 

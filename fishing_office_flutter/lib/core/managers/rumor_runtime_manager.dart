@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../models/resident_personality_context.dart';
 import '../../models/rumor_config.dart';
 import 'festival_runtime_manager.dart';
 import 'resident_runtime_manager.dart';
@@ -62,13 +63,23 @@ class RumorRuntimeManager {
   }
 
   List<RumorEntry> getRumorsForResident(String residentId) {
-    return getActiveRumors().where((rumor) {
+    final personality =
+        _residentRuntimeManager.getResidentPersonalityContext(residentId);
+    final rumors = getActiveRumors().where((rumor) {
       final related = rumor.relatedResidentId;
       final required = rumor.unlockCondition.requiresResidentId;
       final relatedMatches = related.isEmpty || related == residentId;
       final requiredMatches = required.isEmpty || required == residentId;
       return relatedMatches && requiredMatches;
     }).toList(growable: false);
+    final sorted = List<RumorEntry>.from(rumors)
+      ..sort((a, b) {
+        final score = _personalityRumorScore(b, personality)
+            .compareTo(_personalityRumorScore(a, personality));
+        if (score != 0) return score;
+        return b.weight.compareTo(a.weight);
+      });
+    return sorted;
   }
 
   void addRumor(String rumorId) {
@@ -148,6 +159,8 @@ class RumorRuntimeManager {
 
   RumorContext residentRumorContext(String residentId) {
     final state = _residentRuntimeManager.getResidentCurrentState(residentId);
+    final personality =
+        _residentRuntimeManager.getResidentPersonalityContext(residentId);
     final active = getRumorsForResident(residentId);
     final tags = <String>{};
     for (final rumor in active) {
@@ -161,15 +174,56 @@ class RumorRuntimeManager {
       'residentMood': state.mood,
       'residentActivity': state.activity,
       'residentLocation': state.location,
+      'personalityTags': personality.traits,
+      'rumorPreference': personality.rumorPreference,
       'rumorIds': active.map((rumor) => rumor.id).toList(),
-      'rumorTags': tags.toList(growable: false),
+      'rumorTags': <String>{
+        ...tags,
+        ...personality.traits,
+        personality.rumorPreference,
+      }.toList(growable: false),
     };
     return RumorContext(
       activeRumors: active,
-      tags: tags.where((item) => item.isNotEmpty).toList(growable: false),
+      tags: <String>{
+        ...tags,
+        ...personality.traits,
+        personality.rumorPreference,
+      }.where((item) => item.isNotEmpty).toList(growable: false),
       records: Map<String, RumorRuntimeRecord>.unmodifiable(_records),
       raw: raw,
     );
+  }
+
+  int _personalityRumorScore(
+    RumorEntry rumor,
+    ResidentPersonalityContext personality,
+  ) {
+    final tags = rumor.allTags.toSet();
+    var score = rumor.weight;
+    if (personality.traits.contains('gossipy')) score += 12;
+    if (personality.traits.contains('curious') &&
+        tags.any((tag) =>
+            tag.contains('mystery') ||
+            tag.contains('weather') ||
+            tag.contains('ocean') ||
+            tag.contains('fish'))) {
+      score += 8;
+    }
+    if (personality.traits.contains('serious') &&
+        tags.any((tag) =>
+            tag.contains('office') ||
+            tag.contains('work') ||
+            tag.contains('company'))) {
+      score += 6;
+    }
+    if (personality.traits.contains('kind') &&
+        (rumor.category.contains('gossip') || tags.contains('malicious'))) {
+      score -= 8;
+    }
+    if (personality.traits.contains('introverted')) score -= 2;
+    if (personality.traits.contains('cautious')) score -= 1;
+    return score;
   }
 
   RumorRuntimeRecord? recordFor(String rumorId) {

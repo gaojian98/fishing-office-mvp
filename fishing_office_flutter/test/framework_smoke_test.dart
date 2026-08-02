@@ -5,13 +5,18 @@ import 'package:fishing_office_mvp/core/managers/app_managers.dart';
 import 'package:fishing_office_mvp/models/fish_catalog_config.dart';
 import 'package:fishing_office_mvp/models/fish_collection_config.dart';
 import 'package:fishing_office_mvp/models/festival_config.dart';
+import 'package:fishing_office_mvp/models/friendship_state.dart';
 import 'package:fishing_office_mvp/models/honor_config.dart';
 import 'package:fishing_office_mvp/models/inventory_config.dart';
+import 'package:fishing_office_mvp/models/interactive_office.dart';
+import 'package:fishing_office_mvp/models/location_context.dart';
 import 'package:fishing_office_mvp/models/living_world_config.dart';
+import 'package:fishing_office_mvp/models/player_influence.dart';
 import 'package:fishing_office_mvp/models/resident_config.dart';
 import 'package:fishing_office_mvp/models/resident_dialogue_config.dart';
 import 'package:fishing_office_mvp/models/resident_life_config.dart';
 import 'package:fishing_office_mvp/models/resident_memory_config.dart';
+import 'package:fishing_office_mvp/models/resident_personality_context.dart';
 import 'package:fishing_office_mvp/models/resident_relationship_config.dart';
 import 'package:fishing_office_mvp/models/resident_story_config.dart';
 import 'package:fishing_office_mvp/models/rumor_config.dart';
@@ -53,6 +58,7 @@ import 'package:fishing_office_mvp/core/repository/resident_life_repository.dart
 import 'package:fishing_office_mvp/core/repository/resident_repository.dart';
 import 'package:fishing_office_mvp/core/repository/world_save_repository.dart';
 import 'package:fishing_office_mvp/core/services/fairy_event_service.dart';
+import 'package:fishing_office_mvp/models/career_state.dart';
 import 'package:fishing_office_mvp/models/dynamic_event_config.dart';
 import 'package:fishing_office_mvp/pages/home/widgets/ambient_presentation_layer.dart';
 import 'package:flutter/material.dart';
@@ -787,14 +793,14 @@ void main() {
       expect(runtime.getResidentCurrentMood(id), isNotEmpty);
     }
 
-    expect(runtime.getResidentCurrentLocation('resident_1'), 'workplace_1');
+    expect(runtime.getResidentCurrentLocation('resident_1'), 'workstation');
     expect(
-        runtime.getResidentsAtLocation('workplace_1').single.id, 'resident_1');
+        runtime.getResidentsAtLocation('workstation').length, greaterThan(0));
 
     clock.setClock(
       WorldClock.initial().copyWith(dayCount: 1, hour: 23, minute: 30),
     );
-    expect(runtime.getResidentCurrentLocation('resident_0'), 'night_harbor');
+    expect(runtime.getResidentCurrentLocation('resident_0'), 'home');
     expect(runtime.getResidentCurrentActivity('resident_0'), '看夜里的灯塔');
     expect(runtime.getResidentCurrentMood('resident_0'), 'calm');
 
@@ -802,6 +808,1192 @@ void main() {
     expect(clock.hour(), 2);
     expect(runtime.getResidentCurrentLocation('resident_0'),
         isNot('night_harbor'));
+  });
+
+  test(
+      'office life schedule 2.0 resolves stable weekday weekend and save state',
+      () async {
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': List.generate(100, (index) {
+        final mood = switch (index) {
+          2 => 'tired',
+          _ => 'calm',
+        };
+        final personality = switch (index) {
+          1 => 'busy practical',
+          2 => 'warm',
+          _ => 'warm',
+        };
+        return {
+          'id': 'resident_$index',
+          'name': '居民$index',
+          'type': 'resident',
+          'personality': personality,
+          'dialogGroup': 'resident_$index',
+          'mood': mood,
+          'friendship': 0,
+          'unlockLevel': 1,
+          'location': 'default_location_$index',
+          'enabled': true,
+          'home': 'home_$index',
+          'workplace': 'workplace_$index',
+          'dailyRoute': [
+            'workplace_$index',
+            'pantry',
+            'coffee_shop',
+            'park',
+            'home_$index',
+          ],
+        };
+      }),
+    });
+    final life = ResidentLifeConfig.fromJson(
+      scheduleJson: {'version': 'test', 'schedules': []},
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final clock = WorldClockManager(
+      initialClock:
+          WorldClock.initial().copyWith(dayCount: 1, hour: 9, minute: 30),
+      initialCalendar: WorldCalendar.initial().copyWith(
+        dayCount: 1,
+        weekdayIndex: 1,
+        month: 1,
+        day: 1,
+        season: 'spring',
+      ),
+      paused: true,
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+
+    final workMorning = runtime.getResidentCurrentState('resident_1');
+    expect(workMorning.schedulePhase, 'working');
+    expect(workMorning.isWorking, isTrue);
+    expect(workMorning.isOnBreak, isFalse);
+    expect(workMorning.nextChangeTime, '11:00');
+
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 1, hour: 12, minute: 30),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 1,
+        weekdayIndex: 1,
+        month: 1,
+        day: 1,
+        season: 'spring',
+      ),
+    );
+    final lunch = runtime.getResidentCurrentState('resident_1');
+    expect(lunch.schedulePhase, 'lunch');
+    expect(lunch.isOnBreak, isTrue);
+    expect(lunch.nextChangeTime, '14:00');
+    expect(lunch.nextLocation, 'coffee_shop');
+
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 1, hour: 17, minute: 30),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 1,
+        weekdayIndex: 1,
+        month: 1,
+        day: 1,
+        season: 'spring',
+      ),
+    );
+    final busyOvertime = runtime.getResidentCurrentState('resident_1');
+    final tiredOffWork = runtime.getResidentCurrentState('resident_2');
+    expect(busyOvertime.schedulePhase, 'overtime');
+    expect(busyOvertime.isOvertime, isTrue);
+    expect(tiredOffWork.schedulePhase, 'off_work');
+    expect(tiredOffWork.isOvertime, isFalse);
+
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 6, hour: 14, minute: 30),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 6,
+        weekdayIndex: 6,
+        month: 1,
+        day: 6,
+        isWeekend: true,
+        season: 'spring',
+      ),
+    );
+    final weekend = runtime.getResidentCurrentState('resident_1');
+    expect(weekend.schedulePhase, 'weekend');
+    expect(weekend.isWeekend, isTrue);
+    expect(weekend.isWorking, isFalse);
+    expect(weekend.activity, isNot(workMorning.activity));
+
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 8, hour: 23, minute: 30),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 8,
+        weekdayIndex: 1,
+        month: 1,
+        day: 8,
+        season: 'spring',
+      ),
+    );
+    final beforeMidnight = runtime.getResidentCurrentState('resident_1');
+    expect(beforeMidnight.schedulePhase, 'sleep');
+    expect(beforeMidnight.endTime, '06:00');
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 9, hour: 1, minute: 30),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 9,
+        weekdayIndex: 2,
+        month: 1,
+        day: 9,
+        season: 'spring',
+      ),
+    );
+    expect(
+        runtime.getResidentCurrentState('resident_1').schedulePhase, 'sleep');
+
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 9, hour: 10, minute: 50),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 9,
+        weekdayIndex: 2,
+        month: 1,
+        day: 9,
+        season: 'spring',
+      ),
+    );
+    expect(
+        runtime.getResidentCurrentState('resident_1').schedulePhase, 'working');
+    clock.tick(const Duration(minutes: 10));
+    expect(runtime.getResidentCurrentState('resident_1').schedulePhase,
+        'coffee_break');
+
+    final stopwatch = Stopwatch()..start();
+    final states = runtime.getAllResidentCurrentStates();
+    stopwatch.stop();
+    expect(states.length, 100);
+    for (final state in states.values) {
+      expect(state.location, isNotEmpty);
+      expect(state.activity, isNotEmpty);
+      expect(state.mood, isNotEmpty);
+      expect(state.schedulePhase, isNotEmpty);
+      expect(state.nextChangeTime, isNotEmpty);
+    }
+    expect(stopwatch.elapsedMilliseconds, lessThan(250));
+
+    runtime.loadRuntimeStates([
+      {
+        'residentId': 'resident_1',
+        'location': 'legacy_location',
+        'activity': '旧存档里的临时活动',
+        'mood': 'happy',
+        'dayCount': 9,
+        'source': 'legacy_save',
+      },
+    ]);
+    final legacy = runtime.getResidentCurrentState('resident_1');
+    expect(legacy.location, isNotEmpty);
+    expect(
+        LocationContext.supportedLocationIds.contains(legacy.location), isTrue);
+    expect(legacy.schedulePhase, isNotEmpty);
+    expect(legacy.nextChangeTime, isNotEmpty);
+
+    runtime.loadRuntimeStates([
+      {
+        'residentId': 'resident_1',
+        'location': 'workplace_1',
+        'activity': '恢复加班收尾',
+        'mood': 'busy',
+        'dayCount': 9,
+        'source': 'world_save',
+        'schedulePhase': 'overtime',
+        'isWorking': true,
+        'isOvertime': true,
+        'nextLocation': 'elevator',
+        'nextActivity': '准备离开办公室',
+        'nextChangeTime': '18:00',
+      },
+    ]);
+    final restored = runtime.getResidentCurrentState('resident_1');
+    expect(restored.schedulePhase, 'overtime');
+    expect(restored.isWorking, isTrue);
+    expect(restored.isOvertime, isTrue);
+    expect(restored.nextLocation, 'manager_room');
+  });
+
+  test(
+      'office locations integration provides context capacity and runtime hooks',
+      () async {
+    final clock = WorldClockManager(
+      initialClock:
+          WorldClock.initial().copyWith(dayCount: 1, hour: 12, minute: 30),
+      initialCalendar: WorldCalendar.initial().copyWith(
+        dayCount: 1,
+        weekdayIndex: 1,
+        month: 1,
+        day: 1,
+        season: 'spring',
+      ),
+      paused: true,
+    );
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': List.generate(20, (index) {
+        return {
+          'id': 'resident_$index',
+          'name': '居民$index',
+          'type': 'resident',
+          'personality': 'warm',
+          'dialogGroup': 'resident_$index',
+          'mood': 'calm',
+          'friendship': 0,
+          'unlockLevel': 1,
+          'location': 'workplace_$index',
+          'enabled': true,
+          'home': 'home_$index',
+          'workplace': 'workplace_$index',
+          'dailyRoute': ['workplace_$index', 'pantry', 'coffee_shop'],
+        };
+      }),
+    });
+    final life = ResidentLifeConfig.fromJson(
+      scheduleJson: {
+        'version': 'test',
+        'schedules': List.generate(20, (index) {
+          return {
+            'id': 'resident_${index}_lunch',
+            'residentId': 'resident_$index',
+            'schedule': 'lunch',
+            'location': 'pantry',
+            'activity': '午休时在茶水间听听今天的小传闻',
+            'startTime': '12:00',
+            'endTime': '14:00',
+            'mood': 'calm',
+            'weekday': [1, 2, 3, 4, 5],
+          };
+        }),
+      },
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+
+    expect(LocationContext.normalizeId('meetingRoom'), 'meeting_room');
+    expect(LocationContext.normalizeId('meeting-room'), 'meeting_room');
+    expect(LocationContext.normalizeId('workplace_12'), 'workstation');
+    expect(runtime.getLocationContext('meetingRoom').maxCapacity, 8);
+
+    final lunch = runtime.getResidentCurrentState('resident_0');
+    expect(lunch.schedulePhase, 'lunch');
+    expect(lunch.location, 'pantry');
+    expect(runtime.getResidentLocationContext('resident_0').tags,
+        containsAll(['break', 'coffee', 'rumor']));
+
+    final states = runtime.getAllResidentCurrentStates();
+    final pantryCount =
+        states.values.where((state) => state.location == 'pantry').length;
+    final coffeeShopCount =
+        states.values.where((state) => state.location == 'coffee_shop').length;
+    expect(pantryCount, 12);
+    expect(coffeeShopCount, 8);
+    expect(
+      states.values.every((state) => LocationContext.isReasonableForPhase(
+            state.location,
+            state.schedulePhase,
+          )),
+      isTrue,
+    );
+
+    final memory = ResidentMemoryEngine(
+      config: ResidentMemoryConfig.fromJson({
+        'version': 'test',
+        'memories': [],
+      }),
+    );
+    final relationship = ResidentRelationshipEngine(
+      config: ResidentRelationshipConfig.fromJson({
+        'version': 'test',
+        'levels': [
+          {
+            'id': 'stranger',
+            'name': '陌生',
+            'minMeetCount': 0,
+            'enabled': true,
+            'sortOrder': 1,
+          },
+        ],
+        'relationships': [],
+      }),
+      memoryEngine: memory,
+    );
+    final festivalRuntime = FestivalRuntimeManager(
+      config: FestivalConfig.fromJson({'version': 'test', 'festivals': []}),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final weatherRuntime = WeatherRuntimeManager(
+      config: WeatherConfig.fromJson({'version': 'test', 'weatherEvents': []}),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final rumorRuntime = RumorRuntimeManager(
+      config: RumorConfig.fromJson({'version': 'test', 'rumors': []}),
+      worldClockManager: clock,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      residentRuntimeManager: runtime,
+    );
+    final dialogueRuntime = DialogueRuntimeManager(
+      config: ResidentDialogueConfig.fromJson({
+        'version': 'test',
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '今天慢一点。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+          'tags': ['fallback'],
+        },
+        'dialogues': [
+          {
+            'id': 'pantry_rumor_dialogue',
+            'residentId': 'resident_0',
+            'text': '茶水间总能听见一点温柔的小八卦。',
+            'conditions': {
+              'locationTags': ['coffee', 'rumor']
+            },
+            'priority': 20,
+            'repeatable': true,
+            'tags': ['pantry'],
+          },
+          {
+            'id': 'meeting_dialogue',
+            'residentId': 'resident_0',
+            'text': '会议室里的空气有一点认真。',
+            'conditions': {'residentLocation': 'meeting_room'},
+            'priority': 10,
+            'repeatable': true,
+            'tags': ['meeting'],
+          },
+        ],
+      }),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      worldClockManager: clock,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+    );
+    expect(
+        dialogueRuntime.getDialogue('resident_0').id, 'pantry_rumor_dialogue');
+
+    final storyRuntime = StoryRuntimeManager(
+      config: ResidentStoryConfig.fromJson({
+        'version': 'test',
+        'stories': [
+          {
+            'id': 'pantry_break_story',
+            'residentId': 'resident_0',
+            'title': '茶水间的小休息',
+            'summary': '午休时的小故事。',
+            'dialogueIds': [],
+            'conditions': {
+              'requiredLocation': 'pantry',
+              'locationTags': ['break']
+            },
+            'result': {
+              'memoryTags': ['pantry_story']
+            },
+            'priority': 20,
+            'repeatable': true,
+            'tags': ['break_story'],
+          },
+          {
+            'id': 'meeting_story',
+            'residentId': 'resident_0',
+            'title': '会议室插曲',
+            'summary': '只有会议室里才会发生。',
+            'dialogueIds': [],
+            'conditions': {'requiredLocation': 'meeting_room'},
+            'result': {
+              'memoryTags': ['meeting_story']
+            },
+            'priority': 10,
+            'repeatable': true,
+            'tags': ['meeting_story'],
+          },
+        ],
+      }),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      dialogueRuntimeManager: dialogueRuntime,
+      worldClockManager: clock,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+    );
+    expect(
+        storyRuntime.getAvailableStories('resident_0').map((story) => story.id),
+        contains('pantry_break_story'));
+    expect(
+        storyRuntime.getAvailableStories('resident_0').map((story) => story.id),
+        isNot(contains('meeting_story')));
+
+    runtime.applyRuntimeOverride(
+      ResidentRuntimeOverride(
+        residentId: 'resident_0',
+        location: 'meetingRoom',
+        activity: '参加一个轻轻的会议。',
+        mood: 'busy',
+        dayCount: clock.today().dayCount,
+        source: 'test',
+        reason: 'working',
+        schedulePhase: 'working',
+        isWorking: true,
+        nextLocation: 'pantry',
+        nextChangeTime: '13:00',
+      ),
+    );
+    expect(
+        runtime.getResidentCurrentState('resident_0').location, 'meeting_room');
+    expect(dialogueRuntime.getDialogue('resident_0').id, 'meeting_dialogue');
+    expect(
+        storyRuntime.getAvailableStories('resident_0').map((story) => story.id),
+        contains('meeting_story'));
+
+    final lifeManager = ResidentLifeManager(_FakeResidentLifeRepository(life));
+    await lifeManager.load();
+    final legacyDialogue = ResidentDialogueEngine(
+      config: ResidentDialogueConfig.fromJson({
+        'version': 'test',
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '今天慢一点。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+          'tags': ['fallback'],
+        },
+        'dialogues': [],
+      }),
+      lifeManager: lifeManager,
+      memoryEngine: memory,
+      relationshipEngine: relationship,
+    );
+    final legacyStory = ResidentStoryEngine(
+      config: ResidentStoryConfig.fromJson({'version': 'test', 'stories': []}),
+      lifeManager: lifeManager,
+      memoryEngine: memory,
+      relationshipEngine: relationship,
+      dialogueEngine: legacyDialogue,
+    );
+    final secondWorld = SecondWorldEngine(
+      residentConfig: residents,
+      residentLifeEngine: lifeManager,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      residentDialogueEngine: legacyDialogue,
+      residentStoryEngine: legacyStory,
+      dialogueRuntimeManager: dialogueRuntime,
+      storyRuntimeManager: storyRuntime,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      residentRuntimeManager: runtime,
+    );
+    final interaction = secondWorld.interactWithResident('resident_0');
+    expect(interaction.locationId, 'meeting_room');
+    expect(interaction.locationName, isNotEmpty);
+    expect(interaction.locationTags, contains('meeting'));
+    expect(interaction.availableInteractions, contains('start_story'));
+
+    final saveManager = WorldSaveManager(
+      repository: InMemoryWorldSaveRepository(),
+      worldClockManager: clock,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      storyRuntimeManager: storyRuntime,
+      dialogueRuntimeManager: dialogueRuntime,
+    );
+    final tick = WorldTickManager(
+      worldClockManager: clock,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogueRuntime,
+      storyRuntimeManager: storyRuntime,
+      worldSaveManager: saveManager,
+      secondWorldEngine: secondWorld,
+    );
+    final daily = DailySimulationManager(
+      worldTickManager: tick,
+      worldClockManager: clock,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      residentRuntimeManager: runtime,
+      storyRuntimeManager: storyRuntime,
+      worldSaveManager: saveManager,
+    );
+    final quest = QuestRuntimeManager(
+      taskConfig: TaskConfig.fromJson({
+        'tasks': {
+          'items': [
+            {
+              'id': 'visit_pantry',
+              'title': '去茶水间看看',
+              'description': '在休息地点遇见居民。',
+              'category': 'daily',
+              'metric': 'visit_location_pantry',
+              'target': 1,
+              'reward': {'fishCoin': 1, 'exp': 1},
+              'sortOrder': 1,
+            },
+          ],
+        },
+      }),
+      taskManager: TaskManagerView(),
+      worldClockManager: clock,
+      dailySimulationManager: daily,
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogueRuntime,
+      storyRuntimeManager: storyRuntime,
+      fishRuntimeManager: FishRuntimeManager(
+        config: FishCatalogConfig.fromJson({'version': 'test', 'fish': []}),
+        worldClockManager: clock,
+        weatherRuntimeManager: weatherRuntime,
+        festivalRuntimeManager: festivalRuntime,
+        secondWorldEngine: secondWorld,
+      ),
+      rumorRuntimeManager: rumorRuntime,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      worldSaveManager: saveManager,
+    );
+    quest.recordLocationEvent('visit_location', 'pantry');
+    expect(quest.cumulativeMetrics['visit_location_pantry'], 1);
+
+    final saved = await saveManager.saveWorld(force: true, immediate: true);
+    expect(
+      ((saved.residentRuntime['states'] as List<dynamic>)
+              .cast<Map<String, dynamic>>()
+              .firstWhere((state) => state['residentId'] == 'resident_0'))[
+          'residentCurrentLocation'],
+      'meeting_room',
+    );
+
+    runtime.loadRuntimeStates([
+      {
+        'residentId': 'resident_0',
+        'location': 'meeting-room',
+        'activity': '旧存档会议',
+        'mood': 'busy',
+        'dayCount': clock.today().dayCount,
+        'source': 'legacy',
+        'schedulePhase': 'working',
+      },
+    ]);
+    expect(
+        runtime.getResidentCurrentState('resident_0').location, 'meeting_room');
+  });
+
+  test('resident personality integration influences runtime context safely',
+      () async {
+    final clock = WorldClockManager(
+      initialClock:
+          WorldClock.initial().copyWith(dayCount: 3, hour: 12, minute: 20),
+      initialCalendar: WorldCalendar.initial().copyWith(
+        dayCount: 3,
+        weekdayIndex: 3,
+        month: 4,
+        day: 3,
+        season: 'spring',
+      ),
+      paused: true,
+    );
+    final traits = <String>[
+      'outgoing',
+      'introverted',
+      'hardworking',
+      'lazy',
+      'gossipy',
+      'serious',
+      'optimistic',
+      'pessimistic',
+      'curious',
+      'cautious',
+      'kind',
+      'competitive',
+      'playful',
+      'calm',
+      'sensitive',
+    ];
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': List.generate(100, (index) {
+        final trait = traits[index % traits.length];
+        return {
+          'id': 'person_$index',
+          'name': '性格居民$index',
+          'type': 'resident',
+          'personality': index == 98 ? '未知性格' : trait,
+          'dialogGroup': 'person_$index',
+          'mood': index == 3 ? 'tired' : 'calm',
+          'location': 'workplace_$index',
+          'enabled': true,
+          'home': 'home_$index',
+          'workplace': 'workplace_$index',
+          'dailyRoute': ['workplace_$index', 'pantry', 'coffee_shop', 'dock'],
+        };
+      }),
+    });
+    final lifeConfig = ResidentLifeConfig.fromJson(
+      scheduleJson: {
+        'version': 'test',
+        'schedules': [],
+      },
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(lifeConfig),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+
+    final stopwatch = Stopwatch()..start();
+    final personalityContexts = runtime.getAllResidentPersonalityContexts();
+    stopwatch.stop();
+    expect(personalityContexts.length, 100);
+    expect(stopwatch.elapsedMilliseconds, lessThan(250));
+    expect(personalityContexts['person_0']!.traits, contains('outgoing'));
+    expect(personalityContexts['person_1']!.traits, contains('introverted'));
+    expect(personalityContexts['person_2']!.traits, contains('hardworking'));
+    expect(personalityContexts['person_3']!.traits, contains('lazy'));
+    expect(personalityContexts['person_4']!.traits, contains('gossipy'));
+    expect(personalityContexts['person_5']!.traits, contains('serious'));
+    expect(personalityContexts['person_8']!.traits, contains('curious'));
+    expect(personalityContexts['person_9']!.traits, contains('cautious'));
+    expect(personalityContexts['person_10']!.traits, contains('kind'));
+    expect(personalityContexts['person_12']!.traits, contains('playful'));
+    expect(personalityContexts['person_98']!.traits, contains('calm'));
+    expect(ResidentPersonalityContext.normalizeTrait('开朗'), 'outgoing');
+    expect(ResidentPersonalityContext.normalizeTrait('未知性格'), 'calm');
+
+    expect(runtime.getResidentCurrentState('person_0').location, 'pantry');
+    expect(runtime.getResidentCurrentState('person_1').location, 'balcony');
+    expect(runtime.getResidentCurrentState('person_3').isOnBreak, isTrue);
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 3, hour: 17, minute: 20),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 3,
+        weekdayIndex: 3,
+        month: 4,
+        day: 3,
+        season: 'spring',
+      ),
+    );
+    expect(
+        runtime.getResidentCurrentState('person_2').schedulePhase, 'overtime');
+    expect(
+        runtime.getResidentCurrentState('person_3').schedulePhase, 'off_work');
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 3, hour: 12, minute: 20),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 3,
+        weekdayIndex: 3,
+        month: 4,
+        day: 3,
+        season: 'spring',
+      ),
+    );
+    expect(
+        runtime.getAllResidentCurrentStates().values.every((state) {
+          return LocationContext.isReasonableForPhase(
+            state.location,
+            state.schedulePhase,
+          );
+        }),
+        isTrue);
+
+    final memory = ResidentMemoryEngine(
+      config: ResidentMemoryConfig.fromJson({
+        'version': 'test',
+        'memories': [],
+      }),
+    );
+    final relationship = ResidentRelationshipEngine(
+      config: ResidentRelationshipConfig.fromJson({
+        'version': 'test',
+        'levels': [
+          {'id': 'stranger', 'minMeetCount': 0, 'enabled': true},
+          {'id': 'known', 'minMeetCount': 1, 'enabled': true},
+          {'id': 'friend', 'minMeetCount': 5, 'enabled': true},
+        ],
+        'relationships': [],
+      }),
+      memoryEngine: memory,
+    );
+    final festivalRuntime = FestivalRuntimeManager(
+      config: FestivalConfig.fromJson({'version': 'test', 'festivals': []}),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final weatherRuntime = WeatherRuntimeManager(
+      config: WeatherConfig.fromJson({
+        'version': 'test',
+        'weatherEvents': [
+          {
+            'id': 'weather_storm_noon',
+            'name': '午间暴雨',
+            'type': 'storm',
+            'season': ['spring'],
+            'timeRange': '12:00-13:00',
+            'residentMoodModifier': 'worried',
+            'eventTags': ['storm'],
+            'enabled': true,
+          },
+        ],
+      }),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final rumorRuntime = RumorRuntimeManager(
+      config: RumorConfig.fromJson({
+        'version': 'test',
+        'rumors': [
+          {
+            'id': 'rumor_mystery_printer',
+            'title': '打印机旁的小光点',
+            'content': '有人说打印机旁出现了一点蓝色小光。',
+            'category': 'mystery',
+            'source': 'printing_area',
+            'rarity': 'common',
+            'timeRange': 'noon',
+            'tags': ['mystery', 'ocean', 'rumor'],
+            'weight': 1,
+            'enabled': true,
+          },
+          {
+            'id': 'rumor_office_report',
+            'title': '办公室报告',
+            'content': '主管说今天报告可以慢慢来。',
+            'category': 'office',
+            'source': 'office',
+            'rarity': 'common',
+            'timeRange': 'noon',
+            'tags': ['office', 'work'],
+            'weight': 1,
+            'enabled': true,
+          },
+        ],
+      }),
+      worldClockManager: clock,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      residentRuntimeManager: runtime,
+    );
+    final dialogueRuntime = DialogueRuntimeManager(
+      config: ResidentDialogueConfig.fromJson({
+        'version': 'test',
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '慢慢来。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+          'tags': ['fallback'],
+        },
+        'dialogues': [
+          {
+            'id': 'dialogue_gossipy',
+            'residentId': 'person_4',
+            'text': '我听说打印机旁有一点小传闻。',
+            'conditions': {
+              'personalityTags': ['gossipy'],
+              'rumorTags': ['gossipy']
+            },
+            'priority': 10,
+            'repeatable': true,
+            'tags': ['rumor'],
+          },
+          {
+            'id': 'dialogue_serious',
+            'residentId': 'person_5',
+            'text': '先把手头的工作收好，再看海。',
+            'conditions': {
+              'personalityTags': ['serious']
+            },
+            'priority': 10,
+            'repeatable': true,
+            'tags': ['work'],
+          },
+          {
+            'id': 'dialogue_kind',
+            'residentId': 'person_10',
+            'text': '需要帮忙的话，叫我一声就好。',
+            'conditions': {
+              'personalityTags': ['kind']
+            },
+            'priority': 10,
+            'repeatable': true,
+            'tags': ['help', 'warm'],
+          },
+          {
+            'id': 'dialogue_introverted',
+            'residentId': 'person_1',
+            'text': '嗯，今天也挺安静的。',
+            'conditions': {
+              'personalityTags': ['introverted']
+            },
+            'priority': 10,
+            'repeatable': true,
+            'tags': ['short'],
+          },
+          {
+            'id': 'dialogue_playful',
+            'residentId': 'person_12',
+            'text': '刚才那张报表差点自己去摸鱼了。',
+            'conditions': {
+              'personalityTags': ['playful']
+            },
+            'priority': 10,
+            'repeatable': true,
+            'tags': ['humor'],
+          },
+        ],
+      }),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      worldClockManager: clock,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+    );
+    expect(dialogueRuntime.getDialogue('person_4').id, 'dialogue_gossipy');
+    expect(dialogueRuntime.getDialogue('person_5').id, 'dialogue_serious');
+    expect(dialogueRuntime.getDialogue('person_10').id, 'dialogue_kind');
+    expect(dialogueRuntime.getDialogue('person_1').id, 'dialogue_introverted');
+    expect(dialogueRuntime.getDialogue('person_12').id, 'dialogue_playful');
+
+    final storyRuntime = StoryRuntimeManager(
+      config: ResidentStoryConfig.fromJson({
+        'version': 'test',
+        'stories': [
+          {
+            'id': 'story_curious',
+            'residentId': 'person_8',
+            'title': '打印机蓝光',
+            'summary': '好奇的人想去看看蓝色小光。',
+            'dialogueIds': [],
+            'conditions': {
+              'personalityTags': ['curious']
+            },
+            'result': {
+              'memoryTags': ['discovery']
+            },
+            'priority': 10,
+            'repeatable': true,
+            'tags': ['mystery', 'discovery'],
+          },
+          {
+            'id': 'story_playful',
+            'residentId': 'person_12',
+            'title': '茶水间笑话',
+            'summary': '一个轻轻的办公室笑话。',
+            'dialogueIds': [],
+            'conditions': {
+              'personalityTags': ['playful']
+            },
+            'result': {
+              'memoryTags': ['humor']
+            },
+            'priority': 10,
+            'repeatable': true,
+            'tags': ['humor'],
+          },
+          {
+            'id': 'story_general',
+            'residentId': 'person_8',
+            'title': '普通小事',
+            'summary': '不挑性格的小故事。',
+            'dialogueIds': [],
+            'conditions': {},
+            'result': {},
+            'priority': 1,
+            'repeatable': true,
+            'tags': ['daily'],
+          },
+        ],
+      }),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      dialogueRuntimeManager: dialogueRuntime,
+      worldClockManager: clock,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+    );
+    final curiousStories = storyRuntime.getAvailableStories('person_8');
+    expect(curiousStories.first.id, 'story_curious');
+    expect(curiousStories.map((story) => story.id), contains('story_general'));
+    expect(storyRuntime.getAvailableStories('person_12').first.id,
+        'story_playful');
+
+    final lifeManager =
+        ResidentLifeManager(_FakeResidentLifeRepository(lifeConfig));
+    await lifeManager.load();
+    final fallbackDialogue = ResidentDialogueEngine(
+      config: ResidentDialogueConfig.fromJson({
+        'fallback': {'id': 'fallback', 'residentId': '*', 'text': '慢慢来。'},
+        'dialogues': [],
+      }),
+      lifeManager: lifeManager,
+      memoryEngine: memory,
+      relationshipEngine: relationship,
+    );
+    final secondWorld = SecondWorldEngine(
+      residentConfig: residents,
+      residentLifeEngine: lifeManager,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      residentDialogueEngine: fallbackDialogue,
+      residentStoryEngine: ResidentStoryEngine(
+        config: ResidentStoryConfig.fromJson({'stories': []}),
+        lifeManager: lifeManager,
+        memoryEngine: memory,
+        relationshipEngine: relationship,
+        dialogueEngine: fallbackDialogue,
+      ),
+      dialogueRuntimeManager: dialogueRuntime,
+      storyRuntimeManager: storyRuntime,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      residentRuntimeManager: runtime,
+    );
+    final saveManager = WorldSaveManager(
+      repository: InMemoryWorldSaveRepository(),
+      worldClockManager: clock,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      storyRuntimeManager: storyRuntime,
+      dialogueRuntimeManager: dialogueRuntime,
+    );
+    final tick = WorldTickManager(
+      worldClockManager: clock,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogueRuntime,
+      storyRuntimeManager: storyRuntime,
+      worldSaveManager: saveManager,
+      secondWorldEngine: secondWorld,
+    );
+    final daily = DailySimulationManager(
+      worldTickManager: tick,
+      worldClockManager: clock,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      residentRuntimeManager: runtime,
+      storyRuntimeManager: storyRuntime,
+      worldSaveManager: saveManager,
+    );
+    final decision = ResidentDecisionManager(
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogueRuntime,
+      storyRuntimeManager: storyRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      festivalRuntimeManager: festivalRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      worldClockManager: clock,
+      secondWorldEngine: secondWorld,
+      dailySimulationManager: daily,
+      residentMemoryEngine: memory,
+    );
+    decision.runResidentDecision();
+    expect(decision.decisionFor('person_9')!.reason,
+        contains('personality_cautious'));
+    expect(runtime.getResidentCurrentState('person_9').location,
+        isNot(anyOf('dock', 'seaside', 'park')));
+    expect(runtime.getResidentCurrentState('person_12').mood,
+        isNot(equals('angry')));
+
+    final fishRuntime = FishRuntimeManager(
+      config: FishCatalogConfig.fromJson({'version': 'test', 'fish': []}),
+      worldClockManager: clock,
+      weatherRuntimeManager: weatherRuntime,
+      festivalRuntimeManager: festivalRuntime,
+      secondWorldEngine: secondWorld,
+    );
+    final quest = QuestRuntimeManager(
+      taskConfig: TaskConfig.fromJson({
+        'tasks': {'items': []}
+      }),
+      taskManager: TaskManagerView(),
+      worldClockManager: clock,
+      dailySimulationManager: daily,
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogueRuntime,
+      storyRuntimeManager: storyRuntime,
+      fishRuntimeManager: fishRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      worldSaveManager: saveManager,
+    );
+    final relationshipRuntime = RelationshipRuntimeManager(
+      residentRuntimeManager: runtime,
+      residentDecisionManager: decision,
+      rumorRuntimeManager: rumorRuntime,
+      storyRuntimeManager: storyRuntime,
+      dailySimulationManager: daily,
+      worldSaveManager: saveManager,
+      residentRelationshipEngine: relationship,
+      secondWorldEngine: secondWorld,
+    );
+    final achievement = AchievementRuntimeManager(
+      honorConfig: HonorConfig.fromJson({'badges': []}),
+      identityConfig: const {'identities': []},
+      fishCollectionConfig: FishCollectionConfig.fromJson({
+        'collection': {'fishes': []}
+      }),
+      taskConfig: TaskConfig.fromJson({
+        'tasks': {'items': []}
+      }),
+      questRuntimeManager: quest,
+      fishRuntimeManager: fishRuntime,
+      relationshipRuntimeManager: relationshipRuntime,
+      storyRuntimeManager: storyRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      residentRuntimeManager: runtime,
+      worldClockManager: clock,
+      worldSaveManager: saveManager,
+      secondWorldEngine: secondWorld,
+    );
+    final dynamicEvents = DynamicEventRuntimeManager(
+      config: DynamicEventConfig.fromJson({
+        'version': 'test',
+        'events': [
+          {
+            'id': 'event_playful_humor',
+            'type': 'office_humor',
+            'category': 'office',
+            'title': '办公室小笑话',
+            'conditions': {
+              'personalityTags': ['playful']
+            },
+            'priority': 20,
+            'weight': 1,
+            'probability': 1,
+            'repeatable': true,
+            'tags': ['office_humor'],
+          },
+          {
+            'id': 'event_calm_only',
+            'type': 'quiet',
+            'category': 'resident',
+            'title': '安静时刻',
+            'conditions': {
+              'personalityTags': ['calm'],
+              'excludedPersonalityTags': ['playful']
+            },
+            'priority': 5,
+            'weight': 1,
+            'probability': 1,
+            'repeatable': true,
+            'tags': ['quiet'],
+          },
+        ],
+      }),
+      worldClockManager: clock,
+      dailySimulationManager: daily,
+      residentRuntimeManager: runtime,
+      residentDecisionManager: decision,
+      relationshipRuntimeManager: relationshipRuntime,
+      dialogueRuntimeManager: dialogueRuntime,
+      storyRuntimeManager: storyRuntime,
+      festivalRuntimeManager: festivalRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      fishRuntimeManager: fishRuntime,
+      questRuntimeManager: quest,
+      achievementRuntimeManager: achievement,
+      worldSaveManager: saveManager,
+      secondWorldEngine: secondWorld,
+      residentMemoryEngine: memory,
+    );
+    expect(dynamicEvents.getEventContext().personalityTags,
+        containsAll(['playful', 'gossipy', 'curious']));
+    expect(dynamicEvents.getAvailableEvents().map((event) => event.id),
+        contains('event_playful_humor'));
+
+    final gossipyRumors = rumorRuntime.getRumorsForResident('person_4');
+    expect(gossipyRumors.first.id, isNotEmpty);
+    expect(rumorRuntime.residentRumorContext('person_4').tags,
+        contains('gossipy'));
+
+    relationshipRuntime.applyRelationshipChange(
+      'person_10',
+      'person_25',
+      'personality_affinity',
+      1,
+    );
+    expect(
+      relationshipRuntime
+          .getRelationshipBetweenResidents('person_10', 'person_25')
+          .tags,
+      contains('personality_affinity'),
+    );
+    final interaction = secondWorld.interactWithResident('person_10');
+    expect(interaction.personalityTags, contains('kind'));
+    expect(interaction.interactionWillingness, 'high');
+    expect(interaction.preferredTopics, contains('help'));
+
+    await saveManager.saveWorld(force: true, immediate: true);
+    final savedState =
+        ((saveManager.lastSave!.residentRuntime['states'] as List<dynamic>)
+            .cast<Map<String, dynamic>>()
+            .firstWhere((state) => state['residentId'] == 'person_9'));
+    expect(savedState.containsKey('recentPersonalityInfluences'), isTrue);
+    expect(savedState.containsKey('lastPersonalityDecisionReason'), isTrue);
+    runtime.loadRuntimeStates([
+      {
+        'residentId': 'person_1',
+        'location': 'workplace_1',
+        'activity': '旧存档恢复',
+        'mood': 'calm',
+        'dayCount': clock.today().dayCount,
+        'source': 'legacy',
+      },
+    ]);
+    expect(runtime.getResidentPersonalityContext('person_1').traits,
+        contains('introverted'));
   });
 
   test('resident memory engine records first and repeat interactions', () {
@@ -3849,7 +5041,11 @@ void main() {
       saved.dialogueRuntimeState['servedNonRepeatableIds'],
       contains('old_fisher_save_dialogue'),
     );
-    expect(saved.interactionHistory.length, 1);
+    expect(
+      saved.interactionHistory
+          .where((record) => record.residentId == 'old_fisher'),
+      isNotEmpty,
+    );
 
     final second = await createWorld();
     final secondClock = second['clock']! as WorldClockManager;
@@ -3873,7 +5069,11 @@ void main() {
     expect(secondStory.finishedStoryIds, contains('old_fisher_save_story'));
     expect(secondDialogue.servedNonRepeatableIds,
         contains('old_fisher_save_dialogue'));
-    expect(secondSave.interactionHistory.length, 1);
+    expect(
+      secondSave.interactionHistory
+          .where((record) => record.residentId == 'old_fisher'),
+      isNotEmpty,
+    );
 
     secondClock.setClock(
       WorldClock.initial().copyWith(dayCount: 5, hour: 8, minute: 0),
@@ -4785,13 +5985,18 @@ void main() {
     expect(firstSummary.residentHighlights.single, contains('老渔夫'));
     expect(firstSummary.storyHints, contains('今天的第一阵风'));
     expect(firstSummary.todayMessage, contains('第一阵海风日'));
+    expect(firstSummary.currentJobTitle, '实习生');
     expect(daily.hasRunToday(), isTrue);
-    expect(daily.getDailyChanges().length, 5);
+    expect(daily.getDailyChanges().length, 7);
+    expect(
+      daily.getDailyChanges().map((change) => change.type),
+      contains('living_office'),
+    );
     expect(saveManager.lastSave?.dailySimulationState['lastRunDay'], 1);
     expect(tick.lastContext?.afterClockDay, 1);
 
     await secondWorld.startWorld(dailySimulationManager: daily);
-    expect(daily.getDailyChanges().length, 5);
+    expect(daily.getDailyChanges().length, 7);
     expect(daily.getTodayWorldSummary()?.date, firstSummary.date);
 
     clock.setClock(
@@ -4807,7 +6012,7 @@ void main() {
     final secondSummary = daily.getTodayWorldSummary();
     expect(secondSummary?.date, contains('#2'));
     expect(secondSummary?.date, isNot(firstSummary.date));
-    expect(daily.getDailyChanges().length, 10);
+    expect(daily.getDailyChanges().length, 14);
     expect(saveManager.lastSave?.dailySimulationState['lastRunDay'], 2);
   });
 
@@ -5661,7 +6866,7 @@ void main() {
     );
 
     decision.runResidentDecision();
-    expect(decision.decideNextLocation('old_fisher'), 'festival_square');
+    expect(decision.decideNextLocation('old_fisher'), 'balcony');
     expect(runtime.getResidentCurrentMood('old_fisher'), 'happy');
 
     clock.setClock(
@@ -7075,6 +8280,20 @@ void main() {
             'tags': ['sunny_event'],
           },
           {
+            'id': 'event_location_dock',
+            'type': 'dock_encounter',
+            'category': 'office',
+            'title': '码头旁的小插曲',
+            'conditions': {
+              'location': ['dock', 'sea']
+            },
+            'priority': 9,
+            'weight': 1,
+            'probability': 1,
+            'repeatable': true,
+            'tags': ['office_event'],
+          },
+          {
             'id': 'event_rain',
             'type': 'weather_event',
             'category': 'weather',
@@ -7215,6 +8434,8 @@ void main() {
 
     expect(dynamic.getAvailableEvents().map((event) => event.id),
         contains('event_sunny'));
+    expect(dynamic.getAvailableEvents().map((event) => event.id),
+        contains('event_location_dock'));
     clock.setClock(
       WorldClock.initial().copyWith(dayCount: 1, hour: 21, minute: 0),
       calendar: WorldCalendar.initial().copyWith(
@@ -7899,6 +9120,1851 @@ void main() {
     expect(high.lowQuality, isFalse);
     expect(high.audioCue, 'ambient_festival_soft');
     expect(high.weatherOverlay, isNot(Colors.transparent));
+  });
+
+  test('career state gates promotion and prevents duplicate rewards', () {
+    final state = CareerState.initial();
+    expect(state.careerLevel, 'intern');
+    expect(state.jobTitle, '实习生');
+    expect(state.performanceScore, 50);
+    expect(state.skill('fishing').level, 1);
+    expect(state.skill('communication').experience, 0);
+
+    final blocked = state.checkPromotion();
+    expect(blocked.eligible, isFalse);
+    expect(blocked.missingRequirements, contains('minimum_work_days:3'));
+
+    final ready = state
+        .copyWith(
+          consecutiveWorkDays: 3,
+          completedCareerTasks: 3,
+          performanceScore: 55,
+          experience: 20,
+        )
+        .normalized();
+    final allowed = ready.checkPromotion();
+    expect(allowed.eligible, isTrue);
+    expect(allowed.targetLevel, 'junior_employee');
+
+    final promoted = ready.promote('2026-08-02T00:00:00.000');
+    expect(promoted.careerLevel, 'junior_employee');
+    expect(promoted.salary, greaterThan(ready.salary));
+
+    final skillGain = state.withSkillExperience(
+      record: const SkillExperienceRecord(
+        sourceType: 'test',
+        sourceId: 'overflow',
+        timestamp: '2026-08-02T00:00:00.000',
+        skillId: 'fishing',
+        amount: 1000,
+        reason: 'test_overflow',
+      ),
+    );
+    expect(skillGain.state.skill('fishing').level, greaterThan(2));
+    expect(skillGain.levelUps, isNotEmpty);
+
+    final maxLuck = PlayerSkillState.initial('luck').copyWith(
+      level: 10,
+      experience: 100000,
+    );
+    final maxSkillGain = state
+        .copyWith(skillSummary: <String, PlayerSkillState>{'luck': maxLuck})
+        .normalized()
+        .withSkillExperience(
+          record: const SkillExperienceRecord(
+            sourceType: 'test',
+            sourceId: 'max_luck',
+            timestamp: '2026-08-02T00:00:00.000',
+            skillId: 'luck',
+            amount: 10000,
+            reason: 'test_max',
+          ),
+        );
+    expect(maxSkillGain.state.skill('luck').level, 10);
+    expect(maxSkillGain.levelUps, isEmpty);
+
+    final skillBlocked = state
+        .copyWith(
+          careerLevel: 'senior_employee',
+          jobTitle: CareerState.titleForLevel('senior_employee'),
+          consecutiveWorkDays: 28,
+          completedCareerTasks: 26,
+          performanceScore: 70,
+          experience: 260,
+        )
+        .normalized()
+        .checkPromotion(maxRelationshipRank: 2);
+    expect(skillBlocked.missingRequirements, contains('skill_communication:3'));
+    expect(skillBlocked.missingRequirements, contains('skill_efficiency:3'));
+
+    final bounded = promoted.withCareerProgress(
+      experienceDelta: 10,
+      performanceDelta: 99,
+      reason: 'major_story',
+    );
+    expect(bounded.performanceScore - promoted.performanceScore, 8);
+    expect(
+      CareerState.fromJson(const <String, dynamic>{}).careerLevel,
+      'intern',
+    );
+  });
+
+  test('friendship state is gradual bounded and save-compatible', () {
+    final initial = FriendshipState.initial('old_fisher');
+    expect(initial.stage, 'stranger');
+    expect(initial.score, 5);
+    expect(initial.trust, 0);
+    expect(initial.familiarity, 0);
+
+    final ordinary = initial.applyChange(
+      const FriendshipChangeRecord(
+        sourceType: 'resident_interaction',
+        sourceId: 'talk_1',
+        residentId: 'old_fisher',
+        scoreDelta: 3,
+        trustDelta: 0,
+        familiarityDelta: 3,
+        reason: '日常互动让彼此更熟悉。',
+        timestamp: '2026-08-02T00:00:00.000',
+        tags: ['communication', 'topic:fishing'],
+      ),
+    );
+    expect(ordinary.score, 8);
+    expect(ordinary.stage, 'stranger');
+    expect(ordinary.sharedTopics, contains('fishing'));
+
+    final major = ordinary.applyChange(
+      const FriendshipChangeRecord(
+        sourceType: 'resident_story',
+        sourceId: 'story_help',
+        residentId: 'old_fisher',
+        scoreDelta: 10,
+        trustDelta: 8,
+        familiarityDelta: 8,
+        reason: '重要故事推进。',
+        timestamp: '2026-08-02T00:10:00.000',
+        tags: ['story', 'help', 'memory:first_help'],
+      ),
+    );
+    expect(friendshipStageRank(major.stage), lessThanOrEqualTo(1));
+    expect(major.trust, 8);
+    expect(major.sharedMemories, contains('memory:first_help'));
+
+    final highFamiliarity = FriendshipState.initial('guard')
+        .copyWith(
+          score: 90,
+          trust: 5,
+          familiarity: 90,
+        )
+        .normalized();
+    expect(highFamiliarity.stage, isNot('trusted_friend'));
+
+    final conflict = ordinary.applyChange(
+      const FriendshipChangeRecord(
+        sourceType: 'resident_conflict',
+        sourceId: 'conflict_1',
+        residentId: 'old_fisher',
+        scoreDelta: -4,
+        trustDelta: -1,
+        familiarityDelta: 0,
+        reason: '轻微误会。',
+        timestamp: '2026-08-02T00:20:00.000',
+        tags: ['conflict'],
+      ),
+    );
+    expect(conflict.conflictState, 'conflict');
+    final recovering = conflict.applyChange(
+      const FriendshipChangeRecord(
+        sourceType: 'resolve_conflict',
+        sourceId: 'resolve_1',
+        residentId: 'old_fisher',
+        scoreDelta: 2,
+        trustDelta: 1,
+        familiarityDelta: 1,
+        reason: '慢慢化解误会。',
+        timestamp: '2026-08-02T00:30:00.000',
+        tags: ['resolve_conflict'],
+      ),
+    );
+    expect(recovering.conflictState, 'recovering');
+
+    final save = WorldSaveData.empty().copyWith(
+      friendshipStates: <String, FriendshipState>{'old_fisher': recovering},
+      processedSocialSourceIds: const <String>[
+        'resolve_conflict::resolve_1::old_fisher',
+      ],
+      socialInteractionHistory: const <FriendshipChangeRecord>[
+        FriendshipChangeRecord(
+          sourceType: 'resolve_conflict',
+          sourceId: 'resolve_1',
+          residentId: 'old_fisher',
+          scoreDelta: 2,
+          trustDelta: 1,
+          familiarityDelta: 1,
+          reason: '慢慢化解误会。',
+          timestamp: '2026-08-02T00:30:00.000',
+          tags: ['resolve_conflict'],
+        ),
+      ],
+    );
+    final restored = WorldSaveData.fromJson(save.toJson());
+    expect(
+        restored.friendshipStates['old_fisher']?.conflictState, 'recovering');
+    expect(restored.processedSocialSourceIds, hasLength(1));
+    expect(WorldSaveData.fromJson(const <String, dynamic>{}).friendshipStates,
+        isEmpty);
+  });
+
+  test(
+      'career runtime integrates daily save salary quest achievement and engine',
+      () async {
+    final clock = WorldClockManager();
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 7, hour: 9, minute: 0),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 7,
+        weekdayIndex: 2,
+        month: 1,
+        day: 7,
+        season: 'summer',
+      ),
+    );
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': [
+        {
+          'id': 'old_fisher',
+          'name': '老渔夫',
+          'type': 'npc',
+          'personality': 'warm',
+          'dialogGroup': 'old_fisher',
+          'mood': 'calm',
+          'friendship': 0,
+          'unlockLevel': 1,
+          'location': 'office',
+          'enabled': true,
+        },
+      ],
+    });
+    final life = ResidentLifeConfig.fromJson(
+      scheduleJson: {
+        'version': 'test',
+        'schedules': [
+          {
+            'id': 'old_fisher_work',
+            'residentId': 'old_fisher',
+            'schedule': 'working',
+            'location': 'office',
+            'activity': '整理今天的办公室鱼线。',
+            'startTime': '08:00',
+            'endTime': '18:00',
+            'mood': 'calm',
+            'weekday': [1, 2, 3, 4, 5],
+          },
+        ],
+      },
+      activityJson: {
+        'version': 'test',
+        'activities': [],
+      },
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+    final memory = ResidentMemoryEngine();
+    final relationship = ResidentRelationshipEngine(
+      config: ResidentRelationshipConfig.fromJson({
+        'version': 'test',
+        'levels': [],
+        'relationships': [],
+      }),
+      memoryEngine: memory,
+    );
+    final festival = FestivalRuntimeManager(
+      config: FestivalConfig.fromJson({'version': 'test', 'festivals': []}),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final weather = WeatherRuntimeManager(
+      config: WeatherConfig.fromJson({'version': 'test', 'weatherEvents': []}),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final rumor = RumorRuntimeManager(
+      config: RumorConfig.fromJson({'version': 'test', 'rumors': []}),
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      residentRuntimeManager: runtime,
+    );
+    final dialogue = DialogueRuntimeManager(
+      config: ResidentDialogueConfig.fromJson({
+        'version': 'test',
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '办公室今天也慢慢来。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+          'tags': ['fallback'],
+        },
+        'dialogues': [],
+      }),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+    );
+    final story = StoryRuntimeManager(
+      config: ResidentStoryConfig.fromJson({'version': 'test', 'stories': []}),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      dialogueRuntimeManager: dialogue,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+    );
+    final lifeManager = ResidentLifeManager(_FakeResidentLifeRepository(life));
+    await lifeManager.load();
+    final legacyDialogue = ResidentDialogueEngine(
+      config: ResidentDialogueConfig.fromJson({
+        'version': 'test',
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '办公室今天也慢慢来。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+          'tags': ['fallback'],
+        },
+        'dialogues': [],
+      }),
+      lifeManager: lifeManager,
+      memoryEngine: memory,
+      relationshipEngine: relationship,
+    );
+    final secondWorld = SecondWorldEngine(
+      residentConfig: residents,
+      residentLifeEngine: lifeManager,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      residentDialogueEngine: legacyDialogue,
+      residentStoryEngine: ResidentStoryEngine(
+        config:
+            ResidentStoryConfig.fromJson({'version': 'test', 'stories': []}),
+        lifeManager: lifeManager,
+        memoryEngine: memory,
+        relationshipEngine: relationship,
+        dialogueEngine: legacyDialogue,
+      ),
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+    );
+    final repository = _CountingWorldSaveRepository();
+    final save = WorldSaveManager(
+      repository: repository,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      storyRuntimeManager: story,
+      dialogueRuntimeManager: dialogue,
+    );
+    final engine = SecondWorldEngine(
+      residentConfig: residents,
+      residentLifeEngine: lifeManager,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      residentDialogueEngine: legacyDialogue,
+      residentStoryEngine: ResidentStoryEngine(
+        config:
+            ResidentStoryConfig.fromJson({'version': 'test', 'stories': []}),
+        lifeManager: lifeManager,
+        memoryEngine: memory,
+        relationshipEngine: relationship,
+        dialogueEngine: legacyDialogue,
+      ),
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      worldSaveManager: save,
+      residentRuntimeManager: runtime,
+    );
+    final tick = WorldTickManager(
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      worldSaveManager: save,
+      secondWorldEngine: engine,
+    );
+    final daily = DailySimulationManager(
+      worldTickManager: tick,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+      storyRuntimeManager: story,
+      worldSaveManager: save,
+    );
+    final fish = FishRuntimeManager(
+      config: FishCatalogConfig.fromJson({'version': 'test', 'fish': []}),
+      worldClockManager: clock,
+      weatherRuntimeManager: weather,
+      festivalRuntimeManager: festival,
+      secondWorldEngine: secondWorld,
+    );
+    final quest = QuestRuntimeManager(
+      taskConfig: TaskConfig.fromJson({
+        'tasks': {
+          'items': [
+            {
+              'id': 'career_report',
+              'title': '写一份轻松的工作小结',
+              'description': '今天办公室也有一点进展。',
+              'category': 'career',
+              'metric': 'career_task_completed',
+              'target': 1,
+              'reward': {'fishCoin': 1, 'exp': 5},
+              'sortOrder': 1,
+            },
+            {
+              'id': 'fish_daily',
+              'title': '普通钓鱼任务',
+              'description': '保持摸鱼节奏。',
+              'category': 'daily',
+              'metric': 'fishing_count',
+              'target': 1,
+              'reward': {'fishCoin': 1, 'exp': 1},
+              'sortOrder': 2,
+            },
+          ],
+        },
+      }),
+      taskManager: TaskManagerView(),
+      worldClockManager: clock,
+      dailySimulationManager: daily,
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      fishRuntimeManager: fish,
+      rumorRuntimeManager: rumor,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      worldSaveManager: save,
+    );
+    final economy = EconomyRuntimeManager(
+      fishRuntimeManager: fish,
+      questRuntimeManager: quest,
+      residentRuntimeManager: runtime,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      worldClockManager: clock,
+      worldSaveManager: save,
+      secondWorldEngine: engine,
+    );
+    daily.setEconomyRuntimeManager(economy);
+    final achievement = AchievementRuntimeManager(
+      honorConfig: HonorConfig.fromJson({'version': 'test', 'badges': []}),
+      identityConfig: const <String, dynamic>{'identities': []},
+      fishCollectionConfig:
+          FishCollectionConfig.fromJson({'version': 'test', 'fishes': []}),
+      taskConfig: TaskConfig.fromJson({
+        'tasks': {'items': []}
+      }),
+      questRuntimeManager: quest,
+      fishRuntimeManager: fish,
+      relationshipRuntimeManager: RelationshipRuntimeManager(
+        residentRuntimeManager: runtime,
+        residentDecisionManager: ResidentDecisionManager(
+          residentRuntimeManager: runtime,
+          dialogueRuntimeManager: dialogue,
+          storyRuntimeManager: story,
+          weatherRuntimeManager: weather,
+          festivalRuntimeManager: festival,
+          rumorRuntimeManager: rumor,
+          worldClockManager: clock,
+          secondWorldEngine: engine,
+          residentMemoryEngine: memory,
+        ),
+        rumorRuntimeManager: rumor,
+        storyRuntimeManager: story,
+        dailySimulationManager: daily,
+        worldSaveManager: save,
+        residentRelationshipEngine: relationship,
+        secondWorldEngine: engine,
+      ),
+      storyRuntimeManager: story,
+      rumorRuntimeManager: rumor,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      residentRuntimeManager: runtime,
+      worldClockManager: clock,
+      worldSaveManager: save,
+      secondWorldEngine: engine,
+    );
+
+    expect(save.careerState.careerLevel, 'intern');
+    quest.recordCareerTaskCompleted('career_report');
+    quest.recordCareerTaskCompleted('career_report');
+    expect(save.careerState.completedCareerTasks, 1);
+    expect(save.careerRewardHistory.length, 1);
+    expect(save.getSkillState('efficiency').experience, greaterThan(0));
+    final skillExperienceAfterTask =
+        save.getSkillState('efficiency').experience;
+    quest.recordCareerTaskCompleted('career_report');
+    expect(
+        save.getSkillState('efficiency').experience, skillExperienceAfterTask);
+    quest.recordWorldEvent('fishing_count', id: 'fish_1');
+    expect(save.careerState.completedCareerTasks, 1);
+    expect(save.getSkillState('fishing').experience, greaterThan(0));
+
+    final wallet = WalletManagerView(initialFishCoin: 0);
+    final transactions = TransactionManagerView();
+    final summary = await daily.runDailySimulation(
+      wallet: wallet,
+      transactions: transactions,
+    );
+    expect(summary.currentJobTitle, '实习生');
+    expect(summary.careerFeedback, isNotNull);
+    expect(summary.skillExperienceGained, contains('efficiency'));
+    expect(summary.recommendedActions, isNotEmpty);
+    expect(save.careerState.experience, greaterThan(0));
+    expect(save.careerState.performanceScore, inInclusiveRange(0, 100));
+    expect(wallet.fishCoin, greaterThan(0));
+    expect(
+      transactions.records.where((record) => record.type == 'salary').length,
+      1,
+    );
+    await daily.runDailySimulation(wallet: wallet, transactions: transactions);
+    expect(
+      transactions.records.where((record) => record.type == 'salary').length,
+      1,
+    );
+    expect(save.careerFeedbackHistory.length, 1);
+    expect(save.latestCareerFeedback?.salaryPaid, wallet.fishCoin);
+
+    final interaction = engine.interactWithResident('old_fisher');
+    expect(interaction.skillSummary['communication']?.level, 1);
+    expect(interaction.skillGains, contains('communication'));
+    expect(save.getSkillState('communication').experience, greaterThan(0));
+    expect(interaction.friendshipState, isNotNull);
+    expect(interaction.friendshipStage, isNotEmpty);
+    expect(save.getFriendshipState('old_fisher').score, greaterThan(5));
+    expect(save.getFriendshipState('old_fisher').familiarity, greaterThan(0));
+    final friendshipHistoryLength = save.socialInteractionHistory.length;
+    final socialRecord = save.recordFriendshipChange(
+      residentId: 'old_fisher',
+      sourceType: 'manual_social',
+      sourceId: 'same_source',
+      scoreDelta: 3,
+      trustDelta: 1,
+      familiarityDelta: 2,
+      reason: '测试一次可解释社交互动。',
+      tags: const ['communication', 'topic:coffee'],
+    );
+    final duplicateSocialRecord = save.recordFriendshipChange(
+      residentId: 'old_fisher',
+      sourceType: 'manual_social',
+      sourceId: 'same_source',
+      scoreDelta: 3,
+      trustDelta: 1,
+      familiarityDelta: 2,
+      reason: '测试一次可解释社交互动。',
+      tags: const ['communication', 'topic:coffee'],
+    );
+    expect(socialRecord, isNotNull);
+    expect(duplicateSocialRecord, isNull);
+    expect(save.socialInteractionHistory.length, friendshipHistoryLength + 1);
+    save.setSocialCooldown(
+      residentId: 'old_fisher',
+      interactionType: 'invite_coffee',
+      durationDays: 1,
+    );
+    expect(save.isSocialCooldownActive('old_fisher', 'invite_coffee'), isTrue);
+
+    save.recordCareerProgress(
+      sourceId: 'manual_ready',
+      type: 'career_task',
+      experience: 100,
+      performanceDelta: 8,
+      completedTaskDelta: 5,
+    );
+    save.settleCareerDay(
+      dayCount: 8,
+      dateLabel: 'Y1-M1-D8-#8',
+      experience: 0,
+      performanceDelta: 0,
+    );
+    save.settleCareerDay(
+      dayCount: 9,
+      dateLabel: 'Y1-M1-D9-#9',
+      experience: 0,
+      performanceDelta: 0,
+    );
+    final check = engine.getPromotionRequirements();
+    expect(check.missingRequirements, isNot(contains('relationship_rank:')));
+    final result = engine.promoteCareer(
+      wallet: wallet,
+      transactions: transactions,
+    );
+    expect(result.success, isTrue);
+    expect(save.careerState.careerLevel, 'junior_employee');
+    final duplicate = engine.promoteCareer(
+      wallet: wallet,
+      transactions: transactions,
+    );
+    expect(duplicate.success, isFalse);
+    achievement.updateAchievementProgress(
+      const AchievementEvent(type: 'career_task_count', amount: 0),
+    );
+    expect(
+      achievement
+          .getAllAchievements()
+          .where((item) => item.metric.startsWith('career'))
+          .length,
+      0,
+    );
+
+    final saved = await save.saveWorld(force: true, immediate: true);
+    expect(saved.careerState.careerLevel, 'junior_employee');
+    expect(saved.salaryTransactionIds.length, 1);
+    expect(
+        saved.playerSkillStates['communication']?.experience, greaterThan(0));
+    expect(saved.latestCareerFeedback?.salaryPaid, greaterThan(0));
+    expect(saved.processedSkillSourceIds.length,
+        save.processedSkillSourceIds.length);
+    expect(saved.friendshipStates['old_fisher']?.score, greaterThan(5));
+    expect(saved.processedSocialSourceIds.length,
+        save.processedSocialSourceIds.length);
+    await save.resetWorld();
+    expect(save.careerState.careerLevel, 'intern');
+    repository.data = saved;
+    await save.loadWorld();
+    expect(save.careerState.careerLevel, 'junior_employee');
+    expect(save.salaryTransactionIds.length, 1);
+    expect(save.getSkillState('communication').experience, greaterThan(0));
+    expect(save.latestCareerFeedback?.salaryPaid, greaterThan(0));
+    expect(save.getFriendshipState('old_fisher').score,
+        saved.friendshipStates['old_fisher']?.score);
+    expect(save.isSocialCooldownActive('old_fisher', 'invite_coffee'), isTrue);
+  });
+
+  test('office group behaviour batches residents dialogue story and save',
+      () async {
+    final clock = WorldClockManager();
+    clock.setClock(
+      const WorldClock(
+        dayCount: 12,
+        hour: 12,
+        minute: 10,
+        period: WorldDayPeriod.noon,
+        timeLabel: 'Noon',
+      ),
+      calendar: const WorldCalendar(
+        dayCount: 12,
+        weekdayIndex: 3,
+        year: 1,
+        month: 1,
+        day: 12,
+        isWeekend: false,
+        season: 'summer',
+      ),
+    );
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': List.generate(100, (index) {
+        final location = index < 18
+            ? 'pantry'
+            : index < 34
+                ? 'meeting_room'
+                : index < 50
+                    ? 'dock'
+                    : 'home';
+        final personality = index.isEven ? 'outgoing,kind' : 'serious';
+        return {
+          'id': 'person_$index',
+          'name': '居民$index',
+          'type': 'npc',
+          'personality': personality,
+          'dialogGroup': 'office_group',
+          'mood': index % 5 == 0 ? 'happy' : 'calm',
+          'friendship': 0,
+          'unlockLevel': 1,
+          'location': location,
+          'enabled': true,
+        };
+      }),
+    });
+    final lifeConfig = ResidentLifeConfig.fromJson(
+      scheduleJson: {
+        'version': 'test',
+        'schedules': [
+          for (var index = 0; index < 100; index += 1)
+            {
+              'id': 'group_schedule_$index',
+              'residentId': 'person_$index',
+              'schedule': index < 50 ? 'lunch' : 'home',
+              'location': index < 18
+                  ? 'pantry'
+                  : index < 34
+                      ? 'meeting_room'
+                      : index < 50
+                          ? 'dock'
+                          : 'home',
+              'activity': index < 18
+                  ? 'coffee_break'
+                  : index < 34
+                      ? 'project_review'
+                      : index < 50
+                          ? 'weekend_fishing'
+                          : 'home',
+              'startTime': '11:30',
+              'endTime': '13:00',
+              'mood': index % 5 == 0 ? 'happy' : 'calm',
+              'weekday': [1, 2, 3, 4, 5],
+            },
+        ],
+      },
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(lifeConfig),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+    for (var index = 80; index < 86; index += 1) {
+      runtime.applyRuntimeOverride(
+        ResidentRuntimeOverride(
+          residentId: 'person_$index',
+          location: 'meeting_room',
+          activity: 'project_review',
+          mood: 'busy',
+          dayCount: 12,
+          source: 'test',
+          reason: 'meeting',
+          schedulePhase: 'working',
+          isWorking: true,
+          nextLocation: 'office',
+          nextActivity: 'working',
+          nextChangeTime: '13:00',
+        ),
+      );
+    }
+    final memory = ResidentMemoryEngine();
+    final relationship = ResidentRelationshipEngine(
+      config: ResidentRelationshipConfig.fromJson({
+        'version': 'test',
+        'levels': [],
+        'relationships': [],
+      }),
+      memoryEngine: memory,
+    );
+    final festival = FestivalRuntimeManager(
+      config: FestivalConfig.fromJson({'version': 'test', 'festivals': []}),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final weather = WeatherRuntimeManager(
+      config: WeatherConfig.fromJson({'version': 'test', 'weatherEvents': []}),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final rumor = RumorRuntimeManager(
+      config: RumorConfig.fromJson({'version': 'test', 'rumors': []}),
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      residentRuntimeManager: runtime,
+    );
+    final dialogue = DialogueRuntimeManager(
+      config: ResidentDialogueConfig.fromJson({
+        'version': 'test',
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '今天办公室慢慢来。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+          'tags': ['fallback'],
+        },
+        'dialogues': [
+          {
+            'id': 'group_coffee_dialogue',
+            'residentId': '*',
+            'text': '茶水间人多的时候，咖啡也像在开小会。',
+            'conditions': {
+              'groupSizeMin': 2,
+              'groupTopic': 'coffee',
+            },
+            'priority': 9,
+            'repeatable': true,
+            'tags': ['office_group', 'topic:coffee'],
+          },
+        ],
+      }),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+    );
+    final story = StoryRuntimeManager(
+      config: ResidentStoryConfig.fromJson({
+        'version': 'test',
+        'stories': [
+          {
+            'id': 'coffee_group_story',
+            'residentId': '*',
+            'title': '茶水间的小圆桌',
+            'summary': '几位居民围着咖啡聊起今天的海风。',
+            'dialogueIds': [],
+            'conditions': {
+              'groupSizeMin': 2,
+              'groupActivity': 'coffee_break',
+            },
+            'result': {
+              'memoryTags': ['office_group_story'],
+            },
+            'priority': 8,
+            'repeatable': false,
+            'tags': ['office_group', 'coffee'],
+          },
+        ],
+      }),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      dialogueRuntimeManager: dialogue,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+    );
+    final lifeManager = ResidentLifeManager(
+      _FakeResidentLifeRepository(lifeConfig),
+    );
+    await lifeManager.load();
+    final legacyDialogue = ResidentDialogueEngine(
+      config: ResidentDialogueConfig.fromJson({
+        'version': 'test',
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '今天办公室慢慢来。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+          'tags': ['fallback'],
+        },
+        'dialogues': [],
+      }),
+      lifeManager: lifeManager,
+      memoryEngine: memory,
+      relationshipEngine: relationship,
+    );
+    final secondWorld = SecondWorldEngine(
+      residentConfig: residents,
+      residentLifeEngine: lifeManager,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      residentDialogueEngine: legacyDialogue,
+      residentStoryEngine: ResidentStoryEngine(
+        config:
+            ResidentStoryConfig.fromJson({'version': 'test', 'stories': []}),
+        lifeManager: lifeManager,
+        memoryEngine: memory,
+        relationshipEngine: relationship,
+        dialogueEngine: legacyDialogue,
+      ),
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+    );
+    final repository = _CountingWorldSaveRepository();
+    final save = WorldSaveManager(
+      repository: repository,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      storyRuntimeManager: story,
+      dialogueRuntimeManager: dialogue,
+    );
+    final tick = WorldTickManager(
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      worldSaveManager: save,
+      secondWorldEngine: secondWorld,
+    );
+    final daily = DailySimulationManager(
+      worldTickManager: tick,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+      storyRuntimeManager: story,
+      worldSaveManager: save,
+    );
+    final decision = ResidentDecisionManager(
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      weatherRuntimeManager: weather,
+      festivalRuntimeManager: festival,
+      rumorRuntimeManager: rumor,
+      worldClockManager: clock,
+      secondWorldEngine: secondWorld,
+      residentMemoryEngine: memory,
+    );
+    final relationshipRuntime = RelationshipRuntimeManager(
+      residentRuntimeManager: runtime,
+      residentDecisionManager: decision,
+      rumorRuntimeManager: rumor,
+      storyRuntimeManager: story,
+      dailySimulationManager: daily,
+      worldSaveManager: save,
+      residentRelationshipEngine: relationship,
+      secondWorldEngine: secondWorld,
+    );
+
+    final groups = relationshipRuntime.generateOfficeGroups(reason: 'test');
+    expect(groups, isNotEmpty);
+    expect(groups.every((group) => group.size >= 2 && group.size <= 6), isTrue);
+    expect(groups.any((group) => group.activity == 'coffee_break'), isTrue);
+    expect(
+      groups.any((group) =>
+          group.activity == 'meeting' || group.activity == 'project_review'),
+      isTrue,
+    );
+    expect(save.activeGroups.length, groups.length);
+    expect(save.activeGroups.length, lessThan(100));
+    expect(dialogue.getDialogue('person_0').id, 'group_coffee_dialogue');
+    expect(
+        story.getAvailableStories('person_0').first.id, 'coffee_group_story');
+
+    final group = groups.firstWhere(
+      (item) => item.activity == 'coffee_break',
+      orElse: () => groups.first,
+    );
+    final changed = relationshipRuntime.applyOfficeGroupInteraction(
+      group.groupId,
+    );
+    expect(changed, isTrue);
+    for (final member in group.members) {
+      expect(save.getFriendshipState(member).score, greaterThan(0));
+    }
+    expect(save.getSkillState('communication').experience, greaterThan(0));
+    expect(save.dailySocialSummary['todaysGroups'], isNotEmpty);
+    expect(save.groupForResident(group.members.first)?.groupId, group.groupId);
+
+    final saved = await save.saveWorld(force: true, immediate: true);
+    expect(saved.activeGroups, isNotEmpty);
+    await save.resetWorld();
+    repository.data = saved;
+    await save.loadWorld();
+    expect(save.activeGroups.length, saved.activeGroups.length);
+    expect(save.groupForResident(group.members.first)?.groupId, group.groupId);
+  });
+
+  test('living office world integrates shared context summary and save',
+      () async {
+    final clock = WorldClockManager();
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 2, hour: 9, minute: 0),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 2,
+        weekdayIndex: 2,
+        month: 1,
+        day: 2,
+        season: 'summer',
+      ),
+    );
+    final residentConfig = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': List.generate(100, (index) {
+        final location = index < 20
+            ? 'office'
+            : index < 34
+                ? 'meeting_room'
+                : index < 46
+                    ? 'pantry'
+                    : index < 58
+                        ? 'balcony'
+                        : 'home';
+        return {
+          'id': 'office_person_$index',
+          'name': '办公室居民$index',
+          'type': 'npc',
+          'personality': index.isEven ? 'outgoing,kind' : 'serious,cautious',
+          'dialogGroup': 'office',
+          'mood': index % 7 == 0 ? 'busy' : 'calm',
+          'friendship': 0,
+          'unlockLevel': 1,
+          'location': location,
+          'enabled': true,
+        };
+      }),
+    });
+    final lifeConfig = ResidentLifeConfig.fromJson(
+      scheduleJson: {
+        'version': 'test',
+        'schedules': [
+          for (var index = 0; index < 100; index += 1)
+            {
+              'id': 'living_office_schedule_$index',
+              'residentId': 'office_person_$index',
+              'schedule': index < 58 ? 'working' : 'home',
+              'location': index < 20
+                  ? 'office'
+                  : index < 34
+                      ? 'meeting_room'
+                      : index < 46
+                          ? 'pantry'
+                          : index < 58
+                              ? 'balcony'
+                              : 'home',
+              'activity': index < 34
+                  ? 'project_review'
+                  : index < 46
+                      ? 'coffee_break'
+                      : index < 58
+                          ? 'observe_weather'
+                          : 'home',
+              'startTime': '08:30',
+              'endTime': '18:00',
+              'mood': index % 7 == 0 ? 'busy' : 'calm',
+              'weekday': [1, 2, 3, 4, 5],
+            },
+          for (var index = 0; index < 100; index += 1)
+            {
+              'id': 'living_office_lunch_$index',
+              'residentId': 'office_person_$index',
+              'schedule': 'lunch',
+              'location': index.isEven ? 'pantry' : 'coffee_shop',
+              'activity': 'coffee_break',
+              'startTime': '12:00',
+              'endTime': '13:00',
+              'mood': 'happy',
+              'weekday': [1, 2, 3, 4, 5],
+            },
+          for (var index = 0; index < 100; index += 1)
+            {
+              'id': 'living_office_night_$index',
+              'residentId': 'office_person_$index',
+              'schedule': 'sleep',
+              'location': 'home',
+              'activity': 'sleep',
+              'startTime': '22:00',
+              'endTime': '06:00',
+              'mood': 'tired',
+              'weekday': [1, 2, 3, 4, 5, 6, 7],
+            },
+        ],
+      },
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residentConfig),
+      lifeRepository: _FakeResidentLifeRepository(lifeConfig),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+    final memory = ResidentMemoryEngine();
+    final relationship = ResidentRelationshipEngine(
+      config: ResidentRelationshipConfig.fromJson({
+        'version': 'test',
+        'levels': [],
+        'relationships': [],
+      }),
+      memoryEngine: memory,
+    );
+    final festival = FestivalRuntimeManager(
+      config: FestivalConfig.fromJson({
+        'version': 'test',
+        'festivals': [
+          {
+            'id': 'festival_lantern',
+            'name': '海灯节',
+            'dateValue': '1-1',
+            'durationDays': 1,
+            'mood': 'bright',
+            'worldEffects': {'residentMood': 'excited'},
+            'enabled': true,
+          },
+        ],
+      }),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final weather = WeatherRuntimeManager(
+      config: WeatherConfig.fromJson({
+        'version': 'test',
+        'weatherEvents': [
+          {
+            'id': 'weather_sunny',
+            'name': '晴天',
+            'type': 'sunny',
+            'season': ['summer'],
+            'timeRange': '08:00-18:00',
+            'residentMoodModifier': '',
+            'tags': ['sunny'],
+            'sortOrder': 0,
+            'enabled': true,
+          },
+          {
+            'id': 'weather_storm',
+            'name': '暴雨',
+            'type': 'storm',
+            'season': ['summer'],
+            'timeRange': '20:00-22:00',
+            'residentMoodModifier': 'worried',
+            'tags': ['storm', 'rain'],
+            'sortOrder': 1,
+            'enabled': true,
+          },
+        ],
+      }),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final rumor = RumorRuntimeManager(
+      config: RumorConfig.fromJson({
+        'version': 'test',
+        'rumors': [
+          {
+            'id': 'rumor_printer',
+            'title': '打印机今天很安静',
+            'content': '有人说打印机终于愿意慢慢工作了。',
+            'category': 'office',
+            'source': 'office',
+            'rarity': 'common',
+            'timeRange': '08:00-18:00',
+            'tags': ['office', 'soft_rumor'],
+            'enabled': true,
+          },
+        ],
+      }),
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      residentRuntimeManager: runtime,
+    );
+    final dialogue = DialogueRuntimeManager(
+      config: ResidentDialogueConfig.fromJson({
+        'version': 'test',
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '今天办公室也慢慢运转。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+          'tags': ['fallback'],
+        },
+        'dialogues': [
+          {
+            'id': 'office_active_dialogue',
+            'residentId': '*',
+            'text': '今天办公室像一只慢慢醒来的钟。',
+            'conditions': {
+              'minimumActivityLevel': 35,
+              'requiredOfficeTags': ['office_group'],
+            },
+            'priority': 9,
+            'repeatable': true,
+            'tags': ['office_life'],
+          },
+          {
+            'id': 'player_helpful_dialogue',
+            'residentId': '*',
+            'text': '大家都记得你昨天帮过忙。',
+            'conditions': {
+              'requiredPlayerReputation': ['helpful'],
+              'requiredRecentActions': ['helping'],
+              'minimumOfficeTrust': 10,
+            },
+            'priority': 12,
+            'repeatable': true,
+            'tags': ['helpful'],
+          },
+        ],
+      }),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+    );
+    final story = StoryRuntimeManager(
+      config: ResidentStoryConfig.fromJson({
+        'version': 'test',
+        'stories': [
+          {
+            'id': 'office_active_story',
+            'residentId': '*',
+            'title': '办公室一起醒来',
+            'summary': '大家在各自的位置上，让今天变得有一点不同。',
+            'dialogueIds': [],
+            'conditions': {
+              'minimumActivityLevel': 35,
+              'maximumTensionLevel': 80,
+              'requiredOfficeTags': ['office_group'],
+              'activeGroupCount': 1,
+            },
+            'result': {
+              'memoryTags': ['living_office_seen'],
+            },
+            'priority': 8,
+            'repeatable': false,
+            'tags': ['living_office'],
+          },
+          {
+            'id': 'player_helpful_story',
+            'residentId': '*',
+            'title': '大家把椅子留给你',
+            'summary': '有人记得玩家昨天帮过忙，于是午休时多留了一个位置。',
+            'dialogueIds': [],
+            'conditions': {
+              'requiredPlayerReputation': ['helpful'],
+              'requiredRecentActions': ['helping'],
+              'minimumOfficeInfluence': 10,
+            },
+            'result': {
+              'memoryTags': ['player_helpful_seen'],
+            },
+            'priority': 12,
+            'repeatable': false,
+            'tags': ['helpful'],
+          },
+        ],
+      }),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      dialogueRuntimeManager: dialogue,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+    );
+    final lifeManager =
+        ResidentLifeManager(_FakeResidentLifeRepository(lifeConfig));
+    await lifeManager.load();
+    final legacyDialogue = ResidentDialogueEngine(
+      config: ResidentDialogueConfig.fromJson({
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '慢慢来。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+        },
+        'dialogues': [],
+      }),
+      lifeManager: lifeManager,
+      memoryEngine: memory,
+      relationshipEngine: relationship,
+    );
+    final save = WorldSaveManager(
+      repository: _CountingWorldSaveRepository(),
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      storyRuntimeManager: story,
+      dialogueRuntimeManager: dialogue,
+    );
+    final secondWorld = SecondWorldEngine(
+      residentConfig: residentConfig,
+      residentLifeEngine: lifeManager,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      residentDialogueEngine: legacyDialogue,
+      residentStoryEngine: ResidentStoryEngine(
+        config: ResidentStoryConfig.fromJson({'stories': []}),
+        lifeManager: lifeManager,
+        memoryEngine: memory,
+        relationshipEngine: relationship,
+        dialogueEngine: legacyDialogue,
+      ),
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      worldSaveManager: save,
+      residentRuntimeManager: runtime,
+    );
+    final inventoryConfig = InventoryConfig.fromJson({
+      'inventory': {
+        'catalog': [
+          {
+            'id': 'fish_small',
+            'name': '小银鱼',
+            'category': 'fish',
+            'rarity': 'common',
+            'icon': 'fish',
+            'description': '一条适合当作轻松话题的小鱼。',
+            'initialQuantity': 2,
+            'attributes': {
+              'nickname': '银色小话题',
+              'weightRange': '0.2-0.5 kg',
+            },
+          },
+        ],
+      },
+    });
+    final inventory = InventoryManagerView()
+      ..ensureCatalogLoaded(inventoryConfig);
+    final baseTick = WorldTickManager(
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      worldSaveManager: save,
+      secondWorldEngine: secondWorld,
+    );
+    final daily = DailySimulationManager(
+      worldTickManager: baseTick,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+      storyRuntimeManager: story,
+      worldSaveManager: save,
+    );
+    final decision = ResidentDecisionManager(
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      weatherRuntimeManager: weather,
+      festivalRuntimeManager: festival,
+      rumorRuntimeManager: rumor,
+      worldClockManager: clock,
+      secondWorldEngine: secondWorld,
+      residentMemoryEngine: memory,
+    );
+    final relationshipRuntime = RelationshipRuntimeManager(
+      residentRuntimeManager: runtime,
+      residentDecisionManager: decision,
+      rumorRuntimeManager: rumor,
+      storyRuntimeManager: story,
+      dailySimulationManager: daily,
+      worldSaveManager: save,
+      residentRelationshipEngine: relationship,
+      secondWorldEngine: secondWorld,
+    );
+    final fish = FishRuntimeManager(
+      config: FishCatalogConfig.fromJson({'version': 'test', 'fish': []}),
+      worldClockManager: clock,
+      weatherRuntimeManager: weather,
+      festivalRuntimeManager: festival,
+      secondWorldEngine: secondWorld,
+    );
+    final quest = QuestRuntimeManager(
+      taskConfig: TaskConfig.fromJson({
+        'tasks': {'items': []}
+      }),
+      taskManager: TaskManagerView(),
+      worldClockManager: clock,
+      dailySimulationManager: daily,
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      fishRuntimeManager: fish,
+      rumorRuntimeManager: rumor,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      worldSaveManager: save,
+    );
+    final achievement = AchievementRuntimeManager(
+      honorConfig: HonorConfig.fromJson({'version': 'test', 'badges': []}),
+      identityConfig: const <String, dynamic>{'identities': []},
+      fishCollectionConfig:
+          FishCollectionConfig.fromJson({'version': 'test', 'fishes': []}),
+      taskConfig: TaskConfig.fromJson({
+        'tasks': {'items': []}
+      }),
+      questRuntimeManager: quest,
+      fishRuntimeManager: fish,
+      relationshipRuntimeManager: relationshipRuntime,
+      storyRuntimeManager: story,
+      rumorRuntimeManager: rumor,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      residentRuntimeManager: runtime,
+      worldClockManager: clock,
+      worldSaveManager: save,
+      secondWorldEngine: secondWorld,
+    );
+    final dynamicEvents = DynamicEventRuntimeManager(
+      config: DynamicEventConfig.fromJson({
+        'version': 'test',
+        'events': [
+          {
+            'id': 'living_office_event',
+            'type': 'office_rush',
+            'category': 'office',
+            'title': '办公室轻轻忙起来',
+            'conditions': {
+              'minimumActivityLevel': 35,
+              'requiredOfficeTags': ['office_group'],
+            },
+            'priority': 9,
+            'weight': 1,
+            'probability': 1,
+            'repeatable': true,
+            'cooldown': 1,
+          },
+          {
+            'id': 'player_helpful_event',
+            'type': 'office_help',
+            'category': 'office',
+            'title': '有人轻轻向你招手',
+            'conditions': {
+              'requiredPlayerReputation': ['helpful'],
+              'requiredRecentActions': ['helping'],
+              'minimumOfficeTrust': 10,
+            },
+            'priority': 12,
+            'weight': 1,
+            'probability': 1,
+            'repeatable': true,
+            'cooldown': 1,
+          },
+        ],
+      }),
+      worldClockManager: clock,
+      dailySimulationManager: daily,
+      residentRuntimeManager: runtime,
+      residentDecisionManager: decision,
+      relationshipRuntimeManager: relationshipRuntime,
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      fishRuntimeManager: fish,
+      questRuntimeManager: quest,
+      achievementRuntimeManager: achievement,
+      worldSaveManager: save,
+      secondWorldEngine: secondWorld,
+      residentMemoryEngine: memory,
+    );
+    final economy = EconomyRuntimeManager(
+      fishRuntimeManager: fish,
+      questRuntimeManager: quest,
+      residentRuntimeManager: runtime,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      worldClockManager: clock,
+      worldSaveManager: save,
+      secondWorldEngine: secondWorld,
+    );
+    secondWorld.bindInteractiveRuntimes(
+      relationshipRuntimeManager: relationshipRuntime,
+      dynamicEventRuntimeManager: dynamicEvents,
+      dailySimulationManager: daily,
+      inventoryManager: inventory,
+      inventoryConfig: inventoryConfig,
+    );
+    baseTick
+      ..setRelationshipRuntimeManager(relationshipRuntime)
+      ..setDynamicEventRuntimeManager(dynamicEvents)
+      ..setQuestRuntimeManager(quest)
+      ..setAchievementRuntimeManager(achievement)
+      ..setEconomyRuntimeManager(economy);
+
+    save.recordFriendshipChange(
+      residentId: 'office_person_0',
+      sourceType: 'test_help',
+      sourceId: 'help_1',
+      scoreDelta: 20,
+      trustDelta: 10,
+      familiarityDelta: 10,
+      reason: 'player_helped',
+      tags: const <String>['helping', 'communication'],
+      relationship: relationship.getRelationship('office_person_0'),
+    );
+    save.recordPlayerAction(
+      RecentPlayerAction(
+        id: 'help_action_1',
+        type: 'helping',
+        sourceId: 'help_1',
+        description: 'player_helped_resident',
+        createdAt: DateTime.now().toIso8601String(),
+        day: clock.today().dayCount,
+        weight: 3,
+        tags: const <String>['helping', 'choice:help'],
+      ),
+    );
+
+    final morningStarted = DateTime.now();
+    await baseTick.tickHour(advanceClock: false);
+    final morningDuration =
+        DateTime.now().difference(morningStarted).inMilliseconds;
+    final morning = baseTick.lastResult!.worldContext.livingOfficeState;
+    final playerInfluence =
+        baseTick.lastResult!.worldContext.playerInfluenceContext;
+    expect(morning.activeResidentCount, 100);
+    expect(morning.workingResidentCount, greaterThan(0));
+    expect(morning.activityLevel, greaterThanOrEqualTo(35));
+    expect(morning.productivityLevel, inInclusiveRange(0, 100));
+    expect(morning.socialLevel, inInclusiveRange(0, 100));
+    expect(morning.tensionLevel, inInclusiveRange(0, 100));
+    expect(morning.officeMood,
+        isIn(<String>['calm', 'busy', 'social', 'cheerful']));
+    expect(morning.popularLocations, isNotEmpty);
+    expect(morning.worldTags, contains(startsWith('activity:')));
+    expect(morningDuration, lessThan(800));
+    expect(
+      dialogue.getAvailableDialogues('office_person_0').map((item) => item.id),
+      contains('office_active_dialogue'),
+    );
+    expect(story.getAvailableStories('office_person_0').map((item) => item.id),
+        contains('office_active_story'));
+    expect(dynamicEvents.getAvailableEvents().map((item) => item.id),
+        contains('living_office_event'));
+    expect(baseTick.lastResult!.worldContext.locationSnapshot.length, 100);
+    expect(baseTick.lastResult!.worldContext.personalitySnapshot.length, 100);
+    expect(baseTick.lastResult!.worldContext.friendshipSnapshot.length, 100);
+    expect(playerInfluence.reputation, contains('helpful'));
+    expect(
+        playerInfluence.officeInfluence.officeTrust, greaterThanOrEqualTo(10));
+    expect(playerInfluence.recentActionTypes, contains('helping'));
+    expect(
+        dialogue.getDialogue('office_person_0').id, 'player_helpful_dialogue');
+    expect(story.getAvailableStories('office_person_0').map((item) => item.id),
+        contains('player_helpful_story'));
+    expect(dynamicEvents.getActiveEvents().map((item) => item.id),
+        contains('player_helpful_event'));
+    expect(quest.cumulativeMetrics['office_trust'], greaterThanOrEqualTo(10));
+    expect(save.playerInfluenceContext.reputation, contains('helpful'));
+
+    final friendshipBefore = save.getFriendshipState('office_person_0').score;
+    await baseTick.tickHour(advanceClock: false);
+    expect(save.getFriendshipState('office_person_0').score, friendshipBefore);
+
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 2, hour: 12, minute: 15),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 2,
+        weekdayIndex: 2,
+        month: 1,
+        day: 2,
+        season: 'summer',
+      ),
+    );
+    await baseTick.tickHour(advanceClock: false);
+    final lunch = baseTick.lastResult!.worldContext.livingOfficeState;
+    expect(lunch.socialLevel, greaterThanOrEqualTo(morning.socialLevel));
+
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 2, hour: 23, minute: 0),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 2,
+        weekdayIndex: 2,
+        month: 1,
+        day: 2,
+        season: 'summer',
+      ),
+    );
+    await baseTick.tickHour(advanceClock: false);
+    final night = baseTick.lastResult!.worldContext.livingOfficeState;
+    expect(night.activityLevel, lessThan(morning.activityLevel));
+
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 1, hour: 12, minute: 0),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 1,
+        weekdayIndex: 1,
+        month: 1,
+        day: 1,
+        season: 'summer',
+      ),
+    );
+    await baseTick.tickHour(advanceClock: false);
+    final festivalState = baseTick.lastResult!.worldContext.livingOfficeState;
+    expect(festivalState.currentFestival, isNotEmpty);
+    expect(festivalState.worldTags, contains('festival'));
+
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 3, hour: 21, minute: 0),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 3,
+        weekdayIndex: 3,
+        month: 1,
+        day: 3,
+        season: 'summer',
+      ),
+    );
+    await baseTick.tickHour(advanceClock: false);
+    final storm = baseTick.lastResult!.worldContext.livingOfficeState;
+    expect(storm.worldTags, contains('weather_disruption'));
+    expect(
+      (storm.tensionLevel - festivalState.tensionLevel).abs(),
+      lessThanOrEqualTo(12),
+    );
+
+    final interactiveSnapshot = secondWorld.getInteractiveOfficeSnapshot(
+      playerLocation: 'office',
+      residentLimit: 12,
+      historyLimit: 10,
+    );
+    expect(interactiveSnapshot.availableResidents.length, 12);
+    expect(interactiveSnapshot.nearbyResidents, isNotEmpty);
+    expect(interactiveSnapshot.activeGroups, isNotEmpty);
+    expect(interactiveSnapshot.currentEvents.map((item) => item.id),
+        contains('player_helpful_event'));
+    expect(interactiveSnapshot.availableActions.map((item) => item.id),
+        contains('view_residents'));
+    expect(interactiveSnapshot.playerReputation, contains('helpful'));
+    expect(interactiveSnapshot.dailySummary['officeMood'], isNotEmpty);
+    expect(interactiveSnapshot.residentDetails.length, 12);
+
+    final fullInteractiveSnapshot =
+        secondWorld.getInteractiveOfficeSnapshot(playerLocation: 'office');
+    expect(fullInteractiveSnapshot.availableResidents.length, 100);
+    expect(fullInteractiveSnapshot.residentDetails.length, 100);
+    final residentDetail =
+        secondWorld.getResidentDetailViewModel('office_person_0');
+    expect(residentDetail.residentId, 'office_person_0');
+    expect(residentDetail.visibleProfileFields.keys, contains('姓名'));
+    expect(residentDetail.visibleProfileFields.keys, contains('当前地点'));
+    expect(residentDetail.visibleProfileFields.keys, contains('当前行为'));
+    expect(residentDetail.personalitySummary, isNotEmpty);
+    expect(residentDetail.availableInteractions.map((item) => item.id),
+        contains('talk'));
+    expect(residentDetail.availableInteractions.map((item) => item.id),
+        contains('share_fish'));
+    expect(residentDetail.shareFishOptions.length, 1);
+    expect(residentDetail.shareFishOptions.single.available, isTrue);
+    expect(
+      residentDetail.availableInteractions
+          .firstWhere((item) => item.id == 'share_fish')
+          .reason,
+      contains('话题'),
+    );
+    expect(residentDetail.recentMemories.length, lessThanOrEqualTo(10));
+
+    final residentAction = PlayerActionRequest(
+      actionId: 'interactive_resident_help_1',
+      actionType: 'help_work',
+      targetResidentId: 'office_person_0',
+      targetLocationId: 'office',
+      sourcePage: 'resident_detail',
+      currentWorldTime: 'Y1-D3 21:00',
+      timestamp: DateTime.now().toIso8601String(),
+    );
+    expect(residentAction.requestId, residentAction.actionId);
+    final residentResult = secondWorld.submitPlayerAction(residentAction);
+    expect(residentResult.success, isTrue);
+    expect(residentResult.dialogue, isNotNull);
+    expect(residentResult.friendshipChanges, isNotEmpty);
+    expect(residentResult.memoryChanges, isNotEmpty);
+    expect(residentResult.resultGroups['positive'], isNotEmpty);
+    expect(residentResult.recommendedNextActions, isNotEmpty);
+    final updatedResidentDetail =
+        secondWorld.getResidentDetailViewModel('office_person_0');
+    expect(updatedResidentDetail.recentInteractions, isNotEmpty);
+    expect(updatedResidentDetail.relationshipTrend, isNotEmpty);
+    expect(updatedResidentDetail.currentCooldowns, isA<List>());
+    final duplicateResidentResult =
+        secondWorld.submitPlayerAction(residentAction);
+    expect(duplicateResidentResult.success, isFalse);
+    expect(
+      duplicateResidentResult.blockedReasons,
+      contains('duplicate_request'),
+    );
+    final shareFishBlocked = secondWorld.submitPlayerAction(
+      PlayerActionRequest(
+        actionId: 'interactive_share_fish_missing_1',
+        actionType: 'share_fish',
+        targetResidentId: 'office_person_0',
+        sourcePage: 'resident_detail',
+        timestamp: DateTime.now().toIso8601String(),
+      ),
+    );
+    expect(shareFishBlocked.success, isFalse);
+    expect(shareFishBlocked.blockedReasons.join(), contains('鱼'));
+    expect(inventory.ownedOf('fish_small'), 2);
+
+    final shareFishAction = PlayerActionRequest(
+      actionId: 'interactive_share_fish_success_1',
+      actionType: 'share_fish',
+      targetResidentId: 'office_person_0',
+      sourcePage: 'resident_detail',
+      metadata: const <String, Object?>{'fishId': 'fish_small'},
+      timestamp: DateTime.now().toIso8601String(),
+    );
+    final shareFishResult = secondWorld.submitPlayerAction(shareFishAction);
+    expect(shareFishResult.success, isTrue);
+    expect(shareFishResult.inventoryChanges, contains('小银鱼 -1'));
+    expect(shareFishResult.friendshipChanges, isNotEmpty);
+    expect(shareFishResult.memoryChanges, isNotEmpty);
+    expect(inventory.ownedOf('fish_small'), 1);
+    final duplicatedShareFish = secondWorld.submitPlayerAction(shareFishAction);
+    expect(duplicatedShareFish.success, isFalse);
+    expect(inventory.ownedOf('fish_small'), 1);
+    final sameDayShareFish = secondWorld.submitPlayerAction(
+      PlayerActionRequest(
+        actionId: 'interactive_share_fish_success_2',
+        actionType: 'share_fish',
+        targetResidentId: 'office_person_0',
+        sourcePage: 'resident_detail',
+        metadata: const <String, Object?>{'fishId': 'fish_small'},
+        timestamp: DateTime.now().toIso8601String(),
+      ),
+    );
+    expect(sameDayShareFish.success, isFalse);
+    expect(inventory.ownedOf('fish_small'), 1);
+
+    final groupId = interactiveSnapshot.activeGroups.first.group.groupId;
+    final groupResult = secondWorld.submitPlayerAction(
+      PlayerActionRequest(
+        actionId: 'interactive_group_join_1',
+        actionType: 'join_group',
+        targetGroupId: groupId,
+        timestamp: DateTime.now().toIso8601String(),
+      ),
+    );
+    expect(groupResult.success, isTrue);
+    expect(groupResult.friendshipChanges, isNotEmpty);
+    expect(groupResult.skillChanges, isNotEmpty);
+
+    final eventResult = secondWorld.submitPlayerAction(
+      PlayerActionRequest(
+        actionId: 'interactive_event_help_1',
+        actionType: 'help',
+        targetEventId: 'player_helpful_event',
+        timestamp: DateTime.now().toIso8601String(),
+      ),
+    );
+    expect(
+      eventResult.success,
+      isTrue,
+      reason: eventResult.blockedReasons.join(','),
+    );
+    expect(eventResult.eventTriggered?.id, 'player_helpful_event');
+    expect(eventResult.positiveChanges, isNotEmpty);
+
+    clock.setClock(
+      WorldClock.initial().copyWith(dayCount: 4, hour: 9, minute: 0),
+      calendar: WorldCalendar.initial().copyWith(
+        dayCount: 4,
+        weekdayIndex: 4,
+        month: 1,
+        day: 4,
+        season: 'summer',
+      ),
+    );
+    final summary = await daily.runDailySimulation();
+    expect(summary.livingOfficeState, isNotNull);
+    expect(summary.dominantOfficeMood, isNotEmpty);
+    expect(summary.averageActivityLevel, inInclusiveRange(0, 100));
+    expect(summary.importantOfficeEvents, isNotEmpty);
+    expect(summary.groupActivities, isNotEmpty);
+    expect(summary.popularLocations, isNotEmpty);
+    expect(summary.todayPlayerImpact['officeReputation'], contains('helpful'));
+    expect(
+      summary.todayPlayerImpact['influencedEvents'],
+      greaterThanOrEqualTo(1),
+    );
+    expect(summary.todayPlayerImpact['officeInfluence'], isA<Map>());
+    expect(save.officeWorldHistory.length, 1);
+    await daily.runDailySimulation();
+    expect(save.officeWorldHistory.length, 1);
+
+    for (var day = 5; day < 100; day += 1) {
+      final state = secondWorld.buildLivingOfficeState(
+        worldDate: 'Y1-M1-D$day-#$day',
+        timeOfDay: 'morning',
+        weekday: 2,
+        season: 'summer',
+        weatherContext: weather.getCurrentWeather(),
+        festivalContext: null,
+        activeRumors: rumor.getActiveRumors(),
+        residentSnapshot: runtime.getAllResidentCurrentStates(),
+        activeGroups: save.activeGroups,
+        activeStories: const <Object?>[],
+        activeEvents: const <Object?>[],
+        careerContext: save.careerState,
+        skillSummary: Map<String, Object?>.from(save.playerSkillStates),
+        questSummary: quest.cumulativeMetrics,
+        achievementSummary: achievement.getAllAchievements(),
+        previousState: save.livingOfficeState,
+      );
+      save.recordOfficeWorldHistory(
+        secondWorld.buildOfficeWorldHistoryEntry(state),
+      );
+    }
+    expect(save.officeWorldHistory.length, lessThanOrEqualTo(90));
+
+    final saved = await save.saveWorld(force: true, immediate: true);
+    expect(
+        saved.livingOfficeState.officeMood, save.livingOfficeState.officeMood);
+    expect(saved.officeWorldHistory, isNotEmpty);
+    final restored = WorldSaveData.fromJson(saved.toJson());
+    expect(restored.livingOfficeState.officeMood,
+        saved.livingOfficeState.officeMood);
+    expect(restored.officeWorldHistory.length, saved.officeWorldHistory.length);
+    expect(restored.playerInfluenceContext.reputation, contains('helpful'));
+    expect(restored.recentPlayerActions.map((item) => item.type),
+        contains('helping'));
+    final legacy = WorldSaveData.fromJson(const <String, dynamic>{});
+    expect(legacy.livingOfficeState.officeMood, 'calm');
+    expect(legacy.officeWorldHistory, isEmpty);
+    expect(legacy.playerInfluenceContext.reputation, contains('quiet'));
   });
 }
 
