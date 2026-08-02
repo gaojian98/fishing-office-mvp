@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../../models/living_world_config.dart';
+import '../../models/office_life_schedule.dart';
 import '../../models/resident_life_config.dart';
 import '../repository/resident_life_repository.dart';
 import 'world_clock_manager.dart';
@@ -117,9 +118,28 @@ class ResidentCurrentState {
     required this.startTime,
     required this.endTime,
     required this.found,
+    this.schedulePhase = '',
+    this.isWorking = false,
+    this.isOnBreak = false,
+    this.isOvertime = false,
+    this.isWeekend = false,
+    this.nextLocation = '',
+    this.nextActivity = '',
+    this.nextChangeTime = '',
+    this.scheduleReason = '',
   });
 
   factory ResidentCurrentState.fromSchedule(ResidentSchedule schedule) {
+    final life = OfficeLifeSchedule.fromRaw(
+      rawPhase: schedule.schedule,
+      hour: _hourFromTime(schedule.startTime),
+      minute: _minuteFromTime(schedule.startTime),
+      weekday: schedule.weekdays.isEmpty ? 1 : schedule.weekdays.first,
+      location: schedule.location,
+      activity: schedule.activity,
+      startTime: schedule.startTime,
+      endTime: schedule.endTime,
+    );
     return ResidentCurrentState(
       residentId: schedule.residentId,
       scheduleId: schedule.id,
@@ -129,6 +149,15 @@ class ResidentCurrentState {
       startTime: schedule.startTime,
       endTime: schedule.endTime,
       found: true,
+      schedulePhase: life.phase,
+      isWorking: life.isWorking,
+      isOnBreak: life.isOnBreak,
+      isOvertime: life.isOvertime,
+      isWeekend: life.isWeekend,
+      nextLocation: life.nextLocation,
+      nextActivity: life.nextActivity,
+      nextChangeTime: life.nextChangeTime,
+      scheduleReason: life.reason,
     );
   }
 
@@ -153,4 +182,23 @@ class ResidentCurrentState {
   final String startTime;
   final String endTime;
   final bool found;
+  final String schedulePhase;
+  final bool isWorking;
+  final bool isOnBreak;
+  final bool isOvertime;
+  final bool isWeekend;
+  final String nextLocation;
+  final String nextActivity;
+  final String nextChangeTime;
+  final String scheduleReason;
+}
+
+int _hourFromTime(String value) {
+  final parts = value.split(':');
+  return (int.tryParse(parts.isNotEmpty ? parts[0] : '') ?? 0).clamp(0, 23);
+}
+
+int _minuteFromTime(String value) {
+  final parts = value.split(':');
+  return (int.tryParse(parts.length > 1 ? parts[1] : '') ?? 0).clamp(0, 59);
 }

@@ -28,6 +28,7 @@ import '../../pages/inventory/inventory_dialog_page.dart';
 import '../../pages/store/store_dialog_page.dart';
 import '../../pages/store/store_product_detail_dialog_page.dart';
 import '../../pages/tasks/task_dialog_page.dart';
+import '../../widgets/office/office_hub_dialog.dart';
 import '../../models/store_config.dart';
 import '../../models/task_config.dart';
 import '../engine/fishing_result.dart';
@@ -172,6 +173,13 @@ class DialogManager {
           transactionLayout: profileTransactionsLayout,
           dialogManager: this,
         ),
+      );
+    }
+    if (dialogId == 'OfficeHubDialog') {
+      return show<void>(
+        context,
+        barrierDismissible: false,
+        child: const OfficeHubDialog(),
       );
     }
     if (dialogId == 'SettingsDialog') {

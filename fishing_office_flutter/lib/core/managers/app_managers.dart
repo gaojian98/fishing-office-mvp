@@ -29,6 +29,7 @@ import '../../models/transaction_config.dart';
 import '../services/fairy_event_service.dart';
 import 'fish_runtime_manager.dart';
 import 'world_clock_manager.dart';
+import 'world_save_manager.dart';
 
 class CoreManagerState {
   const CoreManagerState({this.ready = false, this.message = 'loading'});
@@ -416,6 +417,7 @@ class FishingProvider extends ChangeNotifier {
     CollectionManagerView? collectionManager,
     FishRuntimeManager? fishRuntimeManager,
     FairyEventService? fairyEventService,
+    WorldSaveManager? worldSaveManager,
   })  : _engine = engine ?? FishingEngine(oceanEngine: OceanEngine()),
         _waitingEngine = waitingEngine ?? WaitingEngine(),
         _chainProvider = chainProvider ?? FishChainProvider(),
@@ -423,7 +425,8 @@ class FishingProvider extends ChangeNotifier {
             waitingEventManager ?? WaitingEventManagerView(WaitingEngine()),
         _collectionManager = collectionManager ?? CollectionManagerView(),
         _fishRuntimeManager = fishRuntimeManager,
-        _fairyEventService = fairyEventService;
+        _fairyEventService = fairyEventService,
+        _worldSaveManager = worldSaveManager;
 
   final FishingEngine _engine;
   final WaitingEngine _waitingEngine;
@@ -432,6 +435,7 @@ class FishingProvider extends ChangeNotifier {
   final CollectionManagerView _collectionManager;
   FishRuntimeManager? _fishRuntimeManager;
   FairyEventService? _fairyEventService;
+  WorldSaveManager? _worldSaveManager;
   FishingSession? _session;
   FishingResult? _result;
   String? _nextBaitId;
@@ -474,6 +478,10 @@ class FishingProvider extends ChangeNotifier {
 
   void setFairyEventService(FairyEventService service) {
     _fairyEventService = service;
+  }
+
+  void setWorldSaveManager(WorldSaveManager manager) {
+    _worldSaveManager = manager;
   }
 
   String get currentActionsLabel {
@@ -800,6 +808,11 @@ class FishingProvider extends ChangeNotifier {
     if (runtimeResult != null) {
       final fish = runtimeResult.fish;
       final tier = _rarityTier(fish.rarity);
+      _recordFishingSkillGain(
+        sessionId: sessionId,
+        fishId: fish.id,
+        rarity: fish.rarity,
+      );
       return FishingResult(
         sessionId: sessionId,
         status: 'resolved',
@@ -855,6 +868,27 @@ class FishingProvider extends ChangeNotifier {
         'audioCue': 'reserved_catch_result',
         'animationCue': 'reserved_line_pull',
       },
+    );
+  }
+
+  void _recordFishingSkillGain({
+    required String sessionId,
+    required String fishId,
+    required String rarity,
+  }) {
+    final save = _worldSaveManager;
+    if (save == null) return;
+    final rarityRank = _rarityTier(rarity);
+    final skills = <String, int>{
+      'fishing': 8 + rarityRank,
+      if (rarityRank >= 3) 'luck': 4,
+      if (!_collectionManager.isDiscovered(fishId)) 'observation': 8,
+    };
+    save.recordSkillExperienceBatch(
+      sourceType: 'fishing_result',
+      sourceId: sessionId,
+      skills: skills,
+      reason: '完成收线后，钓鱼相关能力获得成长。',
     );
   }
 

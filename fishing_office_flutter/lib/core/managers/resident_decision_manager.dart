@@ -1,11 +1,14 @@
 import 'package:flutter/foundation.dart';
 
+import '../../models/location_context.dart';
+import '../../models/resident_personality_context.dart';
 import '../engine/resident_memory_engine.dart';
 import '../engine/second_world_engine.dart';
 import '../utils/resident_mood.dart';
 import 'daily_simulation_manager.dart';
 import 'dialogue_runtime_manager.dart';
 import 'festival_runtime_manager.dart';
+import 'resident_life_manager.dart';
 import 'resident_runtime_manager.dart';
 import 'rumor_runtime_manager.dart';
 import 'story_runtime_manager.dart';
@@ -96,6 +99,9 @@ class ResidentDecisionManager extends ChangeNotifier {
           _residentRuntimeManager.getResidentCurrentState(resident.id);
       final decision = _decide(resident.id);
       _decisions[resident.id] = decision;
+      if (!_shouldApplyDecision(before, decision)) {
+        continue;
+      }
       final applied = _residentRuntimeManager.applyEmotionOverride(
         ResidentRuntimeOverride(
           residentId: resident.id,
@@ -105,6 +111,16 @@ class ResidentDecisionManager extends ChangeNotifier {
           dayCount: _worldClockManager.today().dayCount,
           source: 'resident_decision',
           reason: decision.reason,
+          schedulePhase: before.schedulePhase,
+          isWorking: before.isWorking,
+          isOnBreak: before.isOnBreak,
+          isOvertime: before.isOvertime,
+          isWeekend: before.isWeekend,
+          nextLocation: before.nextLocation,
+          nextActivity: before.nextActivity,
+          nextChangeTime: before.nextChangeTime,
+          overrideExpiresAt: before.nextChangeTime,
+          nextScheduleChange: before.nextChangeTime,
         ),
         reason: decision.reason,
         major: isMajorMoodReason(decision.reason),
@@ -141,6 +157,8 @@ class ResidentDecisionManager extends ChangeNotifier {
     final relationship = context.relationship.relationshipLevel;
     final memoryTags = context.memory.memoryTags;
     final finishedStories = _storyRuntimeManager.finishedStoryIds;
+    final personality =
+        _residentRuntimeManager.getResidentPersonalityContext(residentId);
 
     final route = _routeFor(residentId);
     var location = baseState.location;
@@ -149,30 +167,52 @@ class ResidentDecisionManager extends ChangeNotifier {
     var reason = 'schedule';
 
     if (festival != null) {
-      location = 'festival_square';
+      location = _festivalLocation(baseState, festivalTags);
       activity = '在节日气氛里慢慢走动。';
       mood = festival.residentMood.isEmpty ? 'excited' : festival.residentMood;
       reason = 'festival_started';
     } else if (_isBadWeather(weather?.type ?? '', weatherTags)) {
       location = _indoorLocation(residentId, baseState.location);
       activity = '避开坏天气，在室内听雨和海风。';
-      mood = 'worried';
-      reason = 'weather_change';
+      mood = personality.hasTrait('optimistic') ? 'calm' : 'worried';
+      reason = personality.hasTrait('cautious')
+          ? 'personality_cautious_weather_change'
+          : 'weather_change';
     } else if (activeRumors.isNotEmpty || rumorTags.isNotEmpty) {
-      location = _discussionLocation(residentId, route, baseState.location);
-      activity = '和路过的居民聊起今天的小传闻。';
+      location = _reasonableDeviationLocation(
+        baseState,
+        personality.hasTrait('gossipy')
+            ? personality.preferredLocationForPhase('coffee_break')
+            : _discussionLocation(residentId, route, baseState.location),
+      );
+      activity = personality.hasTrait('cautious')
+          ? '听见传闻后先安静确认，不急着传播。'
+          : '和路过的居民聊起今天的小传闻。';
       mood = 'curious';
-      reason = 'rumor_heard';
+      reason = personality.hasTrait('gossipy')
+          ? 'personality_gossipy_rumor_heard'
+          : 'rumor_heard';
     } else if (finishedStories.isNotEmpty || stories.isNotEmpty) {
-      location = _nextRouteLocation(route, baseState.location);
+      location = _reasonableDeviationLocation(
+        baseState,
+        personality.hasTrait('curious')
+            ? personality.preferredLocationForPhase(baseState.schedulePhase)
+            : _nextRouteLocation(route, baseState.location),
+      );
       activity = '想起刚发生过的小故事，换个地方走走。';
       mood = _storyMood(memoryTags);
-      reason = 'story_finished';
+      reason = personality.hasTrait('curious')
+          ? 'personality_curious_story_finished'
+          : 'story_finished';
     } else if (_isFriend(relationship)) {
-      location = _nextRouteLocation(route, baseState.location);
-      activity = '去容易遇见朋友的地方坐一会儿。';
+      location = _friendMeetingLocation(baseState, route);
+      activity = personality.hasTrait('introverted')
+          ? '找一个安静但还能遇见朋友的地方坐一会儿。'
+          : '去容易遇见朋友的地方坐一会儿。';
       mood = 'happy';
-      reason = 'relationship';
+      reason = personality.hasTrait('introverted')
+          ? 'personality_introverted_relationship'
+          : 'relationship';
     } else if (_isNight()) {
       location = _indoorLocation(residentId, baseState.location);
       activity = '夜色慢下来，准备结束今天。';
@@ -184,13 +224,36 @@ class ResidentDecisionManager extends ChangeNotifier {
       mood = 'lonely';
       reason = 'long_time_no_meet';
     } else {
-      location = _nextRouteLocation(route, baseState.location);
+      location = baseState.nextLocation.isEmpty
+          ? baseState.location
+          : baseState.nextLocation;
       activity = _activityByMood(baseState.mood, summary?.weather ?? '');
       mood = baseState.mood.isEmpty ? 'calm' : baseState.mood;
       reason = 'daily_route';
     }
 
-    if (location == baseState.location && route.length > 1) {
+    final personalityLocation = _personalityLocationDeviation(
+      baseState,
+      location,
+      personality,
+    );
+    if (personalityLocation != location) {
+      location = personalityLocation;
+      reason = 'personality_${personality.dominantTrait}';
+    }
+    final personalityActivity = _personalityActivityDeviation(
+      baseState,
+      activity,
+      personality,
+    );
+    if (personalityActivity != activity) {
+      activity = personalityActivity;
+      reason = 'personality_${personality.dominantTrait}';
+    }
+
+    if (reason != 'daily_route' &&
+        location == baseState.location &&
+        route.length > 1) {
       location = _nextRouteLocation(route, baseState.location);
     }
 
@@ -200,6 +263,8 @@ class ResidentDecisionManager extends ChangeNotifier {
       rumorTags: rumorTags,
       festivalTags: festivalTags,
       memoryTags: memoryTags,
+      personalityTags: personality.traits,
+      interactionWeights: personality.interactionWeights,
     );
     final storyPreference = stories.isNotEmpty ? stories.first.id : '';
     final dialogueSignal = dialogues.isNotEmpty ? dialogues.first.id : '';
@@ -213,6 +278,43 @@ class ResidentDecisionManager extends ChangeNotifier {
           storyPreference.isEmpty ? dialogueSignal : storyPreference,
       reason: reason,
     );
+  }
+
+  bool _shouldApplyDecision(
+    ResidentCurrentState before,
+    ResidentDecision decision,
+  ) {
+    if (!before.found) return true;
+    final major = isMajorMoodReason(decision.reason) ||
+        decision.reason == 'festival_started' ||
+        decision.reason == 'weather_change' ||
+        decision.reason == 'story_finished' ||
+        decision.reason == 'long_time_no_meet';
+    if (major) return true;
+    if (decision.reason == 'daily_route') return false;
+    final currentMinute =
+        _worldClockManager.hour() * 60 + _worldClockManager.minute();
+    final nextMinute = _parseMinute(before.nextChangeTime);
+    if (nextMinute < 0) return false;
+    final minutesUntilChange = _minutesUntil(currentMinute, nextMinute);
+    if (minutesUntilChange > 30) return false;
+    return decision.location != before.location ||
+        decision.activity != before.activity ||
+        decision.mood != before.mood;
+  }
+
+  int _parseMinute(String value) {
+    final parts = value.split(':');
+    if (parts.length < 2) return -1;
+    final hour = int.tryParse(parts[0]);
+    final minute = int.tryParse(parts[1]);
+    if (hour == null || minute == null) return -1;
+    return hour.clamp(0, 23) * 60 + minute.clamp(0, 59);
+  }
+
+  int _minutesUntil(int current, int target) {
+    if (target >= current) return target - current;
+    return target + 24 * 60 - current;
   }
 
   List<String> _routeFor(String residentId) {
@@ -243,6 +345,36 @@ class ResidentDecisionManager extends ChangeNotifier {
     return route[index + 1];
   }
 
+  String _reasonableDeviationLocation(
+    ResidentCurrentState baseState,
+    String proposed,
+  ) {
+    if (baseState.isWorking && baseState.schedulePhase != 'coffee_break') {
+      final context = _residentRuntimeManager.getLocationContext(proposed);
+      if (context.isOutdoor || context.locationId == 'shop') {
+        return baseState.location;
+      }
+    }
+    final normalized = LocationContext.normalizeId(proposed);
+    return normalized.isEmpty ? baseState.location : normalized;
+  }
+
+  String _friendMeetingLocation(
+    ResidentCurrentState baseState,
+    List<String> route,
+  ) {
+    if (baseState.isWorking && !baseState.isOnBreak) {
+      return baseState.location;
+    }
+    if (baseState.schedulePhase == 'lunch') return 'pantry';
+    if (baseState.schedulePhase == 'off_work' ||
+        baseState.schedulePhase == 'evening' ||
+        baseState.isWeekend) {
+      return _nextRouteLocation(route, baseState.location);
+    }
+    return baseState.location;
+  }
+
   String _indoorLocation(String residentId, String fallback) {
     final resident = _residentRuntimeManager.residents
         .where((item) => item.id == residentId)
@@ -250,9 +382,45 @@ class ResidentDecisionManager extends ChangeNotifier {
         .firstOrNull;
     final workplace = resident?.raw['workplace']?.toString() ?? '';
     final home = resident?.raw['home']?.toString() ?? '';
-    if (workplace.isNotEmpty) return workplace;
-    if (home.isNotEmpty) return home;
-    return fallback.isEmpty ? 'office_lounge' : fallback;
+    if (workplace.isNotEmpty) {
+      return LocationContext.normalizeId(workplace);
+    }
+    if (home.isNotEmpty) return LocationContext.normalizeId(home);
+    return fallback.isEmpty
+        ? 'reception'
+        : LocationContext.normalizeId(fallback);
+  }
+
+  String _festivalLocation(
+    ResidentCurrentState baseState,
+    List<String> festivalTags,
+  ) {
+    if (baseState.isWorking && !baseState.isOnBreak) {
+      if (festivalTags.any((tag) =>
+          tag.contains('office') ||
+          tag.contains('work') ||
+          tag.contains('coffee'))) {
+        return baseState.schedulePhase == 'working'
+            ? 'meeting_room'
+            : 'reception';
+      }
+      return baseState.location;
+    }
+    if (festivalTags.any((tag) =>
+        tag.contains('sea') ||
+        tag.contains('ocean') ||
+        tag.contains('fish') ||
+        tag.contains('dock'))) {
+      return baseState.isWeekend ? 'dock' : 'balcony';
+    }
+    if (festivalTags.any((tag) =>
+        tag.contains('community') ||
+        tag.contains('park') ||
+        tag.contains('resident'))) {
+      return baseState.isWeekend ? 'park' : 'reception';
+    }
+    if (baseState.isOnBreak) return 'pantry';
+    return baseState.isWeekend ? 'park' : 'reception';
   }
 
   String _discussionLocation(
@@ -274,12 +442,22 @@ class ResidentDecisionManager extends ChangeNotifier {
     required List<String> rumorTags,
     required List<String> festivalTags,
     required List<String> memoryTags,
+    required List<String> personalityTags,
+    required Map<String, int> interactionWeights,
   }) {
     final candidates = _residentRuntimeManager.residents
         .where((resident) => resident.id != residentId && resident.enabled)
         .toList(growable: false);
     if (candidates.isEmpty) return '';
-    if (rumorTags.isNotEmpty) return candidates.first.id;
+    if (rumorTags.isNotEmpty &&
+        (personalityTags.contains('gossipy') ||
+            personalityTags.contains('curious'))) {
+      return candidates.first.id;
+    }
+    if (personalityTags.contains('introverted') &&
+        interactionWeights['observe'] != null) {
+      return '';
+    }
     if (_isFriend(relationship) && candidates.length > 1) {
       return candidates[1].id;
     }
@@ -288,6 +466,55 @@ class ResidentDecisionManager extends ChangeNotifier {
     }
     if (memoryTags.isNotEmpty) return candidates.last.id;
     return candidates.first.id;
+  }
+
+  String _personalityLocationDeviation(
+    ResidentCurrentState baseState,
+    String current,
+    ResidentPersonalityContext personality,
+  ) {
+    if (baseState.isWorking && !baseState.isOnBreak) {
+      if (personality.hasTrait('hardworking') ||
+          personality.hasTrait('serious') ||
+          personality.hasTrait('competitive')) {
+        final preferred =
+            personality.preferredLocationForPhase(baseState.schedulePhase);
+        return _reasonableDeviationLocation(baseState, preferred);
+      }
+      return current;
+    }
+    if (baseState.schedulePhase == 'coffee_break' ||
+        baseState.schedulePhase == 'lunch' ||
+        baseState.isWeekend ||
+        baseState.schedulePhase == 'evening') {
+      final preferred =
+          personality.preferredLocationForPhase(baseState.schedulePhase);
+      if (preferred != current && personality.locationWeight(preferred) >= 2) {
+        return _reasonableDeviationLocation(baseState, preferred);
+      }
+    }
+    return current;
+  }
+
+  String _personalityActivityDeviation(
+    ResidentCurrentState baseState,
+    String current,
+    ResidentPersonalityContext personality,
+  ) {
+    if (personality.hasTrait('lazy') &&
+        (baseState.schedulePhase == 'coffee_break' ||
+            baseState.schedulePhase == 'lunch')) {
+      return '把休息时间稍微拉长一点，慢慢喝完这杯咖啡。';
+    }
+    if (personality.hasTrait('hardworking') &&
+        baseState.schedulePhase == 'overtime') {
+      return '认真把今天的收尾做好，再安心去看海。';
+    }
+    if (personality.hasTrait('playful') &&
+        baseState.schedulePhase == 'coffee_break') {
+      return '在茶水间讲了个轻轻的办公室笑话。';
+    }
+    return current;
   }
 
   bool _isBadWeather(String type, List<String> tags) {

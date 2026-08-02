@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 
 import '../../models/dynamic_event_config.dart';
+import '../../models/friendship_state.dart';
+import '../../models/living_office_state.dart';
+import '../../models/player_influence.dart';
 import '../engine/resident_memory_engine.dart';
 import '../engine/second_world_engine.dart';
 import 'achievement_runtime_manager.dart';
@@ -82,8 +85,27 @@ class DynamicEventContext {
     required this.locations,
     required this.residentIds,
     required this.relationshipLevels,
+    required this.friendshipStages,
+    required this.friendshipTags,
+    required this.maximumTrust,
+    required this.maximumFamiliarity,
+    required this.personalityTags,
     required this.memoryTags,
     required this.rumorTags,
+    required this.groupActivities,
+    required this.groupTopics,
+    required this.groupLocations,
+    required this.groupTags,
+    required this.maxGroupSize,
+    required this.officeMood,
+    required this.activityLevel,
+    required this.socialLevel,
+    required this.tensionLevel,
+    required this.officeTags,
+    required this.playerReputation,
+    required this.recentPlayerActions,
+    required this.officeInfluence,
+    required this.officeTrust,
     required this.fishIds,
     required this.finishedStoryIds,
     required this.unlockedAchievementIds,
@@ -97,8 +119,27 @@ class DynamicEventContext {
   final List<String> locations;
   final List<String> residentIds;
   final List<String> relationshipLevels;
+  final List<String> friendshipStages;
+  final List<String> friendshipTags;
+  final int maximumTrust;
+  final int maximumFamiliarity;
+  final List<String> personalityTags;
   final List<String> memoryTags;
   final List<String> rumorTags;
+  final List<String> groupActivities;
+  final List<String> groupTopics;
+  final List<String> groupLocations;
+  final List<String> groupTags;
+  final int maxGroupSize;
+  final String officeMood;
+  final int activityLevel;
+  final int socialLevel;
+  final int tensionLevel;
+  final List<String> officeTags;
+  final List<String> playerReputation;
+  final List<String> recentPlayerActions;
+  final int officeInfluence;
+  final int officeTrust;
   final List<String> fishIds;
   final List<String> finishedStoryIds;
   final List<String> unlockedAchievementIds;
@@ -193,9 +234,21 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
   final Map<String, String> _choices = <String, String>{};
   final List<DynamicEventRuntimeRecord> _triggerHistory =
       <DynamicEventRuntimeRecord>[];
+  LivingOfficeState _livingOfficeState = LivingOfficeState.empty();
+  PlayerInfluenceContext _playerInfluenceContext =
+      PlayerInfluenceContext.empty();
 
   List<DynamicEventRuntimeRecord> get triggerHistory =>
       List<DynamicEventRuntimeRecord>.unmodifiable(_triggerHistory);
+
+  void applyLivingOfficeState(LivingOfficeState state) {
+    if (state.isEmpty) return;
+    _livingOfficeState = state;
+  }
+
+  void applyPlayerInfluenceContext(PlayerInfluenceContext context) {
+    _playerInfluenceContext = context;
+  }
 
   List<DynamicEventEntry> getAvailableEvents() {
     final context = getEventContext();
@@ -254,6 +307,7 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
         : event.result.merge(selectedChoice.result);
     final memoryChanged = _applyMemory(event, result);
     final relationshipChanged = _applyRelationships(event, result);
+    final friendshipChanged = _applyFriendship(event, result);
     _applyRumors(result);
     _applyStories(result);
     final questChanged = _applyQuest(event, result);
@@ -284,7 +338,7 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
       choiceId: resolved.choiceId,
       result: result,
       memoryChanged: memoryChanged,
-      relationshipChanged: relationshipChanged,
+      relationshipChanged: relationshipChanged || friendshipChanged,
       questChanged: questChanged,
       achievementChanged: achievementChanged,
     );
@@ -308,20 +362,63 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
     final activeRumors = _rumorRuntimeManager.getActiveRumors();
     final fishPool = _fishRuntimeManager.getActiveFishPool();
     final residents = _residentRuntimeManager.residents;
+    final officeGroups = _relationshipRuntimeManager.getActiveOfficeGroups();
     final locationSet = <String>{};
     final relationshipSet = <String>{};
+    final friendshipStageSet = <String>{};
+    final friendshipTagSet = <String>{};
+    final personalitySet = <String>{};
     final memoryTags = <String>{};
+    final groupActivities = <String>{};
+    final groupTopics = <String>{};
+    final groupLocations = <String>{};
+    final groupTags = <String>{};
+    var maxGroupSize = 0;
+    for (final group in officeGroups) {
+      groupActivities.add(group.activity);
+      groupTopics.add(group.topic);
+      groupLocations.add(group.locationId);
+      groupTags.addAll(group.tags);
+      if (group.size > maxGroupSize) maxGroupSize = group.size;
+    }
+    var maximumTrust = 0;
+    var maximumFamiliarity = 0;
     for (final resident in residents) {
       final state =
           _residentRuntimeManager.getResidentCurrentState(resident.id);
-      if (state.location.isNotEmpty) locationSet.add(state.location);
-      relationshipSet.add(
-        _relationshipRuntimeManager
-            .getPlayerRelationshipWithResident(resident.id)
-            .relationshipLevel,
-      );
+      if (state.location.isNotEmpty) {
+        final location =
+            _residentRuntimeManager.getLocationContext(state.location);
+        locationSet
+          ..add(location.locationId)
+          ..add(location.locationType)
+          ..addAll(location.tags);
+      }
+      final friendship = _worldSaveManager.getFriendshipState(resident.id);
+      relationshipSet.add(friendship.stage);
+      friendshipStageSet.add(friendship.stage);
+      friendshipTagSet
+        ..addAll(friendship.relationshipTags)
+        ..addAll(friendship.sharedTopics.map((topic) => 'topic:$topic'))
+        ..add(friendship.conflictState);
+      if (friendship.trust > maximumTrust) maximumTrust = friendship.trust;
+      if (friendship.familiarity > maximumFamiliarity) {
+        maximumFamiliarity = friendship.familiarity;
+      }
+      final personality =
+          _residentRuntimeManager.getResidentPersonalityContext(resident.id);
+      personalitySet
+        ..addAll(personality.traits)
+        ..addAll(personality.eventReactionTags)
+        ..add(personality.storyPreference)
+        ..add(personality.rumorPreference);
       final memory = _residentMemoryEngine?.getResidentMemory(resident.id);
-      if (memory != null) memoryTags.addAll(memory.memoryTags);
+      if (memory != null) {
+        memoryTags.addAll(memory.memoryTags);
+        relationshipSet.addAll(_relationshipLevelsFromMeetCount(
+          memory.meetCount,
+        ));
+      }
       _residentDecisionManager.decisionFor(resident.id);
     }
     final unlockedAchievements = _achievementRuntimeManager
@@ -342,11 +439,31 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
       locations: locationSet.toList(growable: false),
       residentIds: residents.map((resident) => resident.id).toList(),
       relationshipLevels: relationshipSet.toList(growable: false),
+      friendshipStages: friendshipStageSet.toList(growable: false),
+      friendshipTags: friendshipTagSet.toList(growable: false),
+      maximumTrust: maximumTrust,
+      maximumFamiliarity: maximumFamiliarity,
+      personalityTags: personalitySet.toList(growable: false),
       memoryTags: memoryTags.toList(growable: false),
       rumorTags: <String>[
         ...activeRumors.map((rumor) => rumor.id),
         ..._rumorRuntimeManager.getRumorTags(),
       ],
+      groupActivities: groupActivities.toList(growable: false),
+      groupTopics: groupTopics.toList(growable: false),
+      groupLocations: groupLocations.toList(growable: false),
+      groupTags: groupTags.toList(growable: false),
+      maxGroupSize: maxGroupSize,
+      officeMood: _livingOfficeState.officeMood,
+      activityLevel: _livingOfficeState.activityLevel,
+      socialLevel: _livingOfficeState.socialLevel,
+      tensionLevel: _livingOfficeState.tensionLevel,
+      officeTags: _livingOfficeState.worldTags,
+      playerReputation: _playerInfluenceContext.reputation,
+      recentPlayerActions:
+          _playerInfluenceContext.recentActionTypes.toList(growable: false),
+      officeInfluence: _playerInfluenceContext.officeInfluence.overall,
+      officeTrust: _playerInfluenceContext.officeInfluence.officeTrust,
       fishIds: fishPool.map((fish) => fish.id).toList(growable: false),
       finishedStoryIds: _storyRuntimeManager.finishedStoryIds,
       unlockedAchievementIds: unlockedAchievements,
@@ -359,6 +476,9 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
             ? ''
             : _dialogueRuntimeManager.getDialogue(residents.first.id).id,
         'questMetrics': _questRuntimeManager.cumulativeMetrics,
+        'officeGroupCount': officeGroups.length,
+        'livingOfficeState': _livingOfficeState.toJson(),
+        'playerInfluenceContext': _playerInfluenceContext.toJson(),
       },
     );
     return context;
@@ -435,6 +555,104 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
     }
     if (!_matchesAnyOrEmpty(
         conditions.relationshipLevel, context.relationshipLevels.toSet())) {
+      return false;
+    }
+    if (!_matchesAnyOrEmpty(
+        conditions.friendshipStage, context.friendshipStages.toSet())) {
+      return false;
+    }
+    if (conditions.minimumFriendshipStage.isNotEmpty &&
+        !context.friendshipStages.any((stage) =>
+            friendshipStageRank(stage) >=
+            friendshipStageRank(conditions.minimumFriendshipStage))) {
+      return false;
+    }
+    if (conditions.minimumTrust > 0 &&
+        context.maximumTrust < conditions.minimumTrust) {
+      return false;
+    }
+    if (conditions.minimumFamiliarity > 0 &&
+        context.maximumFamiliarity < conditions.minimumFamiliarity) {
+      return false;
+    }
+    if (!_containsAll(context.friendshipTags, conditions.friendshipTags)) {
+      return false;
+    }
+    if (!_matchesAnyOrEmpty(
+      conditions.personalityTags,
+      context.personalityTags.toSet(),
+    )) {
+      return false;
+    }
+    if (_intersects(
+      context.personalityTags,
+      conditions.excludedPersonalityTags,
+    )) {
+      return false;
+    }
+    if (conditions.groupSizeMin > 0 &&
+        context.maxGroupSize < conditions.groupSizeMin) {
+      return false;
+    }
+    if (!_matchesAnyOrEmpty(
+      conditions.groupActivity,
+      context.groupActivities.toSet(),
+    )) {
+      return false;
+    }
+    if (!_matchesAnyOrEmpty(
+      conditions.groupTopic,
+      context.groupTopics.toSet(),
+    )) {
+      return false;
+    }
+    if (!_matchesAnyOrEmpty(
+      conditions.groupLocation,
+      context.groupLocations.toSet(),
+    )) {
+      return false;
+    }
+    if (!_containsAll(context.groupTags, conditions.groupTags)) {
+      return false;
+    }
+    if (!_matchesAnyOrEmpty(
+      conditions.officeMood,
+      <String>{context.officeMood},
+    )) {
+      return false;
+    }
+    if (conditions.minimumActivityLevel > 0 &&
+        context.activityLevel < conditions.minimumActivityLevel) {
+      return false;
+    }
+    if (conditions.maximumTensionLevel > 0 &&
+        context.tensionLevel > conditions.maximumTensionLevel) {
+      return false;
+    }
+    if (!_containsAll(context.officeTags, conditions.requiredOfficeTags)) {
+      return false;
+    }
+    if (_intersects(context.officeTags, conditions.excludedOfficeTags)) {
+      return false;
+    }
+    if (!_containsAll(
+      context.playerReputation,
+      conditions.requiredPlayerReputation,
+    )) {
+      return false;
+    }
+    if (!_containsAll(
+      context.recentPlayerActions,
+      conditions.requiredRecentActions,
+    )) {
+      return false;
+    }
+    if (conditions.minimumOfficeInfluence > 0 &&
+        context.officeInfluence < conditions.minimumOfficeInfluence) {
+      return false;
+    }
+    if (conditions.minimumOfficeTrust > 0 &&
+        context.officeTrust < conditions.minimumOfficeTrust) {
       return false;
     }
     if (!_containsAll(context.memoryTags, conditions.memoryTags)) return false;
@@ -526,6 +744,65 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
     return changed;
   }
 
+  bool _applyFriendship(DynamicEventEntry event, DynamicEventResult result) {
+    var changed = false;
+    for (final change in result.friendshipChanges) {
+      final residentId = change['residentId']?.toString() ??
+          (event.conditions.residentId.isEmpty
+              ? ''
+              : event.conditions.residentId.first);
+      final record = _relationshipRuntimeManager.applyFriendshipChange(
+        residentId: residentId,
+        sourceType: change['sourceType']?.toString() ?? 'dynamic_event',
+        sourceId: change['sourceId']?.toString() ?? event.id,
+        scoreDelta: _readInt(change['scoreDelta']) ?? 0,
+        trustDelta: _readInt(change['trustDelta']) ?? 0,
+        familiarityDelta: _readInt(change['familiarityDelta']) ?? 0,
+        reason: change['reason']?.toString() ?? '共同经历事件。',
+        tags: _stringList(change['tags']),
+        interactionType: change['interactionType']?.toString() ?? '',
+      );
+      if (record != null) changed = true;
+    }
+    if (!changed &&
+        event.conditions.residentId.length == 1 &&
+        _isSocialEvent(event)) {
+      final record = _relationshipRuntimeManager.applyFriendshipChange(
+        residentId: event.conditions.residentId.first,
+        sourceType: 'dynamic_event',
+        sourceId: event.id,
+        scoreDelta: event.type == 'resident_conflict' ? -2 : 2,
+        trustDelta: event.type == 'work_help' ? 1 : 0,
+        familiarityDelta: 2,
+        reason: event.type == 'resident_conflict'
+            ? '轻微误会让关系暂时有点紧张。'
+            : '社交事件让彼此更熟悉。',
+        tags: <String>[event.type, event.category, ...event.tags],
+        interactionType: event.type,
+      );
+      changed = record != null;
+    }
+    return changed;
+  }
+
+  bool _isSocialEvent(DynamicEventEntry event) {
+    const socialTypes = <String>{
+      'coffee_invitation',
+      'work_help',
+      'shared_break',
+      'office_joke',
+      'resident_conflict',
+      'conflict_resolution',
+      'birthday_greeting',
+      'shared_fishing',
+      'quiet_companionship',
+      'group_lunch',
+      'rumor_discussion',
+    };
+    return socialTypes.contains(event.type) ||
+        event.tags.any((tag) => tag.contains('social'));
+  }
+
   void _applyRumors(DynamicEventResult result) {
     for (final rumorId in result.rumorIds) {
       _rumorRuntimeManager.addRumor(rumorId);
@@ -597,6 +874,15 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
           .map((record) => record.toJson())
           .toList(growable: false),
     });
+  }
+
+  List<String> _relationshipLevelsFromMeetCount(int meetCount) {
+    if (meetCount >= 20) {
+      return const <String>['known', 'friend', 'close_friend'];
+    }
+    if (meetCount >= 5) return const <String>['known', 'friend'];
+    if (meetCount >= 1) return const <String>['known'];
+    return const <String>[];
   }
 
   void _restoreState(Map<String, dynamic> state) {

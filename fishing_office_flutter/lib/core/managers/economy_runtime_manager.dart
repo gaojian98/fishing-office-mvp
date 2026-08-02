@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../../models/career_state.dart';
 import '../../models/task_config.dart';
 import '../engine/second_world_engine.dart';
 import 'festival_runtime_manager.dart';
@@ -115,6 +116,20 @@ class EconomyRuntimeManager extends ChangeNotifier {
     );
   }
 
+  int getSalaryForCareerLevel(String careerLevel) {
+    _ensureMarket();
+    final base = CareerState.salaryForLevel(careerLevel);
+    final multiplier = _salaryMultiplier();
+    return (base * multiplier).round().clamp(1, 1 << 31);
+  }
+
+  int getSalaryForCareerState(CareerState state) {
+    final base = getSalaryForCareerLevel(state.careerLevel);
+    final efficiency = state.skill('efficiency').level;
+    final skillMultiplier = 1 + (((efficiency - 1) * 0.006).clamp(0, 0.05));
+    return (base * skillMultiplier).round().clamp(1, 1 << 31);
+  }
+
   void updateMarket() {
     final day = _worldClockManager.today().dayCount;
     final weather = _weatherRuntimeManager.getCurrentWeather();
@@ -201,6 +216,13 @@ class EconomyRuntimeManager extends ChangeNotifier {
     if (category == 'daily') return (base * 0.95).clamp(0.75, 1.8).toDouble();
     if (category == 'growth') return (base * 1.05).clamp(0.8, 2.0).toDouble();
     return base.clamp(0.75, 1.8).toDouble();
+  }
+
+  double _salaryMultiplier() {
+    final market = getMarketMultiplier();
+    final festivalBonus =
+        _festivalRuntimeManager.getActiveFestivals().isEmpty ? 1.0 : 1.03;
+    return (market * festivalBonus).clamp(0.95, 1.15).toDouble();
   }
 
   double _averageResidentDemand() {

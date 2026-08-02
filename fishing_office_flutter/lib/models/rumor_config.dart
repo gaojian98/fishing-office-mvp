@@ -29,8 +29,12 @@ class RumorEntry {
     required this.id,
     required this.title,
     required this.content,
+    required this.summary,
     required this.category,
     required this.source,
+    required this.sourceType,
+    required this.truthState,
+    required this.heat,
     required this.relatedResidentId,
     required this.relatedFishId,
     required this.relatedWeatherId,
@@ -38,6 +42,14 @@ class RumorEntry {
     required this.rarity,
     required this.unlockCondition,
     required this.timeRange,
+    required this.locationTags,
+    required this.residentTags,
+    required this.timeRestrictions,
+    required this.weatherTags,
+    required this.festivalTags,
+    required this.storyTags,
+    required this.spreadRules,
+    required this.expireRules,
     required this.tags,
     required this.repeatable,
     required this.weight,
@@ -50,8 +62,14 @@ class RumorEntry {
       id: json['id']?.toString() ?? '',
       title: json['title']?.toString() ?? '',
       content: json['content']?.toString() ?? '',
+      summary: json['summary']?.toString() ??
+          _shortSummary(json['content']?.toString() ?? ''),
       category: json['category']?.toString() ?? '',
       source: json['source']?.toString() ?? '',
+      sourceType: json['sourceType']?.toString() ??
+          _sourceTypeFor(json['source']?.toString() ?? ''),
+      truthState: json['truthState']?.toString() ?? 'unknown',
+      heat: _readInt(json['heat'], fallback: _readInt(json['weight'])),
       relatedResidentId: json['relatedResidentId']?.toString() ?? '',
       relatedFishId: json['relatedFishId']?.toString() ?? '',
       relatedWeatherId: json['relatedWeatherId']?.toString() ?? '',
@@ -60,6 +78,14 @@ class RumorEntry {
       unlockCondition:
           RumorUnlockCondition.fromJson(_mapOf(json['unlockCondition'])),
       timeRange: json['timeRange']?.toString() ?? '',
+      locationTags: _stringList(json['locationTags']),
+      residentTags: _stringList(json['residentTags']),
+      timeRestrictions: _stringList(json['timeRestrictions']),
+      weatherTags: _stringList(json['weatherTags']),
+      festivalTags: _stringList(json['festivalTags']),
+      storyTags: _stringList(json['storyTags']),
+      spreadRules: Map<String, dynamic>.from(_mapOf(json['spreadRules'])),
+      expireRules: Map<String, dynamic>.from(_mapOf(json['expireRules'])),
       tags: _stringList(json['tags']),
       repeatable:
           json['repeatable'] is bool ? json['repeatable'] as bool : true,
@@ -72,8 +98,12 @@ class RumorEntry {
   final String id;
   final String title;
   final String content;
+  final String summary;
   final String category;
   final String source;
+  final String sourceType;
+  final String truthState;
+  final int heat;
   final String relatedResidentId;
   final String relatedFishId;
   final String relatedWeatherId;
@@ -81,6 +111,14 @@ class RumorEntry {
   final String rarity;
   final RumorUnlockCondition unlockCondition;
   final String timeRange;
+  final List<String> locationTags;
+  final List<String> residentTags;
+  final List<String> timeRestrictions;
+  final List<String> weatherTags;
+  final List<String> festivalTags;
+  final List<String> storyTags;
+  final Map<String, dynamic> spreadRules;
+  final Map<String, dynamic> expireRules;
   final List<String> tags;
   final bool repeatable;
   final int weight;
@@ -96,6 +134,14 @@ class RumorEntry {
       relatedFishId,
       relatedWeatherId,
       relatedFestivalId,
+      truthState,
+      sourceType,
+      ...locationTags,
+      ...residentTags,
+      ...timeRestrictions,
+      ...weatherTags,
+      ...festivalTags,
+      ...storyTags,
       ...tags,
     }.where((item) => item.isNotEmpty).toList(growable: false);
   }
@@ -241,4 +287,18 @@ double _readDouble(Object? value, {double fallback = 0}) {
   if (value is int) return value.toDouble();
   if (value is num) return value.toDouble();
   return double.tryParse(value?.toString() ?? '') ?? fallback;
+}
+
+String _shortSummary(String content) {
+  final text = content.trim();
+  if (text.length <= 28) return text;
+  return '${text.substring(0, 28)}...';
+}
+
+String _sourceTypeFor(String source) {
+  final text = source.toLowerCase();
+  if (text.contains('居民') || text.contains('同事')) return 'resident';
+  if (text.contains('店') || text.contains('老板')) return 'shop';
+  if (text.contains('天气') || text.contains('风')) return 'weather';
+  return source.isEmpty ? 'world' : 'resident';
 }
