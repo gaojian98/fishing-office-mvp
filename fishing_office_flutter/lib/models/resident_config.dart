@@ -1,3 +1,6 @@
+import 'company_organization.dart';
+import 'resident_career.dart';
+
 class ResidentConfig {
   const ResidentConfig({
     required this.version,
@@ -35,6 +38,8 @@ class ResidentProfile {
     required this.friendship,
     required this.unlockLevel,
     required this.location,
+    required this.organization,
+    required this.career,
     required this.enabled,
     required this.raw,
   });
@@ -50,12 +55,18 @@ class ResidentProfile {
       friendship: 0,
       unlockLevel: 0,
       location: '',
+      organization: const OrganizationAssignment.empty(),
+      career: const ResidentCareerStatus.empty(),
       enabled: false,
       raw: const <String, dynamic>{},
     );
   }
 
   factory ResidentProfile.fromJson(Map<String, dynamic> json) {
+    final organization = OrganizationAssignment.fromResidentJson(
+      json,
+      residentId: json['id']?.toString() ?? '',
+    );
     return ResidentProfile(
       id: json['id']?.toString() ?? '',
       name: json['name']?.toString() ?? '',
@@ -66,6 +77,12 @@ class ResidentProfile {
       friendship: _readInt(json['friendship']),
       unlockLevel: _readInt(json['unlockLevel']),
       location: json['location']?.toString() ?? '',
+      organization: organization,
+      career: ResidentCareerStatus.fromResidentJson(
+        json,
+        organization: organization,
+        residentId: json['id']?.toString() ?? '',
+      ),
       enabled: json['enabled'] is bool ? json['enabled'] as bool : true,
       raw: Map<String, dynamic>.from(json),
     );
@@ -80,6 +97,8 @@ class ResidentProfile {
   final int friendship;
   final int unlockLevel;
   final String location;
+  final OrganizationAssignment organization;
+  final ResidentCareerStatus career;
   final bool enabled;
   final Map<String, dynamic> raw;
 }

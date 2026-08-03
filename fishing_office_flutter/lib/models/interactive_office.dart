@@ -6,6 +6,7 @@ import 'living_office_state.dart';
 import 'office_group.dart';
 import 'player_influence.dart';
 import 'resident_config.dart';
+import 'resident_career.dart';
 import 'resident_dialogue_config.dart';
 import 'resident_personality_context.dart';
 import 'resident_story_config.dart';
@@ -210,6 +211,16 @@ class ResidentDetailViewModel {
     required this.nextActivity,
     required this.nextChangeTime,
     required this.scheduleReason,
+    required this.careerLevel,
+    required this.careerLevelName,
+    required this.employmentStatus,
+    required this.hireDate,
+    required this.salaryLevel,
+    required this.officeEconomyLines,
+    required this.performanceScore,
+    required this.capabilityScore,
+    required this.promotionHistory,
+    required this.careerTags,
     required this.personalityTraits,
     required this.dominantPersonality,
     required this.personalitySummary,
@@ -261,6 +272,16 @@ class ResidentDetailViewModel {
       nextActivity: '',
       nextChangeTime: '',
       scheduleReason: '',
+      careerLevel: '',
+      careerLevelName: '',
+      employmentStatus: '',
+      hireDate: '',
+      salaryLevel: 0,
+      officeEconomyLines: const <String>[],
+      performanceScore: 0,
+      capabilityScore: 0,
+      promotionHistory: const <ResidentCareerEvent>[],
+      careerTags: const <String>[],
       personalityTraits: const <String>[],
       dominantPersonality: '',
       personalitySummary: '还不太了解。',
@@ -311,6 +332,16 @@ class ResidentDetailViewModel {
   final String nextActivity;
   final String nextChangeTime;
   final String scheduleReason;
+  final String careerLevel;
+  final String careerLevelName;
+  final String employmentStatus;
+  final String hireDate;
+  final int salaryLevel;
+  final List<String> officeEconomyLines;
+  final int performanceScore;
+  final int capabilityScore;
+  final List<ResidentCareerEvent> promotionHistory;
+  final List<String> careerTags;
   final List<String> personalityTraits;
   final String dominantPersonality;
   final String personalitySummary;

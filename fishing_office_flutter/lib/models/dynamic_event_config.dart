@@ -138,6 +138,15 @@ class DynamicEventConditions {
     required this.requiredRecentActions,
     required this.minimumOfficeInfluence,
     required this.minimumOfficeTrust,
+    required this.companyId,
+    required this.departmentId,
+    required this.teamId,
+    required this.positionId,
+    required this.organizationTags,
+    required this.careerLevel,
+    required this.employmentStatus,
+    required this.careerTags,
+    required this.salaryLevelMin,
   });
 
   static const supportedTopLevelKeys = <String>{
@@ -175,6 +184,15 @@ class DynamicEventConditions {
     'requiredRecentActions',
     'minimumOfficeInfluence',
     'minimumOfficeTrust',
+    'companyId',
+    'departmentId',
+    'teamId',
+    'positionId',
+    'organizationTags',
+    'careerLevel',
+    'employmentStatus',
+    'careerTags',
+    'salaryLevelMin',
   };
 
   factory DynamicEventConditions.fromJson(Map<String, dynamic> json) {
@@ -214,6 +232,15 @@ class DynamicEventConditions {
       minimumOfficeInfluence:
           _readInt(json['minimumOfficeInfluence'], fallback: 0),
       minimumOfficeTrust: _readInt(json['minimumOfficeTrust'], fallback: 0),
+      companyId: _stringList(json['companyId']),
+      departmentId: _stringList(json['departmentId']),
+      teamId: _stringList(json['teamId']),
+      positionId: _stringList(json['positionId']),
+      organizationTags: _stringList(json['organizationTags']),
+      careerLevel: _stringList(json['careerLevel']),
+      employmentStatus: _stringList(json['employmentStatus']),
+      careerTags: _stringList(json['careerTags']),
+      salaryLevelMin: _readInt(json['salaryLevelMin'], fallback: 0),
     );
   }
 
@@ -251,6 +278,15 @@ class DynamicEventConditions {
   final List<String> requiredRecentActions;
   final int minimumOfficeInfluence;
   final int minimumOfficeTrust;
+  final List<String> companyId;
+  final List<String> departmentId;
+  final List<String> teamId;
+  final List<String> positionId;
+  final List<String> organizationTags;
+  final List<String> careerLevel;
+  final List<String> employmentStatus;
+  final List<String> careerTags;
+  final int salaryLevelMin;
 }
 
 class DynamicEventDialogLine {

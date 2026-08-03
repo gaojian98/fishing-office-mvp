@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../../models/career_state.dart';
+import '../../models/company_organization.dart';
 import '../../models/dynamic_event_config.dart';
 import '../../models/friendship_state.dart';
 import '../../models/interactive_office.dart';
@@ -9,8 +10,10 @@ import '../../models/living_office_state.dart';
 import '../../models/living_world_config.dart';
 import '../../models/location_context.dart';
 import '../../models/office_group.dart';
+import '../../models/office_economy.dart';
 import '../../models/player_influence.dart';
 import '../../models/resident_config.dart';
+import '../../models/resident_career.dart';
 import '../../models/resident_dialogue_config.dart';
 import '../../models/resident_memory_config.dart';
 import '../../models/resident_personality_context.dart';
@@ -86,6 +89,164 @@ class SecondWorldEngine {
   RelationshipRuntimeManager? _relationshipRuntimeManager;
   DynamicEventRuntimeManager? _dynamicEventRuntimeManager;
   DailySimulationManager? _dailySimulationManager;
+
+  CompanyOrganization getCompanyOrganization() {
+    return _residentRuntimeManager?.companyOrganization ??
+        CompanyOrganization.defaultStructure();
+  }
+
+  ResidentOrganizationContext getResidentOrganizationContext(String id) {
+    final runtime = _residentRuntimeManager;
+    if (runtime != null) {
+      return runtime.getResidentOrganizationContext(id);
+    }
+    return ResidentOrganizationContext.resolve(
+      _residentConfig.findResident(id).organization,
+      organization: getCompanyOrganization(),
+    );
+  }
+
+  ResidentCareerStatus getResidentCareerStatus(String id) {
+    return _residentRuntimeManager?.getResidentCareerStatus(id) ??
+        _residentConfig.findResident(id).career;
+  }
+
+  List<ResidentCareerEvent> getResidentCareerEvents(String id) {
+    return getResidentCareerStatus(id).promotionHistory;
+  }
+
+  OfficeEconomyState getOfficeEconomyState() {
+    return _residentRuntimeManager?.officeEconomyState ??
+        const OfficeEconomyState.empty();
+  }
+
+  OfficeEconomySettlementResult settleOfficeEconomy({
+    required String periodType,
+    required String periodKey,
+    String departmentId = '',
+    String settlementId = '',
+    int bonusPool = 0,
+    int operatingCost = 0,
+    int projectIncome = 0,
+    String reason = '',
+  }) {
+    return _residentRuntimeManager?.settleOfficeEconomy(
+          periodType: periodType,
+          periodKey: periodKey,
+          departmentId: departmentId,
+          settlementId: settlementId,
+          bonusPool: bonusPool,
+          operatingCost: operatingCost,
+          projectIncome: projectIncome,
+          reason: reason,
+        ) ??
+        const OfficeEconomySettlementResult.failure(
+          <String>['resident_runtime_missing'],
+        );
+  }
+
+  ResidentCareerStatus applyResidentCareerEvent(
+    String residentId, {
+    required String type,
+    String date = '',
+    String fromPositionId = '',
+    String toPositionId = '',
+    String fromCareerLevel = '',
+    String toCareerLevel = '',
+    String reason = '',
+    int? salaryLevel,
+    int? performanceScore,
+    int? capabilityScore,
+    List<String> tags = const <String>[],
+  }) {
+    return _residentRuntimeManager?.applyResidentCareerEvent(
+          residentId,
+          type: type,
+          date: date,
+          fromPositionId: fromPositionId,
+          toPositionId: toPositionId,
+          fromCareerLevel: fromCareerLevel,
+          toCareerLevel: toCareerLevel,
+          reason: reason,
+          salaryLevel: salaryLevel,
+          performanceScore: performanceScore,
+          capabilityScore: capabilityScore,
+          tags: tags,
+        ) ??
+        getResidentCareerStatus(residentId);
+  }
+
+  OrganizationMutationResult assignResidentOrganization(
+    String residentId, {
+    String mutationType = 'hire',
+    String date = '',
+    String companyId = '',
+    String departmentId = '',
+    String teamId = '',
+    String positionId = '',
+    String reason = '',
+    String sourceId = '',
+    String reportsToResidentId = '',
+    String careerLevel = '',
+  }) {
+    return _residentRuntimeManager?.assignResident(
+          residentId,
+          mutationType: mutationType,
+          date: date,
+          companyId: companyId,
+          departmentId: departmentId,
+          teamId: teamId,
+          positionId: positionId,
+          reason: reason,
+          sourceId: sourceId,
+          reportsToResidentId: reportsToResidentId,
+          careerLevel: careerLevel,
+        ) ??
+        OrganizationMutationResult.failure(
+            <String>['resident_runtime_missing']);
+  }
+
+  OrganizationMutationResult resignResidentOrganization(
+    String residentId, {
+    String date = '',
+    String reason = '',
+    String sourceId = '',
+  }) {
+    return _residentRuntimeManager?.resignResident(
+          residentId,
+          date: date,
+          reason: reason,
+          sourceId: sourceId,
+        ) ??
+        OrganizationMutationResult.failure(
+            <String>['resident_runtime_missing']);
+  }
+
+  List<RecruitmentNeed> getDepartmentRecruitmentNeeds() {
+    return _residentRuntimeManager?.getDepartmentRecruitmentNeeds() ??
+        const <RecruitmentNeed>[];
+  }
+
+  List<PromotionCandidate> getPromotionCandidates({
+    String departmentId = '',
+    String teamId = '',
+  }) {
+    return _residentRuntimeManager?.getPromotionCandidates(
+          departmentId: departmentId,
+          teamId: teamId,
+        ) ??
+        const <PromotionCandidate>[];
+  }
+
+  List<ResidentProfile> getDepartmentManagers(String departmentId) {
+    return _residentRuntimeManager?.getDepartmentManagers(departmentId) ??
+        const <ResidentProfile>[];
+  }
+
+  List<ResidentProfile> getTeamLeaders(String teamId) {
+    return _residentRuntimeManager?.getTeamLeaders(teamId) ??
+        const <ResidentProfile>[];
+  }
 
   void bindInteractiveRuntimes({
     RelationshipRuntimeManager? relationshipRuntimeManager,
@@ -400,6 +561,16 @@ class SecondWorldEngine {
       nextActivity: context.life.nextActivity,
       nextChangeTime: context.life.nextChangeTime,
       scheduleReason: _statusReasonFor(context),
+      careerLevel: context.career.careerLevel,
+      careerLevelName: context.career.displayLevel,
+      employmentStatus: context.career.employmentStatus,
+      hireDate: context.career.hireDate,
+      salaryLevel: context.career.salaryLevel,
+      officeEconomyLines: _officeEconomyLinesFor(context),
+      performanceScore: context.career.performanceScore,
+      capabilityScore: context.career.capabilityScore,
+      promotionHistory: context.career.promotionHistory,
+      careerTags: context.career.tags.take(10).toList(growable: false),
       personalityTraits: context.personality.traits,
       dominantPersonality: context.personality.dominantTrait,
       personalitySummary: _personalitySummary(context.personality),
@@ -436,6 +607,19 @@ class SecondWorldEngine {
       active: context.life.found,
       lastUpdatedAt: WorldClockManager.systemNow().toIso8601String(),
     );
+  }
+
+  List<String> _officeEconomyLinesFor(ResidentContext context) {
+    final state = getOfficeEconomyState();
+    final departmentId = context.organization.departmentId;
+    final departmentBudget = state.departmentBudgets[departmentId];
+    return <String>[
+      '公司预算：${state.companyBudget}',
+      if (departmentBudget != null) '部门预算：$departmentBudget',
+      if (state.lastSettlementId.isNotEmpty) '最近结算：${state.lastSettlementId}',
+      if (state.budgetWarnings.isNotEmpty)
+        '预算提醒：${state.budgetWarnings.take(2).join(' / ')}',
+    ];
   }
 
   PlayerActionResult submitPlayerAction(PlayerActionRequest request) {
@@ -1873,6 +2057,287 @@ class SecondWorldEngine {
     );
   }
 
+  CompanyTimelineEvent? recordCompanyTimelineEvent({
+    required String sourceId,
+    required String type,
+    required String title,
+    required String summary,
+    String category = '',
+    int importance = 50,
+    String date = '',
+    String weekKey = '',
+    String monthKey = '',
+    List<String> relatedResidentIds = const <String>[],
+    List<String> tags = const <String>[],
+    Map<String, dynamic> payload = const <String, dynamic>{},
+    bool generateNews = true,
+  }) {
+    return _worldSaveManager?.recordCompanyTimelineEvent(
+      sourceId: sourceId,
+      type: type,
+      title: title,
+      summary: summary,
+      category: category,
+      importance: importance,
+      date: date,
+      weekKey: weekKey,
+      monthKey: monthKey,
+      relatedResidentIds: relatedResidentIds,
+      tags: tags,
+      payload: payload,
+      generateNews: generateNews,
+    );
+  }
+
+  CompanyTimelineSnapshot getCompanyTimelineSnapshot({
+    String date = '',
+    String weekKey = '',
+    String monthKey = '',
+    int limit = 20,
+  }) {
+    final save = _worldSaveManager;
+    if (save == null) {
+      return const CompanyTimelineSnapshot(
+        news: <CompanyNewsItem>[],
+        events: <CompanyTimelineEvent>[],
+        dailySummary: <String, int>{},
+        weeklySummary: <String, int>{},
+        monthlySummary: <String, int>{},
+      );
+    }
+    return save.getCompanyTimelineSnapshot(
+      date: date,
+      weekKey: weekKey,
+      monthKey: monthKey,
+      limit: limit,
+    );
+  }
+
+  List<AICompanyEvent> getAICompanyEvents() {
+    return _worldSaveManager?.aiCompanyEvents ?? const <AICompanyEvent>[];
+  }
+
+  AICompanyEventResult triggerAICompanyEvent({
+    required String eventId,
+    required String sourceId,
+    required String type,
+    String scope = 'company',
+    List<String> participants = const <String>[],
+    Map<String, dynamic> conditions = const <String, dynamic>{},
+    Map<String, dynamic> effects = const <String, dynamic>{},
+    String reason = '',
+    String startTime = '',
+    String endTime = '',
+    String status = 'active',
+    int cooldown = 0,
+  }) {
+    final save = _worldSaveManager;
+    if (save == null) {
+      return const AICompanyEventResult.failure(<String>[
+        'world_save_missing',
+      ]);
+    }
+    if (eventId.isEmpty || sourceId.isEmpty || type.isEmpty) {
+      return const AICompanyEventResult.failure(<String>[
+        'event_identity_missing',
+      ]);
+    }
+    final existing = save.getAICompanyEvent(sourceId);
+    if (existing != null && existing.isTerminal) {
+      final wasResolved = existing.status == 'resolved';
+      return AICompanyEventResult(
+        success: wasResolved,
+        idempotent: true,
+        event: existing,
+        errors: wasResolved
+            ? const <String>[]
+            : (existing.errors.isEmpty
+                ? <String>['event_${existing.status}']
+                : existing.errors),
+        changedDomains: const <String>[],
+      );
+    }
+    if (save.hasProcessedOfficeEvent('ai_company_event:$sourceId')) {
+      return AICompanyEventResult(
+        success: true,
+        idempotent: true,
+        event: existing,
+        errors: const <String>[],
+        changedDomains: const <String>[],
+      );
+    }
+    if (save.isOfficeEventCooldownActive('ai_company_event:$eventId') ||
+        save.isOfficeEventCooldownActive('ai_company_event:$sourceId')) {
+      return const AICompanyEventResult.failure(<String>['event_cooldown']);
+    }
+    final validationErrors =
+        _validateAICompanyEvent(participants, conditions, effects);
+    if (validationErrors.isNotEmpty) {
+      final failed = _companyEventFromRequest(
+        eventId: eventId,
+        sourceId: sourceId,
+        type: type,
+        scope: scope,
+        participants: participants,
+        conditions: conditions,
+        effects: effects,
+        reason: reason,
+        result: <String, dynamic>{
+          'success': false,
+          'errors': validationErrors,
+        },
+        startTime: startTime,
+        endTime: endTime,
+        status: 'cancelled',
+        cooldown: cooldown,
+        errors: validationErrors,
+      );
+      save.recordAICompanyEvent(failed);
+      return AICompanyEventResult(
+        success: false,
+        idempotent: false,
+        event: failed,
+        errors: validationErrors,
+        changedDomains: const <String>[],
+      );
+    }
+
+    final changedDomains = <String>[];
+    final organizationEffect = _mapEffect(effects['organizationMutation']);
+    if (organizationEffect.isNotEmpty) {
+      final residentId = organizationEffect['residentId']?.toString() ?? '';
+      final mutation = assignResidentOrganization(
+        residentId,
+        mutationType: organizationEffect['mutationType']?.toString() ??
+            organizationEffect['type']?.toString() ??
+            'transfer',
+        date: startTime,
+        companyId: organizationEffect['companyId']?.toString() ?? '',
+        departmentId: organizationEffect['departmentId']?.toString() ?? '',
+        teamId: organizationEffect['teamId']?.toString() ?? '',
+        positionId: organizationEffect['positionId']?.toString() ?? '',
+        reason: 'ai_company_event:$type',
+        sourceId: 'ai_company_event:$sourceId:organization',
+        reportsToResidentId:
+            organizationEffect['reportsToResidentId']?.toString() ?? '',
+        careerLevel: organizationEffect['careerLevel']?.toString() ?? '',
+      );
+      if (!mutation.success) {
+        return AICompanyEventResult(
+          success: false,
+          idempotent: false,
+          event: null,
+          errors: mutation.errors,
+          changedDomains: const <String>[],
+        );
+      }
+      changedDomains.add('organization');
+    }
+
+    final careerEffect = _mapEffect(effects['careerEvent']);
+    if (careerEffect.isNotEmpty && organizationEffect.isEmpty) {
+      final residentId = careerEffect['residentId']?.toString() ?? '';
+      applyResidentCareerEvent(
+        residentId,
+        type: careerEffect['type']?.toString() ?? type,
+        date: startTime,
+        toPositionId: careerEffect['toPositionId']?.toString() ?? '',
+        toCareerLevel: careerEffect['toCareerLevel']?.toString() ?? '',
+        reason: 'ai_company_event:$type',
+        salaryLevel: _nullableInt(careerEffect['salaryLevel']),
+        performanceScore: _nullableInt(careerEffect['performanceScore']),
+        capabilityScore: _nullableInt(careerEffect['capabilityScore']),
+        tags: <String>['ai_company_event', type],
+      );
+      changedDomains.add('career');
+    }
+
+    final economyEffect = _mapEffect(effects['officeEconomy']);
+    if (economyEffect.isNotEmpty) {
+      final economy = settleOfficeEconomy(
+        periodType: economyEffect['periodType']?.toString() ?? 'event',
+        periodKey: economyEffect['periodKey']?.toString() ?? sourceId,
+        departmentId: economyEffect['departmentId']?.toString() ?? '',
+        settlementId: 'ai_company_event:$sourceId:economy',
+        bonusPool: _readEffectInt(economyEffect['bonusPool']),
+        operatingCost: _readEffectInt(economyEffect['operatingCost']),
+        projectIncome: _readEffectInt(economyEffect['projectIncome']),
+        reason: 'ai_company_event:$type',
+      );
+      if (!economy.success) {
+        return AICompanyEventResult(
+          success: false,
+          idempotent: false,
+          event: null,
+          errors: economy.errors,
+          changedDomains: changedDomains,
+        );
+      }
+      changedDomains.add('economy');
+    }
+
+    for (final residentId in participants.where((id) => id.isNotEmpty)) {
+      _residentMemoryEngine.recordLongTermMemory(
+        residentId,
+        type: 'company_event',
+        sourceId: 'ai_company_event:$sourceId',
+        summary: _companyEventSummary(type, scope, participants),
+        participants: participants,
+        importance: _readEffectInt(effects['importance'], fallback: 60),
+        effect: <String, dynamic>{
+          'eventId': eventId,
+          'sourceId': sourceId,
+          'type': type,
+          'scope': scope,
+        },
+      );
+    }
+    if (participants.isNotEmpty) changedDomains.add('memory');
+
+    final event = _companyEventFromRequest(
+      eventId: eventId,
+      sourceId: sourceId,
+      type: type,
+      scope: scope,
+      participants: participants,
+      conditions: conditions,
+      effects: effects,
+      startTime: startTime,
+      endTime: endTime,
+      status: status,
+      cooldown: cooldown,
+      reason: reason,
+      result: <String, dynamic>{
+        'success': true,
+        'changedDomains': changedDomains.toSet().toList(growable: false),
+      },
+    ).copyWith(status: 'resolved');
+    final recorded = save.recordAICompanyEvent(event) ?? event;
+    save.recordCompanyTimelineEvent(
+      sourceId: 'ai_company_event:$sourceId',
+      type: type,
+      title: _companyEventTitle(type),
+      summary: _companyEventSummary(type, scope, participants),
+      category: 'company_event',
+      importance: _readEffectInt(effects['importance'], fallback: 60),
+      relatedResidentIds: participants,
+      tags: <String>['ai_company_event', type, scope],
+      payload: event.toJson(),
+    );
+    save.markOfficeEventProcessed('ai_company_event:$sourceId');
+    if (cooldown > 0) {
+      save.setOfficeEventCooldown('ai_company_event:$eventId', cooldown);
+    }
+    changedDomains.add('news');
+    return AICompanyEventResult(
+      success: true,
+      idempotent: false,
+      event: recorded,
+      errors: const <String>[],
+      changedDomains: changedDomains.toSet().toList(growable: false),
+    );
+  }
+
   PlayerInfluenceContext getPlayerInfluenceContext() {
     final save = _worldSaveManager;
     if (save == null) return PlayerInfluenceContext.empty();
@@ -2109,12 +2574,23 @@ class SecondWorldEngine {
     final personality = clock == null && now == null && runtime != null
         ? runtime.getResidentPersonalityContext(id)
         : ResidentPersonalityContext.fromResident(resident);
+    final organization = clock == null && now == null && runtime != null
+        ? runtime.getResidentOrganizationContext(id)
+        : ResidentOrganizationContext.resolve(
+            resident.organization,
+            organization: getCompanyOrganization(),
+          );
+    final career = clock == null && now == null && runtime != null
+        ? runtime.getResidentCareerStatus(id)
+        : resident.career;
     final friendship = getFriendshipState(id);
     final officeGroup = _worldSaveManager?.groupForResident(id);
     return ResidentContext(
       resident: resident,
       life: life,
       location: location,
+      organization: organization,
+      career: career,
       personality: personality,
       memory: memory,
       relationship: relationship,
@@ -2657,6 +3133,159 @@ class SecondWorldEngine {
     return const <String>[];
   }
 
+  AICompanyEvent _companyEventFromRequest({
+    required String eventId,
+    required String sourceId,
+    required String type,
+    required String scope,
+    required List<String> participants,
+    required Map<String, dynamic> conditions,
+    required Map<String, dynamic> effects,
+    required String reason,
+    required Map<String, dynamic> result,
+    required String startTime,
+    required String endTime,
+    required String status,
+    required int cooldown,
+    List<String> errors = const <String>[],
+  }) {
+    final now = WorldClockManager.systemNow().toIso8601String();
+    return AICompanyEvent(
+      eventId: eventId,
+      sourceId: sourceId,
+      type: type,
+      scope: scope.isEmpty ? 'company' : scope,
+      participants: participants.where((id) => id.isNotEmpty).toList(),
+      conditions: conditions,
+      effects: effects,
+      reason: reason.ifEmpty(_companyEventTitle(type)),
+      result: result,
+      startTime: startTime.isEmpty ? now : startTime,
+      endTime: endTime,
+      status: status,
+      cooldown: cooldown.clamp(0, 365).toInt(),
+      createdAt: now,
+      updatedAt: now,
+      errors: errors,
+    );
+  }
+
+  List<String> _validateAICompanyEvent(
+    List<String> participants,
+    Map<String, dynamic> conditions,
+    Map<String, dynamic> effects,
+  ) {
+    final errors = <String>[];
+    for (final residentId in participants.where((id) => id.isNotEmpty)) {
+      final resident = _residentConfig.findResident(residentId);
+      if (!resident.enabled || resident.id != residentId) {
+        errors.add('participant_missing:$residentId');
+      }
+    }
+    final organizationEffect = _mapEffect(effects['organizationMutation']);
+    if (organizationEffect.isNotEmpty) {
+      final organization = getCompanyOrganization();
+      final companyId = organizationEffect['companyId']?.toString() ?? '';
+      final departmentId = organizationEffect['departmentId']?.toString() ?? '';
+      final teamId = organizationEffect['teamId']?.toString() ?? '';
+      final positionId = organizationEffect['positionId']?.toString() ?? '';
+      if (companyId.isNotEmpty && !organization.hasCompany(companyId)) {
+        errors.add('company_missing:$companyId');
+      }
+      if (departmentId.isNotEmpty &&
+          !organization.hasDepartment(departmentId)) {
+        errors.add('department_missing:$departmentId');
+      }
+      if (teamId.isNotEmpty && !organization.hasTeam(teamId)) {
+        errors.add('team_missing:$teamId');
+      }
+      if (positionId.isNotEmpty && !organization.hasPosition(positionId)) {
+        errors.add('position_missing:$positionId');
+      }
+    }
+    final economyEffect = _mapEffect(effects['officeEconomy']);
+    if (economyEffect.isNotEmpty) {
+      final departmentId = economyEffect['departmentId']?.toString() ?? '';
+      if (departmentId.isNotEmpty &&
+          !getCompanyOrganization().hasDepartment(departmentId)) {
+        errors.add('economy_department_missing:$departmentId');
+      }
+    }
+    final requiredTags = _stringList(conditions['requiredOfficeTags']);
+    if (requiredTags.isNotEmpty) {
+      final officeTags = getLivingOfficeState().worldTags.toSet();
+      for (final tag in requiredTags) {
+        if (!officeTags.contains(tag)) errors.add('condition_tag_missing:$tag');
+      }
+    }
+    return errors;
+  }
+
+  String _companyEventTitle(String type) {
+    switch (type) {
+      case 'department_reorg':
+        return '部门重组正在发生';
+      case 'budget_crisis':
+        return '预算会议变得认真';
+      case 'hiring_wave':
+        return '新的招聘需求出现';
+      case 'layoff_risk':
+        return '裁员风险被提前讨论';
+      case 'management_change':
+        return '管理层关系有了变化';
+      case 'company_celebration':
+        return '办公室准备庆祝一下';
+      case 'emergency_meeting':
+        return '临时会议被召集';
+      case 'major_project':
+        return '一个重要项目浮出水面';
+      case 'department_competition':
+        return '部门之间开始轻轻较劲';
+      case 'group_training':
+        return '集体培训被安排';
+    }
+    return '办公室发生了一件大事';
+  }
+
+  String _companyEventSummary(
+    String type,
+    String scope,
+    List<String> participants,
+  ) {
+    final names = participants
+        .take(3)
+        .map((id) => _residentConfig.findResident(id).name.ifEmpty(id))
+        .join('、');
+    final actor = names.isEmpty ? '办公室里' : '$names 等人';
+    return '$actor参与了${_companyEventTitle(type)}，影响范围：${scope.ifEmpty('company')}。';
+  }
+
+  Map<String, dynamic> _mapEffect(Object? value) {
+    if (value is Map) return Map<String, dynamic>.from(value);
+    return const <String, dynamic>{};
+  }
+
+  List<String> _stringList(Object? value) {
+    if (value is! List) return const <String>[];
+    return value
+        .map((item) => item.toString())
+        .where((item) => item.isNotEmpty)
+        .toList(growable: false);
+  }
+
+  int _readEffectInt(Object? value, {int fallback = 0}) {
+    if (value is int) return value;
+    if (value is num) return value.round();
+    return int.tryParse(value?.toString() ?? '') ?? fallback;
+  }
+
+  int? _nullableInt(Object? value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is num) return value.round();
+    return int.tryParse(value.toString());
+  }
+
   static const Set<String> _negativeMoodSet = <String>{
     'tired',
     'worried',
@@ -2683,6 +3312,8 @@ class ResidentContext {
     required this.resident,
     required this.life,
     required this.location,
+    required this.organization,
+    required this.career,
     required this.personality,
     required this.memory,
     required this.relationship,
@@ -2698,6 +3329,8 @@ class ResidentContext {
   final ResidentProfile resident;
   final ResidentCurrentState life;
   final LocationContext location;
+  final ResidentOrganizationContext organization;
+  final ResidentCareerStatus career;
   final ResidentPersonalityContext personality;
   final ResidentMemoryRecord memory;
   final ResidentRelationshipRecord relationship;

@@ -117,6 +117,15 @@ class ResidentDialogueConditions {
     required this.requiredRecentActions,
     required this.minimumOfficeInfluence,
     required this.minimumOfficeTrust,
+    required this.companyId,
+    required this.departmentId,
+    required this.teamId,
+    required this.positionId,
+    required this.organizationTags,
+    required this.careerLevel,
+    required this.employmentStatus,
+    required this.careerTags,
+    required this.salaryLevelMin,
   });
 
   factory ResidentDialogueConditions.fromJson(Map<String, dynamic> json) {
@@ -171,6 +180,15 @@ class ResidentDialogueConditions {
       requiredRecentActions: _stringList(json['requiredRecentActions']),
       minimumOfficeInfluence: _readInt(json['minimumOfficeInfluence']),
       minimumOfficeTrust: _readInt(json['minimumOfficeTrust']),
+      companyId: json['companyId']?.toString() ?? '',
+      departmentId: json['departmentId']?.toString() ?? '',
+      teamId: json['teamId']?.toString() ?? '',
+      positionId: json['positionId']?.toString() ?? '',
+      organizationTags: _stringList(json['organizationTags']),
+      careerLevel: json['careerLevel']?.toString() ?? '',
+      employmentStatus: json['employmentStatus']?.toString() ?? '',
+      careerTags: _stringList(json['careerTags']),
+      salaryLevelMin: _readInt(json['salaryLevelMin']),
     );
   }
 
@@ -215,6 +233,15 @@ class ResidentDialogueConditions {
   final List<String> requiredRecentActions;
   final int minimumOfficeInfluence;
   final int minimumOfficeTrust;
+  final String companyId;
+  final String departmentId;
+  final String teamId;
+  final String positionId;
+  final List<String> organizationTags;
+  final String careerLevel;
+  final String employmentStatus;
+  final List<String> careerTags;
+  final int salaryLevelMin;
 }
 
 List<Map<String, dynamic>> _listOfMaps(Object? value) {

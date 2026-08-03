@@ -6,6 +6,7 @@ import 'package:fishing_office_mvp/models/interactive_office.dart';
 import 'package:fishing_office_mvp/models/living_office_state.dart';
 import 'package:fishing_office_mvp/models/office_group.dart';
 import 'package:fishing_office_mvp/models/player_influence.dart';
+import 'package:fishing_office_mvp/models/resident_career.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -30,6 +31,11 @@ void main() {
     await tester.tap(find.text('居民'));
     await tester.pumpAndSettle();
     expect(find.textContaining('办公室居民 0'), findsWidgets);
+    expect(find.text('职业'), findsWidgets);
+    expect(find.textContaining('正式居民员工'), findsOneWidget);
+    expect(find.textContaining('雇佣状态：在职'), findsOneWidget);
+    await tester.ensureVisible(find.text('聊一会'));
+    await tester.pumpAndSettle();
     expect(find.text('聊一会'), findsOneWidget);
 
     await tester.tap(find.text('聊一会'));
@@ -92,6 +98,8 @@ void main() {
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('居民'));
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.text('聊聊鱼'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('聊聊鱼'));
     await tester.pumpAndSettle();
@@ -286,6 +294,26 @@ InteractiveOfficeSnapshot _sampleSnapshot({
       nextActivity: '休息一下',
       nextChangeTime: '12:00',
       scheduleReason: '按今日办公室节奏行动',
+      careerLevel: 'regular',
+      careerLevelName: '正式居民员工',
+      employmentStatus: 'active',
+      hireDate: 'Y1-M01-D01',
+      salaryLevel: 180,
+      officeEconomyLines: const [],
+      performanceScore: 62,
+      capabilityScore: 58,
+      promotionHistory: const [
+        ResidentCareerEvent(
+          type: 'hire',
+          date: 'Y1-M01-D01',
+          fromPositionId: '',
+          toPositionId: 'staff',
+          fromCareerLevel: '',
+          toCareerLevel: 'regular',
+          reason: 'test_hire',
+        ),
+      ],
+      careerTags: const ['career:regular', 'employment:active'],
       personalityTraits: const ['calm', 'curious'],
       dominantPersonality: 'calm',
       personalitySummary: '温和，好奇',

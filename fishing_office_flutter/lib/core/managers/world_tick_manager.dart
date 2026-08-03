@@ -6,6 +6,7 @@ import '../../models/living_office_state.dart';
 import '../../models/office_group.dart';
 import '../../models/player_influence.dart';
 import '../engine/second_world_engine.dart';
+import '../utils/runtime_debug.dart';
 import 'achievement_runtime_manager.dart';
 import 'dialogue_runtime_manager.dart';
 import 'dynamic_event_runtime_manager.dart';
@@ -188,6 +189,8 @@ class WorldSimulationContext {
     required this.activeRumors,
     required this.residentSnapshot,
     required this.locationSnapshot,
+    required this.organizationSnapshot,
+    required this.residentCareerSnapshot,
     required this.personalitySnapshot,
     required this.friendshipSnapshot,
     required this.activeGroups,
@@ -226,6 +229,8 @@ class WorldSimulationContext {
   final List<Object?> activeRumors;
   final Map<String, Object?> residentSnapshot;
   final Map<String, Object?> locationSnapshot;
+  final Map<String, Object?> organizationSnapshot;
+  final Map<String, Object?> residentCareerSnapshot;
   final Map<String, Object?> personalitySnapshot;
   final Map<String, Object?> friendshipSnapshot;
   final List<OfficeGroup> activeGroups;
@@ -293,6 +298,8 @@ class WorldSimulationContext {
       activeRumors: activeRumors,
       residentSnapshot: residentSnapshot,
       locationSnapshot: locationSnapshot,
+      organizationSnapshot: organizationSnapshot,
+      residentCareerSnapshot: residentCareerSnapshot,
       personalitySnapshot: personalitySnapshot,
       friendshipSnapshot: friendshipSnapshot,
       activeGroups: activeGroups ?? this.activeGroups,
@@ -701,11 +708,9 @@ class WorldTickManager extends ChangeNotifier {
       worldContext: worldContext,
       runtimeResults: runtimeResults,
     );
-    if (kDebugMode) {
-      debugPrint(
-        'WorldTickManager | tick=${type.name} executed=${executedStages.join('>')} skipped=${skippedStages.join('>')} errors=${errors.keys.join(',')}',
-      );
-    }
+    RuntimeDebug.log(
+      'WorldTickManager | tick=${type.name} executed=${executedStages.join('>')} skipped=${skippedStages.join('>')} errors=${errors.keys.join(',')}',
+    );
     notifyListeners();
     return context;
   }
@@ -971,9 +976,7 @@ class WorldTickManager extends ChangeNotifier {
       if (cacheable) {
         _runtimeCache.invalidateWhere((id) => id == stage);
       }
-      if (kDebugMode) {
-        debugPrint('WorldTickManager | stage=$stage error=$error');
-      }
+      RuntimeDebug.log('WorldTickManager | stage=$stage error=$error');
       _event(TickEventType.afterTick, type, stage);
       runtimeResults.add(
         RuntimeResult(
@@ -1085,6 +1088,7 @@ class WorldTickManager extends ChangeNotifier {
         'marketTrend': _economyRuntimeManager?.marketTrend,
         'priceMultiplier': _economyRuntimeManager?.priceMultiplier,
         'lastMarketDay': _economyRuntimeManager?.lastMarketDay,
+        'officeEconomy': _residentRuntimeManager.officeEconomySnapshot,
       },
     );
     final relationships = safe<Map<String, Object?>>(
@@ -1135,6 +1139,25 @@ class WorldTickManager extends ChangeNotifier {
       'PersonalitySnapshot',
       const <String, Object?>{},
       () => _residentRuntimeManager.getAllResidentPersonalityContexts(),
+    );
+    final organizationSnapshot = safe<Map<String, Object?>>(
+      'OrganizationSnapshot',
+      const <String, Object?>{},
+      () => <String, Object?>{
+        for (final resident in _residentRuntimeManager.residents)
+          resident.id: _residentRuntimeManager
+              .getResidentOrganizationContext(resident.id),
+      },
+    );
+    final residentCareerSnapshot = safe<Map<String, Object?>>(
+      'ResidentCareerSnapshot',
+      const <String, Object?>{},
+      () => <String, Object?>{
+        for (final resident in _residentRuntimeManager.residents)
+          resident.id: _residentRuntimeManager.getResidentCareerStatus(
+            resident.id,
+          ),
+      },
     );
     final friendshipSnapshot = safe<Map<String, Object?>>(
       'FriendshipSnapshot',
@@ -1213,6 +1236,8 @@ class WorldTickManager extends ChangeNotifier {
       activeRumors: rumors,
       residentSnapshot: residentStates,
       locationSnapshot: locationSnapshot,
+      organizationSnapshot: organizationSnapshot,
+      residentCareerSnapshot: residentCareerSnapshot,
       personalitySnapshot: personalitySnapshot,
       friendshipSnapshot: friendshipSnapshot,
       activeGroups: activeGroups,

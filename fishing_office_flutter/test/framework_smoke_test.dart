@@ -10,6 +10,7 @@ import 'package:fishing_office_mvp/models/honor_config.dart';
 import 'package:fishing_office_mvp/models/inventory_config.dart';
 import 'package:fishing_office_mvp/models/interactive_office.dart';
 import 'package:fishing_office_mvp/models/location_context.dart';
+import 'package:fishing_office_mvp/models/living_office_state.dart';
 import 'package:fishing_office_mvp/models/living_world_config.dart';
 import 'package:fishing_office_mvp/models/player_influence.dart';
 import 'package:fishing_office_mvp/models/resident_config.dart';
@@ -59,7 +60,9 @@ import 'package:fishing_office_mvp/core/repository/resident_repository.dart';
 import 'package:fishing_office_mvp/core/repository/world_save_repository.dart';
 import 'package:fishing_office_mvp/core/services/fairy_event_service.dart';
 import 'package:fishing_office_mvp/models/career_state.dart';
+import 'package:fishing_office_mvp/models/company_organization.dart';
 import 'package:fishing_office_mvp/models/dynamic_event_config.dart';
+import 'package:fishing_office_mvp/models/resident_career.dart';
 import 'package:fishing_office_mvp/pages/home/widgets/ambient_presentation_layer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -67,6 +70,830 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('framework smoke test', () {
     expect(true, isTrue);
+  });
+
+  testWidgets('company organization model is widget-test safe', (tester) async {
+    final organization = CompanyOrganization.defaultStructure();
+    expect(organization.findCompany('fishing_office').name, '上班摸鱼有限公司');
+    expect(
+      organization.findPosition('team_leader').isTeamLeader,
+      isTrue,
+    );
+    expect(
+      organization.findPosition('department_manager').isDepartmentManager,
+      isTrue,
+    );
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
+  test('resident organization defaults derive from existing resident fields',
+      () async {
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': [
+        {
+          'id': 'tech_resident',
+          'name': '电脑维修员',
+          'job': '电脑维修员',
+          'personality': 'practical',
+          'location': 'office',
+          'enabled': true,
+        },
+        {
+          'id': 'front_resident',
+          'name': '前台小妹',
+          'job': '前台',
+          'personality': 'warm',
+          'location': 'reception',
+          'enabled': true,
+          'organization': {
+            'companyId': 'fishing_office',
+            'departmentId': 'front_office',
+            'teamId': 'office_admin',
+            'positionId': 'team_leader',
+          },
+          'career': {
+            'careerLevel': 'leader',
+            'hireDate': 'Y1-M01-D02',
+            'salaryLevel': 360,
+            'performanceScore': 88,
+            'capabilityScore': 82,
+            'employmentStatus': 'active',
+            'promotionHistory': [
+              {
+                'type': 'promotion',
+                'date': 'Y1-M02-D01',
+                'fromPositionId': 'staff',
+                'toPositionId': 'team_leader',
+                'fromCareerLevel': 'regular',
+                'toCareerLevel': 'leader',
+                'reason': '稳定照顾前台节奏',
+              }
+            ],
+          },
+        },
+      ],
+    });
+    final life = ResidentLifeConfig.fromJson(
+      scheduleJson: {'version': 'test', 'schedules': []},
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final clock = WorldClockManager(
+      initialClock:
+          WorldClock.initial().copyWith(dayCount: 1, hour: 9, minute: 0),
+      initialCalendar: WorldCalendar.initial().copyWith(
+        dayCount: 1,
+        weekdayIndex: 1,
+        month: 1,
+        day: 1,
+        season: 'spring',
+      ),
+      paused: true,
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+
+    final tech = runtime.getResidentOrganizationContext('tech_resident');
+    expect(tech.companyId, 'fishing_office');
+    expect(tech.departmentId, 'technology');
+    expect(tech.teamId, 'tech_support');
+    expect(tech.positionId, 'specialist');
+    expect(runtime.getResidentCurrentState('tech_resident').organization.tags,
+        contains('department:technology'));
+
+    final front = runtime.getResidentOrganizationContext('front_resident');
+    expect(front.departmentId, 'front_office');
+    expect(front.teamId, 'office_admin');
+    expect(front.isTeamLeader, isTrue);
+    expect(runtime.getResidentsByDepartment('front_office').length, 1);
+    expect(runtime.getResidentsByTeam('office_admin').length, 1);
+    expect(runtime.getTeamLeaders('office_admin').single.id, 'front_resident');
+
+    final techCareer = runtime.getResidentCareerStatus('tech_resident');
+    expect(techCareer.careerLevel, 'senior');
+    expect(techCareer.employmentStatus, 'active');
+    expect(techCareer.promotionHistory.single.type, 'hire');
+    expect(
+      runtime.getResidentCurrentState('tech_resident').career.tags,
+      contains('career:senior'),
+    );
+
+    final frontCareer = runtime.getResidentCareerStatus('front_resident');
+    expect(frontCareer.careerLevel, 'leader');
+    expect(frontCareer.salaryLevel, 360);
+    expect(frontCareer.promotionHistory.single.type, 'promotion');
+    expect(runtime.getPromotionCandidates().first.residentId, 'front_resident');
+
+    final needs = runtime.getDepartmentRecruitmentNeeds();
+    expect(needs.any((need) => need.reason == 'department_manager_vacancy'),
+        isTrue);
+    expect(needs.any((need) => need.reason == 'team_leader_vacancy'), isTrue);
+
+    final promoted = runtime.applyResidentCareerEvent(
+      'tech_resident',
+      type: 'promotion',
+      reason: '测试晋升候选',
+    );
+    expect(promoted.careerLevel, 'leader');
+    expect(promoted.employmentStatus, 'active');
+    expect(promoted.promotionHistory.last.type, 'promotion');
+    expect(
+      runtime.getResidentCurrentState('tech_resident').career.careerLevel,
+      'leader',
+    );
+
+    final transferred = runtime.applyResidentCareerEvent(
+      'tech_resident',
+      type: 'transfer',
+      toPositionId: 'staff',
+      reason: '测试转岗',
+    );
+    expect(transferred.employmentStatus, 'transferred');
+    expect(transferred.tags, contains('career_event:transfer'));
+
+    final demoted = runtime.applyResidentCareerEvent(
+      'tech_resident',
+      type: 'demotion',
+      reason: '测试降职',
+    );
+    expect(demoted.employmentStatus, 'demoted');
+    expect(demoted.promotionHistory.last.type, 'demotion');
+
+    final resigned = runtime.applyResidentCareerEvent(
+      'front_resident',
+      type: 'resignation',
+      reason: '测试离职',
+    );
+    expect(resigned.employmentStatus, 'resigned');
+    expect(runtime.getResidentCareerStatus('front_resident').isActive, isFalse);
+
+    final recruiting = runtime.applyResidentCareerEvent(
+      'front_resident',
+      type: 'recruitment',
+      reason: '测试招聘',
+    );
+    expect(recruiting.employmentStatus, 'recruiting');
+
+    runtime.loadRuntimeStates([
+      {
+        'residentId': 'tech_resident',
+        'location': 'office',
+        'activity': '恢复职业状态',
+        'mood': 'calm',
+        'dayCount': 1,
+        'career': demoted.toJson(),
+      }
+    ]);
+    final restoredCareer = runtime.getResidentCareerStatus('tech_resident');
+    expect(restoredCareer.employmentStatus, 'demoted');
+    expect(restoredCareer.promotionHistory.last.reason, '测试降职');
+  });
+
+  testWidgets('resident career model is widget-test safe', (tester) async {
+    const event = ResidentCareerEvent(
+      type: 'hire',
+      date: 'Y1-M01-D01',
+      fromPositionId: '',
+      toPositionId: 'staff',
+      fromCareerLevel: '',
+      toCareerLevel: 'regular',
+      reason: 'test',
+    );
+    final status = ResidentCareerStatus.fromResidentJson(
+      {
+        'id': 'career_resident',
+        'job': '经理',
+        'career': {
+          'careerLevel': 'manager',
+          'employmentStatus': 'active',
+          'promotionHistory': [event.toJson()],
+        },
+      },
+      organization: const OrganizationAssignment(
+        companyId: 'fishing_office',
+        departmentId: 'management',
+        teamId: 'office_management',
+        positionId: 'department_manager',
+      ),
+      residentId: 'career_resident',
+    );
+    expect(status.displayLevel, '部门负责人');
+    expect(status.canBePromoted, isTrue);
+    expect(status.tags, contains('career:manager'));
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
+  test('organization assignment mutations stay transactional and idempotent',
+      () async {
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': [
+        _organizationResident(
+          id: 'tech_staff',
+          departmentId: 'technology',
+          teamId: 'tech_support',
+          positionId: 'staff',
+        ),
+        _organizationResident(
+          id: 'tech_leader',
+          departmentId: 'technology',
+          teamId: 'tech_support',
+          positionId: 'team_leader',
+          careerLevel: 'leader',
+        ),
+        _organizationResident(
+          id: 'ops_staff',
+          departmentId: 'operations',
+          teamId: 'product_ops',
+          positionId: 'staff',
+        ),
+        _organizationResident(
+          id: 'commerce_staff',
+          departmentId: 'commerce',
+          teamId: 'market_services',
+          positionId: 'staff',
+        ),
+      ],
+    });
+    final life = ResidentLifeConfig.fromJson(
+      scheduleJson: {'version': 'test', 'schedules': []},
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final clock = WorldClockManager(
+      initialClock:
+          WorldClock.initial().copyWith(dayCount: 8, hour: 10, minute: 0),
+      initialCalendar: WorldCalendar.initial().copyWith(
+        dayCount: 8,
+        weekdayIndex: 2,
+        month: 1,
+        day: 8,
+        season: 'spring',
+      ),
+      paused: true,
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+
+    final sameTeamPromotion = runtime.promoteResident(
+      'tech_staff',
+      toPositionId: 'specialist',
+      sourceId: 'mut_same_team',
+      reason: 'same_team_growth',
+      reportsToResidentId: 'tech_leader',
+    );
+    expect(sameTeamPromotion.success, isTrue);
+    expect(runtime.getResidentOrganization('tech_staff').departmentId,
+        'technology');
+    expect(
+        runtime.getResidentOrganization('tech_staff').teamId, 'tech_support');
+    expect(
+        runtime.getResidentOrganization('tech_staff').positionId, 'specialist');
+    expect(runtime.getResidentOrganization('tech_staff').reportsToResidentId,
+        'tech_leader');
+    expect(runtime.getResidentCareerStatus('tech_staff').careerLevel, 'senior');
+
+    final duplicatePromotion = runtime.promoteResident(
+      'tech_staff',
+      toPositionId: 'specialist',
+      sourceId: 'mut_same_team',
+      reason: 'same_team_growth',
+    );
+    expect(duplicatePromotion.success, isTrue);
+    expect(duplicatePromotion.idempotent, isTrue);
+    expect(
+      runtime
+          .getResidentCareerEvents('tech_staff')
+          .where((event) => event.reason == 'same_team_growth')
+          .length,
+      1,
+    );
+
+    final crossTeamPromotion = runtime.promoteResident(
+      'ops_staff',
+      teamId: 'dock_services',
+      toPositionId: 'team_leader',
+      sourceId: 'mut_cross_team',
+      reason: 'cross_team_growth',
+    );
+    expect(crossTeamPromotion.success, isTrue);
+    expect(runtime.getResidentOrganization('ops_staff').departmentId,
+        'operations');
+    expect(
+        runtime.getResidentOrganization('ops_staff').teamId, 'dock_services');
+    expect(
+        runtime.getResidentOrganization('ops_staff').positionId, 'team_leader');
+    expect(
+      runtime.getResidentsByTeam('product_ops').map((resident) => resident.id),
+      isNot(contains('ops_staff')),
+    );
+    expect(
+      runtime
+          .getResidentsByTeam('dock_services')
+          .map((resident) => resident.id),
+      contains('ops_staff'),
+    );
+
+    final crossDepartmentTransfer = runtime.transferResident(
+      'ops_staff',
+      teamId: 'market_services',
+      toPositionId: 'specialist',
+      sourceId: 'mut_cross_department',
+      reason: 'cross_department_transfer',
+    );
+    expect(crossDepartmentTransfer.success, isTrue);
+    expect(
+        runtime.getResidentOrganization('ops_staff').departmentId, 'commerce');
+    expect(
+        runtime.getResidentOrganization('ops_staff').teamId, 'market_services');
+    expect(
+        runtime.getResidentOrganization('ops_staff').positionId, 'specialist');
+    expect(
+      runtime
+          .getResidentsByTeam('dock_services')
+          .map((resident) => resident.id),
+      isNot(contains('ops_staff')),
+    );
+    expect(
+      runtime
+          .getResidentsByTeam('market_services')
+          .map((resident) => resident.id),
+      contains('ops_staff'),
+    );
+
+    final demotion = runtime.demoteResident(
+      'ops_staff',
+      teamId: 'product_ops',
+      toPositionId: 'staff',
+      sourceId: 'mut_demotion',
+      reason: 'demotion_to_staff',
+      reportsToResidentId: 'tech_staff',
+    );
+    expect(demotion.success, isTrue);
+    expect(runtime.getResidentOrganization('ops_staff').departmentId,
+        'operations');
+    expect(runtime.getResidentOrganization('ops_staff').teamId, 'product_ops');
+    expect(runtime.getResidentOrganization('ops_staff').reportsToResidentId,
+        'tech_staff');
+    expect(runtime.getResidentCareerStatus('ops_staff').employmentStatus,
+        'demoted');
+
+    final resignation = runtime.resignResident(
+      'commerce_staff',
+      sourceId: 'mut_resign',
+      reason: 'resignation_test',
+    );
+    expect(resignation.success, isTrue);
+    expect(
+        runtime.getResidentOrganization('commerce_staff').isAssigned, isFalse);
+    expect(runtime.getResidentsByTeam('market_services'), isEmpty);
+
+    final hire = runtime.assignResident(
+      'commerce_staff',
+      mutationType: 'hire',
+      departmentId: 'commerce',
+      teamId: 'market_services',
+      positionId: 'staff',
+      sourceId: 'mut_hire',
+      reason: 'rehire_test',
+    );
+    expect(hire.success, isTrue);
+    expect(
+        runtime.getResidentOrganization('commerce_staff').isAssigned, isTrue);
+    expect(runtime.getResidentCareerStatus('commerce_staff').employmentStatus,
+        'active');
+
+    final beforeFailure = runtime.getResidentOrganization('tech_staff');
+    final missingPosition = runtime.promoteResident(
+      'tech_staff',
+      toPositionId: 'missing_position',
+      sourceId: 'mut_missing_position',
+    );
+    expect(missingPosition.success, isFalse);
+    expect(missingPosition.errors.single, startsWith('position_missing'));
+    expect(runtime.getResidentOrganization('tech_staff').positionId,
+        beforeFailure.positionId);
+
+    final fullPosition = runtime.promoteResident(
+      'tech_staff',
+      toPositionId: 'team_leader',
+      sourceId: 'mut_full_position',
+    );
+    expect(fullPosition.success, isFalse);
+    expect(fullPosition.errors, contains('position_full:team_leader'));
+    expect(runtime.getResidentOrganization('tech_staff').positionId,
+        beforeFailure.positionId);
+
+    final invalidTeam = runtime.transferResident(
+      'tech_staff',
+      departmentId: 'operations',
+      teamId: 'tech_support',
+      toPositionId: 'staff',
+      sourceId: 'mut_invalid_team',
+    );
+    expect(invalidTeam.success, isFalse);
+    expect(invalidTeam.errors, contains('team_department_mismatch'));
+
+    final managementCycle = runtime.promoteResident(
+      'tech_staff',
+      toPositionId: 'department_manager',
+      sourceId: 'mut_cycle',
+      reportsToResidentId: 'tech_staff',
+    );
+    expect(managementCycle.success, isFalse);
+    expect(managementCycle.errors, contains('management_cycle'));
+
+    final multiLevelCycle = runtime.promoteResident(
+      'tech_leader',
+      toPositionId: 'team_leader',
+      sourceId: 'mut_multi_level_cycle',
+      reportsToResidentId: 'ops_staff',
+    );
+    expect(multiLevelCycle.success, isFalse);
+    expect(multiLevelCycle.errors, contains('management_cycle'));
+
+    final crossDepartmentPromotion = runtime.promoteResident(
+      'tech_staff',
+      teamId: 'market_services',
+      toPositionId: 'department_manager',
+      toCareerLevel: 'manager',
+      sourceId: 'mut_cross_department_promotion',
+      reason: 'cross_department_promotion',
+    );
+    expect(crossDepartmentPromotion.success, isTrue);
+    expect(
+        runtime.getResidentOrganization('tech_staff').departmentId, 'commerce');
+    expect(runtime.getResidentOrganization('tech_staff').teamId,
+        'market_services');
+    expect(runtime.getResidentOrganization('tech_staff').positionId,
+        'department_manager');
+    expect(
+        runtime.getResidentCareerStatus('tech_staff').careerLevel, 'manager');
+
+    runtime.loadRuntimeStates(
+      [
+        {
+          'residentId': 'ops_staff',
+          'organization': runtime.getResidentOrganization('ops_staff').toJson(),
+          'career': runtime.getResidentCareerStatus('ops_staff').toJson(),
+          'location': 'office',
+          'activity': 'restore',
+          'mood': 'calm',
+          'dayCount': 8,
+        },
+        {
+          'residentId': 'tech_staff',
+          'location': 'office',
+          'activity': 'old_save_restore',
+          'mood': 'calm',
+          'dayCount': 8,
+        },
+      ],
+      organizationMutationHistory: runtime.organizationMutationHistory
+          .map((record) => record.toJson())
+          .toList(growable: false),
+      processedOrganizationMutationIds:
+          runtime.processedOrganizationMutationIds,
+    );
+    expect(runtime.getResidentOrganization('ops_staff').teamId, 'product_ops');
+    expect(runtime.getResidentOrganization('ops_staff').reportsToResidentId,
+        'tech_staff');
+    expect(runtime.getResidentCareerStatus('ops_staff').employmentStatus,
+        'demoted');
+    expect(runtime.getResidentOrganization('tech_staff').departmentId,
+        'technology');
+    final restoredDuplicate = runtime.demoteResident(
+      'ops_staff',
+      teamId: 'product_ops',
+      toPositionId: 'staff',
+      sourceId: 'mut_demotion',
+      reason: 'demotion_to_staff',
+    );
+    expect(restoredDuplicate.success, isTrue);
+    expect(restoredDuplicate.idempotent, isTrue);
+    expect(
+      runtime.organizationMutationHistory
+          .where((record) => record.sourceId == 'mut_demotion')
+          .length,
+      1,
+    );
+
+    final bulkResidents = ResidentConfig.fromJson({
+      'version': 'bulk',
+      'residents': List.generate(
+        100,
+        (index) => _organizationResident(
+          id: 'bulk_$index',
+          departmentId: index.isEven ? 'operations' : 'technology',
+          teamId: index.isEven ? 'product_ops' : 'tech_support',
+          positionId: 'staff',
+        ),
+      ),
+    });
+    final bulkRuntime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(bulkResidents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await bulkRuntime.load();
+    final startedAt = DateTime.now();
+    final states = bulkRuntime.getAllResidentCurrentStates();
+    final elapsedMs = DateTime.now().difference(startedAt).inMilliseconds;
+    expect(states.length, 100);
+    expect(
+        states.values.every((state) => state.organization.isAssigned), isTrue);
+    expect(elapsedMs < 300, isTrue);
+  });
+
+  test('office economy settles payroll budgets idempotently and restores state',
+      () async {
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': [
+        _organizationResident(
+          id: 'payroll_staff',
+          departmentId: 'technology',
+          teamId: 'tech_support',
+          positionId: 'staff',
+        ),
+        _organizationResident(
+          id: 'payroll_leader',
+          departmentId: 'technology',
+          teamId: 'tech_support',
+          positionId: 'team_leader',
+          careerLevel: 'leader',
+        ),
+        _organizationResident(
+          id: 'payroll_transfer',
+          departmentId: 'technology',
+          teamId: 'tech_support',
+          positionId: 'staff',
+        ),
+      ],
+    });
+    final life = ResidentLifeConfig.fromJson(
+      scheduleJson: {'version': 'test', 'schedules': []},
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final clock = WorldClockManager(
+      initialClock:
+          WorldClock.initial().copyWith(dayCount: 12, hour: 9, minute: 0),
+      initialCalendar: WorldCalendar.initial().copyWith(
+        dayCount: 12,
+        weekdayIndex: 3,
+        month: 1,
+        day: 12,
+        season: 'spring',
+      ),
+      paused: true,
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+
+    final promoted = runtime.promoteResident(
+      'payroll_staff',
+      toPositionId: 'specialist',
+      toCareerLevel: 'senior',
+      sourceId: 'payroll_promotion',
+    );
+    expect(promoted.success, isTrue);
+    final transferred = runtime.transferResident(
+      'payroll_transfer',
+      teamId: 'market_services',
+      toPositionId: 'staff',
+      sourceId: 'payroll_transfer',
+    );
+    expect(transferred.success, isTrue);
+
+    final dayOne = runtime.settleOfficeEconomy(
+      periodType: 'day',
+      periodKey: 'Y1-M1-D12',
+      departmentId: 'technology',
+      settlementId: 'office_payroll_day_12_tech',
+      bonusPool: 90,
+      operatingCost: 100,
+      projectIncome: 1200,
+      reason: 'daily_payroll',
+    );
+    expect(dayOne.success, isTrue);
+    expect(dayOne.idempotent, isFalse);
+    expect(dayOne.record!.residentIds, contains('payroll_staff'));
+    expect(dayOne.record!.residentIds, contains('payroll_leader'));
+    expect(dayOne.record!.residentIds, isNot(contains('payroll_transfer')));
+    expect(
+      dayOne.record!.payroll,
+      residentCareerBaseSalary['senior']! + residentCareerBaseSalary['leader']!,
+    );
+    expect(dayOne.record!.bonus, 90);
+    expect(dayOne.record!.operatingCost, 100);
+    expect(dayOne.record!.projectIncome, 1200);
+    expect(runtime.officeEconomyState.companyBudget, greaterThan(6000));
+    expect(runtime.officeEconomyState.departmentBudgets['technology'],
+        dayOne.record!.netChange);
+
+    final duplicate = runtime.settleOfficeEconomy(
+      periodType: 'day',
+      periodKey: 'Y1-M1-D12',
+      departmentId: 'technology',
+      settlementId: 'office_payroll_day_12_tech',
+      bonusPool: 999,
+      operatingCost: 999,
+      projectIncome: 999,
+    );
+    expect(duplicate.success, isTrue);
+    expect(duplicate.idempotent, isTrue);
+    expect(runtime.officeEconomyState.history.length, 1);
+
+    final resigned = runtime.resignResident(
+      'payroll_leader',
+      sourceId: 'payroll_resign',
+    );
+    expect(resigned.success, isTrue);
+    final dayTwo = runtime.settleOfficeEconomy(
+      periodType: 'day',
+      periodKey: 'Y1-M1-D13',
+      departmentId: 'technology',
+      settlementId: 'office_payroll_day_13_tech',
+      operatingCost: 50,
+      projectIncome: 500,
+    );
+    expect(dayTwo.success, isTrue);
+    expect(dayTwo.record!.residentIds, contains('payroll_staff'));
+    expect(dayTwo.record!.residentIds, isNot(contains('payroll_leader')));
+    expect(dayTwo.record!.payroll, residentCareerBaseSalary['senior']);
+
+    final restored = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await restored.load();
+    restored.loadRuntimeStates(
+      runtime.residents
+          .map((resident) => <String, dynamic>{
+                'residentId': resident.id,
+                'organization':
+                    runtime.getResidentOrganization(resident.id).toJson(),
+                'career': runtime.getResidentCareerStatus(resident.id).toJson(),
+                'location': 'office',
+                'activity': 'restore',
+                'mood': 'calm',
+                'dayCount': 12,
+              })
+          .toList(growable: false),
+      organizationMutationHistory: runtime.organizationMutationHistory
+          .map((record) => record.toJson())
+          .toList(growable: false),
+      processedOrganizationMutationIds:
+          runtime.processedOrganizationMutationIds,
+      officeEconomy: runtime.officeEconomyState.toJson(),
+    );
+    expect(restored.officeEconomyState.history.length, 2);
+    final restoredDuplicate = restored.settleOfficeEconomy(
+      periodType: 'day',
+      periodKey: 'Y1-M1-D13',
+      departmentId: 'technology',
+      settlementId: 'office_payroll_day_13_tech',
+    );
+    expect(restoredDuplicate.idempotent, isTrue);
+    expect(restored.officeEconomyState.history.length, 2);
+
+    restored.loadRuntimeStates(const <Map<String, dynamic>>[]);
+    expect(restored.officeEconomyState.history, isEmpty);
+    expect(restored.officeEconomyState.companyBudget, 6000);
+
+    final bulkResidents = ResidentConfig.fromJson({
+      'version': 'bulk',
+      'residents': List.generate(
+        100,
+        (index) => _organizationResident(
+          id: 'economy_bulk_$index',
+          departmentId: index.isEven ? 'operations' : 'technology',
+          teamId: index.isEven ? 'product_ops' : 'tech_support',
+          positionId: 'staff',
+        ),
+      ),
+    });
+    final bulk = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(bulkResidents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await bulk.load();
+    final startedAt = DateTime.now();
+    final bulkResult = bulk.settleOfficeEconomy(
+      periodType: 'day',
+      periodKey: 'Y1-M1-D12',
+      settlementId: 'bulk_company_payroll',
+      operatingCost: -1,
+      projectIncome: -1,
+    );
+    final elapsedMs = DateTime.now().difference(startedAt).inMilliseconds;
+    expect(bulkResult.success, isTrue);
+    expect(bulkResult.record!.residentIds.length, 100);
+    expect(bulkResult.record!.payroll, greaterThan(0));
+    expect(elapsedMs < 300, isTrue);
+  });
+
+  test('organization conditions parse for dialogue story and dynamic events',
+      () {
+    final dialogue = ResidentDialogueConfig.fromJson({
+      'fallback': {'text': 'fallback'},
+      'dialogues': [
+        {
+          'id': 'department_dialogue',
+          'residentId': '*',
+          'text': '技术部今天也在修一点小风。',
+          'conditions': {
+            'companyId': 'fishing_office',
+            'departmentId': 'technology',
+            'teamId': 'tech_support',
+            'positionId': 'specialist',
+            'organizationTags': ['department:technology'],
+            'careerLevel': 'senior',
+            'employmentStatus': 'active',
+            'careerTags': ['career:senior'],
+            'salaryLevelMin': 200,
+          },
+        }
+      ],
+    }).dialogues.first.conditions;
+    expect(dialogue.companyId, 'fishing_office');
+    expect(dialogue.departmentId, 'technology');
+    expect(dialogue.teamId, 'tech_support');
+    expect(dialogue.positionId, 'specialist');
+    expect(dialogue.organizationTags, contains('department:technology'));
+    expect(dialogue.careerLevel, 'senior');
+    expect(dialogue.employmentStatus, 'active');
+    expect(dialogue.careerTags, contains('career:senior'));
+    expect(dialogue.salaryLevelMin, 200);
+
+    final story = ResidentStoryConfig.fromJson({
+      'stories': [
+        {
+          'id': 'department_story',
+          'residentId': '*',
+          'title': '技术部的小灯',
+          'summary': '有人把坏掉的灯修好了。',
+          'conditions': {
+            'departmentId': 'technology',
+            'organizationTags': ['team:tech_support'],
+            'careerLevel': 'senior',
+            'employmentStatus': 'active',
+            'careerTags': ['career:senior'],
+            'salaryLevelMin': 200,
+          },
+        }
+      ],
+    }).stories.first.conditions;
+    expect(story.departmentId, 'technology');
+    expect(story.organizationTags, contains('team:tech_support'));
+    expect(story.careerLevel, 'senior');
+    expect(story.employmentStatus, 'active');
+    expect(story.careerTags, contains('career:senior'));
+    expect(story.salaryLevelMin, 200);
+
+    final event = DynamicEventConfig.fromJson({
+      'events': [
+        {
+          'id': 'organization_event',
+          'type': 'office',
+          'category': 'office',
+          'title': '部门里的小波纹',
+          'conditions': {
+            'companyId': ['fishing_office'],
+            'departmentId': ['technology'],
+            'teamId': ['tech_support'],
+            'positionId': ['specialist'],
+            'organizationTags': ['department:technology'],
+            'careerLevel': ['senior'],
+            'employmentStatus': ['active'],
+            'careerTags': ['career:senior'],
+            'salaryLevelMin': 200,
+          },
+        }
+      ],
+    }).events.first.conditions;
+    expect(event.companyId, contains('fishing_office'));
+    expect(event.departmentId, contains('technology'));
+    expect(event.teamId, contains('tech_support'));
+    expect(event.positionId, contains('specialist'));
+    expect(event.organizationTags, contains('department:technology'));
+    expect(event.careerLevel, contains('senior'));
+    expect(event.employmentStatus, contains('active'));
+    expect(event.careerTags, contains('career:senior'));
+    expect(event.salaryLevelMin, 200);
   });
 
   test('release readiness json counts fields and references are valid', () {
@@ -2045,6 +2872,117 @@ void main() {
         .firstWhere((item) => item['residentId'] == 'old_fisher');
     expect(exportedRecord['meetCount'], 2);
     expect(exportedRecord['lastInteraction'], 'talk');
+  });
+
+  test('resident long-term memory is bounded idempotent and restorable', () {
+    final engine = ResidentMemoryEngine();
+    final baseTime = DateTime.parse('2026-07-05T08:00:00.000');
+    final duplicate = engine.recordLongTermMemory(
+      'old_fisher',
+      type: 'interaction',
+      sourceId: 'memory_source_1',
+      summary: '老渔夫记得你帮他收起了被海风吹乱的鱼线。',
+      participants: const ['player'],
+      importance: 70,
+      createdAt: baseTime,
+      effect: const {
+        'tags': ['player_helped', 'office_kindness'],
+      },
+    );
+    final repeated = engine.recordLongTermMemory(
+      'old_fisher',
+      type: 'interaction',
+      sourceId: 'memory_source_1',
+      summary: '重复写入不应生成第二条长期记忆。',
+      participants: const ['player'],
+      importance: 10,
+      createdAt: baseTime,
+    );
+    expect(repeated?.memoryId, duplicate?.memoryId);
+    expect(engine.getResidentMemory('old_fisher').longTermMemories.length, 1);
+
+    engine.recordLongTermMemory(
+      'old_fisher',
+      type: 'event',
+      sourceId: 'expired_memory',
+      summary: '一条很轻的过期记忆。',
+      importance: 20,
+      createdAt: baseTime.subtract(const Duration(days: 20)),
+      expiresAt: baseTime.subtract(const Duration(days: 1)),
+    );
+    engine.recordLongTermMemory(
+      'old_fisher',
+      type: 'career',
+      sourceId: 'important_memory',
+      summary: '老渔夫记得那次重要的码头表彰。',
+      importance: 95,
+      createdAt: baseTime.subtract(const Duration(days: 30)),
+      expiresAt: baseTime.subtract(const Duration(days: 1)),
+    );
+    for (var i = 0; i < 80; i += 1) {
+      engine.recordLongTermMemory(
+        'old_fisher',
+        type: i.isEven ? 'relationship' : 'player',
+        sourceId: 'bulk_memory_$i',
+        summary: '第 $i 条办公室小记忆。',
+        importance: i % 100,
+        createdAt: baseTime.add(Duration(minutes: i)),
+      );
+    }
+
+    engine.compactLongTermMemories(
+      now: baseTime.add(const Duration(days: 30)),
+    );
+    final memory = engine.getResidentMemory('old_fisher');
+    expect(
+      memory.longTermMemories.length,
+      ResidentMemoryEngine.longTermMemoryLimitPerResident,
+    );
+    expect(
+        memory.longTermMemories
+            .any((item) => item.sourceId == 'expired_memory'),
+        isFalse);
+    expect(
+      memory.longTermMemories
+          .any((item) => item.sourceId == 'important_memory'),
+      isTrue,
+    );
+    expect(
+      memory.longTermMemories.any((item) => item.effect['decayed'] == true),
+      isTrue,
+    );
+
+    final summary = engine.getResidentMemorySummary('old_fisher');
+    expect(summary.total, ResidentMemoryEngine.longTermMemoryLimitPerResident);
+    expect(summary.tags, contains('player_helped'));
+    expect(summary.byType.keys, contains('career'));
+    expect(summary.recentSummaries, isNotEmpty);
+
+    final restored = ResidentMemoryEngine(
+      config: ResidentMemoryConfig.fromJson(engine.toJson()),
+    );
+    expect(
+      restored.getResidentMemory('old_fisher').longTermMemories.length,
+      memory.longTermMemories.length,
+    );
+    final legacy = ResidentMemoryRecord.fromJson(const {
+      'residentId': 'legacy_resident',
+      'memoryTags': [],
+    });
+    expect(legacy.longTermMemories, isEmpty);
+
+    for (var i = 0; i < 100; i += 1) {
+      final residentId = 'memory_person_$i';
+      engine.recordLongTermMemory(
+        residentId,
+        type: 'interaction',
+        sourceId: 'snapshot_$i',
+        summary: '第 $i 位居民留下了一条短记忆。',
+        importance: 45,
+        createdAt: baseTime,
+      );
+      expect(engine.getResidentMemorySummary(residentId).total, 1);
+    }
   });
 
   test('resident relationship engine updates levels from memory', () {
@@ -6499,6 +7437,21 @@ void main() {
           'home': 'old_fisher_home',
           'workplace': 'dock',
           'dailyRoute': ['dock', 'coffee_shop', 'office_lounge'],
+          'organization': {
+            'companyId': 'fishing_office',
+            'departmentId': 'operations',
+            'teamId': 'dock_services',
+            'positionId': 'staff',
+          },
+          'career': {
+            'hireDate': 'Y1-M01-D01',
+            'careerLevel': 'regular',
+            'salaryLevel': 180,
+            'employmentStatus': 'active',
+            'performanceScore': 86,
+            'capabilityScore': 82,
+            'promotionHistory': [],
+          },
           'enabled': true,
         },
         {
@@ -6529,6 +7482,21 @@ void main() {
           'home': 'guard_room',
           'workplace': 'office_gate',
           'dailyRoute': ['office_gate', 'office_lounge'],
+          'organization': {
+            'companyId': 'fishing_office',
+            'departmentId': 'front_office',
+            'teamId': 'office_admin',
+            'positionId': 'staff',
+          },
+          'career': {
+            'hireDate': 'Y1-M01-D01',
+            'careerLevel': 'regular',
+            'salaryLevel': 180,
+            'employmentStatus': 'active',
+            'performanceScore': 48,
+            'capabilityScore': 42,
+            'promotionHistory': [],
+          },
           'enabled': true,
         },
       ],
@@ -6910,6 +7878,60 @@ void main() {
     expect(decision.decisionFor('old_fisher')?.reason, 'story_finished');
     expect(decision.decideNextActivity('old_fisher'), contains('小故事'));
     expect(decision.decideNextDialogueTarget('old_fisher'), 'sleepy_guard');
+
+    runtime.applyResidentCareerEvent(
+      'old_fisher',
+      type: 'promotion',
+      toPositionId: 'specialist',
+      toCareerLevel: 'senior',
+      performanceScore: 86,
+      capabilityScore: 82,
+      reason: 'ai_candidate_setup',
+    );
+    decision.runResidentDecision();
+    final promotionDecision = decision.decisionFor('old_fisher')!;
+    expect(promotionDecision.decisionId, contains('promotion_request'));
+    expect(promotionDecision.type, 'promotion_request');
+    expect(promotionDecision.score, greaterThanOrEqualTo(80));
+    expect(promotionDecision.confidence, greaterThanOrEqualTo(70));
+    expect(promotionDecision.consequence, 'organization_mutation_required');
+    expect(runtime.getResidentOrganization('old_fisher').positionId,
+        isNot('department_manager'));
+    expect(decision.executeDecision(promotionDecision.decisionId), isTrue);
+    expect(decision.executeDecision(promotionDecision.decisionId), isTrue);
+    expect(decision.decisionHistory.length, 1);
+    expect(
+        decision.processedDecisionIds, contains(promotionDecision.decisionId));
+    expect(decision.decisionCooldowns['old_fisher'], greaterThan(0));
+
+    runtime.settleOfficeEconomy(
+      periodType: 'day',
+      periodKey: 'Y1-M1-D02',
+      settlementId: 'ai_pressure_budget',
+      operatingCost: 5900,
+      projectIncome: 0,
+    );
+    decision.runResidentDecision();
+    final pressureDecision = decision.decisionFor('sleepy_guard')!;
+    expect(pressureDecision.type, 'resignation_risk');
+    expect(pressureDecision.consequence, 'career_runtime_required');
+    expect(runtime.getResidentCareerStatus('sleepy_guard').employmentStatus,
+        isNot('resigned'));
+
+    final restoredDecision = ResidentDecisionManager(
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogueRuntime,
+      storyRuntimeManager: storyRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      festivalRuntimeManager: festivalRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      worldClockManager: clock,
+      secondWorldEngine: secondWorld,
+    )..loadDecisionState(decision.toDecisionStateJson());
+    expect(
+        restoredDecision.decisionFor('sleepy_guard')!.type, 'resignation_risk');
+    expect(restoredDecision.processedDecisionIds,
+        contains(promotionDecision.decisionId));
   });
 
   test('story runtime manager triggers story chain and refreshes dialogue',
@@ -10950,22 +11972,436 @@ void main() {
     }
     expect(save.officeWorldHistory.length, lessThanOrEqualTo(90));
 
+    save.recordCompanyTimelineEvent(
+      sourceId: 'career:promotion:office_person_0',
+      type: 'promotion',
+      title: '办公室里有人升职了',
+      summary: 'office_person_0 因为稳定帮忙，成为了更可靠的居民。',
+      date: 'Y1-M1-D4',
+      weekKey: 'Y1-M1-W1',
+      monthKey: 'Y1-M1',
+      relatedResidentIds: const ['office_person_0'],
+      tags: const ['career', 'promotion'],
+    );
+    save.recordCompanyTimelineEvent(
+      sourceId: 'economy:budget:Y1-M1-D4',
+      type: 'department_budget_change',
+      title: '运营部预算被重新整理',
+      summary: '今天的公司预算看起来更有秩序。',
+      date: 'Y1-M1-D4',
+      weekKey: 'Y1-M1-W1',
+      monthKey: 'Y1-M1',
+      tags: const ['economy', 'budget'],
+    );
+    save.recordCompanyTimelineEvent(
+      sourceId: 'ai:decision:office_person_1',
+      type: 'ai_decision',
+      title: '一个居民认真考虑了今天的安排',
+      summary: 'AI 决策只记录建议，不直接改变职业或组织。',
+      date: 'Y1-M1-D4',
+      weekKey: 'Y1-M1-W1',
+      monthKey: 'Y1-M1',
+      tags: const ['ai_decision'],
+    );
+    save.recordCompanyTimelineEvent(
+      sourceId: 'achievement:office_person_2',
+      type: 'resident_achievement',
+      title: '居民的小成就被大家看见',
+      summary: '一个平凡的努力被办公室温柔地记了下来。',
+      date: 'Y1-M1-D5',
+      weekKey: 'Y1-M1-W1',
+      monthKey: 'Y1-M1',
+      tags: const ['achievement'],
+    );
+    final duplicateTimeline = save.recordCompanyTimelineEvent(
+      sourceId: 'career:promotion:office_person_0',
+      type: 'promotion',
+      title: '重复新闻不应出现',
+      summary: '重复 sourceId 不会重复写入。',
+      date: 'Y1-M1-D4',
+    );
+    expect(duplicateTimeline?.title, '办公室里有人升职了');
+
+    final timelineSnapshot = secondWorld.getCompanyTimelineSnapshot(
+      date: 'Y1-M1-D4',
+      limit: 10,
+    );
+    expect(timelineSnapshot.events.length, 3);
+    expect(timelineSnapshot.news.length, 4);
+    expect(timelineSnapshot.dailySummary['Y1-M1-D4'], 3);
+    expect(timelineSnapshot.weeklySummary['Y1-M1-W1'], 4);
+    expect(timelineSnapshot.monthlySummary['Y1-M1'], 4);
+
+    for (var i = 0; i < 260; i += 1) {
+      save.recordCompanyTimelineEvent(
+        sourceId: 'bulk_timeline_$i',
+        type: i.isEven ? 'company_event' : 'bonus',
+        title: '第 $i 条公司时间线',
+        summary: '用于验证时间线容量上限。',
+        date: 'Y1-M2-D${(i % 28) + 1}',
+        weekKey: 'Y1-M2-W${(i % 4) + 1}',
+        monthKey: 'Y1-M2',
+        importance: i % 100,
+      );
+    }
+    expect(save.companyTimeline.length, lessThanOrEqualTo(240));
+    expect(save.companyNews.length, lessThanOrEqualTo(120));
+
     final saved = await save.saveWorld(force: true, immediate: true);
     expect(
         saved.livingOfficeState.officeMood, save.livingOfficeState.officeMood);
     expect(saved.officeWorldHistory, isNotEmpty);
+    expect(saved.companyTimeline, isNotEmpty);
+    expect(saved.companyNews, isNotEmpty);
     final restored = WorldSaveData.fromJson(saved.toJson());
     expect(restored.livingOfficeState.officeMood,
         saved.livingOfficeState.officeMood);
     expect(restored.officeWorldHistory.length, saved.officeWorldHistory.length);
+    expect(restored.companyTimeline.length, saved.companyTimeline.length);
+    expect(restored.companyNews.length, saved.companyNews.length);
     expect(restored.playerInfluenceContext.reputation, contains('helpful'));
     expect(restored.recentPlayerActions.map((item) => item.type),
         contains('helping'));
     final legacy = WorldSaveData.fromJson(const <String, dynamic>{});
     expect(legacy.livingOfficeState.officeMood, 'calm');
     expect(legacy.officeWorldHistory, isEmpty);
+    expect(legacy.companyTimeline, isEmpty);
+    expect(legacy.companyNews, isEmpty);
     expect(legacy.playerInfluenceContext.reputation, contains('quiet'));
   });
+
+  test('ai company events coordinate runtimes idempotently and restore',
+      () async {
+    final clock = WorldClockManager(
+      initialClock:
+          WorldClock.initial().copyWith(dayCount: 8, hour: 10, minute: 0),
+      initialCalendar: WorldCalendar.initial().copyWith(
+        dayCount: 8,
+        weekdayIndex: 1,
+        month: 1,
+        day: 8,
+        season: 'spring',
+      ),
+      paused: true,
+    );
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': [
+        _organizationResident(
+          id: 'event_resident_a',
+          departmentId: 'operations',
+          teamId: 'product_ops',
+          positionId: 'staff',
+        ),
+        _organizationResident(
+          id: 'event_resident_b',
+          departmentId: 'operations',
+          teamId: 'dock_services',
+          positionId: 'staff',
+        ),
+      ],
+    });
+    final life = ResidentLifeConfig.fromJson(
+      scheduleJson: {'version': 'test', 'schedules': []},
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+    final memory = ResidentMemoryEngine();
+    final relationship = ResidentRelationshipEngine(
+      config: ResidentRelationshipConfig.fromJson({
+        'version': 'test',
+        'levels': [],
+        'relationships': [],
+      }),
+      memoryEngine: memory,
+    );
+    final festival = FestivalRuntimeManager(
+      config: FestivalConfig.fromJson({'version': 'test', 'festivals': []}),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final weather = WeatherRuntimeManager(
+      config: WeatherConfig.fromJson({'version': 'test', 'weatherEvents': []}),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final rumor = RumorRuntimeManager(
+      config: RumorConfig.fromJson({'version': 'test', 'rumors': []}),
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      residentRuntimeManager: runtime,
+    );
+    final dialogue = DialogueRuntimeManager(
+      config: ResidentDialogueConfig.fromJson({
+        'version': 'test',
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '办公室今天有一条新消息。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+          'tags': ['fallback'],
+        },
+        'dialogues': [],
+      }),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+    );
+    final story = StoryRuntimeManager(
+      config: ResidentStoryConfig.fromJson({'version': 'test', 'stories': []}),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      dialogueRuntimeManager: dialogue,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+    );
+    final lifeManager = ResidentLifeManager(
+      _FakeResidentLifeRepository(life),
+    );
+    await lifeManager.load();
+    final legacyDialogue = ResidentDialogueEngine(
+      config: ResidentDialogueConfig.fromJson({
+        'version': 'test',
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '办公室今天有一条新消息。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+          'tags': ['fallback'],
+        },
+        'dialogues': [],
+      }),
+      lifeManager: lifeManager,
+      memoryEngine: memory,
+      relationshipEngine: relationship,
+    );
+    final repository = _CountingWorldSaveRepository();
+    final save = WorldSaveManager(
+      repository: repository,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      storyRuntimeManager: story,
+      dialogueRuntimeManager: dialogue,
+    );
+    final secondWorld = SecondWorldEngine(
+      residentConfig: residents,
+      residentLifeEngine: lifeManager,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      residentDialogueEngine: legacyDialogue,
+      residentStoryEngine: ResidentStoryEngine(
+        config:
+            ResidentStoryConfig.fromJson({'version': 'test', 'stories': []}),
+        lifeManager: lifeManager,
+        memoryEngine: memory,
+        relationshipEngine: relationship,
+        dialogueEngine: legacyDialogue,
+      ),
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      worldSaveManager: save,
+      residentRuntimeManager: runtime,
+    );
+
+    final result = secondWorld.triggerAICompanyEvent(
+      eventId: 'company_event_major_project',
+      sourceId: 'major_project_day_8',
+      type: 'major_project',
+      scope: 'department:operations',
+      participants: const ['event_resident_a', 'event_resident_b'],
+      conditions: const <String, dynamic>{},
+      reason: '季度项目启动',
+      effects: const <String, dynamic>{
+        'organizationMutation': <String, dynamic>{
+          'residentId': 'event_resident_a',
+          'companyId': 'fishing_office',
+          'departmentId': 'operations',
+          'teamId': 'product_ops',
+          'positionId': 'specialist',
+          'careerLevel': 'senior',
+        },
+        'officeEconomy': <String, dynamic>{
+          'periodType': 'event',
+          'periodKey': 'Y1-M1-D8',
+          'departmentId': 'operations',
+          'bonusPool': 20,
+          'operatingCost': 30,
+          'projectIncome': 300,
+        },
+        'importance': 78,
+      },
+      cooldown: 3,
+    );
+    expect(result.success, isTrue);
+    expect(result.changedDomains, containsAll(['organization', 'economy']));
+    expect(runtime.getResidentOrganization('event_resident_a').positionId,
+        'specialist');
+    expect(runtime.getResidentCareerStatus('event_resident_a').careerLevel,
+        'senior');
+    expect(runtime.officeEconomyState.lastSettlementId,
+        'ai_company_event:major_project_day_8:economy');
+    expect(save.companyTimeline.first.sourceId,
+        'ai_company_event:major_project_day_8');
+    expect(save.companyNews.first.category, 'company_event');
+    expect(save.aiCompanyEvents.first.status, 'resolved');
+    expect(save.aiCompanyEvents.first.reason, '季度项目启动');
+    expect(save.aiCompanyEvents.first.result['success'], isTrue);
+    expect(save.aiCompanyEvents.first.result['changedDomains'],
+        containsAll(['organization', 'economy', 'memory']));
+    expect(memory.getResidentMemorySummary('event_resident_a').total,
+        greaterThan(0));
+
+    final duplicate = secondWorld.triggerAICompanyEvent(
+      eventId: 'company_event_major_project',
+      sourceId: 'major_project_day_8',
+      type: 'major_project',
+      participants: const ['event_resident_a'],
+    );
+    expect(duplicate.success, isTrue);
+    expect(duplicate.idempotent, isTrue);
+    expect(
+        save.companyTimeline
+            .where((item) =>
+                item.sourceId == 'ai_company_event:major_project_day_8')
+            .length,
+        1);
+    expect(save.aiCompanyEvents.length, 1);
+
+    final invalid = secondWorld.triggerAICompanyEvent(
+      eventId: 'company_event_bad_target',
+      sourceId: 'bad_target_day_8',
+      type: 'department_reorg',
+      participants: const ['event_resident_a'],
+      effects: const <String, dynamic>{
+        'organizationMutation': <String, dynamic>{
+          'residentId': 'event_resident_a',
+          'companyId': 'fishing_office',
+          'departmentId': 'missing_department',
+          'teamId': 'product_ops',
+          'positionId': 'specialist',
+        },
+      },
+    );
+    expect(invalid.success, isFalse);
+    expect(invalid.errors, contains('department_missing:missing_department'));
+    expect(save.getAICompanyEvent('bad_target_day_8')?.status, 'cancelled');
+    expect(
+        save.getAICompanyEvent('bad_target_day_8')?.result['success'], isFalse);
+    expect(
+      save.companyTimeline.any(
+        (item) => item.sourceId == 'ai_company_event:bad_target_day_8',
+      ),
+      isFalse,
+    );
+    final duplicateInvalid = secondWorld.triggerAICompanyEvent(
+      eventId: 'company_event_bad_target',
+      sourceId: 'bad_target_day_8',
+      type: 'department_reorg',
+      participants: const ['event_resident_a'],
+    );
+    expect(duplicateInvalid.success, isFalse);
+    expect(duplicateInvalid.idempotent, isTrue);
+    expect(duplicateInvalid.errors,
+        contains('department_missing:missing_department'));
+
+    for (var index = 0; index < 150; index += 1) {
+      save.recordAICompanyEvent(
+        AICompanyEvent(
+          eventId: 'bulk_ai_company_event_$index',
+          sourceId: 'bulk_ai_company_source_$index',
+          type: 'group_training',
+          scope: 'company',
+          participants: const <String>[],
+          conditions: const <String, dynamic>{},
+          effects: const <String, dynamic>{},
+          reason: 'bulk event',
+          result: const <String, dynamic>{'success': true},
+          startTime: 'Y1-M1-D8',
+          endTime: '',
+          status: 'resolved',
+          cooldown: 0,
+          createdAt: 'Y1-M1-D8',
+          updatedAt: 'Y1-M1-D8',
+          errors: const <String>[],
+        ),
+      );
+    }
+    expect(save.aiCompanyEvents.length, lessThanOrEqualTo(120));
+
+    final saved = await save.saveWorld(force: true, immediate: true);
+    expect(saved.aiCompanyEvents, isNotEmpty);
+    final restored = WorldSaveData.fromJson(saved.toJson());
+    expect(restored.aiCompanyEvents.length, saved.aiCompanyEvents.length);
+    expect(WorldSaveData.fromJson(const <String, dynamic>{}).aiCompanyEvents,
+        isEmpty);
+  });
+}
+
+Map<String, Object?> _organizationResident({
+  required String id,
+  required String departmentId,
+  required String teamId,
+  required String positionId,
+  String careerLevel = 'regular',
+}) {
+  return <String, Object?>{
+    'id': id,
+    'name': id,
+    'job': '居民员工',
+    'personality': 'steady',
+    'location': 'office',
+    'enabled': true,
+    'organization': <String, Object?>{
+      'companyId': 'fishing_office',
+      'departmentId': departmentId,
+      'teamId': teamId,
+      'positionId': positionId,
+    },
+    'career': <String, Object?>{
+      'careerLevel': careerLevel,
+      'hireDate': 'Y1-M01-D01',
+      'salaryLevel': residentCareerBaseSalary[careerLevel] ?? 180,
+      'performanceScore': 70,
+      'capabilityScore': 70,
+      'employmentStatus': 'active',
+      'promotionHistory': <Map<String, Object?>>[
+        <String, Object?>{
+          'type': 'hire',
+          'date': 'Y1-M01-D01',
+          'fromPositionId': '',
+          'toPositionId': positionId,
+          'fromCareerLevel': '',
+          'toCareerLevel': careerLevel,
+          'reason': 'test_hire',
+        },
+      ],
+    },
+  };
 }
 
 class _FakeResidentLifeRepository extends ResidentLifeRepository {

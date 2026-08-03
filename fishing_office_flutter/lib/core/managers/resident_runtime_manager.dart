@@ -1,9 +1,12 @@
 import 'package:flutter/foundation.dart';
 
 import '../../models/living_world_config.dart';
+import '../../models/company_organization.dart';
 import '../../models/location_context.dart';
 import '../../models/office_life_schedule.dart';
+import '../../models/office_economy.dart';
 import '../../models/resident_config.dart';
+import '../../models/resident_career.dart';
 import '../../models/resident_life_config.dart';
 import '../../models/resident_personality_context.dart';
 import '../repository/resident_life_repository.dart';
@@ -29,25 +32,50 @@ class ResidentRuntimeManager extends ChangeNotifier {
   ResidentLifeConfig? _lifeConfig;
   final Map<String, ResidentRuntimeOverride> _runtimeOverrides =
       <String, ResidentRuntimeOverride>{};
+  final Map<String, ResidentCareerStatus> _careerOverrides =
+      <String, ResidentCareerStatus>{};
+  final Map<String, OrganizationAssignment> _organizationOverrides =
+      <String, OrganizationAssignment>{};
+  final List<OrganizationMutationRecord> _organizationMutationHistory =
+      <OrganizationMutationRecord>[];
+  final Set<String> _processedOrganizationMutationIds = <String>{};
+  OfficeEconomyState _officeEconomyState =
+      const OfficeEconomyState.empty().copyWith(companyBudget: 6000);
   final Map<String, ResidentPersonalityContext> _personalityCache =
       <String, ResidentPersonalityContext>{};
+  final Map<String, List<ResidentProfile>> _residentsByLocationCache =
+      <String, List<ResidentProfile>>{};
+  final Map<String, List<String>> _residentIdsByLocationCache =
+      <String, List<String>>{};
+  String _locationCacheKey = '';
   Object? _error;
   bool _loaded = false;
 
   bool get loaded => _loaded;
   Object? get error => _error;
+  CompanyOrganization get companyOrganization =>
+      CompanyOrganization.defaultStructure();
   List<ResidentProfile> get residents =>
       _residentConfig?.residents ?? const <ResidentProfile>[];
   List<ResidentSchedule> get schedules =>
       _lifeConfig?.schedules ?? const <ResidentSchedule>[];
   List<ResidentActivity> get activities =>
       _lifeConfig?.activities ?? const <ResidentActivity>[];
+  List<OrganizationMutationRecord> get organizationMutationHistory =>
+      List<OrganizationMutationRecord>.unmodifiable(
+        _organizationMutationHistory,
+      );
+  List<String> get processedOrganizationMutationIds =>
+      _processedOrganizationMutationIds.toList(growable: false)..sort();
+  OfficeEconomyState get officeEconomyState => _officeEconomyState.normalized();
+  Map<String, Object?> get officeEconomySnapshot => officeEconomyState.toJson();
 
   Future<void> load() async {
     try {
       _residentConfig = await _residentRepository.load();
       _lifeConfig = await _lifeRepository.load();
       _personalityCache.clear();
+      _invalidateRuntimeCaches();
       _loaded = true;
       _error = null;
       if (kDebugMode) {
@@ -80,16 +108,799 @@ class ResidentRuntimeManager extends ChangeNotifier {
   List<ResidentProfile> getResidentsAtLocation(String locationId) {
     if (locationId.isEmpty) return const <ResidentProfile>[];
     final normalized = LocationContext.normalizeId(locationId);
-    return residents
-        .where((resident) =>
-            resident.enabled &&
-            LocationContext.normalizeId(_currentState(resident.id).location) ==
-                normalized)
-        .toList(growable: false);
+    _ensureLocationCache();
+    return _residentsByLocationCache[normalized] ?? const <ResidentProfile>[];
   }
 
   ResidentCurrentState getResidentCurrentState(String id) {
     return _currentState(id);
+  }
+
+  OrganizationAssignment getResidentOrganization(String id) {
+    return _organizationOverrides[id] ??
+        (_residentConfig?.findResident(id) ?? ResidentProfile.empty(id))
+            .organization;
+  }
+
+  ResidentOrganizationContext getResidentOrganizationContext(String id) {
+    return ResidentOrganizationContext.resolve(
+      getResidentOrganization(id),
+      organization: companyOrganization,
+    );
+  }
+
+  ResidentCareerStatus getResidentCareerStatus(String id) {
+    return _careerOverrides[id] ??
+        (_residentConfig?.findResident(id) ?? ResidentProfile.empty(id)).career;
+  }
+
+  List<ResidentCareerEvent> getResidentCareerEvents(String id) {
+    return getResidentCareerStatus(id).promotionHistory;
+  }
+
+  OfficeEconomySettlementResult settleOfficeEconomy({
+    required String periodType,
+    required String periodKey,
+    String departmentId = '',
+    String settlementId = '',
+    int bonusPool = 0,
+    int operatingCost = 0,
+    int projectIncome = 0,
+    String reason = '',
+  }) {
+    final normalizedPeriodType = periodType.trim().toLowerCase();
+    final normalizedPeriodKey = periodKey.trim();
+    final id = settlementId.isEmpty
+        ? 'office_economy:$normalizedPeriodType:$normalizedPeriodKey:${departmentId.isEmpty ? 'company' : departmentId}'
+        : settlementId;
+    if (normalizedPeriodType.isEmpty || normalizedPeriodKey.isEmpty) {
+      return const OfficeEconomySettlementResult.failure(
+        <String>['settlement_period_missing'],
+      );
+    }
+    if (_officeEconomyState.hasSettled(id)) {
+      OfficeEconomyRecord? existing;
+      for (final record in _officeEconomyState.history) {
+        if (record.settlementId == id) {
+          existing = record;
+          break;
+        }
+      }
+      return OfficeEconomySettlementResult(
+        success: true,
+        idempotent: true,
+        record: existing,
+        state: _officeEconomyState,
+        errors: const <String>[],
+      );
+    }
+    if (departmentId.isNotEmpty &&
+        !companyOrganization.hasDepartment(departmentId)) {
+      return OfficeEconomySettlementResult.failure(
+        <String>['department_missing:$departmentId'],
+      );
+    }
+    final activeResidents = residents.where((resident) {
+      if (!resident.enabled) return false;
+      final career = getResidentCareerStatus(resident.id);
+      if (!career.isActive) return false;
+      final organization = getResidentOrganization(resident.id);
+      if (!organization.isAssigned) return false;
+      return departmentId.isEmpty || organization.departmentId == departmentId;
+    }).toList(growable: false);
+    final payroll = activeResidents.fold<int>(
+      0,
+      (sum, resident) =>
+          sum + salaryForCareer(getResidentCareerStatus(resident.id)),
+    );
+    final bonus = bonusPool.clamp(0, 1 << 31).toInt();
+    final cost = operatingCost < 0
+        ? _defaultOperatingCost(activeResidents.length)
+        : operatingCost.clamp(0, 1 << 31).toInt();
+    final income = projectIncome < 0
+        ? _defaultProjectIncome(activeResidents)
+        : projectIncome.clamp(0, 1 << 31).toInt();
+    final record = OfficeEconomyRecord(
+      settlementId: id,
+      periodType: normalizedPeriodType,
+      periodKey: normalizedPeriodKey,
+      departmentId: departmentId,
+      residentIds: activeResidents
+          .map((resident) => resident.id)
+          .toList(growable: false),
+      payroll: payroll,
+      bonus: bonus,
+      operatingCost: cost,
+      projectIncome: income,
+      reason: reason.isEmpty ? 'office_economy_settlement' : reason,
+      createdAt: _currentWorldDate(),
+    );
+    _officeEconomyState = _officeEconomyState.applyRecord(record);
+    notifyListeners();
+    return OfficeEconomySettlementResult(
+      success: true,
+      idempotent: false,
+      record: record,
+      state: _officeEconomyState,
+      errors: const <String>[],
+    );
+  }
+
+  OrganizationMutationResult assignResident(
+    String residentId, {
+    String mutationType = 'hire',
+    String date = '',
+    String companyId = '',
+    String departmentId = '',
+    String teamId = '',
+    String positionId = '',
+    String reason = '',
+    String sourceId = '',
+    String reportsToResidentId = '',
+    String careerLevel = '',
+  }) {
+    return _applyOrganizationMutation(
+      OrganizationMutationRequest(
+        residentId: residentId,
+        mutationType: mutationType,
+        targetCompanyId: companyId,
+        targetDepartmentId: departmentId,
+        targetTeamId: teamId,
+        targetPositionId: positionId,
+        reason: reason,
+        effectiveDate: date.isEmpty ? _currentWorldDate() : date,
+        sourceId: sourceId.isEmpty
+            ? '$mutationType:$residentId:$date:$companyId:$departmentId:$teamId:$positionId'
+            : sourceId,
+        targetReportsToResidentId: reportsToResidentId,
+        targetCareerLevel: careerLevel,
+      ),
+    );
+  }
+
+  OrganizationMutationResult promoteResident(
+    String residentId, {
+    String date = '',
+    String companyId = '',
+    String departmentId = '',
+    String teamId = '',
+    String toPositionId = '',
+    String toCareerLevel = '',
+    String reason = '',
+    String sourceId = '',
+    String reportsToResidentId = '',
+  }) {
+    return assignResident(
+      residentId,
+      mutationType: 'promotion',
+      date: date,
+      companyId: companyId,
+      departmentId: departmentId,
+      teamId: teamId,
+      positionId: toPositionId,
+      careerLevel: toCareerLevel,
+      reason: reason,
+      sourceId: sourceId,
+      reportsToResidentId: reportsToResidentId,
+    );
+  }
+
+  OrganizationMutationResult transferResident(
+    String residentId, {
+    String date = '',
+    String companyId = '',
+    String departmentId = '',
+    String teamId = '',
+    required String toPositionId,
+    String reason = '',
+    String sourceId = '',
+    String reportsToResidentId = '',
+  }) {
+    return assignResident(
+      residentId,
+      mutationType: 'transfer',
+      date: date,
+      companyId: companyId,
+      departmentId: departmentId,
+      teamId: teamId,
+      positionId: toPositionId,
+      reason: reason,
+      sourceId: sourceId,
+      reportsToResidentId: reportsToResidentId,
+    );
+  }
+
+  OrganizationMutationResult demoteResident(
+    String residentId, {
+    String date = '',
+    String companyId = '',
+    String departmentId = '',
+    String teamId = '',
+    String toPositionId = '',
+    String toCareerLevel = '',
+    String reason = '',
+    String sourceId = '',
+    String reportsToResidentId = '',
+  }) {
+    return assignResident(
+      residentId,
+      mutationType: 'demotion',
+      date: date,
+      companyId: companyId,
+      departmentId: departmentId,
+      teamId: teamId,
+      positionId: toPositionId,
+      careerLevel: toCareerLevel,
+      reason: reason,
+      sourceId: sourceId,
+      reportsToResidentId: reportsToResidentId,
+    );
+  }
+
+  OrganizationMutationResult resignResident(
+    String residentId, {
+    String date = '',
+    String reason = '',
+    String sourceId = '',
+  }) {
+    return assignResident(
+      residentId,
+      mutationType: 'resignation',
+      date: date,
+      reason: reason,
+      sourceId: sourceId,
+    );
+  }
+
+  OrganizationMutationResult releasePosition(
+    String residentId, {
+    String date = '',
+    String reason = '',
+    String sourceId = '',
+  }) {
+    return resignResident(
+      residentId,
+      date: date,
+      reason: reason.isEmpty ? 'release_position' : reason,
+      sourceId: sourceId,
+    );
+  }
+
+  ResidentCareerStatus applyResidentCareerEvent(
+    String residentId, {
+    required String type,
+    String date = '',
+    String fromPositionId = '',
+    String toPositionId = '',
+    String fromCareerLevel = '',
+    String toCareerLevel = '',
+    String reason = '',
+    int? salaryLevel,
+    int? performanceScore,
+    int? capabilityScore,
+    List<String> tags = const <String>[],
+  }) {
+    final resident = _residentConfig?.findResident(residentId) ??
+        ResidentProfile.empty(residentId);
+    if (resident.id.isEmpty) return const ResidentCareerStatus.empty();
+    final current = getResidentCareerStatus(residentId);
+    final resolvedToCareerLevel = toCareerLevel.isEmpty
+        ? _careerLevelAfterEvent(current, type)
+        : toCareerLevel;
+    final currentOrganization = getResidentOrganization(residentId);
+    final result = assignResident(
+      residentId,
+      mutationType: type,
+      date: date,
+      companyId: currentOrganization.companyId,
+      departmentId: currentOrganization.departmentId,
+      teamId: currentOrganization.teamId,
+      positionId: toPositionId.isEmpty
+          ? _targetPositionForCareer(resolvedToCareerLevel)
+          : toPositionId,
+      careerLevel: resolvedToCareerLevel,
+      reason: reason.isEmpty ? 'career_event:$type' : reason,
+      sourceId:
+          'career:$type:$residentId:${date.isEmpty ? _currentWorldDate() : date}:$toPositionId:$toCareerLevel',
+    );
+    if (!result.success) return getResidentCareerStatus(residentId);
+    var updated = getResidentCareerStatus(residentId);
+    if (salaryLevel != null ||
+        performanceScore != null ||
+        capabilityScore != null ||
+        tags.isNotEmpty ||
+        fromPositionId.isNotEmpty ||
+        fromCareerLevel.isNotEmpty) {
+      final event = ResidentCareerEvent(
+        type: type,
+        date: date.isEmpty ? _currentWorldDate() : date,
+        fromPositionId: fromPositionId.isEmpty
+            ? currentOrganization.positionId
+            : fromPositionId,
+        toPositionId: result.assignment.positionId,
+        fromCareerLevel:
+            fromCareerLevel.isEmpty ? current.careerLevel : fromCareerLevel,
+        toCareerLevel: resolvedToCareerLevel,
+        reason: reason.isEmpty ? 'career_event:$type' : reason,
+      );
+      updated = current.applyEvent(
+        event,
+        salaryLevel: salaryLevel,
+        performanceScore: performanceScore,
+        capabilityScore: capabilityScore,
+        extraTags: tags,
+      );
+      _careerOverrides[residentId] = updated;
+      _invalidateRuntimeCaches();
+      notifyListeners();
+    }
+    return updated;
+  }
+
+  OrganizationMutationResult _applyOrganizationMutation(
+    OrganizationMutationRequest request,
+  ) {
+    final resident = _residentConfig?.findResident(request.residentId) ??
+        ResidentProfile.empty(request.residentId);
+    if (resident.id.isEmpty) {
+      return OrganizationMutationResult.failure(<String>['resident_missing']);
+    }
+    final sourceId = request.sourceId.isEmpty
+        ? '${request.mutationType}:${request.residentId}:${request.effectiveDate}'
+        : request.sourceId;
+    if (_processedOrganizationMutationIds.contains(sourceId)) {
+      return OrganizationMutationResult(
+        success: true,
+        idempotent: true,
+        errors: const <String>[],
+        record: _lastOrganizationMutationRecord(sourceId),
+        assignment: getResidentOrganization(request.residentId),
+      );
+    }
+
+    final currentOrganization = getResidentOrganization(request.residentId);
+    final currentCareer = getResidentCareerStatus(request.residentId);
+    final normalizedType = _normalizeMutationType(request.mutationType);
+    final validationErrors = _validateOrganizationMutation(
+      request,
+      normalizedType: normalizedType,
+      currentOrganization: currentOrganization,
+      currentCareer: currentCareer,
+    );
+    if (validationErrors.isNotEmpty) {
+      return OrganizationMutationResult.failure(validationErrors);
+    }
+
+    final target = _resolveTargetAssignment(
+      request,
+      normalizedType: normalizedType,
+      currentOrganization: currentOrganization,
+      currentCareer: currentCareer,
+    );
+    final record = OrganizationMutationRecord(
+      residentId: request.residentId,
+      previousCompanyId: currentOrganization.companyId,
+      previousDepartmentId: currentOrganization.departmentId,
+      previousTeamId: currentOrganization.teamId,
+      previousPositionId: currentOrganization.positionId,
+      targetCompanyId: target.companyId,
+      targetDepartmentId: target.departmentId,
+      targetTeamId: target.teamId,
+      targetPositionId: target.positionId,
+      mutationType: normalizedType,
+      reason: request.reason.isEmpty
+          ? 'organization_mutation:$normalizedType'
+          : request.reason,
+      effectiveDate: request.effectiveDate.isEmpty
+          ? _currentWorldDate()
+          : request.effectiveDate,
+      sourceId: sourceId,
+      previousReportsToResidentId: currentOrganization.reportsToResidentId,
+      targetReportsToResidentId: target.reportsToResidentId,
+    );
+    final event = ResidentCareerEvent(
+      type: normalizedType,
+      date: record.effectiveDate,
+      fromPositionId: currentOrganization.positionId,
+      toPositionId: target.positionId,
+      fromCareerLevel: currentCareer.careerLevel,
+      toCareerLevel: request.targetCareerLevel.isEmpty
+          ? _careerLevelAfterMutation(
+              currentCareer,
+              normalizedType,
+              target.positionId,
+            )
+          : request.targetCareerLevel,
+      reason: record.reason,
+    );
+    final updatedCareer = currentCareer.applyEvent(
+      event,
+      extraTags: <String>[
+        'organization_mutation:$normalizedType',
+        'department:${target.departmentId}',
+        'team:${target.teamId}',
+        'position:${target.positionId}',
+      ],
+    );
+
+    _organizationOverrides[request.residentId] = target;
+    _careerOverrides[request.residentId] = updatedCareer;
+    _organizationMutationHistory.add(record);
+    _processedOrganizationMutationIds.add(sourceId);
+    _invalidateRuntimeCaches();
+    notifyListeners();
+    return OrganizationMutationResult(
+      success: true,
+      idempotent: false,
+      errors: const <String>[],
+      record: record,
+      assignment: target,
+    );
+  }
+
+  OrganizationMutationRecord? _lastOrganizationMutationRecord(String sourceId) {
+    for (final record in _organizationMutationHistory.reversed) {
+      if (record.sourceId == sourceId) return record;
+    }
+    return null;
+  }
+
+  List<String> _validateOrganizationMutation(
+    OrganizationMutationRequest request, {
+    required String normalizedType,
+    required OrganizationAssignment currentOrganization,
+    required ResidentCareerStatus currentCareer,
+  }) {
+    final errors = <String>[];
+    final target = _resolveTargetAssignment(
+      request,
+      normalizedType: normalizedType,
+      currentOrganization: currentOrganization,
+      currentCareer: currentCareer,
+    );
+    if (normalizedType.isEmpty) errors.add('mutation_type_missing');
+    if (!currentCareer.isActive &&
+        normalizedType != 'hire' &&
+        normalizedType != 'recruitment') {
+      errors.add('resident_not_active');
+    }
+    if (normalizedType == 'hire' &&
+        currentCareer.isActive &&
+        currentOrganization.isAssigned) {
+      errors.add('resident_already_active');
+    }
+    if (normalizedType == 'resignation') {
+      return errors;
+    }
+    if (!companyOrganization.hasCompany(target.companyId)) {
+      errors.add('company_missing:${target.companyId}');
+    }
+    if (!companyOrganization.hasDepartment(target.departmentId)) {
+      errors.add('department_missing:${target.departmentId}');
+    }
+    if (!companyOrganization.hasTeam(target.teamId)) {
+      errors.add('team_missing:${target.teamId}');
+    }
+    if (!companyOrganization.hasPosition(target.positionId)) {
+      errors.add('position_missing:${target.positionId}');
+    }
+    if (errors.isNotEmpty) return errors;
+
+    final department = companyOrganization.findDepartment(target.departmentId);
+    final team = companyOrganization.findTeam(target.teamId);
+    if (department.companyId != target.companyId) {
+      errors.add('department_company_mismatch');
+    }
+    if (team.departmentId != target.departmentId) {
+      errors.add('team_department_mismatch');
+    }
+    if (!_positionHasCapacity(target,
+        excludingResidentId: request.residentId)) {
+      errors.add('position_full:${target.positionId}');
+    }
+    final reportsToResidentId = request.targetReportsToResidentId;
+    if (reportsToResidentId.isNotEmpty) {
+      if (reportsToResidentId == request.residentId) {
+        errors.add('management_cycle');
+      } else {
+        final manager = _residentConfig?.findResident(reportsToResidentId) ??
+            ResidentProfile.empty(reportsToResidentId);
+        if (manager.id.isEmpty ||
+            !getResidentCareerStatus(reportsToResidentId).isActive ||
+            !getResidentOrganization(reportsToResidentId).isAssigned) {
+          errors.add('invalid_reports_to');
+        }
+      }
+    }
+    if (_createsManagementCycle(
+      residentId: request.residentId,
+      target: target,
+    )) {
+      errors.add('management_cycle');
+    }
+    return errors;
+  }
+
+  OrganizationAssignment _resolveTargetAssignment(
+    OrganizationMutationRequest request, {
+    required String normalizedType,
+    required OrganizationAssignment currentOrganization,
+    required ResidentCareerStatus currentCareer,
+  }) {
+    if (normalizedType == 'resignation') {
+      return currentOrganization.copyWith(
+        reportsToResidentId: '',
+        active: false,
+        tags: <String>[
+          ...currentOrganization.tags,
+          'employment:resigned',
+        ],
+      );
+    }
+    var teamId = request.targetTeamId.isEmpty
+        ? currentOrganization.teamId
+        : request.targetTeamId;
+    var departmentId = request.targetDepartmentId.isEmpty
+        ? currentOrganization.departmentId
+        : request.targetDepartmentId;
+    if (teamId.isNotEmpty &&
+        request.targetDepartmentId.isEmpty &&
+        companyOrganization.hasTeam(teamId)) {
+      departmentId = companyOrganization.findTeam(teamId).departmentId;
+    }
+    var companyId = request.targetCompanyId.isEmpty
+        ? currentOrganization.companyId
+        : request.targetCompanyId;
+    if (departmentId.isNotEmpty &&
+        request.targetCompanyId.isEmpty &&
+        companyOrganization.hasDepartment(departmentId)) {
+      companyId = companyOrganization.findDepartment(departmentId).companyId;
+    }
+    final targetCareerLevel = request.targetCareerLevel.isEmpty
+        ? _careerLevelAfterMutation(
+            currentCareer,
+            normalizedType,
+            request.targetPositionId,
+          )
+        : request.targetCareerLevel;
+    final positionId = request.targetPositionId.isEmpty
+        ? _targetPositionForCareer(targetCareerLevel)
+        : request.targetPositionId;
+    final reportsToResidentId = request.targetReportsToResidentId.isEmpty
+        ? currentOrganization.reportsToResidentId
+        : request.targetReportsToResidentId;
+    return OrganizationAssignment(
+      companyId: companyId.isEmpty ? 'fishing_office' : companyId,
+      departmentId: departmentId,
+      teamId: teamId,
+      positionId: positionId,
+      reportsToResidentId: reportsToResidentId,
+      tags: <String>{
+        'company:${companyId.isEmpty ? 'fishing_office' : companyId}',
+        'department:$departmentId',
+        'team:$teamId',
+        'position:$positionId',
+        'reports_to:$reportsToResidentId',
+        'organization_mutation:$normalizedType',
+      }.where((tag) => !tag.endsWith(':')).toList(growable: false),
+      active: true,
+    );
+  }
+
+  bool _createsManagementCycle({
+    required String residentId,
+    required OrganizationAssignment target,
+  }) {
+    var currentId = target.reportsToResidentId;
+    if (currentId.isEmpty) return false;
+    final visited = <String>{residentId};
+    while (currentId.isNotEmpty) {
+      if (!visited.add(currentId)) {
+        return currentId == residentId;
+      }
+      if (currentId == residentId) return true;
+      final assignment = getResidentOrganization(currentId);
+      if (!assignment.isAssigned) return false;
+      currentId = assignment.reportsToResidentId;
+    }
+    return false;
+  }
+
+  bool _positionHasCapacity(
+    OrganizationAssignment target, {
+    required String excludingResidentId,
+  }) {
+    final capacity = _positionCapacity(target.positionId);
+    if (capacity >= 999) return true;
+    var occupied = 0;
+    for (final resident in residents.where((resident) => resident.enabled)) {
+      if (resident.id == excludingResidentId) continue;
+      if (!getResidentCareerStatus(resident.id).isActive) continue;
+      final assignment = getResidentOrganization(resident.id);
+      if (!assignment.isAssigned) continue;
+      if (assignment.positionId != target.positionId) continue;
+      if (target.positionId == 'director' &&
+          assignment.companyId == target.companyId) {
+        occupied++;
+      } else if (target.positionId == 'department_manager' &&
+          assignment.departmentId == target.departmentId) {
+        occupied++;
+      } else if (target.positionId == 'team_leader' &&
+          assignment.teamId == target.teamId) {
+        occupied++;
+      }
+    }
+    return occupied < capacity;
+  }
+
+  int _positionCapacity(String positionId) {
+    return switch (positionId) {
+      'director' => 1,
+      'department_manager' => 1,
+      'team_leader' => 1,
+      _ => 999,
+    };
+  }
+
+  String _normalizeMutationType(String value) {
+    final normalized = value.trim().toLowerCase();
+    return switch (normalized) {
+      'promote' => 'promotion',
+      'transfer' => 'transfer',
+      'demote' => 'demotion',
+      'resign' => 'resignation',
+      'recruit' => 'recruitment',
+      _ => normalized,
+    };
+  }
+
+  List<RecruitmentNeed> getDepartmentRecruitmentNeeds() {
+    final needs = <RecruitmentNeed>[];
+    for (final department in companyOrganization.departments) {
+      final departmentResidents = getResidentsByDepartment(department.id)
+          .where((resident) => getResidentCareerStatus(resident.id).isActive)
+          .toList(growable: false);
+      final hasManager = departmentResidents.any((resident) =>
+          getResidentOrganization(resident.id).positionId ==
+              department.managerPositionId ||
+          getResidentOrganization(resident.id).isDepartmentManager);
+      if (!hasManager) {
+        needs.add(RecruitmentNeed(
+          departmentId: department.id,
+          teamId: '',
+          positionId: department.managerPositionId,
+          vacancyCount: 1,
+          priority: 90,
+          reason: 'department_manager_vacancy',
+          tags: <String>['recruitment', 'department:${department.id}'],
+        ));
+      }
+      for (final team in companyOrganization.teams
+          .where((team) => team.departmentId == department.id)) {
+        final teamResidents = departmentResidents
+            .where((resident) =>
+                getResidentOrganization(resident.id).teamId == team.id)
+            .toList(growable: false);
+        final hasLeader = teamResidents.any((resident) =>
+            getResidentOrganization(resident.id).positionId ==
+                team.leaderPositionId ||
+            getResidentOrganization(resident.id).isTeamLeader);
+        if (!hasLeader) {
+          needs.add(RecruitmentNeed(
+            departmentId: department.id,
+            teamId: team.id,
+            positionId: team.leaderPositionId,
+            vacancyCount: 1,
+            priority: 75,
+            reason: 'team_leader_vacancy',
+            tags: <String>[
+              'recruitment',
+              'department:${department.id}',
+              'team:${team.id}',
+            ],
+          ));
+        }
+        if (teamResidents.length < 2) {
+          needs.add(RecruitmentNeed(
+            departmentId: department.id,
+            teamId: team.id,
+            positionId: 'staff',
+            vacancyCount: 2 - teamResidents.length,
+            priority: 45,
+            reason: 'team_capacity_vacancy',
+            tags: <String>[
+              'recruitment',
+              'department:${department.id}',
+              'team:${team.id}',
+            ],
+          ));
+        }
+      }
+    }
+    needs.sort((a, b) => b.priority.compareTo(a.priority));
+    return needs;
+  }
+
+  List<PromotionCandidate> getPromotionCandidates({
+    String departmentId = '',
+    String teamId = '',
+  }) {
+    final candidates = <PromotionCandidate>[];
+    for (final resident in residents.where((resident) => resident.enabled)) {
+      final career = getResidentCareerStatus(resident.id);
+      if (!career.canBePromoted) continue;
+      if (departmentId.isNotEmpty &&
+          getResidentOrganization(resident.id).departmentId != departmentId) {
+        continue;
+      }
+      if (teamId.isNotEmpty &&
+          getResidentOrganization(resident.id).teamId != teamId) {
+        continue;
+      }
+      final score = (career.performanceScore * 0.55 +
+              career.capabilityScore * 0.35 +
+              resident.friendship.clamp(0, 100) * 0.10)
+          .round()
+          .clamp(0, 100);
+      if (score < 58) continue;
+      final organization = getResidentOrganization(resident.id);
+      candidates.add(PromotionCandidate(
+        residentId: resident.id,
+        departmentId: organization.departmentId,
+        teamId: organization.teamId,
+        currentPositionId: organization.positionId,
+        targetPositionId: _targetPositionForCareer(career.nextCareerLevel),
+        currentCareerLevel: career.careerLevel,
+        targetCareerLevel: career.nextCareerLevel,
+        score: score,
+        reason: score >= 78
+            ? 'high_performance_and_capability'
+            : 'steady_growth_candidate',
+      ));
+    }
+    candidates.sort((a, b) {
+      final score = b.score.compareTo(a.score);
+      if (score != 0) return score;
+      return a.residentId.compareTo(b.residentId);
+    });
+    return candidates;
+  }
+
+  List<ResidentProfile> getResidentsByDepartment(String departmentId) {
+    if (departmentId.isEmpty) return const <ResidentProfile>[];
+    return residents
+        .where((resident) =>
+            resident.enabled &&
+            getResidentCareerStatus(resident.id).isActive &&
+            getResidentOrganization(resident.id).isAssigned &&
+            getResidentOrganization(resident.id).departmentId == departmentId)
+        .toList(growable: false);
+  }
+
+  List<ResidentProfile> getResidentsByTeam(String teamId) {
+    if (teamId.isEmpty) return const <ResidentProfile>[];
+    return residents
+        .where((resident) =>
+            resident.enabled &&
+            getResidentCareerStatus(resident.id).isActive &&
+            getResidentOrganization(resident.id).isAssigned &&
+            getResidentOrganization(resident.id).teamId == teamId)
+        .toList(growable: false);
+  }
+
+  List<ResidentProfile> getDepartmentManagers(String departmentId) {
+    if (departmentId.isEmpty) return const <ResidentProfile>[];
+    return getResidentsByDepartment(departmentId)
+        .where((resident) =>
+            getResidentOrganization(resident.id).isDepartmentManager)
+        .toList(growable: false);
+  }
+
+  List<ResidentProfile> getTeamLeaders(String teamId) {
+    if (teamId.isEmpty) return const <ResidentProfile>[];
+    return getResidentsByTeam(teamId)
+        .where((resident) => getResidentOrganization(resident.id).isTeamLeader)
+        .toList(growable: false);
   }
 
   LocationContext getResidentLocationContext(String id) {
@@ -99,13 +910,9 @@ class ResidentRuntimeManager extends ChangeNotifier {
 
   LocationContext getLocationContext(String locationId) {
     final normalized = LocationContext.normalizeId(locationId);
-    final residentIds = residents
-        .where((resident) =>
-            resident.enabled &&
-            LocationContext.normalizeId(_currentState(resident.id).location) ==
-                normalized)
-        .map((resident) => resident.id)
-        .toList(growable: false);
+    _ensureLocationCache();
+    final residentIds =
+        _residentIdsByLocationCache[normalized] ?? const <String>[];
     return LocationContext.fromId(normalized, residentIds: residentIds);
   }
 
@@ -148,6 +955,7 @@ class ResidentRuntimeManager extends ChangeNotifier {
   void applyRuntimeOverride(ResidentRuntimeOverride override) {
     if (override.residentId.isEmpty) return;
     _runtimeOverrides[override.residentId] = _normalizedOverride(override);
+    _invalidateRuntimeCaches();
     notifyListeners();
   }
 
@@ -172,29 +980,80 @@ class ResidentRuntimeManager extends ChangeNotifier {
         source: normalized.source,
       );
       _runtimeOverrides[normalized.residentId] = stable;
+      _invalidateRuntimeCaches();
       notifyListeners();
       return stable;
     }
     _runtimeOverrides[normalized.residentId] = normalized;
+    _invalidateRuntimeCaches();
     notifyListeners();
     return normalized;
   }
 
   void clearRuntimeOverride(String residentId) {
     _runtimeOverrides.remove(residentId);
+    _invalidateRuntimeCaches();
     notifyListeners();
   }
 
   void clearRuntimeOverrides() {
     _runtimeOverrides.clear();
+    _careerOverrides.clear();
+    _organizationOverrides.clear();
+    _organizationMutationHistory.clear();
+    _processedOrganizationMutationIds.clear();
+    _officeEconomyState =
+        const OfficeEconomyState.empty().copyWith(companyBudget: 6000);
+    _invalidateRuntimeCaches();
     notifyListeners();
   }
 
-  void loadRuntimeStates(List<Map<String, dynamic>> states) {
+  void loadRuntimeStates(
+    List<Map<String, dynamic>> states, {
+    List<Map<String, dynamic>> organizationMutationHistory =
+        const <Map<String, dynamic>>[],
+    List<String> processedOrganizationMutationIds = const <String>[],
+    Map<String, dynamic> officeEconomy = const <String, dynamic>{},
+  }) {
     _runtimeOverrides.clear();
+    _careerOverrides.clear();
+    _organizationOverrides.clear();
+    _organizationMutationHistory
+      ..clear()
+      ..addAll(
+        organizationMutationHistory
+            .map(OrganizationMutationRecord.fromJson)
+            .where((record) =>
+                record.residentId.isNotEmpty && record.sourceId.isNotEmpty),
+      );
+    _processedOrganizationMutationIds
+      ..clear()
+      ..addAll(processedOrganizationMutationIds.where((id) => id.isNotEmpty));
+    _officeEconomyState = officeEconomy.isEmpty
+        ? const OfficeEconomyState.empty().copyWith(companyBudget: 6000)
+        : OfficeEconomyState.fromJson(officeEconomy);
     for (final state in states) {
       final residentId = state['residentId']?.toString() ?? '';
       if (residentId.isEmpty) continue;
+      final resident = _residentConfig?.findResident(residentId) ??
+          ResidentProfile.empty(residentId);
+      final organizationJson = state['organization'];
+      if (organizationJson is Map && resident.id.isNotEmpty) {
+        final restored = OrganizationAssignment.fromJson(
+          Map<String, dynamic>.from(organizationJson),
+        );
+        if (restored.companyId.isNotEmpty) {
+          _organizationOverrides[residentId] = restored;
+        }
+      }
+      final careerJson = state['career'];
+      if (careerJson is Map && resident.id.isNotEmpty) {
+        _careerOverrides[residentId] = ResidentCareerStatus.fromResidentJson(
+          <String, dynamic>{'career': Map<String, dynamic>.from(careerJson)},
+          organization: getResidentOrganization(residentId),
+          residentId: residentId,
+        );
+      }
       _runtimeOverrides[residentId] = _normalizedOverride(
         ResidentRuntimeOverride(
           residentId: residentId,
@@ -221,10 +1080,49 @@ class ResidentRuntimeManager extends ChangeNotifier {
           overrideExpiresAt: state['overrideExpiresAt']?.toString() ?? '',
           lastScheduleChange: state['lastScheduleChange']?.toString() ?? '',
           nextScheduleChange: state['nextScheduleChange']?.toString() ?? '',
+          career: _careerOverrides[residentId],
         ),
       );
     }
+    _invalidateRuntimeCaches();
     notifyListeners();
+  }
+
+  void _ensureLocationCache() {
+    final key = _runtimeSnapshotKey();
+    if (_locationCacheKey == key) return;
+    _locationCacheKey = key;
+    _residentsByLocationCache.clear();
+    _residentIdsByLocationCache.clear();
+    for (final resident in residents) {
+      if (!resident.enabled) continue;
+      final location =
+          LocationContext.normalizeId(_currentState(resident.id).location);
+      if (location.isEmpty) continue;
+      (_residentsByLocationCache[location] ??= <ResidentProfile>[]).add(
+        resident,
+      );
+      (_residentIdsByLocationCache[location] ??= <String>[]).add(resident.id);
+    }
+  }
+
+  void _invalidateRuntimeCaches() {
+    _locationCacheKey = '';
+    _residentsByLocationCache.clear();
+    _residentIdsByLocationCache.clear();
+  }
+
+  String _runtimeSnapshotKey() {
+    final clock = _worldClockManager.clock;
+    return [
+      clock.dayCount,
+      clock.hour,
+      clock.minute,
+      residents.length,
+      _runtimeOverrides.length,
+      _organizationOverrides.length,
+      _careerOverrides.length,
+    ].join(':');
   }
 
   ResidentCurrentState _currentState(String id) {
@@ -236,7 +1134,7 @@ class ResidentRuntimeManager extends ChangeNotifier {
     final override = _runtimeOverrides[id];
     if (override != null &&
         override.dayCount == _worldClockManager.today().dayCount) {
-      return override.toCurrentState();
+      return _withOrganization(override.toCurrentState(), resident);
     }
     final clock = _worldClockManager.config;
     final residentSchedules = schedules
@@ -245,12 +1143,15 @@ class ResidentRuntimeManager extends ChangeNotifier {
     for (final schedule in residentSchedules) {
       if (_matchesWeekday(schedule, clock.weekday) &&
           _matchesTime(schedule, clock.hour, clock.minute)) {
-        return _normalizedState(
-          ResidentCurrentState.fromSchedule(_withActivityName(schedule)),
+        return _withOrganization(
+          _normalizedState(
+            ResidentCurrentState.fromSchedule(_withActivityName(schedule)),
+          ),
+          resident,
         );
       }
     }
-    return _fallbackState(resident, clock);
+    return _withOrganization(_fallbackState(resident, clock), resident);
   }
 
   ResidentCurrentState _normalizedState(ResidentCurrentState state) {
@@ -281,6 +1182,35 @@ class ResidentRuntimeManager extends ChangeNotifier {
       nextActivity: state.nextActivity,
       nextChangeTime: state.nextChangeTime,
       scheduleReason: state.scheduleReason,
+      organization: state.organization,
+      career: state.career,
+    );
+  }
+
+  ResidentCurrentState _withOrganization(
+    ResidentCurrentState state,
+    ResidentProfile resident,
+  ) {
+    return ResidentCurrentState(
+      residentId: state.residentId,
+      scheduleId: state.scheduleId,
+      location: state.location,
+      activity: state.activity,
+      mood: state.mood,
+      startTime: state.startTime,
+      endTime: state.endTime,
+      found: state.found,
+      schedulePhase: state.schedulePhase,
+      isWorking: state.isWorking,
+      isOnBreak: state.isOnBreak,
+      isOvertime: state.isOvertime,
+      isWeekend: state.isWeekend,
+      nextLocation: state.nextLocation,
+      nextActivity: state.nextActivity,
+      nextChangeTime: state.nextChangeTime,
+      scheduleReason: state.scheduleReason,
+      organization: getResidentOrganization(resident.id),
+      career: getResidentCareerStatus(resident.id),
     );
   }
 
@@ -642,7 +1572,29 @@ class ResidentRuntimeManager extends ChangeNotifier {
       nextActivity: nextActivity,
       nextChangeTime: life.nextChangeTime,
       scheduleReason: reason,
+      organization: getResidentOrganization(resident.id),
+      career: getResidentCareerStatus(resident.id),
     );
+  }
+
+  String _currentWorldDate() {
+    final today = _worldClockManager.today();
+    return 'Y${today.year}-M${today.month}-D${today.day}-#${today.dayCount}';
+  }
+
+  int _defaultOperatingCost(int activeResidentCount) {
+    return (activeResidentCount * 18).clamp(0, 1 << 31).toInt();
+  }
+
+  int _defaultProjectIncome(List<ResidentProfile> activeResidents) {
+    final capability = activeResidents.fold<int>(
+      0,
+      (sum, resident) =>
+          sum + getResidentCareerStatus(resident.id).capabilityScore,
+    );
+    return (capability * 3 + activeResidents.length * 30)
+        .clamp(0, 1 << 31)
+        .toInt();
   }
 
   String _baseMood(ResidentProfile resident, {required String fallback}) {
@@ -912,6 +1864,8 @@ class ResidentRuntimeManager extends ChangeNotifier {
               nextActivity: state.nextActivity,
               nextChangeTime: state.nextChangeTime,
               scheduleReason: '${state.scheduleReason}|capacity_fallback',
+              organization: state.organization,
+              career: state.career,
             );
     }
     return normalized;
@@ -960,6 +1914,7 @@ class ResidentRuntimeOverride {
     this.overrideExpiresAt = '',
     this.lastScheduleChange = '',
     this.nextScheduleChange = '',
+    this.career,
   });
 
   final String residentId;
@@ -981,6 +1936,7 @@ class ResidentRuntimeOverride {
   final String overrideExpiresAt;
   final String lastScheduleChange;
   final String nextScheduleChange;
+  final ResidentCareerStatus? career;
 
   bool get hasScheduleFlags =>
       isWorking || isOnBreak || isOvertime || isWeekend;
@@ -1005,6 +1961,7 @@ class ResidentRuntimeOverride {
     String? overrideExpiresAt,
     String? lastScheduleChange,
     String? nextScheduleChange,
+    ResidentCareerStatus? career,
   }) {
     return ResidentRuntimeOverride(
       residentId: residentId ?? this.residentId,
@@ -1026,6 +1983,7 @@ class ResidentRuntimeOverride {
       overrideExpiresAt: overrideExpiresAt ?? this.overrideExpiresAt,
       lastScheduleChange: lastScheduleChange ?? this.lastScheduleChange,
       nextScheduleChange: nextScheduleChange ?? this.nextScheduleChange,
+      career: career ?? this.career,
     );
   }
 
@@ -1048,6 +2006,56 @@ class ResidentRuntimeOverride {
       nextActivity: nextActivity,
       nextChangeTime: nextChangeTime,
       scheduleReason: reason,
+      organization: const OrganizationAssignment.empty(),
+      career: career ?? const ResidentCareerStatus.empty(),
     );
   }
+}
+
+String _targetPositionForCareer(String careerLevel) {
+  switch (careerLevel) {
+    case 'director':
+      return 'director';
+    case 'manager':
+      return 'department_manager';
+    case 'leader':
+      return 'team_leader';
+    case 'senior':
+      return 'specialist';
+    case 'trainee':
+    case 'junior':
+    case 'regular':
+    default:
+      return 'staff';
+  }
+}
+
+String _careerLevelAfterEvent(ResidentCareerStatus current, String type) {
+  switch (type.trim().toLowerCase()) {
+    case 'promotion':
+      return current.nextCareerLevel;
+    case 'demotion':
+      final index = residentCareerLevelOrder.indexOf(current.careerLevel);
+      if (index <= 0) return current.careerLevel;
+      return residentCareerLevelOrder[index - 1];
+    default:
+      return current.careerLevel;
+  }
+}
+
+String _careerLevelAfterMutation(
+  ResidentCareerStatus current,
+  String type,
+  String targetPositionId,
+) {
+  if (targetPositionId.isNotEmpty) {
+    return switch (targetPositionId) {
+      'director' => 'director',
+      'department_manager' => 'manager',
+      'team_leader' => 'leader',
+      'specialist' => 'senior',
+      _ => type == 'hire' ? 'regular' : current.careerLevel,
+    };
+  }
+  return _careerLevelAfterEvent(current, type);
 }

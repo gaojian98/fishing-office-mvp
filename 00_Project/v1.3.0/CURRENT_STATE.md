@@ -1,0 +1,333 @@
+# v1.3.0 Current State
+
+## Current Branch
+
+`codex/v1.3-company-organization`
+
+## Current HEAD
+
+Local Module 08 commit. Run `git log -1 --oneline` for the exact current hash.
+
+## Branch Baseline
+
+- `codex/v1.3-company-organization` and `feature/v1.3.0-office-ai` point to the same HEAD.
+- Module 01 through Module 08 source/test/doc changes have been implemented and reviewed locally.
+- Current working tree is expected to be clean after Module 08 Review Fix and RC Readiness commits.
+- Product owner decided to keep using `codex/v1.3-company-organization` as the Module 01 / 02 review branch.
+- Safe branch switch is not recommended while these uncommitted changes exist.
+- Local `feature/v1.3.0-office-ai` is retained for later consolidation after reviewed commits exist.
+
+## Current Version
+
+`v1.3.0`
+
+## Completed Modules
+
+- Module 01: Company Organization System — REVIEWED – COMMITTED
+- Module 02: Career Growth System — REVIEWED – COMMITTED WITH ARCHITECTURE DEBT
+- Module 03: Organization Assignment Runtime Mutation — REVIEWED – COMMITTED
+- Module 04: Office Economy — IMPLEMENTED – COMMITTED
+- Module 05: AI Decision System — IMPLEMENTED – COMMITTED
+- Module 06: Long-Term Memory — IMPLEMENTED – COMMITTED
+- Module 07: Company News & Timeline — IMPLEMENTED – COMMITTED
+- Module 08: AI Company Events — REVIEWED – COMMITTED
+- Mutation Types: EXTRACTED – NO RUNTIME IMPLEMENTATION COMMIT
+- Runtime Performance Debt: RESOLVED – framework smoke performance gate restored below 800ms
+- Long-Term World Evolution Design — DOCUMENTED – WAITING FOR REVIEW
+
+## Planned Next Module
+
+- v1.3.0 staging deployment and human test.
+
+## Current New Models And Concepts
+
+- `fishing_office_flutter/lib/models/company_organization.dart`
+- `CompanyOrganization`
+- `Company`
+- `Department`
+- `Team`
+- `Position`
+- `OrganizationAssignment`
+- `ResidentOrganizationContext`
+- `ResidentProfile.organization`
+- `ResidentCurrentState.organization`
+- `WorldSimulationContext.organizationSnapshot`
+- `fishing_office_flutter/lib/models/resident_career.dart`
+- `ResidentCareerStatus`
+- `ResidentCareerEvent`
+- `RecruitmentNeed`
+- `PromotionCandidate`
+- `ResidentProfile.career`
+- `ResidentCurrentState.career`
+- `ResidentContext.career`
+- `WorldSimulationContext.residentCareerSnapshot`
+- `OrganizationAssignment.active`
+- `OrganizationAssignment.reportsToResidentId`
+- persisted Reporting Graph
+- multi-level management cycle validation
+- `OrganizationMutationRequest`
+- `OrganizationMutationResult`
+- `OrganizationMutationRecord`
+- Runtime organization overrides
+- Runtime organization mutation history
+- `fishing_office_flutter/lib/models/office_economy.dart`
+- `OfficeEconomyState`
+- `OfficeEconomyRecord`
+- `OfficeEconomySettlementResult`
+- company-side payroll settlement
+- bounded office economy history
+- `WorldSimulationContext.economy.officeEconomy`
+- explainable resident AI decision recommendations
+- `ResidentDecision.decisionId`
+- `ResidentDecision.type`
+- `ResidentDecision.score`
+- `ResidentDecision.confidence`
+- `ResidentDecision.target`
+- `ResidentDecision.consequence`
+- `ResidentDecision.cooldown`
+- bounded AI decision history
+- idempotent AI decision execution records
+- `LongTermResidentMemory`
+- `ResidentMemorySummary`
+- bounded resident long-term memory history
+- long-term memory sourceId idempotency
+- long-term memory decay and expiry
+- `CompanyNewsItem`
+- `CompanyTimelineEvent`
+- `CompanyTimelineSnapshot`
+- bounded company news history
+- bounded company timeline history
+- `AICompanyEvent`
+- `AICompanyEventResult`
+- bounded AI company event history
+- `SecondWorldEngine.triggerAICompanyEvent(...)`
+- Long-term world evolution design guardrails
+- ADR-011 through ADR-026 for world evolution rules
+- Architecture guardrails
+- Context reading guide
+
+## Recent Modified Files
+
+- `AGENTS.md`
+- `00_Project/PROJECT_INDEX.md`
+- `00_Project/Module_Manifests/company_organization.md`
+- `00_Project/Module_Manifests/resident_career.md`
+- `00_Project/v1.3.0/CURRENT_STATE.md`
+- `00_Project/v1.3.0/Module_01_Company_Organization_Report.md`
+- `00_Project/v1.3.0/Module_02_Career_Growth_Report.md`
+- `00_Project/v1.3.0/Module_03_Organization_Assignment_Mutation_Report.md`
+- `00_Project/v1.3.0/Module_04_Office_Economy_Report.md`
+- `00_Project/v1.3.0/Module_05_AI_Decision_Report.md`
+- `00_Project/v1.3.0/Module_06_Long_Term_Memory_Report.md`
+- `00_Project/v1.3.0/Module_07_Company_News_Timeline_Report.md`
+- `00_Project/v1.3.0/Module_08_AI_Company_Events_Report.md`
+- `00_Project/v1.3.0/RC_Readiness_Report.md`
+- `00_Project/v1.3.0/QA_Summary.md`
+- `00_Project/v1.3.0/Release_Notes_Draft.md`
+- `00_Project/v1.3.0/Known_Limitations.md`
+- `00_Project/v1.3.0/COMMIT_PUSH_PLAN.md`
+- `00_Project/v1.3.0/ROADMAP.md`
+- `00_Project/v1.3.0/DESIGN_DECISIONS.md`
+- `00_Project/v1.3.0/LONG_TERM_WORLD_EVOLUTION_DESIGN.md`
+- `00_Project/v1.3.0/ARCHITECTURE_GUARDRAILS.md`
+- `00_Project/v1.3.0/CONTEXT_READING_GUIDE.md`
+- `00_Project/v1.3.0/Module_Manifests/organization_assignment_runtime_mutation.md`
+- `00_Project/v1.3.0/Module_Manifests/office_economy.md`
+- `00_Project/v1.3.0/Module_Manifests/ai_decision.md`
+- `00_Project/Module_Manifests/memory_runtime.md`
+- `00_Project/v1.3.0/Module_Manifests/company_news_timeline.md`
+- `00_Project/v1.3.0/Module_Manifests/ai_company_events.md`
+- `fishing_office_flutter/lib/models/office_economy.dart`
+- `fishing_office_flutter/lib/models/company_organization.dart`
+- `fishing_office_flutter/lib/models/resident_career.dart`
+- `fishing_office_flutter/lib/models/resident_config.dart`
+- `fishing_office_flutter/lib/core/managers/resident_life_manager.dart`
+- `fishing_office_flutter/lib/core/managers/resident_runtime_manager.dart`
+- `fishing_office_flutter/lib/core/managers/resident_decision_manager.dart`
+- `fishing_office_flutter/lib/core/engine/resident_memory_engine.dart`
+- `fishing_office_flutter/lib/models/resident_memory_config.dart`
+- `fishing_office_flutter/lib/models/living_office_state.dart`
+- `fishing_office_flutter/lib/models/world_save_data.dart`
+- `fishing_office_flutter/lib/core/managers/world_save_manager.dart`
+- `fishing_office_flutter/lib/core/engine/second_world_engine.dart`
+- `fishing_office_flutter/lib/core/engine/second_world_engine.dart`
+- `fishing_office_flutter/lib/core/managers/world_tick_manager.dart`
+- `fishing_office_flutter/lib/core/managers/world_save_manager.dart`
+- `fishing_office_flutter/lib/models/interactive_office.dart`
+- `fishing_office_flutter/lib/widgets/office/office_hub_dialog.dart`
+- `fishing_office_flutter/lib/core/managers/dialogue_runtime_manager.dart`
+- `fishing_office_flutter/lib/core/managers/story_runtime_manager.dart`
+- `fishing_office_flutter/lib/core/managers/quest_runtime_manager.dart`
+- `fishing_office_flutter/lib/core/managers/dynamic_event_runtime_manager.dart`
+- `fishing_office_flutter/lib/models/resident_dialogue_config.dart`
+- `fishing_office_flutter/lib/models/resident_story_config.dart`
+- `fishing_office_flutter/lib/models/dynamic_event_config.dart`
+- `fishing_office_flutter/test/framework_smoke_test.dart`
+- `fishing_office_flutter/test/widgets/resident_detail_dialog_test.dart`
+
+## Current Public Interfaces
+
+- `ResidentRuntimeManager.companyOrganization`
+- `ResidentRuntimeManager.getResidentOrganization(id)`
+- `ResidentRuntimeManager.getResidentOrganizationContext(id)`
+- `ResidentRuntimeManager.getResidentsByDepartment(departmentId)`
+- `ResidentRuntimeManager.getResidentsByTeam(teamId)`
+- `SecondWorldEngine.getCompanyOrganization()`
+- `SecondWorldEngine.getResidentOrganizationContext(id)`
+- `ResidentContext.organization`
+- `WorldSimulationContext.organizationSnapshot`
+- `QuestRuntimeManager.recordOrganizationEvent(...)`
+- `ResidentRuntimeManager.getResidentCareerStatus(id)`
+- `ResidentRuntimeManager.getResidentCareerEvents(id)`
+- `ResidentRuntimeManager.applyResidentCareerEvent(id, ...)`
+- `ResidentRuntimeManager.getDepartmentRecruitmentNeeds()`
+- `ResidentRuntimeManager.getPromotionCandidates(...)`
+- `ResidentRuntimeManager.getDepartmentManagers(departmentId)`
+- `ResidentRuntimeManager.getTeamLeaders(teamId)`
+- `ResidentRuntimeManager.assignResident(...)`
+- `ResidentRuntimeManager.promoteResident(...)`
+- `ResidentRuntimeManager.transferResident(...)`
+- `ResidentRuntimeManager.demoteResident(...)`
+- `ResidentRuntimeManager.releasePosition(...)`
+- `ResidentRuntimeManager.resignResident(...)`
+- `ResidentRuntimeManager.organizationMutationHistory`
+- `ResidentRuntimeManager.processedOrganizationMutationIds`
+- `SecondWorldEngine.getResidentCareerStatus(id)`
+- `SecondWorldEngine.getResidentCareerEvents(id)`
+- `SecondWorldEngine.applyResidentCareerEvent(id, ...)`
+- `SecondWorldEngine.assignResidentOrganization(...)`
+- `SecondWorldEngine.resignResidentOrganization(...)`
+- `SecondWorldEngine.getDepartmentRecruitmentNeeds()`
+- `SecondWorldEngine.getPromotionCandidates(...)`
+- `SecondWorldEngine.getDepartmentManagers(departmentId)`
+- `SecondWorldEngine.getTeamLeaders(teamId)`
+- `ResidentRuntimeManager.officeEconomyState`
+- `ResidentRuntimeManager.officeEconomySnapshot`
+- `ResidentRuntimeManager.settleOfficeEconomy(...)`
+- `SecondWorldEngine.getOfficeEconomyState()`
+- `SecondWorldEngine.settleOfficeEconomy(...)`
+- `ResidentDecision.decisionId`
+- `ResidentDecision.type`
+- `ResidentDecision.score`
+- `ResidentDecision.confidence`
+- `ResidentDecision.target`
+- `ResidentDecision.consequence`
+- `ResidentDecision.cooldown`
+- `ResidentDecisionManager.decisionHistory`
+- `ResidentDecisionManager.processedDecisionIds`
+- `ResidentDecisionManager.decisionCooldowns`
+- `ResidentDecisionManager.executeDecision(decisionId)`
+- `ResidentDecisionManager.toDecisionStateJson()`
+- `ResidentDecisionManager.loadDecisionState(...)`
+- `ResidentMemoryEngine.recordLongTermMemory(...)`
+- `ResidentMemoryEngine.compactLongTermMemories(...)`
+- `ResidentMemoryEngine.getResidentMemorySummary(id)`
+- `ResidentMemoryEngine.longTermMemoryLimitPerResident`
+- `ResidentMemoryRecord.longTermMemories`
+- `LongTermResidentMemory`
+- `ResidentMemorySummary`
+- `CompanyNewsItem`
+- `CompanyTimelineEvent`
+- `CompanyTimelineSnapshot`
+- `WorldSaveManager.recordCompanyTimelineEvent(...)`
+- `WorldSaveManager.getCompanyTimelineSnapshot(...)`
+- `WorldSaveManager.aiCompanyEvents`
+- `WorldSaveManager.recordAICompanyEvent(...)`
+- `WorldSaveManager.getAICompanyEvent(...)`
+- `SecondWorldEngine.triggerAICompanyEvent(...)`
+- `SecondWorldEngine.getAICompanyEvents()`
+- `WorldSaveManager.companyNews`
+- `WorldSaveManager.companyTimeline`
+- `SecondWorldEngine.recordCompanyTimelineEvent(...)`
+- `SecondWorldEngine.getCompanyTimelineSnapshot(...)`
+
+## Current Design References
+
+- `00_Project/v1.3.0/LONG_TERM_WORLD_EVOLUTION_DESIGN.md`
+- `00_Project/v1.3.0/DESIGN_DECISIONS.md`
+- `00_Project/v1.3.0/ROADMAP.md`
+- `00_Project/v1.3.0/ARCHITECTURE_GUARDRAILS.md`
+- `00_Project/v1.3.0/CONTEXT_READING_GUIDE.md`
+- `00_Project/v1.3.0/Module_Manifests/organization_assignment_runtime_mutation.md`
+- `00_Project/v1.3.0/Module_Manifests/office_economy.md`
+- `00_Project/v1.3.0/Module_Manifests/ai_decision.md`
+- `00_Project/Module_Manifests/memory_runtime.md`
+- `00_Project/v1.3.0/Module_Manifests/company_news_timeline.md`
+
+## Current Test Baseline
+
+- Latest local validation after Commit 2/3 execution:
+  - `flutter analyze` PASS.
+  - `flutter test` PASS with 98 tests.
+  - `framework_smoke_test` performance gate restored; measured sample `morningDuration=246ms`.
+  - Previous release build validation after performance optimization PASS.
+  - Previous `git diff --check` PASS.
+- Latest Module 03 validation:
+  - `dart format --set-exit-if-changed lib test` PASS.
+  - `flutter analyze` PASS.
+  - `flutter test` PASS with 98 tests.
+  - `flutter test test/framework_smoke_test.dart` PASS with 47 tests; full file runtime `67.42s`; internal performance gate PASS below 800ms.
+  - `flutter build web --release` PASS.
+  - `git diff --check` PASS.
+
+## Known Limits
+
+- Organization data is derived from existing resident fields when explicit organization fields are absent.
+- No company organization UI is included.
+- No new JSON type is introduced.
+- Resident career lifecycle is derived from existing resident data/default rules when no runtime override exists.
+- Career events mutate resident career state and persist through existing resident runtime save snapshots.
+- Recruitment needs and promotion candidates are runtime recommendations; they do not automatically mutate resident organization assignments yet.
+- Resident Detail shows career information inside the existing Office Hub only.
+- Career events now route through a unified organization mutation path when they change assignment.
+- Organization mutation save data is runtime state only; raw resident config remains unchanged.
+- Module 03 organization mutation implementation is committed locally.
+- Module 04 Office Economy implementation is committed locally; it is not pushed, released, or merged.
+- Module 05 AI Decision recommendations are read-only with respect to organization, career, economy, player wallet, inventory, quest rewards, and achievement state.
+- AI Decision execution currently records idempotent processing only; domain mutations remain owned by their existing runtime interfaces.
+- Long-term memory is persisted inside existing resident memory save data and caps each resident at 60 records.
+- Long-term memory compression is currently bounded retention, decay, expiry, and summary APIs; richer natural-language compression is deferred.
+- Company News and Timeline are projections, not business state sources.
+- Company News and Timeline are persisted inside existing world save data and are bounded to 120 news items and 240 timeline events.
+- AI Company Events coordinate existing runtime side effects through `SecondWorldEngine` and are persisted in bounded save state.
+- AI Company Events do not add a new top-level Manager, Engine, Repository, Runtime, Provider, page, or JSON type.
+- AI Company Events now persist explicit `reason` and `result` fields and keep failed/cancelled retries idempotent without reporting success.
+- Long-term world evolution rules are documented, but future modules in v1.4.0, v1.5.0, and v2.0.0 remain planned unless explicitly marked implemented in module reports.
+- v1.2 release tag, main merge state, and production release files are not modified by this module.
+
+## Current Forbidden Actions
+
+- Do not switch branches while uncommitted v1.3 changes exist.
+- Do not push, merge, tag, or modify Railway.
+- Do not modify v1.2.0 release baseline.
+- Do not enter the next module until branch and review decision is resolved.
+
+## Next Module
+
+Module 08 AI Company Events is REVIEWED – COMMITTED. v1.3.0 development state is DEVELOPMENT COMPLETE. v1.3.0 staging state is GO FOR STAGING DEPLOYMENT and READY FOR STAGING TEST.
+
+## Default Not Required To Re-Read
+
+- `106_Releases/`
+- v1.0.0 release reports
+- v1.2.0 release package reports
+- Pack 01-35 historical reports
+- build output directories
+- `106_Releases/` unless release or rollback work is explicitly requested
+
+## Latest Review Snapshot
+
+- Module 01 Review: REVIEWED – COMMITTED.
+- Module 02 Review: REVIEWED – COMMITTED WITH ARCHITECTURE DEBT.
+- Module 03 Status: REVIEWED – COMMITTED.
+- Module 04 Status: IMPLEMENTED – COMMITTED.
+- Module 05 Status: IMPLEMENTED – COMMITTED.
+- Module 06 Status: IMPLEMENTED – COMMITTED.
+- Module 07 Status: IMPLEMENTED – COMMITTED.
+- Module 08 Status: REVIEWED – COMMITTED.
+- v1.3.0 Development Status: DEVELOPMENT COMPLETE.
+- v1.3.0 Staging Status: GO FOR STAGING DEPLOYMENT.
+- v1.3.0 Human Test Status: READY FOR STAGING TEST.
+- Latest validation in Module 01/02 commit execution: analyze PASS, flutter test PASS with 98 tests, performance gate restored to 246ms.
+- Commit plan: `00_Project/v1.3.0/MODULE_01_02_COMMIT_PLAN.md`.
+- Branch plan: `00_Project/v1.3.0/BRANCH_CONSOLIDATION_PLAN.md`.

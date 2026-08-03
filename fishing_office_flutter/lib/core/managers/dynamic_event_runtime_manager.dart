@@ -89,6 +89,15 @@ class DynamicEventContext {
     required this.friendshipTags,
     required this.maximumTrust,
     required this.maximumFamiliarity,
+    required this.companyIds,
+    required this.departmentIds,
+    required this.teamIds,
+    required this.positionIds,
+    required this.organizationTags,
+    required this.careerLevels,
+    required this.employmentStatuses,
+    required this.careerTags,
+    required this.maximumSalaryLevel,
     required this.personalityTags,
     required this.memoryTags,
     required this.rumorTags,
@@ -123,6 +132,15 @@ class DynamicEventContext {
   final List<String> friendshipTags;
   final int maximumTrust;
   final int maximumFamiliarity;
+  final List<String> companyIds;
+  final List<String> departmentIds;
+  final List<String> teamIds;
+  final List<String> positionIds;
+  final List<String> organizationTags;
+  final List<String> careerLevels;
+  final List<String> employmentStatuses;
+  final List<String> careerTags;
+  final int maximumSalaryLevel;
   final List<String> personalityTags;
   final List<String> memoryTags;
   final List<String> rumorTags;
@@ -251,7 +269,10 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
   }
 
   List<DynamicEventEntry> getAvailableEvents() {
-    final context = getEventContext();
+    return _availableEventsFor(getEventContext());
+  }
+
+  List<DynamicEventEntry> _availableEventsFor(DynamicEventContext context) {
     final available = _config.events
         .where((event) => event.enabled)
         .where((event) => _matchesEvent(event, context))
@@ -274,8 +295,15 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
   }
 
   DynamicEventRuntimeRecord? triggerEvent(String eventId) {
+    return _triggerEventWithContext(eventId, getEventContext());
+  }
+
+  DynamicEventRuntimeRecord? _triggerEventWithContext(
+    String eventId,
+    DynamicEventContext context,
+  ) {
     final event = _config.findEvent(eventId);
-    if (event == null || !_matchesEvent(event, getEventContext())) return null;
+    if (event == null || !_matchesEvent(event, context)) return null;
     final day = _worldClockManager.today().dayCount;
     final record = DynamicEventRuntimeRecord(
       eventId: event.id,
@@ -367,6 +395,14 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
     final relationshipSet = <String>{};
     final friendshipStageSet = <String>{};
     final friendshipTagSet = <String>{};
+    final companySet = <String>{};
+    final departmentSet = <String>{};
+    final teamSet = <String>{};
+    final positionSet = <String>{};
+    final organizationTagSet = <String>{};
+    final careerLevelSet = <String>{};
+    final employmentStatusSet = <String>{};
+    final careerTagSet = <String>{};
     final personalitySet = <String>{};
     final memoryTags = <String>{};
     final groupActivities = <String>{};
@@ -383,6 +419,7 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
     }
     var maximumTrust = 0;
     var maximumFamiliarity = 0;
+    var maximumSalaryLevel = 0;
     for (final resident in residents) {
       final state =
           _residentRuntimeManager.getResidentCurrentState(resident.id);
@@ -404,6 +441,21 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
       if (friendship.trust > maximumTrust) maximumTrust = friendship.trust;
       if (friendship.familiarity > maximumFamiliarity) {
         maximumFamiliarity = friendship.familiarity;
+      }
+      final organization =
+          _residentRuntimeManager.getResidentOrganizationContext(resident.id);
+      companySet.add(organization.companyId);
+      departmentSet.add(organization.departmentId);
+      teamSet.add(organization.teamId);
+      positionSet.add(organization.positionId);
+      organizationTagSet.addAll(organization.tags);
+      final career =
+          _residentRuntimeManager.getResidentCareerStatus(resident.id);
+      careerLevelSet.add(career.careerLevel);
+      employmentStatusSet.add(career.employmentStatus);
+      careerTagSet.addAll(career.tags);
+      if (career.salaryLevel > maximumSalaryLevel) {
+        maximumSalaryLevel = career.salaryLevel;
       }
       final personality =
           _residentRuntimeManager.getResidentPersonalityContext(resident.id);
@@ -443,6 +495,26 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
       friendshipTags: friendshipTagSet.toList(growable: false),
       maximumTrust: maximumTrust,
       maximumFamiliarity: maximumFamiliarity,
+      companyIds:
+          companySet.where((item) => item.isNotEmpty).toList(growable: false),
+      departmentIds: departmentSet
+          .where((item) => item.isNotEmpty)
+          .toList(growable: false),
+      teamIds: teamSet.where((item) => item.isNotEmpty).toList(growable: false),
+      positionIds:
+          positionSet.where((item) => item.isNotEmpty).toList(growable: false),
+      organizationTags: organizationTagSet
+          .where((item) => item.isNotEmpty)
+          .toList(growable: false),
+      careerLevels: careerLevelSet
+          .where((item) => item.isNotEmpty)
+          .toList(growable: false),
+      employmentStatuses: employmentStatusSet
+          .where((item) => item.isNotEmpty)
+          .toList(growable: false),
+      careerTags:
+          careerTagSet.where((item) => item.isNotEmpty).toList(growable: false),
+      maximumSalaryLevel: maximumSalaryLevel,
       personalityTags: personalitySet.toList(growable: false),
       memoryTags: memoryTags.toList(growable: false),
       rumorTags: <String>[
@@ -506,14 +578,15 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
     Set<String> categories = const <String>{},
     Set<String> types = const <String>{},
   }) {
-    final available = getAvailableEvents().where((event) {
+    final context = getEventContext();
+    final available = _availableEventsFor(context).where((event) {
       final categoryOk =
           categories.isEmpty || categories.contains(event.category);
       final typeOk = types.isEmpty || types.contains(event.type);
       return categoryOk || typeOk;
     }).toList(growable: false);
     if (available.isEmpty) return null;
-    return triggerEvent(available.first.id);
+    return _triggerEventWithContext(available.first.id, context);
   }
 
   bool _matchesEvent(DynamicEventEntry event, DynamicEventContext context) {
@@ -576,6 +649,46 @@ class DynamicEventRuntimeManager extends ChangeNotifier {
       return false;
     }
     if (!_containsAll(context.friendshipTags, conditions.friendshipTags)) {
+      return false;
+    }
+    if (!_matchesAnyOrEmpty(conditions.companyId, context.companyIds.toSet())) {
+      return false;
+    }
+    if (!_matchesAnyOrEmpty(
+      conditions.departmentId,
+      context.departmentIds.toSet(),
+    )) {
+      return false;
+    }
+    if (!_matchesAnyOrEmpty(conditions.teamId, context.teamIds.toSet())) {
+      return false;
+    }
+    if (!_matchesAnyOrEmpty(
+      conditions.positionId,
+      context.positionIds.toSet(),
+    )) {
+      return false;
+    }
+    if (!_containsAll(context.organizationTags, conditions.organizationTags)) {
+      return false;
+    }
+    if (!_matchesAnyOrEmpty(
+      conditions.careerLevel,
+      context.careerLevels.toSet(),
+    )) {
+      return false;
+    }
+    if (!_matchesAnyOrEmpty(
+      conditions.employmentStatus,
+      context.employmentStatuses.toSet(),
+    )) {
+      return false;
+    }
+    if (!_containsAll(context.careerTags, conditions.careerTags)) {
+      return false;
+    }
+    if (conditions.salaryLevelMin > 0 &&
+        context.maximumSalaryLevel < conditions.salaryLevelMin) {
       return false;
     }
     if (!_matchesAnyOrEmpty(
