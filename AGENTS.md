@@ -26,14 +26,18 @@ Run Flutter commands from that directory unless a task explicitly says otherwise
 
 ## 3. Current Development Version
 
-- Current development version: `v1.1.0`
-- Current development branch: `feature/v1.1-office-life-schedule`
-- Current state file: `00_Project/v1.1.0/CURRENT_STATE.md`
+- Current development version: `v1.3.0`
+- Current development branch: `codex/v1.3-company-organization`
+- Current state file: `00_Project/v1.3.0/CURRENT_STATE.md`
+- Current v1.3.0 module state: Module 01 and Module 02 are implemented and waiting for review; Module 03 is planned but blocked by branch/worktree decision because unreviewed implementation-like changes exist.
 
 ## 4. Authoritative Documents
 
 - Highest Product Specification: `00_Project/SecondWorld_Product_Bible.md`
-- Current state: `00_Project/v1.1.0/CURRENT_STATE.md`
+- v1.3 Long-Term World Evolution Design: `00_Project/v1.3.0/LONG_TERM_WORLD_EVOLUTION_DESIGN.md`
+- v1.3 Architecture Guardrails: `00_Project/v1.3.0/ARCHITECTURE_GUARDRAILS.md`
+- v1.3 Context Reading Guide: `00_Project/v1.3.0/CONTEXT_READING_GUIDE.md`
+- Current state: `00_Project/v1.3.0/CURRENT_STATE.md`
 - Project index: `00_Project/PROJECT_INDEX.md`
 - Module manifests: `00_Project/Module_Manifests/*.md`
 - Architecture standard: `00_Project/Standards/Architecture_Standard.md`
@@ -94,14 +98,15 @@ Do not read first and justify later.
 Every task should follow this order:
 
 1. Read `AGENTS.md`.
-2. Read `00_Project/v1.1.0/CURRENT_STATE.md`.
-3. Read the task-specified Module Manifest.
-4. Use `00_Project/PROJECT_INDEX.md` to locate implementation, config, tests, dependencies, and consumers.
-5. Search task symbols with `rg`.
-6. Open symbol definition files.
-7. Open direct callers or consumers.
-8. Open corresponding tests.
-9. Start modification.
+2. Read `00_Project/v1.3.0/CURRENT_STATE.md`.
+3. If the task involves v1.3 world evolution design, read `00_Project/v1.3.0/LONG_TERM_WORLD_EVOLUTION_DESIGN.md`.
+4. Read the task-specified Module Manifest.
+5. Use `00_Project/PROJECT_INDEX.md` to locate implementation, config, tests, dependencies, and consumers.
+6. Search task symbols with `rg`.
+7. Open symbol definition files.
+8. Open direct callers or consumers.
+9. Open corresponding tests.
+10. Start modification.
 
 Forbidden default workflow:
 
@@ -178,6 +183,16 @@ Historical reports are not ordinary Feature inputs.
 - Do not create a top-level Manager, Engine, Repository, Runtime, Provider, or UI page unless explicitly required and no existing owner fits.
 - UI displays state and calls public interfaces. UI must not directly parse JSON or own business rules.
 - Content expansion should be JSON-driven and should not require Flutter code changes.
+- Resident career events that change company organization assignment must use the unified Resident Runtime organization mutation path; do not separately edit career and organization state.
+- Organization Mutation is the only approved entry for resident organization assignment changes.
+- Career must not directly modify Organization assignment fields.
+- Rules accepted in `LONG_TERM_WORLD_EVOLUTION_DESIGN.md` should not be reversed without adding or updating an ADR.
+- Core rule changes require an ADR update before implementation.
+- Planned content must not be documented as implemented.
+- Tests not executed in a documentation-only task must be labeled `NOT EXECUTED`.
+- One task should complete one module unless the user explicitly requests a grouped release or documentation pass.
+- Keep the first read pass within the stated reading budget; do not scan the whole project by default.
+- Do not automatically commit, push, merge, tag, or modify v1.2.0 release baseline.
 
 ## 14. Git Safety Rules
 
