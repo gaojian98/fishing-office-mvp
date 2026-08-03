@@ -7325,6 +7325,21 @@ void main() {
           'home': 'old_fisher_home',
           'workplace': 'dock',
           'dailyRoute': ['dock', 'coffee_shop', 'office_lounge'],
+          'organization': {
+            'companyId': 'fishing_office',
+            'departmentId': 'operations',
+            'teamId': 'dock_services',
+            'positionId': 'staff',
+          },
+          'career': {
+            'hireDate': 'Y1-M01-D01',
+            'careerLevel': 'regular',
+            'salaryLevel': 180,
+            'employmentStatus': 'active',
+            'performanceScore': 86,
+            'capabilityScore': 82,
+            'promotionHistory': [],
+          },
           'enabled': true,
         },
         {
@@ -7355,6 +7370,21 @@ void main() {
           'home': 'guard_room',
           'workplace': 'office_gate',
           'dailyRoute': ['office_gate', 'office_lounge'],
+          'organization': {
+            'companyId': 'fishing_office',
+            'departmentId': 'front_office',
+            'teamId': 'office_admin',
+            'positionId': 'staff',
+          },
+          'career': {
+            'hireDate': 'Y1-M01-D01',
+            'careerLevel': 'regular',
+            'salaryLevel': 180,
+            'employmentStatus': 'active',
+            'performanceScore': 48,
+            'capabilityScore': 42,
+            'promotionHistory': [],
+          },
           'enabled': true,
         },
       ],
@@ -7736,6 +7766,60 @@ void main() {
     expect(decision.decisionFor('old_fisher')?.reason, 'story_finished');
     expect(decision.decideNextActivity('old_fisher'), contains('小故事'));
     expect(decision.decideNextDialogueTarget('old_fisher'), 'sleepy_guard');
+
+    runtime.applyResidentCareerEvent(
+      'old_fisher',
+      type: 'promotion',
+      toPositionId: 'specialist',
+      toCareerLevel: 'senior',
+      performanceScore: 86,
+      capabilityScore: 82,
+      reason: 'ai_candidate_setup',
+    );
+    decision.runResidentDecision();
+    final promotionDecision = decision.decisionFor('old_fisher')!;
+    expect(promotionDecision.decisionId, contains('promotion_request'));
+    expect(promotionDecision.type, 'promotion_request');
+    expect(promotionDecision.score, greaterThanOrEqualTo(80));
+    expect(promotionDecision.confidence, greaterThanOrEqualTo(70));
+    expect(promotionDecision.consequence, 'organization_mutation_required');
+    expect(runtime.getResidentOrganization('old_fisher').positionId,
+        isNot('department_manager'));
+    expect(decision.executeDecision(promotionDecision.decisionId), isTrue);
+    expect(decision.executeDecision(promotionDecision.decisionId), isTrue);
+    expect(decision.decisionHistory.length, 1);
+    expect(
+        decision.processedDecisionIds, contains(promotionDecision.decisionId));
+    expect(decision.decisionCooldowns['old_fisher'], greaterThan(0));
+
+    runtime.settleOfficeEconomy(
+      periodType: 'day',
+      periodKey: 'Y1-M1-D02',
+      settlementId: 'ai_pressure_budget',
+      operatingCost: 5900,
+      projectIncome: 0,
+    );
+    decision.runResidentDecision();
+    final pressureDecision = decision.decisionFor('sleepy_guard')!;
+    expect(pressureDecision.type, 'resignation_risk');
+    expect(pressureDecision.consequence, 'career_runtime_required');
+    expect(runtime.getResidentCareerStatus('sleepy_guard').employmentStatus,
+        isNot('resigned'));
+
+    final restoredDecision = ResidentDecisionManager(
+      residentRuntimeManager: runtime,
+      dialogueRuntimeManager: dialogueRuntime,
+      storyRuntimeManager: storyRuntime,
+      weatherRuntimeManager: weatherRuntime,
+      festivalRuntimeManager: festivalRuntime,
+      rumorRuntimeManager: rumorRuntime,
+      worldClockManager: clock,
+      secondWorldEngine: secondWorld,
+    )..loadDecisionState(decision.toDecisionStateJson());
+    expect(
+        restoredDecision.decisionFor('sleepy_guard')!.type, 'resignation_risk');
+    expect(restoredDecision.processedDecisionIds,
+        contains(promotionDecision.decisionId));
   });
 
   test('story runtime manager triggers story chain and refreshes dialogue',

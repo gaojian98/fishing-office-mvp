@@ -18,21 +18,73 @@ import 'world_clock_manager.dart';
 class ResidentDecision {
   const ResidentDecision({
     required this.residentId,
+    required this.decisionId,
+    required this.type,
     required this.activity,
     required this.location,
     required this.mood,
     required this.interactionTarget,
     required this.storyPreference,
     required this.reason,
+    required this.score,
+    required this.confidence,
+    required this.target,
+    required this.consequence,
+    required this.cooldown,
   });
 
+  factory ResidentDecision.fromJson(Map<String, dynamic> json) {
+    return ResidentDecision(
+      residentId: json['residentId']?.toString() ?? '',
+      decisionId: json['decisionId']?.toString() ?? '',
+      type: json['type']?.toString() ?? 'daily_route',
+      activity: json['activity']?.toString() ?? '',
+      location: json['location']?.toString() ?? '',
+      mood: normalizeResidentMood(json['mood']?.toString() ?? ''),
+      interactionTarget: json['interactionTarget']?.toString() ?? '',
+      storyPreference: json['storyPreference']?.toString() ?? '',
+      reason: json['reason']?.toString() ?? '',
+      score: _readInt(json['score']).clamp(0, 100).toInt(),
+      confidence: _readInt(json['confidence']).clamp(0, 100).toInt(),
+      target: json['target']?.toString() ?? '',
+      consequence: json['consequence']?.toString() ?? '',
+      cooldown: _readInt(json['cooldown']).clamp(0, 1 << 31).toInt(),
+    );
+  }
+
   final String residentId;
+  final String decisionId;
+  final String type;
   final String activity;
   final String location;
   final String mood;
   final String interactionTarget;
   final String storyPreference;
   final String reason;
+  final int score;
+  final int confidence;
+  final String target;
+  final String consequence;
+  final int cooldown;
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'residentId': residentId,
+      'decisionId': decisionId,
+      'type': type,
+      'activity': activity,
+      'location': location,
+      'mood': mood,
+      'interactionTarget': interactionTarget,
+      'storyPreference': storyPreference,
+      'reason': reason,
+      'score': score,
+      'confidence': confidence,
+      'target': target,
+      'consequence': consequence,
+      'cooldown': cooldown,
+    };
+  }
 }
 
 class ResidentDecisionManager extends ChangeNotifier {
@@ -69,10 +121,19 @@ class ResidentDecisionManager extends ChangeNotifier {
   final DailySimulationManager? _dailySimulationManager;
   final ResidentMemoryEngine? _residentMemoryEngine;
   final Map<String, ResidentDecision> _decisions = <String, ResidentDecision>{};
+  final Set<String> _processedDecisionIds = <String>{};
+  final Map<String, int> _decisionCooldowns = <String, int>{};
+  final List<ResidentDecision> _decisionHistory = <ResidentDecision>[];
 
   List<ResidentDecision> get decisions =>
       List<ResidentDecision>.from(_decisions.values)
         ..sort((a, b) => a.residentId.compareTo(b.residentId));
+  List<ResidentDecision> get decisionHistory =>
+      List<ResidentDecision>.unmodifiable(_decisionHistory);
+  List<String> get processedDecisionIds =>
+      _processedDecisionIds.toList(growable: false)..sort();
+  Map<String, int> get decisionCooldowns =>
+      Map<String, int>.unmodifiable(_decisionCooldowns);
 
   ResidentDecision? decisionFor(String residentId) => _decisions[residentId];
 
@@ -99,6 +160,7 @@ class ResidentDecisionManager extends ChangeNotifier {
           _residentRuntimeManager.getResidentCurrentState(resident.id);
       final decision = _decide(resident.id);
       _decisions[resident.id] = decision;
+      _decisionCooldowns[resident.id] = decision.cooldown;
       if (!_shouldApplyDecision(before, decision)) {
         continue;
       }
@@ -142,6 +204,64 @@ class ResidentDecisionManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool executeDecision(String decisionId) {
+    if (decisionId.isEmpty) return false;
+    if (_processedDecisionIds.contains(decisionId)) return true;
+    ResidentDecision? decision;
+    for (final item in _decisions.values) {
+      if (item.decisionId == decisionId) {
+        decision = item;
+        break;
+      }
+    }
+    if (decision == null) return false;
+    _processedDecisionIds.add(decisionId);
+    _decisionHistory.insert(0, decision);
+    if (_decisionHistory.length > 80) {
+      _decisionHistory.removeRange(80, _decisionHistory.length);
+    }
+    notifyListeners();
+    return true;
+  }
+
+  Map<String, dynamic> toDecisionStateJson() {
+    return <String, dynamic>{
+      'decisions': decisions.map((decision) => decision.toJson()).toList(),
+      'processedDecisionIds': processedDecisionIds,
+      'decisionCooldowns': decisionCooldowns,
+      'decisionHistory':
+          _decisionHistory.map((decision) => decision.toJson()).toList(),
+    };
+  }
+
+  void loadDecisionState(Map<String, dynamic> json) {
+    _decisions
+      ..clear()
+      ..addEntries(
+        _listOfMaps(json['decisions'])
+            .map(ResidentDecision.fromJson)
+            .where((decision) =>
+                decision.residentId.isNotEmpty &&
+                decision.decisionId.isNotEmpty)
+            .map((decision) => MapEntry(decision.residentId, decision)),
+      );
+    _processedDecisionIds
+      ..clear()
+      ..addAll(_stringList(json['processedDecisionIds']));
+    _decisionCooldowns
+      ..clear()
+      ..addAll(_intMap(json['decisionCooldowns']));
+    _decisionHistory
+      ..clear()
+      ..addAll(
+        _listOfMaps(json['decisionHistory'])
+            .map(ResidentDecision.fromJson)
+            .where((decision) => decision.decisionId.isNotEmpty)
+            .take(80),
+      );
+    notifyListeners();
+  }
+
   ResidentDecision _decide(String residentId) {
     final context = _secondWorldEngine.getResidentContext(residentId);
     final baseState = context.life;
@@ -159,6 +279,9 @@ class ResidentDecisionManager extends ChangeNotifier {
     final finishedStories = _storyRuntimeManager.finishedStoryIds;
     final personality =
         _residentRuntimeManager.getResidentPersonalityContext(residentId);
+    final organization = context.organization.assignment;
+    final career = context.career;
+    final officeEconomy = _residentRuntimeManager.officeEconomyState;
 
     final route = _routeFor(residentId);
     var location = baseState.location;
@@ -268,8 +391,25 @@ class ResidentDecisionManager extends ChangeNotifier {
     );
     final storyPreference = stories.isNotEmpty ? stories.first.id : '';
     final dialogueSignal = dialogues.isNotEmpty ? dialogues.first.id : '';
+    final ai = _aiDecisionFields(
+      residentId: residentId,
+      reason: reason,
+      relationship: relationship,
+      mood: mood,
+      careerLevel: career.careerLevel,
+      performanceScore: career.performanceScore,
+      capabilityScore: career.capabilityScore,
+      salaryLevel: career.salaryLevel,
+      departmentId: organization.departmentId,
+      officeBudget: officeEconomy.companyBudget,
+      budgetWarnings: officeEconomy.budgetWarnings,
+      memoryTags: memoryTags,
+      personality: personality,
+    );
     return ResidentDecision(
       residentId: residentId,
+      decisionId: ai.decisionId,
+      type: ai.type,
       activity: activity,
       location: location,
       mood: normalizeResidentMood(mood),
@@ -277,6 +417,84 @@ class ResidentDecisionManager extends ChangeNotifier {
       storyPreference:
           storyPreference.isEmpty ? dialogueSignal : storyPreference,
       reason: reason,
+      score: ai.score,
+      confidence: ai.confidence,
+      target: ai.target,
+      consequence: ai.consequence,
+      cooldown: ai.cooldown,
+    );
+  }
+
+  _ResidentAiDecisionFields _aiDecisionFields({
+    required String residentId,
+    required String reason,
+    required String relationship,
+    required String mood,
+    required String careerLevel,
+    required int performanceScore,
+    required int capabilityScore,
+    required int salaryLevel,
+    required String departmentId,
+    required int officeBudget,
+    required List<String> budgetWarnings,
+    required List<String> memoryTags,
+    required ResidentPersonalityContext personality,
+  }) {
+    final day = _worldClockManager.today().dayCount;
+    final baseKey = '$residentId:$day';
+    var type = 'daily_route';
+    var target = departmentId;
+    var consequence = 'observe_only';
+    var score = (performanceScore * 0.45 + capabilityScore * 0.35).round();
+    var confidence = 55;
+    var cooldown = 2;
+    if (budgetWarnings.isNotEmpty || officeBudget < 1200) {
+      type = 'resignation_risk';
+      consequence = 'career_runtime_required';
+      score = (100 - officeBudget ~/ 30).clamp(45, 95).toInt();
+      confidence = 72;
+      cooldown = 12;
+    } else if (salaryLevel > 600) {
+      type = personality.hasTrait('loyal') ? 'training' : 'resignation_risk';
+      consequence = 'career_runtime_required';
+      score = (salaryLevel ~/ 8).clamp(45, 90).toInt();
+      confidence = 68;
+      cooldown = 12;
+    } else if (performanceScore >= 78 && capabilityScore >= 72) {
+      type = 'promotion_request';
+      target = careerLevel;
+      consequence = 'organization_mutation_required';
+      score = (performanceScore * 0.6 + capabilityScore * 0.4).round();
+      confidence = 82;
+      cooldown = 24;
+    } else if (personality.hasTrait('adaptable') && capabilityScore >= 65) {
+      type = 'transfer_choice';
+      consequence = 'organization_mutation_required';
+      score = capabilityScore;
+      confidence = 64;
+      cooldown = 18;
+    } else if (_isFriend(relationship) ||
+        memoryTags.contains('player_helped')) {
+      type = 'help_colleague';
+      consequence = 'relationship_runtime_required';
+      score = 68 + memoryTags.length.clamp(0, 12);
+      confidence = 70;
+      cooldown = 6;
+    } else if (mood == 'tired' || mood == 'angry' || mood == 'sad') {
+      type = 'refuse_interaction';
+      consequence = 'cooldown_only';
+      score = 58;
+      confidence = 66;
+      cooldown = 4;
+    }
+    return _ResidentAiDecisionFields(
+      decisionId: 'ai_decision:$baseKey:$type',
+      type: type,
+      score: score.clamp(0, 100).toInt(),
+      confidence: confidence.clamp(0, 100).toInt(),
+      target: target,
+      consequence: consequence,
+      cooldown: cooldown,
     );
   }
 
@@ -563,4 +781,53 @@ class ResidentDecisionManager extends ChangeNotifier {
     if (weatherName.isNotEmpty) return '因为$weatherName，临时换了今天的安排。';
     return '按自己的节奏换个地方生活一会儿。';
   }
+}
+
+class _ResidentAiDecisionFields {
+  const _ResidentAiDecisionFields({
+    required this.decisionId,
+    required this.type,
+    required this.score,
+    required this.confidence,
+    required this.target,
+    required this.consequence,
+    required this.cooldown,
+  });
+
+  final String decisionId;
+  final String type;
+  final int score;
+  final int confidence;
+  final String target;
+  final String consequence;
+  final int cooldown;
+}
+
+List<Map<String, dynamic>> _listOfMaps(Object? value) {
+  if (value is! List) return const <Map<String, dynamic>>[];
+  return value
+      .whereType<Map>()
+      .map((item) => Map<String, dynamic>.from(item))
+      .toList(growable: false);
+}
+
+List<String> _stringList(Object? value) {
+  if (value is! List) return const <String>[];
+  return value
+      .map((item) => item.toString())
+      .where((item) => item.isNotEmpty)
+      .toList(growable: false);
+}
+
+Map<String, int> _intMap(Object? value) {
+  if (value is! Map) return const <String, int>{};
+  return value.map(
+    (key, value) => MapEntry(key.toString(), _readInt(value)),
+  );
+}
+
+int _readInt(Object? value, {int fallback = 0}) {
+  if (value is int) return value;
+  if (value is num) return value.round();
+  return int.tryParse(value?.toString() ?? '') ?? fallback;
 }

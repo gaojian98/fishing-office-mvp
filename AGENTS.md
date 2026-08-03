@@ -29,7 +29,7 @@ Run Flutter commands from that directory unless a task explicitly says otherwise
 - Current development version: `v1.3.0`
 - Current development branch: `codex/v1.3-company-organization`
 - Current state file: `00_Project/v1.3.0/CURRENT_STATE.md`
-- Current v1.3.0 module state: Module 01, Module 02, and Module 03 are committed locally. Module 04 Office Economy is implemented in the working tree and waiting for review.
+- Current v1.3.0 module state: Module 01, Module 02, Module 03, and Module 04 are committed locally. Module 05 AI Decision is implemented in the working tree and waiting for review.
 
 ## 4. Authoritative Documents
 
@@ -188,6 +188,8 @@ Historical reports are not ordinary Feature inputs.
 - Career must not directly modify Organization assignment fields.
 - Office Economy must remain separate from player wallet, backpack, fish sales, and task reward state.
 - Office Economy settlements require stable idempotency keys and bounded history.
+- Resident AI Decision is an explainable recommendation layer. It may read organization, career, economy, relationship, personality, emotion, memory, dialogue, and story state, but it must not directly mutate organization, career, economy, or player reward state.
+- AI decisions require stable decision IDs, bounded history, cooldowns, and idempotent execution records.
 - Rules accepted in `LONG_TERM_WORLD_EVOLUTION_DESIGN.md` should not be reversed without adding or updating an ADR.
 - Core rule changes require an ADR update before implementation.
 - Planned content must not be documented as implemented.

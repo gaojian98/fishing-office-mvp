@@ -304,3 +304,35 @@ Consequences: Old saves without office economy state fall back safely. Repeated 
 Alternatives: Append every settlement attempt. Rejected because it creates duplicated finance and unbounded history.
 
 Follow-up: Company News and Timeline should summarize economy records without becoming the source of truth.
+
+## ADR-025 AI Decision Is A Read-Only Recommendation Layer
+
+Status: Accepted
+
+Context: Resident decisions can consider organization, career, office economy, relationship, personality, emotion, memory, dialogue, story, weather, festival, and rumor state.
+
+Decision: AI Decision may score, explain, persist, and mark decisions as processed, but it must not directly mutate organization assignment, career state, office economy, player assets, quest rewards, or achievement state.
+
+Rationale: Domain ownership remains with the existing mutation/runtime interfaces, which already enforce validation, idempotency, transaction consistency, and save compatibility.
+
+Consequences: Future modules that execute AI recommendations must call the owning runtime interface, such as Organization Mutation for promotions or transfers and Office Economy for settlements.
+
+Alternatives: Let AI Decision directly perform promotions, resignations, or economy changes. Rejected because it would bypass Module 03 transaction rules and make side effects harder to audit.
+
+Follow-up: Company Events can translate approved AI recommendations into domain calls, but must preserve the same idempotency keys.
+
+## ADR-026 AI Decision History And Execution Must Be Bounded And Idempotent
+
+Status: Accepted
+
+Context: Resident decisions may run repeatedly during Tick, save/load, daily simulation, and future event processing.
+
+Decision: Decision IDs must be stable, executed decisions must be idempotent, cooldowns must be stored by resident, and decision history must be bounded.
+
+Rationale: Repeated evaluation should not duplicate history, spam decisions, or grow save data forever.
+
+Consequences: `executeDecision(decisionId)` records processing only once, and decision history is capped.
+
+Alternatives: Append every evaluation and execution attempt. Rejected because it creates noisy history and unbounded persistence.
+
+Follow-up: Long-Term Memory and Company Timeline should summarize AI decisions rather than copying every repeated evaluation.

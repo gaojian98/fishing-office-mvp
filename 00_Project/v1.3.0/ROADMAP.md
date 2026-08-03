@@ -15,8 +15,8 @@ Primary long-term design reference:
 | Module 01 Company Organization System | REVIEWED – PASS WITH DEBT | Company, Department, Team, Position, resident organization context. Debt: inferred capacity/reporting graph and mixed commit split. |
 | Module 02 Career Growth System | REVIEWED – PASS WITH DEBT | Resident career status, career events, recruitment needs, promotion candidates, Resident Detail career projection. Debt: supplemental career event idempotency must be resolved by Module 03. |
 | Module 03 Organization Assignment Runtime Mutation | REVIEWED – COMMITTED | Transactional organization assignment mutation connected to career events, reporting graph, and save/restore. |
-| Module 04 Office Economy | IMPLEMENTED – WAITING FOR REVIEW | Company-side budget, payroll, bonus, operating cost, project income, budget warning, snapshot, and bounded history. |
-| Module 05 AI Decision System | PLANNED | Explainable resident decisions that read organization, career, economy, relationship, personality, emotion, and memory state. |
+| Module 04 Office Economy | IMPLEMENTED – COMMITTED | Company-side budget, payroll, bonus, operating cost, project income, budget warning, snapshot, and bounded history. |
+| Module 05 AI Decision System | IMPLEMENTED – WAITING FOR REVIEW | Explainable resident decisions that read organization, career, economy, relationship, personality, emotion, and memory state without directly mutating owning domains. |
 | Module 06 Long-Term Memory | PLANNED | Bounded long-term resident memory for interaction, relationship, career, organization, event, and player history. |
 | Module 07 Company News & Timeline | PLANNED | Player-readable company news and structured timeline history. |
 | Module 08 AI Company Events | PLANNED | Cross-runtime company events that call owning mutation/runtime interfaces. |
@@ -42,9 +42,9 @@ Primary long-term design reference:
 
 ## Next Candidate Module
 
-Human review for Module 04 Office Economy.
+Human review for Module 05 AI Decision System.
 
-Readiness: IMPLEMENTED – WAITING FOR REVIEW. Do not enter AI Decision until Module 04 is reviewed and committed or explicitly accepted.
+Readiness: IMPLEMENTED – WAITING FOR REVIEW. Do not enter Long-Term Memory until Module 05 is reviewed and committed or explicitly accepted.
 
 ## Review And Commit Planning
 
