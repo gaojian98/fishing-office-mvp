@@ -285,6 +285,23 @@ class QuestRuntimeManager extends ChangeNotifier {
     }
   }
 
+  void recordOrganizationEvent(
+    String type, {
+    required String residentId,
+    int amount = 1,
+  }) {
+    if (residentId.isEmpty) return;
+    final organization =
+        _residentRuntimeManager.getResidentOrganizationContext(residentId);
+    if (!organization.assignment.isAssigned) return;
+    recordWorldEvent(type, id: organization.companyId, amount: amount);
+    recordWorldEvent('${type}_department',
+        id: organization.departmentId, amount: amount);
+    recordWorldEvent('${type}_team', id: organization.teamId, amount: amount);
+    recordWorldEvent('${type}_position',
+        id: organization.positionId, amount: amount);
+  }
+
   bool claimReward({
     required TaskItemConfig task,
     required WalletManagerView wallet,
@@ -375,8 +392,40 @@ class QuestRuntimeManager extends ChangeNotifier {
     final activeRumors = _rumorRuntimeManager.getActiveRumors();
     final activeFestivals = _festivalRuntimeManager.getActiveFestivals();
     final weather = _weatherRuntimeManager.getCurrentWeather();
+    final organizationMetrics = <String, int>{};
+    for (final resident in _residentRuntimeManager.residents) {
+      if (!resident.enabled) continue;
+      final organization = resident.organization;
+      final career = resident.career;
+      organizationMetrics['company_${organization.companyId}'] =
+          (organizationMetrics['company_${organization.companyId}'] ?? 0) + 1;
+      organizationMetrics['department_${organization.departmentId}'] =
+          (organizationMetrics['department_${organization.departmentId}'] ??
+                  0) +
+              1;
+      organizationMetrics['team_${organization.teamId}'] =
+          (organizationMetrics['team_${organization.teamId}'] ?? 0) + 1;
+      organizationMetrics['position_${organization.positionId}'] =
+          (organizationMetrics['position_${organization.positionId}'] ?? 0) + 1;
+      organizationMetrics['career_${career.careerLevel}'] =
+          (organizationMetrics['career_${career.careerLevel}'] ?? 0) + 1;
+      organizationMetrics['employment_${career.employmentStatus}'] =
+          (organizationMetrics['employment_${career.employmentStatus}'] ?? 0) +
+              1;
+      for (final tag in career.tags) {
+        organizationMetrics['career_tag_$tag'] =
+            (organizationMetrics['career_tag_$tag'] ?? 0) + 1;
+      }
+    }
+    final recruitmentNeeds =
+        _residentRuntimeManager.getDepartmentRecruitmentNeeds();
+    final promotionCandidates =
+        _residentRuntimeManager.getPromotionCandidates();
     return <String, int>{
       ..._worldEventCounts,
+      ...organizationMetrics,
+      'recruitment_need_count': recruitmentNeeds.length,
+      'promotion_candidate_count': promotionCandidates.length,
       'login_days': _worldClockManager.today().dayCount,
       'consecutive_login': _worldClockManager.today().dayCount,
       'fishing_count': fishing == null

@@ -12,6 +12,7 @@ import '../../models/location_context.dart';
 import '../../models/office_group.dart';
 import '../../models/player_influence.dart';
 import '../../models/resident_config.dart';
+import '../../models/resident_career.dart';
 import '../../models/resident_dialogue_config.dart';
 import '../../models/resident_memory_config.dart';
 import '../../models/resident_personality_context.dart';
@@ -87,6 +88,134 @@ class SecondWorldEngine {
   RelationshipRuntimeManager? _relationshipRuntimeManager;
   DynamicEventRuntimeManager? _dynamicEventRuntimeManager;
   DailySimulationManager? _dailySimulationManager;
+
+  CompanyOrganization getCompanyOrganization() {
+    return _residentRuntimeManager?.companyOrganization ??
+        CompanyOrganization.defaultStructure();
+  }
+
+  ResidentOrganizationContext getResidentOrganizationContext(String id) {
+    final runtime = _residentRuntimeManager;
+    if (runtime != null) {
+      return runtime.getResidentOrganizationContext(id);
+    }
+    return ResidentOrganizationContext.resolve(
+      _residentConfig.findResident(id).organization,
+      organization: getCompanyOrganization(),
+    );
+  }
+
+  ResidentCareerStatus getResidentCareerStatus(String id) {
+    return _residentRuntimeManager?.getResidentCareerStatus(id) ??
+        _residentConfig.findResident(id).career;
+  }
+
+  List<ResidentCareerEvent> getResidentCareerEvents(String id) {
+    return getResidentCareerStatus(id).promotionHistory;
+  }
+
+  ResidentCareerStatus applyResidentCareerEvent(
+    String residentId, {
+    required String type,
+    String date = '',
+    String fromPositionId = '',
+    String toPositionId = '',
+    String fromCareerLevel = '',
+    String toCareerLevel = '',
+    String reason = '',
+    int? salaryLevel,
+    int? performanceScore,
+    int? capabilityScore,
+    List<String> tags = const <String>[],
+  }) {
+    return _residentRuntimeManager?.applyResidentCareerEvent(
+          residentId,
+          type: type,
+          date: date,
+          fromPositionId: fromPositionId,
+          toPositionId: toPositionId,
+          fromCareerLevel: fromCareerLevel,
+          toCareerLevel: toCareerLevel,
+          reason: reason,
+          salaryLevel: salaryLevel,
+          performanceScore: performanceScore,
+          capabilityScore: capabilityScore,
+          tags: tags,
+        ) ??
+        getResidentCareerStatus(residentId);
+  }
+
+  OrganizationMutationResult assignResidentOrganization(
+    String residentId, {
+    String mutationType = 'hire',
+    String date = '',
+    String companyId = '',
+    String departmentId = '',
+    String teamId = '',
+    String positionId = '',
+    String reason = '',
+    String sourceId = '',
+    String reportsToResidentId = '',
+    String careerLevel = '',
+  }) {
+    return _residentRuntimeManager?.assignResident(
+          residentId,
+          mutationType: mutationType,
+          date: date,
+          companyId: companyId,
+          departmentId: departmentId,
+          teamId: teamId,
+          positionId: positionId,
+          reason: reason,
+          sourceId: sourceId,
+          reportsToResidentId: reportsToResidentId,
+          careerLevel: careerLevel,
+        ) ??
+        OrganizationMutationResult.failure(
+            <String>['resident_runtime_missing']);
+  }
+
+  OrganizationMutationResult resignResidentOrganization(
+    String residentId, {
+    String date = '',
+    String reason = '',
+    String sourceId = '',
+  }) {
+    return _residentRuntimeManager?.resignResident(
+          residentId,
+          date: date,
+          reason: reason,
+          sourceId: sourceId,
+        ) ??
+        OrganizationMutationResult.failure(
+            <String>['resident_runtime_missing']);
+  }
+
+  List<RecruitmentNeed> getDepartmentRecruitmentNeeds() {
+    return _residentRuntimeManager?.getDepartmentRecruitmentNeeds() ??
+        const <RecruitmentNeed>[];
+  }
+
+  List<PromotionCandidate> getPromotionCandidates({
+    String departmentId = '',
+    String teamId = '',
+  }) {
+    return _residentRuntimeManager?.getPromotionCandidates(
+          departmentId: departmentId,
+          teamId: teamId,
+        ) ??
+        const <PromotionCandidate>[];
+  }
+
+  List<ResidentProfile> getDepartmentManagers(String departmentId) {
+    return _residentRuntimeManager?.getDepartmentManagers(departmentId) ??
+        const <ResidentProfile>[];
+  }
+
+  List<ResidentProfile> getTeamLeaders(String teamId) {
+    return _residentRuntimeManager?.getTeamLeaders(teamId) ??
+        const <ResidentProfile>[];
+  }
 
   void bindInteractiveRuntimes({
     RelationshipRuntimeManager? relationshipRuntimeManager,
@@ -401,6 +530,15 @@ class SecondWorldEngine {
       nextActivity: context.life.nextActivity,
       nextChangeTime: context.life.nextChangeTime,
       scheduleReason: _statusReasonFor(context),
+      careerLevel: context.career.careerLevel,
+      careerLevelName: context.career.displayLevel,
+      employmentStatus: context.career.employmentStatus,
+      hireDate: context.career.hireDate,
+      salaryLevel: context.career.salaryLevel,
+      performanceScore: context.career.performanceScore,
+      capabilityScore: context.career.capabilityScore,
+      promotionHistory: context.career.promotionHistory,
+      careerTags: context.career.tags.take(10).toList(growable: false),
       personalityTraits: context.personality.traits,
       dominantPersonality: context.personality.dominantTrait,
       personalitySummary: _personalitySummary(context.personality),
@@ -2110,12 +2248,23 @@ class SecondWorldEngine {
     final personality = clock == null && now == null && runtime != null
         ? runtime.getResidentPersonalityContext(id)
         : ResidentPersonalityContext.fromResident(resident);
+    final organization = clock == null && now == null && runtime != null
+        ? runtime.getResidentOrganizationContext(id)
+        : ResidentOrganizationContext.resolve(
+            resident.organization,
+            organization: getCompanyOrganization(),
+          );
+    final career = clock == null && now == null && runtime != null
+        ? runtime.getResidentCareerStatus(id)
+        : resident.career;
     final friendship = getFriendshipState(id);
     final officeGroup = _worldSaveManager?.groupForResident(id);
     return ResidentContext(
       resident: resident,
       life: life,
       location: location,
+      organization: organization,
+      career: career,
       personality: personality,
       memory: memory,
       relationship: relationship,
@@ -2684,6 +2833,8 @@ class ResidentContext {
     required this.resident,
     required this.life,
     required this.location,
+    required this.organization,
+    required this.career,
     required this.personality,
     required this.memory,
     required this.relationship,
@@ -2699,6 +2850,8 @@ class ResidentContext {
   final ResidentProfile resident;
   final ResidentCurrentState life;
   final LocationContext location;
+  final ResidentOrganizationContext organization;
+  final ResidentCareerStatus career;
   final ResidentPersonalityContext personality;
   final ResidentMemoryRecord memory;
   final ResidentRelationshipRecord relationship;

@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
-
+import '../../models/company_organization.dart';
 import '../../models/friendship_state.dart';
 import '../../models/living_office_state.dart';
 import '../../models/player_influence.dart';
 import '../../models/resident_dialogue_config.dart';
 import '../../models/location_context.dart';
+import '../../models/resident_career.dart';
 import '../../models/resident_memory_config.dart';
 import '../../models/resident_personality_context.dart';
 import '../../models/resident_relationship_config.dart';
@@ -12,6 +12,7 @@ import '../../models/resident_story_config.dart';
 import '../engine/festival_manager.dart';
 import '../engine/resident_memory_engine.dart';
 import '../engine/resident_relationship_engine.dart';
+import '../utils/runtime_debug.dart';
 import '../engine/weather_state.dart';
 import '../utils/resident_mood.dart';
 import 'dialogue_runtime_manager.dart';
@@ -53,6 +54,8 @@ class StoryRuntimeManager {
   final WeatherRuntimeManager? _weatherRuntimeManager;
   final RumorRuntimeManager? _rumorRuntimeManager;
   final Set<String> _finishedStoryIds = <String>{};
+  final Map<String, _StoryCacheEntry> _availableStoryCache =
+      <String, _StoryCacheEntry>{};
   LivingOfficeState _livingOfficeState = LivingOfficeState.empty();
   PlayerInfluenceContext _playerInfluenceContext =
       PlayerInfluenceContext.empty();
@@ -66,15 +69,18 @@ class StoryRuntimeManager {
     _finishedStoryIds
       ..clear()
       ..addAll(ids.where((id) => id.isNotEmpty));
+    _availableStoryCache.clear();
   }
 
   void applyLivingOfficeState(LivingOfficeState state) {
     if (state.isEmpty) return;
     _livingOfficeState = state;
+    _availableStoryCache.clear();
   }
 
   void applyPlayerInfluenceContext(PlayerInfluenceContext context) {
     _playerInfluenceContext = context;
+    _availableStoryCache.clear();
   }
 
   List<ResidentStoryEntry> getAvailableStories(String residentId) {
@@ -91,6 +97,9 @@ class StoryRuntimeManager {
       rumorContext: _rumorRuntimeManager?.residentRumorContext(residentId),
       state: _residentRuntimeManager.getResidentCurrentState(residentId),
       location: _residentRuntimeManager.getResidentLocationContext(residentId),
+      organization:
+          _residentRuntimeManager.getResidentOrganizationContext(residentId),
+      career: _residentRuntimeManager.getResidentCareerStatus(residentId),
       locationResidentCount: _residentRuntimeManager
           .getResidentsAtLocation(
             _residentRuntimeManager
@@ -107,6 +116,14 @@ class StoryRuntimeManager {
       livingOfficeState: _livingOfficeState,
       playerInfluenceContext: _playerInfluenceContext,
     );
+    final cacheKey = context.cacheKey(
+      finishedStoryCount: _finishedStoryIds.length,
+      storyCount: _config.stories.length,
+    );
+    final cached = _availableStoryCache[residentId];
+    if (cached?.key == cacheKey) {
+      return cached!.items;
+    }
     final matches = _config.stories
         .where((story) => _matchesResident(story, residentId))
         .where(_storyCanRepeat)
@@ -120,21 +137,18 @@ class StoryRuntimeManager {
         if (priority != 0) return priority;
         return a.id.compareTo(b.id);
       });
-    if (kDebugMode) {
-      debugPrint(
-        'StoryRuntimeManager | resident=$residentId available=${sorted.map((item) => item.id).join(',')}',
-      );
-    }
+    _availableStoryCache[residentId] = _StoryCacheEntry(cacheKey, sorted);
+    RuntimeDebug.log(
+      'StoryRuntimeManager | resident=$residentId available=${sorted.map((item) => item.id).join(',')}',
+    );
     return sorted;
   }
 
   StoryRuntimeResult? triggerStory(String residentId) {
     final available = getAvailableStories(residentId);
     if (available.isEmpty) {
-      if (kDebugMode) {
-        debugPrint(
-            'StoryRuntimeManager | resident=$residentId result=not_available');
-      }
+      RuntimeDebug.log(
+          'StoryRuntimeManager | resident=$residentId result=not_available');
       return null;
     }
     return finishStory(available.first.id);
@@ -143,18 +157,16 @@ class StoryRuntimeManager {
   StoryRuntimeResult? finishStory(String storyId) {
     final story = _findStory(storyId);
     if (story == null) {
-      if (kDebugMode) {
-        debugPrint('StoryRuntimeManager | story=$storyId result=missing');
-      }
+      RuntimeDebug.log('StoryRuntimeManager | story=$storyId result=missing');
       return null;
     }
     if (!story.repeatable && hasFinishedStory(storyId)) {
-      if (kDebugMode) {
-        debugPrint('StoryRuntimeManager | story=$storyId result=already_done');
-      }
+      RuntimeDebug.log(
+          'StoryRuntimeManager | story=$storyId result=already_done');
       return null;
     }
     _finishedStoryIds.add(storyId);
+    _availableStoryCache.clear();
     final beforeState =
         _residentRuntimeManager.getResidentCurrentState(story.residentId);
     final storyMood = _storyResultMood(story);
@@ -195,11 +207,9 @@ class StoryRuntimeManager {
     final relationship =
         _residentRelationshipEngine.updateRelationship(story.residentId);
     final dialogue = _dialogueRuntimeManager.getDialogue(story.residentId);
-    if (kDebugMode) {
-      debugPrint(
-        'StoryRuntimeManager | resident=${story.residentId} story=$storyId result=finished relationship=${relationship.relationshipLevel} dialogue=${dialogue.id}',
-      );
-    }
+    RuntimeDebug.log(
+      'StoryRuntimeManager | resident=${story.residentId} story=$storyId result=finished relationship=${relationship.relationshipLevel} dialogue=${dialogue.id}',
+    );
     return StoryRuntimeResult(
       story: story,
       memory: memory,
@@ -404,6 +414,36 @@ class StoryRuntimeManager {
     }
     if (conditions.minimumOfficeTrust > 0 &&
         context.officeTrust < conditions.minimumOfficeTrust) {
+      return false;
+    }
+    if (!_matchesValue(conditions.companyId, context.companyId)) {
+      return false;
+    }
+    if (!_matchesValue(conditions.departmentId, context.departmentId)) {
+      return false;
+    }
+    if (!_matchesValue(conditions.teamId, context.teamId)) {
+      return false;
+    }
+    if (!_matchesValue(conditions.positionId, context.positionId)) {
+      return false;
+    }
+    if (conditions.organizationTags.isNotEmpty &&
+        !conditions.organizationTags.every(context.organizationTags.contains)) {
+      return false;
+    }
+    if (!_matchesValue(conditions.careerLevel, context.careerLevel)) {
+      return false;
+    }
+    if (!_matchesValue(conditions.employmentStatus, context.employmentStatus)) {
+      return false;
+    }
+    if (conditions.careerTags.isNotEmpty &&
+        !conditions.careerTags.every(context.careerTags.contains)) {
+      return false;
+    }
+    if (conditions.salaryLevelMin > 0 &&
+        context.salaryLevel < conditions.salaryLevelMin) {
       return false;
     }
     return true;
@@ -628,6 +668,13 @@ class StoryRuntimeResult {
   final ResidentDialogueEntry refreshedDialogue;
 }
 
+class _StoryCacheEntry {
+  const _StoryCacheEntry(this.key, this.items);
+
+  final String key;
+  final List<ResidentStoryEntry> items;
+}
+
 class _StoryRuntimeContext {
   const _StoryRuntimeContext({
     required this.residentId,
@@ -639,6 +686,8 @@ class _StoryRuntimeContext {
     required this.rumorContext,
     required this.state,
     required this.location,
+    required this.organization,
+    required this.career,
     required this.locationResidentCount,
     required this.personality,
     required this.memory,
@@ -657,6 +706,8 @@ class _StoryRuntimeContext {
   final RumorContext? rumorContext;
   final ResidentCurrentState state;
   final LocationContext location;
+  final ResidentOrganizationContext organization;
+  final ResidentCareerStatus career;
   final int locationResidentCount;
   final ResidentPersonalityContext personality;
   final ResidentMemoryRecord memory;
@@ -788,4 +839,54 @@ class _StoryRuntimeContext {
       playerInfluenceContext.recentActionTypes;
   int get officeInfluence => playerInfluenceContext.officeInfluence.overall;
   int get officeTrust => playerInfluenceContext.officeInfluence.officeTrust;
+  String get companyId => organization.companyId;
+  String get departmentId => organization.departmentId;
+  String get teamId => organization.teamId;
+  String get positionId => organization.positionId;
+  List<String> get organizationTags => organization.tags;
+  String get careerLevel => career.careerLevel;
+  String get employmentStatus => career.employmentStatus;
+  int get salaryLevel => career.salaryLevel;
+  List<String> get careerTags => career.tags;
+
+  String cacheKey({
+    required int finishedStoryCount,
+    required int storyCount,
+  }) {
+    return [
+      storyCount,
+      finishedStoryCount,
+      residentId,
+      timeOfDay,
+      weather.weatherType.name,
+      festival.activeFestivals.join('|'),
+      state.location,
+      state.activity,
+      state.mood,
+      location.locationId,
+      locationResidentCount,
+      relationship.relationshipLevel,
+      relationship.relationshipScore,
+      memory.meetCount,
+      memory.memoryTags.join('|'),
+      availableDialogues.map((dialogue) => dialogue.id).join('|'),
+      livingOfficeState.officeMood,
+      livingOfficeState.activityLevel,
+      livingOfficeState.socialLevel,
+      livingOfficeState.tensionLevel,
+      livingOfficeState.activeGroupCount,
+      livingOfficeState.popularLocations.join('|'),
+      playerInfluenceContext.reputation.join('|'),
+      playerInfluenceContext.recentActionTypes.join('|'),
+      officeInfluence,
+      officeTrust,
+      companyId,
+      departmentId,
+      teamId,
+      positionId,
+      careerLevel,
+      employmentStatus,
+      salaryLevel,
+    ].join('::');
+  }
 }

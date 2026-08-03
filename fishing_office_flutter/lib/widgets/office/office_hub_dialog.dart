@@ -737,6 +737,21 @@ class _ResidentDetailPanel extends StatelessWidget {
             '原因：${detail.scheduleReason}',
           ],
         ),
+        _DetailSection(
+          title: '职业',
+          lines: [
+            '职业阶段：${detail.careerLevelName.isEmpty ? detail.careerLevel : detail.careerLevelName}',
+            '雇佣状态：${_employmentStatusLabel(detail.employmentStatus)}',
+            if (detail.hireDate.isNotEmpty) '入职时间：${detail.hireDate}',
+            '薪资层级：${detail.salaryLevel}',
+            '绩效：${_levelText(detail.performanceScore)}',
+            '能力：${_levelText(detail.capabilityScore)}',
+            if (detail.promotionHistory.isNotEmpty)
+              '最近职业事件：${_careerEventLabel(detail.promotionHistory.last.type)}',
+            if (detail.careerTags.isNotEmpty)
+              '职业标签：${detail.careerTags.take(4).join(' / ')}',
+          ],
+        ),
         _InteractionsSection(
           detail: detail,
           onAction: onAction,
@@ -1761,6 +1776,30 @@ String _levelText(int value) {
   if (value >= 40) return '较高';
   if (value >= 15) return '正在建立';
   return '还需要时间';
+}
+
+String _employmentStatusLabel(String value) {
+  return const <String, String>{
+        'active': '在职',
+        'probation': '试用期',
+        'transferred': '已转岗',
+        'demoted': '调整中',
+        'resigned': '已离职',
+        'recruiting': '招聘中',
+      }[value] ??
+      (value.isEmpty ? '在职' : value);
+}
+
+String _careerEventLabel(String value) {
+  return const <String, String>{
+        'hire': '入职',
+        'promotion': '晋升',
+        'transfer': '转岗',
+        'demotion': '降职',
+        'resignation': '离职',
+        'recruitment': '招聘',
+      }[value] ??
+      (value.isEmpty ? '入职' : value);
 }
 
 String _officeMoodDescription(String mood) {

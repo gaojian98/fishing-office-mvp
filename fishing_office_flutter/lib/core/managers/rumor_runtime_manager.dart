@@ -1,7 +1,6 @@
-import 'package:flutter/foundation.dart';
-
 import '../../models/resident_personality_context.dart';
 import '../../models/rumor_config.dart';
+import '../utils/runtime_debug.dart';
 import 'festival_runtime_manager.dart';
 import 'resident_runtime_manager.dart';
 import 'weather_runtime_manager.dart';
@@ -54,11 +53,9 @@ class RumorRuntimeManager {
       if (sort != 0) return sort;
       return a.id.compareTo(b.id);
     });
-    if (kDebugMode) {
-      debugPrint(
-        'RumorRuntimeManager | active=${merged.map((item) => item.id).join(',')}',
-      );
-    }
+    RuntimeDebug.log(
+      'RumorRuntimeManager | active=${merged.map((item) => item.id).join(',')}',
+    );
     return merged;
   }
 
@@ -96,9 +93,7 @@ class RumorRuntimeManager {
       probability: _probabilityFor(rumor),
       expiresAfterDays: _expiresAfterDaysFor(rumor),
     );
-    if (kDebugMode) {
-      debugPrint('RumorRuntimeManager | add=$rumorId lifecycle=spreading');
-    }
+    RuntimeDebug.log('RumorRuntimeManager | add=$rumorId lifecycle=spreading');
   }
 
   void removeRumor(String rumorId) {

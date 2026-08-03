@@ -5,6 +5,7 @@ import '../../models/office_group.dart';
 import '../../models/resident_relationship_config.dart';
 import '../engine/resident_relationship_engine.dart';
 import '../engine/second_world_engine.dart';
+import '../utils/runtime_debug.dart';
 import 'daily_simulation_manager.dart';
 import 'resident_decision_manager.dart';
 import 'resident_runtime_manager.dart';
@@ -176,11 +177,9 @@ class RelationshipRuntimeManager extends ChangeNotifier {
     _lastUpdateDay = day;
     _worldSaveManager.setDailySocialSummary(_buildDailySocialSummary(day));
     _persistState();
-    if (kDebugMode) {
-      debugPrint(
-        'RelationshipRuntimeManager | day=$day residentPairs=${_residentRelations.length}',
-      );
-    }
+    RuntimeDebug.log(
+      'RelationshipRuntimeManager | day=$day residentPairs=${_residentRelations.length}',
+    );
     notifyListeners();
   }
 

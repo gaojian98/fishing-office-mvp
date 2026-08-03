@@ -995,6 +995,12 @@ class WorldSaveManager extends ChangeNotifier {
         'states': _residentRuntimeManager.residents
             .map((resident) => _residentStateToJson(resident.id))
             .toList(growable: false),
+        'organizationMutationHistory': _residentRuntimeManager
+            .organizationMutationHistory
+            .map((record) => record.toJson())
+            .toList(growable: false),
+        'processedOrganizationMutationIds':
+            _residentRuntimeManager.processedOrganizationMutationIds,
       },
       residentMemory: _residentMemoryEngine.toConfig(),
       residentRelationship: ResidentRelationshipConfig(
@@ -1064,6 +1070,11 @@ class WorldSaveManager extends ChangeNotifier {
     );
     _residentRuntimeManager.loadRuntimeStates(
       _listOfMaps(data.residentRuntime['states']),
+      organizationMutationHistory:
+          _listOfMaps(data.residentRuntime['organizationMutationHistory']),
+      processedOrganizationMutationIds: _stringList(
+        data.residentRuntime['processedOrganizationMutationIds'],
+      ),
     );
     _storyRuntimeManager.loadFinishedStoryIds(data.finishedStories);
     _dialogueRuntimeManager.loadServedNonRepeatableIds(
@@ -1308,6 +1319,8 @@ class WorldSaveManager extends ChangeNotifier {
       'overrideExpiresAt': state.nextChangeTime,
       'lastScheduleChange': state.startTime,
       'nextScheduleChange': state.nextChangeTime,
+      'organization': state.organization.toJson(),
+      'career': state.career.toJson(),
       'lastLocationChange': state.startTime,
       'locationVisitHistory': [
         {

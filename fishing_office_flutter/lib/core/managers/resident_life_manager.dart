@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import '../../models/living_world_config.dart';
 import '../../models/company_organization.dart';
 import '../../models/office_life_schedule.dart';
+import '../../models/resident_career.dart';
 import '../../models/resident_life_config.dart';
 import '../repository/resident_life_repository.dart';
 import 'world_clock_manager.dart';
@@ -129,6 +130,7 @@ class ResidentCurrentState {
     this.nextChangeTime = '',
     this.scheduleReason = '',
     this.organization = const OrganizationAssignment.empty(),
+    this.career = const ResidentCareerStatus.empty(),
   });
 
   factory ResidentCurrentState.fromSchedule(ResidentSchedule schedule) {
@@ -194,6 +196,7 @@ class ResidentCurrentState {
   final String nextChangeTime;
   final String scheduleReason;
   final OrganizationAssignment organization;
+  final ResidentCareerStatus career;
 }
 
 int _hourFromTime(String value) {

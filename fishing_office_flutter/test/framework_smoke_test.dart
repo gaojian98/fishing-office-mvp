@@ -59,7 +59,9 @@ import 'package:fishing_office_mvp/core/repository/resident_repository.dart';
 import 'package:fishing_office_mvp/core/repository/world_save_repository.dart';
 import 'package:fishing_office_mvp/core/services/fairy_event_service.dart';
 import 'package:fishing_office_mvp/models/career_state.dart';
+import 'package:fishing_office_mvp/models/company_organization.dart';
 import 'package:fishing_office_mvp/models/dynamic_event_config.dart';
+import 'package:fishing_office_mvp/models/resident_career.dart';
 import 'package:fishing_office_mvp/pages/home/widgets/ambient_presentation_layer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -67,6 +69,564 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   test('framework smoke test', () {
     expect(true, isTrue);
+  });
+
+  testWidgets('company organization model is widget-test safe', (tester) async {
+    final organization = CompanyOrganization.defaultStructure();
+    expect(organization.findCompany('fishing_office').name, '上班摸鱼有限公司');
+    expect(
+      organization.findPosition('team_leader').isTeamLeader,
+      isTrue,
+    );
+    expect(
+      organization.findPosition('department_manager').isDepartmentManager,
+      isTrue,
+    );
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
+  test('resident organization defaults derive from existing resident fields',
+      () async {
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': [
+        {
+          'id': 'tech_resident',
+          'name': '电脑维修员',
+          'job': '电脑维修员',
+          'personality': 'practical',
+          'location': 'office',
+          'enabled': true,
+        },
+        {
+          'id': 'front_resident',
+          'name': '前台小妹',
+          'job': '前台',
+          'personality': 'warm',
+          'location': 'reception',
+          'enabled': true,
+          'organization': {
+            'companyId': 'fishing_office',
+            'departmentId': 'front_office',
+            'teamId': 'office_admin',
+            'positionId': 'team_leader',
+          },
+          'career': {
+            'careerLevel': 'leader',
+            'hireDate': 'Y1-M01-D02',
+            'salaryLevel': 360,
+            'performanceScore': 88,
+            'capabilityScore': 82,
+            'employmentStatus': 'active',
+            'promotionHistory': [
+              {
+                'type': 'promotion',
+                'date': 'Y1-M02-D01',
+                'fromPositionId': 'staff',
+                'toPositionId': 'team_leader',
+                'fromCareerLevel': 'regular',
+                'toCareerLevel': 'leader',
+                'reason': '稳定照顾前台节奏',
+              }
+            ],
+          },
+        },
+      ],
+    });
+    final life = ResidentLifeConfig.fromJson(
+      scheduleJson: {'version': 'test', 'schedules': []},
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final clock = WorldClockManager(
+      initialClock:
+          WorldClock.initial().copyWith(dayCount: 1, hour: 9, minute: 0),
+      initialCalendar: WorldCalendar.initial().copyWith(
+        dayCount: 1,
+        weekdayIndex: 1,
+        month: 1,
+        day: 1,
+        season: 'spring',
+      ),
+      paused: true,
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+
+    final tech = runtime.getResidentOrganizationContext('tech_resident');
+    expect(tech.companyId, 'fishing_office');
+    expect(tech.departmentId, 'technology');
+    expect(tech.teamId, 'tech_support');
+    expect(tech.positionId, 'specialist');
+    expect(runtime.getResidentCurrentState('tech_resident').organization.tags,
+        contains('department:technology'));
+
+    final front = runtime.getResidentOrganizationContext('front_resident');
+    expect(front.departmentId, 'front_office');
+    expect(front.teamId, 'office_admin');
+    expect(front.isTeamLeader, isTrue);
+    expect(runtime.getResidentsByDepartment('front_office').length, 1);
+    expect(runtime.getResidentsByTeam('office_admin').length, 1);
+    expect(runtime.getTeamLeaders('office_admin').single.id, 'front_resident');
+
+    final techCareer = runtime.getResidentCareerStatus('tech_resident');
+    expect(techCareer.careerLevel, 'senior');
+    expect(techCareer.employmentStatus, 'active');
+    expect(techCareer.promotionHistory.single.type, 'hire');
+    expect(
+      runtime.getResidentCurrentState('tech_resident').career.tags,
+      contains('career:senior'),
+    );
+
+    final frontCareer = runtime.getResidentCareerStatus('front_resident');
+    expect(frontCareer.careerLevel, 'leader');
+    expect(frontCareer.salaryLevel, 360);
+    expect(frontCareer.promotionHistory.single.type, 'promotion');
+    expect(runtime.getPromotionCandidates().first.residentId, 'front_resident');
+
+    final needs = runtime.getDepartmentRecruitmentNeeds();
+    expect(needs.any((need) => need.reason == 'department_manager_vacancy'),
+        isTrue);
+    expect(needs.any((need) => need.reason == 'team_leader_vacancy'), isTrue);
+
+    final promoted = runtime.applyResidentCareerEvent(
+      'tech_resident',
+      type: 'promotion',
+      reason: '测试晋升候选',
+    );
+    expect(promoted.careerLevel, 'leader');
+    expect(promoted.employmentStatus, 'active');
+    expect(promoted.promotionHistory.last.type, 'promotion');
+    expect(
+      runtime.getResidentCurrentState('tech_resident').career.careerLevel,
+      'leader',
+    );
+
+    final transferred = runtime.applyResidentCareerEvent(
+      'tech_resident',
+      type: 'transfer',
+      toPositionId: 'staff',
+      reason: '测试转岗',
+    );
+    expect(transferred.employmentStatus, 'transferred');
+    expect(transferred.tags, contains('career_event:transfer'));
+
+    final demoted = runtime.applyResidentCareerEvent(
+      'tech_resident',
+      type: 'demotion',
+      reason: '测试降职',
+    );
+    expect(demoted.employmentStatus, 'demoted');
+    expect(demoted.promotionHistory.last.type, 'demotion');
+
+    final resigned = runtime.applyResidentCareerEvent(
+      'front_resident',
+      type: 'resignation',
+      reason: '测试离职',
+    );
+    expect(resigned.employmentStatus, 'resigned');
+    expect(runtime.getResidentCareerStatus('front_resident').isActive, isFalse);
+
+    final recruiting = runtime.applyResidentCareerEvent(
+      'front_resident',
+      type: 'recruitment',
+      reason: '测试招聘',
+    );
+    expect(recruiting.employmentStatus, 'recruiting');
+
+    runtime.loadRuntimeStates([
+      {
+        'residentId': 'tech_resident',
+        'location': 'office',
+        'activity': '恢复职业状态',
+        'mood': 'calm',
+        'dayCount': 1,
+        'career': demoted.toJson(),
+      }
+    ]);
+    final restoredCareer = runtime.getResidentCareerStatus('tech_resident');
+    expect(restoredCareer.employmentStatus, 'demoted');
+    expect(restoredCareer.promotionHistory.last.reason, '测试降职');
+  });
+
+  testWidgets('resident career model is widget-test safe', (tester) async {
+    const event = ResidentCareerEvent(
+      type: 'hire',
+      date: 'Y1-M01-D01',
+      fromPositionId: '',
+      toPositionId: 'staff',
+      fromCareerLevel: '',
+      toCareerLevel: 'regular',
+      reason: 'test',
+    );
+    final status = ResidentCareerStatus.fromResidentJson(
+      {
+        'id': 'career_resident',
+        'job': '经理',
+        'career': {
+          'careerLevel': 'manager',
+          'employmentStatus': 'active',
+          'promotionHistory': [event.toJson()],
+        },
+      },
+      organization: const OrganizationAssignment(
+        companyId: 'fishing_office',
+        departmentId: 'management',
+        teamId: 'office_management',
+        positionId: 'department_manager',
+      ),
+      residentId: 'career_resident',
+    );
+    expect(status.displayLevel, '部门负责人');
+    expect(status.canBePromoted, isTrue);
+    expect(status.tags, contains('career:manager'));
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
+  test('organization assignment mutations stay transactional and idempotent',
+      () async {
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': [
+        _organizationResident(
+          id: 'tech_staff',
+          departmentId: 'technology',
+          teamId: 'tech_support',
+          positionId: 'staff',
+        ),
+        _organizationResident(
+          id: 'tech_leader',
+          departmentId: 'technology',
+          teamId: 'tech_support',
+          positionId: 'team_leader',
+          careerLevel: 'leader',
+        ),
+        _organizationResident(
+          id: 'ops_staff',
+          departmentId: 'operations',
+          teamId: 'product_ops',
+          positionId: 'staff',
+        ),
+        _organizationResident(
+          id: 'commerce_staff',
+          departmentId: 'commerce',
+          teamId: 'market_services',
+          positionId: 'staff',
+        ),
+      ],
+    });
+    final life = ResidentLifeConfig.fromJson(
+      scheduleJson: {'version': 'test', 'schedules': []},
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final clock = WorldClockManager(
+      initialClock:
+          WorldClock.initial().copyWith(dayCount: 8, hour: 10, minute: 0),
+      initialCalendar: WorldCalendar.initial().copyWith(
+        dayCount: 8,
+        weekdayIndex: 2,
+        month: 1,
+        day: 8,
+        season: 'spring',
+      ),
+      paused: true,
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+
+    final sameTeamPromotion = runtime.promoteResident(
+      'tech_staff',
+      toPositionId: 'specialist',
+      sourceId: 'mut_same_team',
+      reason: 'same_team_growth',
+    );
+    expect(sameTeamPromotion.success, isTrue);
+    expect(runtime.getResidentOrganization('tech_staff').departmentId,
+        'technology');
+    expect(
+        runtime.getResidentOrganization('tech_staff').teamId, 'tech_support');
+    expect(
+        runtime.getResidentOrganization('tech_staff').positionId, 'specialist');
+    expect(runtime.getResidentCareerStatus('tech_staff').careerLevel, 'senior');
+
+    final duplicatePromotion = runtime.promoteResident(
+      'tech_staff',
+      toPositionId: 'specialist',
+      sourceId: 'mut_same_team',
+      reason: 'same_team_growth',
+    );
+    expect(duplicatePromotion.success, isTrue);
+    expect(duplicatePromotion.idempotent, isTrue);
+    expect(
+      runtime
+          .getResidentCareerEvents('tech_staff')
+          .where((event) => event.reason == 'same_team_growth')
+          .length,
+      1,
+    );
+
+    final crossTeamPromotion = runtime.promoteResident(
+      'ops_staff',
+      teamId: 'dock_services',
+      toPositionId: 'team_leader',
+      sourceId: 'mut_cross_team',
+      reason: 'cross_team_growth',
+    );
+    expect(crossTeamPromotion.success, isTrue);
+    expect(runtime.getResidentOrganization('ops_staff').departmentId,
+        'operations');
+    expect(
+        runtime.getResidentOrganization('ops_staff').teamId, 'dock_services');
+    expect(
+        runtime.getResidentOrganization('ops_staff').positionId, 'team_leader');
+
+    final crossDepartmentTransfer = runtime.transferResident(
+      'ops_staff',
+      teamId: 'market_services',
+      toPositionId: 'specialist',
+      sourceId: 'mut_cross_department',
+      reason: 'cross_department_transfer',
+    );
+    expect(crossDepartmentTransfer.success, isTrue);
+    expect(
+        runtime.getResidentOrganization('ops_staff').departmentId, 'commerce');
+    expect(
+        runtime.getResidentOrganization('ops_staff').teamId, 'market_services');
+    expect(
+        runtime.getResidentOrganization('ops_staff').positionId, 'specialist');
+
+    final demotion = runtime.demoteResident(
+      'ops_staff',
+      teamId: 'product_ops',
+      toPositionId: 'staff',
+      sourceId: 'mut_demotion',
+      reason: 'demotion_to_staff',
+    );
+    expect(demotion.success, isTrue);
+    expect(runtime.getResidentOrganization('ops_staff').departmentId,
+        'operations');
+    expect(runtime.getResidentOrganization('ops_staff').teamId, 'product_ops');
+    expect(runtime.getResidentCareerStatus('ops_staff').employmentStatus,
+        'demoted');
+
+    final resignation = runtime.resignResident(
+      'commerce_staff',
+      sourceId: 'mut_resign',
+      reason: 'resignation_test',
+    );
+    expect(resignation.success, isTrue);
+    expect(
+        runtime.getResidentOrganization('commerce_staff').isAssigned, isFalse);
+    expect(runtime.getResidentsByTeam('market_services'), isEmpty);
+
+    final hire = runtime.assignResident(
+      'commerce_staff',
+      mutationType: 'hire',
+      departmentId: 'commerce',
+      teamId: 'market_services',
+      positionId: 'staff',
+      sourceId: 'mut_hire',
+      reason: 'rehire_test',
+    );
+    expect(hire.success, isTrue);
+    expect(
+        runtime.getResidentOrganization('commerce_staff').isAssigned, isTrue);
+    expect(runtime.getResidentCareerStatus('commerce_staff').employmentStatus,
+        'active');
+
+    final beforeFailure = runtime.getResidentOrganization('tech_staff');
+    final missingPosition = runtime.promoteResident(
+      'tech_staff',
+      toPositionId: 'missing_position',
+      sourceId: 'mut_missing_position',
+    );
+    expect(missingPosition.success, isFalse);
+    expect(missingPosition.errors.single, startsWith('position_missing'));
+    expect(runtime.getResidentOrganization('tech_staff').positionId,
+        beforeFailure.positionId);
+
+    final fullPosition = runtime.promoteResident(
+      'tech_staff',
+      toPositionId: 'team_leader',
+      sourceId: 'mut_full_position',
+    );
+    expect(fullPosition.success, isFalse);
+    expect(fullPosition.errors, contains('position_full:team_leader'));
+    expect(runtime.getResidentOrganization('tech_staff').positionId,
+        beforeFailure.positionId);
+
+    final invalidTeam = runtime.transferResident(
+      'tech_staff',
+      departmentId: 'operations',
+      teamId: 'tech_support',
+      toPositionId: 'staff',
+      sourceId: 'mut_invalid_team',
+    );
+    expect(invalidTeam.success, isFalse);
+    expect(invalidTeam.errors, contains('team_department_mismatch'));
+
+    final managementCycle = runtime.promoteResident(
+      'tech_staff',
+      toPositionId: 'department_manager',
+      sourceId: 'mut_cycle',
+      reportsToResidentId: 'tech_staff',
+    );
+    expect(managementCycle.success, isFalse);
+    expect(managementCycle.errors, contains('management_cycle'));
+
+    runtime.loadRuntimeStates(
+      [
+        {
+          'residentId': 'ops_staff',
+          'organization': runtime.getResidentOrganization('ops_staff').toJson(),
+          'career': runtime.getResidentCareerStatus('ops_staff').toJson(),
+          'location': 'office',
+          'activity': 'restore',
+          'mood': 'calm',
+          'dayCount': 8,
+        },
+        {
+          'residentId': 'tech_staff',
+          'location': 'office',
+          'activity': 'old_save_restore',
+          'mood': 'calm',
+          'dayCount': 8,
+        },
+      ],
+      organizationMutationHistory: runtime.organizationMutationHistory
+          .map((record) => record.toJson())
+          .toList(growable: false),
+      processedOrganizationMutationIds:
+          runtime.processedOrganizationMutationIds,
+    );
+    expect(runtime.getResidentOrganization('ops_staff').teamId, 'product_ops');
+    expect(runtime.getResidentCareerStatus('ops_staff').employmentStatus,
+        'demoted');
+    expect(runtime.getResidentOrganization('tech_staff').departmentId,
+        'technology');
+
+    final bulkResidents = ResidentConfig.fromJson({
+      'version': 'bulk',
+      'residents': List.generate(
+        100,
+        (index) => _organizationResident(
+          id: 'bulk_$index',
+          departmentId: index.isEven ? 'operations' : 'technology',
+          teamId: index.isEven ? 'product_ops' : 'tech_support',
+          positionId: 'staff',
+        ),
+      ),
+    });
+    final bulkRuntime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(bulkResidents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await bulkRuntime.load();
+    final startedAt = DateTime.now();
+    final states = bulkRuntime.getAllResidentCurrentStates();
+    final elapsedMs = DateTime.now().difference(startedAt).inMilliseconds;
+    expect(states.length, 100);
+    expect(
+        states.values.every((state) => state.organization.isAssigned), isTrue);
+    expect(elapsedMs < 300, isTrue);
+  });
+
+  test('organization conditions parse for dialogue story and dynamic events',
+      () {
+    final dialogue = ResidentDialogueConfig.fromJson({
+      'fallback': {'text': 'fallback'},
+      'dialogues': [
+        {
+          'id': 'department_dialogue',
+          'residentId': '*',
+          'text': '技术部今天也在修一点小风。',
+          'conditions': {
+            'companyId': 'fishing_office',
+            'departmentId': 'technology',
+            'teamId': 'tech_support',
+            'positionId': 'specialist',
+            'organizationTags': ['department:technology'],
+            'careerLevel': 'senior',
+            'employmentStatus': 'active',
+            'careerTags': ['career:senior'],
+            'salaryLevelMin': 200,
+          },
+        }
+      ],
+    }).dialogues.first.conditions;
+    expect(dialogue.companyId, 'fishing_office');
+    expect(dialogue.departmentId, 'technology');
+    expect(dialogue.teamId, 'tech_support');
+    expect(dialogue.positionId, 'specialist');
+    expect(dialogue.organizationTags, contains('department:technology'));
+    expect(dialogue.careerLevel, 'senior');
+    expect(dialogue.employmentStatus, 'active');
+    expect(dialogue.careerTags, contains('career:senior'));
+    expect(dialogue.salaryLevelMin, 200);
+
+    final story = ResidentStoryConfig.fromJson({
+      'stories': [
+        {
+          'id': 'department_story',
+          'residentId': '*',
+          'title': '技术部的小灯',
+          'summary': '有人把坏掉的灯修好了。',
+          'conditions': {
+            'departmentId': 'technology',
+            'organizationTags': ['team:tech_support'],
+            'careerLevel': 'senior',
+            'employmentStatus': 'active',
+            'careerTags': ['career:senior'],
+            'salaryLevelMin': 200,
+          },
+        }
+      ],
+    }).stories.first.conditions;
+    expect(story.departmentId, 'technology');
+    expect(story.organizationTags, contains('team:tech_support'));
+    expect(story.careerLevel, 'senior');
+    expect(story.employmentStatus, 'active');
+    expect(story.careerTags, contains('career:senior'));
+    expect(story.salaryLevelMin, 200);
+
+    final event = DynamicEventConfig.fromJson({
+      'events': [
+        {
+          'id': 'organization_event',
+          'type': 'office',
+          'category': 'office',
+          'title': '部门里的小波纹',
+          'conditions': {
+            'companyId': ['fishing_office'],
+            'departmentId': ['technology'],
+            'teamId': ['tech_support'],
+            'positionId': ['specialist'],
+            'organizationTags': ['department:technology'],
+            'careerLevel': ['senior'],
+            'employmentStatus': ['active'],
+            'careerTags': ['career:senior'],
+            'salaryLevelMin': 200,
+          },
+        }
+      ],
+    }).events.first.conditions;
+    expect(event.companyId, contains('fishing_office'));
+    expect(event.departmentId, contains('technology'));
+    expect(event.teamId, contains('tech_support'));
+    expect(event.positionId, contains('specialist'));
+    expect(event.organizationTags, contains('department:technology'));
+    expect(event.careerLevel, contains('senior'));
+    expect(event.employmentStatus, contains('active'));
+    expect(event.careerTags, contains('career:senior'));
+    expect(event.salaryLevelMin, 200);
   });
 
   test('release readiness json counts fields and references are valid', () {
@@ -10966,6 +11526,48 @@ void main() {
     expect(legacy.officeWorldHistory, isEmpty);
     expect(legacy.playerInfluenceContext.reputation, contains('quiet'));
   });
+}
+
+Map<String, Object?> _organizationResident({
+  required String id,
+  required String departmentId,
+  required String teamId,
+  required String positionId,
+  String careerLevel = 'regular',
+}) {
+  return <String, Object?>{
+    'id': id,
+    'name': id,
+    'job': '居民员工',
+    'personality': 'steady',
+    'location': 'office',
+    'enabled': true,
+    'organization': <String, Object?>{
+      'companyId': 'fishing_office',
+      'departmentId': departmentId,
+      'teamId': teamId,
+      'positionId': positionId,
+    },
+    'career': <String, Object?>{
+      'careerLevel': careerLevel,
+      'hireDate': 'Y1-M01-D01',
+      'salaryLevel': residentCareerBaseSalary[careerLevel] ?? 180,
+      'performanceScore': 70,
+      'capabilityScore': 70,
+      'employmentStatus': 'active',
+      'promotionHistory': <Map<String, Object?>>[
+        <String, Object?>{
+          'type': 'hire',
+          'date': 'Y1-M01-D01',
+          'fromPositionId': '',
+          'toPositionId': positionId,
+          'fromCareerLevel': '',
+          'toCareerLevel': careerLevel,
+          'reason': 'test_hire',
+        },
+      ],
+    },
+  };
 }
 
 class _FakeResidentLifeRepository extends ResidentLifeRepository {

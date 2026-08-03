@@ -1,18 +1,19 @@
 import 'dart:math';
 
-import 'package:flutter/foundation.dart';
-
+import '../../models/company_organization.dart';
 import '../../models/friendship_state.dart';
 import '../../models/living_office_state.dart';
 import '../../models/player_influence.dart';
 import '../../models/resident_dialogue_config.dart';
 import '../../models/location_context.dart';
+import '../../models/resident_career.dart';
 import '../../models/resident_memory_config.dart';
 import '../../models/resident_personality_context.dart';
 import '../../models/resident_relationship_config.dart';
 import '../engine/festival_manager.dart';
 import '../engine/resident_memory_engine.dart';
 import '../engine/resident_relationship_engine.dart';
+import '../utils/runtime_debug.dart';
 import '../engine/weather_state.dart';
 import '../utils/resident_mood.dart';
 import 'festival_runtime_manager.dart';
@@ -53,6 +54,8 @@ class DialogueRuntimeManager {
   final RumorRuntimeManager? _rumorRuntimeManager;
   final Random _random;
   final Set<String> _servedNonRepeatableIds = <String>{};
+  final Map<String, _DialogueCacheEntry> _availableDialogueCache =
+      <String, _DialogueCacheEntry>{};
   LivingOfficeState _livingOfficeState = LivingOfficeState.empty();
   PlayerInfluenceContext _playerInfluenceContext =
       PlayerInfluenceContext.empty();
@@ -64,19 +67,30 @@ class DialogueRuntimeManager {
     _servedNonRepeatableIds
       ..clear()
       ..addAll(ids.where((id) => id.isNotEmpty));
+    _availableDialogueCache.clear();
   }
 
   void applyLivingOfficeState(LivingOfficeState state) {
     if (state.isEmpty) return;
     _livingOfficeState = state;
+    _availableDialogueCache.clear();
   }
 
   void applyPlayerInfluenceContext(PlayerInfluenceContext context) {
     _playerInfluenceContext = context;
+    _availableDialogueCache.clear();
   }
 
   List<ResidentDialogueEntry> getAvailableDialogues(String residentId) {
     final context = _contextFor(residentId);
+    final cacheKey = context.cacheKey(
+      servedNonRepeatableCount: _servedNonRepeatableIds.length,
+      dialogueCount: _config.dialogues.length,
+    );
+    final cached = _availableDialogueCache[residentId];
+    if (cached?.key == cacheKey) {
+      return cached!.items;
+    }
     final matches = _config.dialogues
         .where((dialogue) => _matchesResident(dialogue, residentId))
         .where((dialogue) => dialogue.actionType.isEmpty)
@@ -92,6 +106,7 @@ class DialogueRuntimeManager {
         if (priority != 0) return priority;
         return a.id.compareTo(b.id);
       });
+    _availableDialogueCache[residentId] = _DialogueCacheEntry(cacheKey, sorted);
     return sorted;
   }
 
@@ -133,6 +148,7 @@ class DialogueRuntimeManager {
         top.length == 1 ? top.first : top[_random.nextInt(top.length)];
     if (!selected.repeatable) {
       _servedNonRepeatableIds.add(selected.id);
+      _availableDialogueCache.remove(residentId);
     }
     return selected;
   }
@@ -140,10 +156,8 @@ class DialogueRuntimeManager {
   ResidentDialogueEntry getDialogue(String residentId) {
     final available = getAvailableDialogues(residentId);
     if (available.isEmpty) {
-      if (kDebugMode) {
-        debugPrint(
-            'DialogueRuntimeManager | resident=$residentId result=fallback');
-      }
+      RuntimeDebug.log(
+          'DialogueRuntimeManager | resident=$residentId result=fallback');
       return _config.fallback;
     }
     final topPriority = available.first.priority;
@@ -154,12 +168,13 @@ class DialogueRuntimeManager {
         top.length == 1 ? top.first : top[_random.nextInt(top.length)];
     if (!selected.repeatable) {
       _servedNonRepeatableIds.add(selected.id);
+      _availableDialogueCache.remove(residentId);
     }
-    if (kDebugMode) {
+    if (RuntimeDebug.enabled) {
       final state = _residentRuntimeManager.getResidentCurrentState(residentId);
       final relationship =
           _residentRelationshipEngine.getRelationship(residentId);
-      debugPrint(
+      RuntimeDebug.log(
         'DialogueRuntimeManager | resident=$residentId dialogue=${selected.id} '
         'time=${_timeOfDay()} weather=${_worldClockManager.weather().weatherType.name} '
         'festival=${_worldClockManager.festival().activeFestivals.join(',')} '
@@ -184,6 +199,9 @@ class DialogueRuntimeManager {
       rumorContext: _rumorRuntimeManager?.residentRumorContext(residentId),
       state: state,
       location: _residentRuntimeManager.getResidentLocationContext(residentId),
+      organization:
+          _residentRuntimeManager.getResidentOrganizationContext(residentId),
+      career: _residentRuntimeManager.getResidentCareerStatus(residentId),
       locationResidentCount:
           _residentRuntimeManager.getResidentsAtLocation(state.location).length,
       personality:
@@ -351,6 +369,36 @@ class DialogueRuntimeManager {
     }
     if (conditions.minimumOfficeTrust > 0 &&
         context.officeTrust < conditions.minimumOfficeTrust) {
+      return false;
+    }
+    if (!_matchesValue(conditions.companyId, context.companyId)) {
+      return false;
+    }
+    if (!_matchesValue(conditions.departmentId, context.departmentId)) {
+      return false;
+    }
+    if (!_matchesValue(conditions.teamId, context.teamId)) {
+      return false;
+    }
+    if (!_matchesValue(conditions.positionId, context.positionId)) {
+      return false;
+    }
+    if (conditions.organizationTags.isNotEmpty &&
+        !conditions.organizationTags.every(context.organizationTags.contains)) {
+      return false;
+    }
+    if (!_matchesValue(conditions.careerLevel, context.careerLevel)) {
+      return false;
+    }
+    if (!_matchesValue(conditions.employmentStatus, context.employmentStatus)) {
+      return false;
+    }
+    if (conditions.careerTags.isNotEmpty &&
+        !conditions.careerTags.every(context.careerTags.contains)) {
+      return false;
+    }
+    if (conditions.salaryLevelMin > 0 &&
+        context.salaryLevel < conditions.salaryLevelMin) {
       return false;
     }
     return true;
@@ -539,6 +587,13 @@ class DialogueRuntimeManager {
   }
 }
 
+class _DialogueCacheEntry {
+  const _DialogueCacheEntry(this.key, this.items);
+
+  final String key;
+  final List<ResidentDialogueEntry> items;
+}
+
 class _DialogueRuntimeContext {
   const _DialogueRuntimeContext({
     required this.residentId,
@@ -550,6 +605,8 @@ class _DialogueRuntimeContext {
     required this.rumorContext,
     required this.state,
     required this.location,
+    required this.organization,
+    required this.career,
     required this.locationResidentCount,
     required this.personality,
     required this.memory,
@@ -567,6 +624,8 @@ class _DialogueRuntimeContext {
   final RumorContext? rumorContext;
   final ResidentCurrentState state;
   final LocationContext location;
+  final ResidentOrganizationContext organization;
+  final ResidentCareerStatus career;
   final int locationResidentCount;
   final ResidentPersonalityContext personality;
   final ResidentMemoryRecord memory;
@@ -697,4 +756,51 @@ class _DialogueRuntimeContext {
       playerInfluenceContext.recentActionTypes;
   int get officeInfluence => playerInfluenceContext.officeInfluence.overall;
   int get officeTrust => playerInfluenceContext.officeInfluence.officeTrust;
+  String get companyId => organization.companyId;
+  String get departmentId => organization.departmentId;
+  String get teamId => organization.teamId;
+  String get positionId => organization.positionId;
+  List<String> get organizationTags => organization.tags;
+  String get careerLevel => career.careerLevel;
+  String get employmentStatus => career.employmentStatus;
+  int get salaryLevel => career.salaryLevel;
+  List<String> get careerTags => career.tags;
+
+  String cacheKey({
+    required int servedNonRepeatableCount,
+    required int dialogueCount,
+  }) {
+    return [
+      dialogueCount,
+      servedNonRepeatableCount,
+      residentId,
+      timeOfDay,
+      weather.weatherType.name,
+      festival.activeFestivals.join('|'),
+      state.location,
+      state.activity,
+      state.mood,
+      location.locationId,
+      locationResidentCount,
+      relationship.relationshipLevel,
+      relationship.relationshipScore,
+      memory.meetCount,
+      memory.memoryTags.join('|'),
+      livingOfficeState.officeMood,
+      livingOfficeState.activityLevel,
+      livingOfficeState.socialLevel,
+      livingOfficeState.tensionLevel,
+      playerInfluenceContext.reputation.join('|'),
+      playerInfluenceContext.recentActionTypes.join('|'),
+      officeInfluence,
+      officeTrust,
+      companyId,
+      departmentId,
+      teamId,
+      positionId,
+      careerLevel,
+      employmentStatus,
+      salaryLevel,
+    ].join('::');
+  }
 }
