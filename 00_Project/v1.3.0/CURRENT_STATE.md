@@ -6,13 +6,13 @@
 
 ## Current HEAD
 
-`12b674d22cd0261fc8ebbaa19c309ee636228c2e`
+`d16e6045b1702dc023c9da536f1106e09692a397`
 
 ## Branch Baseline
 
 - `codex/v1.3-company-organization` and `feature/v1.3.0-office-ai` point to the same HEAD.
 - Module 01 and Module 02 source/test changes have been committed locally.
-- Current working tree has Module 03 source, test, and documentation changes waiting for commit authorization.
+- Current working tree has Module 04 Office Economy source, test, and documentation changes waiting for review.
 - Product owner decided to keep using `codex/v1.3-company-organization` as the Module 01 / 02 review branch.
 - Safe branch switch is not recommended while these uncommitted changes exist.
 - Local `feature/v1.3.0-office-ai` is retained for later consolidation after reviewed commits exist.
@@ -25,13 +25,15 @@
 
 - Module 01: Company Organization System — REVIEWED – COMMITTED
 - Module 02: Career Growth System — REVIEWED – COMMITTED WITH ARCHITECTURE DEBT
+- Module 03: Organization Assignment Runtime Mutation — REVIEWED – COMMITTED
+- Module 04: Office Economy — IMPLEMENTED – WAITING FOR REVIEW
 - Mutation Types: EXTRACTED – NO RUNTIME IMPLEMENTATION COMMIT
 - Runtime Performance Debt: RESOLVED – framework smoke performance gate restored below 800ms
 - Long-Term World Evolution Design — DOCUMENTED – WAITING FOR REVIEW
 
 ## Planned Next Module
 
-- Module 03: Organization Assignment Runtime Mutation — IMPLEMENTED – REVIEW P1 FIXED – READY FOR COMMIT AUTHORIZATION
+- Module 05: AI Decision System
 
 ## Current New Models And Concepts
 
@@ -64,8 +66,15 @@
 - `OrganizationMutationRecord`
 - Runtime organization overrides
 - Runtime organization mutation history
+- `fishing_office_flutter/lib/models/office_economy.dart`
+- `OfficeEconomyState`
+- `OfficeEconomyRecord`
+- `OfficeEconomySettlementResult`
+- company-side payroll settlement
+- bounded office economy history
+- `WorldSimulationContext.economy.officeEconomy`
 - Long-term world evolution design guardrails
-- ADR-011 through ADR-022 for world evolution rules
+- ADR-011 through ADR-024 for world evolution rules
 - Architecture guardrails
 - Context reading guide
 
@@ -79,12 +88,15 @@
 - `00_Project/v1.3.0/Module_01_Company_Organization_Report.md`
 - `00_Project/v1.3.0/Module_02_Career_Growth_Report.md`
 - `00_Project/v1.3.0/Module_03_Organization_Assignment_Mutation_Report.md`
+- `00_Project/v1.3.0/Module_04_Office_Economy_Report.md`
 - `00_Project/v1.3.0/ROADMAP.md`
 - `00_Project/v1.3.0/DESIGN_DECISIONS.md`
 - `00_Project/v1.3.0/LONG_TERM_WORLD_EVOLUTION_DESIGN.md`
 - `00_Project/v1.3.0/ARCHITECTURE_GUARDRAILS.md`
 - `00_Project/v1.3.0/CONTEXT_READING_GUIDE.md`
 - `00_Project/v1.3.0/Module_Manifests/organization_assignment_runtime_mutation.md`
+- `00_Project/v1.3.0/Module_Manifests/office_economy.md`
+- `fishing_office_flutter/lib/models/office_economy.dart`
 - `fishing_office_flutter/lib/models/company_organization.dart`
 - `fishing_office_flutter/lib/models/resident_career.dart`
 - `fishing_office_flutter/lib/models/resident_config.dart`
@@ -92,6 +104,7 @@
 - `fishing_office_flutter/lib/core/managers/resident_runtime_manager.dart`
 - `fishing_office_flutter/lib/core/engine/second_world_engine.dart`
 - `fishing_office_flutter/lib/core/managers/world_tick_manager.dart`
+- `fishing_office_flutter/lib/core/managers/world_save_manager.dart`
 - `fishing_office_flutter/lib/models/interactive_office.dart`
 - `fishing_office_flutter/lib/widgets/office/office_hub_dialog.dart`
 - `fishing_office_flutter/lib/core/managers/dialogue_runtime_manager.dart`
@@ -140,6 +153,11 @@
 - `SecondWorldEngine.getPromotionCandidates(...)`
 - `SecondWorldEngine.getDepartmentManagers(departmentId)`
 - `SecondWorldEngine.getTeamLeaders(teamId)`
+- `ResidentRuntimeManager.officeEconomyState`
+- `ResidentRuntimeManager.officeEconomySnapshot`
+- `ResidentRuntimeManager.settleOfficeEconomy(...)`
+- `SecondWorldEngine.getOfficeEconomyState()`
+- `SecondWorldEngine.settleOfficeEconomy(...)`
 
 ## Current Design References
 
@@ -149,6 +167,7 @@
 - `00_Project/v1.3.0/ARCHITECTURE_GUARDRAILS.md`
 - `00_Project/v1.3.0/CONTEXT_READING_GUIDE.md`
 - `00_Project/v1.3.0/Module_Manifests/organization_assignment_runtime_mutation.md`
+- `00_Project/v1.3.0/Module_Manifests/office_economy.md`
 
 ## Current Test Baseline
 
@@ -177,7 +196,8 @@
 - Resident Detail shows career information inside the existing Office Hub only.
 - Career events now route through a unified organization mutation path when they change assignment.
 - Organization mutation save data is runtime state only; raw resident config remains unchanged.
-- Module 03 organization mutation implementation is present in the working tree; Reporting Graph P1 is fixed and review is closed for commit authorization. It is not committed, pushed, released, or merged by this task.
+- Module 03 organization mutation implementation is committed locally.
+- Module 04 Office Economy implementation is present in the working tree for review; it is not committed, pushed, released, or merged by this task.
 - Long-term world evolution rules are documented, but future modules in v1.4.0, v1.5.0, and v2.0.0 remain planned unless explicitly marked implemented in module reports.
 - v1.2 release tag, main merge state, and production release files are not modified by this module.
 
@@ -190,7 +210,7 @@
 
 ## Next Module
 
-IMPLEMENTED – REVIEW P1 FIXED – READY FOR COMMIT AUTHORIZATION. Module 03 should be committed before Office Economy or AI Decision work begins.
+Module 05 AI Decision System should start only after Module 04 review and local commit.
 
 ## Default Not Required To Re-Read
 
@@ -205,7 +225,8 @@ IMPLEMENTED – REVIEW P1 FIXED – READY FOR COMMIT AUTHORIZATION. Module 03 sh
 
 - Module 01 Review: REVIEWED – COMMITTED.
 - Module 02 Review: REVIEWED – COMMITTED WITH ARCHITECTURE DEBT.
-- Module 03 Status: IMPLEMENTED – REVIEW P1 FIXED – READY FOR COMMIT AUTHORIZATION.
+- Module 03 Status: REVIEWED – COMMITTED.
+- Module 04 Status: IMPLEMENTED – WAITING FOR REVIEW.
 - Latest validation in Module 01/02 commit execution: analyze PASS, flutter test PASS with 98 tests, performance gate restored to 246ms.
 - Commit plan: `00_Project/v1.3.0/MODULE_01_02_COMMIT_PLAN.md`.
 - Branch plan: `00_Project/v1.3.0/BRANCH_CONSOLIDATION_PLAN.md`.

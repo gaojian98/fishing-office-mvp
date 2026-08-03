@@ -216,6 +216,7 @@ class ResidentDetailViewModel {
     required this.employmentStatus,
     required this.hireDate,
     required this.salaryLevel,
+    required this.officeEconomyLines,
     required this.performanceScore,
     required this.capabilityScore,
     required this.promotionHistory,
@@ -276,6 +277,7 @@ class ResidentDetailViewModel {
       employmentStatus: '',
       hireDate: '',
       salaryLevel: 0,
+      officeEconomyLines: const <String>[],
       performanceScore: 0,
       capabilityScore: 0,
       promotionHistory: const <ResidentCareerEvent>[],
@@ -335,6 +337,7 @@ class ResidentDetailViewModel {
   final String employmentStatus;
   final String hireDate;
   final int salaryLevel;
+  final List<String> officeEconomyLines;
   final int performanceScore;
   final int capabilityScore;
   final List<ResidentCareerEvent> promotionHistory;

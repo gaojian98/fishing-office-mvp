@@ -1001,6 +1001,7 @@ class WorldSaveManager extends ChangeNotifier {
             .toList(growable: false),
         'processedOrganizationMutationIds':
             _residentRuntimeManager.processedOrganizationMutationIds,
+        'officeEconomy': _residentRuntimeManager.officeEconomyState.toJson(),
       },
       residentMemory: _residentMemoryEngine.toConfig(),
       residentRelationship: ResidentRelationshipConfig(
@@ -1075,6 +1076,7 @@ class WorldSaveManager extends ChangeNotifier {
       processedOrganizationMutationIds: _stringList(
         data.residentRuntime['processedOrganizationMutationIds'],
       ),
+      officeEconomy: _dynamicMap(data.residentRuntime['officeEconomy']),
     );
     _storyRuntimeManager.loadFinishedStoryIds(data.finishedStories);
     _dialogueRuntimeManager.loadServedNonRepeatableIds(
@@ -1365,6 +1367,11 @@ class WorldSaveManager extends ChangeNotifier {
         .whereType<Map>()
         .map((item) => Map<String, dynamic>.from(item))
         .toList(growable: false);
+  }
+
+  Map<String, dynamic> _dynamicMap(Object? value) {
+    if (value is! Map) return const <String, dynamic>{};
+    return Map<String, dynamic>.from(value);
   }
 
   bool _mapEquals(Map<String, dynamic> current, Map<String, dynamic> next) {

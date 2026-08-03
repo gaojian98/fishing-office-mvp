@@ -752,6 +752,11 @@ class _ResidentDetailPanel extends StatelessWidget {
               '职业标签：${detail.careerTags.take(4).join(' / ')}',
           ],
         ),
+        if (detail.officeEconomyLines.isNotEmpty)
+          _DetailSection(
+            title: '公司经济',
+            lines: detail.officeEconomyLines,
+          ),
         _InteractionsSection(
           detail: detail,
           onAction: onAction,

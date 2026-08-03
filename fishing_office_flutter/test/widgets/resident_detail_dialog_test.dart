@@ -299,6 +299,7 @@ InteractiveOfficeSnapshot _sampleSnapshot({
       employmentStatus: 'active',
       hireDate: 'Y1-M01-D01',
       salaryLevel: 180,
+      officeEconomyLines: const [],
       performanceScore: 62,
       capabilityScore: 58,
       promotionHistory: const [

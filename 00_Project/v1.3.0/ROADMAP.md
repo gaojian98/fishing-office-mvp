@@ -14,7 +14,12 @@ Primary long-term design reference:
 |---|---|---|
 | Module 01 Company Organization System | REVIEWED – PASS WITH DEBT | Company, Department, Team, Position, resident organization context. Debt: inferred capacity/reporting graph and mixed commit split. |
 | Module 02 Career Growth System | REVIEWED – PASS WITH DEBT | Resident career status, career events, recruitment needs, promotion candidates, Resident Detail career projection. Debt: supplemental career event idempotency must be resolved by Module 03. |
-| Module 03 Organization Assignment Runtime Mutation | IMPLEMENTED – REVIEW P1 FIXED – READY FOR COMMIT AUTHORIZATION | Transactional organization assignment mutation connected to career events, reporting graph, and save/restore. Required before Office Economy. |
+| Module 03 Organization Assignment Runtime Mutation | REVIEWED – COMMITTED | Transactional organization assignment mutation connected to career events, reporting graph, and save/restore. |
+| Module 04 Office Economy | IMPLEMENTED – WAITING FOR REVIEW | Company-side budget, payroll, bonus, operating cost, project income, budget warning, snapshot, and bounded history. |
+| Module 05 AI Decision System | PLANNED | Explainable resident decisions that read organization, career, economy, relationship, personality, emotion, and memory state. |
+| Module 06 Long-Term Memory | PLANNED | Bounded long-term resident memory for interaction, relationship, career, organization, event, and player history. |
+| Module 07 Company News & Timeline | PLANNED | Player-readable company news and structured timeline history. |
+| Module 08 AI Company Events | PLANNED | Cross-runtime company events that call owning mutation/runtime interfaces. |
 | Long-Term World Evolution Design Documentation | DOCUMENTED – WAITING FOR REVIEW | Design guardrails for v1.3.0 and future v1.4.0 / v1.5.0 / v2.0.0 evolution. |
 
 ## Active Constraints
@@ -37,9 +42,9 @@ Primary long-term design reference:
 
 ## Next Candidate Module
 
-Human review for Module 03 Organization Assignment Runtime Mutation.
+Human review for Module 04 Office Economy.
 
-Readiness: IMPLEMENTED – REVIEW P1 FIXED – READY FOR COMMIT AUTHORIZATION. Do not enter Office Economy or AI Decision until Module 03 is committed or explicitly accepted.
+Readiness: IMPLEMENTED – WAITING FOR REVIEW. Do not enter AI Decision until Module 04 is reviewed and committed or explicitly accepted.
 
 ## Review And Commit Planning
 

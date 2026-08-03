@@ -10,6 +10,7 @@ import '../../models/living_office_state.dart';
 import '../../models/living_world_config.dart';
 import '../../models/location_context.dart';
 import '../../models/office_group.dart';
+import '../../models/office_economy.dart';
 import '../../models/player_influence.dart';
 import '../../models/resident_config.dart';
 import '../../models/resident_career.dart';
@@ -112,6 +113,36 @@ class SecondWorldEngine {
 
   List<ResidentCareerEvent> getResidentCareerEvents(String id) {
     return getResidentCareerStatus(id).promotionHistory;
+  }
+
+  OfficeEconomyState getOfficeEconomyState() {
+    return _residentRuntimeManager?.officeEconomyState ??
+        const OfficeEconomyState.empty();
+  }
+
+  OfficeEconomySettlementResult settleOfficeEconomy({
+    required String periodType,
+    required String periodKey,
+    String departmentId = '',
+    String settlementId = '',
+    int bonusPool = 0,
+    int operatingCost = 0,
+    int projectIncome = 0,
+    String reason = '',
+  }) {
+    return _residentRuntimeManager?.settleOfficeEconomy(
+          periodType: periodType,
+          periodKey: periodKey,
+          departmentId: departmentId,
+          settlementId: settlementId,
+          bonusPool: bonusPool,
+          operatingCost: operatingCost,
+          projectIncome: projectIncome,
+          reason: reason,
+        ) ??
+        const OfficeEconomySettlementResult.failure(
+          <String>['resident_runtime_missing'],
+        );
   }
 
   ResidentCareerStatus applyResidentCareerEvent(
@@ -535,6 +566,7 @@ class SecondWorldEngine {
       employmentStatus: context.career.employmentStatus,
       hireDate: context.career.hireDate,
       salaryLevel: context.career.salaryLevel,
+      officeEconomyLines: _officeEconomyLinesFor(context),
       performanceScore: context.career.performanceScore,
       capabilityScore: context.career.capabilityScore,
       promotionHistory: context.career.promotionHistory,
@@ -575,6 +607,19 @@ class SecondWorldEngine {
       active: context.life.found,
       lastUpdatedAt: WorldClockManager.systemNow().toIso8601String(),
     );
+  }
+
+  List<String> _officeEconomyLinesFor(ResidentContext context) {
+    final state = getOfficeEconomyState();
+    final departmentId = context.organization.departmentId;
+    final departmentBudget = state.departmentBudgets[departmentId];
+    return <String>[
+      '公司预算：${state.companyBudget}',
+      if (departmentBudget != null) '部门预算：$departmentBudget',
+      if (state.lastSettlementId.isNotEmpty) '最近结算：${state.lastSettlementId}',
+      if (state.budgetWarnings.isNotEmpty)
+        '预算提醒：${state.budgetWarnings.take(2).join(' / ')}',
+    ];
   }
 
   PlayerActionResult submitPlayerAction(PlayerActionRequest request) {

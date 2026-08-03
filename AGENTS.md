@@ -29,7 +29,7 @@ Run Flutter commands from that directory unless a task explicitly says otherwise
 - Current development version: `v1.3.0`
 - Current development branch: `codex/v1.3-company-organization`
 - Current state file: `00_Project/v1.3.0/CURRENT_STATE.md`
-- Current v1.3.0 module state: Module 01 and Module 02 are implemented and waiting for review; Module 03 is planned but blocked by branch/worktree decision because unreviewed implementation-like changes exist.
+- Current v1.3.0 module state: Module 01, Module 02, and Module 03 are committed locally. Module 04 Office Economy is implemented in the working tree and waiting for review.
 
 ## 4. Authoritative Documents
 
@@ -186,6 +186,8 @@ Historical reports are not ordinary Feature inputs.
 - Resident career events that change company organization assignment must use the unified Resident Runtime organization mutation path; do not separately edit career and organization state.
 - Organization Mutation is the only approved entry for resident organization assignment changes.
 - Career must not directly modify Organization assignment fields.
+- Office Economy must remain separate from player wallet, backpack, fish sales, and task reward state.
+- Office Economy settlements require stable idempotency keys and bounded history.
 - Rules accepted in `LONG_TERM_WORLD_EVOLUTION_DESIGN.md` should not be reversed without adding or updating an ADR.
 - Core rule changes require an ADR update before implementation.
 - Planned content must not be documented as implemented.

@@ -1088,6 +1088,7 @@ class WorldTickManager extends ChangeNotifier {
         'marketTrend': _economyRuntimeManager?.marketTrend,
         'priceMultiplier': _economyRuntimeManager?.priceMultiplier,
         'lastMarketDay': _economyRuntimeManager?.lastMarketDay,
+        'officeEconomy': _residentRuntimeManager.officeEconomySnapshot,
       },
     );
     final relationships = safe<Map<String, Object?>>(

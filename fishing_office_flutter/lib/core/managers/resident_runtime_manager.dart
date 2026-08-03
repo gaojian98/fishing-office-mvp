@@ -4,6 +4,7 @@ import '../../models/living_world_config.dart';
 import '../../models/company_organization.dart';
 import '../../models/location_context.dart';
 import '../../models/office_life_schedule.dart';
+import '../../models/office_economy.dart';
 import '../../models/resident_config.dart';
 import '../../models/resident_career.dart';
 import '../../models/resident_life_config.dart';
@@ -38,6 +39,8 @@ class ResidentRuntimeManager extends ChangeNotifier {
   final List<OrganizationMutationRecord> _organizationMutationHistory =
       <OrganizationMutationRecord>[];
   final Set<String> _processedOrganizationMutationIds = <String>{};
+  OfficeEconomyState _officeEconomyState =
+      const OfficeEconomyState.empty().copyWith(companyBudget: 6000);
   final Map<String, ResidentPersonalityContext> _personalityCache =
       <String, ResidentPersonalityContext>{};
   final Map<String, List<ResidentProfile>> _residentsByLocationCache =
@@ -64,6 +67,8 @@ class ResidentRuntimeManager extends ChangeNotifier {
       );
   List<String> get processedOrganizationMutationIds =>
       _processedOrganizationMutationIds.toList(growable: false)..sort();
+  OfficeEconomyState get officeEconomyState => _officeEconomyState.normalized();
+  Map<String, Object?> get officeEconomySnapshot => officeEconomyState.toJson();
 
   Future<void> load() async {
     try {
@@ -131,6 +136,94 @@ class ResidentRuntimeManager extends ChangeNotifier {
 
   List<ResidentCareerEvent> getResidentCareerEvents(String id) {
     return getResidentCareerStatus(id).promotionHistory;
+  }
+
+  OfficeEconomySettlementResult settleOfficeEconomy({
+    required String periodType,
+    required String periodKey,
+    String departmentId = '',
+    String settlementId = '',
+    int bonusPool = 0,
+    int operatingCost = 0,
+    int projectIncome = 0,
+    String reason = '',
+  }) {
+    final normalizedPeriodType = periodType.trim().toLowerCase();
+    final normalizedPeriodKey = periodKey.trim();
+    final id = settlementId.isEmpty
+        ? 'office_economy:$normalizedPeriodType:$normalizedPeriodKey:${departmentId.isEmpty ? 'company' : departmentId}'
+        : settlementId;
+    if (normalizedPeriodType.isEmpty || normalizedPeriodKey.isEmpty) {
+      return const OfficeEconomySettlementResult.failure(
+        <String>['settlement_period_missing'],
+      );
+    }
+    if (_officeEconomyState.hasSettled(id)) {
+      OfficeEconomyRecord? existing;
+      for (final record in _officeEconomyState.history) {
+        if (record.settlementId == id) {
+          existing = record;
+          break;
+        }
+      }
+      return OfficeEconomySettlementResult(
+        success: true,
+        idempotent: true,
+        record: existing,
+        state: _officeEconomyState,
+        errors: const <String>[],
+      );
+    }
+    if (departmentId.isNotEmpty &&
+        !companyOrganization.hasDepartment(departmentId)) {
+      return OfficeEconomySettlementResult.failure(
+        <String>['department_missing:$departmentId'],
+      );
+    }
+    final activeResidents = residents.where((resident) {
+      if (!resident.enabled) return false;
+      final career = getResidentCareerStatus(resident.id);
+      if (!career.isActive) return false;
+      final organization = getResidentOrganization(resident.id);
+      if (!organization.isAssigned) return false;
+      return departmentId.isEmpty || organization.departmentId == departmentId;
+    }).toList(growable: false);
+    final payroll = activeResidents.fold<int>(
+      0,
+      (sum, resident) =>
+          sum + salaryForCareer(getResidentCareerStatus(resident.id)),
+    );
+    final bonus = bonusPool.clamp(0, 1 << 31).toInt();
+    final cost = operatingCost < 0
+        ? _defaultOperatingCost(activeResidents.length)
+        : operatingCost.clamp(0, 1 << 31).toInt();
+    final income = projectIncome < 0
+        ? _defaultProjectIncome(activeResidents)
+        : projectIncome.clamp(0, 1 << 31).toInt();
+    final record = OfficeEconomyRecord(
+      settlementId: id,
+      periodType: normalizedPeriodType,
+      periodKey: normalizedPeriodKey,
+      departmentId: departmentId,
+      residentIds: activeResidents
+          .map((resident) => resident.id)
+          .toList(growable: false),
+      payroll: payroll,
+      bonus: bonus,
+      operatingCost: cost,
+      projectIncome: income,
+      reason: reason.isEmpty ? 'office_economy_settlement' : reason,
+      createdAt: _currentWorldDate(),
+    );
+    _officeEconomyState = _officeEconomyState.applyRecord(record);
+    notifyListeners();
+    return OfficeEconomySettlementResult(
+      success: true,
+      idempotent: false,
+      record: record,
+      state: _officeEconomyState,
+      errors: const <String>[],
+    );
   }
 
   OrganizationMutationResult assignResident(
@@ -909,6 +1002,8 @@ class ResidentRuntimeManager extends ChangeNotifier {
     _organizationOverrides.clear();
     _organizationMutationHistory.clear();
     _processedOrganizationMutationIds.clear();
+    _officeEconomyState =
+        const OfficeEconomyState.empty().copyWith(companyBudget: 6000);
     _invalidateRuntimeCaches();
     notifyListeners();
   }
@@ -918,6 +1013,7 @@ class ResidentRuntimeManager extends ChangeNotifier {
     List<Map<String, dynamic>> organizationMutationHistory =
         const <Map<String, dynamic>>[],
     List<String> processedOrganizationMutationIds = const <String>[],
+    Map<String, dynamic> officeEconomy = const <String, dynamic>{},
   }) {
     _runtimeOverrides.clear();
     _careerOverrides.clear();
@@ -933,6 +1029,9 @@ class ResidentRuntimeManager extends ChangeNotifier {
     _processedOrganizationMutationIds
       ..clear()
       ..addAll(processedOrganizationMutationIds.where((id) => id.isNotEmpty));
+    _officeEconomyState = officeEconomy.isEmpty
+        ? const OfficeEconomyState.empty().copyWith(companyBudget: 6000)
+        : OfficeEconomyState.fromJson(officeEconomy);
     for (final state in states) {
       final residentId = state['residentId']?.toString() ?? '';
       if (residentId.isEmpty) continue;
@@ -1481,6 +1580,21 @@ class ResidentRuntimeManager extends ChangeNotifier {
   String _currentWorldDate() {
     final today = _worldClockManager.today();
     return 'Y${today.year}-M${today.month}-D${today.day}-#${today.dayCount}';
+  }
+
+  int _defaultOperatingCost(int activeResidentCount) {
+    return (activeResidentCount * 18).clamp(0, 1 << 31).toInt();
+  }
+
+  int _defaultProjectIncome(List<ResidentProfile> activeResidents) {
+    final capability = activeResidents.fold<int>(
+      0,
+      (sum, resident) =>
+          sum + getResidentCareerStatus(resident.id).capabilityScore,
+    );
+    return (capability * 3 + activeResidents.length * 30)
+        .clamp(0, 1 << 31)
+        .toInt();
   }
 
   String _baseMood(ResidentProfile resident, {required String fallback}) {

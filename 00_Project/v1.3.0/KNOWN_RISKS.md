@@ -2,13 +2,18 @@
 
 ## Module 03 Organization Assignment Runtime Mutation
 
+Status: REVIEWED - COMMITTED
+
+## Module 04 Office Economy
+
 Status: IMPLEMENTED - WAITING FOR REVIEW
 
 ## Current Risks
 
-- Reporting graph depth validation currently prevents invalid or self report targets, but does not yet model a complete multi-level management graph.
 - Position capacity is inferred from existing position hierarchy until product-defined capacity fields exist.
-- Module 03 must be human reviewed before Office Economy or AI Decision depends on mutation outcomes.
+- Office Economy settlement is explicit runtime API driven; automatic daily / weekly / monthly settlement scheduling is deferred.
+- Office Economy budget allocation uses current active resident assignment and salary state because no product-provided company budget JSON exists yet.
+- Module 04 must be reviewed before AI Decision depends on economy outcomes.
 
 ## Not Risks In This Task
 

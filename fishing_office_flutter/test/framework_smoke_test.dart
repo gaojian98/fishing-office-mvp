@@ -611,6 +611,200 @@ void main() {
     expect(elapsedMs < 300, isTrue);
   });
 
+  test('office economy settles payroll budgets idempotently and restores state',
+      () async {
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': [
+        _organizationResident(
+          id: 'payroll_staff',
+          departmentId: 'technology',
+          teamId: 'tech_support',
+          positionId: 'staff',
+        ),
+        _organizationResident(
+          id: 'payroll_leader',
+          departmentId: 'technology',
+          teamId: 'tech_support',
+          positionId: 'team_leader',
+          careerLevel: 'leader',
+        ),
+        _organizationResident(
+          id: 'payroll_transfer',
+          departmentId: 'technology',
+          teamId: 'tech_support',
+          positionId: 'staff',
+        ),
+      ],
+    });
+    final life = ResidentLifeConfig.fromJson(
+      scheduleJson: {'version': 'test', 'schedules': []},
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final clock = WorldClockManager(
+      initialClock:
+          WorldClock.initial().copyWith(dayCount: 12, hour: 9, minute: 0),
+      initialCalendar: WorldCalendar.initial().copyWith(
+        dayCount: 12,
+        weekdayIndex: 3,
+        month: 1,
+        day: 12,
+        season: 'spring',
+      ),
+      paused: true,
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+
+    final promoted = runtime.promoteResident(
+      'payroll_staff',
+      toPositionId: 'specialist',
+      toCareerLevel: 'senior',
+      sourceId: 'payroll_promotion',
+    );
+    expect(promoted.success, isTrue);
+    final transferred = runtime.transferResident(
+      'payroll_transfer',
+      teamId: 'market_services',
+      toPositionId: 'staff',
+      sourceId: 'payroll_transfer',
+    );
+    expect(transferred.success, isTrue);
+
+    final dayOne = runtime.settleOfficeEconomy(
+      periodType: 'day',
+      periodKey: 'Y1-M1-D12',
+      departmentId: 'technology',
+      settlementId: 'office_payroll_day_12_tech',
+      bonusPool: 90,
+      operatingCost: 100,
+      projectIncome: 1200,
+      reason: 'daily_payroll',
+    );
+    expect(dayOne.success, isTrue);
+    expect(dayOne.idempotent, isFalse);
+    expect(dayOne.record!.residentIds, contains('payroll_staff'));
+    expect(dayOne.record!.residentIds, contains('payroll_leader'));
+    expect(dayOne.record!.residentIds, isNot(contains('payroll_transfer')));
+    expect(
+      dayOne.record!.payroll,
+      residentCareerBaseSalary['senior']! + residentCareerBaseSalary['leader']!,
+    );
+    expect(dayOne.record!.bonus, 90);
+    expect(dayOne.record!.operatingCost, 100);
+    expect(dayOne.record!.projectIncome, 1200);
+    expect(runtime.officeEconomyState.companyBudget, greaterThan(6000));
+    expect(runtime.officeEconomyState.departmentBudgets['technology'],
+        dayOne.record!.netChange);
+
+    final duplicate = runtime.settleOfficeEconomy(
+      periodType: 'day',
+      periodKey: 'Y1-M1-D12',
+      departmentId: 'technology',
+      settlementId: 'office_payroll_day_12_tech',
+      bonusPool: 999,
+      operatingCost: 999,
+      projectIncome: 999,
+    );
+    expect(duplicate.success, isTrue);
+    expect(duplicate.idempotent, isTrue);
+    expect(runtime.officeEconomyState.history.length, 1);
+
+    final resigned = runtime.resignResident(
+      'payroll_leader',
+      sourceId: 'payroll_resign',
+    );
+    expect(resigned.success, isTrue);
+    final dayTwo = runtime.settleOfficeEconomy(
+      periodType: 'day',
+      periodKey: 'Y1-M1-D13',
+      departmentId: 'technology',
+      settlementId: 'office_payroll_day_13_tech',
+      operatingCost: 50,
+      projectIncome: 500,
+    );
+    expect(dayTwo.success, isTrue);
+    expect(dayTwo.record!.residentIds, contains('payroll_staff'));
+    expect(dayTwo.record!.residentIds, isNot(contains('payroll_leader')));
+    expect(dayTwo.record!.payroll, residentCareerBaseSalary['senior']);
+
+    final restored = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await restored.load();
+    restored.loadRuntimeStates(
+      runtime.residents
+          .map((resident) => <String, dynamic>{
+                'residentId': resident.id,
+                'organization':
+                    runtime.getResidentOrganization(resident.id).toJson(),
+                'career': runtime.getResidentCareerStatus(resident.id).toJson(),
+                'location': 'office',
+                'activity': 'restore',
+                'mood': 'calm',
+                'dayCount': 12,
+              })
+          .toList(growable: false),
+      organizationMutationHistory: runtime.organizationMutationHistory
+          .map((record) => record.toJson())
+          .toList(growable: false),
+      processedOrganizationMutationIds:
+          runtime.processedOrganizationMutationIds,
+      officeEconomy: runtime.officeEconomyState.toJson(),
+    );
+    expect(restored.officeEconomyState.history.length, 2);
+    final restoredDuplicate = restored.settleOfficeEconomy(
+      periodType: 'day',
+      periodKey: 'Y1-M1-D13',
+      departmentId: 'technology',
+      settlementId: 'office_payroll_day_13_tech',
+    );
+    expect(restoredDuplicate.idempotent, isTrue);
+    expect(restored.officeEconomyState.history.length, 2);
+
+    restored.loadRuntimeStates(const <Map<String, dynamic>>[]);
+    expect(restored.officeEconomyState.history, isEmpty);
+    expect(restored.officeEconomyState.companyBudget, 6000);
+
+    final bulkResidents = ResidentConfig.fromJson({
+      'version': 'bulk',
+      'residents': List.generate(
+        100,
+        (index) => _organizationResident(
+          id: 'economy_bulk_$index',
+          departmentId: index.isEven ? 'operations' : 'technology',
+          teamId: index.isEven ? 'product_ops' : 'tech_support',
+          positionId: 'staff',
+        ),
+      ),
+    });
+    final bulk = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(bulkResidents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await bulk.load();
+    final startedAt = DateTime.now();
+    final bulkResult = bulk.settleOfficeEconomy(
+      periodType: 'day',
+      periodKey: 'Y1-M1-D12',
+      settlementId: 'bulk_company_payroll',
+      operatingCost: -1,
+      projectIncome: -1,
+    );
+    final elapsedMs = DateTime.now().difference(startedAt).inMilliseconds;
+    expect(bulkResult.success, isTrue);
+    expect(bulkResult.record!.residentIds.length, 100);
+    expect(bulkResult.record!.payroll, greaterThan(0));
+    expect(elapsedMs < 300, isTrue);
+  });
+
   test('organization conditions parse for dialogue story and dynamic events',
       () {
     final dialogue = ResidentDialogueConfig.fromJson({

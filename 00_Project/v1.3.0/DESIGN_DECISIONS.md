@@ -61,6 +61,26 @@ Reason: Dialogue, Story, Quest, Dynamic Event, Economy, and future AI Decision m
 
 Impact: Save/restore must include `reportsToResidentId` through the existing organization assignment state. Missing values from old saves fall back to an empty reporting relation.
 
+## DD-007 Office Economy Is Company-Side Runtime State
+
+Status: Accepted
+
+Decision: Company budget, department budgets, payroll, bonuses, operating costs, project income, warnings, and office economy history live as runtime state owned through Resident Runtime and saved under `residentRuntime.officeEconomy`.
+
+Reason: Office Economy depends on current organization assignment and resident career state. It must remain separate from player wallet, backpack, fish sales, and task rewards.
+
+Impact: UI can read office economy snapshots, but cannot directly modify company finance. Future AI Decision, News, Timeline, and Company Event modules must use stable settlement IDs and owning runtime APIs.
+
+## DD-008 Office Economy Settlement IDs Are Idempotency Keys
+
+Status: Accepted
+
+Decision: `settlementId` is the idempotency key for payroll, bonus, operating cost, project income, budget allocation, and economy history records.
+
+Reason: Daily, weekly, and monthly settlement may retry after save/load or event replay. Duplicate settlement must not pay salary twice or duplicate financial history.
+
+Impact: Repeated settlement IDs return idempotent success and preserve existing state. Future scheduled settlement must generate stable period-based settlement IDs.
+
 ## ADR-011 Career Changes Must Use Unified Organization Mutation
 
 Status: Accepted
@@ -252,3 +272,35 @@ Consequences: Old saves without `reportsToResidentId` remain compatible through 
 Alternatives: Store reporting only in mutation history. Rejected because consumers would need to rebuild current graph and could miss invalid cycles.
 
 Follow-up: Future Company Timeline may summarize reporting changes, but it must not replace current assignment as the source of truth.
+
+## ADR-023 Company Economy Must Stay Separate From Player Economy
+
+Status: Accepted
+
+Context: v1.3.0 introduces office payroll, department budgets, operating cost, and project income while the game already has player-facing fish coins, inventory, task rewards, and market pricing.
+
+Decision: Office Economy records company-side finance only. It does not write player wallet, inventory, task reward, or fish market state.
+
+Rationale: Company simulation should influence the office world without becoming a second player reward loop or corrupting player assets.
+
+Consequences: Office Economy can be shown read-only in Office Hub / Resident Detail and can feed future AI Decision, News, Timeline, and Company Events. Player rewards must continue using their existing managers.
+
+Alternatives: Reuse player economy balances for company finance. Rejected because it mixes simulation state with player assets and creates reward duplication risk.
+
+Follow-up: Future company events may derive consequences from office economy, but must call owning runtime interfaces.
+
+## ADR-024 Office Economy Settlements Must Be Bounded And Idempotent
+
+Status: Accepted
+
+Context: Payroll, bonuses, costs, and income can run daily, weekly, monthly, or from future company events. Save/load retries can re-dispatch the same settlement.
+
+Decision: Every office economy settlement uses a stable `settlementId`, and office economy history is capped.
+
+Rationale: This prevents duplicate salary, repeated budget changes, and unbounded save growth.
+
+Consequences: Old saves without office economy state fall back safely. Repeated settlement IDs return idempotent success. Future automatic settlement must reuse the same key strategy.
+
+Alternatives: Append every settlement attempt. Rejected because it creates duplicated finance and unbounded history.
+
+Follow-up: Company News and Timeline should summarize economy records without becoming the source of truth.
