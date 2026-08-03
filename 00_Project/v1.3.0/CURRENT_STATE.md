@@ -6,13 +6,13 @@
 
 ## Current HEAD
 
-`721a14c6a7db74376284b53137d1eb5a57121ea9`
+`f243c9d1073a5da6ec7d414c8e2573a7f0a07976`
 
 ## Branch Baseline
 
 - `codex/v1.3-company-organization` and `feature/v1.3.0-office-ai` point to the same HEAD.
-- Module 01, Module 02, Module 03, and Module 04 source/test/doc changes have been committed locally.
-- Current working tree has Module 05 AI Decision source, test, and documentation changes waiting for review.
+- Module 01, Module 02, Module 03, Module 04, and Module 05 source/test/doc changes have been committed locally.
+- Current working tree has Module 06 Long-Term Memory source, test, and documentation changes waiting for review.
 - Product owner decided to keep using `codex/v1.3-company-organization` as the Module 01 / 02 review branch.
 - Safe branch switch is not recommended while these uncommitted changes exist.
 - Local `feature/v1.3.0-office-ai` is retained for later consolidation after reviewed commits exist.
@@ -27,14 +27,15 @@
 - Module 02: Career Growth System — REVIEWED – COMMITTED WITH ARCHITECTURE DEBT
 - Module 03: Organization Assignment Runtime Mutation — REVIEWED – COMMITTED
 - Module 04: Office Economy — IMPLEMENTED – COMMITTED
-- Module 05: AI Decision System — IMPLEMENTED – WAITING FOR REVIEW
+- Module 05: AI Decision System — IMPLEMENTED – COMMITTED
+- Module 06: Long-Term Memory — IMPLEMENTED – WAITING FOR REVIEW
 - Mutation Types: EXTRACTED – NO RUNTIME IMPLEMENTATION COMMIT
 - Runtime Performance Debt: RESOLVED – framework smoke performance gate restored below 800ms
 - Long-Term World Evolution Design — DOCUMENTED – WAITING FOR REVIEW
 
 ## Planned Next Module
 
-- Module 06: Long-Term Memory
+- Module 07: Company News & Timeline
 
 ## Current New Models And Concepts
 
@@ -84,6 +85,11 @@
 - `ResidentDecision.cooldown`
 - bounded AI decision history
 - idempotent AI decision execution records
+- `LongTermResidentMemory`
+- `ResidentMemorySummary`
+- bounded resident long-term memory history
+- long-term memory sourceId idempotency
+- long-term memory decay and expiry
 - Long-term world evolution design guardrails
 - ADR-011 through ADR-026 for world evolution rules
 - Architecture guardrails
@@ -101,6 +107,7 @@
 - `00_Project/v1.3.0/Module_03_Organization_Assignment_Mutation_Report.md`
 - `00_Project/v1.3.0/Module_04_Office_Economy_Report.md`
 - `00_Project/v1.3.0/Module_05_AI_Decision_Report.md`
+- `00_Project/v1.3.0/Module_06_Long_Term_Memory_Report.md`
 - `00_Project/v1.3.0/ROADMAP.md`
 - `00_Project/v1.3.0/DESIGN_DECISIONS.md`
 - `00_Project/v1.3.0/LONG_TERM_WORLD_EVOLUTION_DESIGN.md`
@@ -109,6 +116,7 @@
 - `00_Project/v1.3.0/Module_Manifests/organization_assignment_runtime_mutation.md`
 - `00_Project/v1.3.0/Module_Manifests/office_economy.md`
 - `00_Project/v1.3.0/Module_Manifests/ai_decision.md`
+- `00_Project/Module_Manifests/memory_runtime.md`
 - `fishing_office_flutter/lib/models/office_economy.dart`
 - `fishing_office_flutter/lib/models/company_organization.dart`
 - `fishing_office_flutter/lib/models/resident_career.dart`
@@ -116,6 +124,8 @@
 - `fishing_office_flutter/lib/core/managers/resident_life_manager.dart`
 - `fishing_office_flutter/lib/core/managers/resident_runtime_manager.dart`
 - `fishing_office_flutter/lib/core/managers/resident_decision_manager.dart`
+- `fishing_office_flutter/lib/core/engine/resident_memory_engine.dart`
+- `fishing_office_flutter/lib/models/resident_memory_config.dart`
 - `fishing_office_flutter/lib/core/engine/second_world_engine.dart`
 - `fishing_office_flutter/lib/core/managers/world_tick_manager.dart`
 - `fishing_office_flutter/lib/core/managers/world_save_manager.dart`
@@ -185,6 +195,13 @@
 - `ResidentDecisionManager.executeDecision(decisionId)`
 - `ResidentDecisionManager.toDecisionStateJson()`
 - `ResidentDecisionManager.loadDecisionState(...)`
+- `ResidentMemoryEngine.recordLongTermMemory(...)`
+- `ResidentMemoryEngine.compactLongTermMemories(...)`
+- `ResidentMemoryEngine.getResidentMemorySummary(id)`
+- `ResidentMemoryEngine.longTermMemoryLimitPerResident`
+- `ResidentMemoryRecord.longTermMemories`
+- `LongTermResidentMemory`
+- `ResidentMemorySummary`
 
 ## Current Design References
 
@@ -196,6 +213,7 @@
 - `00_Project/v1.3.0/Module_Manifests/organization_assignment_runtime_mutation.md`
 - `00_Project/v1.3.0/Module_Manifests/office_economy.md`
 - `00_Project/v1.3.0/Module_Manifests/ai_decision.md`
+- `00_Project/Module_Manifests/memory_runtime.md`
 
 ## Current Test Baseline
 
@@ -228,19 +246,21 @@
 - Module 04 Office Economy implementation is committed locally; it is not pushed, released, or merged.
 - Module 05 AI Decision recommendations are read-only with respect to organization, career, economy, player wallet, inventory, quest rewards, and achievement state.
 - AI Decision execution currently records idempotent processing only; domain mutations remain owned by their existing runtime interfaces.
+- Long-term memory is persisted inside existing resident memory save data and caps each resident at 60 records.
+- Long-term memory compression is currently bounded retention, decay, expiry, and summary APIs; richer natural-language compression is deferred.
 - Long-term world evolution rules are documented, but future modules in v1.4.0, v1.5.0, and v2.0.0 remain planned unless explicitly marked implemented in module reports.
 - v1.2 release tag, main merge state, and production release files are not modified by this module.
 
 ## Current Forbidden Actions
 
-- Do not switch branches while uncommitted v1.3 Module 05 changes exist.
+- Do not switch branches while uncommitted v1.3 Module 06 changes exist.
 - Do not push, merge, tag, or modify Railway.
 - Do not modify v1.2.0 release baseline.
 - Do not enter the next module until branch and review decision is resolved.
 
 ## Next Module
 
-Module 06 Long-Term Memory should start only after Module 05 review and local commit.
+Module 07 Company News & Timeline should start only after Module 06 review and local commit.
 
 ## Default Not Required To Re-Read
 
@@ -257,7 +277,8 @@ Module 06 Long-Term Memory should start only after Module 05 review and local co
 - Module 02 Review: REVIEWED – COMMITTED WITH ARCHITECTURE DEBT.
 - Module 03 Status: REVIEWED – COMMITTED.
 - Module 04 Status: IMPLEMENTED – COMMITTED.
-- Module 05 Status: IMPLEMENTED – WAITING FOR REVIEW.
+- Module 05 Status: IMPLEMENTED – COMMITTED.
+- Module 06 Status: IMPLEMENTED – WAITING FOR REVIEW.
 - Latest validation in Module 01/02 commit execution: analyze PASS, flutter test PASS with 98 tests, performance gate restored to 246ms.
 - Commit plan: `00_Project/v1.3.0/MODULE_01_02_COMMIT_PLAN.md`.
 - Branch plan: `00_Project/v1.3.0/BRANCH_CONSOLIDATION_PLAN.md`.

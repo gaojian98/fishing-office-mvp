@@ -10,6 +10,10 @@ Status: IMPLEMENTED - COMMITTED
 
 ## Module 05 AI Decision System
 
+Status: IMPLEMENTED - COMMITTED
+
+## Module 06 Long-Term Memory
+
 Status: IMPLEMENTED - WAITING FOR REVIEW
 
 ## Current Risks
@@ -20,6 +24,8 @@ Status: IMPLEMENTED - WAITING FOR REVIEW
 - AI Decision scoring is deterministic and explainable. It is not a network AI model.
 - AI Decision execution records that a recommendation was processed; it does not execute organization, career, economy, quest, achievement, or player asset mutations.
 - Future Company Event modules must call the owning runtime interfaces when translating AI recommendations into state changes.
+- Long-term memory compression is currently implemented as expiry, decay, bounded retention, and summary APIs, not natural-language summarization.
+- Long-term memory has no UI in this module.
 
 ## Not Risks In This Task
 

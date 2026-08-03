@@ -2873,6 +2873,117 @@ void main() {
     expect(exportedRecord['lastInteraction'], 'talk');
   });
 
+  test('resident long-term memory is bounded idempotent and restorable', () {
+    final engine = ResidentMemoryEngine();
+    final baseTime = DateTime.parse('2026-07-05T08:00:00.000');
+    final duplicate = engine.recordLongTermMemory(
+      'old_fisher',
+      type: 'interaction',
+      sourceId: 'memory_source_1',
+      summary: '老渔夫记得你帮他收起了被海风吹乱的鱼线。',
+      participants: const ['player'],
+      importance: 70,
+      createdAt: baseTime,
+      effect: const {
+        'tags': ['player_helped', 'office_kindness'],
+      },
+    );
+    final repeated = engine.recordLongTermMemory(
+      'old_fisher',
+      type: 'interaction',
+      sourceId: 'memory_source_1',
+      summary: '重复写入不应生成第二条长期记忆。',
+      participants: const ['player'],
+      importance: 10,
+      createdAt: baseTime,
+    );
+    expect(repeated?.memoryId, duplicate?.memoryId);
+    expect(engine.getResidentMemory('old_fisher').longTermMemories.length, 1);
+
+    engine.recordLongTermMemory(
+      'old_fisher',
+      type: 'event',
+      sourceId: 'expired_memory',
+      summary: '一条很轻的过期记忆。',
+      importance: 20,
+      createdAt: baseTime.subtract(const Duration(days: 20)),
+      expiresAt: baseTime.subtract(const Duration(days: 1)),
+    );
+    engine.recordLongTermMemory(
+      'old_fisher',
+      type: 'career',
+      sourceId: 'important_memory',
+      summary: '老渔夫记得那次重要的码头表彰。',
+      importance: 95,
+      createdAt: baseTime.subtract(const Duration(days: 30)),
+      expiresAt: baseTime.subtract(const Duration(days: 1)),
+    );
+    for (var i = 0; i < 80; i += 1) {
+      engine.recordLongTermMemory(
+        'old_fisher',
+        type: i.isEven ? 'relationship' : 'player',
+        sourceId: 'bulk_memory_$i',
+        summary: '第 $i 条办公室小记忆。',
+        importance: i % 100,
+        createdAt: baseTime.add(Duration(minutes: i)),
+      );
+    }
+
+    engine.compactLongTermMemories(
+      now: baseTime.add(const Duration(days: 30)),
+    );
+    final memory = engine.getResidentMemory('old_fisher');
+    expect(
+      memory.longTermMemories.length,
+      ResidentMemoryEngine.longTermMemoryLimitPerResident,
+    );
+    expect(
+        memory.longTermMemories
+            .any((item) => item.sourceId == 'expired_memory'),
+        isFalse);
+    expect(
+      memory.longTermMemories
+          .any((item) => item.sourceId == 'important_memory'),
+      isTrue,
+    );
+    expect(
+      memory.longTermMemories.any((item) => item.effect['decayed'] == true),
+      isTrue,
+    );
+
+    final summary = engine.getResidentMemorySummary('old_fisher');
+    expect(summary.total, ResidentMemoryEngine.longTermMemoryLimitPerResident);
+    expect(summary.tags, contains('player_helped'));
+    expect(summary.byType.keys, contains('career'));
+    expect(summary.recentSummaries, isNotEmpty);
+
+    final restored = ResidentMemoryEngine(
+      config: ResidentMemoryConfig.fromJson(engine.toJson()),
+    );
+    expect(
+      restored.getResidentMemory('old_fisher').longTermMemories.length,
+      memory.longTermMemories.length,
+    );
+    final legacy = ResidentMemoryRecord.fromJson(const {
+      'residentId': 'legacy_resident',
+      'memoryTags': [],
+    });
+    expect(legacy.longTermMemories, isEmpty);
+
+    for (var i = 0; i < 100; i += 1) {
+      final residentId = 'memory_person_$i';
+      engine.recordLongTermMemory(
+        residentId,
+        type: 'interaction',
+        sourceId: 'snapshot_$i',
+        summary: '第 $i 位居民留下了一条短记忆。',
+        importance: 45,
+        createdAt: baseTime,
+      );
+      expect(engine.getResidentMemorySummary(residentId).total, 1);
+    }
+  });
+
   test('resident relationship engine updates levels from memory', () {
     final memory = ResidentMemoryEngine(
       config: ResidentMemoryConfig.fromJson({

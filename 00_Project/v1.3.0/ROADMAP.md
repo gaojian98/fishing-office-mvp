@@ -16,8 +16,8 @@ Primary long-term design reference:
 | Module 02 Career Growth System | REVIEWED – PASS WITH DEBT | Resident career status, career events, recruitment needs, promotion candidates, Resident Detail career projection. Debt: supplemental career event idempotency must be resolved by Module 03. |
 | Module 03 Organization Assignment Runtime Mutation | REVIEWED – COMMITTED | Transactional organization assignment mutation connected to career events, reporting graph, and save/restore. |
 | Module 04 Office Economy | IMPLEMENTED – COMMITTED | Company-side budget, payroll, bonus, operating cost, project income, budget warning, snapshot, and bounded history. |
-| Module 05 AI Decision System | IMPLEMENTED – WAITING FOR REVIEW | Explainable resident decisions that read organization, career, economy, relationship, personality, emotion, and memory state without directly mutating owning domains. |
-| Module 06 Long-Term Memory | PLANNED | Bounded long-term resident memory for interaction, relationship, career, organization, event, and player history. |
+| Module 05 AI Decision System | IMPLEMENTED – COMMITTED | Explainable resident decisions that read organization, career, economy, relationship, personality, emotion, and memory state without directly mutating owning domains. |
+| Module 06 Long-Term Memory | IMPLEMENTED – WAITING FOR REVIEW | Bounded long-term resident memory for interaction, relationship, career, organization, event, and player history. |
 | Module 07 Company News & Timeline | PLANNED | Player-readable company news and structured timeline history. |
 | Module 08 AI Company Events | PLANNED | Cross-runtime company events that call owning mutation/runtime interfaces. |
 | Long-Term World Evolution Design Documentation | DOCUMENTED – WAITING FOR REVIEW | Design guardrails for v1.3.0 and future v1.4.0 / v1.5.0 / v2.0.0 evolution. |
@@ -42,9 +42,9 @@ Primary long-term design reference:
 
 ## Next Candidate Module
 
-Human review for Module 05 AI Decision System.
+Human review for Module 06 Long-Term Memory.
 
-Readiness: IMPLEMENTED – WAITING FOR REVIEW. Do not enter Long-Term Memory until Module 05 is reviewed and committed or explicitly accepted.
+Readiness: IMPLEMENTED – WAITING FOR REVIEW. Do not enter Company News & Timeline until Module 06 is reviewed and committed or explicitly accepted.
 
 ## Review And Commit Planning
 

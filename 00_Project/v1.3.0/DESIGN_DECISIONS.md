@@ -336,3 +336,35 @@ Consequences: `executeDecision(decisionId)` records processing only once, and de
 Alternatives: Append every evaluation and execution attempt. Rejected because it creates noisy history and unbounded persistence.
 
 Follow-up: Long-Term Memory and Company Timeline should summarize AI decisions rather than copying every repeated evaluation.
+
+## ADR-027 Long-Term Resident Memory Must Be Bounded And Source-Id Idempotent
+
+Status: Accepted
+
+Context: Resident memory can now include interaction, relationship, career, organization, event, and player history across a long-running world.
+
+Decision: Long-term memories are stored under the existing resident memory owner, require stable `sourceId`, and are capped per resident.
+
+Rationale: Memory should influence future decisions and stories without becoming an unbounded event log or duplicating retried events.
+
+Consequences: Repeated `sourceId` returns the existing memory. Each resident keeps at most 60 long-term memories, with important memories retained ahead of low-importance memories.
+
+Alternatives: Create a separate top-level memory runtime. Rejected because `ResidentMemoryEngine` already owns resident memory and save compatibility.
+
+Follow-up: Company Timeline may summarize important long-term memories, but must not become the source of truth for resident memory.
+
+## ADR-028 Memory Consumers Must Read Summary Or Tags
+
+Status: Accepted
+
+Context: AI Decision, Dialogue, Story, Dynamic Event, and future News need memory context.
+
+Decision: Consumers should read resident memory summary or memory tags exposed by the memory owner. They must not scan and reinterpret full long-term histories in their own modules.
+
+Rationale: One memory owner preserves expiry, decay, importance, deduplication, and capacity behavior.
+
+Consequences: AI Decision reads `ResidentMemorySummary` when available. Dialogue and Story continue using memory tags and existing memory context.
+
+Alternatives: Let each consumer implement custom memory filtering. Rejected because it duplicates memory rules and increases performance risk.
+
+Follow-up: If richer memory retrieval is needed, extend `ResidentMemoryEngine` with query helpers instead of duplicating logic in consumers.

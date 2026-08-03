@@ -276,6 +276,8 @@ class ResidentDecisionManager extends ChangeNotifier {
     final summary = _dailySimulationManager?.getTodayWorldSummary();
     final relationship = context.relationship.relationshipLevel;
     final memoryTags = context.memory.memoryTags;
+    final longTermMemorySummary =
+        _residentMemoryEngine?.getResidentMemorySummary(residentId);
     final finishedStories = _storyRuntimeManager.finishedStoryIds;
     final personality =
         _residentRuntimeManager.getResidentPersonalityContext(residentId);
@@ -403,7 +405,11 @@ class ResidentDecisionManager extends ChangeNotifier {
       departmentId: organization.departmentId,
       officeBudget: officeEconomy.companyBudget,
       budgetWarnings: officeEconomy.budgetWarnings,
-      memoryTags: memoryTags,
+      memoryTags: <String>{
+        ...memoryTags,
+        ...?longTermMemorySummary?.tags,
+      }.toList(growable: false),
+      longTermMemoryCount: longTermMemorySummary?.total ?? 0,
       personality: personality,
     );
     return ResidentDecision(
@@ -438,6 +444,7 @@ class ResidentDecisionManager extends ChangeNotifier {
     required int officeBudget,
     required List<String> budgetWarnings,
     required List<String> memoryTags,
+    required int longTermMemoryCount,
     required ResidentPersonalityContext personality,
   }) {
     final day = _worldClockManager.today().dayCount;
@@ -477,7 +484,8 @@ class ResidentDecisionManager extends ChangeNotifier {
         memoryTags.contains('player_helped')) {
       type = 'help_colleague';
       consequence = 'relationship_runtime_required';
-      score = 68 + memoryTags.length.clamp(0, 12);
+      score =
+          68 + memoryTags.length.clamp(0, 8) + longTermMemoryCount.clamp(0, 4);
       confidence = 70;
       cooldown = 6;
     } else if (mood == 'tired' || mood == 'angry' || mood == 'sad') {

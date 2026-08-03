@@ -13,6 +13,7 @@ class ResidentMemoryEngine extends ChangeNotifier {
   String _version = '1.0';
   final Map<String, ResidentMemoryRecord> _records =
       <String, ResidentMemoryRecord>{};
+  static const int longTermMemoryLimitPerResident = 60;
 
   List<ResidentMemoryRecord> get records =>
       _records.values.toList(growable: false);
@@ -127,10 +128,168 @@ class ResidentMemoryEngine extends ChangeNotifier {
     return updated;
   }
 
+  LongTermResidentMemory? recordLongTermMemory(
+    String residentId, {
+    required String type,
+    required String sourceId,
+    required String summary,
+    List<String> participants = const <String>[],
+    int importance = 50,
+    DateTime? createdAt,
+    DateTime? expiresAt,
+    Map<String, dynamic> effect = const <String, dynamic>{},
+  }) {
+    if (residentId.isEmpty || sourceId.isEmpty || summary.isEmpty) {
+      return null;
+    }
+    final current = getResidentMemory(residentId);
+    final existing = current.longTermMemories.where(
+      (item) => item.sourceId == sourceId,
+    );
+    if (existing.isNotEmpty) return existing.first;
+    final now = createdAt ?? WorldClockManager.systemNow();
+    final memory = LongTermResidentMemory(
+      memoryId: 'ltm:$residentId:$sourceId',
+      residentId: residentId,
+      type: type.isEmpty ? 'interaction' : type,
+      sourceId: sourceId,
+      participants: <String>{
+        residentId,
+        ...participants.where((item) => item.isNotEmpty),
+      }.toList(growable: false),
+      summary: summary,
+      importance: importance.clamp(0, 100).toInt(),
+      createdAt: now.toIso8601String(),
+      expiresAt: expiresAt?.toIso8601String() ?? '',
+      effect: effect,
+    );
+    final memories = _boundedLongTermMemories(
+      <LongTermResidentMemory>[
+        memory,
+        ...current.longTermMemories,
+      ],
+      now: now,
+    );
+    _records[residentId] = current.copyWith(
+      residentId: residentId,
+      lastMeetTime: current.lastMeetTime.isEmpty
+          ? now.toIso8601String()
+          : current.lastMeetTime,
+      lastInteraction: type.isEmpty ? current.lastInteraction : type,
+      memoryTags: <String>{
+        ...current.memoryTags,
+        'long_term_memory',
+        if (type.isNotEmpty) 'memory_type:$type',
+        ..._stringList(effect['tags']),
+      }.toList(growable: false),
+      longTermMemories: memories,
+    );
+    notifyListeners();
+    return memory;
+  }
+
+  List<LongTermResidentMemory> compactLongTermMemories({
+    DateTime? now,
+  }) {
+    final currentTime = now ?? WorldClockManager.systemNow();
+    final changed = <LongTermResidentMemory>[];
+    var didChange = false;
+    for (final entry in _records.entries) {
+      final compacted = _boundedLongTermMemories(
+        entry.value.longTermMemories
+            .where((item) => !item.isExpired(currentTime))
+            .map((item) => item.decay(now: currentTime))
+            .toList(growable: false),
+        now: currentTime,
+      );
+      if (compacted.length != entry.value.longTermMemories.length ||
+          !_sameMemoryImportance(compacted, entry.value.longTermMemories)) {
+        _records[entry.key] = entry.value.copyWith(
+          longTermMemories: compacted,
+        );
+        didChange = true;
+      }
+      changed.addAll(compacted);
+    }
+    if (didChange) notifyListeners();
+    return changed;
+  }
+
+  ResidentMemorySummary getResidentMemorySummary(String residentId) {
+    final memory = getResidentMemory(residentId);
+    final active = _boundedLongTermMemories(
+      memory.longTermMemories
+          .where((item) => !item.isExpired(WorldClockManager.systemNow()))
+          .toList(growable: false),
+      now: WorldClockManager.systemNow(),
+    );
+    final byType = <String, int>{};
+    for (final item in active) {
+      byType[item.type] = (byType[item.type] ?? 0) + 1;
+    }
+    return ResidentMemorySummary(
+      residentId: residentId,
+      total: active.length,
+      importantCount: active.where((item) => item.isImportant).length,
+      recentSummaries: active
+          .take(8)
+          .map((item) => item.summary)
+          .where((item) => item.isNotEmpty)
+          .toList(growable: false),
+      tags: <String>{
+        ...memory.memoryTags,
+        ...active.expand((item) => _stringList(item.effect['tags'])),
+        ...byType.keys.map((type) => 'memory_type:$type'),
+      }.where((item) => item.isNotEmpty).toList(growable: false),
+      byType: byType,
+    );
+  }
+
   ResidentMemoryConfig toConfig() {
     final items = records..sort((a, b) => a.residentId.compareTo(b.residentId));
     return ResidentMemoryConfig(version: _version, memories: items);
   }
 
   Map<String, dynamic> toJson() => toConfig().toJson();
+
+  List<LongTermResidentMemory> _boundedLongTermMemories(
+    List<LongTermResidentMemory> memories, {
+    required DateTime now,
+  }) {
+    final active =
+        memories.where((item) => !item.isExpired(now)).toList(growable: false)
+          ..sort((a, b) {
+            final important = b.importance.compareTo(a.importance);
+            if (important != 0) return important;
+            return b.createdAt.compareTo(a.createdAt);
+          });
+    final important = active.where((item) => item.isImportant).toList();
+    final normal = active.where((item) => !item.isImportant).toList();
+    return <LongTermResidentMemory>[
+      ...important,
+      ...normal,
+    ].take(longTermMemoryLimitPerResident).toList(growable: false);
+  }
+
+  bool _sameMemoryImportance(
+    List<LongTermResidentMemory> a,
+    List<LongTermResidentMemory> b,
+  ) {
+    if (a.length != b.length) return false;
+    for (var i = 0; i < a.length; i += 1) {
+      if (a[i].memoryId != b[i].memoryId ||
+          a[i].importance != b[i].importance) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+List<String> _stringList(Object? value) {
+  if (value is! List) return const <String>[];
+  return value
+      .map((item) => item.toString())
+      .where((item) => item.isNotEmpty)
+      .toList(growable: false);
 }
