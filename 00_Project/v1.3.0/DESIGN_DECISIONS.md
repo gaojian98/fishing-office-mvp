@@ -368,3 +368,35 @@ Consequences: AI Decision reads `ResidentMemorySummary` when available. Dialogue
 Alternatives: Let each consumer implement custom memory filtering. Rejected because it duplicates memory rules and increases performance risk.
 
 Follow-up: If richer memory retrieval is needed, extend `ResidentMemoryEngine` with query helpers instead of duplicating logic in consumers.
+
+## ADR-029 Company News And Timeline Are Projections
+
+Status: Accepted
+
+Context: v1.3.0 needs player-readable company news and structured history for organization, career, economy, AI decision, event, and achievement changes.
+
+Decision: Company News and Company Timeline are projections stored in World Save. They are not the business state source for career, organization, economy, achievement, or dynamic event results.
+
+Rationale: Existing runtime owners already enforce mutation rules, idempotency, and save compatibility. News and Timeline should make changes readable and queryable without taking ownership of those changes.
+
+Consequences: Future modules record timeline events with stable `sourceId`, but must perform real mutations through owning runtime interfaces first.
+
+Alternatives: Treat Timeline as the source of truth and rebuild runtime state from it. Rejected because that would duplicate every domain model and increase migration risk.
+
+Follow-up: AI Company Events should record readable timeline entries after successful domain mutations.
+
+## ADR-030 Company News And Timeline Histories Must Be Bounded
+
+Status: Accepted
+
+Context: A living office can generate many readable updates over time.
+
+Decision: Company News and Timeline histories must have explicit caps: 120 news items and 240 timeline events.
+
+Rationale: Save data must remain bounded while still giving UI and reports enough recent history.
+
+Consequences: Long-term archival beyond the cap must use future summary strategies instead of unbounded append-only lists.
+
+Alternatives: Keep every readable news item forever. Rejected because it risks save growth and repeated UI scanning.
+
+Follow-up: Future timeline summary can aggregate older records by month or release cycle.

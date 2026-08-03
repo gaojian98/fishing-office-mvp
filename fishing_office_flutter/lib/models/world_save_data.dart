@@ -53,6 +53,8 @@ class WorldSaveData {
     required this.groupHistory,
     required this.livingOfficeState,
     required this.officeWorldHistory,
+    required this.companyNews,
+    required this.companyTimeline,
     required this.lastLivingOfficeUpdate,
     required this.processedOfficeEventIds,
     required this.officeEventCooldowns,
@@ -110,6 +112,8 @@ class WorldSaveData {
       groupHistory: const <OfficeGroup>[],
       livingOfficeState: LivingOfficeState.empty(),
       officeWorldHistory: const <OfficeWorldHistoryEntry>[],
+      companyNews: const <CompanyNewsItem>[],
+      companyTimeline: const <CompanyTimelineEvent>[],
       lastLivingOfficeUpdate: '',
       processedOfficeEventIds: const <String>[],
       officeEventCooldowns: const <String, int>{},
@@ -190,6 +194,8 @@ class WorldSaveData {
           : LivingOfficeState.empty(),
       officeWorldHistory:
           officeWorldHistoryFromJsonList(json['officeWorldHistory']),
+      companyNews: companyNewsFromJsonList(json['companyNews']),
+      companyTimeline: companyTimelineFromJsonList(json['companyTimeline']),
       lastLivingOfficeUpdate: json['lastLivingOfficeUpdate']?.toString() ?? '',
       processedOfficeEventIds: _stringList(json['processedOfficeEventIds']),
       officeEventCooldowns: _intMap(json['officeEventCooldowns']),
@@ -262,6 +268,8 @@ class WorldSaveData {
   final List<OfficeGroup> groupHistory;
   final LivingOfficeState livingOfficeState;
   final List<OfficeWorldHistoryEntry> officeWorldHistory;
+  final List<CompanyNewsItem> companyNews;
+  final List<CompanyTimelineEvent> companyTimeline;
   final String lastLivingOfficeUpdate;
   final List<String> processedOfficeEventIds;
   final Map<String, int> officeEventCooldowns;
@@ -334,6 +342,10 @@ class WorldSaveData {
       'officeWorldHistory': officeWorldHistory
           .map((entry) => entry.toJson())
           .toList(growable: false),
+      'companyNews':
+          companyNews.map((item) => item.toJson()).toList(growable: false),
+      'companyTimeline':
+          companyTimeline.map((item) => item.toJson()).toList(growable: false),
       'lastLivingOfficeUpdate': lastLivingOfficeUpdate,
       'processedOfficeEventIds': processedOfficeEventIds,
       'officeEventCooldowns': officeEventCooldowns,
@@ -392,6 +404,8 @@ class WorldSaveData {
     List<OfficeGroup>? groupHistory,
     LivingOfficeState? livingOfficeState,
     List<OfficeWorldHistoryEntry>? officeWorldHistory,
+    List<CompanyNewsItem>? companyNews,
+    List<CompanyTimelineEvent>? companyTimeline,
     String? lastLivingOfficeUpdate,
     List<String>? processedOfficeEventIds,
     Map<String, int>? officeEventCooldowns,
@@ -452,6 +466,8 @@ class WorldSaveData {
       groupHistory: groupHistory ?? this.groupHistory,
       livingOfficeState: livingOfficeState ?? this.livingOfficeState,
       officeWorldHistory: officeWorldHistory ?? this.officeWorldHistory,
+      companyNews: companyNews ?? this.companyNews,
+      companyTimeline: companyTimeline ?? this.companyTimeline,
       lastLivingOfficeUpdate:
           lastLivingOfficeUpdate ?? this.lastLivingOfficeUpdate,
       processedOfficeEventIds:

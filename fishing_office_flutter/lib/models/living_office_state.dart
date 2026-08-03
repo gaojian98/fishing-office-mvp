@@ -200,6 +200,195 @@ class OfficeWorldHistoryEntry {
   }
 }
 
+const int companyNewsHistoryLimit = 120;
+const int companyTimelineHistoryLimit = 240;
+
+class CompanyNewsItem {
+  const CompanyNewsItem({
+    required this.newsId,
+    required this.sourceId,
+    required this.type,
+    required this.category,
+    required this.title,
+    required this.summary,
+    required this.importance,
+    required this.date,
+    required this.relatedResidentIds,
+    required this.tags,
+  });
+
+  factory CompanyNewsItem.fromJson(Map<String, dynamic> json) {
+    return CompanyNewsItem(
+      newsId: json['newsId']?.toString() ?? '',
+      sourceId: json['sourceId']?.toString() ?? '',
+      type: json['type']?.toString() ?? '',
+      category: json['category']?.toString() ?? '',
+      title: json['title']?.toString() ?? '',
+      summary: json['summary']?.toString() ?? '',
+      importance: _readInt(json['importance']).clamp(0, 100).toInt(),
+      date: json['date']?.toString() ?? '',
+      relatedResidentIds: _stringList(json['relatedResidentIds']),
+      tags: _stringList(json['tags']),
+    );
+  }
+
+  final String newsId;
+  final String sourceId;
+  final String type;
+  final String category;
+  final String title;
+  final String summary;
+  final int importance;
+  final String date;
+  final List<String> relatedResidentIds;
+  final List<String> tags;
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'newsId': newsId,
+      'sourceId': sourceId,
+      'type': type,
+      'category': category,
+      'title': title,
+      'summary': summary,
+      'importance': importance,
+      'date': date,
+      'relatedResidentIds': relatedResidentIds,
+      'tags': tags,
+    };
+  }
+}
+
+class CompanyTimelineEvent {
+  const CompanyTimelineEvent({
+    required this.eventId,
+    required this.sourceId,
+    required this.type,
+    required this.category,
+    required this.title,
+    required this.summary,
+    required this.importance,
+    required this.date,
+    required this.weekKey,
+    required this.monthKey,
+    required this.relatedResidentIds,
+    required this.tags,
+    required this.payload,
+  });
+
+  factory CompanyTimelineEvent.fromJson(Map<String, dynamic> json) {
+    return CompanyTimelineEvent(
+      eventId: json['eventId']?.toString() ?? '',
+      sourceId: json['sourceId']?.toString() ?? '',
+      type: json['type']?.toString() ?? '',
+      category: json['category']?.toString() ?? '',
+      title: json['title']?.toString() ?? '',
+      summary: json['summary']?.toString() ?? '',
+      importance: _readInt(json['importance']).clamp(0, 100).toInt(),
+      date: json['date']?.toString() ?? '',
+      weekKey: json['weekKey']?.toString() ?? '',
+      monthKey: json['monthKey']?.toString() ?? '',
+      relatedResidentIds: _stringList(json['relatedResidentIds']),
+      tags: _stringList(json['tags']),
+      payload: _mapOf(json['payload']),
+    );
+  }
+
+  final String eventId;
+  final String sourceId;
+  final String type;
+  final String category;
+  final String title;
+  final String summary;
+  final int importance;
+  final String date;
+  final String weekKey;
+  final String monthKey;
+  final List<String> relatedResidentIds;
+  final List<String> tags;
+  final Map<String, dynamic> payload;
+
+  CompanyNewsItem toNewsItem() {
+    return CompanyNewsItem(
+      newsId: 'news:$sourceId',
+      sourceId: sourceId,
+      type: type,
+      category: category,
+      title: title,
+      summary: summary,
+      importance: importance,
+      date: date,
+      relatedResidentIds: relatedResidentIds,
+      tags: tags,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'eventId': eventId,
+      'sourceId': sourceId,
+      'type': type,
+      'category': category,
+      'title': title,
+      'summary': summary,
+      'importance': importance,
+      'date': date,
+      'weekKey': weekKey,
+      'monthKey': monthKey,
+      'relatedResidentIds': relatedResidentIds,
+      'tags': tags,
+      'payload': payload,
+    };
+  }
+}
+
+class CompanyTimelineSnapshot {
+  const CompanyTimelineSnapshot({
+    required this.news,
+    required this.events,
+    required this.dailySummary,
+    required this.weeklySummary,
+    required this.monthlySummary,
+  });
+
+  final List<CompanyNewsItem> news;
+  final List<CompanyTimelineEvent> events;
+  final Map<String, int> dailySummary;
+  final Map<String, int> weeklySummary;
+  final Map<String, int> monthlySummary;
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'news': news.map((item) => item.toJson()).toList(growable: false),
+      'events': events.map((item) => item.toJson()).toList(growable: false),
+      'dailySummary': dailySummary,
+      'weeklySummary': weeklySummary,
+      'monthlySummary': monthlySummary,
+    };
+  }
+}
+
+List<CompanyNewsItem> companyNewsFromJsonList(Object? value) {
+  if (value is! List) return const <CompanyNewsItem>[];
+  return value
+      .whereType<Map>()
+      .map((item) => CompanyNewsItem.fromJson(Map<String, dynamic>.from(item)))
+      .where((item) => item.newsId.isNotEmpty && item.sourceId.isNotEmpty)
+      .take(companyNewsHistoryLimit)
+      .toList(growable: false);
+}
+
+List<CompanyTimelineEvent> companyTimelineFromJsonList(Object? value) {
+  if (value is! List) return const <CompanyTimelineEvent>[];
+  return value
+      .whereType<Map>()
+      .map((item) =>
+          CompanyTimelineEvent.fromJson(Map<String, dynamic>.from(item)))
+      .where((item) => item.eventId.isNotEmpty && item.sourceId.isNotEmpty)
+      .take(companyTimelineHistoryLimit)
+      .toList(growable: false);
+}
+
 List<OfficeWorldHistoryEntry> officeWorldHistoryFromJsonList(Object? value) {
   if (value is! List) return const <OfficeWorldHistoryEntry>[];
   return value
@@ -217,6 +406,11 @@ List<String> _stringList(Object? value) {
       .map((item) => item.toString())
       .where((item) => item.isNotEmpty)
       .toList(growable: false);
+}
+
+Map<String, dynamic> _mapOf(Object? value) {
+  if (value is Map) return Map<String, dynamic>.from(value);
+  return const <String, dynamic>{};
 }
 
 int _readInt(Object? value, {int fallback = 0}) {

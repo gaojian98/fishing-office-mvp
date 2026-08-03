@@ -14,6 +14,10 @@ Status: IMPLEMENTED - COMMITTED
 
 ## Module 06 Long-Term Memory
 
+Status: IMPLEMENTED - COMMITTED
+
+## Module 07 Company News & Timeline
+
 Status: IMPLEMENTED - WAITING FOR REVIEW
 
 ## Current Risks
@@ -26,6 +30,8 @@ Status: IMPLEMENTED - WAITING FOR REVIEW
 - Future Company Event modules must call the owning runtime interfaces when translating AI recommendations into state changes.
 - Long-term memory compression is currently implemented as expiry, decay, bounded retention, and summary APIs, not natural-language summarization.
 - Long-term memory has no UI in this module.
+- Company Timeline currently records explicit projection calls; automatic harvesting from all runtime mutation sources is deferred to AI Company Events.
+- Company News uses engineering-level text templates until product copy is provided.
 
 ## Not Risks In This Task
 

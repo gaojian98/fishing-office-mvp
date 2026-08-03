@@ -2057,6 +2057,62 @@ class SecondWorldEngine {
     );
   }
 
+  CompanyTimelineEvent? recordCompanyTimelineEvent({
+    required String sourceId,
+    required String type,
+    required String title,
+    required String summary,
+    String category = '',
+    int importance = 50,
+    String date = '',
+    String weekKey = '',
+    String monthKey = '',
+    List<String> relatedResidentIds = const <String>[],
+    List<String> tags = const <String>[],
+    Map<String, dynamic> payload = const <String, dynamic>{},
+    bool generateNews = true,
+  }) {
+    return _worldSaveManager?.recordCompanyTimelineEvent(
+      sourceId: sourceId,
+      type: type,
+      title: title,
+      summary: summary,
+      category: category,
+      importance: importance,
+      date: date,
+      weekKey: weekKey,
+      monthKey: monthKey,
+      relatedResidentIds: relatedResidentIds,
+      tags: tags,
+      payload: payload,
+      generateNews: generateNews,
+    );
+  }
+
+  CompanyTimelineSnapshot getCompanyTimelineSnapshot({
+    String date = '',
+    String weekKey = '',
+    String monthKey = '',
+    int limit = 20,
+  }) {
+    final save = _worldSaveManager;
+    if (save == null) {
+      return const CompanyTimelineSnapshot(
+        news: <CompanyNewsItem>[],
+        events: <CompanyTimelineEvent>[],
+        dailySummary: <String, int>{},
+        weeklySummary: <String, int>{},
+        monthlySummary: <String, int>{},
+      );
+    }
+    return save.getCompanyTimelineSnapshot(
+      date: date,
+      weekKey: weekKey,
+      monthKey: monthKey,
+      limit: limit,
+    );
+  }
+
   PlayerInfluenceContext getPlayerInfluenceContext() {
     final save = _worldSaveManager;
     if (save == null) return PlayerInfluenceContext.empty();

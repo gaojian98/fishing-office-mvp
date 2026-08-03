@@ -11971,20 +11971,101 @@ void main() {
     }
     expect(save.officeWorldHistory.length, lessThanOrEqualTo(90));
 
+    save.recordCompanyTimelineEvent(
+      sourceId: 'career:promotion:office_person_0',
+      type: 'promotion',
+      title: '办公室里有人升职了',
+      summary: 'office_person_0 因为稳定帮忙，成为了更可靠的居民。',
+      date: 'Y1-M1-D4',
+      weekKey: 'Y1-M1-W1',
+      monthKey: 'Y1-M1',
+      relatedResidentIds: const ['office_person_0'],
+      tags: const ['career', 'promotion'],
+    );
+    save.recordCompanyTimelineEvent(
+      sourceId: 'economy:budget:Y1-M1-D4',
+      type: 'department_budget_change',
+      title: '运营部预算被重新整理',
+      summary: '今天的公司预算看起来更有秩序。',
+      date: 'Y1-M1-D4',
+      weekKey: 'Y1-M1-W1',
+      monthKey: 'Y1-M1',
+      tags: const ['economy', 'budget'],
+    );
+    save.recordCompanyTimelineEvent(
+      sourceId: 'ai:decision:office_person_1',
+      type: 'ai_decision',
+      title: '一个居民认真考虑了今天的安排',
+      summary: 'AI 决策只记录建议，不直接改变职业或组织。',
+      date: 'Y1-M1-D4',
+      weekKey: 'Y1-M1-W1',
+      monthKey: 'Y1-M1',
+      tags: const ['ai_decision'],
+    );
+    save.recordCompanyTimelineEvent(
+      sourceId: 'achievement:office_person_2',
+      type: 'resident_achievement',
+      title: '居民的小成就被大家看见',
+      summary: '一个平凡的努力被办公室温柔地记了下来。',
+      date: 'Y1-M1-D5',
+      weekKey: 'Y1-M1-W1',
+      monthKey: 'Y1-M1',
+      tags: const ['achievement'],
+    );
+    final duplicateTimeline = save.recordCompanyTimelineEvent(
+      sourceId: 'career:promotion:office_person_0',
+      type: 'promotion',
+      title: '重复新闻不应出现',
+      summary: '重复 sourceId 不会重复写入。',
+      date: 'Y1-M1-D4',
+    );
+    expect(duplicateTimeline?.title, '办公室里有人升职了');
+
+    final timelineSnapshot = secondWorld.getCompanyTimelineSnapshot(
+      date: 'Y1-M1-D4',
+      limit: 10,
+    );
+    expect(timelineSnapshot.events.length, 3);
+    expect(timelineSnapshot.news.length, 4);
+    expect(timelineSnapshot.dailySummary['Y1-M1-D4'], 3);
+    expect(timelineSnapshot.weeklySummary['Y1-M1-W1'], 4);
+    expect(timelineSnapshot.monthlySummary['Y1-M1'], 4);
+
+    for (var i = 0; i < 260; i += 1) {
+      save.recordCompanyTimelineEvent(
+        sourceId: 'bulk_timeline_$i',
+        type: i.isEven ? 'company_event' : 'bonus',
+        title: '第 $i 条公司时间线',
+        summary: '用于验证时间线容量上限。',
+        date: 'Y1-M2-D${(i % 28) + 1}',
+        weekKey: 'Y1-M2-W${(i % 4) + 1}',
+        monthKey: 'Y1-M2',
+        importance: i % 100,
+      );
+    }
+    expect(save.companyTimeline.length, lessThanOrEqualTo(240));
+    expect(save.companyNews.length, lessThanOrEqualTo(120));
+
     final saved = await save.saveWorld(force: true, immediate: true);
     expect(
         saved.livingOfficeState.officeMood, save.livingOfficeState.officeMood);
     expect(saved.officeWorldHistory, isNotEmpty);
+    expect(saved.companyTimeline, isNotEmpty);
+    expect(saved.companyNews, isNotEmpty);
     final restored = WorldSaveData.fromJson(saved.toJson());
     expect(restored.livingOfficeState.officeMood,
         saved.livingOfficeState.officeMood);
     expect(restored.officeWorldHistory.length, saved.officeWorldHistory.length);
+    expect(restored.companyTimeline.length, saved.companyTimeline.length);
+    expect(restored.companyNews.length, saved.companyNews.length);
     expect(restored.playerInfluenceContext.reputation, contains('helpful'));
     expect(restored.recentPlayerActions.map((item) => item.type),
         contains('helping'));
     final legacy = WorldSaveData.fromJson(const <String, dynamic>{});
     expect(legacy.livingOfficeState.officeMood, 'calm');
     expect(legacy.officeWorldHistory, isEmpty);
+    expect(legacy.companyTimeline, isEmpty);
+    expect(legacy.companyNews, isEmpty);
     expect(legacy.playerInfluenceContext.reputation, contains('quiet'));
   });
 }

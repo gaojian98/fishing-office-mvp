@@ -94,6 +94,8 @@ class WorldSaveManager extends ChangeNotifier {
   LivingOfficeState _livingOfficeState = LivingOfficeState.empty();
   final List<OfficeWorldHistoryEntry> _officeWorldHistory =
       <OfficeWorldHistoryEntry>[];
+  final List<CompanyNewsItem> _companyNews = <CompanyNewsItem>[];
+  final List<CompanyTimelineEvent> _companyTimeline = <CompanyTimelineEvent>[];
   String _lastLivingOfficeUpdate = '';
   final Set<String> _processedOfficeEventIds = <String>{};
   final Map<String, int> _officeEventCooldowns = <String, int>{};
@@ -164,6 +166,10 @@ class WorldSaveManager extends ChangeNotifier {
   LivingOfficeState get livingOfficeState => _livingOfficeState;
   List<OfficeWorldHistoryEntry> get officeWorldHistory =>
       List<OfficeWorldHistoryEntry>.from(_officeWorldHistory);
+  List<CompanyNewsItem> get companyNews =>
+      List<CompanyNewsItem>.from(_companyNews);
+  List<CompanyTimelineEvent> get companyTimeline =>
+      List<CompanyTimelineEvent>.from(_companyTimeline);
   String get lastLivingOfficeUpdate => _lastLivingOfficeUpdate;
   Set<String> get processedOfficeEventIds =>
       Set<String>.unmodifiable(_processedOfficeEventIds);
@@ -670,6 +676,81 @@ class WorldSaveManager extends ChangeNotifier {
     notifyListeners();
   }
 
+  CompanyTimelineEvent? recordCompanyTimelineEvent({
+    required String sourceId,
+    required String type,
+    required String title,
+    required String summary,
+    String category = '',
+    int importance = 50,
+    String date = '',
+    String weekKey = '',
+    String monthKey = '',
+    List<String> relatedResidentIds = const <String>[],
+    List<String> tags = const <String>[],
+    Map<String, dynamic> payload = const <String, dynamic>{},
+    bool generateNews = true,
+  }) {
+    if (sourceId.isEmpty || type.isEmpty || title.isEmpty) return null;
+    final existing = _companyTimeline.where(
+      (item) => item.sourceId == sourceId,
+    );
+    if (existing.isNotEmpty) return existing.first;
+    final resolvedDate = date.isEmpty ? _currentDateKey() : date;
+    final event = CompanyTimelineEvent(
+      eventId: 'timeline:$sourceId',
+      sourceId: sourceId,
+      type: type,
+      category: category.isEmpty ? _categoryForTimelineType(type) : category,
+      title: title,
+      summary: summary,
+      importance: importance.clamp(0, 100).toInt(),
+      date: resolvedDate,
+      weekKey: weekKey.isEmpty ? _weekKeyFor(resolvedDate) : weekKey,
+      monthKey: monthKey.isEmpty ? _monthKeyFor(resolvedDate) : monthKey,
+      relatedResidentIds:
+          relatedResidentIds.where((item) => item.isNotEmpty).toList(),
+      tags: tags.where((item) => item.isNotEmpty).toList(),
+      payload: payload,
+    );
+    _companyTimeline
+      ..removeWhere((item) => item.sourceId == sourceId)
+      ..insert(0, event);
+    if (generateNews) {
+      _companyNews
+        ..removeWhere((item) => item.sourceId == sourceId)
+        ..insert(0, event.toNewsItem());
+    }
+    _trimCompanyTimeline();
+    notifyListeners();
+    return event;
+  }
+
+  CompanyTimelineSnapshot getCompanyTimelineSnapshot({
+    String date = '',
+    String weekKey = '',
+    String monthKey = '',
+    int limit = 20,
+  }) {
+    final boundedLimit = limit.clamp(1, 100).toInt();
+    final events = _companyTimeline
+        .where((event) {
+          if (date.isNotEmpty && event.date != date) return false;
+          if (weekKey.isNotEmpty && event.weekKey != weekKey) return false;
+          if (monthKey.isNotEmpty && event.monthKey != monthKey) return false;
+          return true;
+        })
+        .take(boundedLimit)
+        .toList(growable: false);
+    return CompanyTimelineSnapshot(
+      news: _companyNews.take(boundedLimit).toList(growable: false),
+      events: events,
+      dailySummary: _summaryBy(_companyTimeline, (event) => event.date),
+      weeklySummary: _summaryBy(_companyTimeline, (event) => event.weekKey),
+      monthlySummary: _summaryBy(_companyTimeline, (event) => event.monthKey),
+    );
+  }
+
   bool hasProcessedOfficeEvent(String id) {
     if (id.isEmpty) return false;
     return _processedOfficeEventIds.contains(id);
@@ -1045,6 +1126,8 @@ class WorldSaveManager extends ChangeNotifier {
       groupHistory: groupHistory,
       livingOfficeState: livingOfficeState,
       officeWorldHistory: officeWorldHistory,
+      companyNews: companyNews,
+      companyTimeline: companyTimeline,
       lastLivingOfficeUpdate: _lastLivingOfficeUpdate,
       processedOfficeEventIds: _processedOfficeEventIds.toList(growable: false)
         ..sort(),
@@ -1158,6 +1241,12 @@ class WorldSaveManager extends ChangeNotifier {
     _officeWorldHistory
       ..clear()
       ..addAll(data.officeWorldHistory);
+    _companyNews
+      ..clear()
+      ..addAll(data.companyNews.take(companyNewsHistoryLimit));
+    _companyTimeline
+      ..clear()
+      ..addAll(data.companyTimeline.take(companyTimelineHistoryLimit));
     _lastLivingOfficeUpdate = data.lastLivingOfficeUpdate;
     _processedOfficeEventIds
       ..clear()
@@ -1204,6 +1293,8 @@ class WorldSaveManager extends ChangeNotifier {
         groupHistory: data.groupHistory,
         livingOfficeState: data.livingOfficeState,
         officeWorldHistory: data.officeWorldHistory,
+        companyNews: data.companyNews,
+        companyTimeline: data.companyTimeline,
         lastLivingOfficeUpdate: data.lastLivingOfficeUpdate,
         processedOfficeEventIds: data.processedOfficeEventIds,
         officeEventCooldowns: data.officeEventCooldowns,
@@ -1279,6 +1370,65 @@ class WorldSaveManager extends ChangeNotifier {
         ...keepForever,
         ...normal,
       ]);
+  }
+
+  void _trimCompanyTimeline() {
+    if (_companyNews.length > companyNewsHistoryLimit) {
+      _companyNews.removeRange(companyNewsHistoryLimit, _companyNews.length);
+    }
+    if (_companyTimeline.length > companyTimelineHistoryLimit) {
+      _companyTimeline.removeRange(
+        companyTimelineHistoryLimit,
+        _companyTimeline.length,
+      );
+    }
+  }
+
+  String _currentDateKey() {
+    final calendar = _worldClockManager.calendar;
+    return 'Y${calendar.year}-M${calendar.month}-D${calendar.day}';
+  }
+
+  String _weekKeyFor(String date) {
+    if (date.contains('-W')) return date.split('-D').first;
+    final day = _worldClockManager.calendar.day;
+    final week = ((day - 1) ~/ 7) + 1;
+    return '${date.split('-D').first}-W$week';
+  }
+
+  String _monthKeyFor(String date) {
+    return date.split('-D').first;
+  }
+
+  String _categoryForTimelineType(String type) {
+    if (type.contains('promotion') ||
+        type.contains('transfer') ||
+        type.contains('hire') ||
+        type.contains('resignation')) {
+      return 'career';
+    }
+    if (type.contains('budget') ||
+        type.contains('bonus') ||
+        type.contains('economy')) {
+      return 'economy';
+    }
+    if (type.contains('achievement')) return 'achievement';
+    if (type.contains('ai_decision')) return 'ai';
+    if (type.contains('event')) return 'event';
+    return 'company';
+  }
+
+  Map<String, int> _summaryBy(
+    List<CompanyTimelineEvent> events,
+    String Function(CompanyTimelineEvent event) keyOf,
+  ) {
+    final summary = <String, int>{};
+    for (final event in events) {
+      final key = keyOf(event);
+      if (key.isEmpty) continue;
+      summary[key] = (summary[key] ?? 0) + 1;
+    }
+    return summary;
   }
 
   String _skillSourceKey({
