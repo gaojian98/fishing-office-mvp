@@ -2,7 +2,7 @@
 
 ## Status
 
-DEVELOPMENT COMPLETE - READY FOR HUMAN RC REVIEW
+v1.3.0 RC REVIEW PASSED – READY FOR PUSH AUTHORIZATION
 
 ## Scope
 
@@ -57,6 +57,6 @@ P2:
 
 ## RC Decision
 
-GO for human RC review.
+GO WITH P2 for push authorization.
 
 Do not push, merge, tag, release, deploy, or modify Railway without explicit product owner authorization.
