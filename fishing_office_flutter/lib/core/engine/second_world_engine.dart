@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../../models/career_state.dart';
+import '../../models/company_organization.dart';
 import '../../models/dynamic_event_config.dart';
 import '../../models/friendship_state.dart';
 import '../../models/interactive_office.dart';

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 import '../../models/living_world_config.dart';
+import '../../models/company_organization.dart';
 import '../../models/location_context.dart';
 import '../../models/office_life_schedule.dart';
 import '../../models/resident_config.dart';
@@ -36,6 +37,8 @@ class ResidentRuntimeManager extends ChangeNotifier {
 
   bool get loaded => _loaded;
   Object? get error => _error;
+  CompanyOrganization get companyOrganization =>
+      CompanyOrganization.defaultStructure();
   List<ResidentProfile> get residents =>
       _residentConfig?.residents ?? const <ResidentProfile>[];
   List<ResidentSchedule> get schedules =>
