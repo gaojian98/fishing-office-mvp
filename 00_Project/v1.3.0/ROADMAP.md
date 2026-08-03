@@ -14,7 +14,7 @@ Primary long-term design reference:
 |---|---|---|
 | Module 01 Company Organization System | REVIEWED – PASS WITH DEBT | Company, Department, Team, Position, resident organization context. Debt: inferred capacity/reporting graph and mixed commit split. |
 | Module 02 Career Growth System | REVIEWED – PASS WITH DEBT | Resident career status, career events, recruitment needs, promotion candidates, Resident Detail career projection. Debt: supplemental career event idempotency must be resolved by Module 03. |
-| Module 03 Organization Assignment Runtime Mutation | GO – REQUIRED DEBT RESOLUTION | Transactional organization assignment mutation connected to career events and save/restore. Required before Office Economy. |
+| Module 03 Organization Assignment Runtime Mutation | IMPLEMENTED – REVIEW P1 FIXED – READY FOR COMMIT AUTHORIZATION | Transactional organization assignment mutation connected to career events, reporting graph, and save/restore. Required before Office Economy. |
 | Long-Term World Evolution Design Documentation | DOCUMENTED – WAITING FOR REVIEW | Design guardrails for v1.3.0 and future v1.4.0 / v1.5.0 / v2.0.0 evolution. |
 
 ## Active Constraints
@@ -37,9 +37,9 @@ Primary long-term design reference:
 
 ## Next Candidate Module
 
-Module 03 Organization Assignment Runtime Mutation.
+Human review for Module 03 Organization Assignment Runtime Mutation.
 
-Readiness: GO – REQUIRED DEBT RESOLUTION. Module 03 may continue after the Module 01 / 02 review debt and atomic commit plan are accepted.
+Readiness: IMPLEMENTED – REVIEW P1 FIXED – READY FOR COMMIT AUTHORIZATION. Do not enter Office Economy or AI Decision until Module 03 is committed or explicitly accepted.
 
 ## Review And Commit Planning
 

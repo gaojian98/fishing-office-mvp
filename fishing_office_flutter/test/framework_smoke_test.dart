@@ -346,6 +346,7 @@ void main() {
       toPositionId: 'specialist',
       sourceId: 'mut_same_team',
       reason: 'same_team_growth',
+      reportsToResidentId: 'tech_leader',
     );
     expect(sameTeamPromotion.success, isTrue);
     expect(runtime.getResidentOrganization('tech_staff').departmentId,
@@ -354,6 +355,8 @@ void main() {
         runtime.getResidentOrganization('tech_staff').teamId, 'tech_support');
     expect(
         runtime.getResidentOrganization('tech_staff').positionId, 'specialist');
+    expect(runtime.getResidentOrganization('tech_staff').reportsToResidentId,
+        'tech_leader');
     expect(runtime.getResidentCareerStatus('tech_staff').careerLevel, 'senior');
 
     final duplicatePromotion = runtime.promoteResident(
@@ -386,6 +389,16 @@ void main() {
         runtime.getResidentOrganization('ops_staff').teamId, 'dock_services');
     expect(
         runtime.getResidentOrganization('ops_staff').positionId, 'team_leader');
+    expect(
+      runtime.getResidentsByTeam('product_ops').map((resident) => resident.id),
+      isNot(contains('ops_staff')),
+    );
+    expect(
+      runtime
+          .getResidentsByTeam('dock_services')
+          .map((resident) => resident.id),
+      contains('ops_staff'),
+    );
 
     final crossDepartmentTransfer = runtime.transferResident(
       'ops_staff',
@@ -401,6 +414,18 @@ void main() {
         runtime.getResidentOrganization('ops_staff').teamId, 'market_services');
     expect(
         runtime.getResidentOrganization('ops_staff').positionId, 'specialist');
+    expect(
+      runtime
+          .getResidentsByTeam('dock_services')
+          .map((resident) => resident.id),
+      isNot(contains('ops_staff')),
+    );
+    expect(
+      runtime
+          .getResidentsByTeam('market_services')
+          .map((resident) => resident.id),
+      contains('ops_staff'),
+    );
 
     final demotion = runtime.demoteResident(
       'ops_staff',
@@ -408,11 +433,14 @@ void main() {
       toPositionId: 'staff',
       sourceId: 'mut_demotion',
       reason: 'demotion_to_staff',
+      reportsToResidentId: 'tech_staff',
     );
     expect(demotion.success, isTrue);
     expect(runtime.getResidentOrganization('ops_staff').departmentId,
         'operations');
     expect(runtime.getResidentOrganization('ops_staff').teamId, 'product_ops');
+    expect(runtime.getResidentOrganization('ops_staff').reportsToResidentId,
+        'tech_staff');
     expect(runtime.getResidentCareerStatus('ops_staff').employmentStatus,
         'demoted');
 
@@ -481,6 +509,33 @@ void main() {
     expect(managementCycle.success, isFalse);
     expect(managementCycle.errors, contains('management_cycle'));
 
+    final multiLevelCycle = runtime.promoteResident(
+      'tech_leader',
+      toPositionId: 'team_leader',
+      sourceId: 'mut_multi_level_cycle',
+      reportsToResidentId: 'ops_staff',
+    );
+    expect(multiLevelCycle.success, isFalse);
+    expect(multiLevelCycle.errors, contains('management_cycle'));
+
+    final crossDepartmentPromotion = runtime.promoteResident(
+      'tech_staff',
+      teamId: 'market_services',
+      toPositionId: 'department_manager',
+      toCareerLevel: 'manager',
+      sourceId: 'mut_cross_department_promotion',
+      reason: 'cross_department_promotion',
+    );
+    expect(crossDepartmentPromotion.success, isTrue);
+    expect(
+        runtime.getResidentOrganization('tech_staff').departmentId, 'commerce');
+    expect(runtime.getResidentOrganization('tech_staff').teamId,
+        'market_services');
+    expect(runtime.getResidentOrganization('tech_staff').positionId,
+        'department_manager');
+    expect(
+        runtime.getResidentCareerStatus('tech_staff').careerLevel, 'manager');
+
     runtime.loadRuntimeStates(
       [
         {
@@ -507,10 +562,27 @@ void main() {
           runtime.processedOrganizationMutationIds,
     );
     expect(runtime.getResidentOrganization('ops_staff').teamId, 'product_ops');
+    expect(runtime.getResidentOrganization('ops_staff').reportsToResidentId,
+        'tech_staff');
     expect(runtime.getResidentCareerStatus('ops_staff').employmentStatus,
         'demoted');
     expect(runtime.getResidentOrganization('tech_staff').departmentId,
         'technology');
+    final restoredDuplicate = runtime.demoteResident(
+      'ops_staff',
+      teamId: 'product_ops',
+      toPositionId: 'staff',
+      sourceId: 'mut_demotion',
+      reason: 'demotion_to_staff',
+    );
+    expect(restoredDuplicate.success, isTrue);
+    expect(restoredDuplicate.idempotent, isTrue);
+    expect(
+      runtime.organizationMutationHistory
+          .where((record) => record.sourceId == 'mut_demotion')
+          .length,
+      1,
+    );
 
     final bulkResidents = ResidentConfig.fromJson({
       'version': 'bulk',

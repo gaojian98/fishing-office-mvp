@@ -224,6 +224,7 @@ class OrganizationAssignment {
     required this.departmentId,
     required this.teamId,
     required this.positionId,
+    this.reportsToResidentId = '',
     this.tags = const <String>[],
     this.active = true,
   });
@@ -233,6 +234,7 @@ class OrganizationAssignment {
         departmentId = '',
         teamId = '',
         positionId = '',
+        reportsToResidentId = '',
         tags = const <String>[],
         active = false;
 
@@ -265,16 +267,24 @@ class OrganizationAssignment {
       const <String>['positionId', 'position'],
       fallback: _derivePosition(json, residentId),
     );
+    final reportsToResidentId = _firstString(
+      nested,
+      json,
+      const <String>['reportsToResidentId', 'managerResidentId'],
+      fallback: '',
+    );
     return OrganizationAssignment(
       companyId: companyId,
       departmentId: departmentId,
       teamId: teamId,
       positionId: positionId,
+      reportsToResidentId: reportsToResidentId,
       tags: <String>{
         'company:$companyId',
         'department:$departmentId',
         'team:$teamId',
         'position:$positionId',
+        'reports_to:$reportsToResidentId',
         ..._stringList(nested['tags']),
         ..._stringList(json['organizationTags']),
       }.where((item) => !item.endsWith(':')).toList(growable: false),
@@ -290,6 +300,7 @@ class OrganizationAssignment {
     final departmentId = json['departmentId']?.toString() ?? '';
     final teamId = json['teamId']?.toString() ?? '';
     final positionId = json['positionId']?.toString() ?? '';
+    final reportsToResidentId = json['reportsToResidentId']?.toString() ?? '';
     if (companyId.isEmpty ||
         departmentId.isEmpty ||
         teamId.isEmpty ||
@@ -301,11 +312,13 @@ class OrganizationAssignment {
       departmentId: departmentId,
       teamId: teamId,
       positionId: positionId,
+      reportsToResidentId: reportsToResidentId,
       tags: <String>{
         'company:$companyId',
         'department:$departmentId',
         'team:$teamId',
         'position:$positionId',
+        'reports_to:$reportsToResidentId',
         ..._stringList(json['tags']),
       }.where((item) => !item.endsWith(':')).toList(growable: false),
       active: _readBool(json['active'], fallback: true),
@@ -316,6 +329,7 @@ class OrganizationAssignment {
   final String departmentId;
   final String teamId;
   final String positionId;
+  final String reportsToResidentId;
   final List<String> tags;
   final bool active;
 
@@ -335,6 +349,7 @@ class OrganizationAssignment {
       'departmentId': departmentId,
       'teamId': teamId,
       'positionId': positionId,
+      'reportsToResidentId': reportsToResidentId,
       'tags': tags,
       'active': active,
     };
@@ -345,6 +360,7 @@ class OrganizationAssignment {
     String? departmentId,
     String? teamId,
     String? positionId,
+    String? reportsToResidentId,
     List<String>? tags,
     bool? active,
   }) {
@@ -352,22 +368,27 @@ class OrganizationAssignment {
     final nextDepartmentId = departmentId ?? this.departmentId;
     final nextTeamId = teamId ?? this.teamId;
     final nextPositionId = positionId ?? this.positionId;
+    final nextReportsToResidentId =
+        reportsToResidentId ?? this.reportsToResidentId;
     return OrganizationAssignment(
       companyId: nextCompanyId,
       departmentId: nextDepartmentId,
       teamId: nextTeamId,
       positionId: nextPositionId,
+      reportsToResidentId: nextReportsToResidentId,
       tags: tags ??
           <String>{
             'company:$nextCompanyId',
             'department:$nextDepartmentId',
             'team:$nextTeamId',
             'position:$nextPositionId',
+            'reports_to:$nextReportsToResidentId',
             ...this.tags.where((tag) =>
                 !tag.startsWith('company:') &&
                 !tag.startsWith('department:') &&
                 !tag.startsWith('team:') &&
-                !tag.startsWith('position:')),
+                !tag.startsWith('position:') &&
+                !tag.startsWith('reports_to:')),
           }.where((item) => !item.endsWith(':')).toList(growable: false),
       active: active ?? this.active,
     );
@@ -449,6 +470,7 @@ class ResidentOrganizationContext {
   String get departmentId => assignment.departmentId;
   String get teamId => assignment.teamId;
   String get positionId => assignment.positionId;
+  String get reportsToResidentId => assignment.reportsToResidentId;
   bool get isTeamLeader => assignment.isTeamLeader;
   bool get isDepartmentManager => assignment.isDepartmentManager;
   List<String> get tags => assignment.tags;

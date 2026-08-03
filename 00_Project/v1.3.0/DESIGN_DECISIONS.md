@@ -40,6 +40,27 @@ Reason: No dedicated position capacity JSON exists yet, and this keeps Module 03
 
 Impact: Future product-provided capacity fields can replace the current inferred capacity without changing UI.
 
+## DD-005 Organization Mutation Is The Only Assignment Write Path
+
+Status: Accepted
+
+Decision: Hire, promotion, transfer, demotion, resignation, release position, and assignment changes use the Resident Runtime organization mutation path.
+
+Reason: Career and organization state must stay transactionally consistent, idempotent, and save-compatible.
+
+Impact: Career events request organization changes through mutation APIs. UI, Dialogue, Story, Quest, and Dynamic Event read the unified current organization state and must not patch assignment fields directly.
+
+
+## DD-006 Reporting Graph Is Part Of Current Organization Assignment
+
+Status: Accepted
+
+Decision: `OrganizationAssignment` persists `reportsToResidentId` as current runtime state, separate from mutation history.
+
+Reason: Dialogue, Story, Quest, Dynamic Event, Economy, and future AI Decision modules need the current reporting graph without reconstructing it from history.
+
+Impact: Save/restore must include `reportsToResidentId` through the existing organization assignment state. Missing values from old saves fall back to an empty reporting relation.
+
 ## ADR-011 Career Changes Must Use Unified Organization Mutation
 
 Status: Accepted
@@ -215,3 +236,19 @@ Consequences: Any direct career-to-organization field write is architecture debt
 Alternatives: Let Career Runtime patch assignment fields internally. Rejected because it duplicates and fragments organization rules.
 
 Follow-up: Audit future Career, AI Decision, Economy, and Dynamic Event work for direct organization writes.
+
+## ADR-022 Organization Mutation Must Persist And Validate Reporting Graph
+
+Status: Accepted
+
+Context: Organization Mutation can change a resident's reporting target. Storing only mutation history makes current reporting relationships expensive and ambiguous for runtime consumers.
+
+Decision: Current organization assignment stores `reportsToResidentId`, and Organization Mutation validates the full reporting chain before committing.
+
+Rationale: Persisting the current reporting edge makes Save/Restore, Dialogue, Story, Quest, Dynamic Event, Economy, and future AI Decision consumers read one consistent organization state. Multi-level cycle detection prevents invalid management graphs.
+
+Consequences: Old saves without `reportsToResidentId` remain compatible through empty fallback. Future modules must use Organization Mutation for reporting changes and must not infer current reporting from history.
+
+Alternatives: Store reporting only in mutation history. Rejected because consumers would need to rebuild current graph and could miss invalid cycles.
+
+Follow-up: Future Company Timeline may summarize reporting changes, but it must not replace current assignment as the source of truth.

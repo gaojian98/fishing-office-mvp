@@ -402,7 +402,8 @@ class ResidentRuntimeManager extends ChangeNotifier {
           ? _currentWorldDate()
           : request.effectiveDate,
       sourceId: sourceId,
-      targetReportsToResidentId: request.targetReportsToResidentId,
+      previousReportsToResidentId: currentOrganization.reportsToResidentId,
+      targetReportsToResidentId: target.reportsToResidentId,
     );
     final event = ResidentCareerEvent(
       type: normalizedType,
@@ -518,6 +519,12 @@ class ResidentRuntimeManager extends ChangeNotifier {
         }
       }
     }
+    if (_createsManagementCycle(
+      residentId: request.residentId,
+      target: target,
+    )) {
+      errors.add('management_cycle');
+    }
     return errors;
   }
 
@@ -529,6 +536,7 @@ class ResidentRuntimeManager extends ChangeNotifier {
   }) {
     if (normalizedType == 'resignation') {
       return currentOrganization.copyWith(
+        reportsToResidentId: '',
         active: false,
         tags: <String>[
           ...currentOrganization.tags,
@@ -565,20 +573,44 @@ class ResidentRuntimeManager extends ChangeNotifier {
     final positionId = request.targetPositionId.isEmpty
         ? _targetPositionForCareer(targetCareerLevel)
         : request.targetPositionId;
+    final reportsToResidentId = request.targetReportsToResidentId.isEmpty
+        ? currentOrganization.reportsToResidentId
+        : request.targetReportsToResidentId;
     return OrganizationAssignment(
       companyId: companyId.isEmpty ? 'fishing_office' : companyId,
       departmentId: departmentId,
       teamId: teamId,
       positionId: positionId,
+      reportsToResidentId: reportsToResidentId,
       tags: <String>{
         'company:${companyId.isEmpty ? 'fishing_office' : companyId}',
         'department:$departmentId',
         'team:$teamId',
         'position:$positionId',
+        'reports_to:$reportsToResidentId',
         'organization_mutation:$normalizedType',
       }.where((tag) => !tag.endsWith(':')).toList(growable: false),
       active: true,
     );
+  }
+
+  bool _createsManagementCycle({
+    required String residentId,
+    required OrganizationAssignment target,
+  }) {
+    var currentId = target.reportsToResidentId;
+    if (currentId.isEmpty) return false;
+    final visited = <String>{residentId};
+    while (currentId.isNotEmpty) {
+      if (!visited.add(currentId)) {
+        return currentId == residentId;
+      }
+      if (currentId == residentId) return true;
+      final assignment = getResidentOrganization(currentId);
+      if (!assignment.isAssigned) return false;
+      currentId = assignment.reportsToResidentId;
+    }
+    return false;
   }
 
   bool _positionHasCapacity(

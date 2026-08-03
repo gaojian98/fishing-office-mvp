@@ -1,5 +1,9 @@
 # Module 03 Organization Assignment Runtime Mutation Report
 
+## Status
+
+IMPLEMENTED – WAITING FOR REVIEW
+
 ## Scope
 
 Implemented transactional organization assignment mutation for resident career lifecycle events without adding a top-level Manager, Engine, Repository, Runtime, Provider, page, or JSON type.
@@ -51,6 +55,7 @@ Covered in `fishing_office_flutter/test/framework_smoke_test.dart`:
 
 - same-team promotion
 - cross-team promotion
+- cross-department promotion
 - cross-department transfer
 - demotion
 - hire
@@ -60,15 +65,23 @@ Covered in `fishing_office_flutter/test/framework_smoke_test.dart`:
 - invalid team ownership
 - management cycle
 - duplicate sourceId
+- duplicate sourceId after save/restore
 - failed mutation rollback
+- old position release
+- new position occupancy
 - save/restore
 - old save fallback
 - 100 resident batch state validation
 
 ## Validation
 
-- Targeted `flutter test test/framework_smoke_test.dart`: PASS
-- Full validation pending final task commands.
+- Targeted `flutter test test/framework_smoke_test.dart --name "organization assignment mutation"`: PASS.
+- `dart format --set-exit-if-changed lib test`: PASS.
+- `flutter analyze`: PASS.
+- `flutter test`: PASS with 98 tests.
+- `flutter test test/framework_smoke_test.dart`: PASS with 47 tests; full file runtime `67.42s`; internal performance gate PASS below 800ms.
+- `flutter build web --release`: PASS.
+- `git diff --check`: PASS.
 
 ## Known Limits
 

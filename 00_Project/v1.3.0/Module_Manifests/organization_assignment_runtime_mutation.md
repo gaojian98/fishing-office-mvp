@@ -2,9 +2,9 @@
 
 ## Status
 
-GO - REQUIRED DEBT RESOLUTION
+IMPLEMENTED - REVIEW P1 FIXED - READY FOR COMMIT AUTHORIZATION
 
-Current worktree note: uncommitted Module 03 implementation files appear to exist, but this manifest records the formal next-module boundary pending branch and human review decision.
+Current worktree note: Module 03 implementation is present locally and ready for commit authorization after review P1 resolution. It is not committed, pushed, merged, released, or deployed by this task.
 
 ## Goal
 
@@ -44,6 +44,7 @@ Establish one organization assignment mutation capability so Career Growth, futu
 ## Output
 
 - updated current organization assignment
+- persisted reportsToResidentId current reporting assignment
 - updated career state when applicable
 - mutation result
 - mutation history record
@@ -67,7 +68,7 @@ Establish one organization assignment mutation capability so Career Growth, futu
 - position exists
 - target position capacity allows assignment
 - reporting target is valid
-- mutation does not create a management cycle
+- multi-level reporting chain does not create a management cycle
 - resident state allows the operation
 
 ## Transaction Rules
@@ -130,15 +131,14 @@ Establish one organization assignment mutation capability so Career Growth, futu
 
 ## Known Risks
 
-- Existing worktree already contains unreviewed Module 03 code; branch and review decision is required before treating it as the formal implementation.
-- Reporting graph depth is not yet fully specified.
-- Position capacity may need product-defined data later.
+- Position capacity is inferred from existing position hierarchy and may need product-defined data later.
+- Module 03 must be reviewed before Office Economy or AI Decision consumes mutation outcomes.
 
 ## Acceptance Criteria
 
-- Formal implementation is reviewed on the agreed v1.3 branch.
+- Formal implementation is ready for review on the agreed v1.3 branch.
 - `git diff --check` passes.
-- Targeted and full Flutter validation pass when implementation is finalized.
+- Targeted and full Flutter validation pass.
 - No v1.2.0 release or Railway production files are modified.
 
 ## Forbidden Changes
@@ -151,4 +151,4 @@ Establish one organization assignment mutation capability so Career Growth, futu
 
 ## Readiness Review
 
-Module 01 and Module 02 are REVIEWED - PASS WITH DEBT. Module 03 is required before Office Economy and must resolve remaining organization/career idempotency and assignment consistency debt.
+Module 01 and Module 02 are REVIEWED - COMMITTED. Module 03 is IMPLEMENTED - REVIEW P1 FIXED - READY FOR COMMIT AUTHORIZATION and must be committed or explicitly accepted before Office Economy.
