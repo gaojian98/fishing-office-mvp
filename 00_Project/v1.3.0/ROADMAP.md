@@ -19,7 +19,7 @@ Primary long-term design reference:
 | Module 05 AI Decision System | IMPLEMENTED – COMMITTED | Explainable resident decisions that read organization, career, economy, relationship, personality, emotion, and memory state without directly mutating owning domains. |
 | Module 06 Long-Term Memory | IMPLEMENTED – COMMITTED | Bounded long-term resident memory for interaction, relationship, career, organization, event, and player history. |
 | Module 07 Company News & Timeline | IMPLEMENTED – COMMITTED | Player-readable company news and structured timeline history. |
-| Module 08 AI Company Events | IMPLEMENTED – COMMITTED | Cross-runtime company events that call owning mutation/runtime interfaces and write bounded event state. |
+| Module 08 AI Company Events | REVIEWED – COMMITTED | Cross-runtime company events that call owning mutation/runtime interfaces and write bounded event state with explicit reason/result persistence. |
 | Long-Term World Evolution Design Documentation | DOCUMENTED – WAITING FOR REVIEW | Design guardrails for v1.3.0 and future v1.4.0 / v1.5.0 / v2.0.0 evolution. |
 
 ## Active Constraints
@@ -42,9 +42,9 @@ Primary long-term design reference:
 
 ## Next Candidate Module
 
-Human review for committed Module 08 AI Company Events.
+v1.3.0 RC human review.
 
-Readiness: IMPLEMENTED – COMMITTED. Do not enter v1.3.0 RC closure until Module 08 is reviewed or explicitly accepted.
+Readiness: DEVELOPMENT COMPLETE – READY FOR HUMAN RC REVIEW. Do not commit, push, merge, tag, release, or deploy until explicitly authorized.
 
 ## Review And Commit Planning
 

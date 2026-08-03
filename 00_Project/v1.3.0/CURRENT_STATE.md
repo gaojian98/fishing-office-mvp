@@ -11,8 +11,8 @@ Local Module 08 commit. Run `git log -1 --oneline` for the exact current hash.
 ## Branch Baseline
 
 - `codex/v1.3-company-organization` and `feature/v1.3.0-office-ai` point to the same HEAD.
-- Module 01, Module 02, Module 03, Module 04, Module 05, Module 06, Module 07, and Module 08 source/test/doc changes have been committed locally.
-- Current working tree is expected to be clean after Module 08 commit.
+- Module 01 through Module 08 source/test/doc changes have been implemented and reviewed locally.
+- Current working tree is expected to be clean after Module 08 Review Fix and RC Readiness commits.
 - Product owner decided to keep using `codex/v1.3-company-organization` as the Module 01 / 02 review branch.
 - Safe branch switch is not recommended while these uncommitted changes exist.
 - Local `feature/v1.3.0-office-ai` is retained for later consolidation after reviewed commits exist.
@@ -30,14 +30,14 @@ Local Module 08 commit. Run `git log -1 --oneline` for the exact current hash.
 - Module 05: AI Decision System — IMPLEMENTED – COMMITTED
 - Module 06: Long-Term Memory — IMPLEMENTED – COMMITTED
 - Module 07: Company News & Timeline — IMPLEMENTED – COMMITTED
-- Module 08: AI Company Events — IMPLEMENTED – COMMITTED
+- Module 08: AI Company Events — REVIEWED – COMMITTED
 - Mutation Types: EXTRACTED – NO RUNTIME IMPLEMENTATION COMMIT
 - Runtime Performance Debt: RESOLVED – framework smoke performance gate restored below 800ms
 - Long-Term World Evolution Design — DOCUMENTED – WAITING FOR REVIEW
 
 ## Planned Next Module
 
-- v1.3.0 RC development closure after human review of the committed Module 08 work.
+- v1.3.0 RC human review.
 
 ## Current New Models And Concepts
 
@@ -121,6 +121,11 @@ Local Module 08 commit. Run `git log -1 --oneline` for the exact current hash.
 - `00_Project/v1.3.0/Module_06_Long_Term_Memory_Report.md`
 - `00_Project/v1.3.0/Module_07_Company_News_Timeline_Report.md`
 - `00_Project/v1.3.0/Module_08_AI_Company_Events_Report.md`
+- `00_Project/v1.3.0/RC_Readiness_Report.md`
+- `00_Project/v1.3.0/QA_Summary.md`
+- `00_Project/v1.3.0/Release_Notes_Draft.md`
+- `00_Project/v1.3.0/Known_Limitations.md`
+- `00_Project/v1.3.0/COMMIT_PUSH_PLAN.md`
 - `00_Project/v1.3.0/ROADMAP.md`
 - `00_Project/v1.3.0/DESIGN_DECISIONS.md`
 - `00_Project/v1.3.0/LONG_TERM_WORLD_EVOLUTION_DESIGN.md`
@@ -286,6 +291,7 @@ Local Module 08 commit. Run `git log -1 --oneline` for the exact current hash.
 - Company News and Timeline are persisted inside existing world save data and are bounded to 120 news items and 240 timeline events.
 - AI Company Events coordinate existing runtime side effects through `SecondWorldEngine` and are persisted in bounded save state.
 - AI Company Events do not add a new top-level Manager, Engine, Repository, Runtime, Provider, page, or JSON type.
+- AI Company Events now persist explicit `reason` and `result` fields and keep failed/cancelled retries idempotent without reporting success.
 - Long-term world evolution rules are documented, but future modules in v1.4.0, v1.5.0, and v2.0.0 remain planned unless explicitly marked implemented in module reports.
 - v1.2 release tag, main merge state, and production release files are not modified by this module.
 
@@ -298,7 +304,7 @@ Local Module 08 commit. Run `git log -1 --oneline` for the exact current hash.
 
 ## Next Module
 
-Module 08 AI Company Events is committed locally and should enter human review before v1.3.0 RC closure.
+Module 08 AI Company Events is REVIEWED – COMMITTED. v1.3.0 RC state is DEVELOPMENT COMPLETE – READY FOR HUMAN RC REVIEW after validation.
 
 ## Default Not Required To Re-Read
 
@@ -318,7 +324,8 @@ Module 08 AI Company Events is committed locally and should enter human review b
 - Module 05 Status: IMPLEMENTED – COMMITTED.
 - Module 06 Status: IMPLEMENTED – COMMITTED.
 - Module 07 Status: IMPLEMENTED – COMMITTED.
-- Module 08 Status: IMPLEMENTED – COMMITTED.
+- Module 08 Status: REVIEWED – COMMITTED.
+- v1.3.0 RC Status: DEVELOPMENT COMPLETE – READY FOR HUMAN RC REVIEW.
 - Latest validation in Module 01/02 commit execution: analyze PASS, flutter test PASS with 98 tests, performance gate restored to 246ms.
 - Commit plan: `00_Project/v1.3.0/MODULE_01_02_COMMIT_PLAN.md`.
 - Branch plan: `00_Project/v1.3.0/BRANCH_CONSOLIDATION_PLAN.md`.
