@@ -55,6 +55,7 @@ class WorldSaveData {
     required this.officeWorldHistory,
     required this.companyNews,
     required this.companyTimeline,
+    required this.aiCompanyEvents,
     required this.lastLivingOfficeUpdate,
     required this.processedOfficeEventIds,
     required this.officeEventCooldowns,
@@ -114,6 +115,7 @@ class WorldSaveData {
       officeWorldHistory: const <OfficeWorldHistoryEntry>[],
       companyNews: const <CompanyNewsItem>[],
       companyTimeline: const <CompanyTimelineEvent>[],
+      aiCompanyEvents: const <AICompanyEvent>[],
       lastLivingOfficeUpdate: '',
       processedOfficeEventIds: const <String>[],
       officeEventCooldowns: const <String, int>{},
@@ -196,6 +198,7 @@ class WorldSaveData {
           officeWorldHistoryFromJsonList(json['officeWorldHistory']),
       companyNews: companyNewsFromJsonList(json['companyNews']),
       companyTimeline: companyTimelineFromJsonList(json['companyTimeline']),
+      aiCompanyEvents: aiCompanyEventsFromJsonList(json['aiCompanyEvents']),
       lastLivingOfficeUpdate: json['lastLivingOfficeUpdate']?.toString() ?? '',
       processedOfficeEventIds: _stringList(json['processedOfficeEventIds']),
       officeEventCooldowns: _intMap(json['officeEventCooldowns']),
@@ -270,6 +273,7 @@ class WorldSaveData {
   final List<OfficeWorldHistoryEntry> officeWorldHistory;
   final List<CompanyNewsItem> companyNews;
   final List<CompanyTimelineEvent> companyTimeline;
+  final List<AICompanyEvent> aiCompanyEvents;
   final String lastLivingOfficeUpdate;
   final List<String> processedOfficeEventIds;
   final Map<String, int> officeEventCooldowns;
@@ -346,6 +350,8 @@ class WorldSaveData {
           companyNews.map((item) => item.toJson()).toList(growable: false),
       'companyTimeline':
           companyTimeline.map((item) => item.toJson()).toList(growable: false),
+      'aiCompanyEvents':
+          aiCompanyEvents.map((item) => item.toJson()).toList(growable: false),
       'lastLivingOfficeUpdate': lastLivingOfficeUpdate,
       'processedOfficeEventIds': processedOfficeEventIds,
       'officeEventCooldowns': officeEventCooldowns,
@@ -406,6 +412,7 @@ class WorldSaveData {
     List<OfficeWorldHistoryEntry>? officeWorldHistory,
     List<CompanyNewsItem>? companyNews,
     List<CompanyTimelineEvent>? companyTimeline,
+    List<AICompanyEvent>? aiCompanyEvents,
     String? lastLivingOfficeUpdate,
     List<String>? processedOfficeEventIds,
     Map<String, int>? officeEventCooldowns,
@@ -468,6 +475,7 @@ class WorldSaveData {
       officeWorldHistory: officeWorldHistory ?? this.officeWorldHistory,
       companyNews: companyNews ?? this.companyNews,
       companyTimeline: companyTimeline ?? this.companyTimeline,
+      aiCompanyEvents: aiCompanyEvents ?? this.aiCompanyEvents,
       lastLivingOfficeUpdate:
           lastLivingOfficeUpdate ?? this.lastLivingOfficeUpdate,
       processedOfficeEventIds:

@@ -400,3 +400,35 @@ Consequences: Long-term archival beyond the cap must use future summary strategi
 Alternatives: Keep every readable news item forever. Rejected because it risks save growth and repeated UI scanning.
 
 Follow-up: Future timeline summary can aggregate older records by month or release cycle.
+
+## ADR-031 AI Company Events Are Coordinators Not Owners
+
+Status: Accepted
+
+Context: Company events can touch organization, career, economy, resident memory, news, and timeline state.
+
+Decision: AI Company Events live behind the existing `SecondWorldEngine` facade and coordinate existing runtime owners instead of becoming a new top-level Manager, Engine, Repository, Runtime, Provider, page, or JSON type.
+
+Rationale: Organization, career, economy, and memory already have ownership, validation, idempotency, and save compatibility rules. Company events should connect those rules rather than duplicate them.
+
+Consequences: Event effects must call Organization Mutation, Career Runtime, Office Economy, Resident Memory, and Company Timeline interfaces. Event state records outcomes and status but is not the source of business truth.
+
+Alternatives: Add a dedicated Company Event Runtime. Rejected for v1.3.0 because the project rule is Manager few, Module many, and the existing engine/save path can own this coordination safely.
+
+Follow-up: If v1.4.0 introduces richer autonomous event scheduling, it should still use these domain-owner interfaces.
+
+## ADR-032 AI Company Event History Must Be Bounded And Source-Id Idempotent
+
+Status: Accepted
+
+Context: Large company events can be retried by save/load, Tick, future AI decisions, or UI action retries.
+
+Decision: AI Company Events require stable `sourceId`, reuse existing processed office event and cooldown state, and cap event history at 120 records.
+
+Rationale: This prevents duplicate organization mutation, duplicate economy settlement, duplicate resident memory, duplicate news, and unbounded save growth.
+
+Consequences: Repeated source IDs return idempotent results. Old saves without AI company event fields fall back to empty history.
+
+Alternatives: Append every event attempt. Rejected because it risks duplicated side effects and save bloat.
+
+Follow-up: Future event candidate generation should build one event context per Tick and avoid O(n²) resident comparisons.

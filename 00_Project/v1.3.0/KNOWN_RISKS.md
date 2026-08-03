@@ -18,7 +18,11 @@ Status: IMPLEMENTED - COMMITTED
 
 ## Module 07 Company News & Timeline
 
-Status: IMPLEMENTED - WAITING FOR REVIEW
+Status: IMPLEMENTED - COMMITTED
+
+## Module 08 AI Company Events
+
+Status: IMPLEMENTED - COMMITTED
 
 ## Current Risks
 
@@ -32,6 +36,8 @@ Status: IMPLEMENTED - WAITING FOR REVIEW
 - Long-term memory has no UI in this module.
 - Company Timeline currently records explicit projection calls; automatic harvesting from all runtime mutation sources is deferred to AI Company Events.
 - Company News uses engineering-level text templates until product copy is provided.
+- AI Company Events currently expose explicit trigger coordination through `SecondWorldEngine`; automatic candidate generation from every Tick is deferred.
+- AI Company Events do not directly inject `ResidentDecisionManager` into `SecondWorldEngine` because the current provider graph already has AI Decision depend on the engine.
 
 ## Not Risks In This Task
 

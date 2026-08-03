@@ -96,6 +96,7 @@ class WorldSaveManager extends ChangeNotifier {
       <OfficeWorldHistoryEntry>[];
   final List<CompanyNewsItem> _companyNews = <CompanyNewsItem>[];
   final List<CompanyTimelineEvent> _companyTimeline = <CompanyTimelineEvent>[];
+  final List<AICompanyEvent> _aiCompanyEvents = <AICompanyEvent>[];
   String _lastLivingOfficeUpdate = '';
   final Set<String> _processedOfficeEventIds = <String>{};
   final Map<String, int> _officeEventCooldowns = <String, int>{};
@@ -170,6 +171,8 @@ class WorldSaveManager extends ChangeNotifier {
       List<CompanyNewsItem>.from(_companyNews);
   List<CompanyTimelineEvent> get companyTimeline =>
       List<CompanyTimelineEvent>.from(_companyTimeline);
+  List<AICompanyEvent> get aiCompanyEvents =>
+      List<AICompanyEvent>.from(_aiCompanyEvents);
   String get lastLivingOfficeUpdate => _lastLivingOfficeUpdate;
   Set<String> get processedOfficeEventIds =>
       Set<String>.unmodifiable(_processedOfficeEventIds);
@@ -297,6 +300,9 @@ class WorldSaveManager extends ChangeNotifier {
     _groupHistory.clear();
     _livingOfficeState = LivingOfficeState.empty();
     _officeWorldHistory.clear();
+    _companyNews.clear();
+    _companyTimeline.clear();
+    _aiCompanyEvents.clear();
     _lastLivingOfficeUpdate = '';
     _processedOfficeEventIds.clear();
     _officeEventCooldowns.clear();
@@ -751,6 +757,30 @@ class WorldSaveManager extends ChangeNotifier {
     );
   }
 
+  AICompanyEvent? getAICompanyEvent(String eventIdOrSourceId) {
+    if (eventIdOrSourceId.isEmpty) return null;
+    for (final event in _aiCompanyEvents) {
+      if (event.eventId == eventIdOrSourceId ||
+          event.sourceId == eventIdOrSourceId) {
+        return event;
+      }
+    }
+    return null;
+  }
+
+  AICompanyEvent? recordAICompanyEvent(AICompanyEvent event) {
+    if (event.eventId.isEmpty || event.sourceId.isEmpty) return null;
+    final existing = getAICompanyEvent(event.sourceId);
+    if (existing != null && existing.isTerminal) return existing;
+    _aiCompanyEvents
+      ..removeWhere((item) =>
+          item.eventId == event.eventId || item.sourceId == event.sourceId)
+      ..insert(0, event);
+    _trimAICompanyEvents();
+    notifyListeners();
+    return event;
+  }
+
   bool hasProcessedOfficeEvent(String id) {
     if (id.isEmpty) return false;
     return _processedOfficeEventIds.contains(id);
@@ -1128,6 +1158,7 @@ class WorldSaveManager extends ChangeNotifier {
       officeWorldHistory: officeWorldHistory,
       companyNews: companyNews,
       companyTimeline: companyTimeline,
+      aiCompanyEvents: aiCompanyEvents,
       lastLivingOfficeUpdate: _lastLivingOfficeUpdate,
       processedOfficeEventIds: _processedOfficeEventIds.toList(growable: false)
         ..sort(),
@@ -1247,6 +1278,9 @@ class WorldSaveManager extends ChangeNotifier {
     _companyTimeline
       ..clear()
       ..addAll(data.companyTimeline.take(companyTimelineHistoryLimit));
+    _aiCompanyEvents
+      ..clear()
+      ..addAll(data.aiCompanyEvents.take(aiCompanyEventHistoryLimit));
     _lastLivingOfficeUpdate = data.lastLivingOfficeUpdate;
     _processedOfficeEventIds
       ..clear()
@@ -1295,6 +1329,7 @@ class WorldSaveManager extends ChangeNotifier {
         officeWorldHistory: data.officeWorldHistory,
         companyNews: data.companyNews,
         companyTimeline: data.companyTimeline,
+        aiCompanyEvents: data.aiCompanyEvents,
         lastLivingOfficeUpdate: data.lastLivingOfficeUpdate,
         processedOfficeEventIds: data.processedOfficeEventIds,
         officeEventCooldowns: data.officeEventCooldowns,
@@ -1380,6 +1415,15 @@ class WorldSaveManager extends ChangeNotifier {
       _companyTimeline.removeRange(
         companyTimelineHistoryLimit,
         _companyTimeline.length,
+      );
+    }
+  }
+
+  void _trimAICompanyEvents() {
+    if (_aiCompanyEvents.length > aiCompanyEventHistoryLimit) {
+      _aiCompanyEvents.removeRange(
+        aiCompanyEventHistoryLimit,
+        _aiCompanyEvents.length,
       );
     }
   }

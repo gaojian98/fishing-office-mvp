@@ -10,6 +10,7 @@ import 'package:fishing_office_mvp/models/honor_config.dart';
 import 'package:fishing_office_mvp/models/inventory_config.dart';
 import 'package:fishing_office_mvp/models/interactive_office.dart';
 import 'package:fishing_office_mvp/models/location_context.dart';
+import 'package:fishing_office_mvp/models/living_office_state.dart';
 import 'package:fishing_office_mvp/models/living_world_config.dart';
 import 'package:fishing_office_mvp/models/player_influence.dart';
 import 'package:fishing_office_mvp/models/resident_config.dart';
@@ -12067,6 +12068,277 @@ void main() {
     expect(legacy.companyTimeline, isEmpty);
     expect(legacy.companyNews, isEmpty);
     expect(legacy.playerInfluenceContext.reputation, contains('quiet'));
+  });
+
+  test('ai company events coordinate runtimes idempotently and restore',
+      () async {
+    final clock = WorldClockManager(
+      initialClock:
+          WorldClock.initial().copyWith(dayCount: 8, hour: 10, minute: 0),
+      initialCalendar: WorldCalendar.initial().copyWith(
+        dayCount: 8,
+        weekdayIndex: 1,
+        month: 1,
+        day: 8,
+        season: 'spring',
+      ),
+      paused: true,
+    );
+    final residents = ResidentConfig.fromJson({
+      'version': 'test',
+      'residents': [
+        _organizationResident(
+          id: 'event_resident_a',
+          departmentId: 'operations',
+          teamId: 'product_ops',
+          positionId: 'staff',
+        ),
+        _organizationResident(
+          id: 'event_resident_b',
+          departmentId: 'operations',
+          teamId: 'dock_services',
+          positionId: 'staff',
+        ),
+      ],
+    });
+    final life = ResidentLifeConfig.fromJson(
+      scheduleJson: {'version': 'test', 'schedules': []},
+      activityJson: {'version': 'test', 'activities': []},
+    );
+    final runtime = ResidentRuntimeManager(
+      residentRepository: _FakeResidentRepository(residents),
+      lifeRepository: _FakeResidentLifeRepository(life),
+      worldClockManager: clock,
+    );
+    await runtime.load();
+    final memory = ResidentMemoryEngine();
+    final relationship = ResidentRelationshipEngine(
+      config: ResidentRelationshipConfig.fromJson({
+        'version': 'test',
+        'levels': [],
+        'relationships': [],
+      }),
+      memoryEngine: memory,
+    );
+    final festival = FestivalRuntimeManager(
+      config: FestivalConfig.fromJson({'version': 'test', 'festivals': []}),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final weather = WeatherRuntimeManager(
+      config: WeatherConfig.fromJson({'version': 'test', 'weatherEvents': []}),
+      worldClockManager: clock,
+      residentRuntimeManager: runtime,
+    );
+    final rumor = RumorRuntimeManager(
+      config: RumorConfig.fromJson({'version': 'test', 'rumors': []}),
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      residentRuntimeManager: runtime,
+    );
+    final dialogue = DialogueRuntimeManager(
+      config: ResidentDialogueConfig.fromJson({
+        'version': 'test',
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '办公室今天有一条新消息。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+          'tags': ['fallback'],
+        },
+        'dialogues': [],
+      }),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+    );
+    final story = StoryRuntimeManager(
+      config: ResidentStoryConfig.fromJson({'version': 'test', 'stories': []}),
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      dialogueRuntimeManager: dialogue,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+    );
+    final lifeManager = ResidentLifeManager(
+      _FakeResidentLifeRepository(life),
+    );
+    await lifeManager.load();
+    final legacyDialogue = ResidentDialogueEngine(
+      config: ResidentDialogueConfig.fromJson({
+        'version': 'test',
+        'fallback': {
+          'id': 'fallback',
+          'residentId': '*',
+          'text': '办公室今天有一条新消息。',
+          'conditions': {},
+          'priority': 0,
+          'repeatable': true,
+          'tags': ['fallback'],
+        },
+        'dialogues': [],
+      }),
+      lifeManager: lifeManager,
+      memoryEngine: memory,
+      relationshipEngine: relationship,
+    );
+    final repository = _CountingWorldSaveRepository();
+    final save = WorldSaveManager(
+      repository: repository,
+      worldClockManager: clock,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      residentRuntimeManager: runtime,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      storyRuntimeManager: story,
+      dialogueRuntimeManager: dialogue,
+    );
+    final secondWorld = SecondWorldEngine(
+      residentConfig: residents,
+      residentLifeEngine: lifeManager,
+      residentMemoryEngine: memory,
+      residentRelationshipEngine: relationship,
+      residentDialogueEngine: legacyDialogue,
+      residentStoryEngine: ResidentStoryEngine(
+        config:
+            ResidentStoryConfig.fromJson({'version': 'test', 'stories': []}),
+        lifeManager: lifeManager,
+        memoryEngine: memory,
+        relationshipEngine: relationship,
+        dialogueEngine: legacyDialogue,
+      ),
+      dialogueRuntimeManager: dialogue,
+      storyRuntimeManager: story,
+      festivalRuntimeManager: festival,
+      weatherRuntimeManager: weather,
+      rumorRuntimeManager: rumor,
+      worldSaveManager: save,
+      residentRuntimeManager: runtime,
+    );
+
+    final result = secondWorld.triggerAICompanyEvent(
+      eventId: 'company_event_major_project',
+      sourceId: 'major_project_day_8',
+      type: 'major_project',
+      scope: 'department:operations',
+      participants: const ['event_resident_a', 'event_resident_b'],
+      conditions: const <String, dynamic>{},
+      effects: const <String, dynamic>{
+        'organizationMutation': <String, dynamic>{
+          'residentId': 'event_resident_a',
+          'companyId': 'fishing_office',
+          'departmentId': 'operations',
+          'teamId': 'product_ops',
+          'positionId': 'specialist',
+          'careerLevel': 'senior',
+        },
+        'officeEconomy': <String, dynamic>{
+          'periodType': 'event',
+          'periodKey': 'Y1-M1-D8',
+          'departmentId': 'operations',
+          'bonusPool': 20,
+          'operatingCost': 30,
+          'projectIncome': 300,
+        },
+        'importance': 78,
+      },
+      cooldown: 3,
+    );
+    expect(result.success, isTrue);
+    expect(result.changedDomains, containsAll(['organization', 'economy']));
+    expect(runtime.getResidentOrganization('event_resident_a').positionId,
+        'specialist');
+    expect(runtime.getResidentCareerStatus('event_resident_a').careerLevel,
+        'senior');
+    expect(runtime.officeEconomyState.lastSettlementId,
+        'ai_company_event:major_project_day_8:economy');
+    expect(save.companyTimeline.first.sourceId,
+        'ai_company_event:major_project_day_8');
+    expect(save.companyNews.first.category, 'company_event');
+    expect(save.aiCompanyEvents.first.status, 'resolved');
+    expect(memory.getResidentMemorySummary('event_resident_a').total,
+        greaterThan(0));
+
+    final duplicate = secondWorld.triggerAICompanyEvent(
+      eventId: 'company_event_major_project',
+      sourceId: 'major_project_day_8',
+      type: 'major_project',
+      participants: const ['event_resident_a'],
+    );
+    expect(duplicate.success, isTrue);
+    expect(duplicate.idempotent, isTrue);
+    expect(
+        save.companyTimeline
+            .where((item) =>
+                item.sourceId == 'ai_company_event:major_project_day_8')
+            .length,
+        1);
+    expect(save.aiCompanyEvents.length, 1);
+
+    final invalid = secondWorld.triggerAICompanyEvent(
+      eventId: 'company_event_bad_target',
+      sourceId: 'bad_target_day_8',
+      type: 'department_reorg',
+      participants: const ['event_resident_a'],
+      effects: const <String, dynamic>{
+        'organizationMutation': <String, dynamic>{
+          'residentId': 'event_resident_a',
+          'companyId': 'fishing_office',
+          'departmentId': 'missing_department',
+          'teamId': 'product_ops',
+          'positionId': 'specialist',
+        },
+      },
+    );
+    expect(invalid.success, isFalse);
+    expect(invalid.errors, contains('department_missing:missing_department'));
+    expect(
+      save.companyTimeline.any(
+        (item) => item.sourceId == 'ai_company_event:bad_target_day_8',
+      ),
+      isFalse,
+    );
+
+    for (var index = 0; index < 150; index += 1) {
+      save.recordAICompanyEvent(
+        AICompanyEvent(
+          eventId: 'bulk_ai_company_event_$index',
+          sourceId: 'bulk_ai_company_source_$index',
+          type: 'group_training',
+          scope: 'company',
+          participants: const <String>[],
+          conditions: const <String, dynamic>{},
+          effects: const <String, dynamic>{},
+          startTime: 'Y1-M1-D8',
+          endTime: '',
+          status: 'resolved',
+          cooldown: 0,
+          createdAt: 'Y1-M1-D8',
+          updatedAt: 'Y1-M1-D8',
+          errors: const <String>[],
+        ),
+      );
+    }
+    expect(save.aiCompanyEvents.length, lessThanOrEqualTo(120));
+
+    final saved = await save.saveWorld(force: true, immediate: true);
+    expect(saved.aiCompanyEvents, isNotEmpty);
+    final restored = WorldSaveData.fromJson(saved.toJson());
+    expect(restored.aiCompanyEvents.length, saved.aiCompanyEvents.length);
+    expect(WorldSaveData.fromJson(const <String, dynamic>{}).aiCompanyEvents,
+        isEmpty);
   });
 }
 

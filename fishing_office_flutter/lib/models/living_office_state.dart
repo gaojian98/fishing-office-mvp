@@ -202,6 +202,7 @@ class OfficeWorldHistoryEntry {
 
 const int companyNewsHistoryLimit = 120;
 const int companyTimelineHistoryLimit = 240;
+const int aiCompanyEventHistoryLimit = 120;
 
 class CompanyNewsItem {
   const CompanyNewsItem({
@@ -368,6 +369,126 @@ class CompanyTimelineSnapshot {
   }
 }
 
+class AICompanyEvent {
+  const AICompanyEvent({
+    required this.eventId,
+    required this.sourceId,
+    required this.type,
+    required this.scope,
+    required this.participants,
+    required this.conditions,
+    required this.effects,
+    required this.startTime,
+    required this.endTime,
+    required this.status,
+    required this.cooldown,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.errors,
+  });
+
+  factory AICompanyEvent.fromJson(Map<String, dynamic> json) {
+    return AICompanyEvent(
+      eventId: json['eventId']?.toString() ?? '',
+      sourceId: json['sourceId']?.toString() ?? '',
+      type: json['type']?.toString() ?? '',
+      scope: json['scope']?.toString() ?? 'company',
+      participants: _stringList(json['participants']),
+      conditions: _mapOf(json['conditions']),
+      effects: _mapOf(json['effects']),
+      startTime: json['startTime']?.toString() ?? '',
+      endTime: json['endTime']?.toString() ?? '',
+      status: _eventStatus(json['status']?.toString() ?? ''),
+      cooldown: _readInt(json['cooldown']),
+      createdAt: json['createdAt']?.toString() ?? '',
+      updatedAt: json['updatedAt']?.toString() ?? '',
+      errors: _stringList(json['errors']),
+    );
+  }
+
+  final String eventId;
+  final String sourceId;
+  final String type;
+  final String scope;
+  final List<String> participants;
+  final Map<String, dynamic> conditions;
+  final Map<String, dynamic> effects;
+  final String startTime;
+  final String endTime;
+  final String status;
+  final int cooldown;
+  final String createdAt;
+  final String updatedAt;
+  final List<String> errors;
+
+  bool get isTerminal =>
+      status == 'resolved' || status == 'cancelled' || status == 'expired';
+
+  AICompanyEvent copyWith({
+    String? status,
+    String? updatedAt,
+    List<String>? errors,
+  }) {
+    return AICompanyEvent(
+      eventId: eventId,
+      sourceId: sourceId,
+      type: type,
+      scope: scope,
+      participants: participants,
+      conditions: conditions,
+      effects: effects,
+      startTime: startTime,
+      endTime: endTime,
+      status: status ?? this.status,
+      cooldown: cooldown,
+      createdAt: createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      errors: errors ?? this.errors,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'eventId': eventId,
+      'sourceId': sourceId,
+      'type': type,
+      'scope': scope,
+      'participants': participants,
+      'conditions': conditions,
+      'effects': effects,
+      'startTime': startTime,
+      'endTime': endTime,
+      'status': status,
+      'cooldown': cooldown,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
+      'errors': errors,
+    };
+  }
+}
+
+class AICompanyEventResult {
+  const AICompanyEventResult({
+    required this.success,
+    required this.idempotent,
+    required this.event,
+    required this.errors,
+    required this.changedDomains,
+  });
+
+  const AICompanyEventResult.failure(this.errors)
+      : success = false,
+        idempotent = false,
+        event = null,
+        changedDomains = const <String>[];
+
+  final bool success;
+  final bool idempotent;
+  final AICompanyEvent? event;
+  final List<String> errors;
+  final List<String> changedDomains;
+}
+
 List<CompanyNewsItem> companyNewsFromJsonList(Object? value) {
   if (value is! List) return const <CompanyNewsItem>[];
   return value
@@ -386,6 +507,16 @@ List<CompanyTimelineEvent> companyTimelineFromJsonList(Object? value) {
           CompanyTimelineEvent.fromJson(Map<String, dynamic>.from(item)))
       .where((item) => item.eventId.isNotEmpty && item.sourceId.isNotEmpty)
       .take(companyTimelineHistoryLimit)
+      .toList(growable: false);
+}
+
+List<AICompanyEvent> aiCompanyEventsFromJsonList(Object? value) {
+  if (value is! List) return const <AICompanyEvent>[];
+  return value
+      .whereType<Map>()
+      .map((item) => AICompanyEvent.fromJson(Map<String, dynamic>.from(item)))
+      .where((item) => item.eventId.isNotEmpty && item.sourceId.isNotEmpty)
+      .take(aiCompanyEventHistoryLimit)
       .toList(growable: false);
 }
 
@@ -417,4 +548,16 @@ int _readInt(Object? value, {int fallback = 0}) {
   if (value is int) return value;
   if (value is num) return value.round();
   return int.tryParse(value?.toString() ?? '') ?? fallback;
+}
+
+String _eventStatus(String value) {
+  switch (value.toLowerCase()) {
+    case 'planned':
+    case 'active':
+    case 'resolved':
+    case 'cancelled':
+    case 'expired':
+      return value.toLowerCase();
+  }
+  return 'planned';
 }

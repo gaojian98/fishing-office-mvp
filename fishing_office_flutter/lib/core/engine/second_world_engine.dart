@@ -2113,6 +2113,215 @@ class SecondWorldEngine {
     );
   }
 
+  List<AICompanyEvent> getAICompanyEvents() {
+    return _worldSaveManager?.aiCompanyEvents ?? const <AICompanyEvent>[];
+  }
+
+  AICompanyEventResult triggerAICompanyEvent({
+    required String eventId,
+    required String sourceId,
+    required String type,
+    String scope = 'company',
+    List<String> participants = const <String>[],
+    Map<String, dynamic> conditions = const <String, dynamic>{},
+    Map<String, dynamic> effects = const <String, dynamic>{},
+    String startTime = '',
+    String endTime = '',
+    String status = 'active',
+    int cooldown = 0,
+  }) {
+    final save = _worldSaveManager;
+    if (save == null) {
+      return const AICompanyEventResult.failure(<String>[
+        'world_save_missing',
+      ]);
+    }
+    if (eventId.isEmpty || sourceId.isEmpty || type.isEmpty) {
+      return const AICompanyEventResult.failure(<String>[
+        'event_identity_missing',
+      ]);
+    }
+    final existing = save.getAICompanyEvent(sourceId);
+    if (existing != null && existing.isTerminal) {
+      return AICompanyEventResult(
+        success: true,
+        idempotent: true,
+        event: existing,
+        errors: const <String>[],
+        changedDomains: const <String>[],
+      );
+    }
+    if (save.hasProcessedOfficeEvent('ai_company_event:$sourceId')) {
+      return AICompanyEventResult(
+        success: true,
+        idempotent: true,
+        event: existing,
+        errors: const <String>[],
+        changedDomains: const <String>[],
+      );
+    }
+    if (save.isOfficeEventCooldownActive('ai_company_event:$eventId') ||
+        save.isOfficeEventCooldownActive('ai_company_event:$sourceId')) {
+      return const AICompanyEventResult.failure(<String>['event_cooldown']);
+    }
+    final validationErrors =
+        _validateAICompanyEvent(participants, conditions, effects);
+    if (validationErrors.isNotEmpty) {
+      final failed = _companyEventFromRequest(
+        eventId: eventId,
+        sourceId: sourceId,
+        type: type,
+        scope: scope,
+        participants: participants,
+        conditions: conditions,
+        effects: effects,
+        startTime: startTime,
+        endTime: endTime,
+        status: 'cancelled',
+        cooldown: cooldown,
+        errors: validationErrors,
+      );
+      save.recordAICompanyEvent(failed);
+      return AICompanyEventResult(
+        success: false,
+        idempotent: false,
+        event: failed,
+        errors: validationErrors,
+        changedDomains: const <String>[],
+      );
+    }
+
+    final changedDomains = <String>[];
+    final organizationEffect = _mapEffect(effects['organizationMutation']);
+    if (organizationEffect.isNotEmpty) {
+      final residentId = organizationEffect['residentId']?.toString() ?? '';
+      final mutation = assignResidentOrganization(
+        residentId,
+        mutationType: organizationEffect['mutationType']?.toString() ??
+            organizationEffect['type']?.toString() ??
+            'transfer',
+        date: startTime,
+        companyId: organizationEffect['companyId']?.toString() ?? '',
+        departmentId: organizationEffect['departmentId']?.toString() ?? '',
+        teamId: organizationEffect['teamId']?.toString() ?? '',
+        positionId: organizationEffect['positionId']?.toString() ?? '',
+        reason: 'ai_company_event:$type',
+        sourceId: 'ai_company_event:$sourceId:organization',
+        reportsToResidentId:
+            organizationEffect['reportsToResidentId']?.toString() ?? '',
+        careerLevel: organizationEffect['careerLevel']?.toString() ?? '',
+      );
+      if (!mutation.success) {
+        return AICompanyEventResult(
+          success: false,
+          idempotent: false,
+          event: null,
+          errors: mutation.errors,
+          changedDomains: const <String>[],
+        );
+      }
+      changedDomains.add('organization');
+    }
+
+    final careerEffect = _mapEffect(effects['careerEvent']);
+    if (careerEffect.isNotEmpty && organizationEffect.isEmpty) {
+      final residentId = careerEffect['residentId']?.toString() ?? '';
+      applyResidentCareerEvent(
+        residentId,
+        type: careerEffect['type']?.toString() ?? type,
+        date: startTime,
+        toPositionId: careerEffect['toPositionId']?.toString() ?? '',
+        toCareerLevel: careerEffect['toCareerLevel']?.toString() ?? '',
+        reason: 'ai_company_event:$type',
+        salaryLevel: _nullableInt(careerEffect['salaryLevel']),
+        performanceScore: _nullableInt(careerEffect['performanceScore']),
+        capabilityScore: _nullableInt(careerEffect['capabilityScore']),
+        tags: <String>['ai_company_event', type],
+      );
+      changedDomains.add('career');
+    }
+
+    final economyEffect = _mapEffect(effects['officeEconomy']);
+    if (economyEffect.isNotEmpty) {
+      final economy = settleOfficeEconomy(
+        periodType: economyEffect['periodType']?.toString() ?? 'event',
+        periodKey: economyEffect['periodKey']?.toString() ?? sourceId,
+        departmentId: economyEffect['departmentId']?.toString() ?? '',
+        settlementId: 'ai_company_event:$sourceId:economy',
+        bonusPool: _readEffectInt(economyEffect['bonusPool']),
+        operatingCost: _readEffectInt(economyEffect['operatingCost']),
+        projectIncome: _readEffectInt(economyEffect['projectIncome']),
+        reason: 'ai_company_event:$type',
+      );
+      if (!economy.success) {
+        return AICompanyEventResult(
+          success: false,
+          idempotent: false,
+          event: null,
+          errors: economy.errors,
+          changedDomains: changedDomains,
+        );
+      }
+      changedDomains.add('economy');
+    }
+
+    for (final residentId in participants.where((id) => id.isNotEmpty)) {
+      _residentMemoryEngine.recordLongTermMemory(
+        residentId,
+        type: 'company_event',
+        sourceId: 'ai_company_event:$sourceId',
+        summary: _companyEventSummary(type, scope, participants),
+        participants: participants,
+        importance: _readEffectInt(effects['importance'], fallback: 60),
+        effect: <String, dynamic>{
+          'eventId': eventId,
+          'sourceId': sourceId,
+          'type': type,
+          'scope': scope,
+        },
+      );
+    }
+    if (participants.isNotEmpty) changedDomains.add('memory');
+
+    final event = _companyEventFromRequest(
+      eventId: eventId,
+      sourceId: sourceId,
+      type: type,
+      scope: scope,
+      participants: participants,
+      conditions: conditions,
+      effects: effects,
+      startTime: startTime,
+      endTime: endTime,
+      status: status,
+      cooldown: cooldown,
+    ).copyWith(status: 'resolved');
+    final recorded = save.recordAICompanyEvent(event) ?? event;
+    save.recordCompanyTimelineEvent(
+      sourceId: 'ai_company_event:$sourceId',
+      type: type,
+      title: _companyEventTitle(type),
+      summary: _companyEventSummary(type, scope, participants),
+      category: 'company_event',
+      importance: _readEffectInt(effects['importance'], fallback: 60),
+      relatedResidentIds: participants,
+      tags: <String>['ai_company_event', type, scope],
+      payload: event.toJson(),
+    );
+    save.markOfficeEventProcessed('ai_company_event:$sourceId');
+    if (cooldown > 0) {
+      save.setOfficeEventCooldown('ai_company_event:$eventId', cooldown);
+    }
+    changedDomains.add('news');
+    return AICompanyEventResult(
+      success: true,
+      idempotent: false,
+      event: recorded,
+      errors: const <String>[],
+      changedDomains: changedDomains.toSet().toList(growable: false),
+    );
+  }
+
   PlayerInfluenceContext getPlayerInfluenceContext() {
     final save = _worldSaveManager;
     if (save == null) return PlayerInfluenceContext.empty();
@@ -2906,6 +3115,155 @@ class SecondWorldEngine {
       }
     } catch (_) {}
     return const <String>[];
+  }
+
+  AICompanyEvent _companyEventFromRequest({
+    required String eventId,
+    required String sourceId,
+    required String type,
+    required String scope,
+    required List<String> participants,
+    required Map<String, dynamic> conditions,
+    required Map<String, dynamic> effects,
+    required String startTime,
+    required String endTime,
+    required String status,
+    required int cooldown,
+    List<String> errors = const <String>[],
+  }) {
+    final now = WorldClockManager.systemNow().toIso8601String();
+    return AICompanyEvent(
+      eventId: eventId,
+      sourceId: sourceId,
+      type: type,
+      scope: scope.isEmpty ? 'company' : scope,
+      participants: participants.where((id) => id.isNotEmpty).toList(),
+      conditions: conditions,
+      effects: effects,
+      startTime: startTime.isEmpty ? now : startTime,
+      endTime: endTime,
+      status: status,
+      cooldown: cooldown.clamp(0, 365).toInt(),
+      createdAt: now,
+      updatedAt: now,
+      errors: errors,
+    );
+  }
+
+  List<String> _validateAICompanyEvent(
+    List<String> participants,
+    Map<String, dynamic> conditions,
+    Map<String, dynamic> effects,
+  ) {
+    final errors = <String>[];
+    for (final residentId in participants.where((id) => id.isNotEmpty)) {
+      final resident = _residentConfig.findResident(residentId);
+      if (!resident.enabled || resident.id != residentId) {
+        errors.add('participant_missing:$residentId');
+      }
+    }
+    final organizationEffect = _mapEffect(effects['organizationMutation']);
+    if (organizationEffect.isNotEmpty) {
+      final organization = getCompanyOrganization();
+      final companyId = organizationEffect['companyId']?.toString() ?? '';
+      final departmentId = organizationEffect['departmentId']?.toString() ?? '';
+      final teamId = organizationEffect['teamId']?.toString() ?? '';
+      final positionId = organizationEffect['positionId']?.toString() ?? '';
+      if (companyId.isNotEmpty && !organization.hasCompany(companyId)) {
+        errors.add('company_missing:$companyId');
+      }
+      if (departmentId.isNotEmpty &&
+          !organization.hasDepartment(departmentId)) {
+        errors.add('department_missing:$departmentId');
+      }
+      if (teamId.isNotEmpty && !organization.hasTeam(teamId)) {
+        errors.add('team_missing:$teamId');
+      }
+      if (positionId.isNotEmpty && !organization.hasPosition(positionId)) {
+        errors.add('position_missing:$positionId');
+      }
+    }
+    final economyEffect = _mapEffect(effects['officeEconomy']);
+    if (economyEffect.isNotEmpty) {
+      final departmentId = economyEffect['departmentId']?.toString() ?? '';
+      if (departmentId.isNotEmpty &&
+          !getCompanyOrganization().hasDepartment(departmentId)) {
+        errors.add('economy_department_missing:$departmentId');
+      }
+    }
+    final requiredTags = _stringList(conditions['requiredOfficeTags']);
+    if (requiredTags.isNotEmpty) {
+      final officeTags = getLivingOfficeState().worldTags.toSet();
+      for (final tag in requiredTags) {
+        if (!officeTags.contains(tag)) errors.add('condition_tag_missing:$tag');
+      }
+    }
+    return errors;
+  }
+
+  String _companyEventTitle(String type) {
+    switch (type) {
+      case 'department_reorg':
+        return '部门重组正在发生';
+      case 'budget_crisis':
+        return '预算会议变得认真';
+      case 'hiring_wave':
+        return '新的招聘需求出现';
+      case 'layoff_risk':
+        return '裁员风险被提前讨论';
+      case 'management_change':
+        return '管理层关系有了变化';
+      case 'company_celebration':
+        return '办公室准备庆祝一下';
+      case 'emergency_meeting':
+        return '临时会议被召集';
+      case 'major_project':
+        return '一个重要项目浮出水面';
+      case 'department_competition':
+        return '部门之间开始轻轻较劲';
+      case 'group_training':
+        return '集体培训被安排';
+    }
+    return '办公室发生了一件大事';
+  }
+
+  String _companyEventSummary(
+    String type,
+    String scope,
+    List<String> participants,
+  ) {
+    final names = participants
+        .take(3)
+        .map((id) => _residentConfig.findResident(id).name.ifEmpty(id))
+        .join('、');
+    final actor = names.isEmpty ? '办公室里' : '$names 等人';
+    return '$actor参与了${_companyEventTitle(type)}，影响范围：${scope.ifEmpty('company')}。';
+  }
+
+  Map<String, dynamic> _mapEffect(Object? value) {
+    if (value is Map) return Map<String, dynamic>.from(value);
+    return const <String, dynamic>{};
+  }
+
+  List<String> _stringList(Object? value) {
+    if (value is! List) return const <String>[];
+    return value
+        .map((item) => item.toString())
+        .where((item) => item.isNotEmpty)
+        .toList(growable: false);
+  }
+
+  int _readEffectInt(Object? value, {int fallback = 0}) {
+    if (value is int) return value;
+    if (value is num) return value.round();
+    return int.tryParse(value?.toString() ?? '') ?? fallback;
+  }
+
+  int? _nullableInt(Object? value) {
+    if (value == null) return null;
+    if (value is int) return value;
+    if (value is num) return value.round();
+    return int.tryParse(value.toString());
   }
 
   static const Set<String> _negativeMoodSet = <String>{

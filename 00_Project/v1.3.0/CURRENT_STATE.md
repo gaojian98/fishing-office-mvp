@@ -6,13 +6,13 @@
 
 ## Current HEAD
 
-`0dc5bd6c5f7326260ced7e1e54a521af1bcd3bfa`
+Local Module 08 commit. Run `git log -1 --oneline` for the exact current hash.
 
 ## Branch Baseline
 
 - `codex/v1.3-company-organization` and `feature/v1.3.0-office-ai` point to the same HEAD.
-- Module 01, Module 02, Module 03, Module 04, Module 05, and Module 06 source/test/doc changes have been committed locally.
-- Current working tree has Module 07 Company News & Timeline source, test, and documentation changes waiting for review.
+- Module 01, Module 02, Module 03, Module 04, Module 05, Module 06, Module 07, and Module 08 source/test/doc changes have been committed locally.
+- Current working tree is expected to be clean after Module 08 commit.
 - Product owner decided to keep using `codex/v1.3-company-organization` as the Module 01 / 02 review branch.
 - Safe branch switch is not recommended while these uncommitted changes exist.
 - Local `feature/v1.3.0-office-ai` is retained for later consolidation after reviewed commits exist.
@@ -29,14 +29,15 @@
 - Module 04: Office Economy — IMPLEMENTED – COMMITTED
 - Module 05: AI Decision System — IMPLEMENTED – COMMITTED
 - Module 06: Long-Term Memory — IMPLEMENTED – COMMITTED
-- Module 07: Company News & Timeline — IMPLEMENTED – WAITING FOR REVIEW
+- Module 07: Company News & Timeline — IMPLEMENTED – COMMITTED
+- Module 08: AI Company Events — IMPLEMENTED – COMMITTED
 - Mutation Types: EXTRACTED – NO RUNTIME IMPLEMENTATION COMMIT
 - Runtime Performance Debt: RESOLVED – framework smoke performance gate restored below 800ms
 - Long-Term World Evolution Design — DOCUMENTED – WAITING FOR REVIEW
 
 ## Planned Next Module
 
-- Module 08: AI Company Events
+- v1.3.0 RC development closure after human review of the committed Module 08 work.
 
 ## Current New Models And Concepts
 
@@ -96,6 +97,10 @@
 - `CompanyTimelineSnapshot`
 - bounded company news history
 - bounded company timeline history
+- `AICompanyEvent`
+- `AICompanyEventResult`
+- bounded AI company event history
+- `SecondWorldEngine.triggerAICompanyEvent(...)`
 - Long-term world evolution design guardrails
 - ADR-011 through ADR-026 for world evolution rules
 - Architecture guardrails
@@ -115,6 +120,7 @@
 - `00_Project/v1.3.0/Module_05_AI_Decision_Report.md`
 - `00_Project/v1.3.0/Module_06_Long_Term_Memory_Report.md`
 - `00_Project/v1.3.0/Module_07_Company_News_Timeline_Report.md`
+- `00_Project/v1.3.0/Module_08_AI_Company_Events_Report.md`
 - `00_Project/v1.3.0/ROADMAP.md`
 - `00_Project/v1.3.0/DESIGN_DECISIONS.md`
 - `00_Project/v1.3.0/LONG_TERM_WORLD_EVOLUTION_DESIGN.md`
@@ -125,6 +131,7 @@
 - `00_Project/v1.3.0/Module_Manifests/ai_decision.md`
 - `00_Project/Module_Manifests/memory_runtime.md`
 - `00_Project/v1.3.0/Module_Manifests/company_news_timeline.md`
+- `00_Project/v1.3.0/Module_Manifests/ai_company_events.md`
 - `fishing_office_flutter/lib/models/office_economy.dart`
 - `fishing_office_flutter/lib/models/company_organization.dart`
 - `fishing_office_flutter/lib/models/resident_career.dart`
@@ -219,6 +226,11 @@
 - `CompanyTimelineSnapshot`
 - `WorldSaveManager.recordCompanyTimelineEvent(...)`
 - `WorldSaveManager.getCompanyTimelineSnapshot(...)`
+- `WorldSaveManager.aiCompanyEvents`
+- `WorldSaveManager.recordAICompanyEvent(...)`
+- `WorldSaveManager.getAICompanyEvent(...)`
+- `SecondWorldEngine.triggerAICompanyEvent(...)`
+- `SecondWorldEngine.getAICompanyEvents()`
 - `WorldSaveManager.companyNews`
 - `WorldSaveManager.companyTimeline`
 - `SecondWorldEngine.recordCompanyTimelineEvent(...)`
@@ -272,19 +284,21 @@
 - Long-term memory compression is currently bounded retention, decay, expiry, and summary APIs; richer natural-language compression is deferred.
 - Company News and Timeline are projections, not business state sources.
 - Company News and Timeline are persisted inside existing world save data and are bounded to 120 news items and 240 timeline events.
+- AI Company Events coordinate existing runtime side effects through `SecondWorldEngine` and are persisted in bounded save state.
+- AI Company Events do not add a new top-level Manager, Engine, Repository, Runtime, Provider, page, or JSON type.
 - Long-term world evolution rules are documented, but future modules in v1.4.0, v1.5.0, and v2.0.0 remain planned unless explicitly marked implemented in module reports.
 - v1.2 release tag, main merge state, and production release files are not modified by this module.
 
 ## Current Forbidden Actions
 
-- Do not switch branches while uncommitted v1.3 Module 07 changes exist.
+- Do not switch branches while uncommitted v1.3 changes exist.
 - Do not push, merge, tag, or modify Railway.
 - Do not modify v1.2.0 release baseline.
 - Do not enter the next module until branch and review decision is resolved.
 
 ## Next Module
 
-Module 08 AI Company Events should start only after Module 07 review and local commit.
+Module 08 AI Company Events is committed locally and should enter human review before v1.3.0 RC closure.
 
 ## Default Not Required To Re-Read
 
@@ -303,7 +317,8 @@ Module 08 AI Company Events should start only after Module 07 review and local c
 - Module 04 Status: IMPLEMENTED – COMMITTED.
 - Module 05 Status: IMPLEMENTED – COMMITTED.
 - Module 06 Status: IMPLEMENTED – COMMITTED.
-- Module 07 Status: IMPLEMENTED – WAITING FOR REVIEW.
+- Module 07 Status: IMPLEMENTED – COMMITTED.
+- Module 08 Status: IMPLEMENTED – COMMITTED.
 - Latest validation in Module 01/02 commit execution: analyze PASS, flutter test PASS with 98 tests, performance gate restored to 246ms.
 - Commit plan: `00_Project/v1.3.0/MODULE_01_02_COMMIT_PLAN.md`.
 - Branch plan: `00_Project/v1.3.0/BRANCH_CONSOLIDATION_PLAN.md`.
