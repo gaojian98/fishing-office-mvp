@@ -2125,6 +2125,7 @@ class SecondWorldEngine {
     List<String> participants = const <String>[],
     Map<String, dynamic> conditions = const <String, dynamic>{},
     Map<String, dynamic> effects = const <String, dynamic>{},
+    String reason = '',
     String startTime = '',
     String endTime = '',
     String status = 'active',
@@ -2143,11 +2144,16 @@ class SecondWorldEngine {
     }
     final existing = save.getAICompanyEvent(sourceId);
     if (existing != null && existing.isTerminal) {
+      final wasResolved = existing.status == 'resolved';
       return AICompanyEventResult(
-        success: true,
+        success: wasResolved,
         idempotent: true,
         event: existing,
-        errors: const <String>[],
+        errors: wasResolved
+            ? const <String>[]
+            : (existing.errors.isEmpty
+                ? <String>['event_${existing.status}']
+                : existing.errors),
         changedDomains: const <String>[],
       );
     }
@@ -2175,6 +2181,11 @@ class SecondWorldEngine {
         participants: participants,
         conditions: conditions,
         effects: effects,
+        reason: reason,
+        result: <String, dynamic>{
+          'success': false,
+          'errors': validationErrors,
+        },
         startTime: startTime,
         endTime: endTime,
         status: 'cancelled',
@@ -2295,6 +2306,11 @@ class SecondWorldEngine {
       endTime: endTime,
       status: status,
       cooldown: cooldown,
+      reason: reason,
+      result: <String, dynamic>{
+        'success': true,
+        'changedDomains': changedDomains.toSet().toList(growable: false),
+      },
     ).copyWith(status: 'resolved');
     final recorded = save.recordAICompanyEvent(event) ?? event;
     save.recordCompanyTimelineEvent(
@@ -3125,6 +3141,8 @@ class SecondWorldEngine {
     required List<String> participants,
     required Map<String, dynamic> conditions,
     required Map<String, dynamic> effects,
+    required String reason,
+    required Map<String, dynamic> result,
     required String startTime,
     required String endTime,
     required String status,
@@ -3140,6 +3158,8 @@ class SecondWorldEngine {
       participants: participants.where((id) => id.isNotEmpty).toList(),
       conditions: conditions,
       effects: effects,
+      reason: reason.ifEmpty(_companyEventTitle(type)),
+      result: result,
       startTime: startTime.isEmpty ? now : startTime,
       endTime: endTime,
       status: status,

@@ -22,7 +22,7 @@ Status: IMPLEMENTED - COMMITTED
 
 ## Module 08 AI Company Events
 
-Status: IMPLEMENTED - COMMITTED
+Status: REVIEWED - COMMITTED
 
 ## Current Risks
 
@@ -38,6 +38,7 @@ Status: IMPLEMENTED - COMMITTED
 - Company News uses engineering-level text templates until product copy is provided.
 - AI Company Events currently expose explicit trigger coordination through `SecondWorldEngine`; automatic candidate generation from every Tick is deferred.
 - AI Company Events do not directly inject `ResidentDecisionManager` into `SecondWorldEngine` because the current provider graph already has AI Decision depend on the engine.
+- AI Company Events preserve failed or cancelled retry results as idempotent failures, not successful duplicate handling.
 
 ## Not Risks In This Task
 

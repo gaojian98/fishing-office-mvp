@@ -423,11 +423,11 @@ Status: Accepted
 
 Context: Large company events can be retried by save/load, Tick, future AI decisions, or UI action retries.
 
-Decision: AI Company Events require stable `sourceId`, reuse existing processed office event and cooldown state, and cap event history at 120 records.
+Decision: AI Company Events require stable `sourceId`, explicit `reason` and `result` records, reuse existing processed office event and cooldown state, and cap event history at 120 records.
 
 Rationale: This prevents duplicate organization mutation, duplicate economy settlement, duplicate resident memory, duplicate news, and unbounded save growth.
 
-Consequences: Repeated source IDs return idempotent results. Old saves without AI company event fields fall back to empty history.
+Consequences: Repeated source IDs return idempotent results. Resolved events retry as idempotent success, while cancelled or expired events retry as idempotent failure with the original errors. Old saves without AI company event fields fall back to empty history.
 
 Alternatives: Append every event attempt. Rejected because it risks duplicated side effects and save bloat.
 

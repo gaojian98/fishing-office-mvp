@@ -12235,6 +12235,7 @@ void main() {
       scope: 'department:operations',
       participants: const ['event_resident_a', 'event_resident_b'],
       conditions: const <String, dynamic>{},
+      reason: '季度项目启动',
       effects: const <String, dynamic>{
         'organizationMutation': <String, dynamic>{
           'residentId': 'event_resident_a',
@@ -12268,6 +12269,10 @@ void main() {
         'ai_company_event:major_project_day_8');
     expect(save.companyNews.first.category, 'company_event');
     expect(save.aiCompanyEvents.first.status, 'resolved');
+    expect(save.aiCompanyEvents.first.reason, '季度项目启动');
+    expect(save.aiCompanyEvents.first.result['success'], isTrue);
+    expect(save.aiCompanyEvents.first.result['changedDomains'],
+        containsAll(['organization', 'economy', 'memory']));
     expect(memory.getResidentMemorySummary('event_resident_a').total,
         greaterThan(0));
 
@@ -12304,12 +12309,25 @@ void main() {
     );
     expect(invalid.success, isFalse);
     expect(invalid.errors, contains('department_missing:missing_department'));
+    expect(save.getAICompanyEvent('bad_target_day_8')?.status, 'cancelled');
+    expect(
+        save.getAICompanyEvent('bad_target_day_8')?.result['success'], isFalse);
     expect(
       save.companyTimeline.any(
         (item) => item.sourceId == 'ai_company_event:bad_target_day_8',
       ),
       isFalse,
     );
+    final duplicateInvalid = secondWorld.triggerAICompanyEvent(
+      eventId: 'company_event_bad_target',
+      sourceId: 'bad_target_day_8',
+      type: 'department_reorg',
+      participants: const ['event_resident_a'],
+    );
+    expect(duplicateInvalid.success, isFalse);
+    expect(duplicateInvalid.idempotent, isTrue);
+    expect(duplicateInvalid.errors,
+        contains('department_missing:missing_department'));
 
     for (var index = 0; index < 150; index += 1) {
       save.recordAICompanyEvent(
@@ -12321,6 +12339,8 @@ void main() {
           participants: const <String>[],
           conditions: const <String, dynamic>{},
           effects: const <String, dynamic>{},
+          reason: 'bulk event',
+          result: const <String, dynamic>{'success': true},
           startTime: 'Y1-M1-D8',
           endTime: '',
           status: 'resolved',

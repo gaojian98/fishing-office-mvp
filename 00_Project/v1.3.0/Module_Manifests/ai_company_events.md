@@ -2,7 +2,7 @@
 
 ## Status
 
-IMPLEMENTED - WAITING FOR REVIEW
+REVIEWED - COMMITTED
 
 ## Purpose
 
@@ -51,6 +51,8 @@ Coordinate large company events across organization, career, office economy, res
 - `aiCompanyEvents`
 - Existing `processedOfficeEventIds`
 - Existing `officeEventCooldowns`
+- `AICompanyEvent.reason`
+- `AICompanyEvent.result`
 
 ## Invariants
 
@@ -61,6 +63,8 @@ Coordinate large company events across organization, career, office economy, res
 - Resident memory uses `recordLongTermMemory(...)`.
 - News and timeline are projections after successful domain effects.
 - Stable `sourceId` prevents duplicate event execution.
+- Resolved retries are idempotent successes; cancelled or expired retries are idempotent failures.
+- Event records persist the reason and actual result separately from desired effects.
 - Event history is bounded to 120 records.
 - Old saves without `aiCompanyEvents` load an empty event history.
 - World Tick order is unchanged.
@@ -71,6 +75,6 @@ Coordinate large company events across organization, career, office economy, res
 
 ## Known limitations
 
-- Event candidates are invoked through the existing `SecondWorldEngine` facade; automatic AI event harvesting from every runtime tick is deferred.
+- Event candidates are invoked through the existing `SecondWorldEngine` facade; automatic AI event harvesting from every runtime tick is deferred as P2 follow-up.
 - AI decision execution is not directly injected into `SecondWorldEngine` because the current provider graph has `ResidentDecisionManager` depend on `SecondWorldEngine`.
 - Event text uses engineering-level templates until product copy is provided.

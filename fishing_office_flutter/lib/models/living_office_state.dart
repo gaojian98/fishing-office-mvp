@@ -378,6 +378,8 @@ class AICompanyEvent {
     required this.participants,
     required this.conditions,
     required this.effects,
+    required this.reason,
+    required this.result,
     required this.startTime,
     required this.endTime,
     required this.status,
@@ -396,6 +398,8 @@ class AICompanyEvent {
       participants: _stringList(json['participants']),
       conditions: _mapOf(json['conditions']),
       effects: _mapOf(json['effects']),
+      reason: json['reason']?.toString() ?? '',
+      result: _mapOf(json['result']),
       startTime: json['startTime']?.toString() ?? '',
       endTime: json['endTime']?.toString() ?? '',
       status: _eventStatus(json['status']?.toString() ?? ''),
@@ -413,6 +417,8 @@ class AICompanyEvent {
   final List<String> participants;
   final Map<String, dynamic> conditions;
   final Map<String, dynamic> effects;
+  final String reason;
+  final Map<String, dynamic> result;
   final String startTime;
   final String endTime;
   final String status;
@@ -427,6 +433,7 @@ class AICompanyEvent {
   AICompanyEvent copyWith({
     String? status,
     String? updatedAt,
+    Map<String, dynamic>? result,
     List<String>? errors,
   }) {
     return AICompanyEvent(
@@ -437,6 +444,8 @@ class AICompanyEvent {
       participants: participants,
       conditions: conditions,
       effects: effects,
+      reason: reason,
+      result: result ?? this.result,
       startTime: startTime,
       endTime: endTime,
       status: status ?? this.status,
@@ -456,6 +465,8 @@ class AICompanyEvent {
       'participants': participants,
       'conditions': conditions,
       'effects': effects,
+      'reason': reason,
+      'result': result,
       'startTime': startTime,
       'endTime': endTime,
       'status': status,
